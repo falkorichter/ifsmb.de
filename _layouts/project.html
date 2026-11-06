@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<main class="container page narrow">
+  <article>
+    <header class="page-header">
+      <p class="meta">
+        <span class="badge {% if page.status == 'abgeschlossen' %}badge-past{% else %}badge-active{% endif %}">{% if page.status == 'abgeschlossen' %}Abgeschlossen{% else %}Aktuell{% endif %}</span>
+        {% if page.zeitraum %} · {{ page.zeitraum }}{% endif %}
+        {% if page.ort %} · {{ page.ort }}{% endif %}
+      </p>
+      <h1>{{ page.title }}</h1>
+      {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+    </header>
+    {% if page.image %}<img class="project-image" src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
+    <div class="prose">
+      {{ content }}
+    </div>
+    {% if page.team %}
+    <h2>Beteiligt</h2>
+    <ul class="link-list">
+      {% for slug in page.team %}
+        {% assign m = site.team | where: "slug", slug | first %}
+        {% if m %}<li><a href="{{ m.url | relative_url }}">{{ m.title }}</a></li>{% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if page.partners %}
+    <h2>Partner</h2>
+    <ul class="link-list">
+      {% for name in page.partners %}
+        {% assign pt = site.data.partners | where: "name", name | first %}
+        <li>{% if pt %}<a href="{{ pt.url }}" target="_blank" rel="noopener">{{ pt.name }}</a>{% else %}{{ name }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{{ '/projekte/' | relative_url }}" class="back-link">← Alle Projekte</a>
+  </article>
+</main>

@@ -1,0 +1,19 @@
+---
+layout: page
+title: Team
+lead: Die Menschen hinter dem Institut.
+---
+{% assign members = site.team | sort: "order" %}
+<div class="grid-3">
+  {% for m in members %}
+  <a class="card card-link member-card" href="{{ m.url | relative_url }}">
+    {% if m.photo %}
+    <img class="avatar" src="{{ m.photo | relative_url }}" alt="Foto von {{ m.title }}" loading="lazy">
+    {% else %}
+    <div class="avatar avatar-initials" aria-hidden="true">{% assign words = m.title | split: ' ' %}{% for w in words limit: 2 %}{{ w | slice: 0 }}{% endfor %}</div>
+    {% endif %}
+    <h3>{{ m.title }}</h3>
+    {% if m.role %}<p class="muted">{{ m.role }}</p>{% endif %}
+  </a>
+  {% endfor %}
+</div>

@@ -1,0 +1,27 @@
+# logo: Pfad unter /assets/images/partner/ — leer lassen, wenn noch kein Logo vorhanden ist
+# logo_dark: true, wenn das Logo helle Elemente hat und einen dunklen Hintergrund braucht
+- name: Kurt-Tucholsky-Grundschule
+  url: https://kurt-tucholsky-grundschule.de/
+  logo: kurt-tucholsky-grundschule.png
+  description: Musikalische Grundschule in Berlin-Moabit.
+
+- name: Förderverein der Kurt-Tucholsky-Grundschule
+  url: https://kurt-tucholsky-foerderverein.de/
+  logo:
+  description: Der Förderverein unterstützt Projekte, Ausflüge und Ausstattung der Kurt-Tucholsky-Grundschule.
+
+- name: 35 services e. V.
+  url: https://35services.de/
+  logo: 35services.png
+  logo_dark: true
+  description: Nachbarschaftswerkstatt in Moabit, Mitglied im Verbund Offener Werkstätten.
+
+- name: Rosalind-Franklin-Gymnasium
+  url: https://rosalind-franklin-gymnasium.de/
+  logo: rosalind-franklin-gymnasium.png
+  description: Gymnasium in Berlin-Moabit.
+
+- name: Jugend hackt
+  url: https://jugendhackt.org/
+  logo: jugendhackt.svg
+  description: Programm für junge Menschen, die mit Code die Welt verbessern wollen.

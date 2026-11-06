@@ -1,0 +1,91 @@
+---
+layout: default
+---
+<main>
+<section class="hero">
+  <div class="container">
+    <p class="kicker">Institut für spontane Makespace Buildung</p>
+    <h1>Wir bauen Makerspaces.<br><span class="hl">Spontan.</span></h1>
+    <p class="hero-text">
+      Wir sind eine Gruppe von Eltern, Bastler*innen und Technik-Begeisterten aus Moabit.
+      Gemeinsam mit Schulen, Vereinen und offenen Werkstätten richten wir Orte ein,
+      an denen Kinder und Jugendliche löten, programmieren, 3D-drucken und Dinge selbst bauen können –
+      ohne lange Anträge, mit dem, was gerade da ist.
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="{{ '/projekte/' | relative_url }}">Unsere Projekte</a>
+      <a class="btn btn-ghost" href="{{ '/team/' | relative_url }}">Wer wir sind</a>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2>Was heißt „spontane Makespace Buildung“?</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Spontan</h3>
+      <p>Wir warten nicht auf den perfekten Raum oder das perfekte Budget. Ein Tisch, ein paar Werkzeuge und Neugier reichen für den Anfang.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛠️</div>
+      <h3>Makespace</h3>
+      <p>Ein Ort zum Ausprobieren: Elektronik, Holz, Code, 3D-Druck, Reparieren. Hier darf etwas schiefgehen – genau so lernt man.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Buildung</h3>
+      <p>Bauen und Bildung gehören zusammen. Wir bringen Schulen, Vereine und Ehrenamtliche zusammen, damit Wissen weitergegeben wird.</p>
+    </div>
+  </div>
+</section>
+
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" %}
+{% if active.size > 0 %}
+<section class="container section">
+  <div class="section-head">
+    <h2>Aktuelle Projekte</h2>
+    <a href="{{ '/projekte/' | relative_url }}">Alle Projekte →</a>
+  </div>
+  <div class="grid-2">
+    {% for p in active limit: 4 %}
+    <a class="card card-link" href="{{ p.url | relative_url }}">
+      <h3>{{ p.title }}</h3>
+      {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if site.posts.size > 0 %}
+<section class="container section">
+  <div class="section-head">
+    <h2>Neuigkeiten</h2>
+    <a href="{{ '/news/' | relative_url }}">Alle Neuigkeiten →</a>
+  </div>
+  <ul class="post-list">
+    {% for post in site.posts limit: 3 %}
+    <li>
+      <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Partner</h2>
+    <a href="{{ '/partner/' | relative_url }}">Mehr über unsere Partner →</a>
+  </div>
+  <div class="logo-strip">
+    {% for p in site.data.partners %}
+    <a href="{{ p.url }}" target="_blank" rel="noopener" class="logo-tile{% if p.logo_dark %} logo-tile-dark{% endif %}" title="{{ p.name }}">
+      {% if p.logo %}<img src="{{ '/assets/images/partner/' | append: p.logo | relative_url }}" alt="{{ p.name }}" loading="lazy">{% else %}<span class="logo-text">{{ p.name }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+</main>

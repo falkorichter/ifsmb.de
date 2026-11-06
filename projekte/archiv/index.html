@@ -1,0 +1,21 @@
+---
+layout: page
+title: Vergangene Projekte
+lead: Was wir schon gebaut haben.
+---
+{% assign past = site.projects | where: "status", "abgeschlossen" | sort: "start" | reverse %}
+{% if past.size > 0 %}
+<div class="grid-2">
+  {% for p in past %}
+  <a class="card card-link" href="{{ p.url | relative_url }}">
+    <p class="meta"><span class="badge badge-past">Abgeschlossen</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}</p>
+    <h3>{{ p.title }}</h3>
+    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p>Noch keine abgeschlossenen Projekte.</p>
+{% endif %}
+
+<p class="section-foot"><a href="{{ '/projekte/' | relative_url }}">← Aktuelle Projekte</a></p>

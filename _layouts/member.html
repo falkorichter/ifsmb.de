@@ -1,0 +1,34 @@
+---
+layout: default
+---
+<main class="container page narrow">
+  <article class="member-profile">
+    <header class="member-head">
+      {% if page.photo %}
+      <img class="avatar avatar-lg" src="{{ page.photo | relative_url }}" alt="Foto von {{ page.title }}">
+      {% else %}
+      <div class="avatar avatar-lg avatar-initials" aria-hidden="true">{% assign words = page.title | split: ' ' %}{% for w in words limit: 2 %}{{ w | slice: 0 }}{% endfor %}</div>
+      {% endif %}
+      <div>
+        <h1>{{ page.title }}</h1>
+        {% if page.role %}<p class="lead">{{ page.role }}</p>{% endif %}
+        {% if page.links %}
+        <ul class="link-list">
+          {% for link in page.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a></li>{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </header>
+    <div class="prose">
+      {{ content }}
+    </div>
+    {% assign member_projects = site.projects | where_exp: "p", "p.team contains page.slug" %}
+    {% if member_projects.size > 0 %}
+    <h2>Projekte</h2>
+    <ul class="link-list">
+      {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{{ '/team/' | relative_url }}" class="back-link">← Zum Team</a>
+  </article>
+</main>

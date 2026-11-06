@@ -1,0 +1,53 @@
+title: Institut für spontane Makespace Buildung
+short_title: IfsMB
+description: Wir bauen Makerspaces – spontan, gemeinsam und dort, wo Kinder und Jugendliche lernen.
+baseurl: ""
+url: "https://ifsmb.de"
+lang: de
+
+markdown: kramdown
+permalink: /news/:year/:month/:day/:title/
+
+collections:
+  team:
+    output: true
+    permalink: /team/:name/
+  projects:
+    output: true
+    permalink: /projekte/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "team"
+    values:
+      layout: "member"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+nav:
+  - title: Neuigkeiten
+    url: /news/
+  - title: Projekte
+    url: /projekte/
+  - title: Team
+    url: /team/
+  - title: Partner
+    url: /partner/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - CLAUDE.md
+  - LICENSE

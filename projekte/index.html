@@ -1,0 +1,21 @@
+---
+layout: page
+title: Projekte
+lead: Woran wir gerade arbeiten.
+---
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | sort: "start" | reverse %}
+{% if active.size > 0 %}
+<div class="grid-2">
+  {% for p in active %}
+  <a class="card card-link" href="{{ p.url | relative_url }}">
+    <p class="meta"><span class="badge badge-active">Aktuell</span>{% if p.ort %} · {{ p.ort }}{% endif %}</p>
+    <h3>{{ p.title }}</h3>
+    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p>Gerade läuft kein Projekt – aber das kann sich spontan ändern.</p>
+{% endif %}
+
+<p class="section-foot"><a href="{{ '/projekte/archiv/' | relative_url }}">→ Vergangene Projekte ansehen</a></p>
