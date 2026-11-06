@@ -5,7 +5,7 @@ layout: default
   <article class="member-profile">
     <header class="member-head">
       {% if page.photo %}
-      <img class="avatar avatar-lg" src="{{ page.photo | relative_url }}" alt="Foto von {{ page.title }}">
+      <img class="avatar avatar-lg" src="{{ page.photo | relative_url }}"{% if page.photo_2x %} srcset="{{ page.photo | relative_url }} 1x, {{ page.photo_2x | relative_url }} 2x"{% endif %} alt="Foto von {{ page.title }}">
       {% else %}
       <div class="avatar avatar-lg avatar-initials" aria-hidden="true">{% assign words = page.title | split: ' ' %}{% for w in words limit: 2 %}{{ w | slice: 0 }}{% endfor %}</div>
       {% endif %}

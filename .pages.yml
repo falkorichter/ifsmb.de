@@ -1,0 +1,285 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
+content:
+  - name: events
+    label: Kalender
+    type: collection
+    path: _events
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, start, location]
+      primary: title
+      sort: start
+      order: desc
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: start
+        label: Beginn
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm"
+      - name: end
+        label: Ende
+        description: Optional. Ohne Ende wird der Termin mit 2 Stunden eingetragen.
+        type: date
+        default: ""
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm"
+      - name: all_day
+        label: Ganztägig
+        description: Uhrzeiten werden dann ignoriert.
+        type: boolean
+        default: false
+      - name: location
+        label: Ort
+        type: string
+      - name: location_url
+        label: Link zum Ort (z. B. Karte)
+        type: string
+      - name: summary
+        label: Kurzbeschreibung
+        description: Erscheint in der Terminliste und im iCal-Kalender.
+        type: text
+      - name: body
+        label: Beschreibung
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: posts
+    label: Neuigkeiten
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: date
+        label: Datum
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm"
+      - name: author
+        label: Autor*in (Team-Kürzel, z. B. falko-richter)
+        type: string
+      - name: original_url
+        label: Ursprünglich veröffentlicht unter (URL)
+        type: string
+      - name: original_site
+        label: Name der Originalseite
+        type: string
+      - name: body
+        label: Text
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: projects
+    label: Projekte
+    type: collection
+    path: _projects
+    filename: "{primary}.md"
+    view:
+      fields: [title, status, start]
+      primary: title
+      sort: start
+      order: desc
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: summary
+        label: Kurzbeschreibung
+        type: text
+      - name: status
+        label: Status
+        type: select
+        default: aktuell
+        options:
+          values: [aktuell, abgeschlossen]
+      - name: start
+        label: Startdatum (für die Sortierung)
+        type: date
+        options:
+          format: "yyyy-MM-dd"
+      - name: zeitraum
+        label: Zeitraum (Text, z. B. „seit November 2026“)
+        type: string
+      - name: ort
+        label: Ort
+        type: string
+      - name: image
+        label: Bild
+        type: image
+      - name: team
+        label: Team (Kürzel, z. B. falko-richter)
+        type: string
+        list: true
+      - name: partners
+        label: Partner (Name wie in der Partnerliste)
+        type: string
+        list: true
+      - name: body
+        label: Beschreibung
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: team
+    label: Team
+    type: collection
+    path: _team
+    filename: "{primary}.md"
+    view:
+      fields: [title, role, order]
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Rolle
+        type: string
+      - name: order
+        label: Reihenfolge
+        type: number
+      - name: photo
+        label: Foto (quadratisch, ca. 480 px)
+        description: Achtung – Handyfotos enthalten oft GPS-Daten. Vorher Metadaten entfernen oder Falko fragen.
+        type: image
+      - name: photo_2x
+        label: Foto in doppelter Auflösung (ca. 960 px, optional)
+        type: image
+      - name: links
+        label: Links
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Bezeichnung
+            type: string
+          - name: url
+            label: URL
+            type: string
+      - name: body
+        label: Profiltext
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: press
+    label: Pressemitteilungen
+    type: collection
+    path: _press
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Titel
+        type: string
+        required: true
+      - name: subtitle
+        label: Untertitel
+        type: string
+      - name: date
+        label: Datum
+        type: date
+        required: true
+        options:
+          format: "yyyy-MM-dd"
+      - name: body
+        label: Text
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: presse
+    label: Presse – Kurzprofil & Kontakt
+    type: file
+    path: _data/presse.yml
+    fields:
+      - name: kurzprofil
+        label: Kurzprofil
+        type: text
+      - name: kontakt_name
+        label: Pressekontakt – Name
+        type: string
+      - name: kontakt_email_b64
+        label: Pressekontakt – E-Mail (base64-kodiert)
+        description: "Damit Spam-Bots die Adresse nicht finden. Erzeugen im Terminal: printf 'presse@ifsmb.de' | base64"
+        type: string
+      - name: kontakt_email_anzeige
+        label: Pressekontakt – Anzeigetext der E-Mail (z. B. presse [at] ifsmb.de)
+        type: string
+      - name: kontakt_telefon
+        label: Pressekontakt – Telefon
+        type: string
+      - name: bildnachweis
+        label: Bildnachweis für Pressefotos
+        type: string
+
+  - name: pressematerial
+    label: Presse – Material zum Download
+    type: file
+    path: _data/pressematerial.yml
+    list: true
+    fields:
+      - name: title
+        label: Titel
+        type: string
+      - name: description
+        label: Beschreibung (Format, Größe)
+        type: string
+      - name: file
+        label: Datei
+        type: file
+      - name: preview
+        label: Vorschaubild
+        type: image
+
+  - name: partners
+    label: Partner
+    type: file
+    path: _data/partners.yml
+    list: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+      - name: url
+        label: Website
+        type: string
+      - name: logo
+        label: Logo
+        type: image
+      - name: logo_dark
+        label: Logo braucht dunklen Hintergrund
+        type: boolean
+      - name: description
+        label: Beschreibung
+        type: string

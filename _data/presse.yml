@@ -1,0 +1,12 @@
+# Wird auf /presse/ und unter jeder Pressemitteilung angezeigt.
+kurzprofil: >-
+  Das Institut für spontane Makespace Buildung (IfsMB) richtet gemeinsam mit Schulen,
+  Vereinen und offenen Werkstätten in Berlin-Moabit Makespaces ein: Orte, an denen Kinder
+  und Jugendliche löten, programmieren, 3D-drucken und Dinge selbst bauen können.
+  Das Institut arbeitet ehrenamtlich und ohne lange Anträge – mit dem, was gerade da ist.
+kontakt_name: ""
+# E-Mail base64-kodiert eintragen: printf 'presse@ifsmb.de' | base64
+kontakt_email_b64: ""
+kontakt_email_anzeige: ""
+kontakt_telefon: ""
+bildnachweis: ""

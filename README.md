@@ -19,11 +19,30 @@ Benötigt Ruby 3.1.2 (siehe `.ruby-version`).
 | Team-Mitglied | `_team/vorname-nachname.md` | `title` (Name), `role`, `order`, optional `photo`, `links` |
 | Projekt | `_projects/slug.md` | `title`, `summary`, `status` (`aktuell` / `abgeschlossen`), `start`, `zeitraum`, `ort`, `team` (Slugs aus `_team`), `partners` (Namen aus `_data/partners.yml`) |
 | Partner | `_data/partners.yml` | Logo nach `assets/images/partner/` legen, Original nach `_logo/partner/` |
+| Termin | `_events/YYYY-MM-DD-slug.md` | `title`, `start` / `end` (`2026-11-28 15:00`), `all_day`, `location`, `summary` |
+| Pressemitteilung | `_press/YYYY-MM-DD-slug.md` | `title`, `subtitle`, `date` |
+| Presse-Kurzprofil & Kontakt | `_data/presse.yml` | |
+| Pressematerial | `_data/pressematerial.yml` | Dateien nach `assets/presse/` |
 | Impressum | `impressum/index.md` | |
 
 Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projekte/archiv/`).
 
-Teamfotos: quadratisch, ca. 480×480 px, nach `assets/images/team/`.
+Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-Daten), auf das Gesicht quadratisch zuschneiden und als `name-480w.jpg` + `name-960w.jpg` nach `assets/images/team/` legen; im Profil `photo` und `photo_2x` setzen.
+
+## Kalender (iCal)
+
+Alle Termine stehen als Abo unter **https://ifsmb.de/kalender.ics** (bzw. `webcal://ifsmb.de/kalender.ics`) bereit. Der Feed wird bei jedem Build neu erzeugt.
+
+## CMS (Pages CMS)
+
+Inhalte lassen sich ohne Git im Browser pflegen:
+
+1. https://app.pagescms.org öffnen und mit GitHub anmelden
+2. Die Pages-CMS-GitHub-App für das Repo `falkorichter/ifsmb.de` installieren (wird beim ersten Login angeboten)
+3. Repo auswählen – Kalender, Neuigkeiten, Projekte, Team, Presse und Partner erscheinen links
+
+Jede Änderung ist ein Commit auf `main`, GitHub Pages veröffentlicht sie automatisch. Uploads landen in `assets/uploads/`.
+**Achtung:** Fotos, die über das CMS hochgeladen werden, werden nicht automatisch von GPS-Daten befreit.
 
 ## E-Mail-Adressen
 

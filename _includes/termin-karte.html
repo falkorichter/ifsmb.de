@@ -1,0 +1,15 @@
+{%- assign e = include.event -%}
+{%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+<li class="event-item" data-end="{{ end_s }}">
+  <a class="card card-link event-card" href="{{ e.url | relative_url }}">
+    <span class="event-date">
+      <span class="event-day">{{ e.start | date: "%d" }}</span>
+      <span class="event-month">{{ e.start | date: "%m.%Y" }}</span>
+    </span>
+    <span class="event-body">
+      <span class="meta">{% include termin-datum.html event=e %}</span>
+      <strong class="event-title">{{ e.title }}</strong>
+      {% if e.location %}<span class="muted">📍 {{ e.location }}</span>{% endif %}
+    </span>
+  </a>
+</li>

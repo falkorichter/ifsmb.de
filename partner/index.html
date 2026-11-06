@@ -1,13 +1,13 @@
 ---
 layout: page
 title: Partner
-lead: Ohne unsere Partner wäre kein Makerspace spontan entstanden. Danke!
+lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
 ---
 <div class="partner-list">
   {% for p in site.data.partners %}
   <div class="card partner-card">
     <a href="{{ p.url }}" target="_blank" rel="noopener" class="logo-tile{% if p.logo_dark %} logo-tile-dark{% endif %}">
-      {% if p.logo %}<img src="{{ '/assets/images/partner/' | append: p.logo | relative_url }}" alt="Logo {{ p.name }}" loading="lazy">{% else %}<span class="logo-text">{{ p.name }}</span>{% endif %}
+      {% if p.logo %}<img src="{{ p.logo | relative_url }}" alt="Logo {{ p.name }}" loading="lazy">{% else %}<span class="logo-text">{{ p.name }}</span>{% endif %}
     </a>
     <div>
       <h3><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.name }}</a></h3>

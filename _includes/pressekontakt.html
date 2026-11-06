@@ -1,0 +1,9 @@
+{%- assign pr = site.data.presse -%}
+<div class="card press-contact">
+  <h3>Pressekontakt</h3>
+  <p>
+    {% if pr.kontakt_name != "" %}{{ pr.kontakt_name }}{% else %}<span class="todo">[Name der Ansprechperson]</span>{% endif %}<br>
+    {% if pr.kontakt_email_b64 != "" %}<a href="#" class="obf-mail" data-em="{{ pr.kontakt_email_b64 }}">{{ pr.kontakt_email_anzeige | default: "E-Mail" }}</a>{% else %}<span class="todo">[E-Mail-Adresse]</span>{% endif %}
+    {% if pr.kontakt_telefon != "" %}<br>{{ pr.kontakt_telefon }}{% endif %}
+  </p>
+</div>

@@ -1,12 +1,20 @@
 ---
 layout: default
 ---
+{%- if page.author -%}{%- assign author = site.team | where: "slug", page.author | first -%}{%- endif -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{{ page.date | date: "%d.%m.%Y" }}{% if page.author %} · {{ page.author }}{% endif %}</p>
+      <p class="meta">{{ page.date | date: "%d.%m.%Y" }}{% if author %} · <a href="{{ author.url | relative_url }}">{{ author.title }}</a>{% endif %}</p>
       <h1>{{ page.title }}</h1>
     </header>
+    {% if page.original_url %}
+    <p class="original-note">
+      Ursprünglich veröffentlicht {% if author %}von <a href="{{ author.url | relative_url }}">{{ author.title }}</a> {% endif %}auf
+      <a href="{{ page.original_url }}" target="_blank" rel="noopener">{{ page.original_site | default: "der Originalseite" }}</a>:<br>
+      <a href="{{ page.original_url }}" target="_blank" rel="noopener" class="small">{{ page.original_url }}</a>
+    </p>
+    {% endif %}
     <div class="prose">
       {{ content }}
     </div>

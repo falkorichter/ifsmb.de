@@ -1,9 +1,11 @@
 title: Institut für spontane Makespace Buildung
 short_title: IfsMB
-description: Wir bauen Makerspaces – spontan, gemeinsam und dort, wo Kinder und Jugendliche lernen.
+description: Wir bauen Makespaces – spontan, gemeinsam und dort, wo Kinder und Jugendliche lernen.
 baseurl: ""
 url: "https://ifsmb.de"
 lang: de
+timezone: Europe/Berlin
+future: true
 
 markdown: kramdown
 permalink: /news/:year/:month/:day/:title/
@@ -15,6 +17,12 @@ collections:
   projects:
     output: true
     permalink: /projekte/:name/
+  events:
+    output: true
+    permalink: /kalender/:name/
+  press:
+    output: true
+    permalink: /presse/:slug/
 
 defaults:
   - scope:
@@ -32,16 +40,30 @@ defaults:
       type: "projects"
     values:
       layout: "project"
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "event"
+  - scope:
+      path: ""
+      type: "press"
+    values:
+      layout: "press"
 
 nav:
   - title: Neuigkeiten
     url: /news/
+  - title: Kalender
+    url: /kalender/
   - title: Projekte
     url: /projekte/
   - title: Team
     url: /team/
   - title: Partner
     url: /partner/
+  - title: Presse
+    url: /presse/
 
 exclude:
   - Gemfile
@@ -51,3 +73,4 @@ exclude:
   - README.md
   - CLAUDE.md
   - LICENSE
+  - .pages.yml

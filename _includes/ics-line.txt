@@ -1,0 +1,11 @@
+{%- comment -%}
+  Gibt eine iCal-Zeile aus, nach RFC 5545 auf kurze Zeilen umgebrochen (Folgezeilen beginnen mit Leerzeichen).
+{%- endcomment -%}
+{%- assign l = include.line -%}
+{%- assign n = l.size | minus: 1 | divided_by: 60 -%}
+{{- l | slice: 0, 60 -}}
+{%- for i in (1..n) -%}
+{%- assign off = i | times: 60 -%}
+{{- nl -}}{{- ' ' -}}{{- l | slice: off, 60 -}}
+{%- endfor -%}
+{{- nl -}}

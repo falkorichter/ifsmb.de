@@ -4,3 +4,4 @@ Gemfile.lock
 .jekyll-cache/
 vendor/
 .bundle/
+_logo/team/

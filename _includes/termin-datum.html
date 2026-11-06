@@ -1,0 +1,17 @@
+{%- assign e = include.event -%}
+{%- assign wd = "So,Mo,Di,Mi,Do,Fr,Sa" | split: "," -%}
+{%- assign s_wd = e.start | date: "%w" | plus: 0 -%}
+{%- assign s_day = e.start | date: "%d.%m.%Y" -%}
+{%- if e.end and e.end != "" -%}
+  {%- assign e_wd = e.end | date: "%w" | plus: 0 -%}
+  {%- assign e_day = e.end | date: "%d.%m.%Y" -%}
+{%- else -%}
+  {%- assign e_day = s_day -%}
+{%- endif -%}
+{%- if e.all_day -%}
+  {{ wd[s_wd] }}, {{ s_day }}{% if e_day != s_day %} – {{ wd[e_wd] }}, {{ e_day }}{% endif %}
+{%- elsif e_day != s_day -%}
+  {{ wd[s_wd] }}, {{ s_day }}, {{ e.start | date: "%H:%M" }} – {{ wd[e_wd] }}, {{ e_day }}, {{ e.end | date: "%H:%M" }} Uhr
+{%- else -%}
+  {{ wd[s_wd] }}, {{ s_day }} · {{ e.start | date: "%H:%M" }}{% if e.end and e.end != "" %}–{{ e.end | date: "%H:%M" }}{% endif %} Uhr
+{%- endif -%}

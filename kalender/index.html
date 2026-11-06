@@ -1,0 +1,41 @@
+---
+layout: page
+title: Kalender
+lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
+---
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+{%- assign sorted = site.events | sort: "start" -%}
+{%- assign upcoming = "" | split: "" -%}
+{%- assign past = "" | split: "" -%}
+{%- for e in sorted -%}
+  {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+  {%- if end_s >= now_s %}{% assign upcoming = upcoming | push: e %}{% else %}{% assign past = past | unshift: e %}{% endif -%}
+{%- endfor -%}
+
+<div class="cal-subscribe">
+  <a class="btn" href="webcal://{{ site.url | remove: 'https://' | remove: 'http://' }}{{ '/kalender.ics' | relative_url }}">📅 Kalender abonnieren</a>
+  <a class="btn btn-ghost" href="{{ '/kalender.ics' | relative_url }}" download>iCal-Datei herunterladen</a>
+</div>
+<p class="muted small">Das Abo funktioniert mit Apple Kalender, Google Kalender, Outlook und Thunderbird. Für Google Kalender: „Weitere Kalender → Per URL“ und <code>{{ site.url }}/kalender.ics</code> eintragen.</p>
+
+<h2 class="cal-heading">Kommende Termine</h2>
+<ul class="event-list" id="events-upcoming">
+  {%- for e in upcoming %}{% include termin-karte.html event=e %}{% endfor %}
+</ul>
+<p class="muted" id="events-none"{% if upcoming.size > 0 %} hidden{% endif %}>Gerade sind keine Termine geplant – aber das kann sich spontan ändern.</p>
+
+<h2 class="cal-heading" id="past-heading"{% if past.size == 0 %} hidden{% endif %}>Vergangene Termine</h2>
+<ul class="event-list event-list-past" id="events-past">
+  {%- for e in past %}{% include termin-karte.html event=e %}{% endfor %}
+</ul>
+
+<script>
+  (function () {
+    var now = Date.now() / 1000, up = document.getElementById('events-upcoming'), past = document.getElementById('events-past');
+    Array.prototype.slice.call(up.children).reverse().forEach(function (li) {
+      if (+li.dataset.end < now) past.insertBefore(li, past.firstChild);
+    });
+    document.getElementById('events-none').hidden = up.children.length > 0;
+    document.getElementById('past-heading').hidden = past.children.length === 0;
+  })();
+</script>

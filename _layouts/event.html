@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<main class="container page narrow">
+  <article>
+    <header class="page-header">
+      <p class="meta">{% include termin-datum.html event=page %}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+    </header>
+    {% if page.location %}
+    <p class="event-location">📍 {% if page.location_url %}<a href="{{ page.location_url }}" target="_blank" rel="noopener">{{ page.location }}</a>{% else %}{{ page.location }}{% endif %}</p>
+    {% endif %}
+    <div class="prose">
+      {{ content }}
+    </div>
+    <p class="cal-subscribe">
+      <a class="btn btn-ghost" href="{{ '/kalender.ics' | relative_url }}">📅 Alle Termine als iCal</a>
+    </p>
+    <a href="{{ '/kalender/' | relative_url }}" class="back-link">← Zum Kalender</a>
+  </article>
+</main>
