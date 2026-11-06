@@ -35,7 +35,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 
 - Kein CSS-/JS-Framework, alle Styles in `assets/css/style.css` mit CSS-Variablen
 - Keine externen Ressourcen (Fonts, Skripte, Tracker) einbinden – Datenschutzhinweis im Impressum verspricht das
-- E-Mail-Adressen nur über das `.obf-mail`-Muster (siehe README)
+- **E-Mail-Adressen immer maskieren, nie im Klartext** – weder in HTML/Markdown noch in `_data/*.yml`, Front Matter, `.pages.yml`-Beispielen, Alt-Texten oder `mailto:`-Links. Einzig erlaubt: das `.obf-mail`-Muster (siehe README) mit base64 in `data-em` (`printf 'name@domain.de' | base64`) und maskiertem Anzeigetext „name [at] domain [punkt] de“; in Datendateien das passende `*_b64`-Feld (z. B. `kontakt_email_b64` in `_data/presse.yml`). Vor jedem Commit prüfen, dass im gebauten HTML keine Adresse steht: `grep -rEo '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}' _site --include='*.html'` darf nichts finden
 - Original-Logos in `_logo/`, `_logo/README.md` aktuell halten
 - Platzhalter sind mit `<span class="todo">` markiert
 - Bilder in Posts: `<div class="gallery">` mit `<a class="lightbox" href="groß.jpg"><img src="klein-600w.jpg"></a>` – die Lightbox in `_layouts/default.html` greift automatisch
