@@ -22,7 +22,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - `_posts/` Neuigkeiten (`/news/`)
 - `_team/` Collection, ein Profil pro Datei (`/team/:name/`), Layout `member`
 - `_projects/` Collection (`/projekte/:name/`), Layout `project`; `status: abgeschlossen` → Archiv `/projekte/archiv/`; `event_tag: ktg` listet alle Termine mit `tags: [ktg]` auf der Projektseite, und die Terminseite verlinkt zurück aufs Projekt
-- `_data/partners.yml` Partnerliste; `logo_dark: true` für helle Logos; `page: /partner/<name>/` verlinkt eine eigene Partnerseite (`partner/<name>/index.md`)
+- `_data/partners.yml` Partnerliste; `logo_dark: true` für helle Logos; `page: /partner/<name>/` verlinkt eine eigene Partnerseite (`partner/<name>/index.md`); `thanks` + `thanks_url` zeigen ein Dankeschön mit Link (z. B. auf einen Termin)
 - `_events/` Kalender-Termine (`/kalender/:name/`), Layout `event`; Felder `start`, `end`, `all_day`, `location`, `location_url`, `summary`, optional `gallery` (Liste aus `image`, `thumb`, `alt`; Bilder unter `assets/images/kalender/<termin>/`, Originale in `_logo/kalender/` – nicht committet) und `date_label` (Text statt Datum, wenn der Tag noch nicht feststeht – iCal nutzt weiter `start`/`end`)
 - `kalender.ics` erzeugt den iCal-Feed. Die Datei enthält echte CRLF-Zeilenenden (RFC 5545) – nur mit Werkzeugen bearbeiten, die `\r\n` erhalten (`.gitattributes`: `-text`). Lange Zeilen bricht `_includes/ics-line.txt` um.
 - `_press/` Pressemitteilungen (`/presse/:slug/`), Layout `press`; Kurzprofil & Pressekontakt in `_data/presse.yml`, Downloads in `_data/pressematerial.yml`

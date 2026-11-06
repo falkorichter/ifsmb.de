@@ -325,6 +325,8 @@ img { max-width: 100%; height: auto; }
 .partner-card .logo-tile { height: 130px; }
 .partner-card h3 a { color: var(--ink); text-decoration: none; }
 .partner-card h3 a:hover { color: var(--accent-2); }
+.partner-thanks { font-weight: 700; color: var(--accent-2); }
+.partner-thanks a { color: inherit; }
 
 @media (max-width: 560px) {
   .partner-card { grid-template-columns: 1fr; }

@@ -328,3 +328,9 @@ content:
       - name: description
         label: Beschreibung
         type: string
+      - name: thanks
+        label: Dankeschön (optional, z. B. „Danke für den Ausflug 2025!“)
+        type: string
+      - name: thanks_url
+        label: Link zum Dankeschön (optional, z. B. /kalender/<termin>/)
+        type: string
