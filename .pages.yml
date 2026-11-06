@@ -33,11 +33,20 @@ content:
         options:
           time: true
           format: "yyyy-MM-dd HH:mm"
+      - name: date_label
+        label: Datum als Text (optional)
+        description: "Wenn der genaue Tag noch nicht feststeht, z. B. „Januar 2027 – genauer Termin folgt“. Ersetzt die Datumsanzeige auf der Website; für den iCal-Kalender Beginn/Ende trotzdem setzen (z. B. ganzer Monat, ganztägig)."
+        type: string
       - name: all_day
         label: Ganztägig
         description: Uhrzeiten werden dann ignoriert.
         type: boolean
         default: false
+      - name: tags
+        label: Kategorien (z. B. ktg)
+        description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
+        type: string
+        list: true
       - name: location
         label: Ort
         type: string
@@ -53,6 +62,21 @@ content:
         type: rich-text
         options:
           format: markdown
+      - name: gallery
+        label: Fotos
+        description: Achtung – Handyfotos enthalten oft GPS-Daten. Vorher Metadaten entfernen oder Falko fragen.
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Bild
+            type: image
+          - name: thumb
+            label: Vorschaubild (optional, ca. 600 px)
+            type: image
+          - name: alt
+            label: Bildbeschreibung
+            type: string
 
   - name: posts
     label: Neuigkeiten
@@ -125,6 +149,10 @@ content:
         type: string
       - name: ort
         label: Ort
+        type: string
+      - name: event_tag
+        label: Termine-Kategorie (z. B. ktg)
+        description: Alle Termine mit dieser Kategorie werden auf der Projektseite aufgelistet.
         type: string
       - name: image
         label: Bild
@@ -212,6 +240,16 @@ content:
         required: true
         options:
           format: "yyyy-MM-dd"
+      - name: contact_name
+        label: Pressekontakt für diese Mitteilung (optional, sonst der allgemeine)
+        type: string
+      - name: contact_email_b64
+        label: E-Mail des Kontakts, base64-kodiert
+        description: "Erzeugen im Terminal: printf 'name@example.org' | base64"
+        type: string
+      - name: contact_email_anzeige
+        label: Anzeigetext der E-Mail (z. B. name [at] example.org)
+        type: string
       - name: body
         label: Text
         type: rich-text
@@ -274,12 +312,19 @@ content:
       - name: url
         label: Website
         type: string
+      - name: instagram
+        label: Instagram-Profil (optional)
+        type: string
       - name: logo
         label: Logo
         type: image
       - name: logo_dark
         label: Logo braucht dunklen Hintergrund
         type: boolean
+      - name: page
+        label: Eigene Seite (optional, z. B. /partner/taschenstation/)
+        description: Pfad zu einer Unterseite mit mehr Infos zur Zusammenarbeit. Die Seite selbst liegt als Datei unter partner/<name>/index.md.
+        type: string
       - name: description
         label: Beschreibung
         type: string

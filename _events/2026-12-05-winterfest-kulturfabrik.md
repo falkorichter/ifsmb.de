@@ -1,6 +1,6 @@
 ---
 title: "Winterfest in der Kulturfabrik"
-start: 2026-12-04 16:00
+start: 2026-12-05 16:00
 all_day: false
 location: "Kulturfabrik Moabit, Lehrter Straße 35, 10557 Berlin"
 summary: Winterfest in der Kulturfabrik Moabit – gemeinsam mit unserem Partner 35services.

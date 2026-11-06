@@ -9,6 +9,9 @@ Originale, unbearbeitete Logo-Dateien. Ausgeliefert werden nur die Kopien in `as
 | `partner/rosalind-franklin-gymnasium.png` | rosalind-franklin-gymnasium.de (Logo-RFG-Schwarz-4x, für die Website auf 600 px Breite verkleinert) |
 | `partner/jugendhackt.svg` | jugendhackt.org (JH_Logo_RGB.svg) |
 | `partner/pc-spende.svg` | pc-spende.das-macht-schule.net (Header-Logo pcspende_logo.svg, abgerufen 06.11.2026) |
+| `partner/taschenstation.svg` | taschenstation.de (inline-SVG-Symbol `#cf-icon--logo` aus dem Seitenkopf extrahiert, Schriftzug „ReUseMe“, abgerufen 06.11.2026) |
+| `partner/bietenholz.jpeg` | bietenholz.design (Site-Icon logo_bietenholz2.jpeg, 512 × 512; für die Website auf 400 px verkleinert, abgerufen 06.11.2026) |
+| HeartLabs | **fehlt** – Printables blockiert automatische Abrufe, Instagram braucht Login; Text-Platzhalter wird angezeigt |
 | Förderverein der Kurt-Tucholsky-Grundschule | **fehlt** – Website hat kein Logo, Text-Platzhalter wird angezeigt |
 
 ## Team-Fotos

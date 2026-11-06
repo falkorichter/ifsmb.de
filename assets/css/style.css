@@ -360,6 +360,7 @@ img { max-width: 100%; height: auto; }
   line-height: 1.1;
 }
 .event-day { display: block; font-size: 1.8rem; font-weight: 900; }
+.event-day-month { font-size: 1.35rem; padding: .2rem 0; }
 .event-month { display: block; font-family: var(--mono); font-size: .75rem; }
 .event-body { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
 .event-title { font-size: 1.1rem; }
@@ -457,3 +458,10 @@ img { max-width: 100%; height: auto; }
   .event-date { width: 62px; }
   .event-day { font-size: 1.4rem; }
 }
+
+.more-link { font-weight: 700; }
+.partner-page-logo img { max-width: 320px; width: 100%; border: 0; border-radius: 0; }
+.prose .partner-page-logo img { border: 0; border-radius: 0; }
+.event-gallery { margin-top: 2rem; }
+.album-link { margin: 1.25rem 0; }
+.event-project { margin-top: 1.5rem; font-weight: 600; }

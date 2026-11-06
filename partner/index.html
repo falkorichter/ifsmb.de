@@ -12,6 +12,8 @@ lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
     <div>
       <h3><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.name }}</a></h3>
       {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+      {% if p.instagram %}<p><a href="{{ p.instagram }}" target="_blank" rel="noopener">Instagram</a></p>{% endif %}
+      {% if p.page %}<p><a href="{{ p.page | relative_url }}" class="more-link">Mehr über die Zusammenarbeit →</a></p>{% endif %}
       <p class="muted small">{{ p.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first }}</p>
     </div>
   </div>

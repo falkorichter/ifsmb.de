@@ -16,6 +16,17 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
+    {% if page.event_tag %}
+    {%- assign tagged = "" | split: "" -%}
+    {%- for e in site.events -%}{%- if e.tags contains page.event_tag -%}{%- assign tagged = tagged | push: e -%}{%- endif -%}{%- endfor -%}
+    {%- assign tagged = tagged | sort: "start" | reverse -%}
+    {% if tagged.size > 0 %}
+    <h2>Termine &amp; Berichte</h2>
+    <ul class="event-list">
+      {%- for e in tagged %}{% include termin-karte.html event=e %}{% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
     {% if page.team %}
     <h2>Beteiligt</h2>
     <ul class="link-list">

@@ -8,7 +8,9 @@
 {%- else -%}
   {%- assign e_day = s_day -%}
 {%- endif -%}
-{%- if e.all_day -%}
+{%- if e.date_label and e.date_label != "" -%}
+  {{ e.date_label }}
+{%- elsif e.all_day -%}
   {{ wd[s_wd] }}, {{ s_day }}{% if e_day != s_day %} – {{ wd[e_wd] }}, {{ e_day }}{% endif %}
 {%- elsif e_day != s_day -%}
   {{ wd[s_wd] }}, {{ s_day }}, {{ e.start | date: "%H:%M" }} – {{ wd[e_wd] }}, {{ e_day }}, {{ e.end | date: "%H:%M" }} Uhr

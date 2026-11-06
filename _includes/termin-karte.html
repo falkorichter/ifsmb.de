@@ -3,13 +3,21 @@
 <li class="event-item" data-end="{{ end_s }}">
   <a class="card card-link event-card" href="{{ e.url | relative_url }}">
     <span class="event-date">
+      {%- if e.date_label and e.date_label != "" -%}
+      {%- assign months = "Jan,Feb,Mär,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Dez" | split: "," -%}
+      {%- assign m_idx = e.start | date: "%m" | plus: 0 | minus: 1 %}
+      <span class="event-day event-day-month">{{ months[m_idx] }}</span>
+      <span class="event-month">{{ e.start | date: "%Y" }}</span>
+      {%- else %}
       <span class="event-day">{{ e.start | date: "%d" }}</span>
       <span class="event-month">{{ e.start | date: "%m.%Y" }}</span>
+      {%- endif %}
     </span>
     <span class="event-body">
       <span class="meta">{% include termin-datum.html event=e %}</span>
       <strong class="event-title">{{ e.title }}</strong>
       {% if e.location %}<span class="muted">📍 {{ e.location }}</span>{% endif %}
+      {% if e.gallery and e.gallery.size > 0 %}<span class="muted small">📷 {{ e.gallery.size }} Foto{% if e.gallery.size > 1 %}s{% endif %}</span>{% endif %}
     </span>
   </a>
 </li>
