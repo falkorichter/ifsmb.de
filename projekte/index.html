@@ -3,7 +3,8 @@ layout: page
 title: Projekte
 lead: Woran wir gerade arbeiten.
 ---
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | sort: "start" | reverse %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | sort: "start" | reverse %}
+{% assign ideas = site.projects | where: "status", "idee" | sort: "start" | reverse %}
 {% assign inquiries = site.projects | where: "status", "anfrage" | sort: "start" | reverse %}
 {% if active.size > 0 %}
 <div class="grid-2">
@@ -26,6 +27,20 @@ lead: Woran wir gerade arbeiten.
   {% for p in inquiries %}
   <a class="card card-link" href="{{ p.url | relative_url }}">
     <p class="meta"><span class="badge badge-inquiry">Anfrage</span>{% if p.ort %} · {{ p.ort }}{% endif %}</p>
+    <h3>{{ p.title }}</h3>
+    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if ideas.size > 0 %}
+<h2 class="cal-heading">Ideen</h2>
+<p class="muted">Was wir vielleicht als Nächstes bauen – noch nichts Festes. Mehr Anregungen gibt es auf der Seite <a href="{{ '/projekte/ideen/' | relative_url }}">Projekt-Ideen</a>.</p>
+<div class="grid-2">
+  {% for p in ideas %}
+  <a class="card card-link" href="{{ p.url | relative_url }}">
+    <p class="meta"><span class="badge badge-idea">Idee</span>{% if p.ort %} · {{ p.ort }}{% endif %}</p>
     <h3>{{ p.title }}</h3>
     {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
   </a>

@@ -580,3 +580,4 @@ img { max-width: 100%; height: auto; }
 .prose th { background: var(--paper); font-weight: 700; }
 .prose tr:nth-child(even) td { background: rgba(255,255,255,.55); }
 .prose h2 + h3, .prose h3 { margin-top: 1.75rem; }
+.badge-idea { background: #e3f6d8; color: var(--ink); }
