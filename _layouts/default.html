@@ -66,9 +66,12 @@
   {% unless page.url == '/spenden/' %}
   <a href="{{ '/spenden/' | relative_url }}" class="badge-donate" aria-label="Spenden">
     <span class="badge-donate-text">❤️<br>Spenden</span>
-    <span class="badge-donate-icon badge-donate-icon--1" aria-hidden="true">🖨️</span>
-    <span class="badge-donate-icon badge-donate-icon--2" aria-hidden="true">💻</span>
-    <span class="badge-donate-icon badge-donate-icon--3" aria-hidden="true">🖥️</span>
+    <span class="badge-donate-icon" style="--i: 0" aria-hidden="true">🖨️</span>
+    <span class="badge-donate-icon" style="--i: 1" aria-hidden="true">📷</span>
+    <span class="badge-donate-icon" style="--i: 2" aria-hidden="true">💾</span>
+    <span class="badge-donate-icon" style="--i: 3" aria-hidden="true">💻</span>
+    <span class="badge-donate-icon" style="--i: 4" aria-hidden="true">🖥️</span>
+    <span class="badge-donate-icon" style="--i: 5" aria-hidden="true">🖱️</span>
   </a>
   {% endunless %}
 

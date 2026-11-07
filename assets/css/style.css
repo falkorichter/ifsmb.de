@@ -532,20 +532,20 @@ img { max-width: 100%; height: auto; }
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 22px;
-  height: 22px;
-  margin: -11px 0 0 -11px;
-  font-size: 17px;
-  line-height: 22px;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  font-size: 24px;
+  line-height: 30px;
   text-align: center;
   pointer-events: none;
-  animation: donate-orbit 7s linear infinite;
+  animation: donate-orbit 12s linear infinite;
+  /* 6 Emoji gleichmäßig verteilt: --i = 0…5 */
+  animation-delay: calc(var(--i, 0) * -2s);
 }
-.badge-donate-icon--2 { animation-delay: -2.33s; }
-.badge-donate-icon--3 { animation-delay: -4.67s; }
 @keyframes donate-orbit {
-  from { transform: rotate(0deg) translateY(-62px) rotate(0deg); }
-  to   { transform: rotate(360deg) translateY(-62px) rotate(-360deg); }
+  from { transform: rotate(0deg) translateY(-70px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateY(-70px) rotate(-360deg); }
 }
 @keyframes donate-spin { to { transform: rotate(360deg); } }
 @keyframes donate-colors {
@@ -554,12 +554,12 @@ img { max-width: 100%; height: auto; }
   66%      { background: #8fb3ff; }
 }
 @media (max-width: 560px) {
-  .badge-donate { width: 80px; height: 80px; bottom: 1.4rem; right: 1.4rem; font-size: .75rem; }
+  .badge-donate { width: 80px; height: 80px; bottom: 1.9rem; right: 1.9rem; font-size: .75rem; }
   .badge-donate::before { inset: -12px; }
-  .badge-donate-icon { font-size: 14px; }
+  .badge-donate-icon { font-size: 19px; }
   @keyframes donate-orbit {
-    from { transform: rotate(0deg) translateY(-50px) rotate(0deg); }
-    to   { transform: rotate(360deg) translateY(-50px) rotate(-360deg); }
+    from { transform: rotate(0deg) translateY(-55px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateY(-55px) rotate(-360deg); }
   }
 }
 @media (prefers-reduced-motion: reduce) {
