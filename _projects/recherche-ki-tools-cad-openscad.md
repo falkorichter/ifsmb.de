@@ -19,4 +19,6 @@ Falko experimentiert mit [Claude Code](https://claude.com/claude-code) und schau
 
 Zusammen mit Anton aus der Werkstatt wurde auch ausprobiert, ob ein KI-Heimserver ([opencode-config](https://github.com/falkorichter/opencode-config)) mit [opencode](https://opencode.ai/) und einem Open-Weight-Modell ebenfalls in der Lage ist, mit OpenSCAD zu konstruieren. Es hat ein bisschen geklappt.
 
+Das ist erst einmal Falkos persönliches Projekt – sobald weitere Leute einsteigen, machen wir ein Projekt des Instituts daraus. Lust mitzumachen? [Meldet euch!]({{ '/angebot/' | relative_url }})
+
 Details und Updates folgen.
