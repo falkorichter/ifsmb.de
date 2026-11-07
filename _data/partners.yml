@@ -24,7 +24,8 @@
 - name: Jugend hackt
   url: https://jugendhackt.org/
   logo: /assets/images/partner/jugendhackt.svg
-  description: Programm für junge Menschen, die mit Code die Welt verbessern wollen.
+  page: /partner/jugend-hackt/
+  description: Programm für junge Menschen, die mit Code die Welt verbessern wollen. Ihr Linux-Live-System ist die Grundlage für unseren 3D-Druck-Stick.
 
 - name: PC-Spende – Das macht Schule
   url: https://pc-spende.das-macht-schule.net/
@@ -47,4 +48,4 @@
   url: https://www.printables.com/@AdditiveProducts
   instagram: https://www.instagram.com/heartlabs_official/
   logo:
-  description: Danke für die Hardware-Spenden! HeartLabs zeigt 3D-Druck-Modelle auf Printables (@AdditiveProducts) und auf Instagram (@heartlabs_official).
+  description: Danke für die Hardware-Spenden – unter anderem den Laptop, auf dem Falko die 3D-Druck-Sticks baut! HeartLabs zeigt 3D-Druck-Modelle auf Printables (@AdditiveProducts) und auf Instagram (@heartlabs_official).

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-label="Illustration eines aufgeklappten Laptops mit eingestecktem USB-Stick">
+  <title>Illustration: Laptop mit USB-Stick</title>
+  <rect width="360" height="260" fill="#ffffff"/>
+  <g fill="none" stroke="#16161d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- screen -->
+    <rect x="80" y="40" width="200" height="130" rx="8"/>
+    <rect x="94" y="54" width="172" height="102" rx="3" stroke="#9a9aa6" stroke-width="3"/>
+    <!-- base -->
+    <path d="M60 180 L300 180 L320 210 L40 210 Z"/>
+    <line x1="150" y1="196" x2="210" y2="196" stroke="#9a9aa6" stroke-width="3"/>
+    <!-- usb stick -->
+    <rect x="320" y="186" width="10" height="12" stroke="#16161d" stroke-width="3"/>
+    <rect x="330" y="182" width="24" height="20" rx="3" stroke="#ff5a36"/>
+  </g>
+  <!-- small 3D-printed cube on screen -->
+  <g stroke="#ff5a36" stroke-width="4" fill="none" stroke-linejoin="round">
+    <path d="M180 78 L206 92 L206 120 L180 134 L154 120 L154 92 Z"/>
+    <path d="M154 92 L180 106 L206 92 M180 106 L180 134"/>
+  </g>
+</svg>
