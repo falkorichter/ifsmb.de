@@ -33,6 +33,16 @@ Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-D
 
 Alle Termine stehen als Abo unter **https://ifsmb.de/kalender.ics** (bzw. `webcal://ifsmb.de/kalender.ics`) bereit. Der Feed wird bei jedem Build neu erzeugt.
 
+## Suche
+
+Die Suche (`/suche/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus dem fertigen HTML nach `jekyll build` erzeugt (macht der Pages-Workflow) und liegt unter `/pagefind/` – alles lokal, keine externen Ressourcen. `jekyll serve` hat keinen Index; zum Ausprobieren:
+
+```sh
+bundle exec jekyll build && npx -y pagefind@1.5.2 --site _site --serve   # http://localhost:1414/suche/
+```
+
+Indexiert wird der Seiteninhalt (`data-pagefind-body` in `_layouts/default.html`) mit den Filtern „Bereich“ und „Stichwort“ (`_includes/suche-meta.html`). Übersichtsseiten tragen `suche: false` und fehlen im Index; der Block „Verknüpft“ wird ignoriert.
+
 ## CMS (Pages CMS)
 
 Inhalte lassen sich ohne Git im Browser pflegen:
@@ -56,8 +66,8 @@ Base64 erzeugen: `printf 'name@ifsmb.de' | base64`
 
 ## Deployment
 
-Push auf `main` → GitHub Pages baut und veröffentlicht automatisch.
-In den Repo-Einstellungen unter *Pages*: Source = „Deploy from a branch“, Branch = `main` / root, Custom domain = `ifsmb.de`.
+Push auf `main` → der Workflow `.github/workflows/pages.yml` baut die Seite, erzeugt den Suchindex und veröffentlicht.
+In den Repo-Einstellungen unter *Pages*: Source = „GitHub Actions“, Custom domain = `ifsmb.de`.
 
 DNS für `ifsmb.de` (Apex):
 

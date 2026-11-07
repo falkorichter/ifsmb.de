@@ -1,0 +1,39 @@
+---
+layout: page
+title: Suche
+lead: Volltextsuche über Neuigkeiten, Projekte, Termine, Ausstattung, Team und mehr.
+suche: false
+---
+{%- comment -%}
+  Volltextsuche mit Pagefind (https://pagefind.app). Der Index (/pagefind/) wird erst nach
+  `jekyll build` erzeugt (siehe .github/workflows/pages.yml und README) – bei reinem
+  `jekyll serve` fehlt er, dann erscheint der Hinweis unten. ?q=… startet direkt eine Suche.
+  Alles kommt von ifsmb.de selbst, keine externen Ressourcen.
+{%- endcomment -%}
+<link rel="stylesheet" href="{{ '/pagefind/pagefind-ui.css' | relative_url }}">
+<div id="search" class="search-ui"></div>
+<p id="search-missing" class="note" hidden>Der Suchindex fehlt: Er wird erst nach <code>jekyll build</code> mit
+<code>npx pagefind --site _site</code> erzeugt (siehe README).</p>
+<script src="{{ '/pagefind/pagefind-ui.js' | relative_url }}"
+  onerror="document.getElementById('search-missing').hidden = false"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (typeof PagefindUI === "undefined") return;
+    var ui = new PagefindUI({
+      element: "#search",
+      baseUrl: "{{ '/' | relative_url }}",
+      showImages: false,
+      showSubResults: true,
+      autofocus: true,
+      processResult: function (result) {
+        if (result.meta.datum) {
+          result.meta.title += " (" + result.meta.datum + ")";
+          delete result.meta.datum; // sonst zeigt Pagefind das Datum noch einmal darunter
+        }
+        return result;
+      }
+    });
+    var q = new URLSearchParams(location.search).get("q");
+    if (q) ui.triggerSearch(q);
+  });
+</script>

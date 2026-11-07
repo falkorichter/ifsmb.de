@@ -78,6 +78,8 @@ nav:
     url: /partner/
   - title: Presse
     url: /presse/
+  - title: Suche
+    url: /suche/
 
 exclude:
   - Gemfile

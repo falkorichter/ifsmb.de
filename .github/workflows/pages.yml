@@ -1,0 +1,44 @@
+# Baut die Seite für GitHub Pages (ifsmb.de) und danach den Suchindex mit Pagefind.
+# Der eingebaute Jekyll-Build von Pages kann keinen Schritt nach dem Build ausführen,
+# deshalb dieser Workflow (Settings → Pages → Source: „GitHub Actions“).
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # Ruby-Version aus .ruby-version
+      - uses: actions/configure-pages@v5
+      - run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      # Volltext-Suchindex für /suche/ (Pagefind liest das fertige HTML → _site/pagefind/)
+      - run: npx -y pagefind@1.5.2 --site _site
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
