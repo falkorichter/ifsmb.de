@@ -64,6 +64,8 @@ E-Mail-Adressen nie im Klartext ins HTML schreiben, sondern base64-kodiert:
 
 Base64 erzeugen: `printf 'name@ifsmb.de' | base64`
 
+Telefonnummern genauso: `<a href="#" class="obf-tel" data-tel="BASE64">Telefon</a>` (Base64 von z. B. `0151 2345678`); das Skript setzt Text und `tel:`-Link.
+
 ## Deployment
 
 Push auf `main` → der Workflow `.github/workflows/pages.yml` baut die Seite, erzeugt den Suchindex und veröffentlicht.

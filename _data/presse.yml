@@ -4,9 +4,11 @@ kurzprofil: >-
   Vereinen und offenen Werkstätten in Berlin-Moabit Makespaces ein: Orte, an denen Kinder
   und Jugendliche löten, programmieren, 3D-drucken und Dinge selbst bauen können.
   Das Institut arbeitet ehrenamtlich und ohne lange Anträge – mit dem, was gerade da ist.
-kontakt_name: ""
+kontakt_name: "Falko Richter"
 # E-Mail base64-kodiert eintragen: printf 'presse@ifsmb.de' | base64
-kontakt_email_b64: ""
-kontakt_email_anzeige: ""
+kontakt_email_b64: "ZmFsa29AMzVzZXJ2aWNlcy5kZQ=="
+kontakt_email_anzeige: "falko [at] 35services [punkt] de"
 kontakt_telefon: ""
+# Telefon ebenfalls base64-kodiert (wird per JavaScript angezeigt): printf '0151 2345678' | base64
+kontakt_telefon_b64: "MDE1MTUgNzQwMTIzNQ=="
 bildnachweis: ""

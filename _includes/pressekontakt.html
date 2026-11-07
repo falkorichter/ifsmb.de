@@ -1,13 +1,13 @@
 {%- assign pr = site.data.presse -%}
-{%- assign c_name = pr.kontakt_name -%}{%- assign c_b64 = pr.kontakt_email_b64 -%}{%- assign c_show = pr.kontakt_email_anzeige -%}{%- assign c_tel = pr.kontakt_telefon -%}
+{%- assign c_name = pr.kontakt_name -%}{%- assign c_b64 = pr.kontakt_email_b64 -%}{%- assign c_show = pr.kontakt_email_anzeige -%}{%- assign c_tel = pr.kontakt_telefon -%}{%- assign c_tel_b64 = pr.kontakt_telefon_b64 -%}
 {%- if page.contact_name and page.contact_name != "" -%}
-  {%- assign c_name = page.contact_name -%}{%- assign c_b64 = page.contact_email_b64 -%}{%- assign c_show = page.contact_email_anzeige -%}{%- assign c_tel = page.contact_telefon | default: "" -%}
+  {%- assign c_name = page.contact_name -%}{%- assign c_b64 = page.contact_email_b64 -%}{%- assign c_show = page.contact_email_anzeige -%}{%- assign c_tel = page.contact_telefon | default: "" -%}{%- assign c_tel_b64 = page.contact_telefon_b64 | default: "" -%}
 {%- endif -%}
 <div class="card press-contact">
   <h3>Pressekontakt</h3>
   <p>
     {% if c_name != "" %}{{ c_name }}{% else %}<span class="todo">[Name der Ansprechperson]</span>{% endif %}<br>
     {% if c_b64 != "" %}<a href="#" class="obf-mail" data-em="{{ c_b64 }}">{{ c_show | default: "E-Mail" }}</a>{% else %}<span class="todo">[E-Mail-Adresse]</span>{% endif %}
-    {% if c_tel != "" %}<br>{{ c_tel }}{% endif %}
+    {% if c_tel_b64 and c_tel_b64 != "" %}<br><a href="#" class="obf-tel" data-tel="{{ c_tel_b64 }}">Telefon (JavaScript nötig)</a>{% elsif c_tel != "" %}<br>{{ c_tel }}{% endif %}
   </p>
 </div>
