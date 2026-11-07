@@ -4,7 +4,7 @@ date: 2026-10-19 09:45:40 +0200
 author: falko-richter
 original_url: https://35services.de/2026/jugend-hackt-congress-2026/
 original_site: 35services.de
-tags: [35services]
+tags: [35services, lulzbot-mini, axidraw, flexibles-filament]
 ---
 
 <a class="video-link" href="https://www.youtube.com/watch?v=2nlEtCjD7ok" target="_blank" rel="noopener">

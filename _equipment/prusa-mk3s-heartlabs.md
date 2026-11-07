@@ -6,7 +6,7 @@ summary: Ein MK3S von HeartLabs – wird gerade bei 35services wieder flott gema
 owner_team: falko-richter
 standort_partner: 35 services e. V.
 standort: 35services e.V. (in Reparatur)
-image: /assets/images/ausstattung/prusa-mk3s/illustration.svg
+image: /assets/images/ausstattung/illustration-drucker.svg
 image_alt: "Illustration eines kartesischen 3D-Druckers (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [prusa-mk3s, prusa-mk3s-heartlabs, 3d-drucker, 35services, heartlabs]
