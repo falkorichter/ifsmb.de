@@ -34,7 +34,7 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 | `institut/ifsmb-logo-badge.png` | Badge aus dem Website-Header, mit Headless Chrome in 3× Auflösung gerendert (transparenter Hintergrund) |
 | `institut/ifsmb-logo-wortmarke.png` | wie oben, mit Schriftzug „Institut für spontane Makespace Buildung“ |
 
-Seit November 2026 in der Schrift **Berlin Type** (siehe unten) neu gerendert: HTML-Seite mit Headless Chrome in 5× Auflösung, transparenter Hintergrund, auf den Inhalt zugeschnitten. Eine Vektorversion gibt es (noch) nicht.
+Seit November 2026 in der Schrift **Berlin Type** (siehe unten) neu gerendert: HTML-Seite mit Headless Chrome in 5× Auflösung, transparenter Hintergrund, auf den Inhalt zugeschnitten. Für den Monospace-Look stehen die Buchstaben von „IfsMB“ in gleich breiten Zellen (0,84 em) – die Schrift selbst bleibt unverändert, wie es die Lizenz verlangt. Eine Vektorversion gibt es (noch) nicht.
 
 ## Schrift: Berlin Type
 

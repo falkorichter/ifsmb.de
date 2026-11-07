@@ -86,7 +86,11 @@ img { max-width: 100%; height: auto; }
   padding: .25rem .5rem;
   box-shadow: 3px 3px 0 var(--ink);
   transform: rotate(-3deg);
+  display: inline-flex;
 }
+/* Monospace-Look für das Logo, ohne die Schrift zu verändern (Lizenz):
+   jeder Buchstabe steht in einer gleich breiten Zelle */
+.brand-cell { display: inline-block; width: .84em; text-align: center; }
 
 .brand-name { font-weight: 700; font-size: .85rem; line-height: 1.2; }
 
