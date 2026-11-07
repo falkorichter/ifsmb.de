@@ -1,7 +1,7 @@
 ---
 title: Jimumeta / 3DMakerpro Lynx
 kategorie: 3D-Scanner
-summary: Ein Handscanner für große Objekte – von Autoteilen bis zu Möbeln. Mit ausführlichem Vergleich zum Creality Ferret SE.
+summary: Ein Handscanner für große Objekte – von Autoteilen bis zu Möbeln. Mit Mobil-Adapter, den wir testen wollen, und ausführlichem Vergleich zum Creality Ferret SE.
 owner_team: falko-richter
 image: /assets/images/ausstattung/3d-scanner/illustration.svg
 image_alt: "Illustration eines 3D-Handscanners, der ein Objekt mit Lichtmustern abtastet (kein Foto des Geräts)"
@@ -9,7 +9,17 @@ image_is_illustration: true
 tags: [3d-scanner, 3dmakerpro-lynx, creality-ferret-se]
 ---
 
-Der Lynx gehört Falko. Weil wir gerade auch den [Creality Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}) testen, hat Falko einen ausführlichen Vergleich der beiden Scanner erstellen lassen – größtenteils mit KI. Hier ist der komplette Vergleich.
+Der Lynx gehört Falko.
+
+## Mobil scannen – das wollen wir testen {#mobil-scannen}
+
+Wir haben den **Mobil-Adapter für den Lynx**, und mobiles Scannen ist eines der Dinge, die wir ausprobieren wollen.
+
+Wichtig: Ganz ohne Computer geht es auch damit nicht – ein Laptop oder PC ist weiterhin beteiligt. Das Handy ist nur die **mobile Bedienoberfläche** beim Scannen. Der Vorteil: Man kann sich mit dem Scanner frei im Raum bewegen und muss nicht gleichzeitig Laptop, USB-Kabel und Scanner-Handstück herumtragen. Gerade bei großen Objekten – genau dafür ist der Lynx gebaut – sollte das viel angenehmer sein.
+
+Wie gut das klappt, berichten wir, sobald wir es getestet haben.
+
+Weil wir gerade auch den [Creality Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}) testen, hat Falko einen ausführlichen Vergleich der beiden Scanner erstellen lassen – größtenteils mit KI. Hier ist der komplette Vergleich.
 
 ## 3D-Scanner im Vergleich: Jimumeta (3DMakerpro) Lynx vs. Creality CR-Scan Ferret SE {#vergleich}
 
@@ -75,6 +85,8 @@ Der Haken ist die Farbe: Das günstige **Standard-Kit erfasst nur Geometrie**. T
 **Tracking und Stabilität:** Beide tracken **markerlos** (ohne Klebepunkte) – man hält den Scanner einfach und bewegt ihn. Beim **Lynx** berichten Nutzer*innen, dass der **Drehteller-Modus perfekt ausrichtet**, die automatische Ausrichtung aus der Hand aber **„selten klappt“**, wenn man keine Übung hat – der Lynx will also einen Drehteller, wie ihn die Premium- und Luxury-Kits mitbringen. Den **Ferret SE** beschreiben Tests durchweg als stabil und einfach; die 30 fps helfen, weil die Punktwolke zwischen zwei Bildern weniger driftet. *Leichter Vorteil für den Ferret SE aus der Hand; mit Drehteller zieht der Lynx gleich.*
 
 **Anschluss, Plattformen und die Handy-Frage:** Der **Lynx** hängt per USB 2.0 am PC (Windows 10/11, macOS 12/13). Ein Handy-Weg über das „Connect“-Zubehör (Android 10+/iOS 15+) existierte, laut einer Shop-Bewertung ist **Connect aber eingestellt**. Der **Ferret SE** läuft über USB 3.0 **nur am PC, ohne iOS**. *Wer ohne PC mit Handy oder Tablet scannen will: Das kann heute keiner der beiden.*
+
+<p class="our-note">💬 <strong>Unsere Erfahrung:</strong> Wir haben einen Mobil-Adapter für den Lynx und wollen mobiles Scannen testen. Ein Computer bleibt dabei beteiligt – das Handy dient als mobile Bedienoberfläche, damit man sich ohne Laptop und Kabel in der Hand im Raum bewegen kann. Siehe <a href="#mobil-scannen">Mobil scannen</a>.</p>
 
 **Software – JMStudio vs. Creality Scan:** **JMStudio (Lynx)** ist kostenlos und läuft unter Windows und macOS. Es kann Drehteller-Abläufe, Ausrichtung und Export (OBJ, PLY, STL, STEP …). Das Umfeld ist kleiner, die Dokumentation dünner, und die Oberfläche wirkt eher wie ein Ingenieurswerkzeug. Die macOS-Unterstützung ist ein echtes Plus. **Creality Scan (Ferret SE)** ist kostenlos und vor allem für Windows gedacht. Das Aushängeschild ist der **Ein-Klick-Ablauf** vom Scan zum texturierten Modell: Objekt erkennen, verfolgen, aufnehmen, zusammensetzen, exportieren – mit wenig Handarbeit. Tests nennen es durchweg **die einfachste Software** unter den günstigen Scannern. *Creality Scan für Einsteiger*innen und Tempo, JMStudio für Flexibilität (und als einzige echte macOS-Lösung).*
 

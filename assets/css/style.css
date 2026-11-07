@@ -639,3 +639,4 @@ img { max-width: 100%; height: auto; }
 .member-profile > h2 { margin-top: 2.25rem; margin-bottom: .9rem; }
 .ai-note { background: #eef3ff; border: 2px dashed var(--blue); border-radius: var(--radius); padding: .8rem 1rem; margin: 1rem 0 1.5rem; }
 .ai-note p { margin: 0; }
+.our-note { background: #fff4c2; border-left: 4px solid var(--accent); border-radius: 6px; padding: .6rem .9rem; margin: .8rem 0 1.2rem; }
