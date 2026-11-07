@@ -14,7 +14,7 @@ permalink: /projekte/persoenlich/
   <div class="grid-2">
     {% for p in mp %}
     <a class="card card-link" href="{{ p.url | relative_url }}">
-      <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% if p.updates and p.updates.size > 0 %}{% assign lu = p.updates | sort: "datum" | last %} · Update: {{ lu.datum | date: "%d.%m.%Y" }}{% endif %}</p>
+      <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · Update: {{ lu }}{% endif %}</p>
       <h3>{{ p.title }}</h3>
       {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
     </a>

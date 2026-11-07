@@ -596,6 +596,9 @@ img { max-width: 100%; height: auto; }
 .update-date { display: block; font-weight: 700; margin-bottom: .2rem; }
 .update-text p { margin: 0 0 .5rem; }
 .project-updates { margin-bottom: 2.5rem; }
+.update-post::before { background: var(--paper); }
+.update-date a { font-weight: 700; }
+.post-project { font-weight: 600; margin-bottom: 1.5rem; }
 
 .nav-group { position: relative; }
 .nav-group-toggle {

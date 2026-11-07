@@ -8,7 +8,8 @@ layout: default
         {% if page.persoenlich %}<span class="badge badge-personal">Persönlich</span> {% endif %}{% if page.status == 'abgeschlossen' %}<span class="badge badge-past">Abgeschlossen</span>{% elsif page.status == 'anfrage' %}<span class="badge badge-inquiry">Anfrage</span>{% elsif page.status == 'idee' %}<span class="badge badge-idea">Idee</span>{% else %}<span class="badge badge-active">Aktuell</span>{% endif %}
         {% if page.zeitraum %} · {{ page.zeitraum }}{% endif %}
         {% if page.ort %} · {{ page.ort }}{% endif %}
-        {%- if page.updates and page.updates.size > 0 -%}{%- assign last_update = page.updates | sort: "datum" | last %} · Letztes Update: <a href="#updates">{{ last_update.datum | date: "%d.%m.%Y" }}</a>{%- endif %}
+        {%- capture last_update %}{% include projekt-letztes-update.html project=page %}{% endcapture -%}
+        {%- if last_update != "" %} · Letztes Update: <a href="#updates">{{ last_update }}</a>{%- endif %}
       </p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
@@ -23,16 +24,33 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
-    {% if page.updates and page.updates.size > 0 %}
-    {%- assign sorted_updates = page.updates | sort: "datum" | reverse -%}
+    {%- comment -%}Stand / Updates: manuelle `updates` und alle Beiträge mit dem event_tag als eine Zeitleiste – so kann jede*r aus dem Team mit einem kleinen Beitrag zum Projekt beitragen.{%- endcomment -%}
+    {%- assign tl_keys = "" | split: "" -%}
+    {%- for u in page.updates -%}{%- capture k %}{{ u.datum | date: "%Y-%m-%d" }} 00:00|u|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
+    {%- assign tagged_posts = "" | split: "" -%}
+    {%- if page.event_tag -%}{%- for po in site.posts -%}{%- if po.tags contains page.event_tag -%}{%- assign tagged_posts = tagged_posts | push: po -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+    {%- for po in tagged_posts -%}{%- capture k %}{{ po.date | date: "%Y-%m-%d %H:%M" }}|p|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
+    {%- assign tl_keys = tl_keys | sort | reverse -%}
+    {% if tl_keys.size > 0 %}
     <section class="project-updates" id="updates">
       <h2>Stand / Updates</h2>
       <ol class="update-list">
-        {%- for u in sorted_updates %}
+        {%- for k in tl_keys %}
+        {%- assign kp = k | split: "|" -%}{%- assign idx = kp[2] | plus: 0 %}
+        {%- if kp[1] == "u" %}{%- assign u = page.updates[idx] %}
         <li class="update-item">
           <span class="meta update-date">{{ u.datum | date: "%d.%m.%Y" }}</span>
           <div class="update-text">{{ u.text | markdownify }}</div>
         </li>
+        {%- else %}{%- assign po = tagged_posts[idx] -%}{%- assign pa = site.team | where: "slug", po.author | first %}
+        <li class="update-item update-post">
+          <span class="meta update-date">{{ po.date | date: "%d.%m.%Y" }}{% if pa %} · <a href="{{ pa.url | relative_url }}">{{ pa.title }}</a>{% endif %}{% if po.persoenlich and page.persoenlich != true %} · <span class="badge badge-personal">Persönlich</span>{% endif %}</span>
+          <div class="update-text">
+            <p><a href="{{ po.url | relative_url }}"><strong>{{ po.title }}</strong></a></p>
+            {%- assign ex = po.excerpt | strip_html | strip -%}{% if ex != "" %}<p>{{ ex | truncatewords: 30 }}</p>{% endif %}
+          </div>
+        </li>
+        {%- endif %}
         {%- endfor %}
       </ol>
     </section>
@@ -45,14 +63,6 @@ layout: default
     <h2>Termine &amp; Berichte</h2>
     <ul class="event-list">
       {%- for e in tagged %}{% include termin-karte.html event=e %}{% endfor %}
-    </ul>
-    {% endif %}
-    {%- assign tagged_posts = "" | split: "" -%}
-    {%- for po in site.posts -%}{%- if po.tags contains page.event_tag -%}{%- assign tagged_posts = tagged_posts | push: po -%}{%- endif -%}{%- endfor -%}
-    {% if tagged_posts.size > 0 %}
-    <h2>Beiträge</h2>
-    <ul class="post-list">
-      {% for po in tagged_posts %}<li><span class="meta">{{ po.date | date: "%d.%m.%Y" }}</span> <a href="{{ po.url | relative_url }}">{{ po.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
     {% endif %}

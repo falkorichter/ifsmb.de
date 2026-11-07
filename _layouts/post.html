@@ -19,6 +19,9 @@ layout: default
       <a href="{{ page.original_url }}" target="_blank" rel="noopener" class="small">{{ page.original_url }}</a>
     </p>
     {% endif %}
+    {%- assign post_projects = "" | split: "" -%}
+    {%- for pr in site.projects -%}{%- if pr.event_tag and page.tags contains pr.event_tag -%}{%- assign post_projects = post_projects | push: pr -%}{%- endif -%}{%- endfor -%}
+    {% if post_projects.size > 0 %}<p class="post-project">🔧 Update zum Projekt {% for pr in post_projects %}<a href="{{ pr.url | relative_url }}#updates">{{ pr.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
     <div class="prose">
       {{ content }}
     </div>
