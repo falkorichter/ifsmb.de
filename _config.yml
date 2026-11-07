@@ -64,14 +64,16 @@ nav:
     url: /news/
   - title: Kalender
     url: /kalender/
-  - title: Projekte
-    url: /projekte/
-  - title: Angebot
-    url: /angebot/
-  - title: Ausstattung
-    url: /ausstattung/
-  - title: Team
-    url: /team/
+  - title: Wir
+    children:
+      - title: Projekte
+        url: /projekte/
+      - title: Angebot
+        url: /angebot/
+      - title: Ausstattung
+        url: /ausstattung/
+      - title: Team
+        url: /team/
   - title: Partner
     url: /partner/
   - title: Presse

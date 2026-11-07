@@ -27,7 +27,18 @@
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span></label>
       <nav class="site-nav">
         {% for item in site.nav %}
+        {% if item.children %}
+        {%- assign sub_active = false -%}
+        {%- for c in item.children -%}{%- if page.url contains c.url -%}{%- assign sub_active = true -%}{%- endif -%}{%- endfor %}
+        <div class="nav-group">
+          <button type="button" class="nav-group-toggle{% if sub_active %} active{% endif %}" aria-haspopup="true">{{ item.title }} <span aria-hidden="true">▾</span></button>
+          <div class="nav-sub">
+            {% for c in item.children %}<a href="{{ c.url | relative_url }}"{% if page.url contains c.url %} class="active"{% endif %}>{{ c.title }}</a>{% endfor %}
+          </div>
+        </div>
+        {% else %}
         <a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} class="active"{% endif %}>{{ item.title }}</a>
+        {% endif %}
         {% endfor %}
       </nav>
     </div>

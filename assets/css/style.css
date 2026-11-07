@@ -585,7 +585,7 @@ img { max-width: 100%; height: auto; }
 .offer-grid { margin-bottom: 1.5rem; }
 .offer-grid .small a { font-weight: 600; }
 .site-footer .footer-note a { color: #cfcdc6; }
-@media (max-width: 1080px) and (min-width: 721px) { .site-nav a { padding: .4rem .5rem; font-size: .92rem; } .brand-name { display: none; } }
+@media (max-width: 1080px) and (min-width: 721px) { .site-nav a, .nav-group-toggle { padding: .4rem .5rem; font-size: .92rem; } .brand-name { display: none; } }
 .offer-contact { margin-bottom: 2.5rem; font-weight: 600; }
 .equipment-jump { margin: .5rem 0 0; font-weight: 600; }
 .equipment-thumb img[src$=".svg"] { object-fit: contain; background: #fff; }
@@ -596,3 +596,41 @@ img { max-width: 100%; height: auto; }
 .update-date { display: block; font-weight: 700; margin-bottom: .2rem; }
 .update-text p { margin: 0 0 .5rem; }
 .project-updates { margin-bottom: 2.5rem; }
+
+.nav-group { position: relative; }
+.nav-group-toggle {
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: .4rem .75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.nav-group-toggle:hover, .nav-group-toggle.active, .nav-group:focus-within .nav-group-toggle { background: var(--accent); }
+.nav-sub {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  min-width: 11rem;
+  flex-direction: column;
+  gap: .1rem;
+  padding: .4rem;
+  margin-top: .25rem;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.nav-sub::before { content: ''; position: absolute; left: 0; right: 0; top: -.6rem; height: .6rem; }
+.nav-group:hover .nav-sub, .nav-group:focus-within .nav-sub { display: flex; }
+.nav-sub a { display: block; white-space: nowrap; }
+@media (max-width: 720px) {
+  .nav-group-toggle { display: block; width: 100%; text-align: left; cursor: default; }
+  .nav-group-toggle span { display: none; }
+  .nav-group-toggle:hover, .nav-group:focus-within .nav-group-toggle { background: none; }
+  .nav-sub { display: flex; position: static; border: 0; box-shadow: none; padding: 0 0 0 1rem; margin: 0; background: none; }
+}

@@ -32,7 +32,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - Stichwort-Konventionen: Kleinbuchstaben mit Bindestrich. Projekt-Ort (`ktg`, `rosalind-franklin-gym`), Herkunft (`35services` für alle von 35services.de übernommenen Beiträge), Besitzer*in eines Geräts (`35services`, `bietenholz`), Gerät (`bambu-lab-a1-mini`, `waermebildkamera`, `u1` für den Snapmaker U1 …), Gerätetyp (`3d-drucker`).
 - `/projekte/ideen/` (`projekte/ideen.md`): Linksammlung mit Projektideen; ✅ = schon gebaut. Links immer ohne Tracking-Parameter (`?si=`, `?is=`, `&pp=`, `spm=` …).
 - `/angebot/`: Angebote und „Warum ein Institut?“
-- Navigation steht in `_config.yml` unter `nav`
+- Navigation steht in `_config.yml` unter `nav`; Einträge mit `children` werden zu einem Untermenü (z. B. „Wir“ mit Projekte, Angebot, Ausstattung, Team)
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
 
