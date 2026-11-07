@@ -20,7 +20,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="{{ '/' | relative_url }}">
-        <span class="brand-mark" role="img" aria-label="IfsMB"><span class="brand-cell" aria-hidden="true">I</span><span class="brand-cell" aria-hidden="true">f</span><span class="brand-cell" aria-hidden="true">s</span><span class="brand-cell" aria-hidden="true">M</span><span class="brand-cell" aria-hidden="true">B</span></span>
+        <span class="brand-mark">IfsMB</span>
         <span class="brand-name">Institut für spontane<br>Makespace Buildung</span>
       </a>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Menü öffnen">
@@ -66,9 +66,12 @@
   {% unless page.url == '/spenden/' %}
   <a href="{{ '/spenden/' | relative_url }}" class="badge-donate" aria-label="Spenden">
     <span class="badge-donate-text">❤️<br>Spenden</span>
-    <span class="badge-donate-icon badge-donate-icon--1" aria-hidden="true">🖨️</span>
-    <span class="badge-donate-icon badge-donate-icon--2" aria-hidden="true">💻</span>
-    <span class="badge-donate-icon badge-donate-icon--3" aria-hidden="true">🖥️</span>
+    <span class="badge-donate-icon" style="--i: 0" aria-hidden="true">🖨️</span>
+    <span class="badge-donate-icon" style="--i: 1" aria-hidden="true">📷</span>
+    <span class="badge-donate-icon" style="--i: 2" aria-hidden="true">💾</span>
+    <span class="badge-donate-icon" style="--i: 3" aria-hidden="true">💻</span>
+    <span class="badge-donate-icon" style="--i: 4" aria-hidden="true">🖥️</span>
+    <span class="badge-donate-icon" style="--i: 5" aria-hidden="true">🖱️</span>
   </a>
   {% endunless %}
 
@@ -117,6 +120,11 @@
       var m = atob(a.dataset.em);
       a.href = 'mailto:' + m;
       a.textContent = m;
+    });
+    document.querySelectorAll('.obf-tel').forEach(function (a) {
+      var t = atob(a.dataset.tel);
+      a.href = 'tel:' + t.replace(/[^0-9+]/g, '').replace(/^0/, '+49');
+      a.textContent = t;
     });
   </script>
 </body>

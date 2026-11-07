@@ -41,7 +41,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 ## Konventionen
 
 - Kein CSS-/JS-Framework, alle Styles in `assets/css/style.css` mit CSS-Variablen
-- Schrift: **Berlin Type** (wir.berlin), lokal in `assets/fonts/berlin-type/` (nur Regular und Bold). Die Font-Dateien dürfen nicht verändert werden (kein Subsetting, kein Umbenennen der Glyphen). Monospace (`--mono`) bleibt für Kicker, Meta-Zeilen und Code. Das Logo „IfsMB“ bekommt seinen Monospace-Look über gleich breite Zellen (`.brand-cell`), nicht über eine veränderte Schrift
+- Schrift: **Berlin Type** (wir.berlin), lokal in `assets/fonts/berlin-type/` (nur Regular und Bold). Die Font-Dateien dürfen nicht verändert werden (kein Subsetting, kein Umbenennen der Glyphen). Monospace (`--mono`) bleibt für Kicker, Meta-Zeilen und Code. Das Logo-Badge „IfsMB“ bleibt vorerst in der Monospace-Systemschrift
 - Keine externen Ressourcen (Fonts, Skripte, Tracker) einbinden – Datenschutzhinweis im Impressum verspricht das
 - E-Mail-Adressen nur über das `.obf-mail`-Muster (siehe README)
 - Original-Logos in `_logo/`, `_logo/README.md` aktuell halten
