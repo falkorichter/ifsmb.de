@@ -12,7 +12,7 @@ image_is_illustration: true
 tags: [prusa-mk3s, prusa-mk3s-heartlabs, 3d-drucker, 35services, heartlabs]
 ---
 
-Falko hat diesen Prusa MK3S sehr günstig von [HeartLabs]({{ '/partner/' | relative_url }}#heartlabs) erworben. Gerade steht er bei 35services **in der Reparatur**.
+Falko hat diesen Prusa MK3S sehr günstig von [HeartLabs]({{ '/partner/' | relative_url }}#heartlabs) erworben. Gerade steht er bei 35services **in der Reparatur**: Das Kabel zum Druckbett war nach vielen Jahren durchgescheuert und wurde heiß – ein neues ist bestellt.
 
 Wenn er wieder läuft, kann er auch **zu Events mitgenommen** oder **mal ausgeliehen** werden – ein robuster Drucker, der nicht fest in einer Werkstatt stehen muss.
 
