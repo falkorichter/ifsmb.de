@@ -44,7 +44,10 @@ layout: default
     {% else %}
     <p class="note">Das Institut besitzt (noch) keine eigenen Geräte. {% include besitz.html item=page %} – darüber können wir es je nach Absprache nutzen.</p>
     {% endif %}
-    {% include verknuepft.html tags=page.tags %}
+    {%- assign rel_tags = "" | split: "" -%}
+    {%- for t in page.tags -%}{%- unless site.data.stichworte_breit contains t -%}{%- assign rel_tags = rel_tags | push: t -%}{%- endunless -%}{%- endfor -%}
+    {%- if rel_tags.size == 0 -%}{%- assign rel_tags = page.tags -%}{%- endif %}
+    {% include verknuepft.html tags=rel_tags %}
     <a href="{{ '/ausstattung/' | relative_url }}" class="back-link">← Alle Ausstattung</a>
   </article>
 </main>

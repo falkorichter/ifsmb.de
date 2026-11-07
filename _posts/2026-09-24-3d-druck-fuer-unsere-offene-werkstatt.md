@@ -4,7 +4,7 @@ date: 2026-09-24 08:57:11 +0200
 author: falko-richter
 original_url: https://35services.de/2026/3d-druck-fuer-unsere-offene-werkstatt/
 original_site: 35services.de
-tags: [35services, bambu-lab-a1-mini, prusa-mk4, snapmaker-u1]
+tags: [35services, bambu-lab-a1-mini, prusa-mk4, u1]
 ---
 
 Wir haben seit einigen Jahren einen Prusa Mk4 Drucker und auch einen Bambulab A1 Mini. Neben der [AG an der KTG](https://35services.de/2024/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/) bieten auch unter *3ddruck [at] 35services [punkt] de* Beratung für eure 3D-Druck Projekte an. Bei Bedarf drucken wir auch mit dem SnapMaker U1 in der KTG, der Drucker hat 4 Druckköpfe und ist extrem gut im Mehrfarbdruck.
