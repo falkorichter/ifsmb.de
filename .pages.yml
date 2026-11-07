@@ -169,7 +169,7 @@ content:
         type: string
       - name: updates
         label: Stand / Updates
-        description: Kleine Updates zum Fortschritt – neuestes zuerst wird automatisch sortiert. Links bitte als normale Markdown-Links.
+        description: Kurze Notizen zum Fortschritt – neuestes zuerst wird automatisch sortiert. Längere Updates mit Fotos lieber als Beitrag mit dem Stichwort aus „Termine-Kategorie“ schreiben, die erscheinen hier automatisch. Links bitte als normale Markdown-Links.
         type: object
         list: true
         fields:
