@@ -9,9 +9,13 @@ image_is_illustration: true
 tags: [3d-scanner, 3dmakerpro-lynx, creality-ferret-se]
 ---
 
-Der Lynx gehört Falko. Weil wir gerade auch den [Creality Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}) testen, hat Falko die beiden Scanner ausführlich verglichen. Hier ist der komplette Vergleich.
+Der Lynx gehört Falko. Weil wir gerade auch den [Creality Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}) testen, hat Falko einen ausführlichen Vergleich der beiden Scanner erstellen lassen – größtenteils mit KI. Hier ist der komplette Vergleich.
 
 ## 3D-Scanner im Vergleich: Jimumeta (3DMakerpro) Lynx vs. Creality CR-Scan Ferret SE {#vergleich}
+
+<div class="ai-note" markdown="1">
+🤖 **Mit Vorsicht genießen:** Dieser Vergleich wurde zum großen Teil von **Claude (KI)** recherchiert und geschrieben. Technische Daten, Preise und Erfahrungsberichte können fehlerhaft oder veraltet sein – bitte vor einer Kaufentscheidung mit den verlinkten [Quellen](#quellen) und eigenen Tests abgleichen.
+</div>
 
 **Stand:** 6. November 2026
 
@@ -177,7 +181,7 @@ Gesammelt aus den Bewertungen der offiziellen Shops (Lynx: store.3dmakerpro.com,
 6. **Vor dem Kauf die Verfügbarkeit prüfen.** Der Lynx ist im US-Shop oft ausverkauft; der Ferret SE ist gut lieferbar, der deutsche Black-Friday-Preis gilt nur vom 10. bis 30. November.
 7. **Die Reddit-Diskussionen lesen** (r/3DScanning, Links unten) – dort stehen die tiefsten Praxiserfahrungen; Reddit blockiert automatische Abrufe, also im Browser lesen.
 
-### 9. Quellen
+### 9. Quellen {#quellen}
 
 **Offizielle Produkt- und Datenseiten**
 

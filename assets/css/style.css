@@ -637,3 +637,5 @@ img { max-width: 100%; height: auto; }
 .badge-personal { background: #f3e1ff; color: var(--ink); }
 .personal-note { background: #f7efff; border: 2px dashed #9b6bd1; border-radius: var(--radius); padding: .8rem 1rem; margin-bottom: 1.5rem; }
 .member-profile > h2 { margin-top: 2.25rem; margin-bottom: .9rem; }
+.ai-note { background: #eef3ff; border: 2px dashed var(--blue); border-radius: var(--radius); padding: .8rem 1rem; margin: 1rem 0 1.5rem; }
+.ai-note p { margin: 0; }
