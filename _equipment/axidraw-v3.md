@@ -3,8 +3,8 @@ title: AxiDraw V3
 kategorie: Stiftplotter
 summary: Ein Roboter, der mit echten Stiften zeichnet – toll, um zu verstehen, wie ein 3D-Drucker funktioniert.
 owner_partner: 35 services e. V.
-image: /assets/video/ausstattung/axidraw-v3/01.jpg
-image_alt: "Der AxiDraw V3 zeichnet mit einem Fineliner die Buchstaben A, B und C auf ein Blatt Papier"
+image: /assets/video/news/jugend-hackt-congress-2026/116361.jpg
+image_alt: "Der AxiDraw V3 hat mit einem Fineliner einen Hund auf ein Blatt Papier gezeichnet"
 videos:
   - src: /assets/video/ausstattung/axidraw-v3/01.mp4
     poster: /assets/video/ausstattung/axidraw-v3/01.jpg

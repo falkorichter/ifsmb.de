@@ -9,13 +9,29 @@ lead: Womit wir arbeiten – und wem es gehört.
 </div>
 
 {% assign items = site.equipment | sort: "title" %}
-<div class="grid-3 equipment-grid">
-  {% for it in items %}
-  <a class="card card-link equipment-card" href="{{ it.url | relative_url }}">
-    {% if it.thumb or it.image %}<span class="equipment-thumb"><img src="{{ it.thumb | default: it.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
-    {% if it.kategorie %}<span class="meta">{% if it.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> {% endif %}{{ it.kategorie }}</span>{% endif %}
-    <h3>{{ it.title }}</h3>
-    <span class="muted small">{% include besitz.html item=it plain=true %}</span>
-  </a>
-  {% endfor %}
-</div>
+{% assign printers = items | where_exp: "it", "it.kategorie contains '3D-Drucker'" %}
+{% assign scanners = items | where_exp: "it", "it.kategorie contains '3D-Scanner'" %}
+{% assign others = "" | split: "" %}
+{% for it in items %}{% unless it.kategorie contains '3D-Drucker' or it.kategorie contains '3D-Scanner' %}{% assign others = others | push: it %}{% endunless %}{% endfor %}
+<nav class="equipment-jump">
+  <a href="#drucker">3D-Drucker ({{ printers.size }})</a> · <a href="#scanner">3D-Scanner ({{ scanners.size }})</a> · <a href="#weiteres">Plotter, Messgeräte und mehr ({{ others.size }})</a>
+</nav>
+{% for g in (1..3) %}
+  {% if g == 1 %}{% assign list = printers %}{% assign gid = "drucker" %}{% assign gtitle = "3D-Drucker" %}
+  {% elsif g == 2 %}{% assign list = scanners %}{% assign gid = "scanner" %}{% assign gtitle = "3D-Scanner" %}
+  {% else %}{% assign list = others %}{% assign gid = "weiteres" %}{% assign gtitle = "Plotter, Messgeräte und mehr" %}{% endif %}
+  {% if list.size > 0 %}
+  <h2 class="cal-heading" id="{{ gid }}">{{ gtitle }}</h2>
+  <div class="grid-3 equipment-grid">
+    {% for it in list %}
+    <a class="card card-link equipment-card" href="{{ it.url | relative_url }}">
+      {% if it.thumb or it.image %}<span class="equipment-thumb"><img src="{{ it.thumb | default: it.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
+      <span class="meta">{% if it.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> {% elsif it.status == "in-reparatur" %}<span class="badge badge-inquiry">In Reparatur</span> {% elsif it.status == "im-test" %}<span class="badge badge-inquiry">Im Test</span> {% endif %}{{ it.kategorie }}</span>
+      <h3>{{ it.title }}</h3>
+      <span class="muted small">{% include besitz.html item=it plain=true %}</span>
+      {% if it.standort %}<span class="muted small">📍 {{ it.standort }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endfor %}

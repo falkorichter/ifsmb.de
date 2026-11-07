@@ -587,3 +587,5 @@ img { max-width: 100%; height: auto; }
 .site-footer .footer-note a { color: #cfcdc6; }
 @media (max-width: 1080px) and (min-width: 721px) { .site-nav a { padding: .4rem .5rem; font-size: .92rem; } .brand-name { display: none; } }
 .offer-contact { margin-bottom: 2.5rem; font-weight: 600; }
+.equipment-jump { margin: .5rem 0 0; font-weight: 600; }
+.equipment-thumb img[src$=".svg"] { object-fit: contain; background: #fff; }
