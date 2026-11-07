@@ -42,7 +42,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 
 - Kein CSS-/JS-Framework, alle Styles in `assets/css/style.css` mit CSS-Variablen
 - Keine externen Ressourcen (Fonts, Skripte, Tracker) einbinden – Datenschutzhinweis im Impressum verspricht das
-- E-Mail-Adressen nur über das `.obf-mail`-Muster (siehe README)
+- E-Mail-Adressen nur über das `.obf-mail`-Muster, Telefonnummern über `.obf-tel` (siehe README)
 - Original-Logos in `_logo/`, `_logo/README.md` aktuell halten
 - Platzhalter sind mit `<span class="todo">` markiert
 - Bilder in Posts: `<div class="gallery">` mit `<a class="lightbox" href="groß.jpg"><img src="klein-600w.jpg"></a>` – die Lightbox in `_layouts/default.html` greift automatisch

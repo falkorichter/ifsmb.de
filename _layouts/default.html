@@ -121,6 +121,11 @@
       a.href = 'mailto:' + m;
       a.textContent = m;
     });
+    document.querySelectorAll('.obf-tel').forEach(function (a) {
+      var t = atob(a.dataset.tel);
+      a.href = 'tel:' + t.replace(/[^0-9+]/g, '').replace(/^0/, '+49');
+      a.textContent = t;
+    });
   </script>
 </body>
 </html>

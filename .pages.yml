@@ -367,7 +367,10 @@ content:
         label: Pressekontakt – Anzeigetext der E-Mail (z. B. presse [at] ifsmb.de)
         type: string
       - name: kontakt_telefon
-        label: Pressekontakt – Telefon
+        label: Pressekontakt – Telefon (sichtbar im Quelltext; besser das Feld darunter)
+        type: string
+      - name: kontakt_telefon_b64
+        label: Pressekontakt – Telefon (base64-kodiert, wird per JavaScript angezeigt)
         type: string
       - name: bildnachweis
         label: Bildnachweis für Pressefotos
