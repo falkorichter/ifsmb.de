@@ -18,3 +18,17 @@ Frieder ist **Lehrer für Informatik, Mathematik und Forstwirtschaft** in Berlin
 **Hintergrund:** B.Sc. Forstwissenschaften und M.Sc. Geoinformatik.
 
 Bei [Hack the Summer](https://hack-the-summer.de/) ist er als Mentor eingetragen, unter anderem für Umweltbildung, Medienbildung, Moderation und Didaktik.
+
+## Aus der Presse
+
+Wie Frieder Lehrer wurde, hat die [taz 2018 erzählt](https://taz.de/QuereinsteigerInnen-Kaum-eine/r-gibt-auf/!5557819/): Nach dem Studium arbeitete er am Deutschen GeoForschungsZentrum. Dann las er zufällig einen Artikel darüber, wie schwer guter Informatikunterricht ist – und dachte sich: Das ist mein Job. Er kündigte und wurde Quereinsteiger.
+
+Ein paar Sätze von ihm aus dem Artikel, die gut zum Institut passen:
+
+> „Ich bin an meiner Schule vonnöten. Das kann nicht jeder von seinem Job sagen.“
+
+> „Wir sind nicht der Notnagel, als der wir in der Öffentlichkeit gerne dargestellt werden.“
+
+Und über die vielen Naturwissenschaftler*innen, die mit ihm in die Schule wechselten: „Was für eine Ressource!“
+
+<p class="muted small">Zitate: Anna Klöpper, „Kaum eine/r gibt auf: Sie machen Schule“, taz, 19.12.2018.</p>
