@@ -8,6 +8,7 @@ layout: default
         {% if page.status == 'abgeschlossen' %}<span class="badge badge-past">Abgeschlossen</span>{% elsif page.status == 'anfrage' %}<span class="badge badge-inquiry">Anfrage</span>{% elsif page.status == 'idee' %}<span class="badge badge-idea">Idee</span>{% else %}<span class="badge badge-active">Aktuell</span>{% endif %}
         {% if page.zeitraum %} · {{ page.zeitraum }}{% endif %}
         {% if page.ort %} · {{ page.ort }}{% endif %}
+        {%- if page.updates and page.updates.size > 0 -%}{%- assign last_update = page.updates | sort: "datum" | last %} · Letztes Update: <a href="#updates">{{ last_update.datum | date: "%d.%m.%Y" }}</a>{%- endif %}
       </p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
@@ -18,6 +19,20 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
+    {% if page.updates and page.updates.size > 0 %}
+    {%- assign sorted_updates = page.updates | sort: "datum" | reverse -%}
+    <section class="project-updates" id="updates">
+      <h2>Stand / Updates</h2>
+      <ol class="update-list">
+        {%- for u in sorted_updates %}
+        <li class="update-item">
+          <span class="meta update-date">{{ u.datum | date: "%d.%m.%Y" }}</span>
+          <div class="update-text">{{ u.text | markdownify }}</div>
+        </li>
+        {%- endfor %}
+      </ol>
+    </section>
+    {% endif %}
     {% if page.event_tag %}
     {%- assign tagged = "" | split: "" -%}
     {%- for e in site.events -%}{%- if e.tags contains page.event_tag -%}{%- assign tagged = tagged | push: e -%}{%- endif -%}{%- endfor -%}

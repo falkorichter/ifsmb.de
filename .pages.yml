@@ -159,6 +159,20 @@ content:
         label: Termine-Kategorie (z. B. ktg)
         description: Alle Termine mit dieser Kategorie werden auf der Projektseite aufgelistet.
         type: string
+      - name: updates
+        label: Stand / Updates
+        description: Kleine Updates zum Fortschritt – neuestes zuerst wird automatisch sortiert. Links bitte als normale Markdown-Links.
+        type: object
+        list: true
+        fields:
+          - name: datum
+            label: Datum
+            type: date
+            options:
+              format: "yyyy-MM-dd"
+          - name: text
+            label: Text
+            type: text
       - name: image
         label: Bild
         type: image

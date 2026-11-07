@@ -66,9 +66,7 @@ Branch `worktree-nachtschicht` (worktree `.claude/worktrees/nachtschicht`), base
    - Year 1 = from 08.04.2024 (school year 2023/24).
    - Year 2 = 2024/25 (Gregor joined in the second half).
    - Unclear details are red placeholders.
-6. **Impressum:**
-   - name and email are filled in; the **address is still a placeholder**.
-   - The email is falko@35services.de (obfuscated). Use a different address if you prefer.
+6. ~~Impressum~~ – **done:** address added (Falko Richter, c/o Kulturfabrik, Lehrter Straße 35, 10557 Berlin); email falko@35services.de (obfuscated).
 7. **Things only you can do (from the Irreführungsverbot note):**
    - check whether you need a trade registration (Gewerbeanmeldung)
    - decide on a legal form (Einzelunternehmen / e.V. / UG …)
@@ -85,3 +83,8 @@ Branch `worktree-nachtschicht` (worktree `.claude/worktrees/nachtschicht`), base
 
 My preview server runs on **http://localhost:4002** (builds into a temp folder).
 Another server on port 4001 (`--host 0.0.0.0`) also serves this worktree. I didn't start it, so I left it running.
+
+## Later additions (same session)
+
+- Projects can carry **`updates:`** (date + Markdown text): rendered as a "Stand / Updates" timeline, "Letztes Update" in the header and on project cards. First use: MK3S (HeartLabs) – new heated-bed cable ordered, with link to the Prusa part.
+- `u1` tag + unboxing event, AxiDraw owner/location, Core-XY photo caption, TAZ 6 story, Impressum address.

@@ -589,3 +589,10 @@ img { max-width: 100%; height: auto; }
 .offer-contact { margin-bottom: 2.5rem; font-weight: 600; }
 .equipment-jump { margin: .5rem 0 0; font-weight: 600; }
 .equipment-thumb img[src$=".svg"] { object-fit: contain; background: #fff; }
+.project-updates { margin-top: 2.5rem; }
+.update-list { list-style: none; border-left: 3px solid var(--accent); padding-left: 1.2rem; display: grid; gap: 1.2rem; }
+.update-item { position: relative; }
+.update-item::before { content: ''; position: absolute; left: calc(-1.2rem - 8px); top: .35rem; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); border: 2px solid var(--ink); }
+.update-date { display: block; font-weight: 700; margin-bottom: .2rem; }
+.update-text p { margin: 0 0 .5rem; }
+.project-updates { margin-bottom: 2.5rem; }

@@ -8,8 +8,9 @@ title: Impressum
 
 **Institut für spontane Makespace Buildung – Falko Richter**<br>
 Falko Richter<br>
-<span class="todo">[Straße und Hausnummer]</span><br>
-<span class="todo">[PLZ] Berlin</span>
+c/o Kulturfabrik<br>
+Lehrter Straße 35<br>
+10557 Berlin
 
 ## Kontakt
 
@@ -17,7 +18,7 @@ E-Mail: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falk
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-Falko Richter, <span class="todo">[Anschrift wie oben]</span>
+Falko Richter, c/o Kulturfabrik, Lehrter Straße 35, 10557 Berlin
 
 ## Hinweis zum Namen
 

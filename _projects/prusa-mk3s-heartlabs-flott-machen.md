@@ -7,6 +7,13 @@ zeitraum: seit November 2026
 ort: 35services e.V.
 event_tag: prusa-mk3s-heartlabs
 tags: [prusa-mk3s-heartlabs]
+updates:
+  - datum: 2026-11-07
+    text: >-
+      Anton von 35services hat ein **neues Kabel für das Druckbett** bestellt:
+      das [Heatbed-Einsy-Stromkabel (verschraubt) von Prusa](https://www.prusa3d.com/de/produkt/heatbed-einsy-power-cable-screw-attached/).
+      Das alte Kabel war nach vielen Jahren komplett durch: Es hing nur noch an wenigen Kupferadern,
+      hat nicht mehr zuverlässig Strom geführt und ist dabei heiß geworden.
 team:
   - falko-richter
 partners:
@@ -17,9 +24,3 @@ partners:
 Falko hat sehr günstig einen [Prusa MK3S]({{ '/ausstattung/prusa-mk3s-heartlabs/' | relative_url }}) von HeartLabs erworben. Der Drucker steht jetzt bei 35services und wird dort repariert.
 
 Ziel: Der Drucker soll wieder zuverlässig drucken, damit wir ihn **zu Events mitnehmen** oder **ausleihen** können.
-
-## Stand der Reparatur
-
-**Update vom 7. November 2026:** Anton von 35services hat ein **neues Kabel für das Druckbett** bestellt. Das alte Kabel war nach vielen Jahren komplett durch: Es hing nur noch an wenigen Kupferadern, hat nicht mehr zuverlässig Strom geführt und ist dabei heiß geworden.
-
-Weitere Updates folgen, sobald das neue Kabel eingebaut ist.
