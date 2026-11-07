@@ -20,6 +20,11 @@ updates:
       im Portalgetriebe ist gebrochen. Abhilfe schafft ein verstärktes Zahnrad:
       [3D Sets Mogster Portal Gear Reinforced](https://www.printables.com/model/1861933-3d-sets-mogster-portal-gear-reinforced)
       auf Printables. [Fotos](#erste-reparatur)
+  - datum: 2026-10-19
+    text: >-
+      **Die Mogster treffen aufeinander** – Papas hellblauer und Falkos gelber Mogster nebeneinander.
+      Danach der **erste Praxistest** von Falkos Mogster: rauf auf den Sandhügel, durchs Laub und
+      ein kleiner Kran an der Front hebt eine Holzlatte. [Fotos und Videos](#mogster-treffen)
 ---
 
 Falko baut den **[Mogster 4x4 Tipper](https://3dsets.com/product/model-20-mogster-4x4-tipper/)** von 3DSets: einen ferngesteuerten Geländekipper im **Maßstab 1:8**.
@@ -70,3 +75,18 @@ Für die Zukunft gibt es eine verstärkte Version des Zahnrads, die noch eingeba
   <a href="/assets/images/projekte/3dsets-mogster-bauen/reparatur/09.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/reparatur/09-600w.jpg" alt="Portalgehäuse mit einem roten Kreuz markiert, die Welle schaut heraus" loading="lazy"></a>
   <a href="/assets/images/projekte/3dsets-mogster-bauen/reparatur/10.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/reparatur/10-600w.jpg" alt="Das Portalgehäuse mit der Welle, daneben die gelbe Felge" loading="lazy"></a>
 </div>
+
+## Die Mogster treffen aufeinander {#mogster-treffen}
+
+Am 19. Oktober 2026 standen die beiden Mogster zum ersten Mal nebeneinander: Papas hellblauer Mogster – fertig, mit Pritsche – und Falkos gelber, bei dem hinten noch der nackte Leiterrahmen zu sehen ist.
+
+Danach ging es für Falkos Mogster zum **ersten Praxistest** nach draußen: einen Sandhügel hinauf und durch Erde und Laub. Und an der Front sitzt ein kleiner, mit einem Servo bewegter **Kran**, der eine Holzlatte an einem Nagel einhakt und anhebt.
+
+<div class="gallery">
+  <a href="/assets/images/projekte/3dsets-mogster-bauen/treffen/01.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/treffen/01-600w.jpg" alt="Papas hellblauer Mogster mit Pritsche und Falkos gelber Mogster mit offenem Leiterrahmen stehen hintereinander auf einem grünen Teppich" loading="lazy"></a>
+  <a href="/assets/images/projekte/3dsets-mogster-bauen/treffen/02.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/treffen/02-600w.jpg" alt="Falkos gelber Mogster fährt schräg einen Sandhügel mit herbstlichem Laub hinauf" loading="lazy"></a>
+</div>
+
+<video class="post-video" controls preload="none" playsinline poster="/assets/video/projekte/3dsets-mogster-bauen/02.jpg" src="/assets/video/projekte/3dsets-mogster-bauen/02.mp4"></video>
+
+<video class="post-video" controls preload="none" playsinline poster="/assets/video/projekte/3dsets-mogster-bauen/03.jpg" src="/assets/video/projekte/3dsets-mogster-bauen/03.mp4"></video>
