@@ -634,3 +634,6 @@ img { max-width: 100%; height: auto; }
   .nav-group-toggle:hover, .nav-group:focus-within .nav-group-toggle { background: none; }
   .nav-sub { display: flex; position: static; border: 0; box-shadow: none; padding: 0 0 0 1rem; margin: 0; background: none; }
 }
+.badge-personal { background: #f3e1ff; color: var(--ink); }
+.personal-note { background: #f7efff; border: 2px dashed #9b6bd1; border-radius: var(--radius); padding: .8rem 1rem; margin-bottom: 1.5rem; }
+.member-profile > h2 { margin-top: 2.25rem; margin-bottom: .9rem; }

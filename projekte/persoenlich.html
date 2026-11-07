@@ -1,0 +1,25 @@
+---
+layout: page
+title: Persönliche Projekte
+lead: Woran Menschen aus unserem Team privat bauen.
+permalink: /projekte/persoenlich/
+---
+{% assign personal = site.projects | where: "persoenlich", true %}
+<p class="muted">Das sind keine Projekte des Instituts, sondern private Makespace-Projekte aus unserem <a href="{{ '/team/' | relative_url }}">Team</a>. Die Projekte des Instituts stehen unter <a href="{{ '/projekte/' | relative_url }}">Projekte</a>.</p>
+{% assign members = site.team | sort: "order" %}
+{% for m in members %}
+  {% assign mp = personal | where_exp: "p", "p.team contains m.slug" | sort: "start" | reverse %}
+  {% if mp.size > 0 %}
+  <h2 class="cal-heading"><a href="{{ m.url | relative_url }}#persoenliche-projekte">{{ m.title }}</a></h2>
+  <div class="grid-2">
+    {% for p in mp %}
+    <a class="card card-link" href="{{ p.url | relative_url }}">
+      <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% if p.updates and p.updates.size > 0 %}{% assign lu = p.updates | sort: "datum" | last %} · Update: {{ lu.datum | date: "%d.%m.%Y" }}{% endif %}</p>
+      <h3>{{ p.title }}</h3>
+      {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endfor %}
+{% if personal.size == 0 %}<p>Noch keine persönlichen Projekte.</p>{% endif %}

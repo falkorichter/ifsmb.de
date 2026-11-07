@@ -3,9 +3,11 @@ layout: page
 title: Neuigkeiten
 lead: Was gerade im Institut passiert.
 ---
-{% if site.posts.size > 0 %}
+{% assign inst_posts = site.posts | where_exp: "p", "p.persoenlich != true" %}
+{% assign pers_posts = site.posts | where: "persoenlich", true %}
+{% if inst_posts.size > 0 %}
 <ul class="post-list post-list-full">
-  {% for post in site.posts %}
+  {% for post in inst_posts %}
   <li>
     <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -15,4 +17,8 @@ lead: Was gerade im Institut passiert.
 </ul>
 {% else %}
 <p>Noch keine Neuigkeiten.</p>
+{% endif %}
+
+{% if pers_posts.size > 0 %}
+<p class="section-foot"><a href="{{ '/news/persoenlich/' | relative_url }}">→ Persönliche Blogs aus dem Team ({{ pers_posts.size }})</a></p>
 {% endif %}

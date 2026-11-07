@@ -103,6 +103,10 @@ content:
       - name: author
         label: Autor*in (Team-Kürzel, z. B. falko-richter)
         type: string
+      - name: persoenlich
+        label: Persönlicher Beitrag
+        description: "Privates Makespace-Update einer Person aus dem Team: erscheint nicht unter Neuigkeiten, sondern im Profil (Autor*in) und unter „Persönliche Blogs“."
+        type: boolean
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben „Termine-Kategorie“ listen diesen Beitrag automatisch auf.
@@ -144,6 +148,10 @@ content:
         default: aktuell
         options:
           values: [idee, anfrage, aktuell, abgeschlossen]
+      - name: persoenlich
+        label: Persönliches Projekt
+        description: "Privates Projekt einer Person aus dem Team (unter Team eintragen): erscheint nicht in den Projektlisten, sondern im Profil und unter „Persönliche Projekte“."
+        type: boolean
       - name: start
         label: Startdatum (für die Sortierung)
         type: date

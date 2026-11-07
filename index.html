@@ -67,7 +67,7 @@ layout: default
 </section>
 {% endif %}
 
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.persoenlich != true" %}
 {% if active.size > 0 %}
 <section class="container section">
   <div class="section-head">
@@ -85,14 +85,15 @@ layout: default
 </section>
 {% endif %}
 
-{% if site.posts.size > 0 %}
+{% assign home_posts = site.posts | where_exp: "p", "p.persoenlich != true" %}
+{% if home_posts.size > 0 %}
 <section class="container section">
   <div class="section-head">
     <h2>Neuigkeiten</h2>
     <a href="{{ '/news/' | relative_url }}">Alle Neuigkeiten →</a>
   </div>
   <ul class="post-list">
-    {% for post in site.posts limit: 3 %}
+    {% for post in home_posts limit: 3 %}
     <li>
       <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>

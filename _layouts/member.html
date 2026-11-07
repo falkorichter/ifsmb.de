@@ -22,9 +22,30 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
-    {% assign member_projects = site.projects | where_exp: "p", "p.team contains page.slug" %}
+    {% assign member_all = site.projects | where_exp: "p", "p.team contains page.slug" %}
+    {% assign member_projects = member_all | where_exp: "p", "p.persoenlich != true" %}
+    {% assign member_personal = member_all | where: "persoenlich", true | sort: "start" | reverse %}
+    {% assign member_posts = site.posts | where: "author", page.slug | where: "persoenlich", true %}
+    {% if member_personal.size > 0 %}
+    <h2 id="persoenliche-projekte">Persönliche Projekte</h2>
+    <div class="grid-2">
+      {% for p in member_personal %}
+      <a class="card card-link" href="{{ p.url | relative_url }}">
+        <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% if p.updates and p.updates.size > 0 %}{% assign lu = p.updates | sort: "datum" | last %} · Update: {{ lu.datum | date: "%d.%m.%Y" }}{% endif %}</p>
+        <h3>{{ p.title }}</h3>
+        {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if member_posts.size > 0 %}
+    <h2 id="persoenlicher-blog">Persönlicher Blog</h2>
+    <ul class="post-list">
+      {% for po in member_posts %}<li><span class="meta">{{ po.date | date: "%d.%m.%Y" }}</span> <a href="{{ po.url | relative_url }}">{{ po.title }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
     {% if member_projects.size > 0 %}
-    <h2>Projekte</h2>
+    <h2>Projekte im Institut</h2>
     <ul class="link-list">
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>

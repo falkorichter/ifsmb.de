@@ -3,9 +3,10 @@ layout: page
 title: Projekte
 lead: Woran wir gerade arbeiten.
 ---
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | sort: "start" | reverse %}
-{% assign ideas = site.projects | where: "status", "idee" | sort: "start" | reverse %}
-{% assign inquiries = site.projects | where: "status", "anfrage" | sort: "start" | reverse %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
+{% assign ideas = site.projects | where: "status", "idee" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
+{% assign inquiries = site.projects | where: "status", "anfrage" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
+{% assign personal = site.projects | where: "persoenlich", true %}
 {% if active.size > 0 %}
 <div class="grid-2">
   {% for p in active %}
@@ -49,3 +50,6 @@ lead: Woran wir gerade arbeiten.
 {% endif %}
 
 <p class="section-foot"><a href="{{ '/projekte/archiv/' | relative_url }}">→ Vergangene Projekte ansehen</a></p>
+{% if personal.size > 0 %}
+<p class="section-foot"><a href="{{ '/projekte/persoenlich/' | relative_url }}">→ Persönliche Projekte aus dem Team ({{ personal.size }})</a></p>
+{% endif %}

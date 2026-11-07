@@ -1,0 +1,25 @@
+---
+layout: page
+title: Persönliche Blogs
+lead: Private Makespace-Updates aus dem Team – was wir zu Hause und nebenbei bauen.
+permalink: /news/persoenlich/
+---
+{% assign pers_posts = site.posts | where: "persoenlich", true %}
+<p class="muted">Das sind keine Beiträge des Instituts, sondern persönliche Updates von Menschen aus unserem <a href="{{ '/team/' | relative_url }}">Team</a>. Die Neuigkeiten des Instituts stehen unter <a href="{{ '/news/' | relative_url }}">Neuigkeiten</a>.</p>
+{% assign members = site.team | sort: "order" %}
+{% for m in members %}
+  {% assign mp = pers_posts | where: "author", m.slug %}
+  {% if mp.size > 0 %}
+  <h2 class="cal-heading"><a href="{{ m.url | relative_url }}#persoenlicher-blog">{{ m.title }}</a></h2>
+  <ul class="post-list post-list-full">
+    {% for post in mp %}
+    <li>
+      <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endfor %}
+{% if pers_posts.size == 0 %}<p>Noch keine persönlichen Beiträge.</p>{% endif %}

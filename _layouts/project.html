@@ -5,7 +5,7 @@ layout: default
   <article>
     <header class="page-header">
       <p class="meta">
-        {% if page.status == 'abgeschlossen' %}<span class="badge badge-past">Abgeschlossen</span>{% elsif page.status == 'anfrage' %}<span class="badge badge-inquiry">Anfrage</span>{% elsif page.status == 'idee' %}<span class="badge badge-idea">Idee</span>{% else %}<span class="badge badge-active">Aktuell</span>{% endif %}
+        {% if page.persoenlich %}<span class="badge badge-personal">Persönlich</span> {% endif %}{% if page.status == 'abgeschlossen' %}<span class="badge badge-past">Abgeschlossen</span>{% elsif page.status == 'anfrage' %}<span class="badge badge-inquiry">Anfrage</span>{% elsif page.status == 'idee' %}<span class="badge badge-idea">Idee</span>{% else %}<span class="badge badge-active">Aktuell</span>{% endif %}
         {% if page.zeitraum %} · {{ page.zeitraum }}{% endif %}
         {% if page.ort %} · {{ page.ort }}{% endif %}
         {%- if page.updates and page.updates.size > 0 -%}{%- assign last_update = page.updates | sort: "datum" | last %} · Letztes Update: <a href="#updates">{{ last_update.datum | date: "%d.%m.%Y" }}</a>{%- endif %}
@@ -14,6 +14,10 @@ layout: default
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
     </header>
     {% if page.image %}<img class="project-image" src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
+    {% if page.persoenlich %}
+    {%- assign owners = "" | split: "" -%}{%- for slug in page.team -%}{%- assign m = site.team | where: "slug", slug | first -%}{%- if m -%}{%- assign owners = owners | push: m -%}{%- endif -%}{%- endfor %}
+    <p class="personal-note">🏠 Persönliches Projekt{% if owners.size > 0 %} von {% for m in owners %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %} – ein privates Makespace-Projekt aus dem Team, kein Projekt des Instituts.</p>
+    {% endif %}
     {% if page.status == 'idee' %}<p class="note">Das ist eine Idee – noch kein festes Projekt. Wenn ihr Lust habt mitzumachen, meldet euch!</p>{% endif %}
     {% if page.status == 'anfrage' %}<p class="note">Das ist eine Anfrage, die bei uns eingegangen ist. Ob und wie daraus ein Projekt wird, ist noch offen.</p>{% endif %}
     <div class="prose">
@@ -81,6 +85,6 @@ layout: default
     </ul>
     {% endif %}
     {% if page.tags and page.tags.size > 0 %}{% include verknuepft.html tags=page.tags %}{% endif %}
-    <a href="{{ '/projekte/' | relative_url }}" class="back-link">← Alle Projekte</a>
+    {% if page.persoenlich %}<a href="{{ '/projekte/persoenlich/' | relative_url }}" class="back-link">← Alle persönlichen Projekte</a>{% else %}<a href="{{ '/projekte/' | relative_url }}" class="back-link">← Alle Projekte</a>{% endif %}
   </article>
 </main>

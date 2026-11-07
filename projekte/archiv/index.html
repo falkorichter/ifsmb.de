@@ -3,7 +3,7 @@ layout: page
 title: Vergangene Projekte
 lead: Was wir schon gebaut haben.
 ---
-{% assign past = site.projects | where: "status", "abgeschlossen" | sort: "start" | reverse %}
+{% assign past = site.projects | where: "status", "abgeschlossen" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
 {% if past.size > 0 %}
 <div class="grid-2">
   {% for p in past %}
