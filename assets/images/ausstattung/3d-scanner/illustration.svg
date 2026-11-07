@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Illustration eines 3D-Handscanners">
+  <title>Illustration: 3D-Handscanner tastet ein Objekt mit Streifenlicht ab</title>
+  <rect width="360" height="300" fill="#ffffff"/>
+  <g stroke="#16161d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- light cone with stripes -->
+    <path d="M96 118 L250 70 L285 220 L96 150 Z" fill="#fff4c2" stroke="none"/>
+    <g stroke="#ffcc00" stroke-width="4">
+      <line x1="140" y1="112" x2="196" y2="178"/>
+      <line x1="170" y1="103" x2="226" y2="190"/>
+      <line x1="200" y1="94" x2="255" y2="203"/>
+      <line x1="230" y1="85" x2="272" y2="212"/>
+    </g>
+    <!-- scanned object (vase) -->
+    <path d="M232 120 C212 140 214 190 232 228 L282 228 C300 190 302 140 282 120 Z" fill="#ff5a36"/>
+    <ellipse cx="257" cy="120" rx="25" ry="7" fill="#ffffff"/>
+    <ellipse cx="257" cy="232" rx="60" ry="12" fill="#e5e1d8" stroke-width="4"/>
+    <!-- scanner body -->
+    <rect x="40" y="100" width="62" height="68" rx="10" fill="#ffffff"/>
+    <circle cx="86" cy="118" r="7" fill="#16161d"/>
+    <circle cx="86" cy="150" r="7" fill="#16161d"/>
+    <rect x="80" y="129" width="14" height="10" rx="2" fill="#ffcc00"/>
+    <!-- handle -->
+    <path d="M52 168 L46 248 Q46 258 56 258 L72 258 Q80 258 80 248 L84 168" fill="#ffffff"/>
+    <!-- cable -->
+    <path d="M62 258 C62 285 120 285 140 270" fill="none" stroke-width="4"/>
+  </g>
+</svg>
