@@ -11,3 +11,5 @@ summary: Details folgen. Im Januar eröffnen wir den Makespace mit 6 Druckern, e
 ---
 
 Details folgen. Im Januar eröffnen wir den Makespace mit 6 Druckern, einer 3D-Druck-AG und 2 Schneidplottern am [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/).
+
+[Frieder Euteneuer]({{ '/team/frieder-euteneuer/' | relative_url }}) will zur Eröffnung weitere Leute zusammentrommeln – Lehrkräfte und alle, die Makespaces an Schulen voranbringen wollen.

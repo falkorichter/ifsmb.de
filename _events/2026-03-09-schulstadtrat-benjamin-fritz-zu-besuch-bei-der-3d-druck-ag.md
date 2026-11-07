@@ -10,5 +10,7 @@ summary: Schulstadtrat Benjamin Fritz besucht die 3D-Druck AG und lässt sich de
 
 Schulstadtrat Benjamin Fritz hat die 3D-Druck AG besucht. Gregor Dill und Falko Richter haben ihm die AG und unseren neuen, komplett spendenfinanzierten 4-Kopf-4-Farb-4-Material-Drucker gezeigt.
 
+Auch [Frieder Euteneuer]({{ '/team/frieder-euteneuer/' | relative_url }}) war dabei – zum Netzwerken und um mit uns den Snapmaker U1 zu feiern.
+
 - [📷 Fotos im Google-Fotos-Album](https://photos.app.goo.gl/3gHcYyH5wt71wuyM6)
 - [Zur Pressemitteilung]({{ '/presse/schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }})
