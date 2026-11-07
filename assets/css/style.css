@@ -640,3 +640,21 @@ img { max-width: 100%; height: auto; }
 .ai-note { background: #eef3ff; border: 2px dashed var(--blue); border-radius: var(--radius); padding: .8rem 1rem; margin: 1rem 0 1.5rem; }
 .ai-note p { margin: 0; }
 .our-note { background: #fff4c2; border-left: 4px solid var(--accent); border-radius: 6px; padding: .6rem .9rem; margin: .8rem 0 1.2rem; }
+
+/* Suche (Pagefind, /suche/) – Inhalt bleibt Flex-Kind von body */
+.search-body { display: contents; }
+.search-ui {
+  --pagefind-ui-scale: .9;
+  --pagefind-ui-primary: var(--blue);
+  --pagefind-ui-text: var(--ink);
+  --pagefind-ui-background: var(--paper);
+  --pagefind-ui-border: var(--line);
+  --pagefind-ui-tag: var(--bg);
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: var(--radius);
+  --pagefind-ui-font: var(--font);
+  margin-bottom: 3rem;
+}
+.search-ui .pagefind-ui__result-link { color: var(--blue); }
+.search-ui .pagefind-ui__result-link:hover { color: var(--accent-2); }
+.search-ui mark { background: var(--accent); color: var(--ink); }

@@ -44,7 +44,10 @@
     </div>
   </header>
 
+  {% unless page.suche == false %}<div class="search-body" data-pagefind-body>
+  {% include suche-meta.html page=page %}{% endunless %}
   {{ content }}
+  {% unless page.suche == false %}</div>{% endunless %}
 
   <footer class="site-footer">
     <div class="container footer-inner">

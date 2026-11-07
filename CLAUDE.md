@@ -35,6 +35,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - **Persönliche Beiträge und Projekte** (`persoenlich: true`): private Makespace-Updates aus dem Team. Sie erscheinen **nicht** in den Listen des Instituts (Neuigkeiten, Startseite, RSS, Projekte, Archiv), sondern im Teamprofil („Persönliche Projekte“, „Persönlicher Blog“) und auf `/projekte/persoenlich/` bzw. `/news/persoenlich/` (unten auf den Listenseiten verlinkt). Posts brauchen `author`, Projekte die Person unter `team`. Die Seiten tragen den Hinweis „kein Beitrag/Projekt des Instituts“.
 - Navigation steht in `_config.yml` unter `nav`; Einträge mit `children` werden zu einem Untermenü (z. B. „Wir“ mit Projekte, Angebot, Ausstattung, Team)
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
+- **Suche** `/suche/` mit Pagefind: Index entsteht erst nach `jekyll build` im Workflow `.github/workflows/pages.yml` (`npx pagefind --site _site`; Pages-Source = „GitHub Actions“). Indexiert wird alles im `data-pagefind-body`-Wrapper aus `_layouts/default.html`, Filter „Bereich“/„Stichwort“ aus `_includes/suche-meta.html`. Reine Übersichtsseiten bekommen `suche: false`. Pagefind-Version im README und Workflow gleich halten.
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
 
 ## Konventionen

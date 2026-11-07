@@ -1,0 +1,26 @@
+{%- comment -%}
+  Pagefind (Suchindex, wird nach `jekyll build` im Pages-Workflow gebaut): Filter „Bereich“
+  und „Stichwort“ sowie das Datum fürs Suchergebnis. Leere Spans – Pagefind liest nur die Attribute.
+{%- endcomment -%}
+{%- assign p = include.page -%}
+{%- case p.collection -%}
+{%- when "posts" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönlicher Blog" -%}{%- else -%}{%- assign bereich = "Neuigkeiten" -%}{%- endif -%}
+{%- when "projects" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Projekte" -%}{%- else -%}{%- assign bereich = "Projekte" -%}{%- endif -%}
+{%- when "events" -%}{%- assign bereich = "Termine" -%}
+{%- when "team" -%}{%- assign bereich = "Team" -%}
+{%- when "equipment" -%}{%- assign bereich = "Ausstattung" -%}
+{%- when "press" -%}{%- assign bereich = "Presse" -%}
+{%- else -%}{%- if p.url contains "/partner/" -%}{%- assign bereich = "Partner" -%}{%- else -%}{%- assign bereich = "Seiten" -%}{%- endif -%}
+{%- endcase %}
+<span data-pagefind-filter="Bereich:{{ bereich }}" hidden></span>
+{%- if p.collection == "posts" or p.collection == "press" %}
+<span data-pagefind-meta="datum:{{ p.date | date: '%d.%m.%Y' }}" hidden></span>
+{%- elsif p.collection == "events" %}
+<span data-pagefind-meta="datum:{% if p.date_label %}{{ p.date_label | escape }}{% else %}{{ p.start | date: '%d.%m.%Y' }}{% endif %}" hidden></span>
+{%- endif %}
+{%- for t in p.tags %}
+<span data-pagefind-filter="Stichwort:{{ site.data.stichworte[t] | default: t | escape }}" hidden></span>
+{%- endfor %}
+{%- if p.event_tag %}
+<span data-pagefind-filter="Stichwort:{{ site.data.stichworte[p.event_tag] | default: p.event_tag | escape }}" hidden></span>
+{%- endif %}
