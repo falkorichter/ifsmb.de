@@ -17,6 +17,7 @@ layout: default
     <div class="gallery gallery-single equipment-hero">
       <a href="{{ page.image | relative_url }}" class="lightbox"><img src="{{ page.thumb | default: page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></a>
     </div>
+    {% if page.image_caption %}<p class="muted small image-caption">{{ page.image_caption }}</p>{% endif %}
     {% if page.image_is_illustration %}<p class="muted small">Illustration – ein Foto folgt{% if page.status == "in-aussicht" %}, sobald das Gerät da ist{% endif %}.</p>{% endif %}
     {% endif %}
     <div class="prose equipment-body">

@@ -268,6 +268,9 @@ content:
       - name: image_alt
         label: Bildbeschreibung
         type: string
+      - name: image_caption
+        label: Bildunterschrift (optional, sichtbar unter dem Foto)
+        type: string
       - name: tags
         label: Stichworte (z. B. 3d-drucker, 35services, ktg)
         description: Alles mit denselben Stichworten wird automatisch verknüpft.
