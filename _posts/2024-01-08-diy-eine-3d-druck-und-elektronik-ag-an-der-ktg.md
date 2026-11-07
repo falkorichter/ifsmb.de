@@ -7,7 +7,7 @@ original_site: 35services.de
 tags: [35services, ktg, ktg-ag-jahr-1, rc-modellbau, axidraw, prusa-mk4]
 ---
 
-Am 8. April um 15:00Uhr startet eine AG an der Kurt-Tucholsky-Grundschule und wir lernen 3D Druck, Löten und Basteln einen fertgesteuerten Bagger oder Kipplaster. Dies ist ein Projekt von Falko (und Jan von 35services).
+Am 8. April um 15:00Uhr startet eine AG an der Kurt-Tucholsky-Grundschule und wir lernen 3D Druck, Löten und Basteln einen fertgesteuerten Bagger oder Kipplaster. Dies ist ein Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) (und [Jan]({{ '/team/jan/' | relative_url }}) von 35services).
 
 <div class="gallery gallery-single">
   <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06-600w.png" alt="Ein zerlegter 3D-gedruckter RC-Kipplaster: gelbe Räder, blaue Mulde und Elektronik" loading="lazy"></a>

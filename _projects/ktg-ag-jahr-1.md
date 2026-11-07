@@ -10,13 +10,14 @@ image: /assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06.png
 tags: [ktg]
 team:
   - falko-richter
+  - jan
 partners:
   - Kurt-Tucholsky-Grundschule
   - Förderverein der Kurt-Tucholsky-Grundschule
   - 35 services e. V.
 ---
 
-Am **8. April 2024** startete an der Kurt-Tucholsky-Grundschule die **„DIY – eine 3D-Druck und Elektronik AG“** – ein Projekt von Falko (und Jan von 35services). Die AG traf sich montags von 15 bis 16 Uhr.
+Am **8. April 2024** startete an der Kurt-Tucholsky-Grundschule die **„DIY – eine 3D-Druck und Elektronik AG“** – ein Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) (und [Jan]({{ '/team/jan/' | relative_url }}) von 35services). Die AG traf sich montags von 15 bis 16 Uhr.
 
 **Das Ziel:** Jedes Kind baut sich ein **ferngesteuertes Fahrzeug** – einen Bagger ([RC Skid Steer](https://www.printables.com/model/544937-v20-3d-printed-rc-skidsteer)) oder einen Kipplaster ([RC Dump Truck](https://www.printables.com/model/649741-v20-3d-printed-rc-dumptruck)). Dafür lernten die Kinder 3D-Druck, Elektronik und Löten.
 

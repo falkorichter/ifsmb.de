@@ -23,6 +23,7 @@ Die Originale in `_logo/team/` werden **nicht** ins Repo committet (`.gitignore`
 | Falko Richter | eigenes Foto (Pixel 10 Pro, enthielt GPS-Daten) | Quadratisch auf das Gesicht zugeschnitten, Namensschild mit QR-Codes/WLAN-Passwort weggeschnitten |
 | Philipp Schalldach | von Falko bereitgestellt | Quadratisch auf das Gesicht zugeschnitten |
 | Gregor Dill | XING-Profilbild (xing.com/profile/Gregor_Dill) | Nur verkleinert |
+| Jan | von Falko bereitgestellt (bewusst verwischtes Schwarzweiß-Porträt, ohne Metadaten) | Quadratisch auf das Gesicht zugeschnitten, 480/960 px |
 
 Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne EXIF) in 480 px und 960 px.
 
