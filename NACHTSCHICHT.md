@@ -59,7 +59,7 @@ Branch `worktree-nachtschicht` (worktree `.claude/worktrees/nachtschicht`), base
 ## Please check / decide
 
 1. **TAZ 6 vs. Mini text:** both todo sections had almost the same text ("Falko hat einen lulzbot taz 6 geschenkt bekommen … Congress"). The Congress post only shows the **Mini**. I kept the Congress sentence on the TAZ 6 as you wrote it – please check.
-2. **AxiDraw owner:** not given. Following your rule ("belongs to a partner unless noted") I set **35services**.
+2. ~~AxiDraw owner~~ – **confirmed by Falko:** owner Falko, location „Unterwegs mit Falko“.
 3. ~~Snapmaker U1 = "4-Kopf-4-Farb-4-Material-Drucker"~~ – **confirmed by Falko.** Everything about it now carries the tag **`u1`** (device, unboxing event 16.02.2026, Schulstadtrat event + press release, Werkstatt post, laptop post), see `/stichworte/#u1`.
 4. **Anton photo:** an adult is clearly visible (presumably Anton) – OK to publish?
 5. **"seit 2023" / AG years:**
