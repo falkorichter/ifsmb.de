@@ -1,9 +1,9 @@
 /*
   Wechselnder Slogan auf der Startseite.
-  <h1 class="slogan" data-effekt="scramble|fallblatt" data-slogans="Zeile 1|Zeile 2;;Zeile 1|Zeile 2">
+  <h1 class="slogan" data-slogans="Zeile 1|Zeile 2;;Zeile 1|Zeile 2">
   Die Slogans stehen in data-slogans (";;" trennt Slogans, "|" trennt die Zeilen; Zeile 2 ist hervorgehoben).
   Der erste Slogan steht als normales HTML im <h1> (für Suchmaschinen und ohne JavaScript).
-  Zum Ausprobieren: ?effekt=scramble oder ?effekt=fallblatt an die URL hängen.
+  Effekt „Scramble“ (wie jugendhackt.org): Buchstaben flackern kurz als Zufallszeichen, dann steht der neue Text.
 */
 (function () {
   var h1 = document.querySelector('h1.slogan');
@@ -11,13 +11,10 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var slogans = h1.dataset.slogans.split(';;').map(function (s) { return s.split('|'); });
-  var m = location.search.match(/[?&]effekt=(scramble|fallblatt)/);
-  var effekt = m ? m[1] : (h1.dataset.effekt || 'scramble');
   var HALTEN = 4000;          // so lange bleibt ein Slogan stehen (ms)
   var current = 0;
 
   h1.setAttribute('aria-live', 'polite');
-  h1.classList.add('slogan-' + effekt);
 
   // Höhe für den längsten Slogan reservieren, damit die Seite nicht springt
   function reserveHeight() {
@@ -54,18 +51,6 @@
   function pad(s, n) { while (s.length < n) s += ' '; return s; }
 
   var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=?!<>/_';
-  var FLAPS = ' ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöüß0123456789.,-!?';
-
-  function flapSteps(from, to) {
-    var a = FLAPS.indexOf(from), b = FLAPS.indexOf(to), seq = [];
-    if (a < 0) a = 0;
-    if (b < 0) return [to];
-    var dist = (b - a + FLAPS.length) % FLAPS.length;
-    var skip = Math.max(1, Math.ceil(dist / 9));   // höchstens ~9 Klappen pro Buchstabe
-    for (var k = skip; k < dist; k += skip) seq.push(FLAPS[(a + k) % FLAPS.length]);
-    seq.push(to);
-    return seq;
-  }
 
   function animate(from, to, done) {
     var nLines = Math.max(from.length, to.length), lines = [];
@@ -89,18 +74,12 @@
     }
 
     var start = null, total = 0, idx = 0;
-    // Pro Zeichen: Startzeit (von links nach rechts) und Schritte
+    // Pro Zeichen: Startzeit (von links nach rechts) und Dauer
     lines.forEach(function (ln) {
       ln.plan = ln.cells.map(function (c, i) {
-        var p = { t0: idx * (effekt === 'fallblatt' ? 45 : 35) };
+        var p = { t0: idx * 35 };
         idx++;
-        if (effekt === 'fallblatt') {
-          p.steps = ln.from[i] === ln.to[i] ? [] : flapSteps(ln.from[i], ln.to[i]);
-          p.dur = p.steps.length * 55;
-        } else {
-          p.dur = ln.from[i] === ln.to[i] && ln.to[i] === ' ' ? 0 : 350 + Math.random() * 300;
-        }
-        p.last = -1;
+        p.dur = ln.from[i] === ln.to[i] && ln.to[i] === ' ' ? 0 : 350 + Math.random() * 300;
         total = Math.max(total, p.t0 + p.dur);
         return p;
       });
@@ -113,18 +92,10 @@
         ln.plan.forEach(function (p, i) {
           var cell = ln.cells[i], ch;
           if (t < p.t0) return;
-          if (effekt === 'fallblatt') {
-            var k = Math.min(p.steps.length - 1, Math.floor((t - p.t0) / 55));
-            if (k < 0 || k === p.last) return;
-            p.last = k;
-            ch = p.steps[k];
-            cell.classList.remove('flip'); void cell.offsetWidth; cell.classList.add('flip');
-          } else {
-            if (t >= p.t0 + p.dur) { ch = ln.to[i]; cell.classList.remove('scrambling'); }
-            else {
-              ch = ln.to[i] === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-              cell.classList.add('scrambling');
-            }
+          if (t >= p.t0 + p.dur) { ch = ln.to[i]; cell.classList.remove('scrambling'); }
+          else {
+            ch = ln.to[i] === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            cell.classList.add('scrambling');
           }
           if (cell.textContent !== ch) cell.textContent = ch;
         });
