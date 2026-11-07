@@ -140,6 +140,11 @@ img { max-width: 100%; height: auto; }
   padding: 0 .1em;
 }
 
+/* Wechselnder Slogan (assets/js/slogan.js) */
+.slogan-word { white-space: nowrap; }
+.slogan-char { white-space: pre; }
+.slogan .slogan-char.scrambling { font-family: var(--mono); font-weight: 700; color: var(--accent-2); }
+
 .hero-text { max-width: 640px; font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 2rem; }
 
 .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
