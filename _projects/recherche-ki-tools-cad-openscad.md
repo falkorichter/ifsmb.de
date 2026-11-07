@@ -9,6 +9,7 @@ team:
   - falko-richter
 partners:
   - 35 services e. V.
+persoenlich: true
 ---
 
 Falko experimentiert mit [Claude Code](https://claude.com/claude-code) und schaut, ob er damit und mit [OpenSCAD](https://openscad.org/) konstruieren kann. Unter diesen Links könnt ihr sehen, was schon alles funktioniert:
