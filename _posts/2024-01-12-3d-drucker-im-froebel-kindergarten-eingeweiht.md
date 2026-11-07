@@ -2,11 +2,15 @@
 title: "3D-Drucker im Fröbel-Kindergarten eingeweiht"
 date: 2024-01-12 16:00:00 +0100
 author: falko-richter
+tags: [kita]
 ---
 
-Am 12. Januar 2024 haben wir im Fröbel-Kindergarten einen 3D-Drucker eingeweiht: einen da Vinci mini von XYZprinting. Morgens wurde ausgepackt und aufgebaut, am Nachmittag liefen die ersten Drucke.
+Am 12. Januar 2024 haben wir im Fröbel-Kindergarten in der Lisa-Fittko-Straße einen 3D-Drucker eingeweiht: einen da Vinci mini von XYZprinting. Morgens wurde ausgepackt und aufgebaut, am Nachmittag liefen die ersten Drucke.
 
 Damit niemand einfach so losdruckt, steht ein Schild auf dem Drucker: „STOP! → Yvonne fragen“.
+
+Die Einführung ist offen dokumentiert – als Open Educational Resource: [chaos-macht-kita auf GitHub](https://github.com/falkorichter/chaos-macht-kita). Wie alles angefangen hat, steht im Beitrag über [Falkos Vortrag auf dem Chaos Communication Camp 2023]({{ '/news/2023/08/16/3d-druck-fuer-kinder-auf-dem-cccamp23/' | relative_url }}).
+
 
 <div class="gallery">
   <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/05.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/05-600w.jpg" alt="Der neue 3D-Drucker steht ausgepackt auf einem Hocker, daneben der Karton" loading="lazy"></a>
