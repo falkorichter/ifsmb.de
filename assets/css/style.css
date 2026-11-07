@@ -581,3 +581,9 @@ img { max-width: 100%; height: auto; }
 .prose tr:nth-child(even) td { background: rgba(255,255,255,.55); }
 .prose h2 + h3, .prose h3 { margin-top: 1.75rem; }
 .badge-idea { background: #e3f6d8; color: var(--ink); }
+.transparency-box { background: #fff4c2; border: 2px solid var(--ink); border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 2rem; }
+.offer-grid { margin-bottom: 1.5rem; }
+.offer-grid .small a { font-weight: 600; }
+.site-footer .footer-note a { color: #cfcdc6; }
+@media (max-width: 1080px) and (min-width: 721px) { .site-nav a { padding: .4rem .5rem; font-size: .92rem; } .brand-name { display: none; } }
+.offer-contact { margin-bottom: 2.5rem; font-weight: 600; }

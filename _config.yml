@@ -66,6 +66,8 @@ nav:
     url: /kalender/
   - title: Projekte
     url: /projekte/
+  - title: Angebot
+    url: /angebot/
   - title: Ausstattung
     url: /ausstattung/
   - title: Team

@@ -6,18 +6,22 @@ title: Impressum
 
 ## Angaben gemäß § 5 DDG
 
-**Institut für spontane Makespace Buildung**<br>
-<span class="todo">[Name der verantwortlichen Person bzw. des Vereins]</span><br>
+**Institut für spontane Makespace Buildung – Falko Richter**<br>
+Falko Richter<br>
 <span class="todo">[Straße und Hausnummer]</span><br>
 <span class="todo">[PLZ] Berlin</span>
 
 ## Kontakt
 
-E-Mail: <span class="todo">[E-Mail-Adresse – mit dem obf-mail-Muster einbinden, siehe README]</span>
+E-Mail: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falko [at] 35services.de</a>
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-<span class="todo">[Name, Anschrift wie oben]</span>
+Falko Richter, <span class="todo">[Anschrift wie oben]</span>
+
+## Hinweis zum Namen
+
+Das „Institut für spontane Makespace Buildung“ ist **keine Hochschule, keine Behörde und kein wissenschaftliches Forschungsinstitut**, sondern eine private, ehrenamtliche Initiative von Falko Richter. Das Institut hat (noch) keine eigene Rechtsform. Mehr dazu unter [Warum ein Institut?]({{ '/angebot/' | relative_url }}#warum-ein-institut).
 
 ## Haftung für Links
 
