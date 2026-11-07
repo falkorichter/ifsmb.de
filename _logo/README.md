@@ -39,3 +39,15 @@ Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS – es gib
 
 Bilder und Videos aus den Beiträgen von 35services.de (Autor: Falko Richter) liegen in `assets/images/news/<slug>/` und `assets/video/news/<slug>/`.
 Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu gespeichert. Videos: mit ffmpeg auf 720p (H.264, CRF 28) verkleinert, Metadaten entfernt (zusammen 220 MB → 6 MB).
+
+## Fotos in eigenen Beiträgen
+
+| Beitrag | Originale (nicht committet) | Bearbeitung |
+|---|---|---|
+| 3D-Druck in der Kita (20.10.2023) | `_logo/news/PXL_20231020_*.jpg` (4 Fotos, enthielten GPS-Daten) | Foto 1: alle sechs Köpfe mit starkem Weichzeichner unkenntlich gemacht (Vision-Gesichtserkennung fand nur ein Gesicht, die übrigen Köpfe wurden von Hand markiert); alle Fotos ohne Metadaten neu gespeichert, 1600 px + 600 px |
+| Kita-Beitrag, Fotos 5–8 | `_logo/news/PXL_2023102*.jpg` | Namen der Kinder auf den Zahnbürstenetuis (Fotos 6 und 8) unkenntlich gemacht |
+| 3D-Drucker im Fröbel-Kindergarten (12.01.2024) | `_logo/news/froebel/` und die ZIP-Datei | 10 Fotos ohne Metadaten; 3 Videos auf 720p ohne Tonspur (Kinderstimmen), Gesichtsprüfung aller Videosekunden ohne Treffer |
+| Termin: Ausflug zu Max (29.04.2024) | `_logo/kalender/max/` | Kindergesichter unkenntlich gemacht: 12 in Foto 1, 3 in Foto 2, 2 in Foto 4; Max (Erwachsener) nicht verpixelt |
+| Unboxing des ersten 35services-Druckers (12.06.2024) | `_logo/news/unboxing/` und die ZIP-Datei | 15 Fotos ohne Metadaten, Kennzeichen zweier Autos (Foto 2) unkenntlich gemacht; 5 Videos auf 720p ohne Tonspur (ein Kind war dabei); Gesichtsprüfung: nur ein Erwachsener in Video 3 (Sek. 31–35), nicht verpixelt |
+| Termin: Ausflug zu Philippe Bietenholz (15.12.2025) | `_logo/kalender/bietenholz/DSC03919.JPG` (Sony-Kamera, ohne GPS) | Gesichter von 6 Kindern und 2 Personen im Hintergrund unkenntlich gemacht; der vortragende Erwachsene nicht verpixelt |
+| Ausstattung (3 Fotos) | `_logo/ausstattung/` | Foto A1 mini: handschriftlicher Kindername auf dem AG-Anmeldezettel und Google-Classroom-Beitrittscode unkenntlich gemacht; alle ohne Metadaten (enthielten GPS) |

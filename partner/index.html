@@ -5,7 +5,7 @@ lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
 ---
 <div class="partner-list">
   {% for p in site.data.partners %}
-  <div class="card partner-card">
+  <div class="card partner-card" id="{{ p.name | slugify }}">
     <a href="{{ p.url }}" target="_blank" rel="noopener" class="logo-tile{% if p.logo_dark %} logo-tile-dark{% endif %}">
       {% if p.logo %}<img src="{{ p.logo | relative_url }}" alt="Logo {{ p.name }}" loading="lazy">{% else %}<span class="logo-text">{{ p.name }}</span>{% endif %}
     </a>
@@ -13,6 +13,8 @@ lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
       <h3><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.name }}</a></h3>
       {% if p.description %}<p>{{ p.description }}</p>{% endif %}
       {% if p.instagram %}<p><a href="{{ p.instagram }}" target="_blank" rel="noopener">Instagram</a></p>{% endif %}
+      {%- assign p_eq = site.equipment | where: "owner_partner", p.name -%}
+      {% if p_eq.size > 0 %}<p class="small">Ausstattung: {% for it in p_eq %}<a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
       {% if p.page %}<p><a href="{{ p.page | relative_url }}" class="more-link">Mehr über die Zusammenarbeit →</a></p>{% endif %}
       <p class="muted small">{{ p.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first }}</p>
     </div>

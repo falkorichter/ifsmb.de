@@ -66,7 +66,7 @@ layout: default
 </section>
 {% endif %}
 
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" %}
 {% if active.size > 0 %}
 <section class="container section">
   <div class="section-head">

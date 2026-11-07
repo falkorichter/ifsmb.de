@@ -1,0 +1,40 @@
+{%- comment -%}
+  Listet alles, was mindestens ein Stichwort mit include.tags teilt (außer der aktuellen Seite).
+{%- endcomment -%}
+{%- assign my = include.tags -%}
+{%- if my and my.size > 0 -%}
+{%- assign groups = "equipment:Ausstattung,projects:Projekte,events:Termine,posts:Beiträge,press:Presse" | split: "," -%}
+{%- capture rel_out -%}
+{%- for g in groups -%}
+  {%- assign gk = g | split: ":" | first -%}{%- assign gl = g | split: ":" | last -%}
+  {%- assign hits = "" | split: "" -%}
+  {%- for it in site[gk] -%}
+    {%- if it.url == page.url -%}{%- continue -%}{%- endif -%}
+    {%- assign hit = false -%}
+    {%- if gk == "projects" -%}
+      {%- if it.event_tag and my contains it.event_tag -%}{%- assign hit = true -%}{%- endif -%}
+    {%- else -%}
+      {%- for t in it.tags -%}{%- if my contains t -%}{%- assign hit = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
+    {%- endif -%}
+    {%- if hit -%}{%- assign hits = hits | push: it -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if gk == "events" -%}{%- assign hits = hits | sort: "start" | reverse -%}{%- endif -%}
+  {%- if hits.size > 0 %}
+  <div class="related-group">
+    <h3>{{ gl }}</h3>
+    <ul>
+      {%- for it in hits %}
+      <li><a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% if gk == "events" %} <span class="meta">{{ it.start | date: "%d.%m.%Y" }}</span>{% elsif gk == "posts" or gk == "press" %} <span class="meta">{{ it.date | date: "%d.%m.%Y" }}</span>{% endif %}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif -%}
+{%- endfor -%}
+{%- endcapture -%}
+{%- if rel_out != "" %}
+<section class="related">
+  <h2>Verknüpft</h2>
+  <div class="related-grid">{{ rel_out }}</div>
+</section>
+{%- endif -%}
+{%- endif -%}

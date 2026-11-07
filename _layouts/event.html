@@ -7,6 +7,7 @@ layout: default
       <p class="meta">{% include termin-datum.html event=page %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+      {% include stichworte.html tags=page.tags %}
     </header>
     {% if page.location %}
     <p class="event-location">📍 {% if page.location_url %}<a href="{{ page.location_url }}" target="_blank" rel="noopener">{{ page.location }}</a>{% else %}{{ page.location }}{% endif %}</p>
@@ -28,6 +29,7 @@ layout: default
     <p class="event-project">Gehört zum Projekt: {% for pr in rel %}<a href="{{ pr.url | relative_url }}">{{ pr.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
     {%- endif -%}
     {%- endif %}
+    {% include verknuepft.html tags=page.tags %}
     <p class="cal-subscribe">
       <a class="btn btn-ghost" href="{{ '/kalender.ics' | relative_url }}">📅 Alle Termine als iCal</a>
     </p>

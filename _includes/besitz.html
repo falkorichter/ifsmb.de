@@ -1,0 +1,13 @@
+{%- comment -%} Zeigt, wem ein Gerät gehört: include.item {%- endcomment -%}
+{%- assign it = include.item -%}
+{%- if it.owner_partner -%}
+  {%- assign op = site.data.partners | where: "name", it.owner_partner | first -%}
+  Gehört unserem Partner {% if op and include.plain == nil %}<a href="{{ '/partner/' | relative_url }}#{{ op.name | slugify }}">{{ op.name }}</a>{% else %}{{ it.owner_partner }}{% endif %}
+{%- elsif it.owner_team -%}
+  {%- assign om = site.team | where: "slug", it.owner_team | first -%}
+  Gehört {% if om and include.plain == nil %}<a href="{{ om.url | relative_url }}">{{ om.title }}</a>{% elsif om %}{{ om.title }}{% else %}{{ it.owner_team }}{% endif %} aus unserem Team
+{%- elsif it.owner_name -%}
+  {% if it.status == "in-aussicht" %}Vielleicht von {{ it.owner_name }}{% else %}Gehört {{ it.owner_name }}{% endif %}
+{%- else -%}
+  Gehört dem Institut
+{%- endif -%}

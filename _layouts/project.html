@@ -5,7 +5,7 @@ layout: default
   <article>
     <header class="page-header">
       <p class="meta">
-        <span class="badge {% if page.status == 'abgeschlossen' %}badge-past{% else %}badge-active{% endif %}">{% if page.status == 'abgeschlossen' %}Abgeschlossen{% else %}Aktuell{% endif %}</span>
+        {% if page.status == 'abgeschlossen' %}<span class="badge badge-past">Abgeschlossen</span>{% elsif page.status == 'anfrage' %}<span class="badge badge-inquiry">Anfrage</span>{% else %}<span class="badge badge-active">Aktuell</span>{% endif %}
         {% if page.zeitraum %} · {{ page.zeitraum }}{% endif %}
         {% if page.ort %} · {{ page.ort }}{% endif %}
       </p>
@@ -13,6 +13,7 @@ layout: default
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
     </header>
     {% if page.image %}<img class="project-image" src="{{ page.image | relative_url }}" alt="{{ page.title }}">{% endif %}
+    {% if page.status == 'anfrage' %}<p class="note">Das ist eine Anfrage, die bei uns eingegangen ist. Ob und wie daraus ein Projekt wird, ist noch offen.</p>{% endif %}
     <div class="prose">
       {{ content }}
     </div>
@@ -24,6 +25,24 @@ layout: default
     <h2>Termine &amp; Berichte</h2>
     <ul class="event-list">
       {%- for e in tagged %}{% include termin-karte.html event=e %}{% endfor %}
+    </ul>
+    {% endif %}
+    {%- assign tagged_posts = "" | split: "" -%}
+    {%- for po in site.posts -%}{%- if po.tags contains page.event_tag -%}{%- assign tagged_posts = tagged_posts | push: po -%}{%- endif -%}{%- endfor -%}
+    {% if tagged_posts.size > 0 %}
+    <h2>Beiträge</h2>
+    <ul class="post-list">
+      {% for po in tagged_posts %}<li><span class="meta">{{ po.date | date: "%d.%m.%Y" }}</span> <a href="{{ po.url | relative_url }}">{{ po.title }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+    {% if page.event_tag %}
+    {%- assign proj_eq = "" | split: "" -%}
+    {%- for it in site.equipment -%}{%- if it.tags contains page.event_tag -%}{%- assign proj_eq = proj_eq | push: it -%}{%- endif -%}{%- endfor -%}
+    {% if proj_eq.size > 0 %}
+    <h2>Ausstattung</h2>
+    <ul class="link-list">
+      {% for it in proj_eq %}<li><a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
     {% endif %}

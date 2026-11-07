@@ -21,12 +21,15 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 
 - `_posts/` Neuigkeiten (`/news/`)
 - `_team/` Collection, ein Profil pro Datei (`/team/:name/`), Layout `member`
-- `_projects/` Collection (`/projekte/:name/`), Layout `project`; `status: abgeschlossen` → Archiv `/projekte/archiv/`; `event_tag: ktg` listet alle Termine mit `tags: [ktg]` auf der Projektseite, und die Terminseite verlinkt zurück aufs Projekt
+- `_projects/` Collection (`/projekte/:name/`), Layout `project`; `status: abgeschlossen` → Archiv `/projekte/archiv/`; `status: anfrage` = eingegangene Anfrage, die vielleicht ein Projekt wird (eigener Abschnitt „Anfragen“, nicht auf der Startseite). `start` muss immer ein Datum sein (wird zum Sortieren genutzt), `event_tag` ein eigenes Stichwort – nie ein allgemeines wie `35services`, sonst landen alle Beiträge dazu auf der Projektseite; `event_tag: ktg` listet alle Termine und Posts mit `tags: [ktg]` auf der Projektseite, und die Terminseite verlinkt zurück aufs Projekt
 - `_data/partners.yml` Partnerliste; `logo_dark: true` für helle Logos; `page: /partner/<name>/` verlinkt eine eigene Partnerseite (`partner/<name>/index.md`)
 - `_events/` Kalender-Termine (`/kalender/:name/`), Layout `event`; Felder `start`, `end`, `all_day`, `location`, `location_url`, `summary`, optional `gallery` (Liste aus `image`, `thumb`, `alt`; Bilder unter `assets/images/kalender/<termin>/`, Originale in `_logo/kalender/` – nicht committet) und `date_label` (Text statt Datum, wenn der Tag noch nicht feststeht – iCal nutzt weiter `start`/`end`)
 - `kalender.ics` erzeugt den iCal-Feed. Die Datei enthält echte CRLF-Zeilenenden (RFC 5545) – nur mit Werkzeugen bearbeiten, die `\r\n` erhalten (`.gitattributes`: `-text`). Lange Zeilen bricht `_includes/ics-line.txt` um.
 - `_press/` Pressemitteilungen (`/presse/:slug/`), Layout `press`; Kurzprofil & Pressekontakt in `_data/presse.yml`, Downloads in `_data/pressematerial.yml`
 - Posts mit `original_url` / `original_site` / `author` (Team-Kürzel) zeigen automatisch den Hinweis „Ursprünglich veröffentlicht von … auf …“
+- `_equipment/` Ausstattung (`/ausstattung/:name/`), Layout `equipment`. Das Institut besitzt (noch) nichts: jedes Gerät hat `owner_partner` (Name aus `_data/partners.yml`) **oder** `owner_team` (Team-Kürzel) **oder** `owner_name` (freier Name). `status: in-aussicht` für Geräte, die wir vielleicht bekommen. Ohne freies Foto: eigene SVG-Illustration mit `image_is_illustration: true` – keine Hersteller- oder Shopfotos übernehmen (Urheberrecht). Partnerseite und Teamprofil listen die Geräte automatisch.
+- **Stichworte (`tags`)** verknüpfen alles miteinander: Posts, Termine, Ausstattung, Pressemitteilungen tragen `tags: [...]`, Projekte ihr `event_tag`. `_includes/verknuepft.html` zeigt auf jeder Seite alles mit gemeinsamen Stichworten, `/stichworte/` listet alle. Anzeigenamen in `_data/stichworte.yml`.
+- Stichwort-Konventionen: Kleinbuchstaben mit Bindestrich. Projekt-Ort (`ktg`, `rosalind-franklin-gym`), Herkunft (`35services` für alle von 35services.de übernommenen Beiträge), Besitzer*in eines Geräts (`35services`, `bietenholz`), Gerät (`bambu-lab-a1-mini`, `waermebildkamera` …), Gerätetyp (`3d-drucker`).
 - Navigation steht in `_config.yml` unter `nav`
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
@@ -41,6 +44,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - Bilder in Posts: `<div class="gallery">` mit `<a class="lightbox" href="groß.jpg"><img src="klein-600w.jpg"></a>` – die Lightbox in `_layouts/default.html` greift automatisch
 - Keine externen Einbettungen (YouTube-iframes, fremde Videos/Bilder): Videos lokal als 720p-MP4 in `assets/video/`, YouTube nur als Link mit lokalem Vorschaubild
 - Fotos immer ohne Metadaten ausliefern (Handyfotos enthalten GPS-Daten): mit Pillow neu speichern, Originale von Personenfotos nicht committen
+- Fotos mit Kindern: Gesichter (auch Profile und Hinterköpfe) unkenntlich machen, bevor sie auf die Seite kommen. Die macOS-Vision-Gesichtserkennung findet nicht alle Gesichter – Ergebnis immer selbst in voller Größe prüfen und fehlende Köpfe von Hand ergänzen. Originale bleiben in `_logo/news/`, `_logo/kalender/`, `_logo/team/` (in `.gitignore`)
 
 ## Beiträge von 35services.de übernehmen
 
@@ -57,9 +61,15 @@ Falko schreibt Beiträge zuerst auf https://35services.de. Soll ein Beitrag hier
    original_url: https://35services.de/<jahr>/<slug>/
    original_site: 35services.de
    ```
+   Zusätzlich immer `tags: [35services]` setzen (plus Stichworte für erwähnte Geräte/Projekte).
    Das Layout `post` zeigt daraus oben automatisch „Ursprünglich veröffentlicht von Falko Richter auf 35services.de“ mit Link.
 3. **Text** wörtlich übernehmen (Absätze, Listen, Links als Markdown). Einzige Änderung: „Makerspace“ → „Makespace“. E-Mail-Adressen nur in der schon verschleierten Form des Originals („falko [at] 35services [punkt] de“) oder per `.obf-mail`.
 4. **Bilder** lokal speichern, nie von 35services.de einbinden: größte Version laden, mit Pillow ohne Metadaten neu speichern als `assets/images/news/<slug>/NN.jpg` (max. 1600 px) und `NN-600w.jpg`; einbinden als `<div class="gallery">` mit `a.lightbox` (Einzelbild: `gallery gallery-single`). Aussagekräftige Alt-Texte, Screenshots beschreiben.
 5. **Videos** (`wp-block-video`, oft 4K oder `.mov`) mit ffmpeg auf 720p verkleinern (`-crf 28 -preset slow -movflags +faststart -map_metadata -1`) nach `assets/video/news/<slug>/NN.mp4` plus Vorschaubild `NN.jpg`; einbinden als `<video class="post-video" controls preload="none" playsinline poster=… src=…>` an der Stelle wie im Original.
 6. **YouTube** nie als iframe: Vorschaubild `img.youtube.com/vi/<id>/hqdefault.jpg` lokal speichern und als `<a class="video-link">` auf youtube.com verlinken.
 7. Danach `bundle exec jekyll build`, Seite ansehen, Größe von `assets/` im Blick behalten.
+
+## Spenden
+
+- Seite `/spenden/`: Das Institut ist (noch) keine eigene Rechtsform – Geldspenden laufen über betterplace an die 3D-Druck AG an der KTG (offiziell ein Projekt von 35services e.V.): https://www.betterplace.org/de/projects/138560-3d-druck-und-elektronik-ag
+- Der schwebende „Spenden“-Button (`.badge-donate`) steht in `_layouts/default.html` und erscheint auf allen Seiten außer `/spenden/` selbst; Animation respektiert `prefers-reduced-motion`.

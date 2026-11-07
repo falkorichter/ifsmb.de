@@ -23,6 +23,9 @@ collections:
   press:
     output: true
     permalink: /presse/:slug/
+  equipment:
+    output: true
+    permalink: /ausstattung/:name/
 
 defaults:
   - scope:
@@ -50,6 +53,11 @@ defaults:
       type: "press"
     values:
       layout: "press"
+  - scope:
+      path: ""
+      type: "equipment"
+    values:
+      layout: "equipment"
 
 nav:
   - title: Neuigkeiten
@@ -58,6 +66,8 @@ nav:
     url: /kalender/
   - title: Projekte
     url: /projekte/
+  - title: Ausstattung
+    url: /ausstattung/
   - title: Team
     url: /team/
   - title: Partner

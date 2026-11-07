@@ -5,6 +5,7 @@ album_url: https://photos.app.goo.gl/3gHcYyH5wt71wuyM6
 contact_name: Falko Richter
 contact_email_b64: ZmFsa29AMzVzZXJ2aWNlcy5kZQ==
 contact_email_anzeige: falko [at] 35services.de
+tags: [ktg, waermebildkamera]
 ---
 
 <p class="album-link"><a class="btn" href="https://photos.app.goo.gl/3gHcYyH5wt71wuyM6" target="_blank" rel="noopener">📷 Alle Fotos im Google-Fotos-Album</a></p>

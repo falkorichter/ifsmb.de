@@ -103,6 +103,11 @@ content:
       - name: author
         label: Autor*in (Team-Kürzel, z. B. falko-richter)
         type: string
+      - name: tags
+        label: Kategorien (z. B. ktg)
+        description: Projekte mit derselben „Termine-Kategorie“ listen diesen Beitrag automatisch auf.
+        type: string
+        list: true
       - name: original_url
         label: Ursprünglich veröffentlicht unter (URL)
         type: string
@@ -138,7 +143,7 @@ content:
         type: select
         default: aktuell
         options:
-          values: [aktuell, abgeschlossen]
+          values: [anfrage, aktuell, abgeschlossen]
       - name: start
         label: Startdatum (für die Sortierung)
         type: date
@@ -216,6 +221,64 @@ content:
         options:
           format: markdown
 
+  - name: equipment
+    label: Ausstattung
+    type: collection
+    path: _equipment
+    filename: "{primary}.md"
+    view:
+      fields: [title, kategorie]
+      primary: title
+      sort: title
+      order: asc
+    fields:
+      - name: title
+        label: Name des Geräts
+        type: string
+        required: true
+      - name: kategorie
+        label: Kategorie (z. B. 3D-Drucker (FDM), Schneidplotter, Messgerät)
+        type: string
+      - name: summary
+        label: Kurzbeschreibung
+        type: text
+      - name: owner_partner
+        label: Gehört Partner (Name wie in der Partnerliste)
+        description: Entweder Partner oder Teammitglied angeben. Das Institut selbst besitzt (noch) keine Geräte.
+        type: string
+      - name: owner_team
+        label: Gehört Teammitglied (Kürzel, z. B. falko-richter)
+        type: string
+      - name: owner_name
+        label: Gehört jemand anderem (Name, falls weder Partner noch Team)
+        type: string
+      - name: status
+        label: Status
+        description: "„in-aussicht“ = Gerät kommt vielleicht, ist aber noch nicht da"
+        type: select
+        options:
+          values: ["", in-aussicht]
+      - name: image
+        label: Foto
+        description: Achtung – Fotos ohne Metadaten und ohne lesbare Namen/Gesichter von Kindern hochladen.
+        type: image
+      - name: thumb
+        label: Vorschaubild (optional, ca. 600 px)
+        type: image
+      - name: image_alt
+        label: Bildbeschreibung
+        type: string
+      - name: tags
+        label: Stichworte (z. B. 3d-drucker, 35services, ktg)
+        description: Alles mit denselben Stichworten wird automatisch verknüpft.
+        type: string
+        list: true
+      - name: body
+        label: Beschreibung
+        type: rich-text
+        options:
+          format: markdown
+
   - name: press
     label: Pressemitteilungen
     type: collection
@@ -240,6 +303,10 @@ content:
         required: true
         options:
           format: "yyyy-MM-dd"
+      - name: tags
+        label: Stichworte (z. B. ktg)
+        type: string
+        list: true
       - name: contact_name
         label: Pressekontakt für diese Mitteilung (optional, sonst der allgemeine)
         type: string

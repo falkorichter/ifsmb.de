@@ -29,6 +29,13 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
+    {% assign my_eq = site.equipment | where: "owner_team", page.slug %}
+    {% if my_eq.size > 0 %}
+    <h2>Ausstattung</h2>
+    <ul class="link-list">
+      {% for it in my_eq %}<li><a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
     <a href="{{ '/team/' | relative_url }}" class="back-link">← Zum Team</a>
   </article>
 </main>

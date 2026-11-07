@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" role="img" aria-label="Illustration eines Delta-3D-Druckers">
+  <title>Illustration: Delta-3D-Drucker</title>
+  <rect width="320" height="420" fill="#ffffff"/>
+  <g fill="none" stroke="#16161d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- back tower -->
+    <line x1="160" y1="40" x2="160" y2="330" stroke="#9a9aa6"/>
+    <!-- top frame -->
+    <path d="M60 70 L160 40 L260 70 L160 95 Z" fill="#ffcc00"/>
+    <!-- front towers -->
+    <line x1="60" y1="70" x2="60" y2="350"/>
+    <line x1="260" y1="70" x2="260" y2="350"/>
+    <line x1="160" y1="95" x2="160" y2="380"/>
+    <!-- base -->
+    <path d="M45 345 L160 315 L275 345 L160 395 Z" fill="#ffffff"/>
+    <!-- round bed -->
+    <ellipse cx="160" cy="345" rx="80" ry="24" fill="#e5e1d8"/>
+    <!-- print object -->
+    <path d="M140 342 L140 300 Q160 285 180 300 L180 342 Z" fill="#ff5a36"/>
+    <!-- carriages -->
+    <rect x="52" y="150" width="16" height="22" rx="3" fill="#ffffff"/>
+    <rect x="252" y="150" width="16" height="22" rx="3" fill="#ffffff"/>
+    <rect x="152" y="170" width="16" height="22" rx="3" fill="#ffffff"/>
+    <!-- arms -->
+    <line x1="64" y1="168" x2="148" y2="262"/>
+    <line x1="58" y1="172" x2="142" y2="266"/>
+    <line x1="256" y1="168" x2="172" y2="262"/>
+    <line x1="262" y1="172" x2="178" y2="266"/>
+    <line x1="156" y1="190" x2="154" y2="258" stroke-width="4"/>
+    <line x1="164" y1="190" x2="166" y2="258" stroke-width="4"/>
+    <!-- effector + nozzle -->
+    <path d="M140 258 L180 258 L172 276 L148 276 Z" fill="#ffcc00"/>
+    <path d="M154 276 L166 276 L160 288 Z" fill="#16161d"/>
+    <!-- spool on top -->
+    <circle cx="160" cy="28" r="18" fill="#ffffff"/>
+    <circle cx="160" cy="28" r="6" fill="#16161d"/>
+  </g>
+</svg>

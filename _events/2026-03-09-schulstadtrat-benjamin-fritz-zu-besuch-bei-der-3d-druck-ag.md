@@ -1,7 +1,7 @@
 ---
 title: "Schulstadtrat Benjamin Fritz zu Besuch bei der 3D-Druck AG"
 start: 2026-03-09 00:00
-tags: [ktg]
+tags: [ktg, waermebildkamera]
 all_day: true
 location: "Kurt-Tucholsky-Grundschule, Rathenower Str. 18, 10559 Berlin"
 location_url: https://kurt-tucholsky-grundschule.de/

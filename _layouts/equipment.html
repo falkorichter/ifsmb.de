@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<main class="container page narrow">
+  <article>
+    <header class="page-header">
+      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> · {% endif %}{% if page.kategorie %}{{ page.kategorie }} · {% endif %}{% include besitz.html item=page %}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+      {% include stichworte.html tags=page.tags %}
+    </header>
+    {% if page.image %}
+    <div class="gallery gallery-single equipment-hero">
+      <a href="{{ page.image | relative_url }}" class="lightbox"><img src="{{ page.thumb | default: page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></a>
+    </div>
+    {% if page.image_is_illustration %}<p class="muted small">Illustration – ein Foto folgt, sobald das Gerät da ist.</p>{% endif %}
+    {% endif %}
+    <div class="prose equipment-body">
+      {{ content }}
+    </div>
+    {% if page.status == "in-aussicht" %}
+    <p class="note">Dieses Gerät ist noch nicht da – wir bekommen es vielleicht. Sobald es so weit ist, aktualisieren wir diese Seite.</p>
+    {% else %}
+    <p class="note">Das Institut besitzt (noch) keine eigenen Geräte. Diese Ausstattung gehört {% if page.owner_partner %}unserem Partner{% else %}einem Teammitglied{% endif %} – über {% if page.owner_partner %}ihn{% else %}diese Person{% endif %} können wir sie je nach Absprache nutzen.</p>
+    {% endif %}
+    {% include verknuepft.html tags=page.tags %}
+    <a href="{{ '/ausstattung/' | relative_url }}" class="back-link">← Alle Ausstattung</a>
+  </article>
+</main>

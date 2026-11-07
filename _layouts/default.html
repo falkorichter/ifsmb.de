@@ -39,6 +39,7 @@
     <div class="container footer-inner">
       <p><strong>{{ site.title }}</strong><br>{{ site.description }}</p>
       <p>
+        <a href="{{ '/spenden/' | relative_url }}">Spenden</a> ·
         <a href="{{ '/impressum/' | relative_url }}">Impressum &amp; Datenschutz</a> ·
         <a href="{{ '/projekte/archiv/' | relative_url }}">Vergangene Projekte</a> ·
         <a href="https://github.com/falkorichter/ifsmb.de" target="_blank" rel="noopener">Quelltext auf GitHub</a>
@@ -46,6 +47,15 @@
       <p class="footer-note">Diese Seite setzt keine Cookies und lädt keine externen Inhalte.</p>
     </div>
   </footer>
+
+  {% unless page.url == '/spenden/' %}
+  <a href="{{ '/spenden/' | relative_url }}" class="badge-donate" aria-label="Spenden">
+    <span class="badge-donate-text">❤️<br>Spenden</span>
+    <span class="badge-donate-icon badge-donate-icon--1" aria-hidden="true">🖨️</span>
+    <span class="badge-donate-icon badge-donate-icon--2" aria-hidden="true">💻</span>
+    <span class="badge-donate-icon badge-donate-icon--3" aria-hidden="true">🖥️</span>
+  </a>
+  {% endunless %}
 
   <div class="lightbox-overlay" id="lightbox" hidden>
     <button class="lb-btn lb-close" aria-label="Schließen">×</button>
