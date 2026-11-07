@@ -51,3 +51,14 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | Unboxing des ersten 35services-Druckers (12.06.2024) | `_logo/news/unboxing/` und die ZIP-Datei | 15 Fotos ohne Metadaten, Kennzeichen zweier Autos (Foto 2) unkenntlich gemacht; 5 Videos auf 720p ohne Tonspur (ein Kind war dabei); Gesichtsprüfung: nur ein Erwachsener in Video 3 (Sek. 31–35), nicht verpixelt |
 | Termin: Ausflug zu Philippe Bietenholz (15.12.2025) | `_logo/kalender/bietenholz/DSC03919.JPG` (Sony-Kamera, ohne GPS) | Gesichter von 6 Kindern und 2 Personen im Hintergrund unkenntlich gemacht; der vortragende Erwachsene nicht verpixelt |
 | Ausstattung (3 Fotos) | `_logo/ausstattung/` | Foto A1 mini: handschriftlicher Kindername auf dem AG-Anmeldezettel und Google-Classroom-Beitrittscode unkenntlich gemacht; alle ohne Metadaten (enthielten GPS) |
+
+## Nachtschicht 07.11.2026 – Ausstattung und Archiv
+
+| Was | Original (nicht committet) | Bearbeitung |
+|---|---|---|
+| Ausstattungsfotos (A1 mini Platanus, Core-XY Anton, LulzBot Mini ×2, Snapmaker U1) | `_logo/ausstattung/` (lagen vorher roh in `_equipment/`, mit GPS) | ohne Metadaten neu gespeichert; im Congress-Foto des LulzBot Mini (02) den Hintergrund mit Teilnehmenden unkenntlich gemacht |
+| AxiDraw-Video | `_logo/ausstattung/axidraw v3.mp4` (100 MB, 4K, mit Ortsangabe) | 720p, ohne Ton und Metadaten (452 KB) |
+| MK3S-Zeitraffer (Infinite Cube, Servo-Halterung, Achsgehäuse) | `~/Downloads/*MK3S*.mp4` (OctoPrint-Kamera) | 720p bzw. 480p, ohne Ton/Metadaten (≈ 7 MB zusammen) |
+| Bilder aus „DIY – eine 3D Druck und Elektronik AG“ (2024) | 35services.de | 9 Bilder, ohne Metadaten; keine Personen |
+| Instagram-QR-Code im Rosalind-Franklin-Beitrag | 35services.de | übernommen |
+| Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |
