@@ -34,7 +34,11 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 | `institut/ifsmb-logo-badge.png` | Badge aus dem Website-Header, mit Headless Chrome in 3× Auflösung gerendert (transparenter Hintergrund) |
 | `institut/ifsmb-logo-wortmarke.png` | wie oben, mit Schriftzug „Institut für spontane Makespace Buildung“ |
 
-Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS – es gibt (noch) keine Vektorversion.
+Seit November 2026 in der Schrift **Berlin Type** (siehe unten) neu gerendert: HTML-Seite mit Headless Chrome in 5× Auflösung, transparenter Hintergrund, auf den Inhalt zugeschnitten. Eine Vektorversion gibt es (noch) nicht.
+
+## Schrift: Berlin Type
+
+Die Website nutzt die **Berlin Type** von [wir.berlin](https://wir.berlin/kampagnen/die-typo) („für alle frei zugänglich und nutzbar“, Modifikation nicht zulässig). Download: `Wir.Berlin_Schrift.zip` (Version 1.3). Ausgeliefert werden nur die Web-Fonts `BerlinTypeWeb-Regular/Bold` als woff2/woff, **unverändert** (kein Subsetting) in `assets/fonts/berlin-type/`. Die Desktop- und Office-Fonts aus dem ZIP werden nicht committet.
 
 ## Übernommene Blogbeiträge
 
