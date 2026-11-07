@@ -36,6 +36,10 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 
 Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS – es gibt (noch) keine Vektorversion. Das Logo bleibt vorerst so, auch wenn die Website die Berlin Type nutzt (Varianten zum Feedback in PR #6).
 
+## Pin
+
+`pin/`: das Logo-Badge als 2-Farb-Anstecker für den 3D-Drucker (OpenSCAD + STLs), siehe `pin/README.md`.
+
 ## Schrift: Berlin Type
 
 Die Website nutzt die **Berlin Type** von [wir.berlin](https://wir.berlin/kampagnen/die-typo) („für alle frei zugänglich und nutzbar“, Modifikation nicht zulässig). Download: `Wir.Berlin_Schrift.zip` (Version 1.3). Ausgeliefert werden nur die Web-Fonts `BerlinTypeWeb-Regular/Bold` als woff2/woff, **unverändert** (kein Subsetting) in `assets/fonts/berlin-type/`. Die Desktop- und Office-Fonts aus dem ZIP werden nicht committet.
