@@ -75,9 +75,9 @@ Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projekte
 - **Schraubstock** ([Thingiverse](https://www.thingiverse.com/thing:2064269))
 - **Schleifpapier-Halter** ([Thingiverse](https://www.thingiverse.com/thing:2404850))
 - **Filamentführung** für den Prusa MK4 ([Video](https://www.youtube.com/watch?v=EtNKQZsVzmw)) und ein [PTFE-Adapter dafür](https://www.youtube.com/watch?v=S_doXKG_Bow)
-- **Filamentbox selber bauen** ([anybot3d](https://anybot3d.com/diy-filament-box-selber-bauen))
+- **Filamentbox selber bauen** – die ursprüngliche Anleitung bei anybot3d ist leider nicht mehr erreichbar <span class="todo">[neuen Link suchen]</span>
 - **CNC-Fräse aus dem 3D-Drucker** ([All3DP](https://all3dp.com/2/3d-printed-cnc/))
-- **Baukastensystem für Lampen und mehr** – mit einem Trick, Sand in Drucke zu füllen ([Video](https://www.youtube.com/watch?v=htj0Zp5YyEQ), [Schreibtischlampe](https://properprinting.pro/product/desk-lamp/))
+- **Baukastensystem für Lampen und mehr** – mit einem Trick, Sand in Drucke zu füllen ([Video](https://www.youtube.com/watch?v=htj0Zp5YyEQ); die Produktseite der Schreibtischlampe bei properprinting.pro ist nicht mehr erreichbar)
 - **Werkzeug für Gewindeeinsätze** – setzt Einschmelzmuttern jedes Mal perfekt. Vielleicht sollten wir das mal bauen? ([Video](https://www.youtube.com/watch?v=ZkJdiu_l0eo&t=532s))
 
 ## Zum Spaß
