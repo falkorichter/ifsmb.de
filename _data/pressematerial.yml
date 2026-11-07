@@ -7,3 +7,13 @@
   description: PNG mit transparentem Hintergrund, 4715 × 960 px
   file: /assets/presse/ifsmb-logo-wortmarke.png
   preview: /assets/presse/ifsmb-logo-wortmarke.png
+
+- title: Logo (Badge) als SVG
+  description: Vektorgrafik, beliebig skalierbar, Schrift in Pfade umgewandelt
+  file: /assets/presse/ifsmb-logo-badge.svg
+  preview: /assets/presse/ifsmb-logo-badge.svg
+
+- title: Logo mit Schriftzug als SVG
+  description: Vektorgrafik, beliebig skalierbar, Schrift in Pfade umgewandelt
+  file: /assets/presse/ifsmb-logo-wortmarke.svg
+  preview: /assets/presse/ifsmb-logo-wortmarke.svg

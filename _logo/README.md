@@ -33,8 +33,10 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 |---|---|
 | `institut/ifsmb-logo-badge.png` | Badge aus dem Website-Header, mit Headless Chrome in 3× Auflösung gerendert (transparenter Hintergrund) |
 | `institut/ifsmb-logo-wortmarke.png` | wie oben, mit Schriftzug „Institut für spontane Makespace Buildung“ |
+| `institut/ifsmb-logo-badge.svg` | Vektorversion des Badges, nach den Maßen des PNG nachgebaut |
+| `institut/ifsmb-logo-wortmarke.svg` | Vektorversion mit Schriftzug |
 
-Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS – es gibt (noch) keine Vektorversion.
+Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, wght 800; SF Pro, wght 700, opsz 28). In den SVGs ist der Text mit fontTools in Pfade umgewandelt, sie brauchen also keine installierte Schrift. Farben: `#ffcc00` (Gelb), `#16161d` (Schwarz), Badge um −3° gedreht.
 
 ## Übernommene Blogbeiträge
 
