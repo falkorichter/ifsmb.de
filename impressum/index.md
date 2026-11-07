@@ -38,6 +38,8 @@ Diese Website wird über [GitHub Pages](https://pages.github.com/) (GitHub Inc.,
 
 Wir selbst setzen keine Cookies, verwenden keine Tracking- oder Analysewerkzeuge und laden keine Schriften oder Skripte von fremden Servern.
 
+Die Schrift dieser Website ist die [Berlin Type](https://wir.berlin/kampagnen/die-typo) des Landes Berlin (wir.berlin). Sie wird unverändert von ifsmb.de selbst ausgeliefert.
+
 Wenn du uns per E-Mail kontaktierst, verwenden wir deine Angaben nur, um deine Anfrage zu beantworten.
 
 ## Quelltext
