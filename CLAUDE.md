@@ -27,9 +27,11 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - `kalender.ics` erzeugt den iCal-Feed. Die Datei enthält echte CRLF-Zeilenenden (RFC 5545) – nur mit Werkzeugen bearbeiten, die `\r\n` erhalten (`.gitattributes`: `-text`). Lange Zeilen bricht `_includes/ics-line.txt` um.
 - `_press/` Pressemitteilungen (`/presse/:slug/`), Layout `press`; Kurzprofil & Pressekontakt in `_data/presse.yml`, Downloads in `_data/pressematerial.yml`
 - Posts mit `original_url` / `original_site` / `author` (Team-Kürzel) zeigen automatisch den Hinweis „Ursprünglich veröffentlicht von … auf …“
-- `_equipment/` Ausstattung (`/ausstattung/:name/`), Layout `equipment`. Das Institut besitzt (noch) nichts: jedes Gerät hat `owner_partner` (Name aus `_data/partners.yml`) **oder** `owner_team` (Team-Kürzel) **oder** `owner_name` (freier Name). `status: in-aussicht` für Geräte, die wir vielleicht bekommen. Ohne freies Foto: eigene SVG-Illustration mit `image_is_illustration: true` – keine Hersteller- oder Shopfotos übernehmen (Urheberrecht). Partnerseite und Teamprofil listen die Geräte automatisch.
+- `_equipment/` Ausstattung (`/ausstattung/:name/`), Layout `equipment`. Das Institut besitzt (noch) nichts: jedes Gerät hat `owner_partner` (Name aus `_data/partners.yml`) **oder** `owner_team` (Team-Kürzel) **oder** `owner_name` (freier Name). `status:` `in-aussicht` (kommt vielleicht), `in-reparatur`, `im-test`. Standort mit `standort` (Text) und optional `standort_partner` (Partnername → Link). Weitere Fotos als `gallery` (Liste aus `image`, `thumb`, `alt`), Videos als `videos` (Liste aus `src`, `poster`, `caption`). Die Übersicht `/ausstattung/` gruppiert automatisch nach `kategorie` (enthält „3D-Drucker“ / „3D-Scanner“ / Rest). Ohne freies Foto: eigene SVG-Illustration mit `image_is_illustration: true` – keine Hersteller- oder Shopfotos übernehmen (Urheberrecht). Partnerseite und Teamprofil listen die Geräte automatisch.
 - **Stichworte (`tags`)** verknüpfen alles miteinander: Posts, Termine, Ausstattung, Pressemitteilungen tragen `tags: [...]`, Projekte ihr `event_tag`. `_includes/verknuepft.html` zeigt auf jeder Seite alles mit gemeinsamen Stichworten, `/stichworte/` listet alle. Anzeigenamen in `_data/stichworte.yml`.
 - Stichwort-Konventionen: Kleinbuchstaben mit Bindestrich. Projekt-Ort (`ktg`, `rosalind-franklin-gym`), Herkunft (`35services` für alle von 35services.de übernommenen Beiträge), Besitzer*in eines Geräts (`35services`, `bietenholz`), Gerät (`bambu-lab-a1-mini`, `waermebildkamera` …), Gerätetyp (`3d-drucker`).
+- `/projekte/ideen/` (`projekte/ideen.md`): Linksammlung mit Projektideen; ✅ = schon gebaut. Links immer ohne Tracking-Parameter (`?si=`, `?is=`, `&pp=`, `spm=` …).
+- `/angebot/`: Angebote und „Warum ein Institut?“
 - Navigation steht in `_config.yml` unter `nav`
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
@@ -73,3 +75,13 @@ Falko schreibt Beiträge zuerst auf https://35services.de. Soll ein Beitrag hier
 
 - Seite `/spenden/`: Das Institut ist (noch) keine eigene Rechtsform – Geldspenden laufen über betterplace an die 3D-Druck AG an der KTG (offiziell ein Projekt von 35services e.V.): https://www.betterplace.org/de/projects/138560-3d-druck-und-elektronik-ag
 - Der schwebende „Spenden“-Button (`.badge-donate`) steht in `_layouts/default.html` und erscheint auf allen Seiten außer `/spenden/` selbst; Animation respektiert `prefers-reduced-motion`.
+
+## Transparenz („Institut“)
+
+„Institut“ ist kein geschützter Begriff, aber es gilt das Irreführungsverbot. Deshalb immer klarstellen: Das IfsMB ist **keine Hochschule, keine Behörde und kein Forschungsinstitut**, sondern eine private, ehrenamtliche Initiative von **Falko Richter** ohne eigene Rechtsform. Der Hinweis steht im Footer jeder Seite, auf `/angebot/` und im Impressum („Institut für spontane Makespace Buildung – Falko Richter“). Texte nie so formulieren, als sei das Institut eine offizielle Einrichtung oder besitze Geräte.
+
+## Privatsphäre bei Inhalten
+
+- Keine Wohnadressen/Wohnstraßen von Personen, keine fremden E-Mail-Adressen veröffentlichen (auch wenn sie in Quellen stehen).
+- Auf Fotos auch handschriftliche Namen, Zugangscodes (z. B. Classroom-Links) und Autokennzeichen unkenntlich machen.
+- Fremde Videos (TikTok, YouTube, Instagram) nur verlinken, nie einbetten.
