@@ -1,27 +1,48 @@
 ---
 layout: default
 ---
+{%- if page.standort_partner -%}{%- assign sp = site.data.partners | where: "name", page.standort_partner | first -%}{%- endif -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> · {% endif %}{% if page.kategorie %}{{ page.kategorie }} · {% endif %}{% include besitz.html item=page %}</p>
+      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> · {% elsif page.status == "in-reparatur" %}<span class="badge badge-inquiry">In Reparatur</span> · {% elsif page.status == "im-test" %}<span class="badge badge-inquiry">Im Test</span> · {% endif %}{% if page.kategorie %}{{ page.kategorie }} · {% endif %}{% include besitz.html item=page %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+      {% if page.standort or sp %}
+      <p class="equipment-location">📍 Standort: {% if sp %}<a href="{{ '/partner/' | relative_url }}#{{ sp.name | slugify }}">{{ page.standort | default: sp.name }}</a>{% else %}{{ page.standort }}{% endif %}</p>
+      {% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
     {% if page.image %}
     <div class="gallery gallery-single equipment-hero">
       <a href="{{ page.image | relative_url }}" class="lightbox"><img src="{{ page.thumb | default: page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></a>
     </div>
-    {% if page.image_is_illustration %}<p class="muted small">Illustration – ein Foto folgt, sobald das Gerät da ist.</p>{% endif %}
+    {% if page.image_is_illustration %}<p class="muted small">Illustration – ein Foto folgt{% if page.status == "in-aussicht" %}, sobald das Gerät da ist{% endif %}.</p>{% endif %}
     {% endif %}
     <div class="prose equipment-body">
       {{ content }}
     </div>
+    {% if page.gallery and page.gallery.size > 0 %}
+    <h2>Fotos</h2>
+    <div class="gallery">
+      {% for g in page.gallery %}
+      <a href="{{ g.image | relative_url }}" class="lightbox"><img src="{{ g.thumb | default: g.image | relative_url }}" alt="{{ g.alt }}" loading="lazy"></a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if page.videos and page.videos.size > 0 %}
+    <h2>Videos</h2>
+    {% for v in page.videos %}
+    <figure class="equipment-video">
+      <video class="post-video" controls preload="none" playsinline{% if v.poster %} poster="{{ v.poster | relative_url }}"{% endif %} src="{{ v.src | relative_url }}"></video>
+      {% if v.caption %}<figcaption class="muted small">{{ v.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+    {% endif %}
     {% if page.status == "in-aussicht" %}
     <p class="note">Dieses Gerät ist noch nicht da – wir bekommen es vielleicht. Sobald es so weit ist, aktualisieren wir diese Seite.</p>
     {% else %}
-    <p class="note">Das Institut besitzt (noch) keine eigenen Geräte. Diese Ausstattung gehört {% if page.owner_partner %}unserem Partner{% else %}einem Teammitglied{% endif %} – über {% if page.owner_partner %}ihn{% else %}diese Person{% endif %} können wir sie je nach Absprache nutzen.</p>
+    <p class="note">Das Institut besitzt (noch) keine eigenen Geräte. {% include besitz.html item=page %} – darüber können wir es je nach Absprache nutzen.</p>
     {% endif %}
     {% include verknuepft.html tags=page.tags %}
     <a href="{{ '/ausstattung/' | relative_url }}" class="back-link">← Alle Ausstattung</a>

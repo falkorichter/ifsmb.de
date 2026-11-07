@@ -572,3 +572,6 @@ img { max-width: 100%; height: auto; }
 .donate-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0; }
 .donate ul { list-style: none; padding-left: 0; }
 .donate li { font-size: 1.1rem; margin: .3rem 0; }
+.equipment-location { margin-top: .6rem; font-weight: 600; }
+.equipment-video { margin: 0 0 1.5rem; }
+.equipment-video figcaption { margin-top: .4rem; }

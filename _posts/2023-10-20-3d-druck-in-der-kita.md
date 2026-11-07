@@ -2,6 +2,7 @@
 title: "3D-Druck in der Kita"
 date: 2023-10-20 10:00:00 +0200
 author: falko-richter
+tags: [prusa-mk4]
 ---
 
 [Falko]({{ '/team/falko-richter/' | relative_url }}) hat in der INA Habersaathstraße eine kleine 3D-Druck-Einführung gegeben. Gedruckt wurden Zahnbürstenetuis mit den Namen der Kinder auf dem Deckel.
