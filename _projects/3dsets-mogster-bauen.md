@@ -1,6 +1,6 @@
 ---
 title: "3DSets Mogster bauen"
-summary: Falko baut den Mogster 4x4 Tipper von 3DSets – einen ferngesteuerten Kipper im Maßstab 1:8, fast komplett aus dem 3D-Drucker.
+summary: Falko baut den Mogster 4x4 Tipper von 3DSets – einen ferngesteuerten Kipper im Maßstab 1:8, fast komplett aus dem 3D-Drucker. Anton baut sich auch einen.
 status: aktuell
 persoenlich: true
 start: 2026-08-16
@@ -9,6 +9,7 @@ event_tag: mogster
 tags: [mogster, rc-modellbau]
 team:
   - falko-richter
+  - anton
 updates:
   - datum: 2026-08-16
     text: >-
@@ -20,11 +21,16 @@ updates:
       im Portalgetriebe ist gebrochen. Abhilfe schafft ein verstärktes Zahnrad:
       [3D Sets Mogster Portal Gear Reinforced](https://www.printables.com/model/1861933-3d-sets-mogster-portal-gear-reinforced)
       auf Printables. [Fotos](#erste-reparatur)
+  - datum: 2026-11-07
+    text: >-
+      **Anton baut sich auch einen Mogster** – damit sind es bald drei. [Mehr](#antons-mogster)
 ---
 
 Falko baut den **[Mogster 4x4 Tipper](https://3dsets.com/product/model-20-mogster-4x4-tipper/)** von 3DSets: einen ferngesteuerten Geländekipper im **Maßstab 1:8**.
 
 Die Baupläne hat Falko gekauft – und sie seinem Papa **ganz uneigennützig zum Geburtstag geschenkt**. 😉
+
+Auch [Anton]({{ '/team/anton/' | relative_url }}) aus dem Team baut sich einen Mogster – [mehr dazu unten](#antons-mogster).
 
 ## Was den Mogster ausmacht
 
@@ -70,3 +76,7 @@ Für die Zukunft gibt es eine verstärkte Version des Zahnrads, die noch eingeba
   <a href="/assets/images/projekte/3dsets-mogster-bauen/reparatur/09.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/reparatur/09-600w.jpg" alt="Portalgehäuse mit einem roten Kreuz markiert, die Welle schaut heraus" loading="lazy"></a>
   <a href="/assets/images/projekte/3dsets-mogster-bauen/reparatur/10.jpg" class="lightbox"><img src="/assets/images/projekte/3dsets-mogster-bauen/reparatur/10-600w.jpg" alt="Das Portalgehäuse mit der Welle, daneben die gelbe Felge" loading="lazy"></a>
 </div>
+
+## Antons Mogster {#antons-mogster}
+
+[Anton]({{ '/team/anton/' | relative_url }}) aus dem Team baut sich ebenfalls einen Mogster. <span class="todo">[Farbe, Baufortschritt, Fotos]</span>
