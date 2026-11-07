@@ -86,3 +86,5 @@ exclude:
   - CLAUDE.md
   - LICENSE
   - .pages.yml
+  - todo.md
+  - NACHTSCHICHT.md
