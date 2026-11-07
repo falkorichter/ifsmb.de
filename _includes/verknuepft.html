@@ -13,6 +13,7 @@
     {%- assign hit = false -%}
     {%- if gk == "projects" -%}
       {%- if it.event_tag and my contains it.event_tag -%}{%- assign hit = true -%}{%- endif -%}
+      {%- for t in it.tags -%}{%- if my contains t -%}{%- assign hit = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
     {%- else -%}
       {%- for t in it.tags -%}{%- if my contains t -%}{%- assign hit = true -%}{%- break -%}{%- endif -%}{%- endfor -%}
     {%- endif -%}

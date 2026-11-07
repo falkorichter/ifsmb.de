@@ -65,6 +65,7 @@ layout: default
       {% endfor %}
     </ul>
     {% endif %}
+    {% if page.tags and page.tags.size > 0 %}{% include verknuepft.html tags=page.tags %}{% endif %}
     <a href="{{ '/projekte/' | relative_url }}" class="back-link">← Alle Projekte</a>
   </article>
 </main>
