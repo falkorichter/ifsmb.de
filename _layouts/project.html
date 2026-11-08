@@ -42,7 +42,7 @@ layout: default
           <span class="meta update-date">{{ u.datum | date: "%d.%m.%Y" }}</span>
           <div class="update-text">{{ u.text | markdownify }}</div>
         </li>
-        {%- else %}{%- assign po = tagged_posts[idx] -%}{%- assign pa = site.team | where: "slug", po.author | first %}
+        {%- else %}{%- assign po = tagged_posts[idx] -%}{%- assign pa = nil -%}{%- if po.author -%}{%- assign pa = site.team | where: "slug", po.author | first -%}{%- endif %}
         <li class="update-item update-post">
           <span class="meta update-date">{{ po.date | date: "%d.%m.%Y" }}{% if pa %} · <a href="{{ pa.url | relative_url }}">{{ pa.title }}</a>{% endif %}{% if po.persoenlich and page.persoenlich != true %} · <span class="badge badge-personal">Persönlich</span>{% endif %}</span>
           <div class="update-text">
