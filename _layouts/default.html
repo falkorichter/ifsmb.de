@@ -49,6 +49,14 @@
   {{ content }}
   {% unless page.suche == false %}</div>{% endunless %}
 
+  {% if site.repository and page.path %}
+  {%- assign schmale_layouts = "post,project,member,event,equipment,press" | split: "," -%}
+  <div class="container edit-page{% if schmale_layouts contains page.layout %} narrow{% endif %}" data-pagefind-ignore>
+    <a class="btn btn-ghost btn-small" href="https://github.com/{{ site.repository }}/edit/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener" title="Quelldatei {{ page.path }} auf GitHub bearbeiten">✏️ Diese Seite bearbeiten</a>
+    <a class="edit-page-source" href="https://github.com/{{ site.repository }}/blob/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener"><code>{{ page.path }}</code></a>
+  </div>
+  {% endif %}
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <p><strong>{{ site.title }}</strong><br>{{ site.description }}</p>

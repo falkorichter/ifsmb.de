@@ -164,6 +164,13 @@ img { max-width: 100%; height: auto; }
 
 .btn:hover { color: var(--ink); transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
 .btn-ghost { background: var(--paper); }
+.btn-small { padding: .4rem .8rem; font-size: .85rem; box-shadow: 3px 3px 0 var(--ink); }
+.btn-small:hover { box-shadow: 1px 1px 0 var(--ink); }
+
+.edit-page { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 3rem auto 2rem; }
+.edit-page-source { color: var(--muted); font-size: .8rem; text-decoration: none; overflow-wrap: anywhere; }
+.edit-page-source:hover { color: var(--accent-2); }
+.edit-page-source code { font-family: var(--mono); }
 
 .section { padding: 3rem 1.25rem 0; }
 .section:last-of-type { padding-bottom: 4rem; }

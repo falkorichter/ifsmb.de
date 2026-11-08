@@ -36,6 +36,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - Navigation steht in `_config.yml` unter `nav`; Einträge mit `children` werden zu einem Untermenü (z. B. „Wir“ mit Projekte, Angebot, Ausstattung, Team)
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
 - **Suche** `/suche/` mit Pagefind: Index entsteht erst nach `jekyll build` im Workflow `.github/workflows/pages.yml` (`npx pagefind --site _site`; Pages-Source = „GitHub Actions“). Indexiert wird alles im `data-pagefind-body`-Wrapper aus `_layouts/default.html`, Filter „Bereich“/„Stichwort“ aus `_includes/suche-meta.html`. Reine Übersichtsseiten bekommen `suche: false`. Pagefind-Version im README und Workflow gleich halten.
+- **Bearbeiten-Button**: `_layouts/default.html` zeigt unter jeder Seite „✏️ Diese Seite bearbeiten“ → GitHub-Editor für `page.path` (Repo/Branch in `_config.yml` unter `repository`/`branch`)
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
 
 ## Konventionen
@@ -87,3 +88,13 @@ Falko schreibt Beiträge zuerst auf https://35services.de. Soll ein Beitrag hier
 - Keine Wohnadressen/Wohnstraßen von Personen, keine fremden E-Mail-Adressen veröffentlichen (auch wenn sie in Quellen stehen).
 - Auf Fotos auch handschriftliche Namen, Zugangscodes (z. B. Classroom-Links) und Autokennzeichen unkenntlich machen.
 - Fremde Videos (TikTok, YouTube, Instagram) nur verlinken, nie einbetten.
+
+## Branches und Pull Requests
+
+Wer einen Branch pusht (nicht `main`), öffnet dazu immer einen Pull Request mit `gh pr create` – auf Deutsch und mit Vorschaubildern:
+
+1. `bundle exec jekyll build`, dann Screenshots der betroffenen Seiten:
+   `python3 -I _scripts/pr_vorschau.py /pfad/der/seite/ …` (Seitenanfang) oder mit `--unten` (Ausschnitt über dem Footer, z. B. für Änderungen am Seitenende). Das Skript nimmt Desktop (1280 px) und Handy (390 px) mit Headless-Chrome auf, lädt die Bilder auf den Branch `pr-previews` (Ordner = Branchname, nie in den Feature-Branch) und gibt eine Markdown-Tabelle für die PR-Beschreibung aus.
+2. Bilder vor dem Hochladen selbst ansehen (`--nur-lokal` speichert nur nach `_pr-vorschau/`, in `.gitignore`). Es gelten dieselben Regeln wie auf der Seite: keine erkennbaren Kindergesichter, keine Kennzeichen, Namen oder Zugangscodes.
+3. PR-Beschreibung: **Was** sich ändert, **warum**, **wie geprüft** (Build, Link-Check, angesehene Seiten), dann die Vorschau-Tabelle. Titel wie die Commit-Message; die Makespace-Regel gilt auch hier.
+4. Bei Inhaltsänderungen reicht ein Screenshot der geänderten Seite. Ohne sichtbare Änderung (Workflow, Skripte) keine Vorschau – dann kurz sagen, warum.
