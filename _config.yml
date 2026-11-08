@@ -94,6 +94,7 @@ exclude:
   - vendor
   - README.md
   - CLAUDE.md
+  - CHANGELOG.md
   - LICENSE
   - .pages.yml
   - todo.md

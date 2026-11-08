@@ -89,6 +89,10 @@ Falko schreibt Beiträge zuerst auf https://35services.de. Soll ein Beitrag hier
 - Auf Fotos auch handschriftliche Namen, Zugangscodes (z. B. Classroom-Links) und Autokennzeichen unkenntlich machen.
 - Fremde Videos (TikTok, YouTube, Instagram) nur verlinken, nie einbetten.
 
+## Changelog
+
+`CHANGELOG.md` folgt [Keep a Changelog](https://keepachangelog.com/de/1.0.0/), auf Deutsch. Jede nennenswerte Änderung kommt mit in den Commit: zuerst unter `## [Unreleased]`, sortiert nach `### Hinzugefügt`, `### Geändert`, `### Veraltet`, `### Entfernt`, `### Behoben`, `### Sicherheit`. Die Seite hat keine Versionsnummern: Beim Push nach `main` wird `[Unreleased]` zum Tagesabschnitt `## [JJJJ-MM-TT]` (neueste oben, Vergleichslinks unten pflegen). Einträge für Menschen schreiben, nicht Commit-Messages kopieren; Tippfehler-Korrekturen und reine Merges weglassen. `CHANGELOG.md` steht in `exclude` und wird nicht ausgeliefert.
+
 ## Branches und Pull Requests
 
 Wer einen Branch pusht (nicht `main`), öffnet dazu immer einen Pull Request mit `gh pr create` – auf Deutsch und mit Vorschaubildern:
