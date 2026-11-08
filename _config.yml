@@ -7,6 +7,10 @@ lang: de
 timezone: Europe/Berlin
 future: true
 
+# Bearbeiten-Button (_layouts/default.html)
+repository: falkorichter/ifsmb.de
+branch: main
+
 markdown: kramdown
 permalink: /news/:year/:month/:day/:title/
 

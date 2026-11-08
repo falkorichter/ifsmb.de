@@ -36,6 +36,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - Navigation steht in `_config.yml` unter `nav`; Einträge mit `children` werden zu einem Untermenü (z. B. „Wir“ mit Projekte, Angebot, Ausstattung, Team)
 - `future: true` in `_config.yml`, sonst baut Jekyll Termine mit Datum in der Zukunft nicht
 - **Suche** `/suche/` mit Pagefind: Index entsteht erst nach `jekyll build` im Workflow `.github/workflows/pages.yml` (`npx pagefind --site _site`; Pages-Source = „GitHub Actions“). Indexiert wird alles im `data-pagefind-body`-Wrapper aus `_layouts/default.html`, Filter „Bereich“/„Stichwort“ aus `_includes/suche-meta.html`. Reine Übersichtsseiten bekommen `suche: false`. Pagefind-Version im README und Workflow gleich halten.
+- **Bearbeiten-Button**: `_layouts/default.html` zeigt unter jeder Seite „✏️ Diese Seite bearbeiten“ → GitHub-Editor für `page.path` (Repo/Branch in `_config.yml` unter `repository`/`branch`)
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
 
 ## Konventionen
