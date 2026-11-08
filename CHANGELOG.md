@@ -13,6 +13,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Termine mit Personen verknüpfen (`team:`): Teamprofile zeigen kommende und vergangene Termine, die Terminseite zeigt „Dabei aus dem Team“. Alle bisherigen Termine sind eingetragen (Falko war nicht beim Ausflug zu happybite).
 - Projektidee „Tarmo5 bauen?“: ein 3D-gedrucktes RC-Auto mit Links zu Printables, YouTube und Reddit, auch in der Ideen-Linksammlung.
 - Termin und Beitrag „Chaos macht Kita – 3D Druck für Kinder 1.0“: Falkos 3D-Druck-Livestream für Kita-Kinder vom 21.05.2020 (Terminseite mit Vorschaubild der Aufzeichnung), Beitrag übernommen aus seinem Blog volkersfreunde.
+- Kalender: „Chaos macht Kita (3D-Druck)“ – Falkos 3D-Druck-Einführung in der INA Habersaathstraße am 20.10.2023, verlinkt mit dem Beitrag „3D-Druck in der Kita“.
 
 ### Geändert
 
