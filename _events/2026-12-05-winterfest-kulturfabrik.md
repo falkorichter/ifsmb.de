@@ -9,6 +9,6 @@ summary: Winterfest in der Kulturfabrik Moabit – gemeinsam mit unserem Partner
 
 Wir feiern das Winterfest in der Kulturfabrik Moabit zusammen mit [35services](https://35services.de/), der Nachbarschaftswerkstatt im Haus.
 
-Mit dabei: 3D-Druck – wir zeigen vor Ort 3D-Drucker.
+Mit dabei: 3D-Druck – wir zeigen vor Ort 3D-Drucker. Vielleicht drucken wir wieder Schneepersonen. [github.com/35services/3d/tree/main/weihnachten](https://github.com/35services/3d/tree/main/weihnachten)
 
 <span class="todo">[Programm, Ende und Details ergänzen.]</span>
