@@ -6,7 +6,7 @@ location: "Kurt-Tucholsky-Grundschule, Rathenower Str. 18, 10559 Berlin"
 location_url: https://kurt-tucholsky-grundschule.de/
 summary: Der spendenfinanzierte 4-Kopf-Drucker wird geliefert, von den Kindern der AG aufgebaut und druckt über Nacht seinen ersten 4-Farb-Drachen.
 tags: [ktg, u1, 35services]
-team: [falko-richter]
+team: [falko-richter, gregor-dill, frieder-euteneuer]
 ---
 
 Am 16. Februar 2026 wurde unser [Snapmaker U1]({{ '/ausstattung/snapmaker-u1/' | relative_url }}) geliefert und eingeweiht – der 4-Kopf-4-Farb-4-Material-Drucker der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}), komplett über Spenden finanziert.
