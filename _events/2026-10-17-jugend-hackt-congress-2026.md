@@ -7,7 +7,7 @@ location: "Theater an der Parkaue, Parkaue 29, 10367 Berlin"
 location_url: https://jugendhackt.org/events/jugend-hackt-congress/
 summary: Falko war beim Jugend hackt Congress zum ersten Mal als Mentor dabei und hat nebenbei den Makespace mit 3D-Druckern und AxiDraw mitbetreut.
 tags: [jugend-hackt, u1, axidraw]
-team: [falko-richter]
+team: [falko-richter, anton]
 ---
 
 Beim [Jugend hackt Congress 2026](https://jugendhackt.org/events/jugend-hackt-congress/) im Theater an der Parkaue war Falko zum ersten Mal als Mentor bei Jugend hackt dabei – ein Wochenende mit Talks, Workshops und Projekten für junge Menschen zwischen 14 und 21 Jahren.
