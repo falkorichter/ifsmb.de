@@ -13,6 +13,8 @@ Der **Treffpunkt Modellbau** sind die Havelländischen Modellbautage im MAFZ in 
 
 **Wir sind dabei – hoffentlich mit Fahrzeugen:** Falko ist mit den Veranstaltern in Kontakt und will seine **Modellbau-Autos** mitbringen. Und **„Opa Andi“** – Falkos Papa – will mit seinem **3D-gedruckten Mogster** vorbeikommen.
 
+**Stand der Dinge:** Falko hat einen Anmeldebogen als Aussteller angefragt. Wir wissen immer noch nicht, wer die Offroad-Crew ist.
+
 <span class="todo">[Wo genau stehen wir, welche Fahrzeuge kommen mit? – Details folgen.]</span>
 
 Mehr zur Messe: [Treffpunkt Modellbau bei messen.de](https://www.messen.de/de/17933/paaren-im-glien/treffpunkt-modellbau/info)
