@@ -47,6 +47,11 @@ content:
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
         type: string
         list: true
+      - name: team
+        label: Dabei aus dem Team (Kürzel, z. B. falko-richter)
+        description: Der Termin erscheint dann im Teamprofil unter „Termine“.
+        type: string
+        list: true
       - name: location
         label: Ort
         type: string

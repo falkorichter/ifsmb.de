@@ -484,6 +484,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .event-gallery { margin-top: 2rem; }
 .album-link { margin: 1.25rem 0; }
 .event-project { margin-top: 1.5rem; font-weight: 600; }
+.event-team { margin-top: 1.5rem; }
 
 .tag-list { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
 .tag-list a { display: inline-block; font-family: var(--mono); font-size: .8rem; text-decoration: none; color: var(--ink); background: var(--line); border-radius: 999px; padding: .15rem .65rem; }

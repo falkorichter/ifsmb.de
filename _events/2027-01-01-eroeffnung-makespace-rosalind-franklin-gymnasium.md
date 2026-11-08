@@ -8,6 +8,7 @@ date_label: "Januar 2027 – genauer Termin folgt"
 location: "Rosalind-Franklin-Gymnasium, Turmstraße 75A, 10551 Berlin"
 location_url: https://rosalind-franklin-gymnasium.de/
 summary: Details folgen. Im Januar eröffnen wir den Makespace mit 6 Druckern, einer 3D-Druck-AG und 2 Schneidplottern am Rosalind-Franklin-Gymnasium.
+team: [falko-richter, frieder-euteneuer]
 ---
 
 Details folgen. Im Januar eröffnen wir den Makespace mit 6 Druckern, einer 3D-Druck-AG und 2 Schneidplottern am [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/).
