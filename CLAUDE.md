@@ -7,7 +7,10 @@ Website des „Institut für spontane Makespace Buildung“. Jekyll 4, GitHub Pa
 ```bash
 bundle exec jekyll build    # → _site/
 bundle exec jekyll serve    # http://localhost:4000
+ruby _scripts/check_site.rb # nach dem Build: tote Links, verwaiste Seiten (--extern: externe Links)
 ```
+
+Nach neuen Seiten/Posts den Link-Check laufen lassen; er läuft auch im Pages-Workflow und stoppt das Deployment bei Fehlern. Externe Links, die dauerhaft tot sind, nicht löschen, sondern in Markdown mit `{: .link-tot}` hinter dem Link markieren (`[Text](url){: .link-tot}`): Das Layout hängt 🪦 an und erklärt das Symbol unten auf der Seite; `--extern` prüft markierte Links nicht mehr. Private Repos („noch privat“) nicht markieren. Das gilt nur für Links, die früher funktioniert haben (ältere Beiträge, übernommene Texte) – einen frisch recherchierten Link, der schon beim Einfügen tot ist, einfach entfernen.
 
 Ruby 3.1.2 (`.ruby-version`). `_site/` niemals committen.
 

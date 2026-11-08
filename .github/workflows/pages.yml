@@ -44,6 +44,8 @@ jobs:
           JEKYLL_ENV: production
       # Full-text search index for /suche/ (Pagefind reads the built HTML → _site/pagefind/)
       - run: npx -y pagefind@1.5.2 --site _site
+      # Tote interne Links, fehlende Anker und nicht erreichbare Seiten → Build schlägt fehl
+      - run: ruby _scripts/check_site.rb
       - uses: actions/upload-pages-artifact@v3
 
   deploy:

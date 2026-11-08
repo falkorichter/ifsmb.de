@@ -1,0 +1,20 @@
+{%- comment -%}
+  Erklärung für tote Links (Markdown: [Text](url){: .link-tot}) unten auf der Seite.
+  Liest die Links aus dem fertigen HTML: kramdown schreibt <a href="…" class="link-tot">Text</a>.
+  Pro Link: alte Adresse + „neuen Link suchen“ (Suche nach der alten Adresse).
+  Aufruf: {% include link-tot-hinweis.html html=content %}
+{%- endcomment -%}
+{%- assign teile = include.html | split: 'class="link-tot"' -%}
+{%- assign anzahl = teile.size | minus: 1 -%}
+<div class="container"><div class="link-tot-hinweis">
+  <p>🪦 = Dieser Link funktioniert nicht mehr (die Seite ist offline oder wurde entfernt). Wir lassen ihn stehen, damit nachvollziehbar bleibt, worauf sich der Text bezieht.</p>
+  <ul>
+  {%- for i in (1..anzahl) -%}
+    {%- assign vorher = teile[forloop.index0] -%}
+    {%- assign url = vorher | split: 'href="' | last | split: '"' | first -%}
+    {%- assign roh = url | replace: '&amp;', '&' -%}
+    {%- assign text = teile[i] | split: '</a>' | first | split: '>' | last | strip_html | strip -%}
+    <li>{% if text != roh %}{{ text }}: {% endif %}<code>{{ url }}</code> – <a href="https://duckduckgo.com/?q={{ roh | url_encode }}" target="_blank" rel="noopener">neuen Link suchen</a> · <a href="https://web.archive.org/web/*/{{ url }}" target="_blank" rel="noopener">alte Version im Internet Archive</a></li>
+  {%- endfor -%}
+  </ul>
+</div></div>

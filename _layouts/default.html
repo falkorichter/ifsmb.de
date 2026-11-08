@@ -47,6 +47,7 @@
   {% unless page.suche == false %}<div class="search-body" data-pagefind-body>
   {% include suche-meta.html page=page %}{% endunless %}
   {{ content }}
+  {% if content contains "link-tot" %}{% include link-tot-hinweis.html html=content %}{% endif %}
   {% unless page.suche == false %}</div>{% endunless %}
 
   {% if site.repository and page.path %}

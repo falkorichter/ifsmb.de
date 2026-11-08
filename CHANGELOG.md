@@ -6,7 +6,15 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- Link-Check `_scripts/check_site.rb`: findet tote interne Links, fehlende Anker und verwaiste Seiten; läuft im Pages-Workflow und stoppt das Deployment bei Fehlern (`--extern` prüft zusätzlich externe Links).
+- Dauerhaft tote externe Links werden mit 🪦 markiert und unten auf der Seite erklärt.
+
 ### Geändert
+
+- Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
+- Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
 
 - Team: Falkos Profilfoto wieder ohne verpixelte Gesichter im Hintergrund (Ausschnitt aus dem Foto im Beitrag zum Jugend Hackt Congress 2026).
 

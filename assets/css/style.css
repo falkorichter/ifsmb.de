@@ -246,6 +246,13 @@ img { max-width: 100%; height: auto; }
 
 .todo { background: #ffe8e1; color: #a12a0c; padding: 0 .3em; border-radius: 4px; font-family: var(--mono); font-size: .9em; }
 
+/* Tote Links: Markierung im Text, Erklärung unten auf der Seite (_layouts/default.html) */
+a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decoration: none; display: inline-block; margin-left: .2em; }
+.link-tot-hinweis { color: var(--muted); font-size: .9em; border-top: 1px solid var(--line); margin-top: 2.5rem; padding-top: .8rem; }
+.link-tot-hinweis p { margin: 0 0 .4rem; }
+.link-tot-hinweis ul { margin: 0; padding-left: 1.2rem; }
+.link-tot-hinweis code { font-size: .9em; overflow-wrap: anywhere; }
+
 .back-link { display: inline-block; margin-top: 2.5rem; font-weight: 600; }
 
 .post-list { list-style: none; }

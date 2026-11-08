@@ -87,6 +87,10 @@ nav:
   - title: Suche
     url: /suche/
 
+# Pagefind-Index (_site/pagefind/) beim Neubauen nicht löschen – lokal mit `npx pagefind --site _site` erzeugt
+keep_files:
+  - pagefind
+
 exclude:
   - Gemfile
   - Gemfile.lock

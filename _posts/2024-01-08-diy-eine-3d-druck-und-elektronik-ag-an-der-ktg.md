@@ -123,7 +123,7 @@ Logo auf die Platine
 
 - wir haben WLAN und richten den Drucker in der Schule ein
 - Wir reden über Sponsoren und sammeln Bargeld von den Eltern ein. Ein Kind wird Kassenwart 🎉
-- Wir drucken mit [https://www.prusa3d.com/de/produkt/colorfabb-varioshore-tpu-natural-filament-700g/](https://www.prusa3d.com/de/produkt/colorfabb-varioshore-tpu-natural-filament-700g/) und schäumen ausversehen – dann wechseln wir auf 195 Grad und es werden Räder und Riemen gedruckt.
+- Wir drucken mit [https://www.prusa3d.com/de/produkt/colorfabb-varioshore-tpu-natural-filament-700g/](https://www.prusa3d.com/de/produkt/colorfabb-varioshore-tpu-natural-filament-700g/){: .link-tot} und schäumen ausversehen – dann wechseln wir auf 195 Grad und es werden Räder und Riemen gedruckt.
 
 Leider hat die Kamera nicht durchgehalten, wir haben nur dieses Foto hier ->
 - Druck hat gut an der strukturierten Platte gehalten

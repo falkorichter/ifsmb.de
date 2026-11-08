@@ -20,4 +20,4 @@ Der FLSUN V400 ist ein sogenannter Delta-Drucker: Statt den Druckkopf über Achs
 - **Extruder:** Direct Drive, Düse bis 300 °C
 - **Druckbett:** beheizt, bis 110 °C
 
-Quellen: [Test bei Tom's Hardware](https://www.tomshardware.com/reviews/flsun-v400-review), [Test bei 3DPrintBeginner](https://3dprintbeginner.com/flsun-v400-review/), [Datenblatt von FLSUN](https://store.flsun3d.com/blogs/news/flusn-v400-more-detailed-specifications)
+Quellen: [Test bei Tom's Hardware](https://www.tomshardware.com/reviews/flsun-v400-review), [Test bei 3DPrintBeginner](https://3dprintbeginner.com/flsun-v400-review/)

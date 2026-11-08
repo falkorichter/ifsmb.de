@@ -11,6 +11,15 @@ bundle exec jekyll serve   # http://localhost:4000
 
 Benötigt Ruby 3.1.2 (siehe `.ruby-version`).
 
+### Links prüfen
+
+```bash
+bundle exec jekyll build && ruby _scripts/check_site.rb            # tote interne Links, fehlende Anker, verwaiste Seiten
+ruby _scripts/check_site.rb --extern                                # zusätzlich externe Links (langsam, 403/429 = meist Bot-Sperre)
+```
+
+„Verwaist“ heißt: von der Startseite aus über keinen Link (Menü, Listen, Texte) erreichbar. Der Pages-Workflow führt die interne Prüfung bei jedem Push aus und bricht bei Fehlern ab.
+
 ## Inhalte pflegen
 
 | Was | Wo | Hinweise |
@@ -35,10 +44,10 @@ Alle Termine stehen als Abo unter **https://ifsmb.de/kalender.ics** (bzw. `webca
 
 ## Suche
 
-Die Suche (`/suche/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus dem fertigen HTML nach `jekyll build` erzeugt (macht der Pages-Workflow) und liegt unter `/pagefind/` – alles lokal, keine externen Ressourcen. `jekyll serve` hat keinen Index; zum Ausprobieren:
+Die Suche (`/suche/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus dem fertigen HTML nach `jekyll build` erzeugt (macht der Pages-Workflow) und liegt unter `/pagefind/` – alles lokal, keine externen Ressourcen. `jekyll serve` erzeugt keinen Index. Lokal einfach neben dem laufenden `jekyll serve` einmal ausführen (und nach größeren Änderungen wiederholen) – `keep_files: [pagefind]` in `_config.yml` sorgt dafür, dass Jekyll den Index beim Neubauen nicht löscht:
 
 ```sh
-bundle exec jekyll build && npx -y pagefind@1.5.2 --site _site --serve   # http://localhost:1414/suche/
+npx -y pagefind@1.5.2 --site _site   # danach funktioniert http://localhost:4000/suche/
 ```
 
 **Wichtig:** Unter Settings → Pages → Build and deployment muss „Source: GitHub Actions“ stehen. Bei „Deploy from a branch“ baut GitHub zusätzlich selbst und überschreibt die Version mit Index – `/pagefind/` liefert dann 404 und die Suche zeigt nur „Der Suchindex fehlt“. Der Workflow bricht in diesem Fall mit einer Fehlermeldung ab.
