@@ -383,6 +383,15 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .event-month { display: block; font-family: var(--mono); font-size: .75rem; }
 .event-body { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
 .event-title { font-size: 1.1rem; }
+.team-faces { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
+.team-face {
+  width: 1.25rem; height: 1.25rem; border-radius: 50%; object-fit: cover; flex: none;
+  background: var(--line); box-shadow: 0 0 0 1px var(--line);
+}
+.team-face-initials {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: .55rem; font-weight: 700; line-height: 1; text-transform: uppercase; color: var(--ink-soft);
+}
 .event-location { font-weight: 600; margin-bottom: 1.5rem; }
 
 .original-note {

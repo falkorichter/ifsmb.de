@@ -3,6 +3,7 @@ title: Philipp Schalldach
 role: Freund & Maker
 order: 2
 photo: /assets/images/team/philipp-schalldach-480w.jpg
+photo_icon: /assets/images/team/philipp-schalldach-48w.jpg
 photo_2x: /assets/images/team/philipp-schalldach-960w.jpg
 links:
   - title: Facebook

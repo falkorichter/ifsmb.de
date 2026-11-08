@@ -3,6 +3,7 @@ title: Gregor Dill
 role: AG-Co-Host KTG
 order: 3
 photo: /assets/images/team/gregor-dill-480w.jpg
+photo_icon: /assets/images/team/gregor-dill-48w.jpg
 photo_2x: /assets/images/team/gregor-dill-960w.jpg
 links:
   - title: XING

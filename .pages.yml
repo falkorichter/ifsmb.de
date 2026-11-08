@@ -231,6 +231,10 @@ content:
       - name: photo_2x
         label: Foto in doppelter Auflösung (ca. 960 px, optional)
         type: image
+      - name: photo_icon
+        label: Mini-Foto für den Kalender (quadratisch, 48 px, optional)
+        description: Rundes Gesicht auf der Kalenderseite. Ohne Mini-Foto wird das normale Foto verkleinert.
+        type: image
       - name: links
         label: Links
         type: object
