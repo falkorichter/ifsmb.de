@@ -9,6 +9,7 @@ event_tag: ktg
 team:
   - falko-richter
   - gregor-dill
+  - jan
 partners:
   - Kurt-Tucholsky-Grundschule
   - 35 services e. V.
