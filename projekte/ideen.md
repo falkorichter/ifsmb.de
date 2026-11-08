@@ -32,6 +32,7 @@ Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projekte
 - **Scarab** von milli – ein geniales Projekt ([milli.wtf](https://www.milli.wtf/products/scarab))
 - **1:8-Auto** – [Instagram-Reel](https://www.instagram.com/reel/DfQVfaNo42B/), dasselbe als [YouTube-Short](https://youtube.com/shorts/6jFfDikJ6gw)
 - **Print-in-Place-RC-Auto** – in einem Stück gedruckt ([Video](https://youtu.be/196DbFc4tKE))
+- **Tarmo5** – ein 3D-gedrucktes RC-Auto, jetzt als [Projektidee]({{ '/projekte/tarmo5/' | relative_url }}) ([Printables](https://www.printables.com/model/348623-3d-printed-rc-car-tarmo5), [Video](https://www.youtube.com/watch?v=kef8Hit1EH0), [Diskussion auf Reddit](https://www.reddit.com/r/EngineeringNS/comments/zvellk/tarmo5/))
 - **DKS-Pro** – ein komplett 3D-gedrucktes 1:10-Chassis ([Video](https://m.youtube.com/watch?v=KSIvDbwBDEk))
 - **CRAMER Truggy RC 4x4** – komplett 3D-gedruckt ([Modell auf Cults](https://cults3d.com/es/modelo-3d/juegos/cramer-truggy-rc-4x4-full-3d-printed), [Video](https://www.youtube.com/watch?v=pMaItQeN5LY)), dazu ein [Body-Kit](https://cults3d.com/es/modelo-3d/juegos/body-kit-cramer) ([Video, Spanisch](https://youtu.be/nkvjXQsBAxw))
 - **3DSets Bamboo 4x4** – ein komplett 3D-gedruckter 1:8-Truck ([Video](https://www.youtube.com/watch?v=yoFo4Qadtdk)) – wow!
