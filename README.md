@@ -41,6 +41,8 @@ Die Suche (`/suche/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus
 bundle exec jekyll build && npx -y pagefind@1.5.2 --site _site --serve   # http://localhost:1414/suche/
 ```
 
+**Wichtig:** Unter Settings → Pages → Build and deployment muss „Source: GitHub Actions“ stehen. Bei „Deploy from a branch“ baut GitHub zusätzlich selbst und überschreibt die Version mit Index – `/pagefind/` liefert dann 404 und die Suche zeigt nur „Der Suchindex fehlt“. Der Workflow bricht in diesem Fall mit einer Fehlermeldung ab.
+
 Indexiert wird der Seiteninhalt (`data-pagefind-body` in `_layouts/default.html`) mit den Filtern „Bereich“ und „Stichwort“ (`_includes/suche-meta.html`). Übersichtsseiten tragen `suche: false` und fehlen im Index; der Block „Verknüpft“ wird ignoriert.
 
 ## CMS (Pages CMS)
