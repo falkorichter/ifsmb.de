@@ -50,6 +50,35 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
+    {%- assign member_events = site.events | where_exp: "e", "e.team contains page.slug" | sort: "start" -%}
+    {%- if member_events.size > 0 -%}
+    {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+    {%- assign ev_up = "" | split: "" -%}
+    {%- assign ev_past = "" | split: "" -%}
+    {%- for e in member_events -%}
+      {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+      {%- if end_s >= now_s %}{% assign ev_up = ev_up | push: e %}{% else %}{% assign ev_past = ev_past | unshift: e %}{% endif -%}
+    {%- endfor %}
+    <h2 id="termine">Termine</h2>
+    <h3 class="cal-heading" id="member-up-heading"{% if ev_up.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
+    <ul class="event-list" id="member-events-up">
+      {%- for e in ev_up %}{% include termin-karte.html event=e %}{% endfor %}
+    </ul>
+    <h3 class="cal-heading" id="member-past-heading"{% if ev_past.size == 0 %} hidden{% endif %}>Vergangene Termine</h3>
+    <ul class="event-list event-list-past" id="member-events-past">
+      {%- for e in ev_past %}{% include termin-karte.html event=e %}{% endfor %}
+    </ul>
+    <script>
+      (function () {
+        var now = Date.now() / 1000, up = document.getElementById('member-events-up'), past = document.getElementById('member-events-past');
+        Array.prototype.slice.call(up.children).reverse().forEach(function (li) {
+          if (+li.dataset.end < now) past.insertBefore(li, past.firstChild);
+        });
+        document.getElementById('member-up-heading').hidden = up.children.length === 0;
+        document.getElementById('member-past-heading').hidden = past.children.length === 0;
+      })();
+    </script>
+    {%- endif %}
     {% assign my_eq = site.equipment | where: "owner_team", page.slug %}
     {% if my_eq.size > 0 %}
     <h2>Ausstattung</h2>

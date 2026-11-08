@@ -7,6 +7,7 @@ location: "STATION Berlin, Luckenwalder Str. 4–6, 10963 Berlin"
 location_url: https://www.allaboutautomation.de/en/berlin/
 tags: [rosalind-franklin-gym]
 summary: Fachmesse für Automatisierung, Robotik und Digitalisierung. Falko war 2026 dort und plant, wieder hinzugehen – vielleicht dürfen diesmal auch Kinder mit.
+team: [falko-richter]
 ---
 
 Die [all about automation](https://www.allaboutautomation.de/en/berlin/) ist eine Fachmesse für industrielle Automatisierung, Robotik und Digitalisierung in der STATION Berlin.

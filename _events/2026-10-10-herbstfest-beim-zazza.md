@@ -15,6 +15,7 @@ gallery:
   - image: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/gebasteltes.jpg
     thumb: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/gebasteltes-600w.jpg
     alt: "Kastanienfigur mit 3D-gedrucktem rosa Hut und Stiefeln"
+team: [falko-richter]
 ---
 
 Herbstfest beim Zazza mit Kastanienbasteln – mit live 3D-Druck von Zubehör: Hüte, Stiefel und mehr für eure Kastanienfiguren kamen direkt aus dem Drucker.

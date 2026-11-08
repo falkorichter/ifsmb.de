@@ -9,6 +9,7 @@ gallery:
   - image: /assets/images/kalender/2025-12-15-ausflug-zu-philippe-bietenholz/01.jpg
     thumb: /assets/images/kalender/2025-12-15-ausflug-zu-philippe-bietenholz/01-600w.jpg
     alt: "Bei HeartLabs: ein großer 3D-gedruckter Weihnachtsbaum, drumherum die Kinder (Gesichter unkenntlich gemacht)"
+team: [falko-richter, gregor-dill]
 ---
 
 Ausflug zum Berliner Designer [Philippe Bietenholz](https://bietenholz.design/) ([Instagram: @phils.products](https://www.instagram.com/phils.products/)) und zu HeartLabs ([Instagram: @heartlabs_official](https://www.instagram.com/heartlabs_official/), [Printables: @AdditiveProduct](https://www.printables.com/@AdditiveProduct)).
