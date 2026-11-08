@@ -44,6 +44,7 @@ Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projekte
 - **Trophy Truck „ARES“** im Maßstab 1:9 ([Video](https://www.youtube.com/watch?v=uZK9EemS87M))
 - **Ein 3D-gedrucktes RC-Chassis nach 6 Monaten Entwicklung** ([Video](https://www.youtube.com/watch?v=SWU7tfwpoAk))
 - **1:10-Militär-Truck** ([Instructables](https://www.instructables.com/3d-Printed-RC-Military-Truck/), [Video](https://youtu.be/Lvq_5YbNifo))
+- **VW-Bus T3** (Volkswagen Transporter) mit 313 mm Radstand ([Modell auf Cults](https://cults3d.com/de/modell-3d/werkzeuge/stl-3d-model-volkswagen-transporter-t3-313mm-wheelbase))
 - **Tatra 1:10** mit Metallgetriebe ([youmagine](https://youmagine.com/designs/2efd110f-b3f3-400f-9b9f-af0c296ae6d5))
 
 ### Gelände, Ketten und Traktoren

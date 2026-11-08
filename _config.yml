@@ -68,6 +68,8 @@ nav:
     children:
       - title: Projekte
         url: /projekte/
+      - title: Projekt-Ideen
+        url: /projekte/ideen/
       - title: Angebot
         url: /angebot/
       - title: Ausstattung
