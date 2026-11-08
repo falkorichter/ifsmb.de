@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Vorschaubilder für Pull Requests.
+"""Preview images for pull requests.
 
-Macht mit Headless-Chrome Screenshots von Seiten aus _site/ (Desktop 1280 px und
-Handy 390 px) und lädt sie auf den Branch `pr-previews` hoch – nie in den
-Feature-Branch. Gibt Markdown zum Einfügen in die PR-Beschreibung aus.
+Takes headless-Chrome screenshots of pages from _site/ (desktop 1280 px and
+phone 390 px) and uploads them to the `pr-previews` branch – never to the
+feature branch. Prints Markdown to paste into the PR description.
 
     bundle exec jekyll build
     python3 -I _scripts/pr_vorschau.py /team/falko-richter/ /news/
-    python3 -I _scripts/pr_vorschau.py --unten /team/falko-richter/   # Ausschnitt über dem Footer
-    python3 -I _scripts/pr_vorschau.py --unten --kontext 400 /news/    # mehr Inhalt über dem Footer zeigen
-    python3 -I _scripts/pr_vorschau.py --nur-lokal /                  # nichts hochladen
+    python3 -I _scripts/pr_vorschau.py --unten /team/falko-richter/   # area above the footer
+    python3 -I _scripts/pr_vorschau.py --unten --kontext 400 /news/    # show more content above the footer
+    python3 -I _scripts/pr_vorschau.py --nur-lokal /                  # don't upload
 
-Ohne --unten wird der obere Teil der Seite (Desktop 1280×900, Handy 390×844)
-aufgenommen. Bilder landen zusätzlich in _pr-vorschau/ (in .gitignore).
+Without --unten the top of the page is captured (desktop 1280×900, phone
+390×844). Images are also kept in _pr-vorschau/ (in .gitignore).
 """
 import argparse, functools, html, http.server, os, re, subprocess, sys, tempfile, threading, urllib.parse
 from PIL import Image
@@ -35,8 +35,8 @@ def serve():
             pass
 
         def do_GET(self):
-            # Handy-Rahmen kommt direkt vom Server, nicht aus _site/ – ein laufendes
-            # `jekyll serve` baut _site/ neu, sobald Bilder in _pr-vorschau/ landen
+            # Serve the phone frame from memory, not from _site/ – a running
+            # `jekyll serve` rebuilds _site/ as soon as images land in _pr-vorschau/
             url = urllib.parse.urlsplit(self.path)
             if url.path != "/__pr_handy.html":
                 return super().do_GET()
@@ -63,11 +63,11 @@ def chrome(url, w, h, scale, dst):
 
 
 def above_footer(im, scale, kontext=160):
-    """Ausschnitt über dem dunklen Footer (Header ist auch dunkel -> von unten suchen).
+    """Crop the area above the dark footer (the header is dark too -> search from the bottom).
 
-    Das Fenster ist viel höher als die Seite, und der Inhaltsbereich wächst bis zum
-    Footer (Sticky Footer). Lange leere Streifen werden deshalb auf 80 px gekürzt,
-    damit über dem Footer wirklich Inhalt zu sehen ist.
+    The window is much taller than the page and the content area stretches down to
+    the footer (sticky footer), so long blank stripes are shortened to 80 px to
+    keep real content visible above the footer.
     """
     W, H = im.size
     dark = lambda y: all(sum(im.getpixel((x, y))) < 130 for x in range(2, 10 * scale, 2))
@@ -81,7 +81,7 @@ def above_footer(im, scale, kontext=160):
     bottom = min(H, y + 60 * scale)
     blank = lambda r: all(lo == hi for lo, hi in im.crop((0, r, W, r + 1)).getextrema())
     keep, run, max_run = [], 0, 80 * scale
-    for r in range(bottom - 1, -1, -1):          # von unten nach oben einsammeln
+    for r in range(bottom - 1, -1, -1):          # collect rows bottom-up
         run = run + 1 if blank(r) else 0
         if run <= max_run:
             keep.append(r)
@@ -99,7 +99,7 @@ def slug(path):
 
 
 def capture(base, path, unten, tmp, kontext=160):
-    # Headless-Chrome wird nicht schmaler als ~500 px -> Handy-Ansicht im 390-px-iframe
+    # Headless Chrome won't go narrower than ~500 px -> render the phone view in a 390 px iframe
     h_mobile = 7000 if unten else 844
     handy = base + "/__pr_handy.html?" + urllib.parse.urlencode({"src": path, "h": h_mobile})
     files = []
@@ -113,13 +113,13 @@ def capture(base, path, unten, tmp, kontext=160):
         if unten:
             im = above_footer(im, scale, kontext)
         name = f"{slug(path)}-{label}.png"
-        im.save(os.path.join(OUT, name), optimize=True)  # Pillow speichert ohne Metadaten
+        im.save(os.path.join(OUT, name), optimize=True)  # Pillow saves without metadata
         files.append((path, label, name))
     return files
 
 
 def upload(branch, names):
-    """Commit auf pr-previews mit <branch>/<datei>, ohne Checkout (Plumbing)."""
+    """Commit <branch>/<file> onto pr-previews without a checkout (plumbing)."""
     try:
         git("fetch", "-q", "origin", PREVIEW_BRANCH)
         parent = git("rev-parse", "FETCH_HEAD")

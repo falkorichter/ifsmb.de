@@ -15,6 +15,8 @@ Ruby 3.1.2 (`.ruby-version`). `_site/` niemals committen.
 
 Alle sichtbaren Texte sind **Deutsch**.
 
+**Code-Kommentare sind Englisch** – in Skripten, Workflows, Layouts/Includes (Liquid- und HTML-Kommentare), CSS und JS, auch Docstrings. Deutsch bleibt alles, was Besucher*innen oder Redakteur*innen sehen: Seitentexte, Fehlermeldungen und Hilfetexte von Skripten, Namen von Workflow-Schritten, Commit-Messages und PR-Beschreibungen.
+
 Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im Deutschen ein männliches Wort, und wir wollen die Gender-Diskussion vermeiden. Das gilt für alle Texte: Seiten, Posts, Projekte, Profile, Meta-Beschreibungen, Alt-Texte und Commit-Messages.
 
 ## Struktur
