@@ -1,6 +1,6 @@
-# Baut die Seite für GitHub Pages (ifsmb.de) und danach den Suchindex mit Pagefind.
-# Der eingebaute Jekyll-Build von Pages kann keinen Schritt nach dem Build ausführen,
-# deshalb dieser Workflow (Settings → Pages → Source: „GitHub Actions“).
+# Builds the site for GitHub Pages (ifsmb.de), then the search index with Pagefind.
+# The built-in Pages Jekyll build can't run a step after the build, hence this
+# workflow (Settings → Pages → Source: "GitHub Actions").
 name: Pages
 
 on:
@@ -21,8 +21,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Steht die Pages-Quelle auf „Deploy from a branch“, baut GitHub parallel selbst mit Jekyll
-      # und überschreibt diese Version – ohne /pagefind/, die Suche ist dann kaputt (Issue #13).
+      # If the Pages source is "Deploy from a branch", GitHub also runs its own Jekyll build
+      # in parallel and overwrites this deployment – without /pagefind/, so search breaks (issue #13).
       - name: Pages-Quelle prüfen (muss „GitHub Actions“ sein)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -35,14 +35,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          # .ruby-version (3.1.2) gibt es auf neuen Runnern nicht mehr – neuestes 3.1.x nehmen
+          # .ruby-version (3.1.2) is no longer available on new runners – use the latest 3.1.x
           ruby-version: "3.1"
           bundler-cache: true
       - uses: actions/configure-pages@v5
       - run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-      # Volltext-Suchindex für /suche/ (Pagefind liest das fertige HTML → _site/pagefind/)
+      # Full-text search index for /suche/ (Pagefind reads the built HTML → _site/pagefind/)
       - run: npx -y pagefind@1.5.2 --site _site
       - uses: actions/upload-pages-artifact@v3
 
