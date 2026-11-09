@@ -20,3 +20,5 @@ An der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) (KTG
 Die AG wird komplett ehrenamtlich von Falko Richter geleitet, Gregor Dill ist Co-AG-Leiter. Alle Investitionen – auch der Mehrfarbdrucker – wurden über Spenden finanziert, zum Teil mit Fundraising-Aktionen der Kinder selbst. [35services e.V.](https://35services.de/) unterstützt als Verein bei der Organisation.
 
 **Spenden:** Unter [35services.de/ag](https://35services.de/ag/) gibt es mehr Informationen und ein Spendenformular. Die Spenden fließen ausschließlich in Material, die Arbeit der AG-Leitung ist ehrenamtlich.
+
+**Förderung:** Falko fragt gerade bei der Berliner MINT-Initiative junior1stein nach, welche Möglichkeiten es für die KTG gibt: [junior1stein für die KTG]({{ '/projekte/junior1stein-ktg/' | relative_url }}). Weitere Wege sammeln wir unter [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}).
