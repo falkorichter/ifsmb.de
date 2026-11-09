@@ -5,7 +5,7 @@ end: 2027-01-28 00:00
 all_day: true
 location: "STATION Berlin, Luckenwalder Str. 4–6, 10963 Berlin"
 location_url: https://www.allaboutautomation.de/en/berlin/
-tags: [rosalind-franklin-gym]
+tags: [rosalind-franklin-gym, ktg]
 summary: Fachmesse für Automatisierung, Robotik und Digitalisierung. Falko war 2026 dort und plant, wieder hinzugehen – vielleicht dürfen diesmal auch Kinder mit.
 team: [falko-richter]
 ---
