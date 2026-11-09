@@ -3,6 +3,7 @@ title: Jan
 role: Mitstreiter der KTG-AG im ersten Jahr
 order: 4
 photo: /assets/images/team/jan-480w.jpg
+photo_icon: /assets/images/team/jan-48w.jpg
 photo_2x: /assets/images/team/jan-960w.jpg
 links:
   - title: Instagram

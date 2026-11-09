@@ -19,5 +19,6 @@
       {% if e.location %}<span class="muted">📍 {{ e.location }}</span>{% endif %}
       {% if e.gallery and e.gallery.size > 0 %}<span class="muted small">📷 {{ e.gallery.size }} Foto{% if e.gallery.size > 1 %}s{% endif %}</span>{% endif %}
     </span>
+    {% include team-gesichter.html team=e.team %}
   </a>
 </li>

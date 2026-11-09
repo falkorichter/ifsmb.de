@@ -3,6 +3,7 @@ title: Falko Richter
 role: Gründer
 order: 1
 photo: /assets/images/team/falko-richter-480w.jpg
+photo_icon: /assets/images/team/falko-richter-48w.jpg
 links:
   - title: GitHub
     url: https://github.com/falkorichter

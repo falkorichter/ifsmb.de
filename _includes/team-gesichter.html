@@ -1,0 +1,15 @@
+{%- comment -%}
+  Small round face icons for a list of team slugs (include.team), roughly one line of text high.
+  Uses photo_icon (48 px), falls back to photo, then to initials. No links: the calendar card is already a link.
+{%- endcomment -%}
+{%- if include.team and include.team.size > 0 -%}
+<span class="team-faces">
+  {%- for slug in include.team %}{% assign s = slug | strip %}{% assign m = site.team | where: "slug", s | first %}
+  {%- assign name = s %}{% if m %}{% assign name = m.title %}{% endif %}
+  {%- assign icon = m.photo_icon | default: m.photo -%}
+  {%- if icon %}<img class="team-face" src="{{ icon | relative_url }}" alt="{{ name }}" title="{{ name }}" width="48" height="48" loading="lazy">
+  {%- else %}{% assign parts = name | split: " " %}<span class="team-face team-face-initials" role="img" aria-label="{{ name }}" title="{{ name }}">{% for p in parts limit: 2 %}{{ p | slice: 0 }}{% endfor %}</span>
+  {%- endif %}
+  {%- endfor -%}
+</span>
+{%- endif -%}
