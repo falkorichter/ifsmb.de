@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Geändert
+
+- Termin all about automation 2027: Stand der Anfrage für einen Besuch mit Schüler*innen (August und November 2026).
+
 ## [2026-11-09]
 
 ### Hinzugefügt
