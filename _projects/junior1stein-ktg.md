@@ -1,5 +1,5 @@
 ---
-title: "junior1stein für die KTG"
+title: "junior1stein für die KTG?"
 summary: Falko fragt bei der Berliner MINT-Initiative junior1stein nach, welche Möglichkeiten es für die Kurt-Tucholsky-Grundschule gibt – so wie für die Schulen im Cluster Mitte.
 status: aktuell
 start: 2026-11-09
