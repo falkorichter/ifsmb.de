@@ -2,10 +2,10 @@
 title: "Alexander von augenrahmen.de zu Besuch in der AG"
 start: 2026-10-05 00:00
 all_day: true
-location: "Rosalind Franklin Gymnasium, Turmstr. 74"
+location: "Rosalind Franklin Gymnasium, Turmstr. 75"
 location_url: https://rosalind-franklin-gymnasium.de/
 summary: Alexander von augenrahmen.de erzählt der 3D-Druck AG von seinen 3D-gedruckten Brillen.
-tags: [rosalind]
+tags: [rosalind-franklin-gym]
 team: [falko-richter]
 ---
 
