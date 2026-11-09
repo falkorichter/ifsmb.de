@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Geändert
+
+- German RepRap X400: Hinweis, dass der Hersteller (zuletzt innovatiQ) seinen Geschäftsbetrieb zum 30. Juni 2026 eingestellt hat; Daten der X400-Generationen und Übernahme durch die Arburg-Eigentümerfamilien (2020) mit Quellen; Einschätzung, ob der Drucker noch nutzbar ist (Slicer, Firmware, Plan B, Fragen vor der Zusage).
+
 ## [2026-11-09]
 
 ### Hinzugefügt
