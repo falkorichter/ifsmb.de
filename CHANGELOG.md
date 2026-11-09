@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Projekt „junior1stein für die KTG“: neuer Abschnitt „Nächste Schritte“ mit dem To-do für Falko, #wirfürschule in der Akazienstraße zu besuchen.
 - Projekt „junior1stein für die KTG“: Falkos Anfrage bei der Berliner MINT-Initiative junior1stein, welche Möglichkeiten es für die KTG gibt (wie im Cluster Mitte). Verlinkt von der KTG-AG und von „Geld für Makespaces“; neues Stichwort `junior1stein`.
 - „Geld für Makespaces“: Die Platanus Schule als zweites Beispiel für den IfsMB-Weg (eigener Drucker, AG, erste Lehrkräfte mit Ideen wie einem Stempel für den Töpferunterricht); Stand auch im Projekt der Platanus Schule.
 - Rosalind-Franklin-Gymnasium (Projekt, Eröffnungstermin, „Geld für Makespaces“): Die 6 Drucker kommen aus der Förderung über junior1stein.

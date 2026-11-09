@@ -44,4 +44,8 @@ Falko hat sich am 9. November 2026 über das [Kontaktformular](https://junior1st
 
 <span class="todo">[Antwort von junior1stein – folgt.]</span>
 
+## Nächste Schritte
+
+- <span class="todo">[To-do Falko]</span> **#wirfürschule besuchen:** die [wirfürschule gUG](https://wirfuerschule.de/) in der Akazienstraße 3a, 10827 Berlin. Von dort kommt das Förderprogramm „Maker Spaces“ (mit „Zukunft Mitgemacht“) – eine zweite Möglichkeit für die KTG neben junior1stein, siehe [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}#wirfuerschule).
+
 Mehr Wege, wie Schulen an Geld für einen Makespace kommen: [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}).
