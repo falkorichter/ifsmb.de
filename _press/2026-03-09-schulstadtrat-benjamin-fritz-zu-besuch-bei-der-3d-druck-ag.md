@@ -24,6 +24,8 @@ Kinder mit grünem Pin haben eine Fotoerlaubnis von den Eltern bekommen. Gedruck
 
 Wir haben einen mehrfarbigen Würfel als Anschauungsobjekt gedruckt. Ein sehr erfolgreicher Nachmittag mit sehr guten Gesprächen. Unter [35services.de/ag](https://35services.de/ag/) freuen wir uns weiter über Spenden, um das Projekt weiterführen und ausbauen zu können. Wir nutzen die Spenden dabei einzig für Material, die Arbeit der AG-Leitung ist komplett ehrenamtlich.
 
+Auch das Bezirksamt Mitte hat über den Besuch berichtet: [🦋 Beitrag auf Bluesky](https://bsky.app/profile/ba-mitte-berlin.bsky.social/post/3mgpafkllzg2x) und auf [✖️ X](https://x.com/BA_Mitte_Berlin/status/2031327219788697932) (Wir werden nicht gerne bei x.com veröffentlicht). Außerdem gibt es einen [📘 Beitrag auf Facebook](https://www.facebook.com/share/p/1B4VgwPxu1/).
+
 ## Unboxing am 16.02.2026
 
 Im Album sind auch ein paar Fotos vom 16.02. An dem Tag fand das feierliche Unboxing und der Aufbau inklusive erstem Druck statt. Einen Testdruck-Drachen haben wir als Geschenk an Herrn Fritz übergeben.
