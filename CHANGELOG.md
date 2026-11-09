@@ -6,10 +6,6 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
-### Geändert
-
-- German RepRap X400: Hinweis, dass der Hersteller (zuletzt innovatiQ) seinen Geschäftsbetrieb zum 30. Juni 2026 eingestellt hat; Daten der X400-Generationen und Übernahme durch die Arburg-Eigentümerfamilien (2020) mit Quellen; Einschätzung, ob der Drucker noch nutzbar ist (Slicer, Firmware, Plan B, Fragen vor der Zusage).
-
 ## [2026-11-09]
 
 ### Hinzugefügt
@@ -23,6 +19,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- German RepRap X400: Hinweis, dass der Hersteller (zuletzt innovatiQ) seinen Geschäftsbetrieb zum 30. Juni 2026 eingestellt hat; Daten der X400-Generationen und Übernahme durch die Arburg-Eigentümerfamilien (2020) mit Quellen; Einschätzung, ob der Drucker noch nutzbar ist (Slicer, Firmware, Plan B, Fragen vor der Zusage).
 - Projekt-Ideen: YouTube, Printables, Thingiverse und Instructables gleich in der Einleitung verlinkt.
 - Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
 - Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
