@@ -13,6 +13,8 @@ Schulstadtrat Benjamin Fritz hat die 3D-Druck AG besucht. Gregor Dill und Falko 
 
 Auch [Frieder Euteneuer]({{ '/team/frieder-euteneuer/' | relative_url }}) war dabei – zum Netzwerken und um mit uns den Snapmaker U1 zu feiern.
 
+So etwas machen wir wieder: Im Januar 2027 gibt es eine [kleine feierliche Eröffnung des Makespace am Rosalind-Franklin-Gymnasium]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
+
 - [📷 Fotos im Google-Fotos-Album](https://photos.app.goo.gl/3gHcYyH5wt71wuyM6)
 - [🦋 Beitrag des Bezirksamts Mitte auf Bluesky](https://bsky.app/profile/ba-mitte-berlin.bsky.social/post/3mgpafkllzg2x)
 - [✖️ Beitrag des Bezirksamts Mitte auf X](https://x.com/BA_Mitte_Berlin/status/2031327219788697932) (Wir werden nicht gerne bei x.com veröffentlicht)

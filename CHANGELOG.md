@@ -20,7 +20,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Behoben
 
-- Rosalind-Franklin-Gymnasium: Der Makespace eröffnet nicht erst im Januar 2027 – die Drucker sind seit Beginn des Schuljahres 2026/27 im Einsatz und die AG läuft; im Januar gibt es nur eine kleine feierliche Eröffnung (Projekt, Termin, Teamprofil Frieder, „Geld für Makespaces“, junior1stein für die KTG).
+- Rosalind-Franklin-Gymnasium: Der Makespace eröffnet nicht erst im Januar 2027 – die Drucker sind seit Beginn des Schuljahres 2026/27 im Einsatz und die AG läuft; im Januar gibt es nur eine kleine feierliche Eröffnung (Projekt, Termin, Teamprofil Frieder, „Geld für Makespaces“, junior1stein für die KTG). Der Termin heißt jetzt „Kleine feierliche Eröffnung des Makespace am Rosalind-Franklin-Gymnasium“ und ist mit dem Besuch von Schulstadtrat Benjamin Fritz an der KTG gegenseitig verlinkt.
 - Link-Check `_scripts/check_site.rb`: findet tote interne Links, fehlende Anker und verwaiste Seiten; läuft im Pages-Workflow und stoppt das Deployment bei Fehlern (`--extern` prüft zusätzlich externe Links).
 - Dauerhaft tote externe Links werden mit 🪦 markiert und unten auf der Seite erklärt.
 - Termine mit Personen verknüpfen (`team:`): Teamprofile zeigen kommende und vergangene Termine, die Terminseite zeigt „Dabei aus dem Team“. Alle bisherigen Termine sind eingetragen (Falko war nicht beim Ausflug zu happybite).
