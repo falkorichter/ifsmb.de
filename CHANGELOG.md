@@ -33,6 +33,14 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Neue Seite „Geld für Makespaces“ (`/geld-fuer-makespaces/`, im Menü unter „Wir“, noch im Aufbau): wie Schulen einen Makespace finanzieren können – Bootstrapping wie an der KTG, das Programm „Maker Spaces“ von #wirfürschule (bis zu 10.000 €), die Berliner MINT-Initiative junior1stein und gebrauchte Hardware über „Das macht Schule“. Dazu Infos aus dem Maker-Space-Newsletter von #wirfürschule: Newsletter und Social-Media-Kanäle, InnovatorsMap, Podcast, Ideen und Termine. Hinweis, dass das Rosalind-Franklin-Gymnasium junior1stein wohl genutzt hat (auch auf der Projektseite). Verlinkt von Angebot und Spenden.
 
+### Geändert
+
+- Angebot, „Warum ein Institut?“: Falkos eigentlicher Grund – alles dokumentieren und auf ein unabhängiges Fundament stellen; „Jeder kann ein Institut gründen“.
+- Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
+- Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
+
+- Team: Falkos Profilfoto wieder ohne verpixelte Gesichter im Hintergrund (Ausschnitt aus dem Foto im Beitrag zum Jugend Hackt Congress 2026).
+
 ## [2026-11-08]
 
 ### Hinzugefügt
