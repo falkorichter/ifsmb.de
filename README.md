@@ -32,7 +32,7 @@ ruby _scripts/check_site.rb --extern                                # zusätzlic
 | Pressemitteilung | `_press/YYYY-MM-DD-slug.md` | `title`, `subtitle`, `date` |
 | Presse-Kurzprofil & Kontakt | `_data/presse.yml` | |
 | Pressematerial | `_data/pressematerial.yml` | Dateien nach `assets/presse/` |
-| Wir in der Presse | `_data/presseberichte.yml` | neueste zuerst; `titel`, optional `datum`,, `medium`, `url`, optional `anlass` (eigene Seite zum Anlass) |
+| Wir in der Presse | `_data/presseberichte.yml` | neueste zuerst; `titel`, optional `datum`, `hinweis`,, `medium`, `url`, optional `anlass` (eigene Seite zum Anlass) |
 | Impressum | `impressum/index.md` | |
 
 Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projekte/archiv/`).

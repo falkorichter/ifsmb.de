@@ -37,7 +37,7 @@ lead: Informationen, Pressemitteilungen und Material für Journalist*innen.
   <h2>Wir in der Presse</h2>
   <ul class="post-list">
     {% for b in site.data.presseberichte %}
-    <li>{% if b.datum %}<span class="meta">{{ b.datum | date: "%d.%m.%Y" }}</span> {% endif %}<a href="{{ b.url }}" target="_blank" rel="noopener">{{ b.titel }}</a> <span class="muted small">– {{ b.medium }}{% if b.anlass %} · <a href="{{ b.anlass | relative_url }}">mehr dazu</a>{% endif %}</span></li>
+    <li>{% if b.datum %}<span class="meta">{{ b.datum | date: "%d.%m.%Y" }}</span> {% endif %}<a href="{{ b.url }}" target="_blank" rel="noopener">{{ b.titel }}</a> <span class="muted small">– {{ b.medium }}{% if b.hinweis %} ({{ b.hinweis }}){% endif %}{% if b.anlass %} · <a href="{{ b.anlass | relative_url }}">mehr dazu</a>{% endif %}</span></li>
     {% endfor %}
   </ul>
 </section>
