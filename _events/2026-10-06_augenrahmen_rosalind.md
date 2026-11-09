@@ -5,7 +5,7 @@ all_day: true
 location: "Rosalind Franklin Gymnasium, Turmstr. 74"
 location_url: https://rosalind-franklin-gymnasium.de/
 summary: Alexander von augenrahmen.de erzählt der 3D-Druck AG von seinen 3D-gedruckten Brillen.
-tags: [ktg]
+tags: [rosalind]
 team: [falko-richter]
 ---
 
