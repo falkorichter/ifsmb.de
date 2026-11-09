@@ -16,4 +16,6 @@ Am [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/) in Moa
 
 Falko Richter berät die Schule ehrenamtlich bei der Einrichtung – mit den Erfahrungen aus der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}).
 
+**Finanzierung:** Das Gymnasium gehört zum Cluster Mitte der Berliner MINT-Initiative junior1stein und hat sie wohl für den Makespace genutzt – mehr unter [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}#junior1stein). <span class="todo">[Details folgen.]</span>
+
 Details folgen.
