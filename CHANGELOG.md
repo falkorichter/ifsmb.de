@@ -14,6 +14,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - „Geld für Makespaces“: Die Platanus Schule als zweites Beispiel für den IfsMB-Weg (eigener Drucker, AG, erste Lehrkräfte mit Ideen wie einem Stempel für den Töpferunterricht); Stand auch im Projekt der Platanus Schule.
 - Rosalind-Franklin-Gymnasium (Projekt, Eröffnungstermin, „Geld für Makespaces“): Die 6 Drucker kommen aus der Förderung über junior1stein.
 - Neuigkeit: 3D-Druck auch in der Computer AG der KTG – Falko zu Gast bei Henning.
+- Kalender: zweiter Besuch der AG bei Max in der Stephanstraße (3. März 2025, mit Foto) und geplanter Besuch mit den Kindern aus dem Schuljahr 2026/27 im Januar 2027; alle drei Termine sind gegenseitig verlinkt.
+- Ausstattung: German RepRap X400 (in Aussicht, angeboten über Ralf von 35services) – vielleicht als Fräsmaschine umzubauen; mit 5 Fotos.
 
 ### Geändert
 

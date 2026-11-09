@@ -23,4 +23,6 @@ team: [falko-richter, jan]
 
 Ausflug der [3D-Druck- und Elektronik-AG]({{ '/projekte/ktg-ag-jahr-1/' | relative_url }}) zu Max in seine Werkstatt in der Stephanstraße: Max betreibt **3dBoutiqueBerlin**, eine kleine Firma, die 3D-gedruckte Objekte entwirft, druckt und verkauft – und seine Kinder sind (oder waren) selbst KTG-Schüler*innen. Max hat uns gezeigt, woran er arbeitet – und ein ganzes Regal voller 3D-Drucker. Ein Highlight war ein Druck mit „Haaren“ aus vielen feinen Filamentfäden.
 
+Weitere Besuche: [März 2025]({{ '/kalender/2025-03-03-zweiter-besuch-bei-max/' | relative_url }}), geplant [Januar 2027]({{ '/kalender/2027-01-04-besuch-bei-max-2027/' | relative_url }}).
+
 Mehr von 3dBoutiqueBerlin: [Instagram](https://www.instagram.com/3dboutiqueberlin/) · [Etsy](https://www.etsy.com/de/shop/3dBoutiqueBerlin)

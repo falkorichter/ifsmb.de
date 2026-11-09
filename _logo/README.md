@@ -64,4 +64,5 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | MK3S-Zeitraffer (Infinite Cube, Servo-Halterung, Achsgehäuse) | `~/Downloads/*MK3S*.mp4` (OctoPrint-Kamera) | 720p bzw. 480p, ohne Ton/Metadaten (≈ 7 MB zusammen) |
 | Bilder aus „DIY – eine 3D Druck und Elektronik AG“ (2024) | 35services.de | 9 Bilder, ohne Metadaten; keine Personen |
 | Instagram-QR-Code im Rosalind-Franklin-Beitrag | 35services.de | übernommen |
+| German RepRap X400 (5 Fotos, per Signal von Ralf) | `_logo/ausstattung/german-reprap-x400/` | ohne Metadaten neu gespeichert, 1600 px + 600 px; keine Personen |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |
