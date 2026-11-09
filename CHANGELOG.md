@@ -10,6 +10,17 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Projekt „junior1stein für die KTG“: Falkos Anfrage bei der Berliner MINT-Initiative junior1stein, welche Möglichkeiten es für die KTG gibt (wie im Cluster Mitte). Verlinkt von der KTG-AG und von „Geld für Makespaces“; neues Stichwort `junior1stein`.
 - Rosalind-Franklin-Gymnasium (Projekt, Eröffnungstermin, „Geld für Makespaces“): Die 6 Drucker kommen aus der Förderung über junior1stein.
+
+### Geändert
+
+- Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
+- Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
+
+- Team: Falkos Profilfoto wieder ohne verpixelte Gesichter im Hintergrund (Ausschnitt aus dem Foto im Beitrag zum Jugend Hackt Congress 2026).
+
+### Behoben
+
+- Rosalind-Franklin-Gymnasium: Der Makespace eröffnet nicht erst im Januar 2027 – die Drucker sind seit Beginn des Schuljahres 2026/27 im Einsatz und die AG läuft; im Januar gibt es nur eine kleine feierliche Eröffnung (Projekt, Termin, Teamprofil Frieder, „Geld für Makespaces“, junior1stein für die KTG).
 - Link-Check `_scripts/check_site.rb`: findet tote interne Links, fehlende Anker und verwaiste Seiten; läuft im Pages-Workflow und stoppt das Deployment bei Fehlern (`--extern` prüft zusätzlich externe Links).
 - Dauerhaft tote externe Links werden mit 🪦 markiert und unten auf der Seite erklärt.
 - Termine mit Personen verknüpfen (`team:`): Teamprofile zeigen kommende und vergangene Termine, die Terminseite zeigt „Dabei aus dem Team“. Alle bisherigen Termine sind eingetragen (Falko war nicht beim Ausflug zu happybite).
@@ -21,13 +32,6 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Presse: neuer Abschnitt „Wir in der Presse“ mit Berichten anderer über uns (`_data/presseberichte.yml`).
 
 - Neue Seite „Geld für Makespaces“ (`/geld-fuer-makespaces/`, im Menü unter „Wir“, noch im Aufbau): wie Schulen einen Makespace finanzieren können – Bootstrapping wie an der KTG, das Programm „Maker Spaces“ von #wirfürschule (bis zu 10.000 €), die Berliner MINT-Initiative junior1stein und gebrauchte Hardware über „Das macht Schule“. Dazu Infos aus dem Maker-Space-Newsletter von #wirfürschule: Newsletter und Social-Media-Kanäle, InnovatorsMap, Podcast, Ideen und Termine. Hinweis, dass das Rosalind-Franklin-Gymnasium junior1stein wohl genutzt hat (auch auf der Projektseite). Verlinkt von Angebot und Spenden.
-
-### Geändert
-
-- Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
-- Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
-
-- Team: Falkos Profilfoto wieder ohne verpixelte Gesichter im Hintergrund (Ausschnitt aus dem Foto im Beitrag zum Jugend Hackt Congress 2026).
 
 ## [2026-11-08]
 

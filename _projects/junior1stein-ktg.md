@@ -20,7 +20,7 @@ updates:
 
 [junior1stein](https://junior1stein.de/) ist die MINT-Initiative der Berliner Senatsverwaltung für Bildung, Jugend und Familie. Im [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/) arbeiten Kitas und Schulen im Bezirk im MINT-Bereich zusammen – darunter das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}), an dem Falko seit einigen Monaten beim Makespace hilft, und die Moabiter Grundschule.
 
-**Was das bringen kann:** Die **6 Drucker** für den neuen Makespace am Rosalind-Franklin-Gymnasium kommen aus der Förderung über junior1stein – er [eröffnet im Januar 2027]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
+**Was das bringen kann:** Die **6 Drucker** im Makespace des Rosalind-Franklin-Gymnasiums kommen aus der Förderung über junior1stein. Sie sind seit Beginn des Schuljahres 2026/27 im Einsatz, die 3D-Druck-AG läuft – im Januar gibt es eine [kleine feierliche Eröffnung]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
 
 Die [Kurt-Tucholsky-Grundschule]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) (KTG) gehört nicht zum Cluster, ist der Moabiter Grundschule aber sehr ähnlich. Deshalb will Falko herausfinden, welche Möglichkeiten junior1stein für die KTG bietet. Er leitet dort seit Jahren die 3D-Druck AG und ist Mitglied im Förderverein der KTG – und damit aus mehreren Richtungen an Förderung interessiert.
 
