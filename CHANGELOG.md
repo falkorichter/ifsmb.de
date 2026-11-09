@@ -22,6 +22,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Angebot, „Warum ein Institut?“: Falkos eigentlicher Grund – alles dokumentieren und auf ein unabhängiges Fundament stellen; „Jeder kann ein Institut gründen“.
 - Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
 - Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
 
