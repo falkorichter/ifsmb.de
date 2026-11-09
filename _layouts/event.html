@@ -9,6 +9,13 @@ layout: default
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
+    {%- if page.nur_projekt %}
+    {%- if page.end and page.end != "" %}{% assign p_end = page.end | date: "%s" | plus: 0 %}{% else %}{% assign p_end = page.start | date: "%s" | plus: 7200 %}{% endif -%}
+    {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+    {%- if p_end >= now_s %}
+    <p class="project-only-note">📌 Ein Termin für die Beteiligten des Projekts – er erscheint erst im öffentlichen Kalender, wenn er stattgefunden hat.</p>
+    {%- endif %}
+    {%- endif %}
     {% if page.location %}
     <p class="event-location">📍 {% if page.location_url %}<a href="{{ page.location_url }}" target="_blank" rel="noopener">{{ page.location }}</a>{% else %}{{ page.location }}{% endif %}</p>
     {% endif %}

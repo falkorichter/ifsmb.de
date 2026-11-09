@@ -7,6 +7,7 @@ date_label: "März 2027 – genauer Termin folgt"
 location: "Südkreuz, Berlin"
 summary: Ausflug der 3D-Druck AG an der KTG zur Firma von Nima am Südkreuz.
 tags: [ktg]
+nur_projekt: true
 team: [falko-richter,gregor-dill]
 ---
 

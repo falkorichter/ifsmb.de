@@ -58,12 +58,35 @@ layout: default
     {% if page.event_tag %}
     {%- assign tagged = "" | split: "" -%}
     {%- for e in site.events -%}{%- if e.tags contains page.event_tag -%}{%- assign tagged = tagged | push: e -%}{%- endif -%}{%- endfor -%}
-    {%- assign tagged = tagged | sort: "start" | reverse -%}
+    {%- assign tagged = tagged | sort: "start" -%}
     {% if tagged.size > 0 %}
+    {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+    {%- assign p_upcoming = "" | split: "" -%}
+    {%- assign p_past = "" | split: "" -%}
+    {%- for e in tagged -%}
+      {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+      {%- if end_s >= now_s %}{% assign p_upcoming = p_upcoming | push: e %}{% else %}{% assign p_past = p_past | unshift: e %}{% endif -%}
+    {%- endfor -%}
     <h2>Termine &amp; Berichte</h2>
-    <ul class="event-list">
-      {%- for e in tagged %}{% include termin-karte.html event=e %}{% endfor %}
+    <h3 class="cal-heading" id="proj-upcoming-heading"{% if p_upcoming.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
+    <ul class="event-list" id="proj-events-upcoming">
+      {%- for e in p_upcoming %}{% include termin-karte.html event=e %}{% endfor %}
     </ul>
+    <h3 class="cal-heading" id="proj-past-heading"{% if p_past.size == 0 %} hidden{% endif %}>Vergangene Termine</h3>
+    <ul class="event-list event-list-past" id="proj-events-past">
+      {%- for e in p_past %}{% include termin-karte.html event=e %}{% endfor %}
+    </ul>
+    <script>
+      // same as /kalender/: move events that ended since the build into the past list
+      (function () {
+        var now = Date.now() / 1000, up = document.getElementById('proj-events-upcoming'), past = document.getElementById('proj-events-past');
+        Array.prototype.slice.call(up.children).reverse().forEach(function (li) {
+          if (+li.dataset.end < now) past.insertBefore(li, past.firstChild);
+        });
+        document.getElementById('proj-upcoming-heading').hidden = up.children.length === 0;
+        document.getElementById('proj-past-heading').hidden = past.children.length === 0;
+      })();
+    </script>
     {% endif %}
     {% endif %}
     {% if page.event_tag %}

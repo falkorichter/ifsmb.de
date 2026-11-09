@@ -21,9 +21,10 @@ lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
 
 <h2 class="cal-heading">Kommende Termine</h2>
 <ul class="event-list" id="events-upcoming">
-  {%- for e in upcoming %}{% include termin-karte.html event=e %}{% endfor %}
+  {%- for e in upcoming %}{% include termin-karte.html event=e versteckt=e.nur_projekt %}{% endfor %}
 </ul>
-<p class="muted" id="events-none"{% if upcoming.size > 0 %} hidden{% endif %}>Gerade sind keine Termine geplant – aber das kann sich spontan ändern.</p>
+{%- assign upcoming_public = upcoming | where_exp: "e", "e.nur_projekt != true" -%}
+<p class="muted" id="events-none"{% if upcoming_public.size > 0 %} hidden{% endif %}>Gerade sind keine Termine geplant – aber das kann sich spontan ändern.</p>
 
 <h2 class="cal-heading" id="past-heading"{% if past.size == 0 %} hidden{% endif %}>Vergangene Termine</h2>
 <ul class="event-list event-list-past" id="events-past">
@@ -34,9 +35,10 @@ lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
   (function () {
     var now = Date.now() / 1000, up = document.getElementById('events-upcoming'), past = document.getElementById('events-past');
     Array.prototype.slice.call(up.children).reverse().forEach(function (li) {
-      if (+li.dataset.end < now) past.insertBefore(li, past.firstChild);
+      if (+li.dataset.end < now) { li.hidden = false; past.insertBefore(li, past.firstChild); }
     });
-    document.getElementById('events-none').hidden = up.children.length > 0;
+    // project-only events stay hidden while upcoming
+    document.getElementById('events-none').hidden = up.querySelectorAll('li:not([hidden])').length > 0;
     document.getElementById('past-heading').hidden = past.children.length === 0;
   })();
 </script>

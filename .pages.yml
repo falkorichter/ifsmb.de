@@ -42,6 +42,11 @@ content:
         description: Uhrzeiten werden dann ignoriert.
         type: boolean
         default: false
+      - name: nur_projekt
+        label: Nur fürs Projekt (bis er stattgefunden hat)
+        description: Kommende Termine erscheinen dann nicht auf der Startseite, im Kalender und im iCal-Abo, sondern nur auf der Projektseite (über die Kategorie). Nach dem Termin erscheint er ganz normal unter „Vergangene Termine“.
+        type: boolean
+        default: false
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.

@@ -1,6 +1,6 @@
 {%- assign e = include.event -%}
 {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
-<li class="event-item" data-end="{{ end_s }}">
+<li class="event-item" data-end="{{ end_s }}"{% if include.versteckt %} hidden{% endif %}>
   <a class="card card-link event-card" href="{{ e.url | relative_url }}">
     <span class="event-date">
       {%- if e.date_label and e.date_label != "" -%}

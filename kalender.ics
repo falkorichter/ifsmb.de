@@ -35,7 +35,9 @@ RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU{{ nl -}}
 END:STANDARD{{ nl -}}
 END:VTIMEZONE{{ nl -}}
 {%- assign events = site.events | sort: "start" -%}
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
 {%- for e in events -%}
+{%- if e.nur_projekt -%}{%- if e.end and e.end != "" -%}{%- assign e_end = e.end | date: "%s" | plus: 0 -%}{%- else -%}{%- assign e_end = e.start | date: "%s" | plus: 7200 -%}{%- endif -%}{%- if e_end >= now_s -%}{%- continue -%}{%- endif -%}{%- endif -%}
 {%- assign has_end = false -%}{%- if e.end and e.end != "" -%}{%- assign has_end = true -%}{%- endif -%}
 {%- assign title = e.title | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
 {%- assign url = site.url | append: e.url -%}

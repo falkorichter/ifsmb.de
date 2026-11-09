@@ -16,9 +16,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Neuigkeit: 3D-Druck auch in der Computer AG der KTG – Falko zu Gast bei Henning.
 - Kalender: zweiter Besuch der AG bei Max in der Stephanstraße (3. März 2025, mit Foto) und geplanter Besuch mit den Kindern aus dem Schuljahr 2026/27 im Januar 2027; alle drei Termine sind gegenseitig verlinkt.
 - Ausstattung: German RepRap X400 (in Aussicht, angeboten über Ralf von 35services) – vielleicht als Fräsmaschine umzubauen; mit 5 Fotos.
+- Kalender: Termine mit `nur_projekt: true` erscheinen erst nach dem Termin im öffentlichen Kalender – vorher nur auf der Projektseite. So bleibt der Kalender übersichtlich, und Eltern und Kinder der KTG-AG sehen die Ausflüge trotzdem. Genutzt für den Besuch bei Max (Januar 2027) und bei der Firma von Nima (März 2027).
 
 ### Geändert
 
+- Projektseiten: „Termine & Berichte“ trennt jetzt wie der Kalender kommende und vergangene Termine; vergangene sind blasser.
 - German RepRap X400: Hinweis, dass der Hersteller (zuletzt innovatiQ) seinen Geschäftsbetrieb zum 30. Juni 2026 eingestellt hat; Daten der X400-Generationen und Übernahme durch die Arburg-Eigentümerfamilien (2020) mit Quellen; Einschätzung, ob der Drucker noch nutzbar ist (Slicer, Firmware, Plan B, Fragen vor der Zusage).
 - Projekt-Ideen: YouTube, Printables, Thingiverse und Instructables gleich in der Einleitung verlinkt.
 - Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
