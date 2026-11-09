@@ -5,7 +5,7 @@ status: aktuell
 start: 2026-11-09
 zeitraum: seit November 2026
 ort: Kurt-Tucholsky-Grundschule, Moabit
-event_tag: junior1stein
+event_tag: junior1stein-ktg
 tags: [ktg, junior1stein]
 team:
   - falko-richter
@@ -19,6 +19,8 @@ updates:
 ---
 
 [junior1stein](https://junior1stein.de/) ist die MINT-Initiative der Berliner Senatsverwaltung für Bildung, Jugend und Familie. Im [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/) arbeiten Kitas und Schulen im Bezirk im MINT-Bereich zusammen – darunter das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}), an dem Falko seit einigen Monaten beim Makespace hilft, und die Moabiter Grundschule.
+
+**Was das bringen kann:** Die **6 Drucker** für den neuen Makespace am Rosalind-Franklin-Gymnasium kommen aus der Förderung über junior1stein – er [eröffnet im Januar 2027]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
 
 Die [Kurt-Tucholsky-Grundschule]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) (KTG) gehört nicht zum Cluster, ist der Moabiter Grundschule aber sehr ähnlich. Deshalb will Falko herausfinden, welche Möglichkeiten junior1stein für die KTG bietet. Er leitet dort seit Jahren die 3D-Druck AG und ist Mitglied im Förderverein der KTG – und damit aus mehreren Richtungen an Förderung interessiert.
 
@@ -38,7 +40,7 @@ Falko hat sich am 9. November 2026 über das [Kontaktformular](https://junior1st
 
 - Kann die KTG ins Cluster Mitte aufgenommen werden, oder gibt es andere Wege zu junior1stein?
 - Welche Förderung – Geld, Geräte, Material, Fortbildungen – ist für eine Grundschule möglich?
-- Was hat das [Rosalind-Franklin-Gymnasium]({{ '/geld-fuer-makespaces/' | relative_url }}#junior1stein) über junior1stein bekommen, und lässt sich das auf die KTG übertragen?
+- Das Rosalind-Franklin-Gymnasium hat über junior1stein 6 Drucker bekommen – lässt sich so etwas auf eine Grundschule wie die KTG übertragen?
 
 <span class="todo">[Antwort von junior1stein – folgt.]</span>
 
