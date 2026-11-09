@@ -6,14 +6,18 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [2026-11-09]
+
 ### Hinzugefügt
 
 - Projekt „junior1stein für die KTG“: Falkos Anfrage bei der Berliner MINT-Initiative junior1stein, welche Möglichkeiten es für die KTG gibt (wie im Cluster Mitte). Verlinkt von der KTG-AG und von „Geld für Makespaces“; neues Stichwort `junior1stein`.
 - „Geld für Makespaces“: Die Platanus Schule als zweites Beispiel für den IfsMB-Weg (eigener Drucker, AG, erste Lehrkräfte mit Ideen wie einem Stempel für den Töpferunterricht); Stand auch im Projekt der Platanus Schule.
 - Rosalind-Franklin-Gymnasium (Projekt, Eröffnungstermin, „Geld für Makespaces“): Die 6 Drucker kommen aus der Förderung über junior1stein.
+- Neuigkeit: 3D-Druck auch in der Computer AG der KTG – Falko zu Gast bei Henning.
 
 ### Geändert
 
+- Projekt-Ideen: YouTube, Printables, Thingiverse und Instructables gleich in der Einleitung verlinkt.
 - Suche lokal: Pagefind-Index bleibt beim Neubauen erhalten, `/suche/` funktioniert auch mit `jekyll serve`.
 - Tote externe Links in FLSUN V400, im AG-Beitrag von 2024 und beim Lastenlaufrad-Projekt markiert.
 
@@ -117,6 +121,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Beispieltermin „Offener Bastelnachmittag“.
 
 [Unreleased]: https://github.com/falkorichter/ifsmb.de/commits/main
+[2026-11-09]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-09&until=2026-11-09
 [2026-11-08]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-08&until=2026-11-08
 [2026-11-07]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-07&until=2026-11-07
 [2026-11-06]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-06&until=2026-11-06

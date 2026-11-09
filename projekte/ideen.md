@@ -6,7 +6,7 @@ permalink: /projekte/ideen/
 ---
 <div class="prose ideas" markdown="1">
 
-Hier sammeln wir Projekte, die uns begeistern – für AGs, Workshops oder einfach zum Nachbauen. ✅ heißt: Haben wir schon gebaut. Die meisten Links führen zu YouTube, Printables, Thingiverse oder Instructables; wir binden nichts davon direkt ein.
+Hier sammeln wir Projekte, die uns begeistern – für AGs, Workshops oder einfach zum Nachbauen. ✅ heißt: Haben wir schon gebaut. Die meisten Links führen zu [YouTube](https://www.youtube.com/), [Printables](https://www.printables.com/), [Thingiverse](https://www.thingiverse.com/) oder [Instructables](https://www.instructables.com/); wir binden nichts davon direkt ein.
 
 Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projekte/' | relative_url }}) vorbei oder [meldet euch]({{ '/angebot/' | relative_url }}).
 
