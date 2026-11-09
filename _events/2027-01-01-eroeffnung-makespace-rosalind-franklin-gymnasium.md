@@ -1,5 +1,5 @@
 ---
-title: "Kleine feierliche Eröffnung des Makespace am Rosalind-Franklin-Gymnasium"
+title: "Kleine feierliche Eröffnung mit Netzwerktreffen des Makespace am Rosalind-Franklin-Gymnasium"
 start: 2027-01-01 00:00
 end: 2027-01-31 00:00
 tags: [rosalind-franklin-gym, junior1stein]
