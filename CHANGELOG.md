@@ -44,6 +44,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Tag der offenen Tür am Rosalind-Franklin-Gymnasium: Schlüsselanhänger mit Schullogo, gebaut mit MakeMySign von MakerWorld – mit Screenshot des Druckauftrags und Zeitraffer.
 - „Prusa MK3S (HeartLabs) flott machen“ ist ein persönliches Projekt von Falko; „Netzwerk“ steht ganz oben im Menü „Wir“.
 - Die Würfel-Beiträge der Platanus Schule und des Rosalind-Franklin-Gymnasiums heißen jetzt „Infinite Cube“, verlinken das Modell auf MakerWorld und sich gegenseitig – an beiden Schulen lernen wir gerade, wie man Stützstrukturen baut.
 - Dracheneier: kein eigener Beitrag mehr, sondern ein Update im Projekt der KTG-AG (mit Fotos und Video).

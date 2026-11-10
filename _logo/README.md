@@ -71,4 +71,5 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | Infinite Cube Referenz (03.11.2026) | `_logo/news/2026-11-10-infinite-cube-referenz/` (mit Zip) | 4 Fotos ohne Metadaten (enthielten GPS); keine Personen |
 | iPad-Stifte laden (02.11.2026) | `_logo/news/2026-11-10-ipad-stifte-laden/` (mit Zip) | 4 Fotos ohne Metadaten; geprägte Beschriftung zweier gedruckter Haken (wohl Namen) unkenntlich, Foto 1 unten abgeschnitten (Schuh) |
 | Notebook der KTG (02.11.2026) | `_logo/news/2026-11-10-notebook-ktg/` | ohne Metadaten |
+| Tag der offenen Tür RFG (Druckauftrag) | `_logo/kalender/2026-11-28-tag-der-offenen-tuer-rosalind-franklin-gymnasium/` | Screenshot als JPG; Zeitraffer der Druckerkamera 720p ohne Ton, keine Personen |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |
