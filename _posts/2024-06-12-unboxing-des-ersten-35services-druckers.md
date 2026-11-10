@@ -9,23 +9,22 @@ Am 12. Juni 2024 kam der erste Drucker von 35services: ein Bambu Lab A1. Falko h
 
 Abgeholt mit dem Lastenrad, ausgepackt, aufgebaut, kalibriert – und als erster Druck lief, wie es sich gehört, das Benchy-Boot.
 
-<div class="gallery">
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/01.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/01-600w.jpg" alt="Der Karton mit dem Drucker auf dem Lastenrad" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/02.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/02-600w.jpg" alt="Das Lastenrad mit dem Bambu-Lab-Karton vor der Tür (Kennzeichen unkenntlich gemacht)" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/03.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/03-600w.jpg" alt="Der geöffnete Karton" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/04.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/04-600w.jpg" alt="Der ausgepackte Bambu Lab A1 auf dem Tisch" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/05.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/05-600w.jpg" alt="Das Zubehör im Karton-Einsatz" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/06.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/06-600w.jpg" alt="Der aufgebaute Drucker" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/07.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/07-600w.jpg" alt="Kalibrierung: Schwingungskompensation auf dem Display" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/08.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/08-600w.jpg" alt="Der Drucker während der Kalibrierung" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/09.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/09-600w.jpg" alt="Kalibrierung: Werkzeugkopf reinigen" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/10.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/10-600w.jpg" alt="Auswahl des ersten Drucks auf dem Display: das Benchy-Boot" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/11.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/11-600w.jpg" alt="Der erste Druck läuft" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/12.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/12-600w.jpg" alt="Ein Kind mit Fahrradhelm schaut dem Drucker zu" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/13.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/13-600w.jpg" alt="Zuschauen beim ersten Druck" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/14.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/14-600w.jpg" alt="Das fertige schwarze Benchy-Boot auf dem Druckbett" loading="lazy"></a>
-  <a href="/assets/images/news/unboxing-des-ersten-35services-druckers/15.jpg" class="lightbox"><img src="/assets/images/news/unboxing-des-ersten-35services-druckers/15-600w.jpg" alt="Das Benchy-Boot von der Seite" loading="lazy"></a>
-</div>
+![Der Karton mit dem Drucker auf dem Lastenrad](/assets/images/news/unboxing-des-ersten-35services-druckers/01.jpg)
+![Das Lastenrad mit dem Bambu-Lab-Karton vor der Tür (Kennzeichen unkenntlich gemacht)](/assets/images/news/unboxing-des-ersten-35services-druckers/02.jpg)
+![Der geöffnete Karton](/assets/images/news/unboxing-des-ersten-35services-druckers/03.jpg)
+![Der ausgepackte Bambu Lab A1 auf dem Tisch](/assets/images/news/unboxing-des-ersten-35services-druckers/04.jpg)
+![Das Zubehör im Karton-Einsatz](/assets/images/news/unboxing-des-ersten-35services-druckers/05.jpg)
+![Der aufgebaute Drucker](/assets/images/news/unboxing-des-ersten-35services-druckers/06.jpg)
+![Kalibrierung: Schwingungskompensation auf dem Display](/assets/images/news/unboxing-des-ersten-35services-druckers/07.jpg)
+![Der Drucker während der Kalibrierung](/assets/images/news/unboxing-des-ersten-35services-druckers/08.jpg)
+![Kalibrierung: Werkzeugkopf reinigen](/assets/images/news/unboxing-des-ersten-35services-druckers/09.jpg)
+![Auswahl des ersten Drucks auf dem Display: das Benchy-Boot](/assets/images/news/unboxing-des-ersten-35services-druckers/10.jpg)
+![Der erste Druck läuft](/assets/images/news/unboxing-des-ersten-35services-druckers/11.jpg)
+![Ein Kind mit Fahrradhelm schaut dem Drucker zu](/assets/images/news/unboxing-des-ersten-35services-druckers/12.jpg)
+![Zuschauen beim ersten Druck](/assets/images/news/unboxing-des-ersten-35services-druckers/13.jpg)
+![Das fertige schwarze Benchy-Boot auf dem Druckbett](/assets/images/news/unboxing-des-ersten-35services-druckers/14.jpg)
+![Das Benchy-Boot von der Seite](/assets/images/news/unboxing-des-ersten-35services-druckers/15.jpg)
+{: .gallery}
 
 ## Videos
 

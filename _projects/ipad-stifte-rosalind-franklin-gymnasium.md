@@ -21,6 +21,5 @@ Am Gymnasium gilt dasselbe Vorgehen:
 2. **Durchtesten:** Geht der Stift an, schreibt er zuverlässig auf dem iPad, hält der Akku die Ladung?
 3. **Aussortieren**, was nicht mehr funktioniert – bei manchen Stiften ist der Akku leider tot.
 
-<div class="gallery gallery-single">
-  <a class="lightbox" href="{{ '/assets/images/projekte/ipad-stifte-wiederbeleben/01.jpg' | relative_url }}"><img src="{{ '/assets/images/projekte/ipad-stifte-wiederbeleben/01-600w.jpg' | relative_url }}" alt="Sieben weiße Eingabestifte fürs iPad liegen nebeneinander auf einem dunklen Tisch, bei zweien ist die USB-C-Ladebuchse zu sehen" loading="lazy"></a>
-</div>
+![Sieben weiße Eingabestifte fürs iPad liegen nebeneinander auf einem dunklen Tisch, bei zweien ist die USB-C-Ladebuchse zu sehen](/assets/images/projekte/ipad-stifte-wiederbeleben/01.jpg)
+{: .gallery}

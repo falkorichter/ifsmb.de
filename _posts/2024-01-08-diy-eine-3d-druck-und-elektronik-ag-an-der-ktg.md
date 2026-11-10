@@ -9,9 +9,8 @@ tags: [35services, ktg, ktg-ag-jahr-1, rc-modellbau, axidraw, prusa-mk4]
 
 Am 8. April um 15:00Uhr startet eine AG an der Kurt-Tucholsky-Grundschule und wir lernen 3D Druck, Löten und Basteln einen fertgesteuerten Bagger oder Kipplaster. Dies ist ein Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) (und [Jan]({{ '/team/jan/' | relative_url }}) von 35services).
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06-600w.png" alt="Ein zerlegter 3D-gedruckter RC-Kipplaster: gelbe Räder, blaue Mulde und Elektronik" loading="lazy"></a>
-</div>
+![Ein zerlegter 3D-gedruckter RC-Kipplaster: gelbe Räder, blaue Mulde und Elektronik](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/06.png)
+{: .gallery}
 
 ## Vielen Dank an unsere Sponsoren:
 
@@ -22,11 +21,10 @@ Am 8. April um 15:00Uhr startet eine AG an der Kurt-Tucholsky-Grundschule und wi
 - [**Brille und Glas**](https://www.brilleundglas-augenoptik.de/) – der tolle kleine Optiker in der Lehrter Straße – Doppelt Dank für den Spind: die Kollegen in der Werktatt freuen sich und die Einnahmen gehen direkt in diese AG
 - **Eltern** – Danke an alle Eltern, die schon Geld mitgegeben haben
 
-<div class="gallery">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/01.jpg" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/01-600w.jpg" alt="Foto aus der 3D-Druck- und Elektronik-AG (1/9)" loading="lazy"></a>
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/02.jpg" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/02-600w.jpg" alt="Foto aus der 3D-Druck- und Elektronik-AG (2/9)" loading="lazy"></a>
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/03.jpg" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/03-600w.jpg" alt="Foto aus der 3D-Druck- und Elektronik-AG (3/9)" loading="lazy"></a>
-</div>
+![Foto aus der 3D-Druck- und Elektronik-AG (1/9)](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/01.jpg)
+![Foto aus der 3D-Druck- und Elektronik-AG (2/9)](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/02.jpg)
+![Foto aus der 3D-Druck- und Elektronik-AG (3/9)](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/03.jpg)
+{: .gallery}
 
 Wir sind knapp [700 Schüler](https://www.bildung.berlin.de/schulverzeichnis/schuelerschaft.aspx) an der Schule und werden auf den Schulfesten/Schulflohmärkten immer unsere Sponsoren ausstellen und großzügig erwähnen 🫶🫶🫶
 
@@ -69,9 +67,8 @@ Zum Anmelden bitte bei Frau Schroth im Sekretariat melden und eine eMail an falk
 
 #### 2 Auf dem Weg zum 3D Druck
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/07.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/07-600w.png" alt="Der AxiDraw zeichnet mit einem Stift ein Bild – ein 2D-Drucker als Roboter" loading="lazy"></a>
-</div>
+![Der AxiDraw zeichnet mit einem Stift ein Bild – ein 2D-Drucker als Roboter](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/07.png)
+{: .gallery}
 
 - Was ist ein 3D Druck Stift? Warum ist er gefährlich (heiß)
 - Wir malen mit dem 3D Druck Stift
@@ -106,20 +103,17 @@ Logo auf die Platine
 
 #### 5 Wir rechnen
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/08.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/08-600w.png" alt="Der Klassenraum der AG: Whiteboards mit der Kostenrechnung, dazwischen ein Bildschirm mit RC-Bausätzen" loading="lazy"></a>
-</div>
+![Der Klassenraum der AG: Whiteboards mit der Kostenrechnung, dazwischen ein Bildschirm mit RC-Bausätzen](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/08.png)
+{: .gallery}
 
-<div class="gallery">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/04.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/04-600w.png" alt="Foto aus der 3D-Druck- und Elektronik-AG (4/9)" loading="lazy"></a>
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/05.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/05-600w.png" alt="Foto aus der 3D-Druck- und Elektronik-AG (5/9)" loading="lazy"></a>
-</div>
+![Foto aus der 3D-Druck- und Elektronik-AG (4/9)](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/04.png)
+![Foto aus der 3D-Druck- und Elektronik-AG (5/9)](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/05.png)
+{: .gallery}
 
 #### 6 – Räder und Riemen aus Gummi drucken
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/09.png" class="lightbox"><img src="/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/09-600w.png" alt="Ein Prusa MK4 druckt Räder und Riemen aus rotem TPU" loading="lazy"></a>
-</div>
+![Ein Prusa MK4 druckt Räder und Riemen aus rotem TPU](/assets/images/news/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/09.png)
+{: .gallery}
 
 - wir haben WLAN und richten den Drucker in der Schule ein
 - Wir reden über Sponsoren und sammeln Bargeld von den Eltern ein. Ein Kind wird Kassenwart 🎉

@@ -26,6 +26,5 @@ Die Schulleitung freut sich, dass die Stifte vielleicht wieder genutzt werden k�
 
 Einen Teil der Stifte haben wir zum Testen ans Rosalind-Franklin-Gymnasium ausgeliehen: [iPad-Stifte testen am Rosalind-Franklin-Gymnasium]({{ '/projekte/ipad-stifte-rosalind-franklin-gymnasium/' | relative_url }}).
 
-<div class="gallery gallery-single">
-  <a class="lightbox" href="{{ '/assets/images/projekte/ipad-stifte-wiederbeleben/01.jpg' | relative_url }}"><img src="{{ '/assets/images/projekte/ipad-stifte-wiederbeleben/01-600w.jpg' | relative_url }}" alt="Sieben weiße Eingabestifte fürs iPad liegen nebeneinander auf einem dunklen Tisch, bei zweien ist die USB-C-Ladebuchse zu sehen" loading="lazy"></a>
-</div>
+![Sieben weiße Eingabestifte fürs iPad liegen nebeneinander auf einem dunklen Tisch, bei zweien ist die USB-C-Ladebuchse zu sehen](/assets/images/projekte/ipad-stifte-wiederbeleben/01.jpg)
+{: .gallery}

@@ -15,20 +15,19 @@ wir haben uns getroffen und mal ein bisschen experimentiert mit unseren 3-D Druc
 - TPU – wir haben verschiedene TPU Filament getestet, unter anderem ein sich aufschäumendes Filament. TPU ist ein gummiartiges, weiches Filament.
 - Falko hat einen Drucker, der eine 0,4 mm große Düse hat, vorgegaukelt er hätte eine Zwanzig Millimeter große Düse und müsse mit 6 mm Schichtdicke drucken. Das war sehr lustig und hat erstaunlicherweise sogar funktioniert. Die Lüftung muss dafür abgeschaltet sein. Dann sprudelt lustig Filament aus der kleinen Düse und wirst zu einer lustigen Wurst, die dann sogar den Plan entsprechend eine Form ergibt.
 
-<div class="gallery">
-  <a href="/assets/images/news/3d-druck-experimente/01.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/01-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (1/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/02.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/02-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (2/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/03.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/03-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (3/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/04.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/04-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (4/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/05.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/05-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (5/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/06.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/06-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (6/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/07.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/07-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (7/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/08.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/08-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (8/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/09.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/09-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (9/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/10.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/10-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (10/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/11.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/11-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (11/12)" loading="lazy"></a>
-  <a href="/assets/images/news/3d-druck-experimente/12.jpg" class="lightbox"><img src="/assets/images/news/3d-druck-experimente/12-600w.jpg" alt="Foto von den 3D-Druck-Experimenten (12/12)" loading="lazy"></a>
-</div>
+![Foto von den 3D-Druck-Experimenten (1/12)](/assets/images/news/3d-druck-experimente/01.jpg)
+![Foto von den 3D-Druck-Experimenten (2/12)](/assets/images/news/3d-druck-experimente/02.jpg)
+![Foto von den 3D-Druck-Experimenten (3/12)](/assets/images/news/3d-druck-experimente/03.jpg)
+![Foto von den 3D-Druck-Experimenten (4/12)](/assets/images/news/3d-druck-experimente/04.jpg)
+![Foto von den 3D-Druck-Experimenten (5/12)](/assets/images/news/3d-druck-experimente/05.jpg)
+![Foto von den 3D-Druck-Experimenten (6/12)](/assets/images/news/3d-druck-experimente/06.jpg)
+![Foto von den 3D-Druck-Experimenten (7/12)](/assets/images/news/3d-druck-experimente/07.jpg)
+![Foto von den 3D-Druck-Experimenten (8/12)](/assets/images/news/3d-druck-experimente/08.jpg)
+![Foto von den 3D-Druck-Experimenten (9/12)](/assets/images/news/3d-druck-experimente/09.jpg)
+![Foto von den 3D-Druck-Experimenten (10/12)](/assets/images/news/3d-druck-experimente/10.jpg)
+![Foto von den 3D-Druck-Experimenten (11/12)](/assets/images/news/3d-druck-experimente/11.jpg)
+![Foto von den 3D-Druck-Experimenten (12/12)](/assets/images/news/3d-druck-experimente/12.jpg)
+{: .gallery}
 
 <video class="post-video" controls preload="none" playsinline poster="/assets/video/news/3d-druck-experimente/02.jpg" src="/assets/video/news/3d-druck-experimente/02.mp4"></video>
 

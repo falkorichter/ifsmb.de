@@ -9,7 +9,6 @@ In der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }
 
 Die Station ist Open Source – wir wollen mit den AGs weitere Taschenstationen in Berlin verteilen.
 
-<div class="gallery">
-  <a href="/assets/images/news/videocall-mit-reuseme/01.jpg" class="lightbox"><img src="/assets/images/news/videocall-mit-reuseme/01-600w.jpg" alt="Die große Tafel im Klassenraum zeigt die Präsentation von ReUseMe: vom Einkaufsbeutel über Bornheim und Frankfurt bis zur 3D-gedruckten Station für ganz Deutschland (Kamerabild der Klasse unkenntlich gemacht)" loading="lazy"></a>
-  <a href="/assets/images/news/videocall-mit-reuseme/02.jpg" class="lightbox"><img src="/assets/images/news/videocall-mit-reuseme/02-600w.jpg" alt="Ein Laptop mit dem Videocall steht auf unserem Snapmaker U1, an der Tafel die Schritte Ziel, Export, Slice, Print (Kinder unkenntlich gemacht)" loading="lazy"></a>
-</div>
+![Die große Tafel im Klassenraum zeigt die Präsentation von ReUseMe: vom Einkaufsbeutel über Bornheim und Frankfurt bis zur 3D-gedruckten Station für ganz Deutschland (Kamerabild der Klasse unkenntlich gemacht)](/assets/images/news/videocall-mit-reuseme/01.jpg)
+![Ein Laptop mit dem Videocall steht auf unserem Snapmaker U1, an der Tafel die Schritte Ziel, Export, Slice, Print (Kinder unkenntlich gemacht)](/assets/images/news/videocall-mit-reuseme/02.jpg)
+{: .gallery}

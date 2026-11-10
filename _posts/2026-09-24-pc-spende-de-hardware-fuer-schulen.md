@@ -11,9 +11,8 @@ Falko hat Erfahrungen mit „das macht Schule“ gemacht und will es mir euch te
 
 Wenn ihr Kontakt zu Firmen habt, bei denen die IT-Hardware aussortiert wird, schaut euch [pc-spende.de](http://pc-spende.de) an – Das System ist super einfach, ihr inseriert die Hardware, Schulen bewerben sich und bekommen euren Kontakt erst wenn [das-macht-schule](http://das-macht-schule.net/) die Rahmenbedingungen (Zustimmung der Schulleitung etc.) geklärt hat. Die Abholung erfolgt dann direkt.
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/pc-spende-de-hardware-fuer-schulen/01.png" class="lightbox"><img src="/assets/images/news/pc-spende-de-hardware-fuer-schulen/01-600w.png" alt="Banner von pc-spende.de – eine Initiative von Das macht Schule" loading="lazy"></a>
-</div>
+![Banner von pc-spende.de – eine Initiative von Das macht Schule](/assets/images/news/pc-spende-de-hardware-fuer-schulen/01.png)
+{: .gallery}
 
 Dort können wir als offene Werkstatt auch unterstützen! Wenn das beschriebene Prozedere zu kompliziert ist. Meldet euch als Berliner Spender bei *falko [ät] 35services [punkt] de* – wir nehmen die Hardware an und vermitteln sie an [pc-spende.de](http://pc-spende.de) weiter.
 

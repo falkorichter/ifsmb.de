@@ -45,6 +45,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Bildergalerien werden jetzt in Markdown geschrieben: Bilder untereinander und darunter `{: .gallery}` – ein kleines Jekyll-Plugin macht daraus die Galerie mit Vorschaubildern und Lightbox (ein Bild wird automatisch groß, Alt-Texte sind Pflicht). Videos gehen genauso mit `![Beschreibung](video.mp4)`. Alle 40 bestehenden Galerien sind umgestellt; die Seiten sehen aus wie vorher.
 - Tag der offenen Tür am Rosalind-Franklin-Gymnasium: Schlüsselanhänger mit Schullogo, gebaut mit MakeMySign von MakerWorld – mit Screenshot des Druckauftrags und Zeitraffer.
 - „Prusa MK3S (HeartLabs) flott machen“ ist ein persönliches Projekt von Falko; „Netzwerk“ steht ganz oben im Menü „Wir“.
 - Die Würfel-Beiträge der Platanus Schule und des Rosalind-Franklin-Gymnasiums heißen jetzt „Infinite Cube“, verlinken das Modell auf MakerWorld und sich gegenseitig – an beiden Schulen lernen wir gerade, wie man Stützstrukturen baut.

@@ -7,9 +7,8 @@ verlinkt: []
 ---
 Was als 3D-Druck AG an einer Grundschule angefangen hat, ist inzwischen ein ganzes Geflecht: AGs an mehreren Schulen, Ausflüge, Partner, Geräte, die bei verschiedenen Leuten stehen, und viele Menschen, die mitmachen. Damit man das auch **sehen** kann, gibt es jetzt eine neue Seite: das **[Netzwerk]({{ '/netzwerk/' | relative_url }})** (im Menü unter „Wir“).
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/netzwerk/02.jpg" class="lightbox"><img src="/assets/images/news/netzwerk/02-600w.jpg" alt="Das Netzwerk mit der 3D-Druck AG an der KTG in der Mitte: Ihre Verbindungen zu Teilprojekten, Terminen, Beiträgen, Menschen, Partnern und Geräten leuchten auf, rechts stehen sie als Buttons" loading="lazy"></a>
-</div>
+![Das Netzwerk mit der 3D-Druck AG an der KTG in der Mitte: Ihre Verbindungen zu Teilprojekten, Terminen, Beiträgen, Menschen, Partnern und Geräten leuchten auf, rechts stehen sie als Buttons](/assets/images/news/netzwerk/02.jpg)
+{: .gallery}
 
 ## Was das Netzwerk zeigt
 

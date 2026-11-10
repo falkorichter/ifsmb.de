@@ -67,10 +67,9 @@ Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projekte
 
 - ✅ **Mikroskop-Objektiv** – von Falko schon erfolgreich gedruckt ([Video](https://youtu.be/nuZ_JptlqYE), [Objektiv bei AmScope](https://amscope.com/products/4x-plan-achromatic-objective-lens-knurled-ring), [Modell auf Thingiverse](https://www.thingiverse.com/thing:5130912))
 
-  <div class="gallery gallery-small">
-    <a href="/assets/images/ideen/mikroskop/01.jpg" class="lightbox"><img src="/assets/images/ideen/mikroskop/01-600w.jpg" alt="Falkos gedrucktes Mikroskop: ein schwarzer 3D-gedruckter Tubus mit Mikroskop-Objektiv (4×) vorn an einer Sony-Objektivkamera" loading="lazy"></a>
-    <a href="/assets/images/ideen/mikroskop/02.jpg" class="lightbox"><img src="/assets/images/ideen/mikroskop/02-600w.jpg" alt="Das gedruckte Mikroskop von hinten: die Objektivkamera Sony QX1 mit dem 3D-gedruckten Tubus" loading="lazy"></a>
-  </div>
+  ![Falkos gedrucktes Mikroskop: ein schwarzer 3D-gedruckter Tubus mit Mikroskop-Objektiv (4×) vorn an einer Sony-Objektivkamera](/assets/images/ideen/mikroskop/01.jpg)
+  ![Das gedruckte Mikroskop von hinten: die Objektivkamera Sony QX1 mit dem 3D-gedruckten Tubus](/assets/images/ideen/mikroskop/02.jpg)
+  {: .gallery .gallery-small}
 
 - **Wiggle-Linse** für Wackelbilder ([Anleitung von George Moua](https://www.georgemoua.com/3d-wiggle-lens), [Video](https://youtu.be/HOLFxGDkaJo), [Short 1](https://youtube.com/shorts/XtBXlFPNMfU), [Short 2](https://youtube.com/shorts/PVDwAEtDep0), [Variante für Sony E-Mount](https://www.instructables.com/3D-Printed-Wigglegram-Lens-Sony-E-mount-APSC/))
 - **Objektiv aus einer Kodak-Einwegkamera** ([Video](https://youtu.be/2ymKt4uhTOw))

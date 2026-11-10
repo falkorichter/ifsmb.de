@@ -13,9 +13,8 @@ lead: Partner – Nachbarschaftswerkstatt in Moabit
 
 Im Oktober 2026 gab es Nachschub: ein ganzer Tisch voller Filamentrollen in vielen Farben.
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/partner/35services/filamentspende.jpg" class="lightbox"><img src="/assets/images/partner/35services/filamentspende-600w.jpg" alt="Drei Stapel eingeschweißter Filamentrollen in Grün, Blau, Rot, Weiß und Kupfer auf einer Werkbank" loading="lazy"></a>
-</div>
+![Drei Stapel eingeschweißter Filamentrollen in Grün, Blau, Rot, Weiß und Kupfer auf einer Werkbank](/assets/images/partner/35services/filamentspende.jpg)
+{: .gallery}
 
 → [35services.de](https://35services.de/)
 

@@ -18,12 +18,11 @@ updates:
     text: |-
       **Dracheneier aus dem 3D-Drucker:** Ein schwarzes Ei mit Schuppen lässt sich öffnen – darin liegt zusammengerollt ein beweglicher Drache aus schimmerndem Filament.
 
-      <div class="gallery">
-      <a href="/assets/images/news/dracheneier-drucken/01.jpg" class="lightbox"><img src="/assets/images/news/dracheneier-drucken/01-600w.jpg" alt="Ein schwarzes 3D-gedrucktes Ei mit Drachenschuppen steht auf einem Tisch" loading="lazy"></a>
-      <a href="/assets/images/news/dracheneier-drucken/02.jpg" class="lightbox"><img src="/assets/images/news/dracheneier-drucken/02-600w.jpg" alt="Das Ei ist geöffnet: Darin liegt ein zusammengerollter, beweglicher Drache in Rosa und Blau" loading="lazy"></a>
-      </div>
+      ![Ein schwarzes 3D-gedrucktes Ei mit Drachenschuppen steht auf einem Tisch](/assets/images/news/dracheneier-drucken/01.jpg)
+      ![Das Ei ist geöffnet: Darin liegt ein zusammengerollter, beweglicher Drache in Rosa und Blau](/assets/images/news/dracheneier-drucken/02.jpg)
+      {: .gallery}
 
-      <video class="post-video" controls preload="none" playsinline poster="/assets/video/news/dracheneier-drucken/01.jpg" src="/assets/video/news/dracheneier-drucken/01.mp4"></video>
+      ![Video: Das Drachenei wird geöffnet, darin der zusammengerollte Drache](/assets/video/news/dracheneier-drucken/01.mp4)
 ---
 
 An der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) (KTG) in Moabit gibt es die „3D-Druck und CAD AG“: Kinder lernen dort, wie ein 3D-Drucker funktioniert, konstruieren eigene Objekte und drucken sie aus – mit 3D-Druck-Stiften, einem Plotter und unserem 4-Kopf-4-Farb-4-Material-Drucker.

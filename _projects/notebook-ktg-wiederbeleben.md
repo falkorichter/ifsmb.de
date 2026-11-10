@@ -18,6 +18,5 @@ Ein neues Projekt von Falko für die [3D-Druck AG an der KTG]({{ '/projekte/3d-d
 
 Wie bei den [iPad-Stiften]({{ '/projekte/ipad-stifte-wiederbeleben/' | relative_url }}) gilt: Was an der Schule herumliegt und noch funktioniert, soll wieder genutzt werden.
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/notebook-ktg/01.jpg" class="lightbox"><img src="/assets/images/news/notebook-ktg/01-600w.jpg" alt="Seitenansicht des aufgeklappten Notebooks: Anschlüsse und das beschädigte Displayscharnier" loading="lazy"></a>
-</div>
+![Seitenansicht des aufgeklappten Notebooks: Anschlüsse und das beschädigte Displayscharnier](/assets/images/news/notebook-ktg/01.jpg)
+{: .gallery}

@@ -21,6 +21,5 @@ Die [3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosal
 
 So haben alle Kinder die Materialien an einem Ort und können auch zu Hause weitermachen.
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/projekte/itslearning-rosalind-franklin-gymnasium/01.jpg" class="lightbox"><img src="/assets/images/projekte/itslearning-rosalind-franklin-gymnasium/01-600w.jpg" alt="Screenshot des itslearning-Kurses „3D-Druck und CAD AG“ mit den Plänen Slicer lernen, Externe Anfragen und TinkerCAD; links die Kursleitung (Namen außer Falko Richter unkenntlich gemacht)" loading="lazy"></a>
-</div>
+![Screenshot des itslearning-Kurses „3D-Druck und CAD AG“ mit den Plänen Slicer lernen, Externe Anfragen und TinkerCAD; links die Kursleitung (Namen außer Falko Richter unkenntlich gemacht)](/assets/images/projekte/itslearning-rosalind-franklin-gymnasium/01.jpg)
+{: .gallery}

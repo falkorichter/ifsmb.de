@@ -16,24 +16,23 @@ tags: [35services, jugend-hackt, lulzbot-mini, lulzbot-taz-6, axidraw, flexibles
 
 35Services hat mit Hardware und Freiwilligen auf den JugendHackt Congress unterstützt. Wir hoffen, dass die Finanzierung verlängert wird damit nach 13 Jahren nicht Schluss ist mit dieser tollen Institution.
 
-<div class="gallery">
-  <a href="/assets/images/news/jugend-hackt-congress-2026/01.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/01-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (1/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/02.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/02-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (2/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/03.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/03-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (3/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/04.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/04-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (4/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/05.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/05-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (5/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/06.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/06-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (6/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/07.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/07-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (7/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/08.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/08-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (8/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/09.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/09-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (9/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/10.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/10-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (10/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/11.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/11-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (11/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/12.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/12-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (12/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/13.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/13-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (13/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/14.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/14-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (14/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/15.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/15-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (15/16)" loading="lazy"></a>
-  <a href="/assets/images/news/jugend-hackt-congress-2026/16.jpg" class="lightbox"><img src="/assets/images/news/jugend-hackt-congress-2026/16-600w.jpg" alt="Foto vom Jugend Hackt Congress 2026 (16/16)" loading="lazy"></a>
-</div>
+![Foto vom Jugend Hackt Congress 2026 (1/16)](/assets/images/news/jugend-hackt-congress-2026/01.jpg)
+![Foto vom Jugend Hackt Congress 2026 (2/16)](/assets/images/news/jugend-hackt-congress-2026/02.jpg)
+![Foto vom Jugend Hackt Congress 2026 (3/16)](/assets/images/news/jugend-hackt-congress-2026/03.jpg)
+![Foto vom Jugend Hackt Congress 2026 (4/16)](/assets/images/news/jugend-hackt-congress-2026/04.jpg)
+![Foto vom Jugend Hackt Congress 2026 (5/16)](/assets/images/news/jugend-hackt-congress-2026/05.jpg)
+![Foto vom Jugend Hackt Congress 2026 (6/16)](/assets/images/news/jugend-hackt-congress-2026/06.jpg)
+![Foto vom Jugend Hackt Congress 2026 (7/16)](/assets/images/news/jugend-hackt-congress-2026/07.jpg)
+![Foto vom Jugend Hackt Congress 2026 (8/16)](/assets/images/news/jugend-hackt-congress-2026/08.jpg)
+![Foto vom Jugend Hackt Congress 2026 (9/16)](/assets/images/news/jugend-hackt-congress-2026/09.jpg)
+![Foto vom Jugend Hackt Congress 2026 (10/16)](/assets/images/news/jugend-hackt-congress-2026/10.jpg)
+![Foto vom Jugend Hackt Congress 2026 (11/16)](/assets/images/news/jugend-hackt-congress-2026/11.jpg)
+![Foto vom Jugend Hackt Congress 2026 (12/16)](/assets/images/news/jugend-hackt-congress-2026/12.jpg)
+![Foto vom Jugend Hackt Congress 2026 (13/16)](/assets/images/news/jugend-hackt-congress-2026/13.jpg)
+![Foto vom Jugend Hackt Congress 2026 (14/16)](/assets/images/news/jugend-hackt-congress-2026/14.jpg)
+![Foto vom Jugend Hackt Congress 2026 (15/16)](/assets/images/news/jugend-hackt-congress-2026/15.jpg)
+![Foto vom Jugend Hackt Congress 2026 (16/16)](/assets/images/news/jugend-hackt-congress-2026/16.jpg)
+{: .gallery}
 
 Es gibt hier keine Fotos mit den Teilis, ich habe keine Fotoerlaubnis für 35services, daher nur Fotos mit Erwachsenen.
 

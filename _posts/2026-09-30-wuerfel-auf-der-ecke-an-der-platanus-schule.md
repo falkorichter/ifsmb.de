@@ -11,6 +11,5 @@ Das Gleiche machen wir gerade auch am [Rosalind-Franklin-Gymnasium]({{ '/news/20
 
 Falko hat inzwischen eine [Referenz gedruckt]({{ '/news/2026/11/03/ein-infinite-cube-als-referenz/' | relative_url }}), mit der die AGs ihre Würfel vergleichen können.
 
-<div class="gallery gallery-single">
-  <a href="/assets/images/news/platanus-ag-wuerfel/01.jpg" class="lightbox"><img src="/assets/images/news/platanus-ag-wuerfel/01-600w.jpg" alt="Ein rosa Würfelrahmen steht auf einer Ecke auf dem Druckbett, an einigen Kanten hängen feine Fäden" loading="lazy"></a>
-</div>
+![Ein rosa Würfelrahmen steht auf einer Ecke auf dem Druckbett, an einigen Kanten hängen feine Fäden](/assets/images/news/platanus-ag-wuerfel/01.jpg)
+{: .gallery}
