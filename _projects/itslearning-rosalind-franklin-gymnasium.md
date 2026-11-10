@@ -13,7 +13,7 @@ partners:
   - Rosalind-Franklin-Gymnasium
 ---
 
-Die [3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) organisiert sich über **itslearning**, die Lernplattform der Berliner Schulen. Dort hat die „3D-Druck und CAD AG“ einen eigenen Kurs, in dem die Kursleitung – Falko ist auch dabei – die Themen als **Pläne** mit Materialien anlegt:
+Die [3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) organisiert sich über **itslearning**, die Lernplattform der Berliner Schulen. Dort hat die „3D-Druck und CAD AG“ einen eigenen Kurs. Das ist super praktisch und Falko freut sich so gut in die Schule integriert zu sein.
 
 - **Slicer lernen** – wir lernen den Slicer kennen, in unserem Fall BambuStudio.
 - **TinkerCAD** – Konstruieren im Browser.
