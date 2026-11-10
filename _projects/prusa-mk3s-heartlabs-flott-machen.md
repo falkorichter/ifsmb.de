@@ -2,6 +2,7 @@
 title: "Prusa MK3S (HeartLabs) flott machen"
 summary: Falko repariert einen Prusa MK3S von HeartLabs bei 35services – danach soll er zu Events mitkommen und ausgeliehen werden können.
 status: aktuell
+persoenlich: true
 start: 2026-11-01
 zeitraum: seit November 2026
 ort: 35services e.V.

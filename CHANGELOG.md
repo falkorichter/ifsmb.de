@@ -10,6 +10,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Kalender: Tag der offenen Tür am Rosalind-Franklin-Gymnasium (28. November 2026, 10–13 Uhr) – die Kinder drucken Merchandise für die Schule und stellen den Makespace vor.
 - Beitrag: Alle iPad-Stifte der KTG hängen am Ladekabel (Beschriftungen gedruckter Haken unkenntlich gemacht).
 - Neues Teilprojekt der KTG-AG: „Ein Notebook der KTG wiederbeleben“ (Displayscharnier mit Macke, stationär nutzbar), verwandt mit den iPad-Stiften.
 - Persönlicher Beitrag von Falko: „Ein Infinite Cube als Referenz“ (Fehldruck in Orange, gelungener Würfel in Blau auf dem P2S am Rosalind-Franklin-Gymnasium), verlinkt mit den Infinite-Cube-Beiträgen beider Schulen.
@@ -43,6 +44,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- „Prusa MK3S (HeartLabs) flott machen“ ist ein persönliches Projekt von Falko; „Netzwerk“ steht ganz oben im Menü „Wir“.
 - Die Würfel-Beiträge der Platanus Schule und des Rosalind-Franklin-Gymnasiums heißen jetzt „Infinite Cube“, verlinken das Modell auf MakerWorld und sich gegenseitig – an beiden Schulen lernen wir gerade, wie man Stützstrukturen baut.
 - Dracheneier: kein eigener Beitrag mehr, sondern ein Update im Projekt der KTG-AG (mit Fotos und Video).
 - Mogster und PC-Blend: Erfahrungen mit dem schwierigen Filament (Trocknen, aufgeheizter Druckraum, als Nächstes ein Satin-Druckbett); Beiträge mit den benutzten Druckern verlinkt.

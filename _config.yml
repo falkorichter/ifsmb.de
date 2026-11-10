@@ -70,6 +70,8 @@ nav:
     url: /kalender/
   - title: Wir
     children:
+      - title: Netzwerk
+        url: /netzwerk/
       - title: Projekte
         url: /projekte/
       - title: Projekt-Ideen
@@ -82,8 +84,6 @@ nav:
         url: /ausstattung/
       - title: Team
         url: /team/
-      - title: Netzwerk
-        url: /netzwerk/
   - title: Partner
     url: /partner/
   - title: Presse
