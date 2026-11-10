@@ -3,8 +3,8 @@ title: "WordPress-Support an der KTG"
 summary: Falko unterstützt die Kurt-Tucholsky-Grundschule bei ihrer WordPress-Website – und hat dafür ein Plugin geschrieben, das CSV-Dateien in Tabellen verwandelt.
 status: aktuell
 persoenlich: true
-start: 2026-09-01
-zeitraum: seit 2026
+start: 2023-09-01
+zeitraum: seit 2023
 ort: Kurt-Tucholsky-Grundschule, Moabit
 event_tag: wordpress-ktg
 tags: [wordpress, ktg]
@@ -23,6 +23,21 @@ Themen:
 * [ ] Schulleitung beraten
 * [ ] Wordpress Pflege (Plugins aktualisieren, Wordpress aktualisieren, Dokumentation)
 * [ ] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
+
+## Autoren können nur ihre eigenen Beiträge bearbeiten:
+`:themes/[...]/functions.php`:
+```
+add_action( 'admin_init', 'allow_author_edit_pages' );
+function allow_author_edit_pages() {
+    $role = get_role( 'author' );
+    if ( $role ) {
+        $role->add_cap( 'edit_pages' );
+        $role->add_cap( 'edit_published_pages' );
+    }
+}
+```
+* https://share.gemini.google/D3H8qaKTWvyK
+* 
 
 ## Das Plugin: CSV Import to Table
 
