@@ -1,6 +1,6 @@
 ---
 title: "WordPress-Support an der KTG"
-summary: Falko unterstützt die Kurt-Tucholsky-Grundschule bei ihrer WordPress-Website – und hat dafür ein Plugin geschrieben, das CSV-Dateien in Tabellen verwandelt.
+summary: Falko unterstützt die Kurt-Tucholsky-Grundschule bei ihrer WordPress-Website – und hat dafür sogar Plugin geschrieben, das CSV-Dateien in Tabellen verwandelt.
 status: aktuell
 persoenlich: true
 start: 2023-09-01
@@ -16,7 +16,7 @@ partners:
 
 Die Website der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) läuft mit **WordPress**. Falko hilft der Schule ehrenamtlich dabei, die Seite zu pflegen und Inhalte einfacher einzustellen.
 
-Themen:
+## Themen:
 * [ ] Elementor los werden
 * [ ] Webseite umziehen zu in-berlin.de
 * [x] Ansprechpartner bei riedewald.net auf die aktuelle Schulleitung anpassen lassen
@@ -25,7 +25,7 @@ Themen:
 * [ ] Wordpress Pflege (Plugins aktualisieren, Wordpress aktualisieren, Dokumentation)
 * [x] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
 
-## Autoren können nur ihre eigenen Beiträge bearbeiten:
+# Autoren können nur ihre eigenen Beiträge bearbeiten:
 `:themes/[...]/functions.php`:
 ```
 add_action( 'admin_init', 'allow_author_edit_pages' );
@@ -40,7 +40,7 @@ function allow_author_edit_pages() {
 * https://share.gemini.google/D3H8qaKTWvyK
 * 
 
-## Das Plugin: CSV Import to Table
+### Das Plugin: CSV Import to Table
 
 Viele Informationen liegen in der Schule als Tabelle vor – zum Beispiel aus Excel oder einer anderen Tabellenkalkulation. Damit sie ohne Abtippen auf der Website landen, hat Falko das WordPress-Plugin **[CSV Import to Table](https://github.com/falkorichter/csv-import-to-table-improved)** entwickelt.
 
