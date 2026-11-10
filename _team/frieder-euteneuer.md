@@ -23,7 +23,7 @@ Bei [Hack the Summer](https://hack-the-summer.de/) ist er als Mentor eingetragen
 
 - **März 2026:** Beim [Besuch von Schulstadtrat Benjamin Fritz an der KTG]({{ '/kalender/2026-03-09-schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }}) war Frieder dabei – zum Netzwerken und um den [Snapmaker U1]({{ '/ausstattung/snapmaker-u1/' | relative_url }}) zu feiern.
 - **Januar 2027:** Zur [kleinen feierlichen Eröffnung des Makespace am Rosalind-Franklin-Gymnasium]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}) will Frieder weitere Leute zusammentrommeln.
-- Sein persönliches Projekt: [40 Monitore von der Bundesdruckerei]({{ '/projekte/40-monitore-bundesdruckerei/' | relative_url }}).
+- Seine persönlichen Projekte: der [Makespace Tiergarten]({{ '/projekte/makespace-tiergarten/' | relative_url }}) und [40 Monitore von der Bundesdruckerei]({{ '/projekte/40-monitore-bundesdruckerei/' | relative_url }}).
 
 ## Aus der Presse
 

@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- Persönliches Projekt „Makespace Tiergarten“ von Frieder (Raum 226: 3D-Drucker, Ton- und Videostudio, Werkzeug) mit persönlichem Beitrag zum Tag der offenen Tür 2025 und 8 Fotos von Falko; Gesichter von Besucher*innen und handschriftliche Namen unkenntlich gemacht. Verlinkt vom Teamprofil von Frieder; neues Stichwort `makespace-tiergarten`.
+
 ### Geändert
 
 - Termin all about automation 2027: Stand der Anfrage für einen Besuch mit Schüler*innen (August und November 2026).
