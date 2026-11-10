@@ -18,3 +18,5 @@ Wir stellen uns das ähnlich vor wie an der KTG, als [Schulstadtrat Benjamin Fri
 Die 6 Drucker kommen aus der Förderung über [junior1stein](https://junior1stein.de/), die Berliner MINT-Initiative – das Gymnasium gehört dort zum [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/). Mehr dazu unter [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}#junior1stein).
 
 [Frieder Euteneuer]({{ '/team/frieder-euteneuer/' | relative_url }}) will zur Eröffnung weitere Leute zusammentrommeln – Lehrkräfte und alle, die Makespaces an Schulen voranbringen wollen.
+
+Den Termin suchen wir gerade. Der 19. Januar, 16:00 bis 18:00 steht im Raum.
