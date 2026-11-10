@@ -10,6 +10,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Neues Teilprojekt der AG am Rosalind-Franklin-Gymnasium: „Die AG organisiert sich über itslearning“ mit Screenshot des Kurses (Namen außer Falko unkenntlich gemacht).
 - Kalender: Tag der offenen Tür am Rosalind-Franklin-Gymnasium (28. November 2026, 10–13 Uhr) – die Kinder drucken Merchandise für die Schule und stellen den Makespace vor.
 - Beitrag: Alle iPad-Stifte der KTG hängen am Ladekabel (Beschriftungen gedruckter Haken unkenntlich gemacht).
 - Neues Teilprojekt der KTG-AG: „Ein Notebook der KTG wiederbeleben“ (Displayscharnier mit Macke, stationär nutzbar), verwandt mit den iPad-Stiften.
