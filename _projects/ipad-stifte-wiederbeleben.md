@@ -14,7 +14,7 @@ partners:
   - Kurt-Tucholsky-Grundschule
 ---
 
-An der Kurt-Tucholsky-Grundschule liegen **ganz viele Eingabestifte fürs iPad** herum, die lange nicht benutzt wurden. Das sind **keine originalen Apple Pencils**, sondern einfache kompatible Stifte – **ohne Neigungs- und ohne Druckerkennung**. Zum Schreiben, Zeichnen und Tippen auf dem iPad reichen sie trotzdem.
+An der Kurt-Tucholsky-Grundschule liegen **ganz viele Eingabestifte fürs iPad** herum, die lange nicht benutzt wurden. Das sind **keine originalen Apple Pencils**, sondern einfache kompatible Stifte – **ohne Neigungs- und ohne Druckerkennung**. Zum Schreiben, Zeichnen und Tippen auf dem iPad sind sie aber ideal – und wir brauchen präzise Eingaben beim Arbeiten mit Tinkercad und CAD.
 
 In der [3D-Druck AG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) holen wir sie wieder hervor:
 

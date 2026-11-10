@@ -4,8 +4,11 @@ date: 2026-09-14 08:00:00 +0200
 author: falko-richter
 persoenlich: true
 tags: [mogster-pc-blend, mogster]
+verlinkt: [/ausstattung/prusa-mk4-mmu/]
 ---
-Erste Drucke für das Teilprojekt [PC-Blend drucken]({{ '/projekte/mogster-pc-blend-drucken/' | relative_url }}) am Mogster. Nicht jeder Versuch hat geklappt – aber die Zahnräder sehen gut aus. Eine Erklärung folgt.
+Erste Drucke für das Teilprojekt [PC-Blend drucken]({{ '/projekte/mogster-pc-blend-drucken/' | relative_url }}) am Mogster. Nicht jeder Versuch hat geklappt – aber die Zahnräder sehen gut aus.
+
+PC-Blend ist schwierig zu drucken. Vielleicht ist das Filament schon sehr alt – getrocknet haben wir es aber. Der Druckraum in der IKEA-Kiste war eigentlich ganz gut aufgeheizt. Als Nächstes testen wir ein **Satin-Druckbett**, das Falko gekauft hat.
 
 <div class="gallery">
   <a href="/assets/images/news/mogster-pc-blend/01.jpg" class="lightbox"><img src="/assets/images/news/mogster-pc-blend/01-600w.jpg" alt="Fehldruck: ein Zahnrad hängt als Fadengewirr an der Düse eines Prusa MK4" loading="lazy"></a>

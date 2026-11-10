@@ -10,6 +10,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Beitrag: Alle iPad-Stifte der KTG hängen am Ladekabel (Beschriftungen gedruckter Haken unkenntlich gemacht).
+- Neues Teilprojekt der KTG-AG: „Ein Notebook der KTG wiederbeleben“ (Displayscharnier mit Macke, stationär nutzbar), verwandt mit den iPad-Stiften.
+- Persönlicher Beitrag von Falko: „Ein Infinite Cube als Referenz“ (Fehldruck in Orange, gelungener Würfel in Blau auf dem P2S am Rosalind-Franklin-Gymnasium), verlinkt mit den Infinite-Cube-Beiträgen beider Schulen.
+- Beitrag: Mehrfarbdruck mit dem A1 mini an der Platanus Schule – Filament wird per Hand gewechselt (Schrift auf dem Anhänger unkenntlich gemacht).
+- Ausstattung: eine Seite für alle sechs Drucker am Rosalind-Franklin-Gymnasium (4 × Bambu Lab A1 mini, 2 × Bambu Lab P2S mit AMS), die der Schule gehören.
 - Projektkarten (Projekte, Archiv, persönliche Projekte, Startseite) zeigen, wie aktiv ein Projekt ist: Symbole mit hochgestellten Zahlen für Teilprojekte 🧩, Termine 📅 (gelb, wenn welche anstehen), Updates 📰, Geräte 🛠️ und Beteiligte 👤 – jedes führt direkt zum passenden Abschnitt der Projektseite.
 - Beiträge können mehrere Autor*innen haben (`author` als Liste); der Beitrag zum Tag der offenen Tür im Makespace Tiergarten ist jetzt von Falko und Frieder.
 - Persönliches Projekt „Makespace Tiergarten“ von Frieder (Raum 226: 3D-Drucker, Ton- und Videostudio, Werkzeug) mit persönlichem Beitrag zum Tag der offenen Tür 2025 und 8 Fotos von Falko; Gesichter von Besucher*innen und handschriftliche Namen unkenntlich gemacht. Verlinkt vom Teamprofil von Frieder; neues Stichwort `makespace-tiergarten`.
@@ -38,6 +43,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Die Würfel-Beiträge der Platanus Schule und des Rosalind-Franklin-Gymnasiums heißen jetzt „Infinite Cube“, verlinken das Modell auf MakerWorld und sich gegenseitig – an beiden Schulen lernen wir gerade, wie man Stützstrukturen baut.
+- Dracheneier: kein eigener Beitrag mehr, sondern ein Update im Projekt der KTG-AG (mit Fotos und Video).
+- Mogster und PC-Blend: Erfahrungen mit dem schwierigen Filament (Trocknen, aufgeheizter Druckraum, als Nächstes ein Satin-Druckbett); Beiträge mit den benutzten Druckern verlinkt.
+- Moldlay: Stand der Versuche (sehr brüchig, Föhn hat kaum geholfen, als Nächstes anderer Drucker oder 2,85-mm-Filament).
+- Open Press bauen läuft seit 2026; iPad-Stifte: präzise Eingaben für Tinkercad und CAD.
 - Projekt „Prusa MK3S (HeartLabs) flott machen“: Anton ist mit beteiligt.
 - Termin all about automation 2027: Stand der Anfrage für einen Besuch mit Schüler*innen (August und November 2026).
 

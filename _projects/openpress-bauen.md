@@ -2,8 +2,8 @@
 title: "Open Press bauen"
 summary: Eine kleine Tiefdruckpresse aus dem 3D-Drucker – für Linoldruck und Radierung. Ein Exemplar ist schon fertig.
 status: aktuell
-start: 2026-11-10
-zeitraum: Schuljahr 2026/27
+start: 2026-01-01
+zeitraum: seit 2026
 ort: Kurt-Tucholsky-Grundschule, Moabit
 teil_von: [3d-druck-ag-ktg]
 event_tag: openpress

@@ -15,4 +15,4 @@ Ein neues Projekt von Falko und Philipp: **Moldlay drucken**. Moldlay ist ein wa
 
 Die ersten Versuche liefen im September 2026 auf einem Prusa MK4 – Fotos gibt es im Beitrag [Moldlay drucken: die ersten Versuche]({{ '/news/2026/09/24/moldlay-drucken-die-ersten-versuche/' | relative_url }}).
 
-<span class="todo">Erklärung, was wir mit Moldlay vorhaben, folgt.</span>
+**Stand:** Moldlay ist **extrem brüchig**. Mit einem Föhn haben wir versucht, das Filament geschmeidiger zu bekommen – geholfen hat es nur wenig. Nächste Schritte: einen anderen Drucker oder **2,85-mm-Filament** ausprobieren.
