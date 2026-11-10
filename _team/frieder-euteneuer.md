@@ -1,6 +1,6 @@
 ---
 title: Frieder Euteneuer
-role: Er weiß noch nichts davon
+role: Makespace aktivist am Tiergaten Gymnsasium
 order: 5
 links:
   - title: Mentor bei Hack the Summer
