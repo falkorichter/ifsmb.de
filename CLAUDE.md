@@ -8,6 +8,7 @@ Website des „Institut für spontane Makespace Buildung“. Jekyll 4, GitHub Pa
 bundle exec jekyll build    # → _site/
 bundle exec jekyll serve    # http://localhost:4000
 ruby _scripts/check_site.rb # nach dem Build: tote Links, verwaiste Seiten (--extern: externe Links)
+ruby _scripts/check_galerien.rb # Galerien müssen Markdown sein (keine HTML-Galerien)
 ```
 
 Nach neuen Seiten/Posts den Link-Check laufen lassen; er läuft auch im Pages-Workflow und stoppt das Deployment bei Fehlern. Externe Links, die dauerhaft tot sind, nicht löschen, sondern in Markdown mit `{: .link-tot}` hinter dem Link markieren (`[Text](url){: .link-tot}`): Das Layout hängt 🪦 an und erklärt das Symbol unten auf der Seite; `--extern` prüft markierte Links nicht mehr. Private Repos („noch privat“) nicht markieren. Das gilt nur für Links, die früher funktioniert haben (ältere Beiträge, übernommene Texte) – einen frisch recherchierten Link, der schon beim Einfügen tot ist, einfach entfernen.
@@ -58,7 +59,7 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
   ![Alt-Text 2](/assets/images/news/<slug>/02.jpg)
   {: .gallery}
   ```
-  Das Plugin baut daraus `<div class="gallery">` mit `a.lightbox` und nimmt automatisch das Vorschaubild `NN-600w.jpg`, wenn es existiert. Ein einzelnes Bild wird automatisch groß (`gallery-single`), kleine Vorschaubilder mit `{: .gallery .gallery-small}`. Jedes Bild braucht einen Alt-Text, sonst bricht der Build ab. Videos: `![Kurze Beschreibung](/assets/video/…/01.mp4)` als eigener Absatz wird zum `<video class="post-video">` mit `01.jpg` als Vorschaubild. Kein HTML für Galerien mehr schreiben.
+  Das Plugin baut daraus `<div class="gallery">` mit `a.lightbox` und nimmt automatisch das Vorschaubild `NN-600w.jpg`, wenn es existiert. Ein einzelnes Bild wird automatisch groß (`gallery-single`), kleine Vorschaubilder mit `{: .gallery .gallery-small}`. Jedes Bild braucht einen Alt-Text, sonst bricht der Build ab. Videos: `![Kurze Beschreibung](/assets/video/…/01.mp4)` als eigener Absatz wird zum `<video class="post-video">` mit `01.jpg` als Vorschaubild. Kein HTML für Galerien mehr schreiben – `_scripts/check_galerien.rb` meldet HTML-Galerien (`div.gallery`, `a.lightbox`, WordPress-Galerien) mit Datei und Zeile; der Workflow `.github/workflows/pruefen.yml` lässt damit jeden Pull Request durchfallen, `pages.yml` stoppt das Deployment.
 - Keine externen Einbettungen (YouTube-iframes, fremde Videos/Bilder): Videos lokal als 720p-MP4 in `assets/video/`, YouTube nur als Link mit lokalem Vorschaubild
 - Fotos immer ohne Metadaten ausliefern (Handyfotos enthalten GPS-Daten): mit Pillow neu speichern, Originale von Personenfotos nicht committen
 - Fotos mit Kindern: Gesichter (auch Profile und Hinterköpfe) unkenntlich machen, bevor sie auf die Seite kommen. Die macOS-Vision-Gesichtserkennung findet nicht alle Gesichter – Ergebnis immer selbst in voller Größe prüfen und fehlende Köpfe von Hand ergänzen. Originale bleiben in `_logo/news/`, `_logo/kalender/`, `_logo/team/` (in `.gitignore`)

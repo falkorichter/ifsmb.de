@@ -1,0 +1,27 @@
+# Checks every pull request before it can be merged: galleries must be Markdown,
+# the site must build (the gallery plugin stops on images without alt text),
+# and the link check must pass.
+name: Prüfen
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+      - name: Galerien in Markdown prüfen
+        run: ruby _scripts/check_galerien.rb
+      - name: Seite bauen
+        run: bundle exec jekyll build
+      - name: Links und erreichbare Seiten prüfen
+        run: ruby _scripts/check_site.rb

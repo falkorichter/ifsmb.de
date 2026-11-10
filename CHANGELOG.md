@@ -10,6 +10,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Persönliches Projekt „ifsmb.de“ von Falko mit Aufgaben als Checkboxen (über GitHub abhakbar); Aufgabenlisten werden ohne Aufzählungspunkte angezeigt.
+- Prüfung `_scripts/check_galerien.rb`: Galerien müssen Markdown sein. Neuer Workflow „Prüfen“ für Pull Requests (Galerien, Build, Link-Check); auch das Deployment stoppt bei HTML-Galerien.
 - Neues Teilprojekt der AG am Rosalind-Franklin-Gymnasium: „Die AG organisiert sich über itslearning“ mit Screenshot des Kurses (Namen außer Falko unkenntlich gemacht).
 - Kalender: Tag der offenen Tür am Rosalind-Franklin-Gymnasium (28. November 2026, 10–13 Uhr) – die Kinder drucken Merchandise für die Schule und stellen den Makespace vor.
 - Beitrag: Alle iPad-Stifte der KTG hängen am Ladekabel (Beschriftungen gedruckter Haken unkenntlich gemacht).
