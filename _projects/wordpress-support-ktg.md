@@ -18,11 +18,12 @@ Die Website der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.
 
 Themen:
 * [ ] Elementor los werden
-* [ ] Webeseite umziehen zu in-berlin.de
+* [ ] Webseite umziehen zu in-berlin.de
+* [x] Ansprechpartner bei riedewald.net auf die aktuelle Schulleitung anpassen lassen
 * [ ] Lehrkräfte schulen
 * [ ] Schulleitung beraten
 * [ ] Wordpress Pflege (Plugins aktualisieren, Wordpress aktualisieren, Dokumentation)
-* [ ] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
+* [x] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
 
 ## Autoren können nur ihre eigenen Beiträge bearbeiten:
 `:themes/[...]/functions.php`:
