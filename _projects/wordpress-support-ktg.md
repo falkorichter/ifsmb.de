@@ -22,6 +22,7 @@ Die Website der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.
 * [x] Ansprechpartner bei riedewald.net auf die aktuelle Schulleitung anpassen lassen
 * [ ] Lehrkräfte schulen
 * [ ] Schulleitung beraten
+* [ ] neuen Themen
 * [ ] Wordpress Pflege (Plugins aktualisieren, Wordpress aktualisieren, Dokumentation)
 * [x] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
 
