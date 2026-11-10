@@ -16,6 +16,14 @@ partners:
 
 Die Website der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) läuft mit **WordPress**. Falko hilft der Schule ehrenamtlich dabei, die Seite zu pflegen und Inhalte einfacher einzustellen.
 
+Themen:
+* [ ] Elementor los werden
+* [ ] Webeseite umziehen zu in-berlin.de
+* [ ] Lehrkräfte schulen
+* [ ] Schulleitung beraten
+* [ ] Wordpress Pflege (Plugins aktualisieren, Wordpress aktualisieren, Dokumentation)
+* [ ] Feuer löschen (wenn mal wieder  [PHP kaputt ist](https://www.tagesschau.de/wirtschaft/technologie/it-sicherheit-php-luecke-100.html))
+
 ## Das Plugin: CSV Import to Table
 
 Viele Informationen liegen in der Schule als Tabelle vor – zum Beispiel aus Excel oder einer anderen Tabellenkalkulation. Damit sie ohne Abtippen auf der Website landen, hat Falko das WordPress-Plugin **[CSV Import to Table](https://github.com/falkorichter/csv-import-to-table-improved)** entwickelt.
