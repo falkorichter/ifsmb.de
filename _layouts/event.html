@@ -6,9 +6,16 @@ layout: default
     <header class="page-header">
       <p class="meta">{% include termin-datum.html event=page %}</p>
       <h1>{{ page.title }}</h1>
+      {%- if page.persoenlich and page.team %}
+      <p class="event-byline">Persönlicher Termin von {% for slug in page.team %}{% assign m = site.team | where: "slug", slug | first %}{% if m %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% else %}{{ slug }}{% endif %}{% if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif %}{% endfor %}</p>
+      {%- endif %}
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
+    {%- if page.persoenlich %}
+    {%- assign owners = "" | split: "" -%}{%- for slug in page.team -%}{%- assign m = site.team | where: "slug", slug | first -%}{%- if m -%}{%- assign owners = owners | push: m -%}{%- endif -%}{%- endfor %}
+    <p class="personal-note">🏠 Persönlicher Termin{% if owners.size > 0 %} von {% for m in owners %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %} – ein privater Makespace-Termin aus dem Team, kein Termin des Instituts. Er steht nicht im Kalender des Instituts, sondern nur im Teamprofil.</p>
+    {%- endif %}
     {%- if page.nur_projekt %}
     {%- if page.end and page.end != "" %}{% assign p_end = page.end | date: "%s" | plus: 0 %}{% else %}{% assign p_end = page.start | date: "%s" | plus: 7200 %}{% endif -%}
     {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
@@ -29,15 +36,12 @@ layout: default
       {% endfor %}
     </div>
     {% endif %}
-    {%- if page.team and page.team.size > 0 %}
-    <p class="event-team">Dabei aus dem Team: {% for slug in page.team %}{% assign m = site.team | where: "slug", slug | first %}{% if m %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% else %}{{ slug }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
-    {%- endif %}
-    {%- if page.tags and page.tags.size > 0 -%}
-    {%- assign rel = "" | split: "" -%}
-    {%- for pr in site.projects -%}{%- if pr.event_tag and page.tags contains pr.event_tag -%}{%- assign rel = rel | push: pr -%}{%- endif -%}{%- endfor -%}
-    {%- if rel.size > 0 %}
-    <p class="event-project">Gehört zum Projekt: {% for pr in rel %}<a href="{{ pr.url | relative_url }}">{{ pr.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
-    {%- endif -%}
+    {%- if page.persoenlich and page.team and page.team.size > 0 %}
+    <h2>Persönlicher Termin von</h2>
+    {% include team-karten.html team=page.team %}
+    {% include verbindungen.html ohne_personen=true %}
+    {%- else %}
+    {% include verbindungen.html %}
     {%- endif %}
     {% include verknuepft.html tags=page.tags %}
     <p class="cal-subscribe">

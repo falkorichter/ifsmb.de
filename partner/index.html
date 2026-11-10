@@ -17,6 +17,8 @@ lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
       {% if p_eq.size > 0 %}<p class="small">Ausstattung: {% for it in p_eq %}<a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
       {%- assign p_pr = site.projects | where_exp: "pr", "pr.partners contains p.name" | sort: "start" | reverse -%}
       {% if p_pr.size > 0 %}<p class="small">Projekte: {% for it in p_pr %}<a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% if it.persoenlich %} (persönlich){% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
+      {%- assign p_ev = site.events | where_exp: "e", "e.partners contains p.name" | where_exp: "e", "e.persoenlich != true" | sort: "start" | reverse -%}
+      {% if p_ev.size > 0 %}<p class="small">Termine: {% for it in p_ev %}<a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
       {% if p.page %}<p><a href="{{ p.page | relative_url }}" class="more-link">Mehr über die Zusammenarbeit →</a></p>{% endif %}
       <p class="muted small">{{ p.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first }}</p>
     </div>

@@ -1,7 +1,7 @@
 ---
 title: "Tag der offenen Tür 2025 im Makespace Tiergarten"
 date: 2025-12-05 18:00:00 +0100
-author: falko-richter
+author: [falko-richter, frieder-euteneuer]
 persoenlich: true
 tags: [makespace-tiergarten]
 ---

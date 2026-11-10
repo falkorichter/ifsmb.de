@@ -5,7 +5,8 @@ title: Kalender
 lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
 ---
 {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
-{%- assign sorted = site.events | sort: "start" -%}
+{%- comment -%}Personal events (persoenlich: true) only appear in the team profile.{%- endcomment -%}
+{%- assign sorted = site.events | where_exp: "e", "e.persoenlich != true" | sort: "start" -%}
 {%- assign upcoming = "" | split: "" -%}
 {%- assign past = "" | split: "" -%}
 {%- for e in sorted -%}

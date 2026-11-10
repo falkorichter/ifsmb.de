@@ -42,14 +42,34 @@ content:
         description: Uhrzeiten werden dann ignoriert.
         type: boolean
         default: false
+      - name: persoenlich
+        label: Persönlicher Termin
+        description: "Privater Termin einer Person aus dem Team (unter „Dabei aus dem Team“ eintragen): erscheint nicht auf der Startseite, im Kalender und im iCal-Abo, sondern nur im Teamprofil."
+        type: boolean
+        default: false
       - name: nur_projekt
         label: Nur fürs Projekt (bis er stattgefunden hat)
         description: Kommende Termine erscheinen dann nicht auf der Startseite, im Kalender und im iCal-Abo, sondern nur auf der Projektseite (über die Kategorie). Nach dem Termin erscheint er ganz normal unter „Vergangene Termine“.
         type: boolean
         default: false
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
+        type: string
+        list: true
+      - name: projekte
+        label: Gehört zu den Projekten (Kürzel, z. B. openpress-bauen)
+        description: Der Termin erscheint auf jeder dieser Projektseiten unter „Termine & Berichte“ – zusätzlich zu Projekten mit passender Kategorie.
+        type: string
+        list: true
+      - name: partners
+        label: Partner (Name wie in der Partnerliste)
+        description: Der Termin erscheint dann bei diesem Partner auf der Partnerseite.
         type: string
         list: true
       - name: team
@@ -117,6 +137,11 @@ content:
         label: Persönlicher Beitrag
         description: "Privates Makespace-Update einer Person aus dem Team: erscheint nicht unter Neuigkeiten, sondern im Profil (Autor*in) und unter „Persönliche Blogs“."
         type: boolean
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben „Termine-Kategorie“ listen diesen Beitrag automatisch auf.
@@ -173,6 +198,16 @@ content:
       - name: ort
         label: Ort
         type: string
+      - name: teil_von
+        label: Teilprojekt von (Kürzel der Projekte, z. B. 3d-druck-ag-ktg)
+        description: Teilprojekte erscheinen nicht in den Projektübersichten, sondern unter „Teilprojekte“ auf der Seite jedes übergeordneten Projekts. Ein Teilprojekt kann zu mehreren Projekten gehören.
+        type: string
+        list: true
+      - name: verwandt
+        label: Verwandte Projekte (Kürzel, z. B. ipad-stifte-wiederbeleben)
+        description: Erscheinen unten unter „Verwandte Projekte“ – auf beiden Seiten, es reicht ein Eintrag bei einem der Projekte.
+        type: string
+        list: true
       - name: event_tag
         label: Termine-Kategorie (z. B. ktg)
         description: Alle Termine mit dieser Kategorie werden auf der Projektseite aufgelistet.
@@ -207,6 +242,11 @@ content:
         type: rich-text
         options:
           format: markdown
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
 
   - name: team
     label: Team
@@ -256,6 +296,11 @@ content:
         type: rich-text
         options:
           format: markdown
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
 
   - name: equipment
     label: Ausstattung
@@ -279,14 +324,25 @@ content:
         label: Kurzbeschreibung
         type: text
       - name: owner_partner
-        label: Gehört Partner (Name wie in der Partnerliste)
-        description: Entweder Partner oder Teammitglied angeben. Das Institut selbst besitzt (noch) keine Geräte.
+        label: Gehört Partner (Namen wie in der Partnerliste)
+        description: Ein Gerät kann mehreren gehören – Partner, Teammitglieder und andere lassen sich kombinieren. Das Institut selbst besitzt (noch) keine Geräte.
         type: string
+        list: true
       - name: owner_team
         label: Gehört Teammitglied (Kürzel, z. B. falko-richter)
         type: string
+        list: true
       - name: owner_name
         label: Gehört jemand anderem (Name, falls weder Partner noch Team)
+        type: string
+        list: true
+      - name: standort
+        label: Standort (Text, z. B. „Kurt-Tucholsky-Grundschule (3D-Druck AG)“)
+        description: Wo das Gerät steht. Erscheint auf der Geräteseite und im Netzwerk als Ort.
+        type: string
+      - name: standort_partner
+        label: Standort bei Partner (Name wie in der Partnerliste)
+        description: Optional – verlinkt den Standort mit dem Partner, im Netzwerk als Linie „steht bei“.
         type: string
       - name: status
         label: Status
@@ -307,6 +363,11 @@ content:
       - name: image_caption
         label: Bildunterschrift (optional, sichtbar unter dem Foto)
         type: string
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
       - name: tags
         label: Stichworte (z. B. 3d-drucker, 35services, ktg)
         description: Alles mit denselben Stichworten wird automatisch verknüpft.
@@ -342,6 +403,11 @@ content:
         required: true
         options:
           format: "yyyy-MM-dd"
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+        description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
       - name: tags
         label: Stichworte (z. B. ktg)
         type: string

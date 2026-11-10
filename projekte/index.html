@@ -4,18 +4,14 @@ layout: page
 title: Projekte
 lead: Woran wir gerade arbeiten.
 ---
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
-{% assign ideas = site.projects | where: "status", "idee" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
-{% assign inquiries = site.projects | where: "status", "anfrage" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" | sort: "start" | reverse %}
+{% assign ideas = site.projects | where: "status", "idee" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" | sort: "start" | reverse %}
+{% assign inquiries = site.projects | where: "status", "anfrage" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" | sort: "start" | reverse %}
 {% assign personal = site.projects | where: "persoenlich", true %}
 {% if active.size > 0 %}
 <div class="grid-2">
   {% for p in active %}
-  <a class="card card-link" href="{{ p.url | relative_url }}">
-    <p class="meta"><span class="badge badge-active">Aktuell</span>{% if p.ort %} · {{ p.ort }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · Update: {{ lu }}{% endif %}</p>
-    <h3>{{ p.title }}</h3>
-    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
-  </a>
+  {% include projekt-karte.html project=p badge="aktiv" meta=true %}
   {% endfor %}
 </div>
 {% else %}
@@ -27,11 +23,7 @@ lead: Woran wir gerade arbeiten.
 <p class="muted">Bei uns eingegangene Anfragen – vielleicht wird daraus bald ein Projekt.</p>
 <div class="grid-2">
   {% for p in inquiries %}
-  <a class="card card-link" href="{{ p.url | relative_url }}">
-    <p class="meta"><span class="badge badge-inquiry">Anfrage</span>{% if p.ort %} · {{ p.ort }}{% endif %}</p>
-    <h3>{{ p.title }}</h3>
-    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
-  </a>
+  {% include projekt-karte.html project=p badge="anfrage" meta=true %}
   {% endfor %}
 </div>
 {% endif %}
@@ -41,11 +33,7 @@ lead: Woran wir gerade arbeiten.
 <p class="muted">Was wir vielleicht als Nächstes bauen – noch nichts Festes. Mehr Anregungen gibt es auf der Seite <a href="{{ '/projekte/ideen/' | relative_url }}">Projekt-Ideen</a>.</p>
 <div class="grid-2">
   {% for p in ideas %}
-  <a class="card card-link" href="{{ p.url | relative_url }}">
-    <p class="meta"><span class="badge badge-idea">Idee</span>{% if p.ort %} · {{ p.ort }}{% endif %}</p>
-    <h3>{{ p.title }}</h3>
-    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
-  </a>
+  {% include projekt-karte.html project=p badge="idee" meta=true %}
   {% endfor %}
 </div>
 {% endif %}

@@ -1,0 +1,59 @@
+---
+suche: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Netzwerk
+lead: Wie unsere Projekte, Termine, Beiträge, Menschen, Partner und Geräte zusammenhängen. Ziehen, zoomen, anklicken – und von Punkt zu Punkt weiterwandern.
+permalink: /netzwerk/
+---
+{%- comment -%}
+  Graph data is rendered by Jekyll: one node per resource with its raw link fields.
+  assets/js/netzwerk.js resolves the fields into edges (same rules as _includes/verbindungen.html).
+{%- endcomment -%}
+{%- capture nodes -%}
+[
+{%- for x in site.projects -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"projekt","title":{{ x.title | jsonify }},"slug":{{ x.slug | jsonify }},"status":{{ x.status | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"date":{{ x.start | date: "%Y-%m-%d" | jsonify }},"event_tag":{{ x.event_tag | jsonify }},"teil_von":{{ x.teil_von | jsonify }},"verwandt":{{ x.verwandt | jsonify }},"team":{{ x.team | jsonify }},"partners":{{ x.partners | jsonify }},"tags":{{ x.tags | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for x in site.events -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"termin","title":{{ x.title | jsonify }},"slug":{{ x.slug | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"date":{{ x.start | date: "%Y-%m-%d" | jsonify }},"projekte":{{ x.projekte | jsonify }},"team":{{ x.team | jsonify }},"partners":{{ x.partners | jsonify }},"tags":{{ x.tags | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for x in site.posts -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"beitrag","title":{{ x.title | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"date":{{ x.date | date: "%Y-%m-%d" | jsonify }},"author":{{ x.author | jsonify }},"tags":{{ x.tags | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for x in site.team -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"person","title":{{ x.title | jsonify }},"slug":{{ x.slug | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for x in site.equipment -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"ausstattung","title":{{ x.title | jsonify }},"owner_partner":{{ x.owner_partner | jsonify }},"standort_partner":{{ x.standort_partner | jsonify }},"owner_team":{{ x.owner_team | jsonify }},"owner_name":{{ x.owner_name | jsonify }},"standort":{{ x.standort | jsonify }},"status":{{ x.status | jsonify }},"tags":{{ x.tags | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for x in site.press -%}
+{"id":{{ x.url | relative_url | jsonify }},"type":"presse","title":{{ x.title | jsonify }},"date":{{ x.date | date: "%Y-%m-%d" | jsonify }},"tags":{{ x.tags | jsonify }},"verlinkt":{{ x.verlinkt | jsonify }}},
+{%- endfor -%}
+{%- for pt in site.data.partners -%}
+{"id":{% if pt.page %}{{ pt.page | relative_url | jsonify }}{% else %}{{ "partner:" | append: pt.name | jsonify }}{% endif %},"type":"partner","title":{{ pt.name | jsonify }},"url":{% if pt.page %}{{ pt.page | relative_url | jsonify }}{% else %}{{ pt.url | jsonify }}{% endif %},"extern":{% if pt.page %}false{% else %}true{% endif %}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]
+{%- endcapture -%}
+
+<div class="netz" id="netz">
+  <div class="netz-controls">
+    <label class="netz-search"><span class="visually-hidden">Suchen</span><input type="search" id="netz-suche" placeholder="Suchen …" autocomplete="off"></label>
+    <fieldset class="netz-filter" id="netz-filter">
+      <legend class="visually-hidden">Anzeigen</legend>
+    </fieldset>
+    <label class="netz-toggle"><input type="checkbox" id="netz-persoenlich" checked> Persönliches zeigen</label>
+    <p class="netz-legend" aria-hidden="true"><span class="netz-line netz-line-besitz"></span> gehört <span class="netz-line netz-line-standort"></span> steht bei <span class="netz-line netz-line-teil"></span> Teilprojekt <span class="netz-line"></span> verbunden</p>
+    <button type="button" class="btn btn-ghost netz-reset" id="netz-reset">Alles zeigen</button>
+  </div>
+  <div class="netz-stage">
+    <canvas id="netz-canvas" aria-label="Netzwerk aller Verbindungen – die Liste rechts ist die zugängliche Variante" role="img"></canvas>
+    <aside class="netz-panel" id="netz-panel" aria-live="polite">
+      <p class="muted">Klicke auf einen Punkt, um seine Verbindungen zu sehen. Mit dem Mausrad zoomen, den Hintergrund ziehen zum Verschieben.</p>
+    </aside>
+  </div>
+</div>
+
+<noscript><p>Für das Netzwerk braucht es JavaScript. Alle Verbindungen stehen auch unten auf jeder Seite.</p></noscript>
+
+<script id="netz-daten" type="application/json">{{ nodes }}</script>
+<script src="{{ '/assets/js/netzwerk.js' | relative_url }}" defer></script>

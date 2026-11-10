@@ -1,0 +1,8 @@
+{%- comment -%}
+  Linked author names. include.author = a team slug or a list of slugs (posts can have several authors).
+{%- endcomment -%}
+{%- assign au_slugs = include.author | join: "," | split: "," -%}
+{%- for s in au_slugs -%}{%- assign am = site.team | where: "slug", s | first -%}
+{%- if am %}<a href="{{ am.url | relative_url }}">{{ am.title }}</a>{% else %}{{ s }}{% endif -%}
+{%- if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif -%}
+{%- endfor -%}

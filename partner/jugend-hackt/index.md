@@ -18,6 +18,8 @@ lead: Partner – „Mit Code die Welt verbessern“
 
 </div>
 
+{% include verbindungen.html partner="Jugend hackt" %}
+
 {% assign jh_tags = "jugend-hackt" | split: "," %}
 {% include verknuepft.html tags=jh_tags %}
 

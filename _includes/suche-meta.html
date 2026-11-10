@@ -6,7 +6,7 @@
 {%- case p.collection -%}
 {%- when "posts" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönlicher Blog" -%}{%- else -%}{%- assign bereich = "Neuigkeiten" -%}{%- endif -%}
 {%- when "projects" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Projekte" -%}{%- else -%}{%- assign bereich = "Projekte" -%}{%- endif -%}
-{%- when "events" -%}{%- assign bereich = "Termine" -%}
+{%- when "events" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Termine" -%}{%- else -%}{%- assign bereich = "Termine" -%}{%- endif -%}
 {%- when "team" -%}{%- assign bereich = "Team" -%}
 {%- when "equipment" -%}{%- assign bereich = "Ausstattung" -%}
 {%- when "press" -%}{%- assign bereich = "Presse" -%}

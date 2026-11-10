@@ -16,6 +16,7 @@ updates:
       hat nicht mehr zuverlässig Strom geführt und ist dabei heiß geworden.
 team:
   - falko-richter
+  - anton
 partners:
   - HeartLabs
   - 35 services e. V.

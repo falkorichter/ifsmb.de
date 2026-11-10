@@ -14,11 +14,7 @@ permalink: /projekte/persoenlich/
   <h2 class="cal-heading"><a href="{{ m.url | relative_url }}#persoenliche-projekte">{{ m.title }}</a></h2>
   <div class="grid-2">
     {% for p in mp %}
-    <a class="card card-link" href="{{ p.url | relative_url }}">
-      <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · Update: {{ lu }}{% endif %}</p>
-      <h3>{{ p.title }}</h3>
-      {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
-    </a>
+    {% include projekt-karte.html project=p badge="persoenlich" meta=true %}
     {% endfor %}
   </div>
   {% endif %}

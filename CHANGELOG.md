@@ -6,12 +6,39 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [2026-11-10]
+
 ### Hinzugefügt
 
+- Projektkarten (Projekte, Archiv, persönliche Projekte, Startseite) zeigen, wie aktiv ein Projekt ist: Symbole mit hochgestellten Zahlen für Teilprojekte 🧩, Termine 📅 (gelb, wenn welche anstehen), Updates 📰, Geräte 🛠️ und Beteiligte 👤 – jedes führt direkt zum passenden Abschnitt der Projektseite.
+- Beiträge können mehrere Autor*innen haben (`author` als Liste); der Beitrag zum Tag der offenen Tür im Makespace Tiergarten ist jetzt von Falko und Frieder.
 - Persönliches Projekt „Makespace Tiergarten“ von Frieder (Raum 226: 3D-Drucker, Ton- und Videostudio, Werkzeug) mit persönlichem Beitrag zum Tag der offenen Tür 2025 und 8 Fotos von Falko; Gesichter von Besucher*innen und handschriftliche Namen unkenntlich gemacht. Verlinkt vom Teamprofil von Frieder; neues Stichwort `makespace-tiergarten`.
+- Beitrag „Unser Netzwerk: Alles hängt zusammen“ stellt die Netzwerk-Seite, die Verbindungen, Teilprojekte und den neuen Besitz/Standort von Geräten vor.
+- Verbindungen für alle Seiten: Projekte, Termine, Beiträge, Personen, Ausstattung, Presse und Partnerseiten lassen sich mit `verlinkt` beliebig miteinander verbinden. Unten auf jeder Seite stehen alle Verbindungen in beide Richtungen als gleich gestylte Buttons (Teil von, Projekte, Termine, Beiträge, Beteiligt, Partner, Ausstattung); persönliche Inhalte sind gekennzeichnet. Partnerseiten zeigen ihre Projekte, Termine und Geräte.
+- Dokumentation der Datenstruktur als ASCII-Art (`DATENSTRUKTUR.md`).
+- Neue Seite „Netzwerk“ (`/netzwerk/`, im Menü unter „Wir“): alle Projekte, Termine, Beiträge, Personen, Partner, Geräte und Pressemitteilungen als Netz zum Ziehen, Zoomen und Durchklicken – mit Filtern, Suche und direkten Links auf einzelne Punkte. Läuft ohne externe Bibliothek.
+- Ausstattung: Ein Gerät kann mehrere Besitzer*innen haben (`owner_partner`, `owner_team`, `owner_name` als Listen, kombinierbar). Besitz und Standort sind besondere Verbindungen: eigene Gruppen „Gehört“ und „Standort“ unten auf der Geräteseite, Etiketten „Besitz“/„Standort“ auf Partnerseiten und eigene Linien im Netzwerk (rot = gehört, blau gestrichelt = steht bei); Standorte ohne Partner werden im Netzwerk eigene Orte. Standort jetzt auch im CMS. Antons Core-XY-Drucker ist mit seinem Standort-Partner 35 services e. V. verknüpft.
+- Fotos aus dem September und Oktober 2026 eingepflegt:
+  - Beiträge zur KTG-AG: Dracheneier aus dem 3D-Drucker (mit Video) und Videocall mit ReUseMe zur Taschen-Tausch-Station (Kinder unkenntlich gemacht).
+  - Rosalind-Franklin-Gymnasium: Besuch im neuen Makespace (mit Video) und ein Würfel mit Baumstützen aus der AG.
+  - Platanus Schule: Würfel auf der Ecke aus der AG.
+  - Persönlich: Mogster-Teile aus dem Drucker, neues Teilprojekt „Mogster: PC-Blend drucken“ und neues Projekt „Moldlay drucken“ von Falko und Philipp, jeweils mit Fotos.
+  - Projekt-Ideen: Fotos von Falkos gedrucktem Mikroskop.
+  - Herbstfest beim Zazza: Foto der gedruckten Hüte und Stiefel.
+  - Neue Partnerseite für 35 services e. V. mit Foto der Filamentspende.
+- Teilprojekte: Projekte mit `teil_von` erscheinen nicht in den Übersichten, sondern auf der Seite der übergeordneten Projekte – ein Teilprojekt kann zu mehreren Projekten gehören. Teilprojekte nennen ihre Eltern oben und unten als gut sichtbare Buttons („Dieses Projekt ist ein Teil von“).
+- Zwei Teilprojekte der 3D-Druck AG an der KTG: „Open Press bauen“ (ein Exemplar ist fertig) und „Blockface-Stempel als Klassensatz“, beide mit Unterstützung von Frau S.; Fotos folgen.
+- „junior1stein für die KTG“ ist jetzt ein Teilprojekt der 3D-Druck AG an der KTG.
+- Teilprojekt der KTG-AG „iPad-Stifte wiederbeleben“ (einfache kompatible Stifte, keine Apple Pencils): alle Stifte der Schule aufladen, testen und die mit totem Akku aussortieren; mit Foto.
+- Teilprojekt des Rosalind-Franklin-Gymnasiums „iPad-Stifte testen“: 20 Stifte aus der KTG sind als Leihgabe zum Testen dort; mit Foto.
+- Verwandte Projekte (`verwandt`): Projekte verlinken sich gegenseitig, unten als Buttons „Verwandte Projekte“ – zuerst für die beiden iPad-Stifte-Projekte.
+- Ausstattung: Lasercutter für die KTG (im Test, Illustration statt Foto).
+- Persönliche Termine (`persoenlich: true`): erscheinen nicht im Kalender des Instituts, nur im Teamprofil. Die Terminseite nennt die Person oben und zeigt unten ihre Karte. Erster Termin: Falkos Besuch an der Gustav-Falke-Grundschule am 11. November 2026 (Making im Stundenplan seit 2020, offener Makespace, Schulfirma-AG; mit Links zur Tüftelzeit und zur Schülerfirma).
+- Termine können zu mehreren Projekten (`projekte`), Partnern (`partners`) und Personen gehören; die Terminseite zeigt alle unten als Buttons wie auf den Projektseiten. Projektseiten und die Partnerübersicht listen die Termine automatisch.
 
 ### Geändert
 
+- Projekt „Prusa MK3S (HeartLabs) flott machen“: Anton ist mit beteiligt.
 - Termin all about automation 2027: Stand der Anfrage für einen Besuch mit Schüler*innen (August und November 2026).
 
 ## [2026-11-09]
@@ -134,6 +161,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Beispieltermin „Offener Bastelnachmittag“.
 
 [Unreleased]: https://github.com/falkorichter/ifsmb.de/commits/main
+[2026-11-10]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-10&until=2026-11-10
 [2026-11-09]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-09&until=2026-11-09
 [2026-11-08]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-08&until=2026-11-08
 [2026-11-07]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-07&until=2026-11-07

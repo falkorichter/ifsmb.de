@@ -1,0 +1,25 @@
+{%- comment -%}
+  Project card for overviews. The title link is stretched over the whole card (CSS ::after),
+  so the activity icons can be their own deep links without nesting links.
+  include.project, include.badge ("aktiv" | "anfrage" | "idee" | "abgeschlossen" | "persoenlich" | none), include.meta (bool)
+{%- endcomment -%}
+{%- assign p = include.project -%}
+<div class="card card-link card-stretch">
+  {%- if include.meta %}
+  <p class="meta">
+    {%- case include.badge -%}
+    {%- when "aktiv" %}<span class="badge badge-active">Aktuell</span>
+    {%- when "anfrage" %}<span class="badge badge-inquiry">Anfrage</span>
+    {%- when "idee" %}<span class="badge badge-idea">Idee</span>
+    {%- when "abgeschlossen" %}<span class="badge badge-past">Abgeschlossen</span>
+    {%- when "persoenlich" %}<span class="badge badge-personal">Persönlich</span>
+    {%- endcase -%}
+    {%- if p.zeitraum and include.badge == "abgeschlossen" or p.zeitraum and include.badge == "persoenlich" %} · {{ p.zeitraum }}{% endif -%}
+    {%- if p.ort and include.badge != "persoenlich" and include.badge != "abgeschlossen" %} · {{ p.ort }}{% endif -%}
+    {%- if include.badge == "aktiv" or include.badge == "persoenlich" %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · Update: {{ lu }}{% endif %}{% endif -%}
+  </p>
+  {%- endif %}
+  <h3><a class="card-main-link" href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+  {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+  {% include projekt-aktivitaet.html project=p %}
+</div>

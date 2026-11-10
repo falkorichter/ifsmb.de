@@ -1,20 +1,22 @@
 ---
 layout: default
 ---
-{%- if page.author -%}{%- assign author = site.team | where: "slug", page.author | first -%}{%- endif -%}
+{%- comment -%}author may be one team slug or a list; `author` = first one (for links to a personal blog){%- endcomment -%}
+{%- assign author_slugs = page.author | join: "," | split: "," -%}
+{%- if author_slugs.size > 0 -%}{%- assign author = site.team | where: "slug", author_slugs.first | first -%}{%- endif -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{{ page.date | date: "%d.%m.%Y" }}{% if author %} · <a href="{{ author.url | relative_url }}">{{ author.title }}</a>{% endif %}</p>
+      <p class="meta">{{ page.date | date: "%d.%m.%Y" }}{% if author_slugs.size > 0 %} · {% include autoren.html author=page.author %}{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% include stichworte.html tags=page.tags %}
     </header>
     {% if page.persoenlich %}
-    <p class="personal-note">✍️ Persönlicher Beitrag{% if author %} von <a href="{{ author.url | relative_url }}">{{ author.title }}</a>{% endif %} – ein privates Makespace-Update aus dem Team, kein Beitrag des Instituts.{% if author %} Mehr im <a href="{{ author.url | relative_url }}#persoenlicher-blog">persönlichen Blog von {{ author.title | split: " " | first }}</a>.{% endif %}</p>
+    <p class="personal-note">✍️ Persönlicher Beitrag{% if author_slugs.size > 0 %} von {% include autoren.html author=page.author %}{% endif %} – ein privates Makespace-Update aus dem Team, kein Beitrag des Instituts.{% if author %} Mehr im <a href="{{ author.url | relative_url }}#persoenlicher-blog">persönlichen Blog von {{ author.title | split: " " | first }}</a>.{% endif %}</p>
     {% endif %}
     {% if page.original_url %}
     <p class="original-note">
-      Ursprünglich veröffentlicht {% if author %}von <a href="{{ author.url | relative_url }}">{{ author.title }}</a> {% endif %}auf
+      Ursprünglich veröffentlicht {% if author_slugs.size > 0 %}von {% include autoren.html author=page.author %} {% endif %}auf
       <a href="{{ page.original_url }}" target="_blank" rel="noopener">{{ page.original_site | default: "der Originalseite" }}</a>:<br>
       <a href="{{ page.original_url }}" target="_blank" rel="noopener" class="small">{{ page.original_url }}</a>
     </p>
@@ -25,6 +27,7 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
+    {% include verbindungen.html %}
     {% include verknuepft.html tags=page.tags %}
     {% if page.persoenlich %}<a href="{{ '/news/persoenlich/' | relative_url }}" class="back-link">← Alle persönlichen Blogs</a>{% else %}<a href="{{ '/news/' | relative_url }}" class="back-link">← Alle Neuigkeiten</a>{% endif %}
   </article>

@@ -65,4 +65,6 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | Bilder aus „DIY – eine 3D Druck und Elektronik AG“ (2024) | 35services.de | 9 Bilder, ohne Metadaten; keine Personen |
 | Instagram-QR-Code im Rosalind-Franklin-Beitrag | 35services.de | übernommen |
 | German RepRap X400 (5 Fotos, per Signal von Ralf) | `_logo/ausstattung/german-reprap-x400/` | ohne Metadaten neu gespeichert, 1600 px + 600 px; keine Personen |
+| iPad-Stifte (KTG, 10.11.2026) | nicht im Repo (Chat-Upload) | ohne Metadaten neu gespeichert, unten abgeschnitten (Füße einer Person im Bild), 1600 px + 600 px |
+| Foto-Import 10.11.2026 (Mikroskop, Dracheneier, Filamentspende, Herbstbasteln, Moldlay, PC-Blend, Mogster, Rosalind-Franklin-Gymnasium, Platanus, ReUseMe) | `_logo/news/2026-11-10-import/` (Ordner = Dateiname des Uploads, Zips daneben) | alle ohne Metadaten (enthielten GPS), 1600 px + 600 px; ReUseMe: Kamerabild der Klasse auf Tafel und Laptop sowie ein Hinterkopf unkenntlich, die Fotos mit vielen Kindern und Zugangsdaten an der Tafel (132529429, 132618970) nicht verwendet; Videos 720p ohne Ton, keine Personen |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |

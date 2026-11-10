@@ -1,0 +1,32 @@
+{%- comment -%}
+  Activity bar for a project card: icons with superscript counts, each a deep link into the project page.
+  include.project = the project. Counts use the same rules as _layouts/project.html.
+{%- endcomment -%}
+{%- assign pa = include.project -%}
+{%- assign pa_url = pa.url | relative_url -%}
+{%- assign n_sub = 0 -%}
+{%- for x in site.projects -%}{%- assign xp = x.teil_von | join: "," | split: "," -%}{%- if xp contains pa.slug %}{% assign n_sub = n_sub | plus: 1 %}{% endif -%}{%- endfor -%}
+{%- assign n_ev = 0 -%}{%- assign n_up = 0 -%}
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+{%- for e in site.events -%}
+  {%- assign ep = e.projekte | join: "," | split: "," -%}
+  {%- if ep contains pa.slug or pa.event_tag and e.tags contains pa.event_tag -%}
+    {%- assign n_ev = n_ev | plus: 1 -%}
+    {%- if e.end and e.end != "" %}{% assign es = e.end | date: "%s" | plus: 0 %}{% else %}{% assign es = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+    {%- if es >= now_s %}{% assign n_up = n_up | plus: 1 %}{% endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign n_upd = pa.updates.size | default: 0 -%}
+{%- if pa.event_tag -%}{%- for x in site.posts -%}{%- if x.tags contains pa.event_tag %}{% assign n_upd = n_upd | plus: 1 %}{% endif -%}{%- endfor -%}{%- endif -%}
+{%- assign n_eq = 0 -%}
+{%- if pa.event_tag -%}{%- for x in site.equipment -%}{%- if x.tags contains pa.event_tag %}{% assign n_eq = n_eq | plus: 1 %}{% endif -%}{%- endfor -%}{%- endif -%}
+{%- assign n_team = pa.team.size | default: 0 -%}
+{%- if n_sub > 0 or n_ev > 0 or n_upd > 0 or n_eq > 0 or n_team > 0 -%}
+<span class="activity">
+  {%- if n_sub > 0 %}<a class="activity-item" href="{{ pa_url }}#teilprojekte" title="{{ n_sub }} Teilprojekt{% if n_sub != 1 %}e{% endif %}"><span aria-hidden="true">🧩</span><sup>{{ n_sub }}</sup><span class="visually-hidden"> Teilprojekt{% if n_sub != 1 %}e{% endif %}</span></a>{% endif -%}
+  {%- if n_ev > 0 %}<a class="activity-item{% if n_up > 0 %} activity-hot{% endif %}" href="{{ pa_url }}#termine" title="{{ n_ev }} Termin{% if n_ev != 1 %}e{% endif %}{% if n_up > 0 %}, davon {{ n_up }} kommend{% endif %}"><span aria-hidden="true">📅</span><sup>{{ n_ev }}</sup><span class="visually-hidden"> Termin{% if n_ev != 1 %}e{% endif %}{% if n_up > 0 %}, davon {{ n_up }} kommend{% endif %}</span></a>{% endif -%}
+  {%- if n_upd > 0 %}<a class="activity-item" href="{{ pa_url }}#updates" title="{{ n_upd }} Update{% if n_upd != 1 %}s{% endif %}"><span aria-hidden="true">📰</span><sup>{{ n_upd }}</sup><span class="visually-hidden"> Update{% if n_upd != 1 %}s{% endif %}</span></a>{% endif -%}
+  {%- if n_eq > 0 %}<a class="activity-item" href="{{ pa_url }}#verbindungen" title="{{ n_eq }} Gerät{% if n_eq != 1 %}e{% endif %}"><span aria-hidden="true">🛠️</span><sup>{{ n_eq }}</sup><span class="visually-hidden"> Gerät{% if n_eq != 1 %}e{% endif %}</span></a>{% endif -%}
+  {%- if n_team > 0 %}<a class="activity-item" href="{{ pa_url }}#verbindungen" title="{{ n_team }} Beteiligte"><span aria-hidden="true">👤</span><sup>{{ n_team }}</sup><span class="visually-hidden"> Beteiligte</span></a>{% endif -%}
+</span>
+{%- endif -%}

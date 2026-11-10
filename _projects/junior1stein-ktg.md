@@ -5,6 +5,7 @@ status: aktuell
 start: 2026-11-09
 zeitraum: seit November 2026
 ort: Kurt-Tucholsky-Grundschule, Moabit
+teil_von: [3d-druck-ag-ktg]
 event_tag: junior1stein-ktg
 tags: [ktg, junior1stein]
 team:

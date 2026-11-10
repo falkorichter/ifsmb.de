@@ -1,13 +1,28 @@
-{%- comment -%} Zeigt, wem ein Gerät gehört: include.item {%- endcomment -%}
+{%- comment -%}
+  Who owns a device: include.item. owner_partner / owner_team / owner_name may each be a single value or a list –
+  a device can have several owners. include.plain = no links.
+{%- endcomment -%}
 {%- assign it = include.item -%}
-{%- if it.owner_partner -%}
-  {%- assign op = site.data.partners | where: "name", it.owner_partner | first -%}
-  Gehört unserem Partner {% if op and include.plain == nil %}<a href="{{ '/partner/' | relative_url }}#{{ op.name | slugify }}">{{ op.name }}</a>{% else %}{{ it.owner_partner }}{% endif %}
-{%- elsif it.owner_team -%}
-  {%- assign om = site.team | where: "slug", it.owner_team | first -%}
-  Gehört {% if om and include.plain == nil %}<a href="{{ om.url | relative_url }}">{{ om.title }}</a>{% elsif om %}{{ om.title }}{% else %}{{ it.owner_team }}{% endif %} aus unserem Team
-{%- elsif it.owner_name -%}
-  {% if it.status == "in-aussicht" %}Vielleicht von {{ it.owner_name }}{% else %}Gehört {{ it.owner_name }}{% endif %}
-{%- else -%}
+{%- assign o_partners = it.owner_partner | join: "|" | split: "|" -%}
+{%- assign o_team = it.owner_team | join: "|" | split: "|" -%}
+{%- assign o_names = it.owner_name | join: "|" | split: "|" -%}
+{%- assign owners = "" | split: "" -%}
+{%- for n in o_partners -%}
+  {%- assign op = site.data.partners | where: "name", n | first -%}
+  {%- if op and include.plain == nil -%}{%- capture o %}<a href="{{ op.page | default: '/partner/' | relative_url }}{% unless op.page %}#{{ op.name | slugify }}{% endunless %}">{{ op.name }}</a>{% endcapture -%}{%- else -%}{%- assign o = n -%}{%- endif -%}
+  {%- assign owners = owners | push: o -%}
+{%- endfor -%}
+{%- for s in o_team -%}
+  {%- assign om = site.team | where: "slug", s | first -%}
+  {%- if om and include.plain == nil -%}{%- capture o %}<a href="{{ om.url | relative_url }}">{{ om.title }}</a>{% endcapture -%}{%- elsif om -%}{%- assign o = om.title -%}{%- else -%}{%- assign o = s -%}{%- endif -%}
+  {%- assign owners = owners | push: o -%}
+{%- endfor -%}
+{%- for n in o_names -%}{%- assign owners = owners | push: n -%}{%- endfor -%}
+{%- if owners.size == 0 -%}
   Gehört dem Institut
+{%- else -%}
+  {%- if it.status == "in-aussicht" %}Vielleicht von {% else %}Gehört {% endif -%}
+  {%- if o_partners.size > 0 and owners.size == 1 %}unserem Partner {% endif -%}
+  {%- for o in owners -%}{{ o }}{% if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif %}{%- endfor -%}
+  {%- if o_team.size > 0 and owners.size == 1 %} aus unserem Team{% endif -%}
 {%- endif -%}

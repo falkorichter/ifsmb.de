@@ -86,6 +86,7 @@ layout: default
       {% for it in my_eq %}<li><a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
+    {% include verbindungen.html %}
     <a href="{{ '/team/' | relative_url }}" class="back-link">← Zum Team</a>
   </article>
 </main>

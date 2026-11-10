@@ -4,15 +4,11 @@ layout: page
 title: Vergangene Projekte
 lead: Was wir schon gebaut haben.
 ---
-{% assign past = site.projects | where: "status", "abgeschlossen" | where_exp: "p", "p.persoenlich != true" | sort: "start" | reverse %}
+{% assign past = site.projects | where: "status", "abgeschlossen" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" | sort: "start" | reverse %}
 {% if past.size > 0 %}
 <div class="grid-2">
   {% for p in past %}
-  <a class="card card-link" href="{{ p.url | relative_url }}">
-    <p class="meta"><span class="badge badge-past">Abgeschlossen</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}</p>
-    <h3>{{ p.title }}</h3>
-    {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
-  </a>
+  {% include projekt-karte.html project=p badge="abgeschlossen" meta=true %}
   {% endfor %}
 </div>
 {% else %}
