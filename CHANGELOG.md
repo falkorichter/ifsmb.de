@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- „Neu anlegen“-Buttons unter „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.
 - Zwei neue Projekte zu den offenen Werkstatt-Repositories von 35services e. V.: „3D-Druck in der Werkstatt: 35services/3d“ (mit 5 Bildern) und „2D-Projekte mit dem Stiftplotter: 35services/2d“ (mit 4 Bildern); verlinkt auf der Partnerseite von 35services und im Teamprofil von Jan (`35services-jan` auf GitHub).
 - Beitrag aus dem ersten Jahr der KTG-AG (19. April 2024): „Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie“ – nachdem ein AG-Kind gewettet hatte, dass der AxiDraw keine Mona Lisa malen kann.
 - Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
@@ -19,6 +20,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 ### Geändert
 
 - Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
+
+### Behoben
+
+- PR-Vorschaubilder mit `--unten` funktionieren jetzt auch bei langen Seiten (Teamprofile, Projekte): vorher fehlte der Footer im Bild und der Ausschnitt zeigte den Seitenkopf.
 
 ## [2026-11-11]
 

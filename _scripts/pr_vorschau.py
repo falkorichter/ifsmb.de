@@ -42,7 +42,9 @@ def serve():
                 return super().do_GET()
             q = urllib.parse.parse_qs(url.query)
             src, h = html.escape(q["src"][0], quote=True), int(q["h"][0])
-            body = (f'<body style="margin:0"><iframe src="{src}" '
+            # --unten: scroll the framed page to its end, so long pages fit without a huge window
+            scroll = ' onload="this.contentWindow.scrollTo({top: 1e9, behavior: \'instant\'})"' if "unten" in q else ""
+            body = (f'<body style="margin:0"><iframe src="{src}"{scroll} '
                     f'style="border:0;width:390px;height:{h}px"></iframe>').encode()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -57,7 +59,7 @@ def serve():
 
 def chrome(url, w, h, scale, dst):
     subprocess.run([CHROME, "--headless=new", "--hide-scrollbars", f"--window-size={w},{h}",
-                    f"--force-device-scale-factor={scale}", f"--screenshot={dst}", url],
+                    f"--force-device-scale-factor={scale}", "--virtual-time-budget=5000", f"--screenshot={dst}", url],
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
     return Image.open(dst).convert("RGB")
 
@@ -100,11 +102,16 @@ def slug(path):
 
 def capture(base, path, unten, tmp, kontext=160):
     # Headless Chrome won't go narrower than ~500 px -> render the phone view in a 390 px iframe
-    h_mobile = 7000 if unten else 844
-    handy = base + "/__pr_handy.html?" + urllib.parse.urlencode({"src": path, "h": h_mobile})
+    # --unten: the phone frame scrolls to the page end (Chrome caps screenshots at ~16k device px);
+    # desktop is tall enough for long pages (profiles, projects), otherwise the crop would hit the header
+    h_mobile = 3000 if unten else 844
+    params = {"src": path, "h": h_mobile}
+    if unten:
+        params["unten"] = 1
+    handy = base + "/__pr_handy.html?" + urllib.parse.urlencode(params)
     files = []
     for label, url, w, h, scale, crop_w in [
-        ("desktop", base + path, 1280, 4000 if unten else 900, 1, None),
+        ("desktop", base + path, 1280, 10000 if unten else 900, 1, None),
         ("handy", handy, 600, h_mobile, 2, 390),
     ]:
         im = chrome(url, w, h, scale, os.path.join(tmp, "full.png"))

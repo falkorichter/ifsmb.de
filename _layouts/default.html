@@ -55,6 +55,7 @@
   <div class="container edit-page{% if schmale_layouts contains page.layout %} narrow{% endif %}" data-pagefind-ignore>
     <a class="btn btn-ghost btn-small" href="https://github.com/{{ site.repository }}/edit/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener" title="Quelldatei {{ page.path }} auf GitHub bearbeiten">✏️ Diese Seite bearbeiten</a>
     <a class="edit-page-source" href="https://github.com/{{ site.repository }}/blob/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener"><code>{{ page.path }}</code></a>
+    {% include neu-buttons.html %}
   </div>
   {% endif %}
 
