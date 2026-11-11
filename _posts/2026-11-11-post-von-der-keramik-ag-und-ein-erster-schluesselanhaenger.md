@@ -3,6 +3,8 @@ title: "Post von der Keramik AG und ein erster Schlüsselanhänger"
 date: 2026-11-11 18:44:00 +0100
 author: falko-richter
 tags: [platanus]
+projekte: [3d-druck-ag-platanus-schule]
+nur_projekt: true
 verlinkt: [/ausstattung/bambu-lab-a1-mini-platanus/]
 ---
 Neues aus der [3D-Druck AG an der Platanus Schule]({{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}): Wir haben **Post von der Keramik AG** bekommen! Darin stehen ihre Ideen für einen 3D-gedruckten Stempel, mit dem sie ihre Tonarbeiten kennzeichnen können – samt ausgedruckten Motiven und der Frage, ob noch ein kleiner Text wie „Made by“ mit draufpasst.

@@ -190,6 +190,7 @@ Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Se
                       (danach) –         ✔        ✔        –           ✔        ✔
  Persönlicher Termin         –           –        –        –           ✔            –
  Beitrag                     ✔         /news/     –        –           ✔        ✔ (Stichwort)
+ Beitrag nur_projekt         –           –        –        –           –        ✔ (Stichwort)
  Persönlicher Beitrag        –    /news/persoenlich/       –           ✔        ✔ (Stichwort)
 ```
 

@@ -84,7 +84,7 @@ layout: default
 </section>
 {% endif %}
 
-{% assign home_posts = site.posts | where_exp: "p", "p.persoenlich != true" %}
+{% assign home_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" %}
 {% if home_posts.size > 0 %}
 <section class="container section">
   <div class="section-head">

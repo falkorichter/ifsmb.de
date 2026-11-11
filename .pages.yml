@@ -137,6 +137,10 @@ content:
         label: Persönlicher Beitrag
         description: "Privates Makespace-Update einer Person aus dem Team: erscheint nicht unter Neuigkeiten, sondern im Profil (Autor*in) und unter „Persönliche Blogs“."
         type: boolean
+      - name: nur_projekt
+        label: Nur fürs Projekt
+        description: "Kleines Projekt-Update: erscheint nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite (über die Kategorie)."
+        type: boolean
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
