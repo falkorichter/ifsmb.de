@@ -10,6 +10,7 @@ event_tag: ipad-stifte
 verwandt: [ipad-stifte-rosalind-franklin-gymnasium]
 team:
   - falko-richter
+  - mr-e
 partners:
   - Kurt-Tucholsky-Grundschule
 ---
