@@ -10,6 +10,7 @@ team:
   - falko-richter
   - gregor-dill
   - jan
+  - mr-e
 partners:
   - Kurt-Tucholsky-Grundschule
   - 35 services e. V.

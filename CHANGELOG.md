@@ -26,6 +26,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Persönliches Projekt „Lastenanhänger vom Theater“ von Falko (Anfrage über 35services e. V., Ausbau mit dem Berliner Lastenrad-Netzwerk) mit Foto.
 - Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
+- Neues Teamprofil „Mr E“ (ohne Foto und persönliche Angaben): hilft seit 2026 in der KTG-AG, beteiligt an den iPad-Stiften und am Notebook der KTG.
 
 ## [2026-11-10]
 
