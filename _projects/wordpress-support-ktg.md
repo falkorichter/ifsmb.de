@@ -17,7 +17,7 @@ partners:
 Die Website der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) läuft mit **WordPress**. Falko hilft der Schule ehrenamtlich dabei, die Seite zu pflegen und Inhalte einfacher einzustellen.
 
 ## Themen:
-* [ ] Elementor los werden
+* [ ] Elementor los werden (Freigabe erteilt)
 * [ ] Webseite umziehen zu in-berlin.de
 * [x] Ansprechpartner bei riedewald.net auf die aktuelle Schulleitung anpassen lassen
 * [ ] Lehrkräfte schulen
