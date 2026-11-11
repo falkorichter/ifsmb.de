@@ -73,5 +73,6 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | Notebook der KTG (02.11.2026) | `_logo/news/2026-11-10-notebook-ktg/` | ohne Metadaten |
 | Tag der offenen Tür RFG (Druckauftrag) | `_logo/kalender/2026-11-28-tag-der-offenen-tuer-rosalind-franklin-gymnasium/` | Screenshot als JPG; Zeitraffer der Druckerkamera 720p ohne Ton, keine Personen |
 | itslearning-Kurs RFG (Screenshot) | `_logo/news/2026-11-10-itslearning/` | Namen und Foto der Kursleitung außer Falko Richter unkenntlich gemacht |
+| Profilfoto Frieder | `_logo/team/frieder-euteneuer-original.png` | quadratisch zugeschnitten (480 px + 48 px); © Sergej Glanze / FUNKE Foto Services – Nachweis im Profil (`photo_credit`) |
 | Lastenanhänger vom Theater (11.11.2026) | `_logo/news/2026-11-11-lastenanhaenger-vom-theater/` | ohne Metadaten neu gespeichert; keine Personen |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |

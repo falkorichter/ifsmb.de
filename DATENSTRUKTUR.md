@@ -131,7 +131,7 @@ standort_partner: Kurt-Tucholsky-Grundschule   # verlinkt den Standort mit dem P
 | `owner_partner` / `owner_team` / `owner_name` | Ausstattung | **Besitz** – Partner / Person / Name, je eine Liste | `owner_partner: [35 services e. V., Kurt-Tucholsky-Grundschule]` |
 | `standort_partner` / `standort` | Ausstattung | **Standort** – Partner / Ort (Text) | `standort_partner: Kurt-Tucholsky-Grundschule` |
 
-`verlinkt` ist die allgemeine Verbindung: Es nimmt die **Adresse** der anderen Seite, so wie sie im
+`verlinkt` ist die allgemeine Verbindung (auch zu normalen Seiten wie `/geld-fuer-makespaces/` – die erscheinen unten unter „Seiten“; solche Seiten zeigen ihre Verbindungen, wenn sie `{% include verbindungen.html %}` einbinden): Es nimmt die **Adresse** der anderen Seite, so wie sie im
 Browser steht (ohne `https://ifsmb.de`). So lässt sich alles mit allem verbinden – auch Person mit
 Termin, Beitrag mit Beitrag oder Ausstattung mit Partnerseite.
 

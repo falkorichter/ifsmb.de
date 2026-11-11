@@ -752,3 +752,6 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .task-list { list-style: none; padding-left: 0; }
 .task-list-item { position: relative; padding-left: 1.9rem; margin: .45rem 0; }
 .task-list-item-checkbox { position: absolute; left: 0; top: .3rem; width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--ink); }
+
+/* photo credit under a team member's name */
+.photo-credit { font-size: .75rem; color: var(--muted); margin-top: .3rem; }

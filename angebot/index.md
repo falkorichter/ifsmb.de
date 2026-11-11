@@ -7,7 +7,7 @@ lead: Was das IfsMB macht – und warum es „Institut“ heißt.
   <strong>Kurz und ehrlich:</strong> Das „Institut für spontane Makespace Buildung“ ist <strong>keine Hochschule, keine Behörde und kein Forschungsinstitut</strong>. Dahinter steht <strong>Falko Richter</strong> als Privatperson, zusammen mit Freund*innen und Partnern – ehrenamtlich und ohne eigene Rechtsform. Wer verantwortlich ist, steht im <a href="{{ '/impressum/' | relative_url }}">Impressum</a>.
 </div>
 
-<h2>Was wir anbieten</h2>
+## Was wir anbieten
 <div class="grid-2 offer-grid">
   <div class="card">
     <div class="card-icon">🖨️</div>
@@ -49,15 +49,21 @@ lead: Was das IfsMB macht – und warum es „Institut“ heißt.
 
 <p class="offer-contact">Interesse an einer AG, einem Workshop oder Beratung? Schreibt Falko: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falko [at] 35services.de</a></p>
 
-<h2 id="warum-ein-institut">Warum ein Institut?</h2>
-<div class="prose">
-  <p><strong>Falko wollte schon immer alles dokumentieren und auf ein unabhängiges Fundament stellen.</strong> Die AGs, Workshops und Geräte sollen nicht nur in Köpfen, Chats und verstreuten Blogbeiträgen stecken, sondern an einem Ort stehen, an dem jede*r nachlesen kann, was wir gemacht haben und wie es funktioniert.</p>
-  <p>Und wie nennt man so etwas? <strong>„Jeder kann ein Institut gründen“</strong>, hat Falko sich gesagt – und es einfach getan. „Institut für spontane Makespace Buildung“ beschreibt ziemlich gut, was wir tun: Wir bauen Makespaces, und zwar spontan, mit dem, was gerade da ist, ohne lange Anträge.</p>
-  <p>Das stimmt sogar: Der Begriff „Institut“ ist in Deutschland nicht gesetzlich geschützt. Trotzdem soll niemand einen falschen Eindruck bekommen – wer „Institut“ liest, denkt vielleicht an eine Universität, ein Amt oder ein großes Forschungszentrum. Deshalb sagen wir es ganz offen:</p>
-  <ul>
-    <li>Das IfsMB ist <strong>keine Hochschule</strong>, <strong>keine Behörde</strong> und <strong>kein wissenschaftliches Forschungsinstitut</strong>.</li>
-    <li>Dahinter steht <strong>Falko Richter</strong> als Privatperson – sein vollständiger Name steht im <a href="{{ '/impressum/' | relative_url }}">Impressum</a>.</li>
-    <li>Das Institut ist (noch) <strong>keine eigene Rechtsform</strong>. Viele Projekte laufen offiziell über unseren Partner <a href="https://35services.de/">35services e.V.</a> – deshalb gehen auch <a href="{{ '/spenden/' | relative_url }}">Spenden</a> derzeit an die AG bei 35services.</li>
-  </ul>
-  <p>Wir arbeiten daran, das Institut auf eigene Füße zu stellen. Bis dahin gilt: viel Begeisterung, wenig Bürokratie – und volle Transparenz.</p>
+## Warum ein Institut?
+{: #warum-ein-institut}
+
+<div class="prose" markdown="1">
+
+**Falko wollte schon immer alles dokumentieren und auf ein unabhängiges Fundament stellen.** Die AGs, Workshops und Geräte sollen nicht nur in Köpfen, Chats und verstreuten Blogbeiträgen stecken, sondern an einem Ort stehen, an dem jede*r nachlesen kann, was wir gemacht haben und wie es funktioniert.
+
+Und wie nennt man so etwas? **„Jeder kann ein Institut gründen“**, hat Falko sich gesagt – und es einfach getan. „Institut für spontane Makespace Buildung“ beschreibt ziemlich gut, was wir tun: Wir bauen Makespaces, und zwar spontan, mit dem, was gerade da ist, ohne lange Anträge.
+
+Das stimmt sogar: Der Begriff „Institut“ ist in Deutschland nicht gesetzlich geschützt. Trotzdem soll niemand einen falschen Eindruck bekommen – wer „Institut“ liest, denkt vielleicht an eine Universität, ein Amt oder ein großes Forschungszentrum. Deshalb sagen wir es ganz offen:
+
+- Das IfsMB ist **keine Hochschule**, **keine Behörde** und **kein wissenschaftliches Forschungsinstitut**.
+- Dahinter steht **Falko Richter** als Privatperson – sein vollständiger Name steht im [Impressum]({{ '/impressum/' | relative_url }}).
+- Das Institut ist (noch) **keine eigene Rechtsform**. Viele Projekte laufen offiziell über unseren Partner [35services e.V.](https://35services.de/) – deshalb gehen auch [Spenden]({{ '/spenden/' | relative_url }}) derzeit an die AG bei 35services.
+
+Wir arbeiten daran, das Institut auf eigene Füße zu stellen. Bis dahin gilt: viel Begeisterung, wenig Bürokratie – und volle Transparenz.
+
 </div>

@@ -276,6 +276,10 @@ content:
       - name: photo_2x
         label: Foto in doppelter Auflösung (ca. 960 px, optional)
         type: image
+      - name: photo_credit
+        label: Bildnachweis (optional, z. B. „© Name / Agentur“)
+        description: Erscheint unter dem Namen im Profil. Pflicht bei Fotos, die nicht von uns oder der Person selbst stammen – und nur mit Erlaubnis verwenden.
+        type: string
       - name: photo_icon
         label: Mini-Foto für den Kalender (quadratisch, 48 px, optional)
         description: Rundes Gesicht auf der Kalenderseite. Ohne Mini-Foto wird das normale Foto verkleinert.

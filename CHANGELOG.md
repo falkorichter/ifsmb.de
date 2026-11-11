@@ -6,6 +6,18 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
+- Weiterleitungen für gelöschte Seiten (`layout: weiterleitung`), damit alte Links weiter funktionieren.
+- Verbindungen auch zu normalen Seiten wie „Geld für Makespaces“ (`verlinkt`), unten als Gruppe „Seiten“. „Geld für Makespaces“ ist mit allen dort erwähnten Projekten, Terminen, Beiträgen, Geräten, Partnern und Seiten verbunden.
+- Kalender: Tag der offenen Tür am Gymnasium Tiergarten (4. Dezember 2026, 16–19 Uhr) mit Hinweis auf den Makespace und Falkos Besuch im letzten Jahr.
+- Kalender: Nachmittag der offenen Tür am Rosalind-Franklin-Gymnasium (21. Januar 2027, 16–19 Uhr), verlinkt mit dem Tag der offenen Tür im November.
+
+### Geändert
+
+- Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
+
 ## [2026-11-11]
 
 ### Hinzugefügt
