@@ -125,10 +125,18 @@
   {%- if hit %}{% assign g_equipment = g_equipment | push: x %}{% endif -%}
 {%- endfor -%}
 
+{%- comment -%}--- plain pages (e.g. /geld-fuer-makespaces/), linked via `verlinkt`; partner pages are in the partner group ---{%- endcomment -%}
+{%- assign g_pages = "" | split: "" -%}
+{%- for x in site.html_pages -%}
+  {%- if x.url == P.url or x.url contains "/partner/" %}{% continue %}{% endif -%}
+  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- if p_links contains x.url or x_links contains me_url %}{% assign g_pages = g_pages | push: x %}{% endif -%}
+{%- endfor -%}
+
 {%- comment -%}--- output ---{%- endcomment -%}
 {%- assign has_owner = false -%}{%- if o_partners.size > 0 or o_team.size > 0 or o_names.size > 0 %}{% assign has_owner = true %}{% endif -%}
 {%- assign has_location = false -%}{%- if l_partners.size > 0 or P.standort %}{% assign has_location = true %}{% endif -%}
-{%- if has_owner or has_location or g_parents.size > 0 or g_projects.size > 0 or g_events.size > 0 or g_posts.size > 0 or g_people.size > 0 or g_partners.size > 0 or g_unknown_partners.size > 0 or g_equipment.size > 0 %}
+{%- if has_owner or has_location or g_parents.size > 0 or g_projects.size > 0 or g_events.size > 0 or g_posts.size > 0 or g_people.size > 0 or g_partners.size > 0 or g_unknown_partners.size > 0 or g_equipment.size > 0 or g_pages.size > 0 %}
 <section class="connections" id="verbindungen" data-pagefind-ignore="all">
   {%- if g_parents.size > 0 %}
   <h2>{% if kind == "projects" %}Dieses Projekt ist ein Teil von{% else %}Teil von{% endif %}</h2>
@@ -180,6 +188,12 @@
   <ul class="link-list link-list-connections">
     {% for pt in g_partners %}<li><a href="{{ pt.page | default: pt.url | relative_url }}"{% unless pt.page %} target="_blank" rel="noopener"{% endunless %}><span aria-hidden="true">🤝</span> {{ pt.name }}</a></li>{% endfor %}
     {% for n in g_unknown_partners %}<li><span class="link-list-plain"><span aria-hidden="true">🤝</span> {{ n }}</span></li>{% endfor %}
+  </ul>
+  {%- endif %}
+  {%- if g_pages.size > 0 %}
+  <h2>Seiten</h2>
+  <ul class="link-list link-list-connections">
+    {% for x in g_pages %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📄</span> {{ x.title }}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if g_equipment.size > 0 %}

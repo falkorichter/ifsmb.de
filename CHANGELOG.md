@@ -8,8 +8,26 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Zwei neue Projekte zu den offenen Werkstatt-Repositories von 35services e. V.: „3D-Druck in der Werkstatt: 35services/3d“ (mit 5 Bildern) und „2D-Projekte mit dem Stiftplotter: 35services/2d“ (mit 4 Bildern); verlinkt auf der Partnerseite von 35services und im Teamprofil von Jan (`35services-jan` auf GitHub).
+- Beitrag aus dem ersten Jahr der KTG-AG (19. April 2024): „Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie“ – nachdem ein AG-Kind gewettet hatte, dass der AxiDraw keine Mona Lisa malen kann.
+- Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
+- Weiterleitungen für gelöschte Seiten (`layout: weiterleitung`), damit alte Links weiter funktionieren.
+- Verbindungen auch zu normalen Seiten wie „Geld für Makespaces“ (`verlinkt`), unten als Gruppe „Seiten“. „Geld für Makespaces“ ist mit allen dort erwähnten Projekten, Terminen, Beiträgen, Geräten, Partnern und Seiten verbunden.
+- Kalender: Tag der offenen Tür am Gymnasium Tiergarten (4. Dezember 2026, 16–19 Uhr) mit Hinweis auf den Makespace und Falkos Besuch im letzten Jahr.
+- Kalender: Nachmittag der offenen Tür am Rosalind-Franklin-Gymnasium (21. Januar 2027, 16–19 Uhr), verlinkt mit dem Tag der offenen Tür im November.
+
+### Geändert
+
+- Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
+
+## [2026-11-11]
+
+### Hinzugefügt
+
 - Zeitleiste unter dem Netzwerk (`/netzwerk/`): gestapelte Balken pro Monat für Projektstarts, Beiträge, Termine und Presse – mit „heute“-Markierung, blass gezeichneten geplanten Monaten und einer Tabellenansicht. Die Filter oben gelten auch für die Zeitleiste; ein Klick auf einen Monat hebt seine Einträge im Netzwerk hervor und listet sie rechts auf (Link mit `#zeit:JJJJ-MM`), ein ausgewählter Punkt im Netzwerk hebt umgekehrt seine Verbindungen in der Zeitleiste hervor.
+- Persönliches Projekt „Lastenanhänger vom Theater“ von Falko (Anfrage über 35services e. V., Ausbau mit dem Berliner Lastenrad-Netzwerk) mit Foto.
 - Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
+- Neues Teamprofil „Mr E“ (ohne Foto und persönliche Angaben): hilft seit 2026 in der KTG-AG, beteiligt an den iPad-Stiften und am Notebook der KTG.
 
 ## [2026-11-10]
 
@@ -184,6 +202,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Beispieltermin „Offener Bastelnachmittag“.
 
 [Unreleased]: https://github.com/falkorichter/ifsmb.de/commits/main
+[2026-11-11]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-11&until=2026-11-11
 [2026-11-10]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-10&until=2026-11-10
 [2026-11-09]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-09&until=2026-11-09
 [2026-11-08]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-08&until=2026-11-08

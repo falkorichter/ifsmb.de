@@ -1,6 +1,6 @@
 ---
 title: Falko Richter
-role: Gründer
+role: Gründer/AG-Leiter/Netzwerker
 order: 1
 photo: /assets/images/team/falko-richter-480w.jpg
 photo_icon: /assets/images/team/falko-richter-48w.jpg

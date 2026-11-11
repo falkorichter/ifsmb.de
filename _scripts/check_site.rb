@@ -112,7 +112,9 @@ until queue.empty?
 end
 
 linked_anywhere = links_from.values.reduce(Set.new, :|)
-orphans = pages.reject { |f| reachable.include?(f) || ORPHAN_OK.include?(url_path_for(f)) }
+# redirect pages for old addresses (layout weiterleitung) are meant to be unlinked
+redirect = ->(f) { File.read(f, 2000).include?('http-equiv="refresh"') }
+orphans = pages.reject { |f| reachable.include?(f) || ORPHAN_OK.include?(url_path_for(f)) || redirect.call(f) }
 
 # --- Ausgabe ---
 ok = true

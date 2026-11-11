@@ -1,0 +1,18 @@
+<!doctype html>
+{%- comment -%}
+  Redirect for an address that no longer exists. Front matter: `ziel` (new address, may include #anchor).
+  Static hosting (GitHub Pages) can't send HTTP redirects, so this uses meta refresh + canonical + a visible link.
+{%- endcomment -%}
+{%- assign ziel_url = page.ziel | relative_url -%}
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Weitergeleitet – {{ site.title }}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.url }}{{ ziel_url }}">
+  <meta http-equiv="refresh" content="0; url={{ ziel_url }}">
+</head>
+<body>
+  <p>Diese Seite gibt es nicht mehr – weiter zu <a href="{{ ziel_url }}">{{ page.ziel_titel | default: ziel_url }}</a>.</p>
+</body>
+</html>
