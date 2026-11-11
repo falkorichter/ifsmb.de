@@ -53,6 +53,23 @@ permalink: /netzwerk/
   </div>
 </div>
 
+<section class="netz-zeit" id="netz-zeit" aria-labelledby="netz-zeit-titel">
+  <h2 id="netz-zeit-titel">Zeitleiste</h2>
+  <p class="muted">Was im Institut los war – Projektstarts, Beiträge, Termine und Presse pro Monat. Die Filter oben gelten auch hier. Klicke auf einen Monat, um ihn im Netzwerk zu markieren.</p>
+  <p class="netz-zeit-legende" id="netz-zeit-legende"></p>
+  <div class="netz-zeit-frame">
+    <svg id="netz-zeit-achse" class="netz-zeit-achse" aria-hidden="true"></svg>
+    <div class="netz-zeit-scroll" id="netz-zeit-scroll">
+      <svg id="netz-zeit-svg" role="group" aria-label="Zeitleiste: Aktivitäten pro Monat"></svg>
+    </div>
+  </div>
+  <div class="netz-zeit-tip" id="netz-zeit-tip" hidden></div>
+  <details class="netz-zeit-details">
+    <summary>Als Tabelle anzeigen</summary>
+    <div id="netz-zeit-tabelle"></div>
+  </details>
+</section>
+
 <noscript><p>Für das Netzwerk braucht es JavaScript. Alle Verbindungen stehen auch unten auf jeder Seite.</p></noscript>
 
 <script id="netz-daten" type="application/json">{{ nodes }}</script>
