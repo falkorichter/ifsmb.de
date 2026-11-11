@@ -6,8 +6,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [2026-11-11]
+
 ### Hinzugefügt
 
+- Persönliches Projekt „Lastenanhänger vom Theater“ von Falko (Anfrage über 35services e. V., Ausbau mit dem Berliner Lastenrad-Netzwerk) mit Foto.
 - Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
 
 ## [2026-11-10]
@@ -183,6 +186,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Beispieltermin „Offener Bastelnachmittag“.
 
 [Unreleased]: https://github.com/falkorichter/ifsmb.de/commits/main
+[2026-11-11]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-11&until=2026-11-11
 [2026-11-10]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-10&until=2026-11-10
 [2026-11-09]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-09&until=2026-11-09
 [2026-11-08]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-08&until=2026-11-08
