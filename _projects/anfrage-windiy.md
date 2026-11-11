@@ -14,7 +14,7 @@ partners:
 
 Wir haben eine Anfrage, „Felix Bananenfest“ bei seinem WinDIY-Projekt zu helfen.
 
-Falko hat erst einmal alle Informationen zum Projekt in einem Repository (github.com/falkorichter/WinDIY-Die-Wind-Turbine-aus-dem-3D-Drucker, noch privat) zusammentragen lassen, damit wir schauen können, wie teuer alle weiteren benötigten Teile sind.
+Falko hat erst einmal alle Informationen zum Projekt in einem Repository ([github.com/falkorichter/WinDIY-Die-Wind-Turbine-aus-dem-3D-Drucker](https://github.com/falkorichter/WinDIY-Die-Wind-Turbine-aus-dem-3D-Drucker), noch privat) zusammentragen lassen, damit wir schauen können, wie teuer alle weiteren benötigten Teile sind.
 
 - Original: [nerdiy.de – WinDIY: Die Wind-Turbine aus dem 3D-Drucker](https://nerdiy.de/windiy-die-wind-turbine-aus-dem-3d-drucker/)
 - Hackaday: [WinDIY – HAWT Wind Turbine](https://hackaday.io/project/172328-windiy-hawt-wind-turbine)
