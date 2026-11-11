@@ -8,6 +8,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Zwei neue Projekte zu den offenen Werkstatt-Repositories von 35services e. V.: „3D-Druck in der Werkstatt: 35services/3d“ (mit 5 Bildern) und „2D-Projekte mit dem Stiftplotter: 35services/2d“ (mit 4 Bildern); verlinkt auf der Partnerseite von 35services und im Teamprofil von Jan (`35services-jan` auf GitHub).
+- Beitrag aus dem ersten Jahr der KTG-AG (19. April 2024): „Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie“ – nachdem ein AG-Kind gewettet hatte, dass der AxiDraw keine Mona Lisa malen kann.
 - Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
 - Weiterleitungen für gelöschte Seiten (`layout: weiterleitung`), damit alte Links weiter funktionieren.
 - Verbindungen auch zu normalen Seiten wie „Geld für Makespaces“ (`verlinkt`), unten als Gruppe „Seiten“. „Geld für Makespaces“ ist mit allen dort erwähnten Projekten, Terminen, Beiträgen, Geräten, Partnern und Seiten verbunden.
