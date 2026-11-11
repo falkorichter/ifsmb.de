@@ -21,7 +21,7 @@ Der **Treffpunkt Modellbau** sind die Havelländischen Modellbautage im MAFZ in 
 - [Erste Reparatur am Mogster: Portalzahnrad gebrochen]({% post_url 2026-10-08-erste-reparatur-am-mogster-portalzahnrad %})
 - [Die Mogster treffen aufeinander]({% post_url 2026-10-19-die-mogster-treffen-aufeinander %})
 
-**Stand der Dinge:** Falko hat einen Anmeldebogen als Aussteller angefragt. Wir wissen immer noch nicht, wer die Offroad-Crew ist.
+**Stand der Dinge:** Die Standanmeldung für Aussteller ist da (Anmeldeschluss 15. Dezember 2026) – siehe [Standanmeldung für den Treffpunkt Modellbau 2027 ist da]({% post_url 2026-11-11-standanmeldung-treffpunkt-modellbau-2027 %}). Wir wissen immer noch nicht, wer die Offroad-Crew ist.
 
 <span class="todo">[Wo genau stehen wir, welche Fahrzeuge kommen mit? – Details folgen.]</span>
 

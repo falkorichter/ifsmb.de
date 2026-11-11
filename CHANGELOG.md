@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
+
 ## [2026-11-10]
 
 ### Hinzugefügt
