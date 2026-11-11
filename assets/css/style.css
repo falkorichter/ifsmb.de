@@ -748,6 +748,46 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .netz-line-standort { border-top: 3px dashed #2f5bea; }
 .netz-line-teil { border-top-width: 4px; }
 
+/* timeline below the network graph (stacked bars per month) */
+.netz-zeit { position: relative; margin-top: 2rem; }
+.netz-zeit h2 { margin-bottom: .2rem; }
+.netz-zeit-legende { display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .85rem; color: var(--ink-soft); margin: .5rem 0; }
+.netz-zeit-key { display: inline-flex; align-items: center; gap: .35rem; }
+.netz-zeit-swatch { display: inline-block; width: .8rem; height: .8rem; border-radius: 3px; }
+.netz-zeit-swatch-future { background: linear-gradient(90deg, #ffcc00 0 25%, #2bb673 25% 50%, #2f5bea 50% 75%, #13a3b5 75%); opacity: .45; }
+.netz-zeit-frame { display: flex; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--bg); padding: .5rem 0 .25rem; overflow: hidden; }
+.netz-zeit-achse { flex: none; display: block; }
+.netz-zeit-achse text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.netz-zeit-scroll { flex: 1 1 auto; min-width: 0; overflow-x: auto; }
+#netz-zeit-svg { display: block; }
+#netz-zeit-svg text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.tl-ytick { text-anchor: end; dominant-baseline: middle; }
+#netz-zeit-svg .tl-xtick { text-anchor: middle; }
+#netz-zeit-svg .tl-now { fill: var(--ink); font-weight: 700; }
+#netz-zeit-svg .tl-year { fill: var(--ink-soft); font-weight: 700; }
+#netz-zeit-svg .tl-today-label { fill: var(--ink); font-weight: 700; }
+.tl-grid { stroke: var(--line); stroke-width: 1; }
+.tl-base { stroke: var(--ink); stroke-width: 1; }
+.tl-today { stroke: var(--ink); stroke-width: 1; }
+.tl-break { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.tl-seg.tl-future { fill-opacity: .45; }
+.tl-seg.tl-dim { fill-opacity: .22; }
+.tl-hit, .tl-hit-gap { fill: transparent; }
+.tl-hit[tabindex] { cursor: pointer; }
+.tl-hit[tabindex]:hover, .tl-hit:focus-visible { fill: rgba(22, 22, 29, .06); outline: none; }
+.tl-hit.tl-active { fill: rgba(22, 22, 29, .1); stroke: var(--ink); stroke-width: 1.5; }
+.netz-zeit-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--paper); border: 2px solid var(--ink); border-radius: 10px; padding: .4rem .6rem; font-size: .85rem; box-shadow: 3px 3px 0 var(--ink); white-space: nowrap; }
+.netz-zeit-tip p { margin: 0; }
+.netz-zeit-tip-title { font-size: .8rem; color: var(--muted); margin-bottom: .15rem !important; }
+.netz-zeit-tip-key { display: inline-block; width: .9rem; height: 0; border-top: 3px solid; vertical-align: middle; margin-right: .4rem; }
+.netz-zeit-tip-row strong { font-family: var(--mono); }
+.netz-zeit-details { margin-top: .6rem; }
+.netz-zeit-details summary { cursor: pointer; font-weight: 600; }
+.netz-zeit-table { border-collapse: collapse; margin-top: .5rem; font-size: .9rem; }
+.netz-zeit-table th, .netz-zeit-table td { padding: .2rem .7rem; border-bottom: 1px solid var(--line); text-align: right; }
+.netz-zeit-table th:first-child { text-align: left; }
+.netz-zeit-table td { font-family: var(--mono); }
+
 /* Markdown task lists (- [ ] / - [x]), e.g. a project used as a task tracker */
 .task-list { list-style: none; padding-left: 0; }
 .task-list-item { position: relative; padding-left: 1.9rem; margin: .45rem 0; }

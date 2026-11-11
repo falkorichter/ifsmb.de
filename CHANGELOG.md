@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Zeitleiste unter dem Netzwerk (`/netzwerk/`): gestapelte Balken pro Monat für Projektstarts, Beiträge, Termine und Presse – mit „heute“-Markierung, blass gezeichneten geplanten Monaten und einer Tabellenansicht. Die Filter oben gelten auch für die Zeitleiste; ein Klick auf einen Monat hebt seine Einträge im Netzwerk hervor und listet sie rechts auf (Link mit `#zeit:JJJJ-MM`), ein ausgewählter Punkt im Netzwerk hebt umgekehrt seine Verbindungen in der Zeitleiste hervor.
 - Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
 
 ## [2026-11-10]
