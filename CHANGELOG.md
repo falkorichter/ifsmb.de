@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- „➕ Partner“ auf `/partner/` und „➕ Wir in der Presse“ auf `/presse/`: Partner und Presseberichte können jetzt auch als eigene Datei angelegt werden (`_data/partner/<name>.yml`, `_data/pressebericht/<name>.yml`) – ein kleines Plugin hängt sie an die Listen an, Presseberichte nach Datum einsortiert. So gibt es auch dafür Vorlagen mit allen Feldern.
 - „➕ Vergangenes Projekt“ im Archiv (`/projekte/archiv/`): Vorlage für ein abgeschlossenes Projekt mit `status: abgeschlossen`, Beispiel-Startdatum in der Vergangenheit und Gliederung „Worum ging es?“, „Was wir gemacht haben“, „Was daraus geworden ist“.
 - Ausstattung: Falkos privater Snapmaker U1 mit Deckel – für den Keller, zum Erweitern (Trocknungseinheiten, Custom-Firmware) und mit ersten Links aus der U1-Community.
 - „Neu anlegen“-Buttons unter „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.

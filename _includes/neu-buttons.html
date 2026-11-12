@@ -46,7 +46,8 @@
       {%- when '/news/persoenlich/' -%}{% include neu-button.html typ="beitrag" label="Persönlicher Beitrag" persoenlich=true hint="Neuer persönlicher Beitrag" %}
       {%- when '/kalender/' -%}{% include neu-button.html typ="termin" label="Termin" hint="Neuer Termin mit allen Feldern" %}
       {%- when '/ausstattung/' -%}{% include neu-button.html typ="geraet" label="Gerät" hint="Neues Gerät mit allen Feldern" %}
-      {%- when '/presse/' -%}{% include neu-button.html typ="presse" label="Pressemitteilung" hint="Neue Pressemitteilung mit allen Feldern" %}
+      {%- when '/presse/' -%}{% include neu-button.html typ="presse" label="Pressemitteilung" hint="Neue Pressemitteilung mit allen Feldern" %}{% include neu-button.html typ="pressebericht" label="Wir in der Presse" hint="Neuer Bericht über uns – wird nach Datum einsortiert" %}
+      {%- when '/partner/' -%}{% include neu-button.html typ="partner" label="Partner" hint="Neuer Partner als eigene Datei – erscheint auf /partner/ und im Netzwerk" %}
     {%- endcase -%}
   {%- endif -%}
 {%- endif -%}
