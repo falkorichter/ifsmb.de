@@ -1,0 +1,12 @@
+{%- comment -%}
+  Template for a new partner as its own file (_data/partner/<name>.yml), picked up by _plugins/partner_dateien.rb.
+{%- endcomment -%}
+# Neuer Partner – erscheint auf /partner/, im Netzwerk und überall, wo Seiten den Partner über seinen Namen nennen.
+# Dateiname oben anpassen: name-des-partners.yml (nur Kleinbuchstaben und Bindestriche).
+name: Name des Partners   # genau so schreiben, wie er bei anderen Seiten unter partners: oder owner_partner: steht
+url: https://beispiel.de/   # Pflicht: Website des Partners (Logo und Name verlinken darauf)
+instagram:   # optional: Link zum Instagram-Profil
+logo:   # /assets/images/partner/<name>.png – leer lassen, solange es kein Logo gibt; Original nach _logo/partner/
+logo_dark: false   # true, wenn das Logo helle Elemente hat und einen dunklen Hintergrund braucht
+page:   # optional: eigene Partnerseite, z. B. /partner/<name>/ (Datei partner/<name>/index.md)
+description: Ein Satz, wer der Partner ist und wie wir zusammenarbeiten.

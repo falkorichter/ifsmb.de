@@ -11,8 +11,14 @@
     {%- capture inhalt -%}{% include vorlagen/termin.md team=include.team tags=include.tags projekte=include.projekte partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'projekt' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
     {%- capture inhalt -%}{% include vorlagen/projekt.md team=include.team partners=include.partners teil_von=include.teil_von verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'projekt-vergangen' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
     {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+  {%- when 'partner' -%}{%- assign dir = '_data/partner' -%}{%- assign datei = 'name-des-partners.yml' -%}
+    {%- capture inhalt -%}{% include vorlagen/partner.yml %}{%- endcapture -%}
+  {%- when 'pressebericht' -%}{%- assign dir = '_data/pressebericht' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}
+    {%- capture inhalt -%}{% include vorlagen/pressebericht.yml %}{%- endcapture -%}
   {%- when 'team' -%}{%- assign dir = '_team' -%}{%- assign datei = 'vorname-nachname.md' -%}
     {%- capture inhalt -%}{% include vorlagen/team.md %}{%- endcapture -%}
   {%- when 'presse' -%}{%- assign dir = '_press' -%}{%- assign datei = 'JJJJ-MM-TT-titel-der-mitteilung.md' -%}

@@ -27,12 +27,12 @@ ruby _scripts/check_site.rb --extern                                # zusätzlic
 | Neuigkeiten | `_posts/YYYY-MM-DD-slug.md` | Front Matter: `title`, `date` |
 | Team-Mitglied | `_team/vorname-nachname.md` | `title` (Name), `role`, `order`, optional `photo`, `links` |
 | Projekt | `_projects/slug.md` | `title`, `summary`, `status` (`aktuell` / `abgeschlossen`), `start`, `zeitraum`, `ort`, `team` (Slugs aus `_team`), `partners` (Namen aus `_data/partners.yml`) |
-| Partner | `_data/partners.yml` | Logo nach `assets/images/partner/` legen, Original nach `_logo/partner/` |
+| Partner | `_data/partners.yml` oder `_data/partner/<name>.yml` (ein Partner pro Datei) | Logo nach `assets/images/partner/` legen, Original nach `_logo/partner/` |
 | Termin | `_events/YYYY-MM-DD-slug.md` | `title`, `start` / `end` (`2026-11-28 15:00`), `all_day`, `location`, `summary` |
 | Pressemitteilung | `_press/YYYY-MM-DD-slug.md` | `title`, `subtitle`, `date` |
 | Presse-Kurzprofil & Kontakt | `_data/presse.yml` | |
 | Pressematerial | `_data/pressematerial.yml` | Dateien nach `assets/presse/` |
-| Wir in der Presse | `_data/presseberichte.yml` | neueste zuerst; `titel`, optional `datum`, `hinweis`,, `medium`, `url`, optional `anlass` (eigene Seite zum Anlass) |
+| Wir in der Presse | `_data/presseberichte.yml` oder `_data/pressebericht/<name>.yml` (wird nach `datum` einsortiert) | neueste zuerst; `titel`, optional `datum`, `hinweis`,, `medium`, `url`, optional `anlass` (eigene Seite zum Anlass) |
 | Impressum | `impressum/index.md` | |
 
 Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projekte/archiv/`).

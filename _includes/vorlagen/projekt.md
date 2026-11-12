@@ -11,7 +11,7 @@ start: JJJJ-MM-TT   # muss ein Datum sein, wird zum Sortieren genutzt
 zeitraum: seit JJJJ   # Text, z. B. „seit 2026“ oder „Herbst 2026“
 ort:   # z. B. „Kurt-Tucholsky-Grundschule, Moabit“ – keine Wohnadressen
 event_tag:   # eigenes Stichwort (nie ein allgemeines wie 35services): Beiträge und Termine mit diesem Stichwort erscheinen hier
-teil_von: [{{ include.teil_von }}]   # Dateinamen übergeordneter Projekte → Teilprojekt, nicht in den Übersichten
+teil_von:{% if include.teil_von %} [{{ include.teil_von }}]{% endif %}   # leer lassen! Nur für Teilprojekte: [dateiname-des-elternprojekts] – erscheinen dann nicht in den Übersichten
 verwandt: []   # Dateinamen verwandter Projekte, z. B. [3d-druck-ag-ktg]
 team: [{{ include.team }}]   # Team-Kürzel der Beteiligten
 partners: [{{ include.partners }}]   # Namen aus _data/partners.yml, in Anführungszeichen

@@ -15,7 +15,7 @@ verlinkt:
   - /news/2026/11/10/unser-netzwerk-alles-haengt-zusammen/
 ---
 
-Was Falko für das Institut und für ifsmb.de gerade erledigt. Die Liste ist auch ein Aufgaben-Tracker: Auf GitHub über „✏️ Diese Seite bearbeiten“ ein `[ ]` durch `[x]` ersetzen – schon ist die Aufgabe abgehakt.
+Was Falko für das Institut und für ifsmb.de gerade erledigt. Die Liste ist auch ein Aufgaben-Tracker: Auf GitHub über den ✏️-Button unten auf der Seite ein `[ ]` durch `[x]` ersetzen – schon ist die Aufgabe abgehakt.
 
 ## Aufgaben
 
