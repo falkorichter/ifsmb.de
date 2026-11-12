@@ -795,3 +795,35 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 
 /* photo credit under a team member's name */
 .photo-credit { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+
+/* Map of the network (/karte/), see assets/js/karte.js */
+.karte-hinweis { margin: 0; font-size: .9rem; }
+.karte-rahmen { position: relative; }
+.karte-map { position: relative; width: 100%; height: 72vh; min-height: 420px; border: 2px solid var(--ink); border-radius: var(--radius); background: #e8e4da; overflow: hidden; outline-offset: 3px; }
+.karte-map.is-geladen { touch-action: none; cursor: grab; }
+.karte-map.is-ziehen { cursor: grabbing; }
+.karte-kacheln, .karte-marker { position: absolute; inset: 0; }
+.karte-marker { pointer-events: none; }
+.karte-kacheln img { position: absolute; top: 0; left: 0; width: 256px; height: 256px; max-width: none; user-select: none; }
+.karte-punkt { pointer-events: auto; position: absolute; top: 0; left: 0; margin: -15px 0 0 -15px; min-width: 30px; height: 30px; padding: 0 .35rem; border: 2px solid var(--ink); border-radius: 999px; background: var(--accent); color: var(--ink); font: 700 .8rem/1 var(--font); cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
+.karte-punkt:hover, .karte-punkt:focus-visible { background: var(--accent-2); color: var(--paper); z-index: 2; }
+.karte-punkt.is-aktiv { background: var(--blue); color: var(--paper); z-index: 3; }
+.karte-punkt.is-leer { min-width: 18px; height: 18px; margin: -9px 0 0 -9px; background: var(--paper); }
+.karte-punkt.is-ungefaehr { border-style: dashed; }
+.karte-zustimmung { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: .6rem; max-width: 30rem; margin: 0 auto; padding: 1.5rem; text-align: center; }
+.karte-zustimmung[hidden] { display: none; }
+.karte-zoom { position: absolute; top: .75rem; left: .75rem; display: flex; flex-direction: column; gap: .4rem; }
+.karte-zoom[hidden] { display: none; }
+.karte-zoom .btn { width: 2.4rem; height: 2.4rem; padding: 0; font-size: 1.2rem; box-shadow: 2px 2px 0 var(--ink); }
+.karte-attribution { position: absolute; right: 2px; bottom: 2px; margin: 0; padding: .1rem .5rem; font-size: .75rem; background: rgba(255, 255, 255, .85); border-radius: 0 0 calc(var(--radius) - 2px) 0; }
+.karte-aus { font: inherit; color: var(--blue); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+.karte-liste { list-style: none; display: grid; gap: .35rem; }
+.karte-ort-knopf { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: .5rem; text-align: left; font: inherit; font-size: .95rem; font-weight: 600; padding: .35rem .75rem; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper); cursor: pointer; }
+.karte-ort-knopf:hover { background: var(--accent); }
+.karte-zahl { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.karte-zurueck { padding: .25rem .8rem; font-size: .85rem; }
+.karte-osm-link { font-size: .85rem; margin: .2rem 0 0; }
+@media (max-width: 860px) {
+  .karte-map { height: 60vh; }
+}
+.karte-kommt { color: var(--accent-2); font-weight: 700; }

@@ -57,6 +57,11 @@ content:
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
+        type: string
+        list: true
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
@@ -144,6 +149,11 @@ content:
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
       - name: tags
@@ -249,6 +259,11 @@ content:
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
 
@@ -374,6 +389,11 @@ content:
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
       - name: tags
