@@ -259,6 +259,7 @@
             img.alt = "";
             img.draggable = false;
             img.decoding = "async";
+            img.onerror = function () { this.style.visibility = "hidden"; };
             img.src = TILE_URL.replace("{z}", z).replace("{x}", wx).replace("{y}", ty);
             cache[key] = img;
             tiles.appendChild(img);
