@@ -8,6 +8,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Jeder Termin hat oben neben Datum und Uhrzeit einen Link „📅 iCal“, der nur diesen einen Termin als `.ics` herunterlädt – zum Übernehmen in den eigenen Kalender, ohne den ganzen Kalender zu abonnieren.
+- Eigene iCal-Feeds für Projekte, Teamprofile und Partnerseiten: Der Button „📅 iCal“ neben der Überschrift „Termine“ bzw. „Termine & Berichte“ enthält genau die Termine dieser Seite, auch die vergangenen. So kann man ein Projekt verfolgen oder nur Falkos Termine abonnieren, ohne den ganzen Kalender des Instituts.
 - „➕ Partner“ auf `/partner/` und „➕ Wir in der Presse“ auf `/presse/`: Partner und Presseberichte können jetzt auch als eigene Datei angelegt werden (`_data/partner/<name>.yml`, `_data/pressebericht/<name>.yml`) – ein kleines Plugin hängt sie an die Listen an, Presseberichte nach Datum einsortiert. So gibt es auch dafür Vorlagen mit allen Feldern.
 - „➕ Vergangenes Projekt“ im Archiv (`/projekte/archiv/`): Vorlage für ein abgeschlossenes Projekt mit `status: abgeschlossen`, Beispiel-Startdatum in der Vergangenheit und Gliederung „Worum ging es?“, „Was wir gemacht haben“, „Was daraus geworden ist“.
 - „Neu anlegen“-Buttons neben „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.
@@ -19,6 +21,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
 - Changelog enthält nur noch Funktionen der Website, keine Inhalte mehr – die zeigt das Netzwerk mit seiner Zeitleiste. Bisherige Inhalts-Einträge entfernt.
 

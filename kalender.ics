@@ -4,67 +4,12 @@ permalink: /kalender.ics
 ---
 {% capture nl %}
 {% endcapture -%}
-{%- assign tz_off = site.time | date: "%z" -%}
-{%- assign tz_sec = tz_off | slice: 1, 2 | plus: 0 | times: 3600 -%}
-{%- assign stamp = site.time | date: "%s" | minus: tz_sec | date: "%Y%m%dT%H%M%SZ" -%}
-{%- assign host = site.url | remove: "https://" | remove: "http://" -%}
-BEGIN:VCALENDAR{{ nl -}}
-VERSION:2.0{{ nl -}}
-PRODID:-//{{ host }}//Kalender//DE{{ nl -}}
-CALSCALE:GREGORIAN{{ nl -}}
-METHOD:PUBLISH{{ nl -}}
-{%- include ics-line.txt line="X-WR-CALNAME:Institut für spontane Makespace Buildung" -%}
-X-WR-TIMEZONE:Europe/Berlin{{ nl -}}
-REFRESH-INTERVAL;VALUE=DURATION:PT6H{{ nl -}}
-X-PUBLISHED-TTL:PT6H{{ nl -}}
-BEGIN:VTIMEZONE{{ nl -}}
-TZID:Europe/Berlin{{ nl -}}
-BEGIN:DAYLIGHT{{ nl -}}
-TZOFFSETFROM:+0100{{ nl -}}
-TZOFFSETTO:+0200{{ nl -}}
-TZNAME:CEST{{ nl -}}
-DTSTART:19700329T020000{{ nl -}}
-RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU{{ nl -}}
-END:DAYLIGHT{{ nl -}}
-BEGIN:STANDARD{{ nl -}}
-TZOFFSETFROM:+0200{{ nl -}}
-TZOFFSETTO:+0100{{ nl -}}
-TZNAME:CET{{ nl -}}
-DTSTART:19701025T030000{{ nl -}}
-RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU{{ nl -}}
-END:STANDARD{{ nl -}}
-END:VTIMEZONE{{ nl -}}
+{%- include ics-kopf.txt feed=true -%}
 {%- assign events = site.events | sort: "start" -%}
 {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
 {%- for e in events -%}
 {%- if e.persoenlich -%}{%- continue -%}{%- endif -%}
 {%- if e.nur_projekt -%}{%- if e.end and e.end != "" -%}{%- assign e_end = e.end | date: "%s" | plus: 0 -%}{%- else -%}{%- assign e_end = e.start | date: "%s" | plus: 7200 -%}{%- endif -%}{%- if e_end >= now_s -%}{%- continue -%}{%- endif -%}{%- endif -%}
-{%- assign has_end = false -%}{%- if e.end and e.end != "" -%}{%- assign has_end = true -%}{%- endif -%}
-{%- assign title = e.title | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
-{%- assign url = site.url | append: e.url -%}
-{%- assign desc = e.summary | default: "" | strip_html | normalize_whitespace | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' -%}
-{%- if desc != "" -%}{%- assign desc = desc | append: '\n\n' -%}{%- endif -%}
-{%- assign desc = desc | append: url -%}
-BEGIN:VEVENT{{ nl -}}
-UID:{{ e.url | split: "/" | join: "-" | remove_first: "-" }}@{{ host }}{{ nl -}}
-DTSTAMP:{{ stamp }}{{ nl -}}
-{%- if e.all_day -%}
-{%- assign last_day = e.start -%}{%- if has_end -%}{%- assign last_day = e.end -%}{%- endif -%}
-{%- assign end_day = last_day | date: "%Y-%m-%d" | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
-DTSTART;VALUE=DATE:{{ e.start | date: "%Y%m%d" }}{{ nl -}}
-DTEND;VALUE=DATE:{{ end_day }}{{ nl -}}
-{%- else -%}
-{%- if has_end -%}{%- assign end_t = e.end | date: "%Y%m%dT%H%M%S" -%}{%- else -%}{%- assign end_t = e.start | date: "%s" | plus: 7200 | date: "%Y%m%dT%H%M%S" -%}{%- endif -%}
-DTSTART;TZID=Europe/Berlin:{{ e.start | date: "%Y%m%dT%H%M%S" }}{{ nl -}}
-DTEND;TZID=Europe/Berlin:{{ end_t }}{{ nl -}}
-{%- endif -%}
-{%- assign line = "SUMMARY:" | append: title -%}{%- include ics-line.txt line=line -%}
-{%- if e.location and e.location != "" -%}
-{%- assign loc = e.location | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
-{%- assign line = "LOCATION:" | append: loc -%}{%- include ics-line.txt line=line -%}
-{%- endif -%}
-{%- assign line = "DESCRIPTION:" | append: desc -%}{%- include ics-line.txt line=line -%}
-{%- assign line = "URL:" | append: url -%}{%- include ics-line.txt line=line -%}
-END:VEVENT{{ nl -}}
+{%- include ics-vevent.txt event=e -%}
 {%- endfor -%}
 END:VCALENDAR{{ nl -}}

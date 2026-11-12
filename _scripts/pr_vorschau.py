@@ -10,11 +10,12 @@ feature branch. Prints Markdown to paste into the PR description.
     python3 -I _scripts/pr_vorschau.py --unten /team/falko-richter/   # area above the footer
     python3 -I _scripts/pr_vorschau.py --unten --kontext 400 /news/    # show more content above the footer
     python3 -I _scripts/pr_vorschau.py --nur-lokal /                  # don't upload
+    python3 -I _scripts/pr_vorschau.py "/team/falko-richter/#termine" # scroll to a heading
 
 Without --unten the top of the page is captured (desktop 1280×900, phone
 390×844). Images are also kept in _pr-vorschau/ (in .gitignore).
 """
-import argparse, functools, html, http.server, os, re, subprocess, sys, tempfile, threading, urllib.parse
+import argparse, functools, html, http.server, json, os, re, subprocess, sys, tempfile, threading, urllib.parse
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,10 +43,16 @@ def serve():
                 return super().do_GET()
             q = urllib.parse.parse_qs(url.query)
             src, h = html.escape(q["src"][0], quote=True), int(q["h"][0])
+            w = int(q.get("w", ["390"])[0])
             # --unten: scroll the framed page to its end, so long pages fit without a huge window
             scroll = ' onload="this.contentWindow.scrollTo({top: 1e9, behavior: \'instant\'})"' if "unten" in q else ""
+            if "anker" in q:
+                # path with #anchor: scroll that heading to the top, leaving room for the sticky header
+                a = html.escape(json.dumps(q["anker"][0]), quote=True)
+                scroll = (' onload="var d=this.contentWindow,e=d.document.getElementById(' + a + ');'
+                          'if(e)d.scrollTo({top:e.getBoundingClientRect().top+d.scrollY-110,behavior:\'instant\'})"')
             body = (f'<body style="margin:0"><iframe src="{src}"{scroll} '
-                    f'style="border:0;width:390px;height:{h}px"></iframe>').encode()
+                    f'style="border:0;width:{w}px;height:{h}px"></iframe>').encode()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
@@ -105,13 +112,20 @@ def capture(base, path, unten, tmp, kontext=160):
     # --unten: the phone frame scrolls to the page end (Chrome caps screenshots at ~16k device px);
     # desktop is tall enough for long pages (profiles, projects), otherwise the crop would hit the header
     h_mobile = 3000 if unten else 844
-    params = {"src": path, "h": h_mobile}
+    page, _, anker = path.partition("#")
+    params = {"src": page, "h": h_mobile}
     if unten:
         params["unten"] = 1
+    if anker:
+        params["anker"] = anker
     handy = base + "/__pr_handy.html?" + urllib.parse.urlencode(params)
+    desktop = base + path
+    if anker:
+        # a plain #anchor scrolls unreliably in headless Chrome -> frame it like the phone view
+        desktop = base + "/__pr_handy.html?" + urllib.parse.urlencode({"src": page, "h": 900, "w": 1280, "anker": anker})
     files = []
     for label, url, w, h, scale, crop_w in [
-        ("desktop", base + path, 1280, 10000 if unten else 900, 1, None),
+        ("desktop", desktop, 1280, 10000 if unten else 900, 1, None),
         ("handy", handy, 600, h_mobile, 2, 390),
     ]:
         im = chrome(url, w, h, scale, os.path.join(tmp, "full.png"))

@@ -51,7 +51,8 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
-    {%- assign member_events = site.events | where_exp: "e", "e.team contains page.slug" | sort: "start" -%}
+    {%- include termine-auswahl.html res=page art="team" -%}
+    {%- assign member_events = termine_auswahl -%}
     {%- if member_events.size > 0 -%}
     {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
     {%- assign ev_up = "" | split: "" -%}
@@ -60,7 +61,7 @@ layout: default
       {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
       {%- if end_s >= now_s %}{% assign ev_up = ev_up | push: e %}{% else %}{% assign ev_past = ev_past | unshift: e %}{% endif -%}
     {%- endfor %}
-    <h2 id="termine">Termine</h2>
+    <h2 id="termine">Termine {% include ics-button.html url=page.url %}</h2>
     <h3 class="cal-heading" id="member-up-heading"{% if ev_up.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
     <ul class="event-list" id="member-events-up">
       {%- for e in ev_up %}{% include termin-karte.html event=e %}{% endfor %}

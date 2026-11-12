@@ -1,0 +1,6 @@
+{%- comment -%}
+  "📅 iCal" link to the feed of a resource: /projekte/x/ → /projekte/x.ics (written by _plugins/termin_ics.rb).
+  Parameter: url=<url of the resource page>
+{%- endcomment -%}
+{%- assign ib_url = include.url | split: "/" | join: "/" | append: ".ics" -%}
+<a class="termin-ics" href="{{ ib_url | relative_url }}" title="Diese Termine (auch vergangene) in den eigenen Kalender übernehmen oder abonnieren">📅 iCal</a>

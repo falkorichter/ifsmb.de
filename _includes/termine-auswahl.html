@@ -1,0 +1,30 @@
+{%- comment -%}
+  Picks the events of a resource and assigns them, sorted by start, to `termine_auswahl`.
+  Used by the pages (project, team profile, partner) and by their iCal feeds
+  (_plugins/termin_ics.rb), so page and feed always list the same events.
+  Parameters:
+    res=<doc or page>   the resource
+    art="projects"      events with the project's event_tag in `tags` or the project in `projekte`
+    art="team"          events with the person in `team` (personal ones included, as on the profile)
+    art="partner"       events with the partner in `partners` (not personal) or linked via `verlinkt`
+                        in either direction; needs partner=<name from _data/partners.yml>
+{%- endcomment -%}
+{%- assign ta_res = include.res -%}
+{%- assign termine_auswahl = "" | split: "" -%}
+{%- if include.art == "projects" -%}
+  {%- for x in site.events -%}
+    {%- assign x_proj = x.projekte | join: "," | split: "," -%}
+    {%- if ta_res.event_tag and x.tags contains ta_res.event_tag or x_proj contains ta_res.slug -%}{%- assign termine_auswahl = termine_auswahl | push: x -%}{%- endif -%}
+  {%- endfor -%}
+{%- elsif include.art == "team" -%}
+  {%- assign termine_auswahl = site.events | where_exp: "e", "e.team contains ta_res.slug" -%}
+{%- elsif include.art == "partner" -%}
+  {%- assign ta_links = ta_res.verlinkt | join: "," | split: "," -%}
+  {%- for x in site.events -%}
+    {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+    {%- assign x_partners = x.partners | join: "," | split: "," -%}
+    {%- if ta_links contains x.url or x_links contains ta_res.url -%}{%- assign termine_auswahl = termine_auswahl | push: x -%}
+    {%- elsif x.persoenlich != true and x_partners contains include.partner -%}{%- assign termine_auswahl = termine_auswahl | push: x -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign termine_auswahl = termine_auswahl | sort: "start" -%}
