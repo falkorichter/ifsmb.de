@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Beitrag aus der KTG-AG: Der Snapmaker U1 ist nach den Herbstferien per Lastenrad zurück – mit einer Druckplatte voller Hamster, Zeitraffer und den vermurksten Exemplaren zum Analysieren.
 - Persönlicher Beitrag zum KI-Server: Ein Raspberry Pi 4 soll als Proxy den stromhungrigen Server schlafen legen und bei Anfragen aufwecken.
 - Projektidee „Mural – einen Wandplotter bauen“ (Falko und Anton bei 35services): Open-Source-Wandplotter, mit dem wir Schrittmotoren verwerten können; Bilder aus dem GitHub-Repo mit Quellen und Lizenz.
 - Persönlicher Beitrag „Besuch bei Jugend hackt in der OKF“: Beamer abgeholt, über Finanzierung und lokale KI gesprochen.
