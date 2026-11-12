@@ -386,7 +386,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .termin-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1rem; }
 .cal-subscribe { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1.5rem 0 .75rem; }
 .cal-heading { margin-top: 2.5rem; }
-.cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin-top: 2.5rem; }
+.cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 2.5rem 0 1.25rem; }
 .cal-heading-abo h2 { margin: 0; }
 .abo-open { white-space: nowrap; }
 /* subscribe dialog on /kalender/ (native <dialog>) */
