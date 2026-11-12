@@ -72,6 +72,8 @@ nav:
     children:
       - title: Netzwerk
         url: /netzwerk/
+      - title: Karte
+        url: /karte/
       - title: Projekte
         url: /projekte/
       - title: Projekt-Ideen

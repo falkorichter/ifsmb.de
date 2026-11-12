@@ -4,7 +4,7 @@ layout: page
 title: Neuigkeiten
 lead: Was gerade im Institut passiert.
 ---
-{% assign inst_posts = site.posts | where_exp: "p", "p.persoenlich != true" %}
+{% assign inst_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" %}
 {% assign pers_posts = site.posts | where: "persoenlich", true %}
 {% if inst_posts.size > 0 %}
 <ul class="post-list post-list-full">
