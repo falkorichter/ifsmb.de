@@ -14,37 +14,10 @@ lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
   {%- if end_s >= now_s %}{% assign upcoming = upcoming | push: e %}{% else %}{% assign past = past | unshift: e %}{% endif -%}
 {%- endfor -%}
 
-{%- assign ics_abs = site.url | append: '/kalender.ics' -%}
-<h2 class="cal-heading cal-heading-abo">Kommende Termine <button type="button" class="btn btn-small" id="abo-open" aria-haspopup="dialog" aria-controls="abo-dialog">📅 Abonnieren</button></h2>
-<dialog class="abo-dialog" id="abo-dialog" aria-labelledby="abo-title">
-  <form method="dialog" class="abo-close-form"><button class="abo-close" aria-label="Schließen">×</button></form>
-  <h2 id="abo-title">Kalender abonnieren</h2>
-  <p>Das Abo funktioniert mit Apple Kalender, Google Kalender, Outlook und Thunderbird. Für Google Kalender: „Weitere Kalender → Per URL“ und <code>{{ ics_abs }}</code> eintragen.</p>
-  <div class="cal-subscribe">
-    <a class="btn" href="webcal://{{ site.url | remove: 'https://' | remove: 'http://' }}{{ '/kalender.ics' | relative_url }}">📅 Kalender abonnieren</a>
-    <a class="btn btn-ghost" href="{{ '/kalender.ics' | relative_url }}" download>iCal-Datei herunterladen</a>
-    <button type="button" class="btn btn-ghost" id="abo-copy" data-url="{{ ics_abs }}" hidden>Adresse kopieren</button>
-  </div>
-</dialog>
-<noscript><p class="cal-subscribe"><a class="btn btn-small" href="webcal://{{ site.url | remove: 'https://' | remove: 'http://' }}{{ '/kalender.ics' | relative_url }}">📅 Kalender abonnieren</a> <a class="btn btn-small btn-ghost" href="{{ '/kalender.ics' | relative_url }}" download>iCal-Datei herunterladen</a></p><style>#abo-open{display:none}</style></noscript>
-<script>
-  // subscribe dialog: native <dialog>; without JS the <noscript> links take over
-  (function () {
-    var d = document.getElementById('abo-dialog'), open = document.getElementById('abo-open'), copy = document.getElementById('abo-copy');
-    if (!d.showModal) { open.hidden = true; d.setAttribute('open', ''); d.classList.add('abo-inline'); return; }
-    open.addEventListener('click', function () { d.showModal(); });
-    // /kalender/#abonnieren opens the dialog right away (link target for other pages)
-    if (location.hash === '#abonnieren') d.showModal();
-    // close on click on the backdrop
-    d.addEventListener('click', function (ev) { if (ev.target === d) d.close(); });
-    if (navigator.clipboard) {
-      copy.hidden = false;
-      copy.addEventListener('click', function () {
-        navigator.clipboard.writeText(copy.dataset.url).then(function () { copy.textContent = 'Kopiert ✓'; });
-      });
-    }
-  })();
-</script>
+<div class="cal-heading-abo">
+  <h2 class="cal-heading">Kommende Termine</h2>
+  {% include kalender-abo.html ics="/kalender.ics" titel="Kalender des Instituts abonnieren" %}
+</div>
 <ul class="event-list" id="events-upcoming">
   {%- for e in upcoming %}{% include termin-karte.html event=e versteckt=e.nur_projekt %}{% endfor %}
 </ul>

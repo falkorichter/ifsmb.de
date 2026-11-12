@@ -382,13 +382,13 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .site-footer a:hover { color: #fff; }
 .footer-note { color: #8f8d86; font-size: .8rem; }
 
-.termin-ics { margin-left: .5rem; white-space: nowrap; }
-h2 .termin-ics, h3 .termin-ics { font-family: var(--mono); font-size: .9rem; font-weight: 400; vertical-align: middle; }
+/* calendar button + dialog (_includes/kalender-abo.html) */
+.termin-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1rem; }
 .cal-subscribe { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1.5rem 0 .75rem; }
 .cal-heading { margin-top: 2.5rem; }
-.cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; }
-button.btn { font: inherit; font-weight: 700; cursor: pointer; }
-button.btn-small { font-size: .85rem; }
+.cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin-top: 2.5rem; }
+.cal-heading-abo h2 { margin: 0; }
+.abo-open { white-space: nowrap; }
 /* subscribe dialog on /kalender/ (native <dialog>) */
 .abo-dialog {
   margin: auto;
@@ -401,13 +401,15 @@ button.btn-small { font-size: .85rem; }
   color: var(--ink);
 }
 .abo-dialog::backdrop { background: rgba(10, 10, 14, .55); }
-.abo-dialog h2 { margin: 0 2rem .75rem 0; }
+.abo-dialog h2 { margin: 0 2rem .75rem 0; font-size: clamp(1.25rem, 4vw, 1.5rem); }
 .abo-dialog code { overflow-wrap: anywhere; }
 .abo-dialog .cal-subscribe { margin: 1.25rem 0 0; }
 .abo-close-form { position: absolute; top: .6rem; right: .6rem; margin: 0; }
 .abo-close { font: inherit; font-size: 1.6rem; line-height: 1; width: 2.2rem; height: 2.2rem; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; }
 .abo-close:hover { background: var(--accent); }
-.abo-dialog.abo-inline { position: static; margin: 1rem 0; }
+.abo-was { font-weight: 700; }
+.abo-was .meta { font-weight: 400; }
+.abo-dialog .cal-subscribe + .small { margin-top: 1rem; }
 
 .event-list { list-style: none; display: grid; gap: 1rem; }
 .event-list-past .event-card { opacity: .65; }

@@ -151,7 +151,16 @@
   </ul>
   {%- endif %}
   {%- if g_events.size > 0 %}
-  <h2>Termine{% if kind == "partner" %} {% include ics-button.html url=me_url %}{% endif %}</h2>
+  {%- if kind == "partner" %}
+  {%- assign ics_url = me_url | split: "/" | join: "/" | append: ".ics" %}
+  {%- assign abo_titel = "Termine mit " | append: include.partner | append: " abonnieren" %}
+  <div class="cal-heading-abo">
+    <h2>Termine</h2>
+    {% include kalender-abo.html ics=ics_url titel=abo_titel %}
+  </div>
+  {%- else %}
+  <h2>Termine</h2>
+  {%- endif %}
   <ul class="link-list link-list-connections">
     {% for x in g_events %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📅</span> {{ x.title }} <span class="link-meta">{% if x.date_label and x.date_label != "" %}{{ x.start | date: "%m/%Y" }}{% else %}{{ x.start | date: "%d.%m.%Y" }}{% endif %}</span>{% if x.persoenlich %} <span class="link-private">persönlich</span>{% endif %}</a></li>{% endfor %}
   </ul>

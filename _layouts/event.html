@@ -6,7 +6,10 @@ layout: default
     <header class="page-header">
       {%- assign ics_name = page.url | split: "/" | last %}
       {%- assign ics_url = "/kalender/" | append: ics_name | append: ".ics" %}
-      <p class="meta">{% include termin-datum.html event=page %} <a class="termin-ics" href="{{ ics_url | relative_url }}" download title="Diesen Termin in den eigenen Kalender übernehmen">📅 iCal</a></p>
+      <div class="termin-meta">
+        <p class="meta">{% include termin-datum.html event=page %}</p>
+        {% include kalender-abo.html ics=ics_url event=page %}
+      </div>
       <h1>{{ page.title }}</h1>
       {%- if page.persoenlich and page.team %}
       <p class="event-byline">Persönlicher Termin von {% for slug in page.team %}{% assign m = site.team | where: "slug", slug | first %}{% if m %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% else %}{{ slug }}{% endif %}{% if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif %}{% endfor %}</p>
@@ -47,7 +50,7 @@ layout: default
     {%- endif %}
     {% include verknuepft.html tags=page.tags %}
     <p class="cal-subscribe">
-      <a class="btn btn-ghost" href="{{ '/kalender.ics' | relative_url }}">📅 Alle Termine als iCal</a>
+      <a class="btn btn-ghost" href="{{ '/kalender/#abonnieren' | relative_url }}">📅 Alle Termine abonnieren</a>
     </p>
     <a href="{{ '/kalender/' | relative_url }}" class="back-link">← Zum Kalender</a>
   </article>

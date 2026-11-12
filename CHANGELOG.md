@@ -9,6 +9,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 ### Hinzugefügt
 
 - Jeder Termin hat oben neben Datum und Uhrzeit einen Link „📅 iCal“, der nur diesen einen Termin als `.ics` herunterlädt – zum Übernehmen in den eigenen Kalender, ohne den ganzen Kalender zu abonnieren.
+- Kalender-Fenster mit Google-Button überall, wo es Termine gibt: „📅 Abonnieren“ neben „Kommende Termine“ (`/kalender/`) und neben den Termin-Überschriften von Projekten, Teamprofilen und Partnerseiten, „📅 In den Kalender“ oben auf jeder Terminseite. Das Fenster bietet „Apple Kalender & Outlook“ (öffnet das Abo bzw. den Termin direkt im Kalender-Programm), „Google Kalender“ (fragt bei Google, ob der Kalender hinzugefügt werden soll, bzw. öffnet einen ausgefüllten neuen Termin) und den Download der iCal-Datei, mit kurzer Anleitung. `<seite>#abonnieren` öffnet das Fenster direkt.
 - Eigene iCal-Feeds für Projekte, Teamprofile und Partnerseiten: Der Button „📅 iCal“ neben der Überschrift „Termine“ bzw. „Termine & Berichte“ enthält genau die Termine dieser Seite, auch die vergangenen. So kann man ein Projekt verfolgen oder nur Falkos Termine abonnieren, ohne den ganzen Kalender des Instituts.
 - „➕ Partner“ auf `/partner/` und „➕ Wir in der Presse“ auf `/presse/`: Partner und Presseberichte können jetzt auch als eigene Datei angelegt werden (`_data/partner/<name>.yml`, `_data/pressebericht/<name>.yml`) – ein kleines Plugin hängt sie an die Listen an, Presseberichte nach Datum einsortiert. So gibt es auch dafür Vorlagen mit allen Feldern.
 - „➕ Vergangenes Projekt“ im Archiv (`/projekte/archiv/`): Vorlage für ein abgeschlossenes Projekt mit `status: abgeschlossen`, Beispiel-Startdatum in der Vergangenheit und Gliederung „Worum ging es?“, „Was wir gemacht haben“, „Was daraus geworden ist“.
@@ -21,7 +22,6 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
-- Kalender `/kalender/`: Statt zwei Buttons und Erklärtext über der Liste steht neben „Kommende Termine“ ein Button „📅 Abonnieren“. Er öffnet ein Fenster mit der Anleitung (Apple, Google, Outlook, Thunderbird), den Buttons „Kalender abonnieren“ und „iCal-Datei herunterladen“ und „Adresse kopieren“ für Google. `/kalender/#abonnieren` öffnet das Fenster direkt.
 - iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
 - Changelog enthält nur noch Funktionen der Website, keine Inhalte mehr – die zeigt das Netzwerk mit seiner Zeitleiste. Bisherige Inhalts-Einträge entfernt.

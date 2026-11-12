@@ -91,7 +91,12 @@ layout: default
       {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
       {%- if end_s >= now_s %}{% assign p_upcoming = p_upcoming | push: e %}{% else %}{% assign p_past = p_past | unshift: e %}{% endif -%}
     {%- endfor -%}
-    <h2 id="termine">Termine &amp; Berichte {% include ics-button.html url=page.url %}</h2>
+    {%- assign ics_url = page.url | split: "/" | join: "/" | append: ".ics" %}
+    {%- assign abo_titel = "Termine von „" | append: page.title | append: "“ abonnieren" %}
+    <div class="cal-heading-abo">
+      <h2 id="termine">Termine &amp; Berichte</h2>
+      {% include kalender-abo.html ics=ics_url titel=abo_titel %}
+    </div>
     <h3 class="cal-heading" id="proj-upcoming-heading"{% if p_upcoming.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
     <ul class="event-list" id="proj-events-upcoming">
       {%- for e in p_upcoming %}{% include termin-karte.html event=e %}{% endfor %}

@@ -1,0 +1,68 @@
+{%- comment -%}
+  "📅" button + dialog to put events into one's own calendar (assets/js/kalender-abo.js opens it).
+  Without JS the button is a plain link to the .ics file.
+  Parameters:
+    ics=<path>      feed or event file, e.g. /kalender.ics, /team/falko-richter.ics, /kalender/<termin>.ics
+    titel=<text>    dialog heading (default: "Kalender abonnieren" / "In den Kalender übernehmen")
+    event=<doc>     single event: Apple/Outlook get the file, Google a pre-filled "new event" form
+                    (without event: subscription via webcal:// and Google's "add calendar by URL" link)
+    label=<text>    button text (default: "📅 Abonnieren" / "📅 In den Kalender")
+  Only one dialog per page: it always has the id "abonnieren", so <page>#abonnieren opens it.
+{%- endcomment -%}
+{%- assign ab_ics = include.ics -%}
+{%- assign ab_host = site.url | remove: "https://" | remove: "http://" -%}
+{%- assign ab_https = site.url | append: ab_ics -%}
+{%- assign ab_webcal = "webcal://" | append: ab_host | append: ab_ics -%}
+{%- assign ab_e = include.event -%}
+{%- if ab_e -%}
+  {%- assign ab_titel = include.titel | default: "In den Kalender übernehmen" -%}
+  {%- assign ab_label = include.label | default: "📅 In den Kalender" -%}
+  {%- comment -%} Google "new event" form; same date rules as _includes/ics-vevent.txt {%- endcomment -%}
+  {%- assign g_title = ab_e.title -%}
+  {%- assign g_tz = "" -%}
+  {%- if ab_e.date_label and ab_e.date_label != "" -%}
+    {%- assign g_title = "TBD: " | append: g_title -%}
+    {%- assign g_first = ab_e.start | date: "%Y-%m-01" -%}
+    {%- assign g_end = g_first | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
+    {%- assign g_dates = g_first | remove: "-" | append: "/" | append: g_end -%}
+  {%- elsif ab_e.all_day -%}
+    {%- assign g_last = ab_e.end | default: ab_e.start -%}
+    {%- assign g_end = g_last | date: "%Y-%m-%d" | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
+    {%- assign g_dates = ab_e.start | date: "%Y%m%d" | append: "/" | append: g_end -%}
+  {%- else -%}
+    {%- if ab_e.end and ab_e.end != "" -%}{%- assign g_end = ab_e.end | date: "%Y%m%dT%H%M%S" -%}{%- else -%}{%- assign g_end = ab_e.start | date: "%s" | plus: 7200 | date: "%Y%m%dT%H%M%S" -%}{%- endif -%}
+    {%- assign g_dates = ab_e.start | date: "%Y%m%dT%H%M%S" | append: "/" | append: g_end -%}
+    {%- assign g_tz = "&ctz=Europe/Berlin" -%}
+  {%- endif -%}
+  {%- assign g_details = ab_e.summary | default: "" | strip_html | normalize_whitespace -%}
+  {%- if ab_e.date_label and ab_e.date_label != "" -%}{%- assign g_details = ab_e.date_label | append: " – " | append: g_details -%}{%- endif -%}
+  {%- assign g_details = g_details | append: " " | append: site.url | append: ab_e.url | strip -%}
+  {%- capture ab_google -%}https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ g_title | url_encode }}&dates={{ g_dates }}{{ g_tz }}{% if ab_e.location %}&location={{ ab_e.location | url_encode }}{% endif %}&details={{ g_details | url_encode }}{%- endcapture -%}
+{%- else -%}
+  {%- assign ab_titel = include.titel | default: "Kalender abonnieren" -%}
+  {%- assign ab_label = include.label | default: "📅 Abonnieren" -%}
+  {%- assign ab_cid = ab_webcal | url_encode -%}
+  {%- assign ab_google = "https://calendar.google.com/calendar/render?cid=" | append: ab_cid -%}
+{%- endif -%}
+<a class="btn btn-small abo-open" href="{{ ab_ics | relative_url }}" data-abo="abonnieren" aria-haspopup="dialog">{{ ab_label }}</a>
+<dialog class="abo-dialog" id="abonnieren" aria-labelledby="abonnieren-titel">
+  <form method="dialog" class="abo-close-form"><button class="abo-close" aria-label="Schließen">×</button></form>
+  <h2 id="abonnieren-titel">{{ ab_titel }}</h2>
+  {%- if ab_e %}
+  <p class="abo-was">{{ ab_e.title }}<br><span class="meta">{% include termin-datum.html event=ab_e %}</span></p>
+  <div class="cal-subscribe">
+    <a class="btn" href="{{ ab_ics | relative_url }}">Apple Kalender &amp; Outlook</a>
+    <a class="btn" href="{{ ab_google }}" target="_blank" rel="noopener">Google Kalender</a>
+  </div>
+  <p class="muted small">„Apple Kalender &amp; Outlook“ lädt eine iCal-Datei, die sich im Kalender-Programm öffnet (auch Thunderbird). „Google Kalender“ öffnet ein ausgefülltes Formular für einen neuen Termin bei Google.</p>
+  {%- else %}
+  <p>Neue und geänderte Termine kommen automatisch dazu.</p>
+  <div class="cal-subscribe">
+    <a class="btn" href="{{ ab_webcal }}">Apple Kalender &amp; Outlook</a>
+    <a class="btn" href="{{ ab_google }}" target="_blank" rel="noopener">Google Kalender</a>
+    <a class="btn btn-ghost" href="{{ ab_ics | relative_url }}" download>iCal-Datei herunterladen</a>
+  </div>
+  <p class="muted small">„Apple Kalender &amp; Outlook“ öffnet das Abo direkt im Kalender-Programm (Mac, iPhone, iPad, Outlook, Thunderbird). „Google Kalender“ fragt im Browser, ob der Kalender hinzugefügt werden soll – in der Google-App geht das nicht. Google aktualisiert Abos nur etwa einmal am Tag. Falls es nicht klappt: bei Google „Weitere Kalender → Per URL“ und <code>{{ ab_https }}</code> eintragen.</p>
+  {%- endif %}
+</dialog>
+<script src="{{ '/assets/js/kalender-abo.js' | relative_url }}" defer></script>
