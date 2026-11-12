@@ -1,5 +1,5 @@
 {%- comment -%}
-  "➕ Neu" buttons next to the edit button: open GitHub's "new file" editor with a template from
+  "➕" buttons in the same row as the edit button: open GitHub's "new file" editor with a template from
   _includes/vorlagen/ whose connection to the current page is already filled in.
 {%- endcomment -%}
 {%- assign c = page.collection -%}
@@ -40,22 +40,21 @@
     {%- case page.url -%}
       {%- when '/team/' -%}{% include neu-button.html typ="team" label="Teamprofil" hint="Neues Teamprofil mit allen Feldern" %}
       {%- when '/projekte/' -%}{% include neu-button.html typ="projekt" label="Projekt" hint="Neues Projekt mit allen Feldern" %}
+      {%- when '/projekte/archiv/' -%}{% include neu-button.html typ="projekt-vergangen" label="Vergangenes Projekt" hint="Abgeschlossenes Projekt nachtragen – mit Gliederung für den Rückblick" %}
       {%- when '/projekte/persoenlich/' -%}{% include neu-button.html typ="projekt" label="Persönliches Projekt" persoenlich=true hint="Neues persönliches Projekt – Person unter team eintragen" %}
       {%- when '/news/' -%}{% include neu-button.html typ="beitrag" label="Beitrag" hint="Neuer Beitrag mit allen Feldern" %}
       {%- when '/news/persoenlich/' -%}{% include neu-button.html typ="beitrag" label="Persönlicher Beitrag" persoenlich=true hint="Neuer persönlicher Beitrag" %}
       {%- when '/kalender/' -%}{% include neu-button.html typ="termin" label="Termin" hint="Neuer Termin mit allen Feldern" %}
       {%- when '/ausstattung/' -%}{% include neu-button.html typ="geraet" label="Gerät" hint="Neues Gerät mit allen Feldern" %}
-      {%- when '/presse/' -%}{% include neu-button.html typ="presse" label="Pressemitteilung" hint="Neue Pressemitteilung mit allen Feldern" %}
+      {%- when '/presse/' -%}{% include neu-button.html typ="presse" label="Pressemitteilung" hint="Neue Pressemitteilung mit allen Feldern" %}{% include neu-button.html typ="pressebericht" label="Wir in der Presse" hint="Neuer Bericht über uns – wird nach Datum einsortiert" %}
+      {%- when '/partner/' -%}{% include neu-button.html typ="partner" label="Partner" hint="Neuer Partner als eigene Datei – erscheint auf /partner/ und im Netzwerk" %}
     {%- endcase -%}
   {%- endif -%}
 {%- endif -%}
 {%- endcapture -%}
 {%- assign buttons = buttons | strip -%}
 {%- if buttons != '' -%}
-<div class="neu-buttons">
-  <span class="neu-label">Neu anlegen:</span>
-  {{ buttons }}
-</div>
+{{ buttons }}
 <script>
   // Fill today's date and UTC offset into the template links at click time (build date would be stale).
   document.addEventListener('click', function (ev) {
