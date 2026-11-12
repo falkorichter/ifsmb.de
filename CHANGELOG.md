@@ -6,6 +6,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [2026-11-13]
+
 ### Hinzugefügt
 
 - Jeder Termin hat oben neben Datum und Uhrzeit einen Link „📅 iCal“, der nur diesen einen Termin als `.ics` herunterlädt – zum Übernehmen in den eigenen Kalender, ohne den ganzen Kalender zu abonnieren.
@@ -124,6 +126,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - Kalender mit iCal-Feed, Presseseite und Pages CMS.
 
 [Unreleased]: https://github.com/falkorichter/ifsmb.de/commits/main
+[2026-11-13]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-13&until=2026-11-13
 [2026-11-11]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-11&until=2026-11-11
 [2026-11-10]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-10&until=2026-11-10
 [2026-11-09]: https://github.com/falkorichter/ifsmb.de/commits/main/?since=2026-11-09&until=2026-11-09
