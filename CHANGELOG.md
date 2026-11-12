@@ -10,6 +10,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Beitrag „Post von der Keramik AG und ein erster Schlüsselanhänger“ aus der 3D-Druck AG an der Platanus Schule: Stempelideen der Keramik AG und der erste (viel zu rote) mehrfarbige Schlüsselanhänger, mit Video vom Druck. Er erscheint nur auf der Projektseite.
 - Beiträge mit `nur_projekt: true` erscheinen nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite – für kleine Projekt-Updates.
+- KI-Server von Anton: Abschnitt „So ist diese Seite entstanden“ – agentisch über Claude per Pull Request eingetragen, mit zwei Screenshots.
+- Persönliches Projekt „KI-Server von Anton“ (mit Falko): lokaler KI-Server, per Tailscale erreichbar, zum agentischen Programmieren mit OpenCode; mit Foto der Grafikkarte.
 - Zwei neue Projekte zu den offenen Werkstatt-Repositories von 35services e. V.: „3D-Druck in der Werkstatt: 35services/3d“ (mit 5 Bildern) und „2D-Projekte mit dem Stiftplotter: 35services/2d“ (mit 4 Bildern); verlinkt auf der Partnerseite von 35services und im Teamprofil von Jan (`35services-jan` auf GitHub).
 - Beitrag aus dem ersten Jahr der KTG-AG (19. April 2024): „Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie“ – nachdem ein AG-Kind gewettet hatte, dass der AxiDraw keine Mona Lisa malen kann.
 - Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
