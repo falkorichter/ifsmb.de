@@ -9,7 +9,7 @@ layout: null
   <link href="{{ site.url }}/"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <id>{{ site.url }}/</id>
-  {% assign feed_posts = site.posts | where_exp: "p", "p.persoenlich != true" %}
+  {% assign feed_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" %}
   {% for post in feed_posts limit: 20 %}
   <entry>
     <title>{{ post.title | xml_escape }}</title>
