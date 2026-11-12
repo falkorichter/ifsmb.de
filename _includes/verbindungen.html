@@ -151,7 +151,7 @@
   </ul>
   {%- endif %}
   {%- if g_events.size > 0 %}
-  <h2>Termine</h2>
+  <h2>Termine{% if kind == "partner" %} {% include ics-button.html url=me_url %}{% endif %}</h2>
   <ul class="link-list link-list-connections">
     {% for x in g_events %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📅</span> {{ x.title }} <span class="link-meta">{% if x.date_label and x.date_label != "" %}{{ x.start | date: "%m/%Y" }}{% else %}{{ x.start | date: "%d.%m.%Y" }}{% endif %}</span>{% if x.persoenlich %} <span class="link-private">persönlich</span>{% endif %}</a></li>{% endfor %}
   </ul>
