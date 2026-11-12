@@ -21,3 +21,11 @@ Der Server soll per **Tailscale** erreichbar sein. Dann kann man darauf mit [Ope
 Falko erzählt schon seit einer Weile von **Vibe Coding** – seine Präsentation dazu: [Agentic 101](https://github.com/falkorichter/presentations/tree/main/agentic%20101).
 
 Wenn ihr euch für so etwas interessiert, der 4004 podcast von c't ist sehr spannend. [ct-3003.podigee.io/](https://ct-3003.podigee.io/).
+## So ist diese Seite entstanden
+{: #entstehung}
+
+Diese Seite hat Falko geschrieben und **agentisch über Claude** eingetragen – mit einem Pull Request auf GitHub. Auch das Foto der Grafikkarte kam direkt über Claude auf die Seite, und diesen Absatz hat Falko ebenfalls per Claude ergänzt.
+
+![Screenshot aus der Claude-App: Falkos Nachricht mit dem Foto der Grafikkarte und Claudes Antwort mit dem Pull Request für dieses Projekt](/assets/images/projekte/ki-server-anton/02.jpg)
+![Screenshot aus der Claude-App: Falko tippt die Bitte, diesen Absatz über die Entstehung der Seite einzufügen](/assets/images/projekte/ki-server-anton/03.jpg)
+{: .gallery .gallery-small}
