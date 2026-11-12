@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Persönlicher Beitrag zum KI-Server: Ein Raspberry Pi 4 soll als Proxy den stromhungrigen Server schlafen legen und bei Anfragen aufwecken.
 - Projektidee „Mural – einen Wandplotter bauen“ (Falko und Anton bei 35services): Open-Source-Wandplotter, mit dem wir Schrittmotoren verwerten können; Bilder aus dem GitHub-Repo mit Quellen und Lizenz.
 - Persönlicher Beitrag „Besuch bei Jugend hackt in der OKF“: Beamer abgeholt, über Finanzierung und lokale KI gesprochen.
 - Karte `/karte/` (unter „Wir“ und vom Netzwerk aus verlinkt): unsere Orte auf OpenStreetMap – Schulen, Werkstatt, Veranstaltungsorte – mit allen Projekten, Terminen (kommende markiert), Beiträgen und Geräten dort. Die Kartenbilder kommen erst nach Klick auf „Karte laden“; die Liste der Orte funktioniert auch ohne. Orte stehen in `_data/orte.yml`, Seiten finden ihren Ort automatisch oder über `orte: [...]`. Impressum (Datenschutz) ergänzt.
