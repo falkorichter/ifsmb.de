@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Karte `/karte/` (unter „Wir“ und vom Netzwerk aus verlinkt): unsere Orte auf OpenStreetMap – Schulen, Werkstatt, Veranstaltungsorte – mit allen Projekten, Terminen (kommende markiert), Beiträgen und Geräten dort. Die Kartenbilder kommen erst nach Klick auf „Karte laden“; die Liste der Orte funktioniert auch ohne. Orte stehen in `_data/orte.yml`, Seiten finden ihren Ort automatisch oder über `orte: [...]`. Impressum (Datenschutz) ergänzt.
 - Beitrag „Post von der Keramik AG und ein erster Schlüsselanhänger“ aus der 3D-Druck AG an der Platanus Schule: Stempelideen der Keramik AG und der erste (viel zu rote) mehrfarbige Schlüsselanhänger, mit Video vom Druck. Er erscheint nur auf der Projektseite.
 - Beiträge mit `nur_projekt: true` erscheinen nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite – für kleine Projekt-Updates.
 - KI-Server von Anton: Abschnitt „So ist diese Seite entstanden“ – agentisch über Claude per Pull Request eingetragen, mit zwei Screenshots.

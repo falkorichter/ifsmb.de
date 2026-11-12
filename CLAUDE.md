@@ -46,12 +46,14 @@ Immer **Makespace** schreiben, nie „Makerspace“. Grund: „Maker“ ist im D
 - CMS: [Pages CMS](https://pagescms.org), Konfiguration in `.pages.yml` – bei neuen Feldern dort mitpflegen
 - **Verbindungen**: Alle Ressourcen (Projekte, Termine, Beiträge, Personen, Ausstattung, Presse, Partnerseiten) können mit `verlinkt: [/adresse/, …]` beliebige andere Seiten verlinken. `_includes/verbindungen.html` zeigt unten auf jeder Seite alle Verbindungen in beide Richtungen als gleich gestylte Buttons (Teil von, Projekte, Termine, Beiträge, Beteiligt, Partner, Ausstattung) – zusammen mit den bestehenden Feldern `teil_von`, `verwandt`, `projekte`, `team`, `author`, `partners`, `owner_*`, `event_tag`/`tags`. Übersicht als ASCII-Art in `DATENSTRUKTUR.md` – bei neuen Feldern dort mitpflegen. `/netzwerk/` (`netzwerk/index.html` + `assets/js/netzwerk.js`, ohne Bibliothek) zeichnet alle Verbindungen als Graph; neue Verbindungsfelder auch dort ins JSON und in die Kanten-Regeln aufnehmen. Darunter eine Zeitleiste (gestapelte Balken pro Monat aus dem `date` im JSON: Projektstart, Beiträge, Termine, Presse) im selben Skript – sie nutzt dieselben Filter und Farben wie der Graph.
 
+- **Karte** `/karte/` (`karte/index.html` + `assets/js/karte.js`, ohne Bibliothek): zeigt die Orte aus `_data/orte.yml` (`id`, `name`, `adresse`, `lat`, `lon`, optional `partner`, `finden`, `fern`, `ungefaehr`) auf OpenStreetMap. Projekte, Termine und Geräte landen automatisch an einem Ort, wenn ihr `ort`/`location`/`standort` eines der `finden`-Wörter enthält, sonst über `standort_partner`/`partners`/`owner_partner` = `partner` des Orts. Beiträge erscheinen beim Ort ihres Projekts (über `tags`/`projekte`). Mit `orte: [<id>]` lässt sich jede Seite fest einem Ort zuordnen. Neue Orte: Koordinaten auf openstreetmap.org nachsehen, nur öffentliche Adressen (Schulen, Vereine, Veranstaltungsorte) – nie Wohnadressen; Werkstätten von Privatleuten nur straßengenau mit `ungefaehr: true`. Kommende Termine sind im Ortspanel markiert.
+
 - **Gelöschte Seiten weiterleiten**: Wird eine Seite gelöscht, die schon live war, an ihrer alten Adresse eine Weiterleitung anlegen – Datei mit `layout: weiterleitung`, `permalink: <alte Adresse>`, `ziel: <neue Adresse>` (optional `ziel_titel`), z. B. `projekte/40-monitore-bundesdruckerei.html`. Der Link-Check zählt solche Seiten nicht als verwaist.
 
 ## Konventionen
 
 - Kein CSS-/JS-Framework, alle Styles in `assets/css/style.css` mit CSS-Variablen
-- Keine externen Ressourcen (Fonts, Skripte, Tracker) einbinden – Datenschutzhinweis im Impressum verspricht das
+- Keine externen Ressourcen (Fonts, Skripte, Tracker) einbinden – Datenschutzhinweis im Impressum verspricht das. Einzige Ausnahme: die Kartenbilder von OpenStreetMap auf `/karte/`, und nur nach Klick auf „Karte laden“ (im Impressum unter Datenschutz beschrieben)
 - E-Mail-Adressen nur über das `.obf-mail`-Muster, Telefonnummern über `.obf-tel` (siehe README)
 - Original-Logos in `_logo/`, `_logo/README.md` aktuell halten
 - Platzhalter sind mit `<span class="todo">` markiert
