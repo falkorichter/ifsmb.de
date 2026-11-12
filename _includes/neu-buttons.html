@@ -1,5 +1,5 @@
 {%- comment -%}
-  "➕ Neu" buttons next to the edit button: open GitHub's "new file" editor with a template from
+  "➕" buttons in the same row as the edit button: open GitHub's "new file" editor with a template from
   _includes/vorlagen/ whose connection to the current page is already filled in.
 {%- endcomment -%}
 {%- assign c = page.collection -%}
@@ -53,10 +53,7 @@
 {%- endcapture -%}
 {%- assign buttons = buttons | strip -%}
 {%- if buttons != '' -%}
-<div class="neu-buttons">
-  <span class="neu-label">Neu anlegen:</span>
-  {{ buttons }}
-</div>
+{{ buttons }}
 <script>
   // Fill today's date and UTC offset into the template links at click time (build date would be stale).
   document.addEventListener('click', function (ev) {

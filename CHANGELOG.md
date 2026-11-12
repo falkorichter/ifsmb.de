@@ -30,6 +30,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
 - Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
 
 ### Behoben
