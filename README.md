@@ -37,6 +37,8 @@ ruby _scripts/check_site.rb --extern                                # zusätzlic
 
 Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projekte/archiv/`).
 
+Neue Inhalte brauchen **keinen Eintrag in `CHANGELOG.md`** – dort stehen nur Funktionen der Website. Welche Inhalte wann dazukamen, zeigt das [Netzwerk](https://ifsmb.de/netzwerk/) mit seiner Zeitleiste.
+
 Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-Daten), auf das Gesicht quadratisch zuschneiden und als `name-480w.jpg` + `name-960w.jpg` nach `assets/images/team/` legen; im Profil `photo` und `photo_2x` setzen.
 
 ## Kalender (iCal)
