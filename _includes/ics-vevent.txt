@@ -1,17 +1,26 @@
 {%- comment -%}
   One VEVENT for include.event. Needs `nl`, `stamp` and `host` (from ics-kopf.txt).
+  Events with date_label (only month/year known) become one all-day event on the
+  first of the start month with "TBD: " before the title, instead of spanning the whole range.
 {%- endcomment -%}
 {%- assign e = include.event -%}
 {%- assign has_end = false -%}{%- if e.end and e.end != "" -%}{%- assign has_end = true -%}{%- endif -%}
 {%- assign title = e.title | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
+{%- assign tbd = false -%}{%- if e.date_label and e.date_label != "" -%}{%- assign tbd = true -%}{%- assign title = "TBD: " | append: title -%}{%- endif -%}
 {%- assign url = site.url | append: e.url -%}
 {%- assign desc = e.summary | default: "" | strip_html | normalize_whitespace | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' -%}
 {%- if desc != "" -%}{%- assign desc = desc | append: '\n\n' -%}{%- endif -%}
+{%- if tbd -%}{%- assign label = e.date_label | strip_newlines | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' -%}{%- assign desc = label | append: '\n\n' | append: desc -%}{%- endif -%}
 {%- assign desc = desc | append: url -%}
 BEGIN:VEVENT{{ nl -}}
 UID:{{ e.url | split: "/" | join: "-" | remove_first: "-" }}@{{ host }}{{ nl -}}
 DTSTAMP:{{ stamp }}{{ nl -}}
-{%- if e.all_day -%}
+{%- if tbd -%}
+{%- assign first_day = e.start | date: "%Y-%m-01" -%}
+{%- assign end_day = first_day | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
+DTSTART;VALUE=DATE:{{ first_day | remove: "-" }}{{ nl -}}
+DTEND;VALUE=DATE:{{ end_day }}{{ nl -}}
+{%- elsif e.all_day -%}
 {%- assign last_day = e.start -%}{%- if has_end -%}{%- assign last_day = e.end -%}{%- endif -%}
 {%- assign end_day = last_day | date: "%Y-%m-%d" | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
 DTSTART;VALUE=DATE:{{ e.start | date: "%Y%m%d" }}{{ nl -}}
