@@ -19,3 +19,5 @@ Ein neues Projekt von Anton und Falko: Anton baut einen **Server für lokale KI*
 Der Server soll per **Tailscale** erreichbar sein. Dann kann man darauf mit [OpenCode](https://github.com/falkorichter/opencode-config) agentisch programmieren – Falkos Konfiguration liegt auf GitHub.
 
 Falko erzählt schon seit einer Weile von **Vibe Coding** – seine Präsentation dazu: [Agentic 101](https://github.com/falkorichter/presentations/tree/main/agentic%20101).
+
+Wenn ihr euch für so etwas interessiert, der 4004 podcast von c't ist sehr spannend. [ct-3003.podigee.io/](https://ct-3003.podigee.io/).
