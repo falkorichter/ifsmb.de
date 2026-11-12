@@ -11,6 +11,10 @@ team:
   - falko-richter
 ---
 
+## how it started
+Falko hat sich, wie viele Leute, einen Mac mini mit 16 GB RAM als kleinen Homeserver gekauft. So klein ist das gar nicht, das weiß er. Seit letztem Jahr probiert er dann auch immer mal wieder auf diesem Mac, auf dem etwas größeren Mac mit 36 GB RAM und auch mit Anton auf noch einem Mac mit 32 GB RAM, wie man lokale KI laufen lässt, um zu programmieren oder nur LLMs zu nutzen oder auch, um Software zu betreiben, die dann LLMs als Werkzeug benutzt, um z. B. Signal-Nachrichten in einem Chat zu beantworten, damit eine offene Werkstatt besseren Service bekommt.
+
+## how it's going 
 Ein neues Projekt von Anton und Falko: Anton baut einen **Server für lokale KI**. Falko hat **16 GB RAM** und eine **256-GB-SSD** beigesteuert.
 
 ![Eine NVIDIA-Tesla-Grafikkarte, in der Hand gehalten, im Hintergrund Kabel und ein Netzteil auf dem Boden](/assets/images/projekte/ki-server-anton/01.jpg)

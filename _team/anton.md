@@ -1,7 +1,7 @@
 ---
 title: Anton
 role: Aus der Werkstatt bei 35services
-order: 6
+order: 2
 photo: /assets/images/team/anton-480w.jpg
 photo_icon: /assets/images/team/anton-48w.jpg
 ---
