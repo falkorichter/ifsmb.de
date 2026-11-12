@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- „Neu anlegen“-Buttons unter „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.
 - Beitrag aus der KTG-AG: Der Snapmaker U1 ist nach den Herbstferien per Lastenrad zurück – mit einer Druckplatte voller Hamster, Zeitraffer und den vermurksten Exemplaren zum Analysieren.
 - Persönlicher Beitrag zum KI-Server: Ein Raspberry Pi 4 soll als Proxy den stromhungrigen Server schlafen legen und bei Anfragen aufwecken.
 - Projektidee „Mural – einen Wandplotter bauen“ (Falko und Anton bei 35services): Open-Source-Wandplotter, mit dem wir Schrittmotoren verwerten können; Bilder aus dem GitHub-Repo mit Quellen und Lizenz.
@@ -28,6 +29,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 ### Geändert
 
 - Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
+
+### Behoben
+
+- PR-Vorschaubilder mit `--unten` funktionieren jetzt auch bei langen Seiten (Teamprofile, Projekte): vorher fehlte der Footer im Bild und der Ausschnitt zeigte den Seitenkopf.
 
 ## [2026-11-11]
 
