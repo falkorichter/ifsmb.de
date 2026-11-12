@@ -1,0 +1,36 @@
+{%- comment -%}
+  iCal header up to and including VTIMEZONE. Needs `nl` (CRLF) from the caller.
+  Sets `stamp` and `host` for ics-vevent.txt. With feed=true it adds calendar name and refresh interval.
+{%- endcomment -%}
+{%- assign tz_off = site.time | date: "%z" -%}
+{%- assign tz_sec = tz_off | slice: 1, 2 | plus: 0 | times: 3600 -%}
+{%- assign stamp = site.time | date: "%s" | minus: tz_sec | date: "%Y%m%dT%H%M%SZ" -%}
+{%- assign host = site.url | remove: "https://" | remove: "http://" -%}
+BEGIN:VCALENDAR{{ nl -}}
+VERSION:2.0{{ nl -}}
+PRODID:-//{{ host }}//Kalender//DE{{ nl -}}
+CALSCALE:GREGORIAN{{ nl -}}
+METHOD:PUBLISH{{ nl -}}
+{%- if include.feed -%}
+{%- include ics-line.txt line="X-WR-CALNAME:Institut für spontane Makespace Buildung" -%}
+X-WR-TIMEZONE:Europe/Berlin{{ nl -}}
+REFRESH-INTERVAL;VALUE=DURATION:PT6H{{ nl -}}
+X-PUBLISHED-TTL:PT6H{{ nl -}}
+{%- endif -%}
+BEGIN:VTIMEZONE{{ nl -}}
+TZID:Europe/Berlin{{ nl -}}
+BEGIN:DAYLIGHT{{ nl -}}
+TZOFFSETFROM:+0100{{ nl -}}
+TZOFFSETTO:+0200{{ nl -}}
+TZNAME:CEST{{ nl -}}
+DTSTART:19700329T020000{{ nl -}}
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU{{ nl -}}
+END:DAYLIGHT{{ nl -}}
+BEGIN:STANDARD{{ nl -}}
+TZOFFSETFROM:+0200{{ nl -}}
+TZOFFSETTO:+0100{{ nl -}}
+TZNAME:CET{{ nl -}}
+DTSTART:19701025T030000{{ nl -}}
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU{{ nl -}}
+END:STANDARD{{ nl -}}
+END:VTIMEZONE{{ nl -}}

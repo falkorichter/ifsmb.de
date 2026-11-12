@@ -386,6 +386,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .site-footer a:hover { color: #fff; }
 .footer-note { color: #8f8d86; font-size: .8rem; }
 
+.termin-ics { margin-left: .5rem; white-space: nowrap; }
 .cal-subscribe { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1.5rem 0 .75rem; }
 .cal-heading { margin-top: 2.5rem; }
 

@@ -4,7 +4,9 @@ layout: default
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{% include termin-datum.html event=page %}</p>
+      {%- assign ics_name = page.url | split: "/" | last %}
+      {%- assign ics_url = "/kalender/" | append: ics_name | append: ".ics" %}
+      <p class="meta">{% include termin-datum.html event=page %} <a class="termin-ics" href="{{ ics_url | relative_url }}" download title="Diesen Termin in den eigenen Kalender übernehmen">📅 iCal</a></p>
       <h1>{{ page.title }}</h1>
       {%- if page.persoenlich and page.team %}
       <p class="event-byline">Persönlicher Termin von {% for slug in page.team %}{% assign m = site.team | where: "slug", slug | first %}{% if m %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% else %}{{ slug }}{% endif %}{% if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif %}{% endfor %}</p>

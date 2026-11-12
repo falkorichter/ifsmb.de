@@ -1,0 +1,31 @@
+{%- comment -%}
+  One VEVENT for include.event. Needs `nl`, `stamp` and `host` (from ics-kopf.txt).
+{%- endcomment -%}
+{%- assign e = include.event -%}
+{%- assign has_end = false -%}{%- if e.end and e.end != "" -%}{%- assign has_end = true -%}{%- endif -%}
+{%- assign title = e.title | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
+{%- assign url = site.url | append: e.url -%}
+{%- assign desc = e.summary | default: "" | strip_html | normalize_whitespace | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' -%}
+{%- if desc != "" -%}{%- assign desc = desc | append: '\n\n' -%}{%- endif -%}
+{%- assign desc = desc | append: url -%}
+BEGIN:VEVENT{{ nl -}}
+UID:{{ e.url | split: "/" | join: "-" | remove_first: "-" }}@{{ host }}{{ nl -}}
+DTSTAMP:{{ stamp }}{{ nl -}}
+{%- if e.all_day -%}
+{%- assign last_day = e.start -%}{%- if has_end -%}{%- assign last_day = e.end -%}{%- endif -%}
+{%- assign end_day = last_day | date: "%Y-%m-%d" | append: " 12:00:00" | date: "%s" | plus: 86400 | date: "%Y%m%d" -%}
+DTSTART;VALUE=DATE:{{ e.start | date: "%Y%m%d" }}{{ nl -}}
+DTEND;VALUE=DATE:{{ end_day }}{{ nl -}}
+{%- else -%}
+{%- if has_end -%}{%- assign end_t = e.end | date: "%Y%m%dT%H%M%S" -%}{%- else -%}{%- assign end_t = e.start | date: "%s" | plus: 7200 | date: "%Y%m%dT%H%M%S" -%}{%- endif -%}
+DTSTART;TZID=Europe/Berlin:{{ e.start | date: "%Y%m%dT%H%M%S" }}{{ nl -}}
+DTEND;TZID=Europe/Berlin:{{ end_t }}{{ nl -}}
+{%- endif -%}
+{%- assign line = "SUMMARY:" | append: title -%}{%- include ics-line.txt line=line -%}
+{%- if e.location and e.location != "" -%}
+{%- assign loc = e.location | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' | strip_newlines -%}
+{%- assign line = "LOCATION:" | append: loc -%}{%- include ics-line.txt line=line -%}
+{%- endif -%}
+{%- assign line = "DESCRIPTION:" | append: desc -%}{%- include ics-line.txt line=line -%}
+{%- assign line = "URL:" | append: url -%}{%- include ics-line.txt line=line -%}
+END:VEVENT{{ nl -}}
