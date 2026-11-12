@@ -168,12 +168,8 @@ img { max-width: 100%; height: auto; }
 .btn-small:hover { box-shadow: 1px 1px 0 var(--ink); }
 
 .edit-page { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 3rem auto 2rem; }
-.edit-page-source { color: var(--muted); font-size: .8rem; text-decoration: none; overflow-wrap: anywhere; }
-.edit-page-source:hover { color: var(--accent-2); }
-.edit-page-source code { font-family: var(--mono); }
-/* "➕ new" buttons below the edit button (_includes/neu-buttons.html) */
-.neu-buttons { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .6rem; }
-.neu-label { color: var(--muted); font-size: .85rem; font-weight: 600; }
+/* edit button shows the source path; the "➕" buttons (_includes/neu-buttons.html) follow in the same row */
+.edit-page code { font-family: var(--mono); font-size: .8rem; font-weight: 400; overflow-wrap: anywhere; }
 
 .section { padding: 3rem 1.25rem 0; }
 .section:last-of-type { padding-bottom: 4rem; }
