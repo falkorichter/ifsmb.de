@@ -53,6 +53,21 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
                                          └────────────────────────────────┘
 ```
 
+## Orte auf der Karte
+
+`/karte/` zeigt die Orte aus `_data/orte.yml`. Wie eine Seite zu ihrem Ort kommt (die erste
+passende Regel gewinnt):
+
+```
+ orte: [<id>]                       ──► ORT        jede Seite, fest zugeordnet
+ ort / location / standort (Text)   ──► ORT        enthält eines der `finden`-Wörter
+ standort_partner, partners,        ──► ORT        Partnername = `partner` des Orts
+ owner_partner (Gerät ohne standort)
+ BEITRAG: tags / projekte           ──► PROJEKT ──► ORT des Projekts
+```
+
+Termine mit `location: "Berlin"` oder „Online“ landen nirgends – lieber gar kein Punkt als ein falscher.
+
 ## Besitz und Standort (Ausstattung)
 
 Besitz und Standort sind **besondere Verbindungen**: Sie haben auf der Geräteseite eigene Gruppen
@@ -190,6 +205,7 @@ Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Se
                       (danach) –         ✔        ✔        –           ✔        ✔
  Persönlicher Termin         –           –        –        –           ✔            –
  Beitrag                     ✔         /news/     –        –           ✔        ✔ (Stichwort)
+ Beitrag nur_projekt         –           –        –        –           –        ✔ (Stichwort)
  Persönlicher Beitrag        –    /news/persoenlich/       –           ✔        ✔ (Stichwort)
 ```
 

@@ -38,6 +38,8 @@ Diese Website wird über [GitHub Pages](https://pages.github.com/) (GitHub Inc.,
 
 Wir selbst setzen keine Cookies, verwenden keine Tracking- oder Analysewerkzeuge und laden keine Schriften oder Skripte von fremden Servern.
 
+**Karte:** Die [Karte]({{ '/karte/' | relative_url }}) zeigt Kartenbilder von [OpenStreetMap](https://www.openstreetmap.org/) (OpenStreetMap Foundation, Vereinigtes Königreich). Sie werden erst geladen, wenn du auf „Karte laden“ klickst; dabei wird deine IP-Adresse an die Server der OpenStreetMap Foundation übertragen. Details in der [Datenschutzerklärung der OSMF](https://osmfoundation.org/wiki/Privacy_Policy). Wenn du „Auf diesem Gerät merken“ wählst, speichert dein Browser das lokal (kein Cookie); mit „Karte ausblenden“ wird das wieder gelöscht.
+
 Wenn du uns per E-Mail kontaktierst, verwenden wir deine Angaben nur, um deine Anfrage zu beantworten.
 
 ## Quelltext

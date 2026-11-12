@@ -1,6 +1,6 @@
 ---
 title: "Lastenanhänger vom Theater"
-summary: Über 35services kam eine Anfrage rein: Dreirädrige Bühnenwagen aus einem Theater abholen und gemeinsam mit dem Lastenrad-Netzwerk in Berlin zu Lastenanhängern ausbauen.
+summary: "Über 35services kam eine Anfrage rein: Dreirädrige Bühnenwagen aus einem Theater abholen und gemeinsam mit dem Lastenrad-Netzwerk in Berlin zu Lastenanhängern ausbauen."
 status: aktuell
 persoenlich: true
 start: 2026-11-11

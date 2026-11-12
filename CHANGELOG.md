@@ -8,6 +8,17 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- Ausstattung: Falkos privater Snapmaker U1 mit Deckel – für den Keller, zum Erweitern (Trocknungseinheiten, Custom-Firmware) und mit ersten Links aus der U1-Community.
+- „Neu anlegen“-Buttons unter „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.
+- Beitrag aus der KTG-AG: Der Snapmaker U1 ist nach den Herbstferien per Lastenrad zurück – mit einer Druckplatte voller Hamster, Zeitraffer und den vermurksten Exemplaren zum Analysieren.
+- Persönlicher Beitrag zum KI-Server: Ein Raspberry Pi 4 soll als Proxy den stromhungrigen Server schlafen legen und bei Anfragen aufwecken.
+- Projektidee „Mural – einen Wandplotter bauen“ (Falko und Anton bei 35services): Open-Source-Wandplotter, mit dem wir Schrittmotoren verwerten können; Bilder aus dem GitHub-Repo mit Quellen und Lizenz.
+- Persönlicher Beitrag „Besuch bei Jugend hackt in der OKF“: Beamer abgeholt, über Finanzierung und lokale KI gesprochen.
+- Karte `/karte/` (unter „Wir“ und vom Netzwerk aus verlinkt): unsere Orte auf OpenStreetMap – Schulen, Werkstatt, Veranstaltungsorte – mit allen Projekten, Terminen (kommende markiert), Beiträgen und Geräten dort. Die Kartenbilder kommen erst nach Klick auf „Karte laden“; die Liste der Orte funktioniert auch ohne. Orte stehen in `_data/orte.yml`, Seiten finden ihren Ort automatisch oder über `orte: [...]`. Impressum (Datenschutz) ergänzt.
+- Beitrag „Post von der Keramik AG und ein erster Schlüsselanhänger“ aus der 3D-Druck AG an der Platanus Schule: Stempelideen der Keramik AG und der erste (viel zu rote) mehrfarbige Schlüsselanhänger, mit Video vom Druck. Er erscheint nur auf der Projektseite.
+- Beiträge mit `nur_projekt: true` erscheinen nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite – für kleine Projekt-Updates.
+- KI-Server von Anton: Abschnitt „So ist diese Seite entstanden“ – agentisch über Claude per Pull Request eingetragen, mit zwei Screenshots.
+- Persönliches Projekt „KI-Server von Anton“ (mit Falko): lokaler KI-Server, per Tailscale erreichbar, zum agentischen Programmieren mit OpenCode; mit Foto der Grafikkarte.
 - Zwei neue Projekte zu den offenen Werkstatt-Repositories von 35services e. V.: „3D-Druck in der Werkstatt: 35services/3d“ (mit 5 Bildern) und „2D-Projekte mit dem Stiftplotter: 35services/2d“ (mit 4 Bildern); verlinkt auf der Partnerseite von 35services und im Teamprofil von Jan (`35services-jan` auf GitHub).
 - Beitrag aus dem ersten Jahr der KTG-AG (19. April 2024): „Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie“ – nachdem ein AG-Kind gewettet hatte, dass der AxiDraw keine Mona Lisa malen kann.
 - Beitrag „40 Monitore von der Bundesdruckerei“ (statt eines Projekts): Beispiel für gebrauchte Hardware über „Das macht Schule“, verbunden mit „Geld für Makespaces“ und dem PC-Spende-Beitrag; die alte Projektadresse leitet dorthin weiter.
@@ -20,10 +31,15 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Teamprofil Frieder nach seinen Wünschen: Untertitel „Makespace Aktivist am Tiergarten Gymnasium“, Lehrer aktuell am Gymnasium Tiergarten, eigene Liste persönlicher Projekte (Schulgartenaktionen, Kreative Pause im Makespace). Profilfoto mit Bildnachweis (neues Feld `photo_credit`). „40 Monitore von der Bundesdruckerei“ steht nicht mehr in seinem Profil.
 
+### Behoben
+
+- PR-Vorschaubilder mit `--unten` funktionieren jetzt auch bei langen Seiten (Teamprofile, Projekte): vorher fehlte der Footer im Bild und der Ausschnitt zeigte den Seitenkopf.
+
 ## [2026-11-11]
 
 ### Hinzugefügt
 
+- Zeitleiste unter dem Netzwerk (`/netzwerk/`): gestapelte Balken pro Monat für Projektstarts, Beiträge, Termine und Presse – mit „heute“-Markierung, blass gezeichneten geplanten Monaten und einer Tabellenansicht. Die Filter oben gelten auch für die Zeitleiste; ein Klick auf einen Monat hebt seine Einträge im Netzwerk hervor und listet sie rechts auf (Link mit `#zeit:JJJJ-MM`), ein ausgewählter Punkt im Netzwerk hebt umgekehrt seine Verbindungen in der Zeitleiste hervor.
 - Persönliches Projekt „Lastenanhänger vom Theater“ von Falko (Anfrage über 35services e. V., Ausbau mit dem Berliner Lastenrad-Netzwerk) mit Foto.
 - Persönlicher Beitrag: Standanmeldung für den Treffpunkt Modellbau 2027 als PDF zum Herunterladen, verknüpft mit dem Termin in Paaren im Glien.
 - Neues Teamprofil „Mr E“ (ohne Foto und persönliche Angaben): hilft seit 2026 in der KTG-AG, beteiligt an den iPad-Stiften und am Notebook der KTG.
