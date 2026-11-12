@@ -852,3 +852,14 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
   .karte-map { height: 60vh; }
 }
 .karte-kommt { color: var(--accent-2); font-weight: 700; }
+
+/* Challenges (Herausforderungen) */
+.badge-open { background: #ffe0c2; color: var(--ink); }
+.badge-solved { background: #e3f6d8; color: var(--ink); }
+.challenge-owners { margin-top: .4rem; font-weight: 600; }
+.challenge-solved { opacity: .75; }
+.challenge-card-line { display: flex; flex-direction: column; gap: .15rem; margin-top: .5rem; }
+.challenge-solution { margin-top: 2rem; padding: 1rem 1.2rem; background: #f0faea; border: 2px solid var(--ink); border-radius: var(--radius); }
+.challenge-solution h2 { margin-top: 0; }
+#herausforderungen { margin-top: 2.5rem; margin-bottom: .9rem; }
+#herausforderungen .link-meta { font-size: .9rem; font-weight: 400; vertical-align: middle; }

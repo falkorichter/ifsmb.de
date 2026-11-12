@@ -9,6 +9,7 @@
 
   var TYPES = {
     projekt:     { label: 'Projekte', one: 'Projekt',     color: '#ffcc00', icon: '🔧' },
+    herausforderung: { label: 'Herausforderungen', one: 'Herausforderung', color: '#ff9f1c', icon: '🧗' },
     termin:      { label: 'Termine', one: 'Termin',      color: '#2f5bea', icon: '📅' },
     beitrag:     { label: 'Beiträge', one: 'Beitrag',     color: '#2bb673', icon: '📰' },
     person:      { label: 'Personen', one: 'Person',     color: '#ff5a36', icon: '👤' },

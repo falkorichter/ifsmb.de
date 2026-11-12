@@ -4,7 +4,7 @@ layout: page
 title: Stichworte
 lead: Alles auf einen Blick – nach Themen, Orten, Partnern und Geräten.
 ---
-{%- assign everything = site.posts | concat: site.events | concat: site.equipment | concat: site.press -%}
+{%- assign everything = site.posts | concat: site.events | concat: site.equipment | concat: site.press | concat: site.herausforderungen -%}
 {%- assign tag_csv = everything | map: "tags" | join: "," -%}
 {%- assign ptag_csv = site.projects | map: "event_tag" | join: "," -%}
 {%- assign all_tags = tag_csv | append: "," | append: ptag_csv | split: "," | uniq | sort -%}
@@ -20,6 +20,7 @@ lead: Alles auf einen Blick – nach Themen, Orten, Partnern und Geräten.
   <ul class="tag-items">
     {%- for p in tp %}<li><span class="badge badge-active">Projekt</span> <a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor -%}
     {%- for it in site.equipment %}{% if it.tags contains t %}<li><span class="badge badge-past">Ausstattung</span> <a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endif %}{% endfor -%}
+    {%- for it in site.herausforderungen %}{% if it.tags contains t %}<li><span class="badge badge-open">Herausforderung</span> <a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endif %}{% endfor -%}
     {%- assign evs = site.events | sort: "start" | reverse -%}
     {%- for it in evs %}{% if it.tags contains t %}<li><span class="badge badge-past">Termin</span> <a href="{{ it.url | relative_url }}">{{ it.title }}</a> <span class="meta">{{ it.start | date: "%d.%m.%Y" }}</span></li>{% endif %}{% endfor -%}
     {%- for it in site.posts %}{% if it.tags contains t %}<li><span class="badge badge-past">Beitrag</span> <a href="{{ it.url | relative_url }}">{{ it.title }}</a> <span class="meta">{{ it.date | date: "%d.%m.%Y" }}</span></li>{% endif %}{% endfor -%}

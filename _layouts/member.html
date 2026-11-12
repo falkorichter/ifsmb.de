@@ -51,6 +51,15 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
+    {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
+    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
+    {%- assign member_ch = member_ch | concat: member_ch_done -%}
+    {% if member_ch.size > 0 %}
+    <h2 id="herausforderungen">Herausforderungen</h2>
+    <div class="grid-2">
+      {% for h in member_ch %}{% include herausforderung-karte.html h=h %}{% endfor %}
+    </div>
+    {% endif %}
     {%- include termine-auswahl.html res=page art="team" -%}
     {%- assign member_events = termine_auswahl -%}
     {%- if member_events.size > 0 -%}
