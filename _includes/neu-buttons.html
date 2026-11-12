@@ -40,6 +40,7 @@
     {%- case page.url -%}
       {%- when '/team/' -%}{% include neu-button.html typ="team" label="Teamprofil" hint="Neues Teamprofil mit allen Feldern" %}
       {%- when '/projekte/' -%}{% include neu-button.html typ="projekt" label="Projekt" hint="Neues Projekt mit allen Feldern" %}
+      {%- when '/projekte/archiv/' -%}{% include neu-button.html typ="projekt-vergangen" label="Vergangenes Projekt" hint="Abgeschlossenes Projekt nachtragen – mit Gliederung für den Rückblick" %}
       {%- when '/projekte/persoenlich/' -%}{% include neu-button.html typ="projekt" label="Persönliches Projekt" persoenlich=true hint="Neues persönliches Projekt – Person unter team eintragen" %}
       {%- when '/news/' -%}{% include neu-button.html typ="beitrag" label="Beitrag" hint="Neuer Beitrag mit allen Feldern" %}
       {%- when '/news/persoenlich/' -%}{% include neu-button.html typ="beitrag" label="Persönlicher Beitrag" persoenlich=true hint="Neuer persönlicher Beitrag" %}

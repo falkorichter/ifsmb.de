@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- „➕ Vergangenes Projekt“ im Archiv (`/projekte/archiv/`): Vorlage für ein abgeschlossenes Projekt mit `status: abgeschlossen`, Beispiel-Startdatum in der Vergangenheit und Gliederung „Worum ging es?“, „Was wir gemacht haben“, „Was daraus geworden ist“.
 - Ausstattung: Falkos privater Snapmaker U1 mit Deckel – für den Keller, zum Erweitern (Trocknungseinheiten, Custom-Firmware) und mit ersten Links aus der U1-Community.
 - „Neu anlegen“-Buttons unter „Diese Seite bearbeiten“: öffnen auf GitHub eine neue Datei mit einer Vorlage, in der alle möglichen Felder mit Erklärung stehen und die Verbindung zur aktuellen Seite schon eingetragen ist – z. B. auf einem Teamprofil Beitrag, Projekt, Termin und Gerät dieser Person, auf einer Projektseite Beitrag, Termin, Teilprojekt und Gerät, auf einer Partnerseite Projekt, Termin und Gerät des Partners, auf /team/ ein neues Teamprofil. Das heutige Datum wird beim Klick eingesetzt.
 - Beitrag aus der KTG-AG: Der Snapmaker U1 ist nach den Herbstferien per Lastenrad zurück – mit einer Druckplatte voller Hamster, Zeitraffer und den vermurksten Exemplaren zum Analysieren.
@@ -33,6 +34,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Behoben
 
+- Projekte aus der „➕ Projekt“-Vorlage verschwanden aus den Übersichten (`/projekte/`, Startseite, Archiv), weil `teil_von: []` gesetzt war – die Vorlagen lassen `teil_von` jetzt leer.
 - PR-Vorschaubilder mit `--unten` funktionieren jetzt auch bei langen Seiten (Teamprofile, Projekte): vorher fehlte der Footer im Bild und der Ausschnitt zeigte den Seitenkopf.
 
 ## [2026-11-11]

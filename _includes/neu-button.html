@@ -11,6 +11,8 @@
     {%- capture inhalt -%}{% include vorlagen/termin.md team=include.team tags=include.tags projekte=include.projekte partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'projekt' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
     {%- capture inhalt -%}{% include vorlagen/projekt.md team=include.team partners=include.partners teil_von=include.teil_von verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'projekt-vergangen' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
     {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
   {%- when 'team' -%}{%- assign dir = '_team' -%}{%- assign datei = 'vorname-nachname.md' -%}
