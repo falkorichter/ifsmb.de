@@ -21,6 +21,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Kalender `/kalender/`: Statt zwei Buttons und Erklärtext über der Liste steht neben „Kommende Termine“ ein Button „📅 Abonnieren“. Er öffnet ein Fenster mit der Anleitung (Apple, Google, Outlook, Thunderbird), den Buttons „Kalender abonnieren“ und „iCal-Datei herunterladen“ und „Adresse kopieren“ für Google. `/kalender/#abonnieren` öffnet das Fenster direkt.
 - iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
 - Changelog enthält nur noch Funktionen der Website, keine Inhalte mehr – die zeigt das Netzwerk mit seiner Zeitleiste. Bisherige Inhalts-Einträge entfernt.
