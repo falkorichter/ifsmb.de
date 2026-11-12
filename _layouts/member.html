@@ -18,6 +18,12 @@ layout: default
           {% for link in page.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a></li>{% endfor %}
         </ul>
         {% endif %}
+        {%- include feed-auswahl.html res=page art="team" -%}
+        {%- if feed_auswahl.size > 0 %}
+        {%- assign feed_url = page.url | append: "feed.xml" %}
+        {%- assign feed_titel = "Beiträge von " | append: page.title | append: " abonnieren" %}
+        <div class="feed-abo-zeile">{% include feed-abo.html feed=feed_url titel=feed_titel label="📡 Beiträge als RSS-Feed" %}</div>
+        {%- endif %}
       </div>
     </header>
     <div class="prose">

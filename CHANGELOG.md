@@ -6,6 +6,14 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- RSS-Feeds zum Folgen im Feed-Reader: Neben den Neuigkeiten des Instituts gibt es jetzt eigene Feeds für jedes Projekt (Beiträge und kurze Updates aus „Stand / Updates“), für jede Person aus dem Team (alle ihre Beiträge) und für die persönlichen Blogs. Der Button „📡 RSS-Feed“ auf `/news/`, neben „Stand / Updates“ auf Projektseiten und im Teamprofil öffnet – wie beim Kalender – ein Fenster mit der Feed-Adresse zum Kopieren und Buttons für den Feed-Reader auf dem Gerät, Feedly und Inoreader. Browser und Feed-Reader finden die Feeds auf Projekt- und Teamseiten auch automatisch.
+
+### Geändert
+
+- Bilder und Links in RSS-Beiträgen funktionieren jetzt auch in Feed-Readern, die relative Adressen nicht auflösen, und jeder Beitrag nennt seine Autor*innen.
+
 ## [2026-11-13]
 
 ### Hinzugefügt

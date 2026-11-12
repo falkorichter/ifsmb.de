@@ -1,0 +1,18 @@
+{%- comment -%}
+  Picks the posts of a resource (newest first) and assigns them to `feed_auswahl`.
+  Used by the pages (buttons) and by their feeds (_plugins/beitrag_feeds.rb).
+  Parameters:
+    res=<doc>         the resource
+    art="projects"    posts with the project's event_tag in `tags` (as "Stand / Updates")
+    art="team"        posts with the person in `author` (a slug or a list)
+  `feed_eintraege` = number of entries in the feed (for projects including manual `updates`).
+{%- endcomment -%}
+{%- assign fa_res = include.res -%}
+{%- assign feed_auswahl = "" | split: "" -%}
+{%- if include.art == "projects" -%}
+  {%- if fa_res.event_tag -%}{%- for po in site.posts -%}{%- if po.tags contains fa_res.event_tag -%}{%- assign feed_auswahl = feed_auswahl | push: po -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+  {%- assign feed_eintraege = feed_auswahl.size | plus: fa_res.updates.size -%}
+{%- elsif include.art == "team" -%}
+  {%- for po in site.posts -%}{%- assign po_au = po.author | join: "," | split: "," -%}{%- if po_au contains fa_res.slug -%}{%- assign feed_auswahl = feed_auswahl | push: po -%}{%- endif -%}{%- endfor -%}
+  {%- assign feed_eintraege = feed_auswahl.size -%}
+{%- endif -%}

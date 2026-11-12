@@ -1,0 +1,53 @@
+{%- comment -%}
+  Atom feed body, shared by /feed.xml and the feeds from _plugins/beitrag_feeds.rb.
+  Parameters:
+    titel=<text>        feed title
+    self=<path>         URL of the feed itself, e.g. /projekte/foo/feed.xml
+    alt=<path>          page the feed belongs to, e.g. /projekte/foo/
+    beitraege=<posts>   posts, newest first
+    projekt=<doc>       optional: also add the project's manual `updates:` as entries
+    limit=<n>           max. entries (default 50)
+{%- endcomment -%}
+{%- assign af_posts = include.beitraege -%}
+{%- assign af_p = include.projekt -%}
+{%- assign af_limit = include.limit | default: 50 -%}
+{%- comment -%}sort posts and manual updates together by "date|kind|index" keys, like the project page{%- endcomment -%}
+{%- assign af_keys = "" | split: "" -%}
+{%- for po in af_posts -%}{%- capture k %}{{ po.date | date: "%Y-%m-%d %H:%M" }}|p|{{ forloop.index0 }}{% endcapture %}{%- assign af_keys = af_keys | push: k -%}{%- endfor -%}
+{%- if af_p -%}{%- for u in af_p.updates -%}{%- capture k %}{{ u.datum | date: "%Y-%m-%d" }} 00:00|u|{{ forloop.index0 }}{% endcapture %}{%- assign af_keys = af_keys | push: k -%}{%- endfor -%}{%- endif -%}
+{%- assign af_keys = af_keys | sort | reverse -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de" xml:base="{{ site.url }}/">
+  <title>{{ include.titel | xml_escape }}</title>
+  <subtitle>{{ site.description | xml_escape }}</subtitle>
+  <link href="{{ site.url }}{{ include.self }}" rel="self"/>
+  <link href="{{ site.url }}{{ include.alt }}"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ site.url }}{{ include.self }}</id>
+  <author><name>{{ site.title | xml_escape }}</name><uri>{{ site.url }}/</uri></author>
+  {%- for k in af_keys limit: af_limit %}
+  {%- assign kp = k | split: "|" -%}{%- assign idx = kp[2] | plus: 0 -%}
+  {%- if kp[1] == "p" %}{%- assign po = af_posts[idx] %}
+  <entry>
+    <title>{{ po.title | xml_escape }}</title>
+    <link href="{{ site.url }}{{ po.url }}"/>
+    <updated>{{ po.date | date_to_xmlschema }}</updated>
+    <id>{{ site.url }}{{ po.id }}</id>
+    {%- assign au_slugs = po.author | join: "," | split: "," -%}
+    {%- for s in au_slugs %}{% assign am = site.team | where: "slug", s | first %}
+    <author><name>{{ am.title | default: s | xml_escape }}</name>{% if am %}<uri>{{ site.url }}{{ am.url }}</uri>{% endif %}</author>
+    {%- endfor %}
+    <content type="html">{{ po.content | xml_escape }}</content>
+  </entry>
+  {%- else %}{%- assign u = af_p.updates[idx] -%}
+  {%- assign u_html = u.text | markdownify -%}
+  <entry>
+    <title>Update: {{ u_html | strip_html | normalize_whitespace | truncatewords: 12 | xml_escape }}</title>
+    <link href="{{ site.url }}{{ af_p.url }}#updates"/>
+    <updated>{{ u.datum | date_to_xmlschema }}</updated>
+    <id>{{ site.url }}{{ af_p.url }}#update-{{ u.datum | date: "%Y-%m-%d" }}-{{ idx }}</id>
+    <content type="html">{{ u_html | xml_escape }}</content>
+  </entry>
+  {%- endif %}
+  {%- endfor %}
+</feed>
