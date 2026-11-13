@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- **Netzwerk:** Todos erscheinen als kleine grüne Punkte 📋 – verbunden mit der hauptzuständigen Person („gehört“), den helfenden Händen, ihren Projekten und verknüpften Seiten; ein Klick führt direkt zur Karte in der Eisenhower-Matrix. Herausforderungen sind jetzt ebenfalls kleine Punkte.
 - „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben – auch Speicherleiste und Diff-Fenster: Wird in einem Tab gespeichert oder verworfen, verschwindet der Hinweis im anderen spätestens nach einer Sekunde.
 - Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
 - Todo für Falko (mit Anton): den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.

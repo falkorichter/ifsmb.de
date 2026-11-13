@@ -2,7 +2,7 @@
 suche: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Netzwerk
-lead: Wie unsere Projekte, Herausforderungen, Termine, Beiträge, Menschen, Partner und Geräte zusammenhängen. Ziehen, zoomen, anklicken – und von Punkt zu Punkt weiterwandern.
+lead: Wie unsere Projekte, Herausforderungen, Todos, Termine, Beiträge, Menschen, Partner und Geräte zusammenhängen. Ziehen, zoomen, anklicken – und von Punkt zu Punkt weiterwandern.
 permalink: /netzwerk/
 ---
 {%- comment -%}
@@ -77,4 +77,9 @@ permalink: /netzwerk/
 <noscript><p>Für das Netzwerk braucht es JavaScript. Alle Verbindungen stehen auch unten auf jeder Seite.</p></noscript>
 
 <script id="netz-daten" type="application/json">{{ nodes }}</script>
+{%- comment -%}Todo files (todos/todo-<person>.md) are loaded by netzwerk.js and parsed with TodoFormat from todos.js.{%- endcomment -%}
+{%- assign netz_todo_ids = "" | split: "" -%}
+{%- for f in site.static_files -%}{%- if f.extname == ".md" and f.path contains "/todos/todo-" -%}{%- assign nt_id = f.basename | remove_first: "todo-" -%}{%- assign netz_todo_ids = netz_todo_ids | push: nt_id -%}{%- endif -%}{%- endfor %}
+<script id="netz-todos" type="application/json">{"dateien": {{ netz_todo_ids | jsonify }}, "basis": {{ '/todos/' | relative_url | jsonify }}}</script>
+<script src="{{ '/assets/js/todos.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/netzwerk.js' | relative_url }}" defer></script>
