@@ -1,5 +1,5 @@
 ---
-title: "Fabmaker-Slicer für Mac und Web zurückentwickeln"
+title: "Fabmaker-Slicer für Mac und Web 'craften'"
 summary: Den Windows-Slicer der Fabmaker-Drucker mit Claude Code oder OpenCode untersuchen, damit die Drucker auch vom Mac oder aus dem Browser drucken.
 art: aufgabe
 status: offen
