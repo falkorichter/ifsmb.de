@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- **Todos** (`/todos/`, Experiment neben den Herausforderungen, von `/herausforderungen/` verlinkt): Herausforderungen pro Person in einer eigenen Markdown-Datei `todos/<person>.md`, angezeigt als Eisenhower-Matrix (🔥 Sofort erledigen, 📌 Einplanen, 🤝 Abgeben, 💤 Später, ✅ Erledigt). Die kleinen Karten lassen sich innerhalb eines Feldes und zwischen den Feldern verschieben – mit der Maus, am Griff ⠿ mit dem Finger oder mit den Pfeiltasten. Ein Klick öffnet ein Fenster mit der Matrix links und dem Editor rechts: Titel, Art, Status, Fälligkeit, hauptzuständige Person (Übergeben verschiebt die Karte in deren Datei), 🙌 helfende Hände als runde Bilder, Projekte, Stichworte und verknüpfte Seiten mit Autovervollständigung aus dem Suchindex. Jede Änderung wird sofort im Browser gespeichert; „🔀 Ansehen & Pull Request“ zeigt die Änderungen als Diff, kopiert die neue Datei und öffnet den GitHub-Editor.
+
 ## [2026-11-13]
 
 ### Hinzugefügt

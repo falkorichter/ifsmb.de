@@ -1,0 +1,54 @@
+---
+layout: null
+permalink: /todos/suchindex.json
+---
+{%- comment -%}
+  Autocomplete data for the todo editor (assets/js/todos.js), loaded lazily on first edit:
+  people (with round photo), projects, tags and every page that `verlinkt` may point to.
+{%- endcomment -%}
+{%- assign tags_all = "" | split: "" -%}
+{%- for p in site.posts %}{% assign tags_all = tags_all | concat: p.tags %}{% endfor -%}
+{%- for p in site.events %}{% assign tags_all = tags_all | concat: p.tags %}{% endfor -%}
+{%- for p in site.equipment %}{% assign tags_all = tags_all | concat: p.tags %}{% endfor -%}
+{%- for p in site.herausforderungen %}{% assign tags_all = tags_all | concat: p.tags %}{% endfor -%}
+{%- for p in site.projects %}{% if p.event_tag %}{% assign tags_all = tags_all | push: p.event_tag %}{% endif %}{% endfor -%}
+{%- for t in site.data.stichworte %}{% assign tags_all = tags_all | push: t[0] %}{% endfor -%}
+{%- assign tags_all = tags_all | compact | uniq | sort -%}
+{
+  "personen": [
+    {%- for m in site.team -%}
+    {"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}, "url": {{ m.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  "projekte": [
+    {%- for p in site.projects -%}
+    {"id": {{ p.slug | jsonify }}, "name": {{ p.title | jsonify }}, "url": {{ p.url | relative_url | jsonify }}, "tag": {{ p.event_tag | default: "" | jsonify }}, "status": {{ p.status | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  "stichworte": [
+    {%- for t in tags_all -%}
+    {"id": {{ t | jsonify }}, "name": {{ site.data.stichworte[t] | default: t | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  "seiten": [
+    {%- assign first = true -%}
+    {%- for p in site.events -%}{% unless first %},{% endunless %}{% assign first = false %}
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Termin", "datum": {{ p.start | date: "%Y-%m-%d" | jsonify }}}
+    {%- endfor -%}
+    {%- for p in site.posts -%},
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Beitrag", "datum": {{ p.date | date: "%Y-%m-%d" | jsonify }}}
+    {%- endfor -%}
+    {%- for p in site.equipment -%},
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Gerät"}
+    {%- endfor -%}
+    {%- for p in site.press -%},
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Presse"}
+    {%- endfor -%}
+    {%- for p in site.herausforderungen -%},
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Herausforderung"}
+    {%- endfor -%}
+    {%- for p in site.pages -%}{%- if p.title and p.url != "/todos/" and p.layout != "weiterleitung" and p.url contains "/" -%}{%- unless p.url contains ".json" or p.url contains ".xml" or p.url contains ".ics" -%},
+    {"url": {{ p.url | relative_url | jsonify }}, "name": {{ p.title | jsonify }}, "typ": "Seite"}
+    {%- endunless -%}{%- endif -%}{%- endfor %}
+  ]
+}
