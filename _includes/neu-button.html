@@ -1,7 +1,8 @@
 {%- comment -%}
   One "➕ new" button: a GitHub "new file" link with file name and content prefilled from a template.
   Params: typ (beitrag, termin, projekt, geraet, herausforderung, team, presse), label, hint (tooltip) and the template params
-  (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich).
+  (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich, wichtig, dringend).
+  klein=true renders only a small "➕" (label goes into aria-label), e.g. inside a matrix quadrant.
   Placeholders JJJJ-MM-TT / JJJJ / TZTZ are replaced at click time by the script in _includes/neu-buttons.html.
 {%- endcomment -%}
 {%- case include.typ -%}
@@ -16,7 +17,7 @@
   {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
     {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
   {%- when 'herausforderung' -%}{%- assign dir = '_herausforderungen' -%}{%- assign datei = 'kurzer-name.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/herausforderung.md team=include.team projekte=include.projekte tags=include.tags verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/herausforderung.md team=include.team projekte=include.projekte tags=include.tags verlinkt=include.verlinkt persoenlich=include.persoenlich wichtig=include.wichtig dringend=include.dringend %}{%- endcapture -%}
   {%- when 'partner' -%}{%- assign dir = '_data/partner' -%}{%- assign datei = 'name-des-partners.yml' -%}
     {%- capture inhalt -%}{% include vorlagen/partner.yml %}{%- endcapture -%}
   {%- when 'pressebericht' -%}{%- assign dir = '_data/pressebericht' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}
@@ -27,5 +28,5 @@
     {%- capture inhalt -%}{% include vorlagen/presse.md tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
 {%- endcase -%}
 {%- comment -%} url_encode turns spaces into "+"; literal "+" is already %2B at that point, so only spaces are replaced {%- endcomment -%}
-<a class="btn btn-ghost btn-small neu-btn" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
-' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ include.hint | escape }}">➕ {{ include.label }}</a>
+<a class="{% if include.klein %}neu-btn neu-btn-klein{% else %}btn btn-ghost btn-small neu-btn{% endif %}" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
+' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ include.hint | escape }}"{% if include.klein %} aria-label="{{ include.label | escape }}">➕{% else %}>➕ {{ include.label }}{% endif %}</a>

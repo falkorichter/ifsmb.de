@@ -73,7 +73,7 @@ layout: default
       {% include kalender-abo.html ics=ics_url titel=abo_titel %}
       {%- endif %}
     </div>
-    {% include eisenhower.html list=member_ch_open ohne_team=true %}
+    {% include eisenhower.html list=member_ch_open ohne_team=true team=page.slug %}
     {% if member_ch_done.size > 0 %}
     <h3 class="cal-heading">Gelöst</h3>
     <ul class="link-list link-list-connections">

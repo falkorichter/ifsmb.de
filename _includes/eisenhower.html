@@ -1,6 +1,8 @@
 {%- comment -%}
   Eisenhower matrix of challenges: 2×2 grid (dringend / nicht dringend × wichtig / nicht wichtig).
   include.list = challenges (solved ones are skipped), include.ohne_team = hide the people (team profile).
+  Each quadrant gets a small "➕" for a new challenge with wichtig/dringend prefilled; include.team,
+  include.projekte and include.persoenlich are passed on to the template (project page / team profile).
   Challenges without `wichtig`/`dringend` are listed below the grid as "noch nicht eingeordnet".
 {%- endcomment -%}
 {%- assign em_q1 = "" | split: "" -%}{%- assign em_q2 = "" | split: "" -%}{%- assign em_q3 = "" | split: "" -%}{%- assign em_q4 = "" | split: "" -%}{%- assign em_none = "" | split: "" -%}
@@ -15,6 +17,7 @@
   {%- else %}{% assign em_none = em_none | push: h %}
   {%- endcase -%}
 {%- endfor -%}
+{%- assign em_team = include.team | join: ', ' -%}
 {%- assign em_total = em_q1.size | plus: em_q2.size | plus: em_q3.size | plus: em_q4.size -%}
 {%- if em_total > 0 or em_none.size > 0 %}
 <div class="eisenhower" role="group" aria-label="Eisenhower-Matrix: Herausforderungen nach Wichtigkeit und Dringlichkeit">
@@ -23,14 +26,17 @@
   <div class="eh-axis eh-axis-col" aria-hidden="true">Nicht dringend</div>
   {%- for qi in (1..4) %}
   {%- case qi -%}
-  {%- when 1 %}{% assign em_list = em_q1 %}{% assign em_q = "q1" %}{% assign em_name = "Sofort erledigen" %}{% assign em_icon = "🔥" %}{% assign em_sub = "wichtig · dringend" %}
-  {%- when 2 %}{% assign em_list = em_q2 %}{% assign em_q = "q2" %}{% assign em_name = "Einplanen" %}{% assign em_icon = "📌" %}{% assign em_sub = "wichtig · nicht dringend" %}
-  {%- when 3 %}{% assign em_list = em_q3 %}{% assign em_q = "q3" %}{% assign em_name = "Abgeben" %}{% assign em_icon = "🤝" %}{% assign em_sub = "nicht wichtig · dringend" %}
-  {%- when 4 %}{% assign em_list = em_q4 %}{% assign em_q = "q4" %}{% assign em_name = "Später" %}{% assign em_icon = "💤" %}{% assign em_sub = "nicht wichtig · nicht dringend" %}
+  {%- when 1 %}{% assign em_list = em_q1 %}{% assign em_q = "q1" %}{% assign em_name = "Sofort erledigen" %}{% assign em_icon = "🔥" %}{% assign em_sub = "wichtig · dringend" %}{% assign em_w = "true" %}{% assign em_d = "true" %}
+  {%- when 2 %}{% assign em_list = em_q2 %}{% assign em_q = "q2" %}{% assign em_name = "Einplanen" %}{% assign em_icon = "📌" %}{% assign em_sub = "wichtig · nicht dringend" %}{% assign em_w = "true" %}{% assign em_d = "false" %}
+  {%- when 3 %}{% assign em_list = em_q3 %}{% assign em_q = "q3" %}{% assign em_name = "Abgeben" %}{% assign em_icon = "🤝" %}{% assign em_sub = "nicht wichtig · dringend" %}{% assign em_w = "false" %}{% assign em_d = "true" %}
+  {%- when 4 %}{% assign em_list = em_q4 %}{% assign em_q = "q4" %}{% assign em_name = "Später" %}{% assign em_icon = "💤" %}{% assign em_sub = "nicht wichtig · nicht dringend" %}{% assign em_w = "false" %}{% assign em_d = "false" %}
   {%- endcase %}
   {%- if qi == 1 %}<div class="eh-axis eh-axis-row" aria-hidden="true"><span>Wichtig</span></div>{% elsif qi == 3 %}<div class="eh-axis eh-axis-row" aria-hidden="true"><span>Nicht wichtig</span></div>{% endif %}
   <section class="eh-cell eh-{{ em_q }}">
-    <h3 class="eh-title"><span aria-hidden="true">{{ em_icon }}</span> {{ em_name }} <span class="eh-count">{{ em_list.size }}</span></h3>
+    <h3 class="eh-title"><span aria-hidden="true">{{ em_icon }}</span> {{ em_name }} <span class="eh-count">{{ em_list.size }}</span>
+      {%- assign em_label = "Neue Herausforderung: " | append: em_name -%}
+      {%- assign em_hint = "Neue Herausforderung in „" | append: em_name | append: "“ (" | append: em_sub | append: ") – schon eingeordnet" -%}
+      {% include neu-button.html typ="herausforderung" klein=true label=em_label hint=em_hint wichtig=em_w dringend=em_d team=em_team projekte=include.projekte persoenlich=include.persoenlich %}</h3>
     <p class="eh-sub">{{ em_sub }}</p>
     {%- if em_list.size > 0 %}
     <ul class="eh-list">

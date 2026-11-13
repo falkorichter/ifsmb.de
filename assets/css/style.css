@@ -882,6 +882,9 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .eh-q4 { background: #eeeae1; }
 .eh-title { font-size: 1.05rem; margin: 0; display: flex; align-items: center; gap: .4rem; }
 .eh-count { margin-left: auto; font-family: var(--mono); font-size: .8rem; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; padding: 0 .5rem; }
+.eh-count + .neu-btn-klein { margin-left: 0; }
+.neu-btn-klein { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; font-size: .8rem; text-decoration: none; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; box-shadow: 2px 2px 0 var(--ink); transition: transform .1s, box-shadow .1s; }
+.neu-btn-klein:hover, .neu-btn-klein:focus-visible { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
 .eh-sub { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); margin: .15rem 0 .5rem; }
 .eh-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
 .eh-list a { font-weight: 600; }

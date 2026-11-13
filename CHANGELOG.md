@@ -10,6 +10,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 - Herausforderungen haben ein Fälligkeitsdatum (`faellig`): oben auf der Seite mit „📅 In den Kalender“ (Apple/Outlook-Datei oder ausgefülltes Google-Formular), rot als „überfällig“, wenn das Datum vorbei ist. Jede Herausforderung mit Datum hat eine eigene iCal-Datei (`/herausforderungen/<name>.ics`), alle zusammen stehen in `/herausforderungen.ics` (abonnierbar, auch in Google Kalender), und die Kalender-Feeds der Projekte und Teamprofile enthalten die Fälligkeiten ihrer Herausforderungen als ganztägige Termine („🧗 Fällig: …“).
 - Eisenhower-Matrix: Herausforderungen bekommen `wichtig` und `dringend` und landen in einem der vier Felder „Sofort erledigen“, „Einplanen“, „Abgeben“, „Später“. Die Matrix steht oben auf `/herausforderungen/`, auf Projektseiten und in Teamprofilen (gelöste darunter als Liste); jede Karte und Seite zeigt ihr Feld als Etikett.
+- Kleine ➕-Knöpfe in jedem Feld der Eisenhower-Matrix: Sie öffnen eine neue Herausforderung, in der `wichtig` und `dringend` schon passend zum Feld eingetragen sind – auf Projektseiten auch das Projekt und die Beteiligten, im Teamprofil die Person.
 
 ## [2026-11-13]
 
