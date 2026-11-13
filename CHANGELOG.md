@@ -8,20 +8,17 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
-- **Netzwerk:** Todos erscheinen als kleine grüne Punkte 📋 – verbunden mit der hauptzuständigen Person („gehört“), den helfenden Händen, ihren Projekten und verknüpften Seiten; ein Klick führt direkt zur Karte in der Eisenhower-Matrix. Herausforderungen sind jetzt ebenfalls kleine Punkte.
-- „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben – auch Speicherleiste und Diff-Fenster: Wird in einem Tab gespeichert oder verworfen, verschwindet der Hinweis im anderen spätestens nach einer Sekunde.
-- Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
-- Todo für Falko (mit Anton): den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
-
-### Geändert
-
-- Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
-- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
+- **Chrome-Erweiterung „Todo aus Auswahl“** (`_chrome-erweiterung/`, Installation im README dort): Text auf einer beliebigen Seite markieren, Rechtsklick → „Neues Todo aus …“. Die Todo-Seite legt daraus ein Todo an – Titel aus der ersten Zeile, die Auswahl als Zitat, die Adresse der Seite als Quelle – und öffnet den Editor. Person, Website und Feld der Matrix stehen in den Einstellungen der Erweiterung.
+- Todos haben ein neues Feld **Quelle** (`quelle`): die Adresse, von der ein Todo stammt – im Editor als Link, auf der Karte als 🌐.
 
 ## [2026-11-13]
 
 ### Hinzugefügt
 
+- **Netzwerk:** Todos erscheinen als kleine grüne Punkte 📋 – verbunden mit der hauptzuständigen Person („gehört“), den helfenden Händen, ihren Projekten und verknüpften Seiten; ein Klick führt direkt zur Karte in der Eisenhower-Matrix. Herausforderungen sind jetzt ebenfalls kleine Punkte.
+- „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben – auch Speicherleiste und Diff-Fenster: Wird in einem Tab gespeichert oder verworfen, verschwindet der Hinweis im anderen spätestens nach einer Sekunde.
+- Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
+- Todo für Falko (mit Anton): den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
 - **Todos** (`/todos/`, Experiment neben den Herausforderungen, von `/herausforderungen/` verlinkt): Herausforderungen pro Person in einer eigenen Markdown-Datei `todos/todo-<person>.md`, angezeigt als Eisenhower-Matrix (🔥 Sofort erledigen, 📌 Einplanen, 🤝 Abgeben, 💤 Später, ✅ Erledigt). Die kleinen Karten lassen sich innerhalb eines Feldes und zwischen den Feldern verschieben – mit der Maus, am Griff ⠿ mit dem Finger oder mit den Pfeiltasten. Ein Klick öffnet ein Fenster mit der Matrix links und dem Editor rechts: Titel, Art, Status, Fälligkeit, hauptzuständige Person (Übergeben verschiebt die Karte in deren Datei), 🙌 helfende Hände als runde Bilder, Projekte, Stichworte und verknüpfte Seiten mit Autovervollständigung aus dem Suchindex. Jede Änderung wird sofort im Browser gespeichert; „🔀 Ansehen & Pull Request“ zeigt die Änderungen als Diff, kopiert die neue Datei und öffnet den GitHub-Editor.
 - **Herausforderungen** (`/herausforderungen/`, unter „Wir“): Aufgaben, Probleme und offene Fragen, die kleiner sind als ein Projekt. Jede gehört zu einem oder mehreren Projekten (`projekte` oder über das `event_tag`), hat eine oder mehrere Zuständige (`team`), einen Status (offen, in Arbeit, gelöst – mit Feld für die Lösung) und lässt sich mit `verlinkt` mit Terminen, Geräten, Beiträgen oder Partnerseiten verbinden. Projektseiten zeigen ihre Herausforderungen als Karten, Projektkarten zählen die offenen (🧗), Teamprofile listen die eigenen, alle anderen Seiten zeigen sie unten bei „Verbindungen“. Auch im Netzwerk, in der Suche, bei den Stichworten und in Pages CMS.
 - „➕ Herausforderung“ auf Projekt-, Termin-, Geräte- und Partnerseiten, auf Teamprofilen und auf `/herausforderungen/` – mit Projekt, Zuständigen bzw. Verbindung schon eingetragen.
@@ -40,6 +37,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
+- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
 - Bilder und Links in RSS-Beiträgen funktionieren jetzt auch in Feed-Readern, die relative Adressen nicht auflösen, und jeder Beitrag nennt seine Autor*innen.
 - iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
