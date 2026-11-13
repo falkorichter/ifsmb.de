@@ -15,6 +15,7 @@ partners:
   - Kurt-Tucholsky-Grundschule
   - Förderverein der Kurt-Tucholsky-Grundschule
   - 35 services e. V.
+uuid: 57a3c29a-348f-4001-8338-4ba2ec7e7ebd
 ---
 
 Am **8. April 2024** startete an der Kurt-Tucholsky-Grundschule die **„DIY – eine 3D-Druck und Elektronik AG“** – ein Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) (und [Jan]({{ '/team/jan/' | relative_url }}) von 35services). Die AG traf sich montags von 15 bis 16 Uhr.

@@ -10,6 +10,7 @@ team:
   - falko-richter
 partners:
   - 35 services e. V.
+uuid: 25dadef8-5e49-4e0d-a56e-b1f9415a8641
 ---
 
 Wir haben eine Anfrage, „Felix Bananenfest“ bei seinem WinDIY-Projekt zu helfen.

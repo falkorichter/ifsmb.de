@@ -13,6 +13,7 @@ team:
 partners:
   - 35 services e. V.
 verlinkt: [/ausstattung/axidraw-v3/]
+uuid: ead407ea-bc9f-4466-a59c-2b55eaa22b54
 ---
 
 [Mural](https://getmural.me/) ist ein **Wandplotter zum Selberbauen**: Der Roboter hängt an **zwei Zahnriemen**, die oben mit Reißzwecken an der Wand befestigt sind. Zwei **Schrittmotoren** ziehen ihn über die Wand, ein kleiner Servo setzt den Stift auf und hebt ihn wieder ab – so entstehen **wandgroße Zeichnungen** mit (abwaschbaren) Filzstiften. Gesteuert wird alles über den Browser. Gerade ist **Mural V2** erschienen.

@@ -15,6 +15,7 @@ updates:
       Erster Test: eine Enterprise aus Klemmbausteinen gescannt und auf dem Snapmaker U1
       wieder ausgedruckt – mit Videos im Beitrag
       [Klemmbaustein-Enterprise gescannt und gedruckt](/news/2026/11/07/klemmbaustein-enterprise-gescannt-und-gedruckt/).
+uuid: 9a4f79a5-be36-4025-8180-fd1028753e45
 ---
 
 Falko evaluiert den [Creality CR-Scan Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}).

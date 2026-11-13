@@ -10,6 +10,7 @@ tags: [mogster, rc-modellbau]
 team:
   - falko-richter
   - anton
+uuid: 467b5e0d-3ac5-4d8c-9122-3d8d8ee59924
 ---
 
 Falko baut den **[Mogster 4x4 Tipper](https://3dsets.com/product/model-20-mogster-4x4-tipper/)** von 3DSets: einen ferngesteuerten Geländekipper im **Maßstab 1:8**.

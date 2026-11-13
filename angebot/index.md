@@ -2,6 +2,7 @@
 layout: page
 title: Angebot
 lead: Was das IfsMB macht – und warum es „Institut“ heißt.
+uuid: d92cb238-0eda-4f47-bd93-7c38addf6647
 ---
 <div class="transparency-box" id="hinweis">
   <strong>Kurz und ehrlich:</strong> Das „Institut für spontane Makespace Buildung“ ist <strong>keine Hochschule, keine Behörde und kein Forschungsinstitut</strong>. Dahinter steht <strong>Falko Richter</strong> als Privatperson, zusammen mit Freund*innen und Partnern – ehrenamtlich und ohne eigene Rechtsform. Wer verantwortlich ist, steht im <a href="{{ '/impressum/' | relative_url }}">Impressum</a>.

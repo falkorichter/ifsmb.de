@@ -3,6 +3,7 @@ title: "3D-Druck für Kinder – Falko auf dem Chaos Communication Camp 2023"
 date: 2023-08-16 20:00:00 +0200
 author: falko-richter
 tags: [kita, waermebildkamera, ccc]
+uuid: 656fa1c6-dca1-4c1a-aee8-43236acb75f9
 ---
 
 Auf dem **Chaos Communication Camp 2023** hat [Falko]({{ '/team/falko-richter/' | relative_url }}) in einem der „Fünf-Minuten-Termine“ vorgestellt, wie man schon **Kindergartenkindern 3D-Druck** näherbringen kann – und dabei nach Mitstreiter*innen gesucht.

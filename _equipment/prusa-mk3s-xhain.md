@@ -18,6 +18,7 @@ videos:
     poster: /assets/video/ausstattung/prusa-mk3s-xhain/03.jpg
     caption: "Zeitraffer über OctoPrint: ein Achsgehäuse für ein RC-Modell (4 h 51 min)"
 tags: [prusa-mk3s, 3d-drucker, 35services]
+uuid: 5a5d2217-6713-4c2c-a614-69e87b52c16d
 ---
 
 Falko hat diesen Prusa MK3S sehr günstig gekauft. Er druckt mit seiner **gehärteten Düse** in einem **geschlossenen Bauraum** bei 35services.

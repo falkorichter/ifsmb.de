@@ -19,6 +19,7 @@ gallery:
     thumb: /assets/images/kalender/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/04-600w.jpg
     alt: "Ein gedrucktes Tier mit Haaren aus feinen Filamentfäden (Gesicht des Kindes unkenntlich gemacht)"
 team: [falko-richter, jan]
+uuid: 9cfa8c18-41ad-4e2e-8654-f3059885b7d0
 ---
 
 Ausflug der [3D-Druck- und Elektronik-AG]({{ '/projekte/ktg-ag-jahr-1/' | relative_url }}) zu Max in seine Werkstatt in der Stephanstraße: Max betreibt **3dBoutiqueBerlin**, eine kleine Firma, die 3D-gedruckte Objekte entwirft, druckt und verkauft – und seine Kinder sind (oder waren) selbst KTG-Schüler*innen. Max hat uns gezeigt, woran er arbeitet – und ein ganzes Regal voller 3D-Drucker. Ein Highlight war ein Druck mit „Haaren“ aus vielen feinen Filamentfäden.

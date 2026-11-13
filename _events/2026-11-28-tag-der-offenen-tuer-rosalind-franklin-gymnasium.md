@@ -14,6 +14,7 @@ gallery:
   - image: /assets/images/kalender/2026-11-28-tag-der-offenen-tuer-rosalind-franklin-gymnasium/druckauftrag.jpg
     thumb: /assets/images/kalender/2026-11-28-tag-der-offenen-tuer-rosalind-franklin-gymnasium/druckauftrag-600w.jpg
     alt: "Screenshot: Druckauftrag „Rosalind 1“ an den Bambu Lab P2S – fünf Schlüsselanhänger mit Schullogo, 49 Minuten, 20,5 g PLA in zwei Farben"
+uuid: 4f205f8b-7a6f-459b-bcec-769dda6386f9
 ---
 
 Das [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/veranstaltungen/) lädt zum **Tag der offenen Tür** ein – mit Führungen durch das Gebäude, Programm in der Aula und der Gelegenheit, die Schulgemeinschaft kennenzulernen.

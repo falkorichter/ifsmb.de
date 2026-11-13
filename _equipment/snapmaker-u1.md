@@ -9,6 +9,7 @@ image: /assets/images/ausstattung/snapmaker-u1/01.jpg
 thumb: /assets/images/ausstattung/snapmaker-u1/01-600w.jpg
 image_alt: "Der Snapmaker U1 mit Einhausung unterwegs im Kofferraum eines Autos"
 tags: [u1, 3d-drucker, mehrfarbdruck, ktg, 35services]
+uuid: 2beec856-6fe0-4ef8-a3e9-819cdd0f99a7
 ---
 
 Der Snapmaker U1 ist der Drucker der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}): ein **Werkzeugwechsler mit vier Druckköpfen**. Statt Filament umzuspulen, tauscht er einfach den kompletten Druckkopf – so kann er **vier Farben oder vier verschiedene Materialien** in einem Druck verarbeiten und ist **extrem gut im Mehrfarbdruck**. Dank **Einhausung** bleibt die Wärme im Bauraum und neugierige Finger bleiben draußen.

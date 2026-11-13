@@ -15,6 +15,7 @@ tags: [{{ include.tags }}]   # Stichworte; das event_tag eines Projekts verbinde
 verlinkt: [{{ include.verlinkt }}]   # weitere Seiten: Termine, Geräte, Beiträge, z. B. [/kalender/…/]
 persoenlich: {{ include.persoenlich | default: false }}   # true = aus einem privaten Projekt im Team
 loesung:   # wenn gelöst: wie, in Markdown – erscheint unter „Lösung“
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Beschreibung in Markdown: Was ist das Problem, was wurde schon probiert, was wird gebraucht? Dateiname oben anpassen: kurzer Name mit Bindestrichen.

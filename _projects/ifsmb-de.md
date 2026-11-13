@@ -13,6 +13,7 @@ verlinkt:
   - /news/2026/09/24/pc-spende-de-hardware-fuer-schulen/
   - /projekte/3ddruck-iso-jugend-hackt/
   - /news/2026/11/10/unser-netzwerk-alles-haengt-zusammen/
+uuid: 6cb71a9c-fd4f-489e-8d20-cba39f0feb55
 ---
 
 Was Falko für das Institut und für ifsmb.de gerade erledigt. Die Liste ist auch ein Aufgaben-Tracker: Auf GitHub über den ✏️-Button unten auf der Seite ein `[ ]` durch `[x]` ersetzen – schon ist die Aufgabe abgehakt.

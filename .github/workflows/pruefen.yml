@@ -22,6 +22,8 @@ jobs:
           bundler-cache: true
       - name: Galerien in Markdown prüfen
         run: ruby _scripts/check_galerien.rb
+      - name: Seiten-Kennungen (uuid) prüfen
+        run: ruby _scripts/uuids_ergaenzen.rb --pruefen
       - name: Formulare und Pages-CMS-Felder testen
         run: ruby _scripts/test_formulare.rb
       - name: Seite bauen

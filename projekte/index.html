@@ -9,7 +9,8 @@ lead: Woran wir gerade arbeiten.
 {% assign inquiries = site.projects | where: "status", "anfrage" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" | sort: "start" | reverse %}
 {% assign personal = site.projects | where: "persoenlich", true %}
 {% if active.size > 0 %}
-<div class="grid-2">
+<div class="gelesen-fortschritt" data-bereich=".gelesen-projekte" hidden><div class="gelesen-fortschritt-balken"><span></span></div><span class="gelesen-fortschritt-text"></span></div>
+<div class="grid-2 gelesen-projekte">
   {% for p in active %}
   {% include projekt-karte.html project=p badge="aktiv" meta=true %}
   {% endfor %}

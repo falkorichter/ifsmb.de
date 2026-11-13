@@ -3,6 +3,7 @@ title: "Unboxing des ersten 35services-Druckers"
 date: 2024-06-12 17:30:00 +0200
 author: falko-richter
 tags: [ktg, 35services, 3d-drucker, ktg-ag-jahr-1]
+uuid: 7422156b-3659-433c-b8a8-1ea424860523
 ---
 
 Am 12. Juni 2024 kam der erste Drucker von 35services: ein Bambu Lab A1. Falko hat ihn auf eigenes Risiko gekauft – finanziert werden soll er nach und nach über Spenden unter [35services.de/ag](https://35services.de/ag/).

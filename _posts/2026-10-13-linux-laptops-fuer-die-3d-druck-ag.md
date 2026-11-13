@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/ag/
 original_site: 35services.de
 tags: [ktg, 35services, u1, 3ddruck-iso, laptops]
+uuid: 298ba849-e002-4df4-8bb2-0aa61ee50c9b
 ---
 
 Falko baut fleißig an einem **Linux-Betriebssystem-Image** ([github.com/35services/3ddruck-jugend-hackt-iso](https://github.com/35services/3ddruck-jugend-hackt-iso)), mit dem wir in der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) auf Laptops noch besser arbeiten können.

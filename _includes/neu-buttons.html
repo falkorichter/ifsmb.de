@@ -82,14 +82,15 @@
       .catch(function () { window.location.href = a.href; })
       .then(function () { a.removeAttribute('aria-busy'); });
   });
-  // Fill today's date and UTC offset into the template links at click time (build date would be stale).
+  // Fill today's date, UTC offset and a fresh uuid into the template links at click time (build date would be stale).
   document.addEventListener('click', function (ev) {
     var a = ev.target.closest && ev.target.closest('a[data-vorlage]');
     if (!a) return;
     var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
     var off = -d.getTimezoneOffset(), tz = (off >= 0 ? '+' : '-') + p(Math.floor(Math.abs(off) / 60)) + p(Math.abs(off) % 60);
     a.href = a.href.replace(/JJJJ-MM-TT/g, d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()))
-      .replace(/JJJJ/g, d.getFullYear()).replace(/TZTZ/g, encodeURIComponent(tz));
+      .replace(/JJJJ/g, d.getFullYear()).replace(/TZTZ/g, encodeURIComponent(tz))
+      .replace(/UUID-NEU/g, window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'UUID-NEU');
   });
 </script>
 {%- endif -%}

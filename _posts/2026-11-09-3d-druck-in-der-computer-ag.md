@@ -3,6 +3,7 @@ title: "3D-Druck auch in der Computer AG"
 date: 2026-11-09 12:00:00 +0100
 author: falko-richter
 tags: [ktg, u1]
+uuid: 0a694491-d934-462e-bc04-e7f31600a93c
 ---
 
 Falko und Henning haben besprochen, wie Hennings **Computer AG** an der KTG auch ein bisschen 3D-Druck machen kann. Henning hat inzwischen Zugang zum Drucker der [3D-Druck AG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) und arbeitet sich gerade ein.

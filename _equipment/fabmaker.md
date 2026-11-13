@@ -11,6 +11,7 @@ thumb: /assets/images/ausstattung/fabmaker/01-600w.jpg
 image_alt: "Ein Fabmaker-3D-Drucker mit rotem Deckel und Display in einem Fahrradanhänger, angehängt an ein Lastenrad auf Kopfsteinpflaster"
 tags: [fabmaker, 3d-drucker, ktg]
 verlinkt: [/projekte/3d-druck-ag-ktg/, /projekte/3d-druck-ag-rosalind-franklin-gymnasium/, /todos/]
+uuid: 0d1fe4e6-359e-4b9c-8f04-15d94c945750
 ---
 
 An der [3D-Druck AG der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) stehen **zwei Fabmaker** – geschlossene „Bildungsdrucker“ der Fabmaker GmbH aus Braunschweig. Beide gehören Falko. Einen hat das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) verschenkt; er war dort nicht mehr funktionsfähig. Der andere kam aus einem Gymnsaium im Wedding, weil das Gerät nicht mehr unterstützt wird, stand es dort nur rum.

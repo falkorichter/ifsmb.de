@@ -1004,3 +1004,46 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
   .todos-achse { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .todo-ghost { transform: none; } .todo-karte:hover { transform: none; } }
+
+/* "read" marker (assets/js/gelesen.js) */
+.gelesen-haken {
+  display: inline-block;
+  margin-left: .35em;
+  width: 1.15em;
+  height: 1.15em;
+  line-height: 1.15em;
+  border-radius: 50%;
+  background: var(--muted);
+  color: var(--paper);
+  font-size: .7em;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: .15em;
+  text-decoration: none;
+  opacity: .7;
+}
+.gelesen-fortschritt {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.gelesen-fortschritt[hidden] { display: none; }
+.gelesen-fortschritt-balken {
+  flex: 1;
+  height: 6px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.gelesen-fortschritt-balken span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+@media (prefers-reduced-motion: reduce) { .gelesen-fortschritt-balken span { transition: none; } }

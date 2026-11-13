@@ -21,6 +21,7 @@ team:
 partners:
   - HeartLabs
   - 35 services e. V.
+uuid: 8f46d01b-411f-49eb-a53f-d60e35fd1a1f
 ---
 
 Falko hat sehr günstig einen [Prusa MK3S]({{ '/ausstattung/prusa-mk3s-heartlabs/' | relative_url }}) von HeartLabs erworben. Der Drucker steht jetzt bei 35services und wird dort repariert.

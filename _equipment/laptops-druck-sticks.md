@@ -9,6 +9,7 @@ image: /assets/images/ausstattung/laptops-druck-sticks/illustration.svg
 image_alt: "Illustration eines aufgeklappten Laptops mit eingestecktem USB-Stick (kein Foto der Geräte)"
 image_is_illustration: true
 tags: [laptops, 3ddruck-iso, ktg]
+uuid: c232dbdd-1c8f-4344-a3de-85d35023a271
 ---
 
 Für die [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) hat Falko eine kleine Laptop-Flotte zusammengestellt:

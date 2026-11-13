@@ -7,6 +7,7 @@ summary: Falko besucht die Gustav-Falke-Grundschule und ihren Makespace – Maki
 tags: [gustav-falke]
 team: [falko-richter]
 persoenlich: true
+uuid: 24d52929-a0fd-4928-bbab-f5391fd2d417
 ---
 
 Falko besucht die **Gustav-Falke-Grundschule** in Berlin und schaut sich ihren Makespace an.

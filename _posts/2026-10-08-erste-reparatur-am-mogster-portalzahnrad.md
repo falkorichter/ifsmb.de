@@ -4,6 +4,7 @@ date: 2026-10-08 12:00:00 +0200
 author: falko-richter
 persoenlich: true
 tags: [mogster, rc-modellbau]
+uuid: 1b288b3d-c290-4ad8-a607-a3c5f335b1ea
 ---
 Falkos eigener Mogster ist gelb – und hat im Oktober 2026 die erste Reparatur gebraucht. Die **Portalachse hat eine Schwachstelle**: Das gedruckte Zahnrad im Portalgetriebe hält die hohe Kraft nicht immer aus und bricht. Also: Rad ab, Portalgehäuse auf, neues Zahnrad drucken und einbauen.
 

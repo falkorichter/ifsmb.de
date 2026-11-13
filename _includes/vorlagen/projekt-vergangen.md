@@ -21,6 +21,7 @@ image:   # Titelbild für die Projektkarte, z. B. /assets/images/projekte/<name>
 updates:   # kurze Notizen aus der Projektzeit, neueste zuerst – längere Berichte lieber als Beitrag mit dem event_tag
 #  - datum: 2025-12-01
 #    text: Was passiert ist, in Markdown.
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 **Worum ging es?**

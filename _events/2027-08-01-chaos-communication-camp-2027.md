@@ -9,6 +9,7 @@ location_url: https://events.ccc.de/camp/
 summary: Das Hacker-Zeltlager des Chaos Computer Club findet alle vier Jahre im August statt – 2027 wieder. Termin und Ort sind noch nicht offiziell.
 tags: [ccc, cccamp]
 team: [falko-richter]
+uuid: d15a8f3b-429e-4aec-a742-cb003f846d5b
 ---
 
 Das [Chaos Communication Camp](https://events.ccc.de/camp/) ist ein internationales Zeltlager für Hacker\*innen, Bastler\*innen und alle, die sich für Technik und Gesellschaft interessieren. Der [Chaos Computer Club](https://www.ccc.de/) veranstaltet es alle vier Jahre im August – zuletzt 2023 im Ziegeleipark Mildenberg, wo Falko einen [Kurzvortrag über 3D-Druck für Kinder]({{ '/kalender/2023-08-16-cccamp23-3d-druck-fuer-kinder/' | relative_url }}) gehalten hat.

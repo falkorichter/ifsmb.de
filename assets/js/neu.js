@@ -267,10 +267,24 @@ var NeuFormular = (function () {
   function loescheEntwurf() { try { localStorage.removeItem(aktiv.schluessel); } catch (e) { /* storage blocked */ } }
 
   // ---------- file ----------
+  // random v4 UUID for the "read" marker (assets/js/gelesen.js); crypto.randomUUID needs a secure context
+  function neueUuid() {
+    var c = typeof crypto !== "undefined" ? crypto : null;
+    if (c && c.randomUUID) return c.randomUUID();
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (z) {
+      var r = Math.random() * 16 | 0;
+      return (z === "x" ? r : (r & 3 | 8)).toString(16);
+    });
+  }
   function dateiText(schema, w) {
     var paare = alleFelder(schema).filter(function (f) { return !f.intern; }).map(function (f) {
       return [f.name, f.ausgabe ? f.ausgabe(w[f.name], w) : w[f.name]];
     });
+    // pages get a uuid (kept in the draft, so it stays the same while editing); _data/*.yml entries don't
+    if (schema.format !== "yaml") {
+      if (!w.uuid) w.uuid = neueUuid();
+      paare.push(["uuid", w.uuid]);
+    }
     return schema.format === "yaml" ? F.yaml(paare) + "\n" : F.frontMatter(paare, w.text);
   }
   function dateiInhalt() { return dateiText(aktiv.schema, aktiv.w); }

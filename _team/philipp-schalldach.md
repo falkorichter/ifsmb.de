@@ -8,6 +8,7 @@ photo_2x: /assets/images/team/philipp-schalldach-960w.jpg
 links:
   - title: Facebook
     url: https://www.facebook.com/philippfabian.schalldach
+uuid: 6b1d0031-03b1-475f-bcf4-756a5556c13f
 ---
 
 <span class="todo">[Kurzes Profil: Wer bist du, was machst du im Institut, was baust du gern?]</span>

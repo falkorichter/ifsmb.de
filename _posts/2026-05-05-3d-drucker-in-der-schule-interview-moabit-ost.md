@@ -2,6 +2,7 @@
 title: "„3-D-Drucker in der Schule“ – Interview im Quartiersmanagement Moabit-Ost"
 date: 2026-05-05 12:00:00 +0200
 tags: [ktg, u1, axidraw, lessing-gymnasium, rosalind-franklin-gym, bietenholz, 35services]
+uuid: f84117c0-b2f9-4c28-9856-839b00ccf9cc
 ---
 
 <p class="original-note">Gerald Backhaus hat Falko für die Interview-Reihe des <strong>Quartiersmanagements Moabit-Ost</strong> in der Kurt-Tucholsky-Grundschule besucht. Das ganze Interview mit vielen Fotos gibt es dort:<br>

@@ -11,6 +11,7 @@ team:
   - falko-richter
 partners:
   - Kurt-Tucholsky-Grundschule
+uuid: 6cfaedcf-2f91-4217-b48e-06c08782602e
 ---
 
 [BlockFace](https://openpressproject.com/blogs/news/what-is-the-blockface-stamp-kit) ist ein **modulares Stempelset für Typografie**, entworfen vom Grafiker Will Mower und herausgegeben vom Open Press Project aus Köln. Alle Formen liegen auf einem 10-mm-Raster und lassen sich zu Buchstaben in verschiedenen Schriftstilen zusammensetzen – zum Beispiel für Plakate, Karten, Muster oder eigene Symbole.

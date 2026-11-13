@@ -7,6 +7,7 @@ location_url: https://www.youtube.com/watch?v=UYhys3mDXUc
 summary: Livestream zum Thema „3D-Druck für Kita-Kinder“ mit Falko und seinem Papa – was ist ein 3D-Drucker, was hat er mit einer Heißklebepistole zu tun, und live wird ein Objekt gedruckt.
 tags: [kita]
 team: [falko-richter]
+uuid: 352a68bb-6d9a-4423-ad03-a0cefa7cb0b0
 ---
 
 Livestream an Himmelfahrt: Falko erklärt mit seinem Papa, was ein 3D-Drucker ist, wie er funktioniert, was das mit einer Heißklebepistole zu tun hat und warum eine Wärmebildkamera dabei sehr praktisch ist. Ab 10:30 wurde live ein Objekt gedruckt.

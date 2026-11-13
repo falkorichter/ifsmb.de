@@ -9,6 +9,7 @@ summary: Tag der offenen Tür am Gymnasium Tiergarten – dabei kann man auch de
 tags: [makespace-tiergarten]
 team: [frieder-euteneuer]
 verlinkt: [/news/2025/12/05/tag-der-offenen-tuer-2025-im-makespace-tiergarten/]
+uuid: defc5e10-3682-4496-8581-656c0610e95f
 ---
 
 Das [Gymnasium Tiergarten](https://gymnasium-tiergarten.de/tag-der-offenen-tuer-2026/) lädt zum **Tag der offenen Tür** ein: Die Schulleitung stellt die Schule vor (ab 16 Uhr alle 30 Minuten), Schüler*innen führen durchs Haus, Schulsozialarbeit, Gesamtelternvertretung, Gesamtschülervertretung und Förderverein sind mit dabei.

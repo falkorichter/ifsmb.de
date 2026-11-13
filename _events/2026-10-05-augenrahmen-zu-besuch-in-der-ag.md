@@ -7,6 +7,7 @@ location_url: https://kurt-tucholsky-grundschule.de/
 summary: Alexander von augenrahmen.de erzählt der 3D-Druck AG von seinen 3D-gedruckten Brillen.
 tags: [ktg]
 team: [falko-richter]
+uuid: 85712a4d-beba-4a28-9b1e-e2cab98d0060
 ---
 
 Danke an **Alexander von [augenrahmen.de](https://augenrahmen.de/)**, der in der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) vorbeigekommen ist und uns von seinen **3D-gedruckten Brillen** erzählt hat. Alexander kommt aus dem Kiez – 3D-Druck-Kiez Moabit!

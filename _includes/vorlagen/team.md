@@ -13,6 +13,7 @@ links:   # Links zur Person, Liste aus title und url
 #  - title: GitHub
 #    url: https://github.com/…
 verlinkt: []   # weitere Seiten, z. B. [/projekte/3d-druck-ag-ktg/]
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Kurzer Text über die Person in Markdown: was sie macht und womit sie im Makespace hilft. Keine Wohnadresse, keine privaten E-Mail-Adressen. Dateiname oben anpassen: vorname-nachname.

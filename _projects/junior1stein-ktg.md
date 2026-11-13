@@ -17,6 +17,7 @@ updates:
   - datum: 2026-11-09
     text: >-
       Anfrage über das Kontaktformular von junior1stein geschickt. Wir warten auf Antwort.
+uuid: f296d854-6bcd-4f99-80b6-f5d0b1221f94
 ---
 
 [junior1stein](https://junior1stein.de/) ist die MINT-Initiative der Berliner Senatsverwaltung für Bildung, Jugend und Familie. Im [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/) arbeiten Kitas und Schulen im Bezirk im MINT-Bereich zusammen – darunter das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}), an dem Falko seit einigen Monaten beim Makespace hilft, und die Moabiter Grundschule.

@@ -10,6 +10,7 @@ team:
   - falko-richter
 partners:
   - 35 services e. V.
+uuid: 38ab2b0d-7f8e-4ab2-b112-af8b7ee29f73
 ---
 
 Im Herbst 2025 hat Falko am Lessing-Gymnasium eine **Programmierwerkstatt** von 35services angeboten. Die Idee: Fortschritt und Ideen dokumentieren, damit es ähnliche Werkstätten später auch an anderen Orten geben kann.

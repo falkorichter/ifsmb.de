@@ -8,6 +8,7 @@ location_url: https://jugendhackt.org/events/jugend-hackt-congress/
 summary: Falko war beim Jugend hackt Congress zum ersten Mal als Mentor dabei und hat nebenbei den Makespace mit 3D-Druckern und AxiDraw mitbetreut.
 tags: [jugend-hackt, u1, axidraw]
 team: [falko-richter, anton]
+uuid: 46c313c6-ec4b-4e18-9af0-089b4a290b81
 ---
 
 Beim [Jugend hackt Congress 2026](https://jugendhackt.org/events/jugend-hackt-congress/) im Theater an der Parkaue war Falko zum ersten Mal als Mentor bei Jugend hackt dabei – ein Wochenende mit Talks, Workshops und Projekten für junge Menschen zwischen 14 und 21 Jahren.

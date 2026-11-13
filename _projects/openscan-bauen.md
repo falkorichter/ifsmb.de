@@ -12,6 +12,7 @@ team:
 partners:
   - 35 services e. V.
 verlinkt: [/news/2026/05/25/open-hardware-summit-2026/]
+uuid: c33afcf3-ae35-49c2-994e-bfa740c1dc7b
 ---
 
 [OpenScan](https://openscan.eu/) ist ein **3D-Scanner, den man selbst bauen kann** – komplett **Open Source** und **modular**. Das Projekt kommt aus Halle (Saale), läuft seit 2017 und wird von einer großen Community weiterentwickelt. Firmware und Baupläne sind veröffentlicht und dürfen verändert werden.

@@ -4,6 +4,7 @@ date: 2026-10-06 12:40:00 +0200
 author: falko-richter
 tags: [rosalind-franklin-gym, infinite-cube]
 verlinkt: [/news/2026/09/30/wuerfel-auf-der-ecke-an-der-platanus-schule/, /ausstattung/drucker-rosalind-franklin-gymnasium/]
+uuid: f559d793-83ed-4b3b-b8bc-d753e79e3457
 ---
 Aus der [3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}): ein [Infinite Cube](https://makerworld.com/en/models/909738-infinite-cube) von MakerWorld, auf die Kante gestellt und mit **Baumstützen** gedruckt – die verzweigten Stützen tragen die schrägen Kanten. Daran lernen wir, wie man Stützstrukturen baut.
 

@@ -5,6 +5,7 @@ author: falko-richter
 persoenlich: true
 tags: [infinite-cube]
 verlinkt: [/news/2026/09/30/wuerfel-auf-der-ecke-an-der-platanus-schule/, /news/2026/10/06/wuerfel-mit-baumstuetzen-am-rosalind-franklin-gymnasium/, /ausstattung/drucker-rosalind-franklin-gymnasium/]
+uuid: 87407f78-e2c4-4e24-8cdf-f59de7fc7fdd
 ---
 Den [Infinite Cube](https://makerworld.com/en/models/909738-infinite-cube) drucken wir gerade an zwei Schulen – an der [Platanus Schule]({{ '/news/2026/09/30/wuerfel-auf-der-ecke-an-der-platanus-schule/' | relative_url }}) und am [Rosalind-Franklin-Gymnasium]({{ '/news/2026/10/06/wuerfel-mit-baumstuetzen-am-rosalind-franklin-gymnasium/' | relative_url }}). Damit die AGs vergleichen können, wie ein gut gedruckter Würfel aussieht, hat Falko eine **Referenz** gedruckt – auf einem der [P2S am Rosalind-Franklin-Gymnasium]({{ '/ausstattung/drucker-rosalind-franklin-gymnasium/' | relative_url }}).
 

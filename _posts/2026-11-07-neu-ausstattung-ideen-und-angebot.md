@@ -2,6 +2,7 @@
 title: "Neu auf der Seite: Ausstattung, Projekt-Ideen und unser Angebot"
 date: 2026-11-07 09:00:00 +0100
 author: falko-richter
+uuid: a626c438-6ca6-4dd4-87bf-e78c9916771c
 ---
 
 Auf der Website gibt es einiges Neues:

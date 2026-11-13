@@ -4,6 +4,7 @@ date: 2026-09-22 13:40:00 +0200
 author: falko-richter
 tags: [rosalind-franklin-gym]
 verlinkt: [/ausstattung/drucker-rosalind-franklin-gymnasium/]
+uuid: 1675fe61-a634-4130-841d-abfa9d53eea7
 ---
 Ein erster Blick in den neuen Makespace am [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}): zwei Bambu Lab P2S mit AMS-Filamentwechsler und vier Bambu Lab A1 mini an langen Tischreihen ([alle sechs Drucker]({{ '/ausstattung/drucker-rosalind-franklin-gymnasium/' | relative_url }})) – und die ersten Drucke sind auch schon fertig.
 

@@ -4,6 +4,7 @@ date: 2026-10-19 12:00:00 +0200
 author: falko-richter
 persoenlich: true
 tags: [mogster, rc-modellbau]
+uuid: 8f03298a-a732-424a-80d5-00eda79d654a
 ---
 Am 19. Oktober 2026 standen die beiden Mogster zum ersten Mal nebeneinander: Papas hellblauer Mogster – fertig, mit Pritsche – und Falkos gelber, bei dem hinten noch der nackte Leiterrahmen zu sehen ist.
 

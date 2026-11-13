@@ -6,6 +6,7 @@ tags: [platanus]
 projekte: [3d-druck-ag-platanus-schule]
 nur_projekt: true
 verlinkt: [/ausstattung/bambu-lab-a1-mini-platanus/]
+uuid: 4c988454-c549-4a41-a2e3-2f9da5535aa2
 ---
 Neues aus der [3D-Druck AG an der Platanus Schule]({{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}): Wir haben **Post von der Keramik AG** bekommen! Darin stehen ihre Ideen für einen 3D-gedruckten Stempel, mit dem sie ihre Tonarbeiten kennzeichnen können – samt ausgedruckten Motiven und der Frage, ob noch ein kleiner Text wie „Made by“ mit draufpasst.
 

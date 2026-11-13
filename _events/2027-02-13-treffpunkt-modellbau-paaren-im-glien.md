@@ -8,6 +8,7 @@ location_url: https://www.messen.de/de/17933/paaren-im-glien/treffpunkt-modellba
 summary: Die Havelländischen Modellbautage – Falko will seine Modellbau-Autos mitbringen, und „Opa Andi“ kommt mit seinem 3D-gedruckten Mogster.
 tags: [rc-modellbau, mogster]
 team: [falko-richter,anton,jan]
+uuid: e4b3a170-7bf0-4d60-b71c-663ebe1ca4d8
 ---
 
 Der **Treffpunkt Modellbau** sind die Havelländischen Modellbautage im MAFZ in Paaren im Glien – mit Fachhändlern, Clubs, Vereinen, Modellbaufreund*innen und Bastler*innen, für Große und Kleine. Die Messe ist für alle offen (Samstag und Sonntag jeweils 10–17 Uhr).

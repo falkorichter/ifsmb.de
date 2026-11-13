@@ -24,6 +24,7 @@ updates:
       {: .gallery}
 
       ![Video: Das Drachenei wird geöffnet, darin der zusammengerollte Drache](/assets/video/news/dracheneier-drucken/01.mp4)
+uuid: 25935665-0ecf-425f-b139-831203fb98a9
 ---
 
 An der [Kurt-Tucholsky-Grundschule](https://kurt-tucholsky-grundschule.de/) (KTG) in Moabit gibt es die „3D-Druck und CAD AG“: Kinder lernen dort, wie ein 3D-Drucker funktioniert, konstruieren eigene Objekte und drucken sie aus – mit 3D-Druck-Stiften, einem Plotter und unserem 4-Kopf-4-Farb-4-Material-Drucker.

@@ -4,6 +4,7 @@ date: 2026-10-01 22:30:00 +0200
 author: falko-richter
 persoenlich: true
 tags: [mogster, rc-modellbau]
+uuid: 7cebe213-da7c-45db-9aa2-19d67f812022
 ---
 Nach Papas Mogster wollte Falko auch einen: Am **30. September und 1. Oktober 2026** hat er seinen gelben Mogster an zwei Abenden in der Werkstatt zusammengebaut. Als Extra sitzt im Führerhaus eine **kleine Kamera auf einem Servo**, die sich hin und her drehen kann. Kurz darauf ging es zur ersten Ausfahrt ins Gelände.
 

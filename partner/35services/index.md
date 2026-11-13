@@ -8,6 +8,7 @@ verlinkt:
   - /ausstattung/laptops-druck-sticks/
   - /ausstattung/lulzbot-taz-6/
   - /partner/jugend-hackt/
+uuid: 08515cfe-c14b-4488-b136-cf67dfaae236
 ---
 <div class="prose" markdown="1">
 

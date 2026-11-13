@@ -4,6 +4,7 @@ date: 2025-12-05 18:00:00 +0100
 author: [falko-richter, frieder-euteneuer]
 persoenlich: true
 tags: [makespace-tiergarten]
+uuid: ccf6523a-ed77-40c5-a66f-6bef31c9f7fd
 ---
 Beim Tag der offenen Tür 2025 war Falko im [Makespace Tiergarten]({{ '/projekte/makespace-tiergarten/' | relative_url }}) von [Frieder]({{ '/team/frieder-euteneuer/' | relative_url }}) in Raum 226 zu Besuch. Es gab Waffeln, und im Studio lief vor dem Greenscreen ein Wetterbericht.
 
