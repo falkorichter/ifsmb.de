@@ -13,7 +13,7 @@ tags: [fabmaker, 3d-drucker, ktg]
 verlinkt: [/projekte/3d-druck-ag-ktg/, /projekte/3d-druck-ag-rosalind-franklin-gymnasium/, /todos/]
 ---
 
-An der [3D-Druck AG der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) stehen **zwei Fabmaker** – geschlossene „Bildungsdrucker“ der Fabmaker GmbH aus Braunschweig. Beide gehören Falko. Einen hat das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) verschenkt; er war dort nicht mehr funktionsfähig.
+An der [3D-Druck AG der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) stehen **zwei Fabmaker** – geschlossene „Bildungsdrucker“ der Fabmaker GmbH aus Braunschweig. Beide gehören Falko. Einen hat das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) verschenkt; er war dort nicht mehr funktionsfähig. Der andere kam aus einem Gymnsaium im Wedding, weil das Gerät nicht mehr unterstützt wird, stand es dort nur rum.
 
 Die Fabmaker GmbH ist seit 2023 insolvent, die Website ist abgeschaltet. Es gibt also keinen Support mehr – und der Slicer läuft nur unter Windows. Alles, was wir herausfinden, sammeln wir im Repository [35services/fabmaker-rettung](https://github.com/35services/fabmaker-rettung): Recherche, Installationsdateien, Wartungsprogramme und das Anwenderhandbuch.
 
