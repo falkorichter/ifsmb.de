@@ -21,6 +21,8 @@ Ihr wollt selbst Geld für einen Makespace an eurer Schule auftreiben? Wege dazu
 
 Bei uns läuft alles über Spenden. Mal sind wir mit den Spenden voraus, mal ein bisschen hinterher. Bei den folgenden Projekten ist Falko gerade privat in Vorleistung gegangen. Sobald genug Spenden zusammen sind, bitten wir [35services e.V.](https://35services.de/), die Kosten zu übernehmen – die Geräte gehören dann dem Verein.
 
+Im Zweifel gibt's auch ab und zu eine Ehrenamtspauschale und man kann sich so die Ausgaben schön rechnen. So gibt es auch keinen Druck, irgendetwas erstatten zu müssen.
+
 - 🖨️ [Snapmaker U1]({{ '/ausstattung/snapmaker-u1/' | relative_url }}) – unser 4-Farb-Drucker an der KTG. Die Spenden decken die Anschaffung noch nicht ganz.
 - 📷 [3D-Scanner evaluieren]({{ '/projekte/3d-scanner-evaluieren/' | relative_url }}) – wir testen gerade, welcher 3D-Scanner zu uns passt.
 - 💾 [USB-Sticks für den 3D-Druck-Stick]({{ '/projekte/3ddruck-iso-jugend-hackt/' | relative_url }}) – damit wir viele alte Laptops auf einmal einrichten können, hat Falko die Sticks privat gekauft. Die Laptops selbst wären sonst im Müll gelandet: Sie kommen von Falkos Vater und aus der KTG.
