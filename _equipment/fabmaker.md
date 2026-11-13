@@ -1,5 +1,5 @@
 ---
-title: Fabmaker „Bildungsdrucker“ (2 ×)
+title: Zwei Fabmaker-Drucker
 kategorie: 3D-Drucker (FDM)
 summary: Zwei Fabmaker-Drucker, deren Hersteller insolvent ist – wir wollen sie wieder zum Leben bringen. Einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium.
 owner_team: falko-richter
