@@ -913,7 +913,7 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
 .todos-erledigt summary { cursor: pointer; font-weight: 700; color: var(--ink-soft); }
 .todos-erledigt .todos-liste { margin-top: .5rem; }
 .todos-erledigt .todo-titel { text-decoration: line-through; opacity: .7; }
-.todos-dialog { width: min(1200px, 96vw); max-height: 92vh; padding: 0; border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--ink); background: var(--bg); color: var(--ink); }
+.todos-dialog { margin: auto; width: min(1200px, 96vw); max-height: 92vh; padding: 0; border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--ink); background: var(--bg); color: var(--ink); }
 .todos-dialog::backdrop { background: rgba(10, 10, 14, .55); }
 .todos-dialog[open] { display: flex; flex-direction: column; }
 .todos-dialog-kopf { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; border-bottom: 2px solid var(--ink); background: var(--paper); }
