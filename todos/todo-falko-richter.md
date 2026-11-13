@@ -134,4 +134,19 @@ tags: [openscan]
 - **Kamera:** Welche Kamera nehmen wir?
 - **Mitmachen:** Wer baut mit?
 
+### Non planar slicing {#non-planar-slicing}
+
+```yaml
+kurz: "Angucken "
+art: frage
+status: offen
+seit: 2026-11-13
+helfer: [anton]
+projekte: [35services-3d]
+tags: [35services-3d]
+verlinkt: [/partner/35services/, /ausstattung/bambu-lab-a1-mini/, /ausstattung/prusa-mk3s-xhain/, /projekte/prusa-mk3s-heartlabs-flott-machen/]
+```
+
+https://youtu.be/cRSoVq_reGQ?is=4-7OQB8jc_aDTww_
+
 ## ✅ Erledigt
