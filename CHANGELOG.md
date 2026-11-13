@@ -6,6 +6,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Geändert
+
+- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
+
 ### Hinzugefügt
 
 - Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.

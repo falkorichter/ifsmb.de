@@ -10,7 +10,7 @@ image: /assets/images/ausstattung/fabmaker/01.jpg
 thumb: /assets/images/ausstattung/fabmaker/01-600w.jpg
 image_alt: "Ein Fabmaker-3D-Drucker mit rotem Deckel und Display in einem Fahrradanhänger, angehängt an ein Lastenrad auf Kopfsteinpflaster"
 tags: [fabmaker, 3d-drucker, ktg]
-verlinkt: [/projekte/3d-druck-ag-ktg/, /projekte/3d-druck-ag-rosalind-franklin-gymnasium/]
+verlinkt: [/projekte/3d-druck-ag-ktg/, /projekte/3d-druck-ag-rosalind-franklin-gymnasium/, /todos/]
 ---
 
 An der [3D-Druck AG der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) stehen **zwei Fabmaker** – geschlossene „Bildungsdrucker“ der Fabmaker GmbH aus Braunschweig. Beide gehören Falko. Einen hat das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) verschenkt; er war dort nicht mehr funktionsfähig.
@@ -21,4 +21,4 @@ Was wir schon wissen:
 
 - Fabmaker empfahl, nur mit **PETG** zu drucken.
 - Als Druckbett-Folie passt **BuildTak** in 304 × 304 mm.
-- Welches Dateiformat der Drucker erwartet, ist noch offen – siehe die Herausforderung [Fabmaker-Slicer für Mac und Web]({{ '/herausforderungen/fabmaker-slicer-mac-web/' | relative_url }}).
+- Welches Dateiformat der Drucker erwartet, ist noch offen – siehe das Todo [Fabmaker-Slicer für Mac und Web]({{ '/todos/#falko-richter/fabmaker-slicer-mac-web' | relative_url }}).

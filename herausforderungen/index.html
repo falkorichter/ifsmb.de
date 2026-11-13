@@ -31,7 +31,7 @@ verlinkt: [/todos/]
   {% for h in h_open %}{% include herausforderung-karte.html h=h %}{% endfor %}
 </div>
 {% else %}
-<p class="muted">Gerade ist nichts offen. 🎉</p>
+<p class="muted">Hier ist gerade nichts offen – die aktuellen Herausforderungen stehen pro Person in den <a href="{{ '/todos/' | relative_url }}">Todos</a>.</p>
 {% endif %}
 
 {% if h_done.size > 0 %}
