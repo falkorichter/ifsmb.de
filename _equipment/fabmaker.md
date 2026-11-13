@@ -22,3 +22,11 @@ Was wir schon wissen:
 - Fabmaker empfahl, nur mit **PETG** zu drucken.
 - Als Druckbett-Folie passt **BuildTak** in 304 × 304 mm.
 - Welches Dateiformat der Drucker erwartet, ist noch offen – siehe das Todo [Fabmaker-Slicer für Mac und Web]({{ '/todos/#falko-richter/fabmaker-slicer-mac-web' | relative_url }}).
+
+## Links 
+
+- https://www.facebook.com/reel/693153367802930
+- https://www.youtube.com/watch?v=RZR0yw8zzek
+- https://www.instagram.com/fabmaker_3d/
+- https://www.tu-braunschweig.de/transferservice/technologietransfer/gruendungen/gruendungen-an-der-tu-braunschweig/interviews/fabmaker
+- https://3druck.com/drucker-und-produkte/fabmaker-bietet-beratung-und-arbeitet-einen-eigenen-3d-drucker-2313628/
