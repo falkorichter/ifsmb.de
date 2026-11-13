@@ -1,0 +1,15 @@
+{%- comment -%}
+  Sorts challenges by priority from _data/herausforderungen_reihenfolge.yml.
+  include.liste = challenges (any order). Result in `h_sortiert`: listed ones in the
+  order of the data file, then the rest in the order they came in.
+{%- endcomment -%}
+{%- assign hs_rest = include.liste -%}
+{%- assign h_sortiert = "" | split: "" -%}
+{%- for s in site.data.herausforderungen_reihenfolge.reihenfolge -%}
+  {%- assign hs_x = hs_rest | where: "slug", s | first -%}
+  {%- if hs_x -%}
+    {%- assign h_sortiert = h_sortiert | push: hs_x -%}
+    {%- assign hs_rest = hs_rest | where_exp: "h", "h.slug != s" -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign h_sortiert = h_sortiert | concat: hs_rest -%}

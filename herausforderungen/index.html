@@ -5,7 +5,9 @@ title: Herausforderungen
 lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
 ---
 {%- comment -%}
-  Overview of all challenges: open / in progress first, solved below, personal ones at the end.
+  Overview of all challenges: open ones by priority (_data/herausforderungen_reihenfolge.yml),
+  solved below, personal ones at the end. Open and personal lists can be reordered by
+  drag & drop (assets/js/herausforderungen.js); saving goes through the GitHub editor.
 {%- endcomment -%}
 <div class="prose intro">
   <p>Ein Projekt besteht aus vielen kleinen <strong>Herausforderungen</strong>: Welche Motoren passen? Wer besorgt die Platine? Warum haftet das Filament nicht? Jede Herausforderung gehört zu einem oder mehreren <a href="{{ '/projekte/' | relative_url }}">Projekten</a>, Terminen oder Menschen – und jemand aus dem <a href="{{ '/team/' | relative_url }}">Team</a> kümmert sich darum.</p>
@@ -13,20 +15,23 @@ lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als
 </div>
 {%- assign all = site.herausforderungen | sort: "title" -%}
 {%- assign inst = all | where_exp: "h", "h.persoenlich != true" -%}
-{%- assign personal = all | where: "persoenlich", true -%}
+{%- assign personal_all = all | where: "persoenlich", true -%}
 {%- assign h_open = inst | where_exp: "h", "h.status != 'geloest'" -%}
-{%- assign h_wip = h_open | where: "status", "in-arbeit" -%}
-{%- assign h_todo = h_open | where_exp: "h", "h.status != 'in-arbeit'" -%}
-{%- assign h_open = h_wip | concat: h_todo -%}
+{%- include herausforderungen-sortieren.html liste=h_open -%}{%- assign h_open = h_sortiert -%}
 {%- assign h_done = inst | where: "status", "geloest" -%}
+{%- assign p_open = personal_all | where_exp: "h", "h.status != 'geloest'" -%}
+{%- include herausforderungen-sortieren.html liste=p_open -%}{%- assign p_open = h_sortiert -%}
+{%- assign p_done = personal_all | where: "status", "geloest" -%}
+{%- assign personal = p_open | concat: p_done -%}
 <nav class="equipment-jump">
   <a href="#offen">Offen ({{ h_open.size }})</a>{% if h_done.size > 0 %} · <a href="#geloest">Gelöst ({{ h_done.size }})</a>{% endif %}{% if personal.size > 0 %} · <a href="#persoenlich">Persönlich ({{ personal.size }})</a>{% endif %}
 </nav>
 
 <h2 class="cal-heading" id="offen">Offen</h2>
 {% if h_open.size > 0 %}
-<div class="grid-2">
-  {% for h in h_open %}{% include herausforderung-karte.html h=h %}{% endfor %}
+<p class="muted small sort-hint">Wichtigstes zuerst. Mit <span aria-hidden="true">⠿</span> verschieben (Maus, Finger oder Pfeiltasten), um die Reihenfolge zu ändern.</p>
+<div class="grid-2 sortable" data-sortable="offen">
+  {% for h in h_open %}{% include herausforderung-sortierbar.html h=h nr=forloop.index %}{% endfor %}
 </div>
 {% else %}
 <p class="muted">Gerade ist nichts offen. 🎉</p>
@@ -42,7 +47,32 @@ lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als
 {% if personal.size > 0 %}
 <h2 class="cal-heading" id="persoenlich">Aus persönlichen Projekten</h2>
 <p class="muted">Herausforderungen aus privaten Makespace-Projekten im Team – keine Aufgaben des Instituts.</p>
-<div class="grid-2">
-  {% for h in personal %}{% include herausforderung-karte.html h=h %}{% endfor %}
+{% if p_open.size > 0 %}
+<div class="grid-2 sortable" data-sortable="persoenlich">
+  {% for h in p_open %}{% include herausforderung-sortierbar.html h=h nr=forloop.index %}{% endfor %}
 </div>
+{% endif %}
+{% if p_done.size > 0 %}
+<div class="grid-2">
+  {% for h in p_done %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+
+{% if h_open.size > 0 or p_open.size > 0 %}
+{%- comment -%}Save bar: hidden until the order changes. The data file keeps solved/unknown slugs out; JS lists the open ones in page order.{%- endcomment -%}
+<div class="sort-bar" id="sort-bar" hidden
+     data-edit-url="https://github.com/{{ site.repository }}/edit/{{ site.branch }}/_data/herausforderungen_reihenfolge.yml">
+  <p class="sort-bar-text"><strong>Neue Reihenfolge</strong> – noch nicht gespeichert.</p>
+  <div class="sort-bar-actions">
+    <button type="button" class="btn btn-small" id="sort-save">💾 Kopieren &amp; auf GitHub speichern</button>
+    <button type="button" class="btn btn-small btn-ghost" id="sort-reset">↩️ Zurücksetzen</button>
+  </div>
+  <details class="sort-bar-yaml">
+    <summary>Neuen Inhalt für <code>_data/herausforderungen_reihenfolge.yml</code> ansehen</summary>
+    <textarea id="sort-yaml" rows="8" readonly aria-label="Neuer Inhalt der Datei _data/herausforderungen_reihenfolge.yml"></textarea>
+  </details>
+  <p class="muted small" id="sort-status" aria-live="polite"></p>
+</div>
+<script src="{{ '/assets/js/herausforderungen.js' | relative_url }}" defer></script>
 {% endif %}

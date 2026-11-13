@@ -1,0 +1,9 @@
+{%- comment -%}
+  Draggable wrapper around a challenge card on /herausforderungen/.
+  include.h = the challenge, include.nr = its current priority (1 = first).
+  The handle sits outside the card link, so dragging never follows the link.
+{%- endcomment -%}
+<div class="sortable-item" data-slug="{{ include.h.slug }}">
+  <button type="button" class="drag-handle" aria-label="„{{ include.h.title | escape }}“ verschieben (Pfeiltasten hoch/runter)" title="Ziehen oder mit Pfeiltasten verschieben"><span class="prio-nr">{{ include.nr }}</span><span aria-hidden="true">⠿</span></button>
+  {% include herausforderung-karte.html h=include.h %}
+</div>

@@ -1,0 +1,10 @@
+# Priority of the open challenges (Herausforderungen): first = most important.
+# Entries are file names from _herausforderungen/ without ".md".
+# Challenges missing here come after the listed ones (sorted by title).
+# Easiest way to change it: drag the cards on /herausforderungen/ and save.
+reihenfolge:
+  - kurzer-name
+  - mural-schrittmotoren
+  - openscan-variante
+  - repair-cafe-nochmall
+  - stadtteilkasse-moabit

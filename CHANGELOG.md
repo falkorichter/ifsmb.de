@@ -6,6 +6,14 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- **Herausforderungen nach Wichtigkeit sortieren:** Auf `/herausforderungen/` lassen sich die offenen Karten am Griff ⠿ per Drag & Drop verschieben – mit der Maus, mit dem Finger oder mit den Pfeiltasten. Die Nummer am Griff zeigt den Platz. Danach erscheint unten „💾 Kopieren & auf GitHub speichern“: Die neue Reihenfolge wird kopiert, und der GitHub-Editor für `_data/herausforderungen_reihenfolge.yml` öffnet sich zum Einfügen. Bis dahin merkt sich der Browser die ungespeicherte Reihenfolge. Die Reihenfolge lässt sich auch in Pages CMS ändern.
+
+### Geändert
+
+- Offene Herausforderungen stehen auf `/herausforderungen/`, auf Projektseiten und in Teamprofilen jetzt in der gespeicherten Reihenfolge statt nach Titel bzw. „in Arbeit“ zuerst. Neue Herausforderungen, die noch nicht in der Liste stehen, kommen ans Ende.
+
 ## [2026-11-13]
 
 ### Hinzugefügt

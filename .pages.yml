@@ -472,6 +472,17 @@ content:
         options:
           format: markdown
 
+  - name: herausforderungen-reihenfolge
+    label: Herausforderungen – Reihenfolge
+    type: file
+    path: _data/herausforderungen_reihenfolge.yml
+    fields:
+      - name: reihenfolge
+        label: Reihenfolge der offenen Herausforderungen (wichtigste zuerst)
+        description: "Dateinamen aus _herausforderungen/ ohne „.md“. Nicht aufgeführte kommen ans Ende. Einfacher: auf /herausforderungen/ die Karten verschieben."
+        type: string
+        list: true
+
   - name: press
     label: Pressemitteilungen
     type: collection

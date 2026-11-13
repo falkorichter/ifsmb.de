@@ -55,9 +55,10 @@ layout: default
     {%- for h in ch_all -%}
       {%- assign hp = h.projekte | join: "," | split: "," -%}{%- assign ht = h.tags | join: "," | split: "," -%}
       {%- if hp contains page.slug or page.event_tag and ht contains page.event_tag -%}
-        {%- if h.status == "geloest" %}{% assign ch_done = ch_done | push: h %}{% elsif h.status == "in-arbeit" %}{% assign ch_open = ch_open | unshift: h %}{% else %}{% assign ch_open = ch_open | push: h %}{% endif -%}
+        {%- if h.status == "geloest" %}{% assign ch_done = ch_done | push: h %}{% else %}{% assign ch_open = ch_open | push: h %}{% endif -%}
       {%- endif -%}
     {%- endfor -%}
+    {%- include herausforderungen-sortieren.html liste=ch_open -%}{%- assign ch_open = h_sortiert -%}
     {%- assign ch_list = ch_open | concat: ch_done -%}
     {% if ch_list.size > 0 %}
     <h2 id="herausforderungen">Herausforderungen <span class="link-meta">{{ ch_open.size }} offen{% if ch_done.size > 0 %} · {{ ch_done.size }} gelöst{% endif %}</span></h2>

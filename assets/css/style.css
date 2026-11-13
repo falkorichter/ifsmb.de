@@ -866,5 +866,37 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .challenge-card-line { display: flex; flex-direction: column; gap: .15rem; margin-top: .5rem; }
 .challenge-solution { margin-top: 2rem; padding: 1rem 1.2rem; background: #f0faea; border: 2px solid var(--ink); border-radius: var(--radius); }
 .challenge-solution h2 { margin-top: 0; }
+
+/* Drag & drop priorities on /herausforderungen/ (assets/js/herausforderungen.js) */
+.sort-hint { margin: -.25rem 0 .9rem; }
+.sortable-item { position: relative; display: flex; }
+.sortable-item > .card { flex: 1; padding-left: 3.2rem; }
+.drag-handle {
+  position: absolute; top: .75rem; left: .75rem; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: .1rem;
+  width: 2rem; padding: .3rem 0;
+  font: inherit; font-size: 1.1rem; line-height: 1; color: var(--ink);
+  background: var(--accent); border: 2px solid var(--ink); border-radius: 8px;
+  cursor: grab; touch-action: none; user-select: none;
+}
+.drag-handle .prio-nr { font-size: .8rem; font-weight: 800; }
+.drag-handle:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.sortable-item.dragging { z-index: 2; }
+.sortable-item.dragging > .card { box-shadow: 8px 8px 0 var(--ink); transform: rotate(-1deg) scale(1.02); }
+.sortable-item.dragging .drag-handle { cursor: grabbing; }
+body.is-sorting { cursor: grabbing; user-select: none; }
+.sort-bar {
+  position: sticky; bottom: 1rem; z-index: 5; margin-top: 1.5rem;
+  padding: .9rem 1.1rem; background: var(--paper);
+  border: 2px solid var(--ink); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--ink);
+}
+.sort-bar[hidden] { display: none; }
+.sort-bar-text { margin: 0 0 .6rem; }
+.sort-bar-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.sort-bar-yaml { margin-top: .7rem; }
+.sort-bar-yaml textarea { width: 100%; margin-top: .4rem; font-family: var(--mono); font-size: .85rem; border: 2px solid var(--line); border-radius: 8px; padding: .5rem; }
+#sort-status:empty { display: none; }
+#sort-status { margin: .5rem 0 0; }
+@media (prefers-reduced-motion: reduce) { .sortable-item.dragging > .card { transform: none; } }
 #herausforderungen { margin-top: 2.5rem; margin-bottom: .9rem; }
 #herausforderungen .link-meta { font-size: .9rem; font-weight: 400; vertical-align: middle; }
