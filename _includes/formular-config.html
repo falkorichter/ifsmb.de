@@ -1,0 +1,29 @@
+{%- comment -%}
+  Configuration for assets/js/formular.js (shared by the todo editor and the "➕ new" forms) and a small loader
+  that fetches scripts on first use. Included once per page by _layouts/default.html.
+{%- endcomment -%}
+<script type="application/json" id="formular-daten">
+{
+  "suchindex": {{ '/todos/suchindex.json' | relative_url | jsonify }},
+  "pagefind": {{ '/pagefind/pagefind.js' | relative_url | jsonify }},
+  "github": {{ site.repository | prepend: "https://github.com/" | jsonify }},
+  "branch": {{ site.branch | default: "main" | jsonify }},
+  "skripte": {{ '/assets/js/' | relative_url | jsonify }}
+}
+</script>
+<script>
+  // Load scripts from assets/js/ one after another, each only once: ladeSkripte(["formular.js", "neu.js"]) → Promise.
+  window.ladeSkripte = (function () {
+    var basis = JSON.parse(document.getElementById("formular-daten").textContent).skripte, geladen = {};
+    function eins(name) {
+      return geladen[name] || (geladen[name] = new Promise(function (ok, fehler) {
+        var s = document.createElement("script");
+        s.src = basis + name;
+        s.onload = ok;
+        s.onerror = function () { delete geladen[name]; fehler(new Error(name)); };
+        document.head.appendChild(s);
+      }));
+    }
+    return function (namen) { return namen.reduce(function (p, n) { return p.then(function () { return eins(n); }); }, Promise.resolve()); };
+  })();
+</script>
