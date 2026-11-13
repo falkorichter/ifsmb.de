@@ -22,6 +22,8 @@ CHECK_EXTERNAL = ARGV.include?("--extern")
 ORPHAN_OK = %w[/404.html].freeze
 # Pfade, die erst im CI entstehen (Pagefind-Index)
 GENERATED_PREFIXES = %w[/pagefind/].freeze
+# Pages whose #fragment is a JS route, not an HTML id (e.g. /todos/#<person>/<todo>)
+HASH_ROUTES = %w[/todos/].freeze
 
 abort "#{SITE} fehlt – erst `bundle exec jekyll build` ausführen." unless Dir.exist?(SITE)
 
@@ -94,7 +96,7 @@ html_of.each do |file, html|
       next
     end
 
-    if uri.fragment && !uri.fragment.empty? && target.end_with?(".html")
+    if uri.fragment && !uri.fragment.empty? && target.end_with?(".html") && !HASH_ROUTES.include?(url_path_for(target))
       frag = CGI.unescape(uri.fragment)
       broken[page] << "Anker fehlt: #{ref}" unless ids_of[target].include?(frag)
     end

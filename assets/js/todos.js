@@ -1,12 +1,12 @@
 // Todo app on /todos/ – an experiment next to the Herausforderungen collection, without libraries.
-// One Markdown file per person (todos/<person>.md, see the comment at the top of each file):
+// One Markdown file per person (todos/todo-<person>.md, see the comment at the top of each file):
 //   ## <quadrant heading>      → Eisenhower quadrant (q1 … q4) or "Erledigt"
 //   ### <title> {#id}          → one challenge; order inside a quadrant = priority
 //   ```yaml … ```              → fields (kurz, art, status, seit, faellig, helfer, projekte, tags, verlinkt …)
 //   free Markdown text
 // Files are fetched lazily per person. Every change is written to localStorage right away;
 // "Pull Request" shows a diff, copies the new file and opens the GitHub editor.
-// Format of todos/<person>.md: parse ⇄ serialize. Pure functions, also usable from Node for tests.
+// Format of todos/todo-<person>.md: parse ⇄ serialize. Pure functions, also usable from Node for tests.
 var TodoFormat = (function () {
   "use strict";
   var BUCKETS = [
@@ -139,10 +139,31 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   var parse = F.parse, serialize = F.serialize, normal = F.normal, slugify = F.slugify, norm = F.norm;
   var CFG = JSON.parse(dataEl.textContent);
 
+  // Page mode on /todos/ (#todos-app exists) or embedded mode: a button on project pages and team profiles
+  // (_includes/todos-knopf.html) loads this script on click and calls TodoApp.start(); everything lives in the pop-up.
   var app = document.getElementById("todos-app");
+  var EINGEBETTET = !app;
+  if (!document.getElementById("todos-dialog")) {
+    document.body.insertAdjacentHTML("beforeend",
+      '<dialog class="todos-dialog" id="todos-dialog" aria-labelledby="todos-dialog-titel">'
+      + '<div class="todos-dialog-kopf"><h2 id="todos-dialog-titel">Todo bearbeiten</h2>'
+      + '<a class="todos-alle" id="todos-alle" href="' + CFG.basis + '" hidden>Alle Todos ↗</a>'
+      + '<button type="button" class="btn btn-small btn-ghost" id="todos-dialog-zu" aria-label="Schließen">✕</button></div>'
+      + '<div class="todos-dialog-body"><div class="todos-dialog-links" id="todos-dialog-links"></div>'
+      + '<form class="todos-editor" id="todos-editor" autocomplete="off"></form></div></dialog>'
+      + '<dialog class="todos-dialog todos-diff-dialog" id="todos-diff" aria-labelledby="todos-diff-titel">'
+      + '<div class="todos-dialog-kopf"><h2 id="todos-diff-titel">Änderungen speichern</h2>'
+      + '<button type="button" class="btn btn-small btn-ghost" data-schliessen aria-label="Schließen">✕</button></div>'
+      + '<div class="todos-diff-body" id="todos-diff-body"></div></dialog>');
+  }
+  if (EINGEBETTET) {
+    document.getElementById("todos-dialog-links").insertAdjacentHTML("afterbegin",
+      '<nav class="todos-personen" id="todos-personen" aria-label="Person wählen"></nav><div class="todos-leiste" id="todos-leiste" hidden></div>');
+  }
   var personenNav = document.getElementById("todos-personen");
   var leiste = document.getElementById("todos-leiste");
-  var matrixPlatz = document.getElementById("todos-matrix-platz");
+  var matrixPlatz = EINGEBETTET ? document.getElementById("todos-dialog-links") : document.getElementById("todos-matrix-platz");
+  var alleLink = document.getElementById("todos-alle");
   var dialog = document.getElementById("todos-dialog");
   var dialogLinks = document.getElementById("todos-dialog-links");
   var editor = document.getElementById("todos-editor");
@@ -150,15 +171,25 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   var diffBody = document.getElementById("todos-diff-body");
 
   var STORE = "ifsmb-todos:";
+  // File of a person: todos/todo-<person>.md (the prefix keeps it apart from the profile _team/<person>.md)
+  function dateiname(person) { return "todo-" + person + ".md"; }
+  function pfad(person) { return "todos/" + dateiname(person); }
   var ART = { aufgabe: "📋", problem: "⚠️", frage: "❓" };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function heute() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
   function datumDE(d) { var p = String(d || "").split("-"); return p.length === 3 ? p[2] + "." + p[1] + "." + p[0] : d; }
   function storeGet(k) { try { return JSON.parse(localStorage.getItem(STORE + k) || "null"); } catch (e) { return null; } }
-  function storeSet(k, v) { try { if (v) localStorage.setItem(STORE + k, JSON.stringify(v)); else localStorage.removeItem(STORE + k); } catch (e) { /* storage blocked */ } }
+  // ROH remembers the raw localStorage value this tab last wrote or saw per person, to notice changes from other tabs.
+  var ROH = {};
+  function storeRoh(k) { try { return localStorage.getItem(STORE + k); } catch (e) { return null; } }
+  function storeSet(k, v) {
+    var roh = v ? JSON.stringify(v) : null;
+    ROH[k] = roh;
+    try { if (roh) localStorage.setItem(STORE + k, roh); else localStorage.removeItem(STORE + k); } catch (e) { /* storage blocked */ }
+  }
   function el(html) { var t = document.createElement("template"); t.innerHTML = html.trim(); var n = t.content.firstChild; t.content.removeChild(n); return n; }
   var liveEl = el('<p class="visually-hidden" aria-live="polite"></p>');
-  app.appendChild(liveEl);
+  document.body.appendChild(liveEl);
   function sagen(text) { liveEl.textContent = text; }
 
   // ---------- people ----------
@@ -175,6 +206,12 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   // ---------- state per person ----------
   var DOCS = {};   // person → { server: text|null, doc, konflikt }
+  var FILTER = null; // embedded on a project page: { projekt, tag } – only matching todos are shown
+  var NAV = null;    // person ids in the navigation (null = everyone)
+  function sichtbar(t) {
+    if (!FILTER) return true;
+    return (t.felder.projekte || []).indexOf(FILTER.projekt) >= 0 || !!FILTER.tag && (t.felder.tags || []).indexOf(FILTER.tag) >= 0;
+  }
   var aktuell = null;
   var auswahl = null; // id of the challenge in the editor
 
@@ -182,9 +219,10 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (DOCS[person]) return Promise.resolve(DOCS[person]);
     var hatDatei = CFG.dateien.indexOf(person) >= 0;
     var p = hatDatei
-      ? fetch(CFG.basis + encodeURIComponent(person) + ".md", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      ? fetch(CFG.basis + encodeURIComponent(dateiname(person)), { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       : Promise.resolve(null);
     return p.then(function (server) {
+      ROH[person] = storeRoh(person);
       var entwurf = storeGet(person);
       var st = { server: server, doc: null, konflikt: false };
       if (entwurf && normal(entwurf.text) === normal(server)) { storeSet(person, null); entwurf = null; }
@@ -230,17 +268,29 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   // ---------- people navigation ----------
   function renderPersonen() {
-    var html = CFG.personen.map(function (p) {
-      var n = DOCS[p.id] ? DOCS[p.id].doc.todos.filter(function (t) { return t.q !== "done"; }).length : null;
+    var liste = NAV ? NAV.map(function (id) { return PERSON[id] || { id: id, name: id }; }) : CFG.personen;
+    var html = liste.map(function (p) {
+      var n = DOCS[p.id] ? DOCS[p.id].doc.todos.filter(function (t) { return t.q !== "done" && sichtbar(t); }).length : null;
       var hat = CFG.dateien.indexOf(p.id) >= 0 || DOCS[p.id] && DOCS[p.id].doc.todos.length;
-      return '<a href="#' + esc(p.id) + '" class="todos-person' + (p.id === aktuell ? " aktiv" : "") + (hat ? "" : " leer") + '"' + (p.id === aktuell ? ' aria-current="page"' : "") + ">"
-        + avatar(p.id, "todo-avatar-gross") + "<span>" + esc(p.name) + "</span>"
+      var innen = avatar(p.id, "todo-avatar-gross") + "<span>" + esc(p.name) + "</span>"
         + (n ? '<sup class="todos-zahl">' + n + "</sup>" : "")
-        + (geaendert(p.id) ? '<span class="todos-punkt" title="Ungespeicherte Änderungen">●</span>' : "")
-        + "</a>";
+        + (geaendert(p.id) ? '<span class="todos-punkt" title="Ungespeicherte Änderungen">●</span>' : "");
+      var cls = "todos-person" + (p.id === aktuell ? " aktiv" : "") + (hat ? "" : " leer");
+      return EINGEBETTET
+        ? '<button type="button" class="' + cls + '" data-person="' + esc(p.id) + '"' + (p.id === aktuell ? ' aria-pressed="true"' : ' aria-pressed="false"') + ">" + innen + "</button>"
+        : '<a href="#' + esc(p.id) + '" class="' + cls + '"' + (p.id === aktuell ? ' aria-current="page"' : "") + ">" + innen + "</a>";
     }).join("");
     personenNav.innerHTML = html;
+    personenNav.hidden = EINGEBETTET && liste.length < 2;
+    if (alleLink && aktuell) alleLink.href = CFG.basis + "#" + encodeURIComponent(aktuell);
   }
+
+  personenNav.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-person]");
+    if (!b) return;
+    auswahl = null;
+    zeige(b.getAttribute("data-person")).then(function () { renderEditor(); });
+  });
 
   // ---------- save bar ----------
   function renderLeiste() {
@@ -249,10 +299,10 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (!offen.length && !(st && st.konflikt)) { leiste.hidden = true; leiste.innerHTML = ""; return; }
     leiste.hidden = false;
     leiste.innerHTML = offen.map(function (p) {
-      return '<div class="todos-leiste-zeile">' + avatar(p.id) + ' <span>Änderungen in <code>todos/' + esc(p.id) + '.md</code> – im Browser gespeichert, noch nicht auf der Website.</span>'
+      return '<div class="todos-leiste-zeile">' + avatar(p.id) + ' <span>Änderungen in <code>' + esc(pfad(p.id)) + '</code> – im Browser gespeichert, noch nicht auf der Website.</span>'
         + '<span class="todos-leiste-knoepfe"><button type="button" class="btn btn-small" data-pr="' + esc(p.id) + '">🔀 Ansehen &amp; Pull Request</button>'
         + '<button type="button" class="btn btn-small btn-ghost" data-verwerfen="' + esc(p.id) + '">↩️ Verwerfen</button></span></div>';
-    }).join("") + (st && st.konflikt ? '<p class="todos-konflikt">⚠️ <code>todos/' + esc(aktuell) + '.md</code> hat sich auf der Website geändert, seit du hier angefangen hast. Im Diff siehst du deine Fassung gegen die aktuelle – fremde Änderungen gehen beim Einfügen verloren.</p>' : "");
+    }).join("") + (st && st.konflikt ? '<p class="todos-konflikt">⚠️ <code>' + esc(pfad(aktuell)) + '</code> hat sich auf der Website geändert, seit du hier angefangen hast. Im Diff siehst du deine Fassung gegen die aktuelle – fremde Änderungen gehen beim Einfügen verloren.</p>' : "");
   }
   leiste.addEventListener("click", function (e) {
     var pr = e.target.closest("[data-pr]"), vw = e.target.closest("[data-verwerfen]");
@@ -287,7 +337,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   function renderMatrix() {
     var st = DOCS[aktuell];
     if (!st) return;
-    var todos = st.doc.todos;
+    var todos = st.doc.todos.filter(sichtbar);
     var zelle = function (b) {
       var liste = todos.filter(function (t) { return t.q === b.q; });
       return '<section class="todos-zelle todos-' + b.q + '" data-q="' + b.q + '">'
@@ -312,25 +362,26 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     renderPersonen();
     renderLeiste();
     renderMatrix();
-    if (!matrix.parentNode) { matrixPlatz.innerHTML = ""; matrixPlatz.appendChild(matrix); }
+    if (!matrix.parentNode) { if (!EINGEBETTET) matrixPlatz.innerHTML = ""; matrixPlatz.appendChild(matrix); }
   }
 
   // Read the order from the DOM after a move and write it back into the document.
   function ausDom() {
     var st = DOCS[aktuell], byId = {};
     st.doc.todos.forEach(function (t) { byId[t.id] = t; });
-    var neu = [];
+    var dom = [];
     matrix.querySelectorAll(".todos-liste").forEach(function (ul) {
       var q = ul.getAttribute("data-q");
       ul.querySelectorAll(":scope > .todo-karte").forEach(function (li) {
         var t = byId[li.getAttribute("data-id")];
         if (!t) return;
         setzeFeld(t, q);
-        neu.push(t);
-        delete byId[t.id];
+        dom.push(t);
       });
     });
-    Object.keys(byId).forEach(function (k) { neu.push(byId[k]); });
+    // Shown todos fill the array slots they occupied before, in their new order; hidden ones (filter) stay put.
+    var neu = st.doc.todos.slice(), k = 0;
+    st.doc.todos.forEach(function (t, i) { if (dom.indexOf(t) >= 0) neu[i] = dom[k++]; });
     st.doc.todos = neu;
   }
   // Moving into/out of "Erledigt" also sets the status.
@@ -432,7 +483,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (!richtung) return;
     e.preventDefault();
     var st = DOCS[aktuell], t = finde(id);
-    var gleiche = st.doc.todos.filter(function (x) { return x.q === t.q; });
+    var gleiche = st.doc.todos.filter(function (x) { return x.q === t.q && sichtbar(x); });
     var i = gleiche.indexOf(t), alle = st.doc.todos;
     if (richtung === "hoch" && i > 0) { tausche(alle, t, gleiche[i - 1]); }
     else if (richtung === "runter" && i < gleiche.length - 1) { tausche(alle, t, gleiche[i + 1]); }
@@ -441,14 +492,14 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       if (!ziel) return;
       alle.splice(alle.indexOf(t), 1);
       setzeFeld(t, ziel);
-      var zielListe = alle.filter(function (x) { return x.q === ziel; });
+      var zielListe = alle.filter(function (x) { return x.q === ziel && sichtbar(x); });
       if (richtung === "runter" && zielListe.length) alle.splice(alle.indexOf(zielListe[0]), 0, t); else alle.push(t);
     }
     speichern(aktuell);
     renderMatrix();
     var neuLi = matrix.querySelector('.todo-karte[data-id="' + CSS.escape(id) + '"]');
     if (neuLi) { if (t.q === "done") matrix.querySelector(".todos-erledigt").open = true; neuLi.focus(); }
-    var pos = st.doc.todos.filter(function (x) { return x.q === t.q; }).indexOf(t) + 1;
+    var pos = st.doc.todos.filter(function (x) { return x.q === t.q && sichtbar(x); }).indexOf(t) + 1;
     sagen("„" + t.titel + "“: " + BUCKET[t.q].name + ", Platz " + pos + ".");
     if (auswahl) renderEditor();
   });
@@ -456,7 +507,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   function neueAufgabe(q) {
     var st = DOCS[aktuell];
-    var t = { id: eindeutig(st.doc, "neue-herausforderung"), titel: "", q: q, felder: { art: "aufgabe", status: q === "done" ? "geloest" : "offen", seit: heute() }, text: "", autoId: true };
+    var t = { id: eindeutig(st.doc, "neues-todo"), titel: "", q: q, felder: { art: "aufgabe", status: q === "done" ? "geloest" : "offen", seit: heute() }, text: "", autoId: true };
+    if (FILTER) { t.felder.projekte = [FILTER.projekt]; if (FILTER.tag) t.felder.tags = [FILTER.tag]; }
     st.doc.todos.push(t);
     speichern(aktuell);
     renderMatrix();
@@ -473,7 +525,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     renderMatrix();
     renderEditor(neu);
     ladeIndex();
-    location.replace("#" + aktuell + "/" + id);
+    if (!EINGEBETTET) location.replace("#" + aktuell + "/" + id);
   }
   function schliessen() {
     auswahl = null;
@@ -481,9 +533,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   }
   dialog.addEventListener("close", function () {
     auswahl = null;
-    matrixPlatz.appendChild(matrix);
+    if (!EINGEBETTET) { matrixPlatz.appendChild(matrix); if (aktuell) location.replace("#" + aktuell); }
     renderMatrix();
-    if (aktuell) location.replace("#" + aktuell);
   });
   document.getElementById("todos-dialog-zu").addEventListener("click", schliessen);
   dialog.addEventListener("click", function (e) { if (e.target === dialog) schliessen(); });
@@ -494,7 +545,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   function renderEditor(neu) {
     var t = auswahl && finde(auswahl);
-    if (!t) { editor.innerHTML = '<p class="muted">Wähle links eine Karte.</p>'; return; }
+    if (!t) { editor.innerHTML = '<p class="muted">Wähle links eine Karte – oder lege mit ➕ in einem Feld ein neues Todo an.</p>'; return; }
     var f = t.felder;
     var felder = {}; BUCKETS.forEach(function (b) { felder[b.q] = b.icon + " " + b.name; });
     var personen = {}; CFG.personen.forEach(function (p) { personen[p.id] = p.name; });
@@ -555,7 +606,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     var v = e.target.value;
     if (n === "titel") {
       t.titel = v;
-      if (t.autoId && v.trim()) { t.id = eindeutig(DOCS[aktuell].doc, slugify(v), t); auswahl = t.id; editor.querySelector(".todos-id").textContent = "#" + t.id; location.replace("#" + aktuell + "/" + t.id); }
+      if (t.autoId && v.trim()) { t.id = eindeutig(DOCS[aktuell].doc, slugify(v), t); auswahl = t.id; editor.querySelector(".todos-id").textContent = "#" + t.id; if (!EINGEBETTET) location.replace("#" + aktuell + "/" + t.id); }
     } else if (n === "text") t.text = v;
     else if (n === "kurz" || n === "faellig") { if (v) t.felder[n] = v; else delete t.felder[n]; }
     else return;
@@ -601,6 +652,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   function uebergeben(t, person) {
     var von = aktuell;
     laden(person).then(function (ziel) {
+      if (NAV && NAV.indexOf(person) < 0) NAV.push(person);
       var st = DOCS[von];
       st.doc.todos = st.doc.todos.filter(function (x) { return x !== t; });
       t.id = eindeutig(ziel.doc, t.id, t);
@@ -772,13 +824,15 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     return { html: html.join(""), plus: plus, minus: minus };
   }
 
+  var diffPerson = null;
   function zeigeDiff(person) {
+    diffPerson = person;
     laden(person).then(function (st) {
       var neu = serialize(st.doc), alt = st.server;
       var d = diffHtml(alt, neu);
-      var datei = "todos/" + person + ".md";
+      var datei = pfad(person);
       var url = alt == null
-        ? CFG.github + "/new/" + CFG.branch + "/todos?filename=" + encodeURIComponent(person + ".md") + "&value=" + encodeURIComponent(neu)
+        ? CFG.github + "/new/" + CFG.branch + "/todos?filename=" + encodeURIComponent(dateiname(person)) + "&value=" + encodeURIComponent(neu)
         : CFG.github + "/edit/" + CFG.branch + "/" + datei;
       diffBody.innerHTML =
         "<p>" + avatar(person) + " <code>" + esc(datei) + "</code> " + (alt == null ? "(neue Datei)" : "") + ' <span class="d-zahl-plus">+' + d.plus + '</span> <span class="d-zahl-minus">−' + d.minus + "</span></p>"
@@ -801,8 +855,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
             function () { diffBody.querySelector("details").open = true; diffBody.querySelector("textarea").select(); oeffnen("Kopieren ging nicht – bitte den Text unten kopieren."); });
         } else { diffBody.querySelector("details").open = true; diffBody.querySelector("textarea").select(); oeffnen("Bitte den Text unten kopieren."); }
       });
-      if (dialog.open) dialog.close();
-      diffDialog.showModal();
+      if (!diffDialog.open) diffDialog.showModal();
     });
   }
   diffDialog.addEventListener("click", function (e) { if (e.target === diffDialog || e.target.closest("[data-schliessen]")) diffDialog.close(); });
@@ -811,12 +864,12 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   function zeige(person) {
     aktuell = person;
     renderPersonen();
-    matrixPlatz.querySelector("#todos-laden") || (matrix.parentNode ? null : (matrixPlatz.innerHTML = '<p class="muted" id="todos-laden">Lädt …</p>'));
+    if (!EINGEBETTET && !matrix.parentNode && !matrixPlatz.querySelector("#todos-laden")) matrixPlatz.innerHTML = '<p class="muted" id="todos-laden">Lädt …</p>';
     return laden(person).then(function () {
       if (aktuell !== person) return;
       renderAlles();
     }).catch(function () {
-      matrixPlatz.innerHTML = '<p class="note">Die Datei <code>todos/' + esc(person) + '.md</code> konnte nicht geladen werden.</p>';
+      (EINGEBETTET ? matrix : matrixPlatz).innerHTML = '<p class="note">Die Datei <code>' + esc(pfad(person)) + '</code> konnte nicht geladen werden.</p>';
     });
   }
   function route() {
@@ -829,8 +882,74 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       else if (dialog.open && !h[1]) dialog.close();
     });
   }
-  window.addEventListener("hashchange", route);
-  // Other tabs: keep the change dots in sync.
-  window.addEventListener("storage", function (e) { if (e.key && e.key.indexOf(STORE) === 0) { renderPersonen(); renderLeiste(); } });
-  route();
+  // Another tab changed a draft (edited, saved, discarded): take over its content, so this tab neither shows
+  // a stale save bar / diff nor overwrites the other tab with an older state.
+  function abgleich(person, roh) {
+    if (ROH[person] === roh) return;
+    ROH[person] = roh;
+    var st = DOCS[person];
+    if (st) {
+      var neu = null;
+      try { neu = JSON.parse(roh || "null"); } catch (x) { /* ignore broken value */ }
+      st.doc = parse(neu ? neu.text : (st.server || ""));
+      st.konflikt = !!neu && normal(neu.basis) !== normal(st.server);
+      if (person === aktuell) {
+        renderMatrix();
+        if (auswahl && !finde(auswahl)) schliessen();
+        else if (auswahl && !editor.contains(document.activeElement)) renderEditor();
+      }
+    }
+    renderPersonen(); renderLeiste();
+    if (diffDialog.open && diffPerson === person) {
+      if (geaendert(person)) zeigeDiff(person);
+      else { diffDialog.close(); sagen("Die Änderungen an " + pfad(person) + " wurden in einem anderen Tab gespeichert oder verworfen."); }
+    }
+  }
+  window.addEventListener("storage", function (e) {
+    if (e.key === null) { pruefeTabs(); return; } // localStorage.clear() in another tab
+    if (e.key.indexOf(STORE) === 0) abgleich(e.key.slice(STORE.length), e.newValue);
+  });
+  // Safety net for missed events (e.g. a tab restored from the back/forward cache): compare once per second
+  // while the tab is visible, and right away when it becomes visible again.
+  function pruefeTabs() {
+    var personen = Object.keys(ROH);
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(STORE) === 0 && personen.indexOf(k.slice(STORE.length)) < 0) personen.push(k.slice(STORE.length)); } } catch (e) { return; }
+    personen.forEach(function (p) { abgleich(p, storeRoh(p)); });
+  }
+  setInterval(function () { if (!document.hidden) pruefeTabs(); }, 1000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) pruefeTabs(); });
+  window.addEventListener("pageshow", function (e) { if (e.persisted) pruefeTabs(); });
+  if (!EINGEBETTET) {
+    window.addEventListener("hashchange", route);
+    route();
+    return;
+  }
+
+  // Embedded: o = { person } (team profile) or { projekt, tag, team: [...] } (project page), plus titel.
+  // On a project page every person file is loaded; the navigation shows people with todos for the project, then the project team.
+  matrixPlatz.appendChild(matrix);
+  window.TodoApp = {
+    start: function (o) {
+      FILTER = o.projekt ? { projekt: o.projekt, tag: o.tag || "" } : null;
+      document.getElementById("todos-dialog-titel").textContent = o.titel || "Todos";
+      alleLink.hidden = false;
+      var laden1 = o.person ? laden(o.person) : Promise.all(CFG.dateien.map(function (id) { return laden(id).catch(function () { return null; }); }));
+      return laden1.then(function () {
+        var personen = [];
+        if (o.person) personen = [o.person];
+        else {
+          CFG.dateien.forEach(function (id) { if (DOCS[id] && DOCS[id].doc.todos.some(sichtbar)) personen.push(id); });
+          (o.team || []).forEach(function (id) { if (PERSON[id] && personen.indexOf(id) < 0) personen.push(id); });
+          if (!personen.length) personen = CFG.dateien.slice(0, 1);
+        }
+        NAV = personen;
+        auswahl = null;
+        return zeige(personen[0]);
+      }).then(function () {
+        if (!dialog.open) dialog.showModal();
+        renderEditor();
+        ladeIndex();
+      });
+    }
+  };
 })();

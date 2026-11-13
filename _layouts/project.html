@@ -65,6 +65,10 @@ layout: default
       {% for h in ch_list %}{% include herausforderung-karte.html h=h ohne_projekt=true %}{% endfor %}
     </div>
     {% endif %}
+    {%- comment -%}Todos of this project (todos/todo-<person>.md, filtered by `projekte` or the event_tag) – loaded by JS on click.{%- endcomment -%}
+    <h2 id="todos">Todos</h2>
+    {%- assign tk_titel = "Todos – " | append: page.title -%}
+    {% include todos-knopf.html projekt=page.slug tag=page.event_tag team=page.team titel=tk_titel label="Todos zum Projekt" %}
     {%- comment -%}Stand / Updates: manuelle `updates` und alle Beiträge mit dem event_tag als eine Zeitleiste – so kann jede*r aus dem Team mit einem kleinen Beitrag zum Projekt beitragen.{%- endcomment -%}
     {%- assign tl_keys = "" | split: "" -%}
     {%- for u in page.updates -%}{%- capture k %}{{ u.datum | date: "%Y-%m-%d" }} 00:00|u|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
