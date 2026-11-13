@@ -1,6 +1,6 @@
 ---
 title: "Hardware/Software für die KTG AG"
-summary: Wir bekommen keinen Snapmaker Orca
+summary: Wir bekommen keinen Snapmaker Orca installiert
 art: problem   # aufgabe, problem oder frage
 status: offen   # offen, in-arbeit oder geloest
 seit: 2026-09-01   # seit wann die Herausforderung besteht
