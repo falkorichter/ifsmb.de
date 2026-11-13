@@ -6,6 +6,8 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [2026-11-13]
+
 ### Hinzugefügt
 
 - **Formulare für alle ➕-Buttons:** Beitrag, Termin, Projekt, vergangenes Projekt, Gerät, Herausforderung, Teamprofil, Pressemitteilung, Partner und „Wir in der Presse“ öffnen jetzt ein Fenster direkt auf der Seite – wie der Todo-Editor, mit Auswahllisten, runden Personenbildern und Autovervollständigung für Personen, Projekte, Stichworte, Partner und Seiten. Rechts steht live die fertige Datei; Dateiname, Stichwort des Projekts und Terminende füllen sich von selbst. Der Entwurf bleibt im Browser, bis er abgeschickt ist. „📋 Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit fertigem Inhalt (→ Pull Request). Die Vorlage mit allen Feldern gibt es weiter über den Link oben im Fenster oder mit Strg/⌘-Klick.
@@ -15,21 +17,6 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 - „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben – auch Speicherleiste und Diff-Fenster: Wird in einem Tab gespeichert oder verworfen, verschwindet der Hinweis im anderen spätestens nach einer Sekunde.
 - Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
 - Todo für Falko (mit Anton): den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
-
-### Geändert
-
-- Todo-Editor und die neuen Formulare teilen sich dieselben Bausteine (`assets/js/formular.js`); ein Klick neben das Fenster schließt es nur noch, wenn er dort auch angefangen hat (Text markieren schließt nicht mehr aus Versehen).
-- Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
-- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
-
-### Behoben
-
-- Pages CMS: Geräte können jetzt auch den Status „im-test“ und „in-reparatur“ bekommen, und „Foto ist eine eigene Illustration“ lässt sich dort setzen (beides fehlte in `.pages.yml` – gefunden von den neuen Tests).
-
-## [2026-11-13]
-
-### Hinzugefügt
-
 - **Todos** (`/todos/`, Experiment neben den Herausforderungen, von `/herausforderungen/` verlinkt): Herausforderungen pro Person in einer eigenen Markdown-Datei `todos/todo-<person>.md`, angezeigt als Eisenhower-Matrix (🔥 Sofort erledigen, 📌 Einplanen, 🤝 Abgeben, 💤 Später, ✅ Erledigt). Die kleinen Karten lassen sich innerhalb eines Feldes und zwischen den Feldern verschieben – mit der Maus, am Griff ⠿ mit dem Finger oder mit den Pfeiltasten. Ein Klick öffnet ein Fenster mit der Matrix links und dem Editor rechts: Titel, Art, Status, Fälligkeit, hauptzuständige Person (Übergeben verschiebt die Karte in deren Datei), 🙌 helfende Hände als runde Bilder, Projekte, Stichworte und verknüpfte Seiten mit Autovervollständigung aus dem Suchindex. Jede Änderung wird sofort im Browser gespeichert; „🔀 Ansehen & Pull Request“ zeigt die Änderungen als Diff, kopiert die neue Datei und öffnet den GitHub-Editor.
 - **Herausforderungen** (`/herausforderungen/`, unter „Wir“): Aufgaben, Probleme und offene Fragen, die kleiner sind als ein Projekt. Jede gehört zu einem oder mehreren Projekten (`projekte` oder über das `event_tag`), hat eine oder mehrere Zuständige (`team`), einen Status (offen, in Arbeit, gelöst – mit Feld für die Lösung) und lässt sich mit `verlinkt` mit Terminen, Geräten, Beiträgen oder Partnerseiten verbinden. Projektseiten zeigen ihre Herausforderungen als Karten, Projektkarten zählen die offenen (🧗), Teamprofile listen die eigenen, alle anderen Seiten zeigen sie unten bei „Verbindungen“. Auch im Netzwerk, in der Suche, bei den Stichworten und in Pages CMS.
 - „➕ Herausforderung“ auf Projekt-, Termin-, Geräte- und Partnerseiten, auf Teamprofilen und auf `/herausforderungen/` – mit Projekt, Zuständigen bzw. Verbindung schon eingetragen.
@@ -48,6 +35,9 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Todo-Editor und die neuen Formulare teilen sich dieselben Bausteine (`assets/js/formular.js`); ein Klick neben das Fenster schließt es nur noch, wenn er dort auch angefangen hat (Text markieren schließt nicht mehr aus Versehen).
+- Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
+- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
 - Bilder und Links in RSS-Beiträgen funktionieren jetzt auch in Feed-Readern, die relative Adressen nicht auflösen, und jeder Beitrag nennt seine Autor*innen.
 - iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
@@ -55,6 +45,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Behoben
 
+- Pages CMS: Geräte können jetzt auch den Status „im-test“ und „in-reparatur“ bekommen, und „Foto ist eine eigene Illustration“ lässt sich dort setzen (beides fehlte in `.pages.yml` – gefunden von den neuen Tests).
 - Projekte aus der „➕ Projekt“-Vorlage verschwanden aus den Übersichten (`/projekte/`, Startseite, Archiv), weil `teil_von: []` gesetzt war – die Vorlagen lassen `teil_von` jetzt leer.
 - PR-Vorschaubilder mit `--unten` funktionieren jetzt auch bei langen Seiten (Teamprofile, Projekte): vorher fehlte der Footer im Bild und der Ausschnitt zeigte den Seitenkopf.
 
