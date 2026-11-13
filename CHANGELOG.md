@@ -6,15 +6,12 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
-### Hinzugefügt
-
-- **Herausforderungen** (`/herausforderungen/`, unter „Wir“): Aufgaben, Probleme und offene Fragen, die kleiner sind als ein Projekt. Jede gehört zu einem oder mehreren Projekten (`projekte` oder über das `event_tag`), hat eine oder mehrere Zuständige (`team`), einen Status (offen, in Arbeit, gelöst – mit Feld für die Lösung) und lässt sich mit `verlinkt` mit Terminen, Geräten, Beiträgen oder Partnerseiten verbinden. Projektseiten zeigen ihre Herausforderungen als Karten, Projektkarten zählen die offenen (🧗), Teamprofile listen die eigenen, alle anderen Seiten zeigen sie unten bei „Verbindungen“. Auch im Netzwerk, in der Suche, bei den Stichworten und in Pages CMS.
-- „➕ Herausforderung“ auf Projekt-, Termin-, Geräte- und Partnerseiten, auf Teamprofilen und auf `/herausforderungen/` – mit Projekt, Zuständigen bzw. Verbindung schon eingetragen.
-
 ## [2026-11-13]
 
 ### Hinzugefügt
 
+- **Herausforderungen** (`/herausforderungen/`, unter „Wir“): Aufgaben, Probleme und offene Fragen, die kleiner sind als ein Projekt. Jede gehört zu einem oder mehreren Projekten (`projekte` oder über das `event_tag`), hat eine oder mehrere Zuständige (`team`), einen Status (offen, in Arbeit, gelöst – mit Feld für die Lösung) und lässt sich mit `verlinkt` mit Terminen, Geräten, Beiträgen oder Partnerseiten verbinden. Projektseiten zeigen ihre Herausforderungen als Karten, Projektkarten zählen die offenen (🧗), Teamprofile listen die eigenen, alle anderen Seiten zeigen sie unten bei „Verbindungen“. Auch im Netzwerk, in der Suche, bei den Stichworten und in Pages CMS.
+- „➕ Herausforderung“ auf Projekt-, Termin-, Geräte- und Partnerseiten, auf Teamprofilen und auf `/herausforderungen/` – mit Projekt, Zuständigen bzw. Verbindung schon eingetragen.
 - Jeder Termin hat oben neben Datum und Uhrzeit einen Link „📅 iCal“, der nur diesen einen Termin als `.ics` herunterlädt – zum Übernehmen in den eigenen Kalender, ohne den ganzen Kalender zu abonnieren.
 - Kalender-Fenster mit Google-Button überall, wo es Termine gibt: „📅 Abonnieren“ neben „Kommende Termine“ (`/kalender/`) und neben den Termin-Überschriften von Projekten, Teamprofilen und Partnerseiten, „📅 In den Kalender“ oben auf jeder Terminseite. Das Fenster bietet „Apple Kalender & Outlook“ (öffnet das Abo bzw. den Termin direkt im Kalender-Programm), „Google Kalender“ (fragt bei Google, ob der Kalender hinzugefügt werden soll, bzw. öffnet einen ausgefüllten neuen Termin) und den Download der iCal-Datei, mit kurzer Anleitung. `<seite>#abonnieren` öffnet das Fenster direkt.
 - Eigene iCal-Feeds für Projekte, Teamprofile und Partnerseiten: Der Button „📅 iCal“ neben der Überschrift „Termine“ bzw. „Termine & Berichte“ enthält genau die Termine dieser Seite, auch die vergangenen. So kann man ein Projekt verfolgen oder nur Falkos Termine abonnieren, ohne den ganzen Kalender des Instituts.
