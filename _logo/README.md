@@ -76,4 +76,5 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | Profilfoto Frieder | `_logo/team/frieder-euteneuer-original.png` | quadratisch zugeschnitten (480 px + 48 px); © Sergej Glanze / FUNKE Foto Services – Nachweis im Profil (`photo_credit`) |
 | Lastenanhänger vom Theater (11.11.2026) | `_logo/news/2026-11-11-lastenanhaenger-vom-theater/` | ohne Metadaten neu gespeichert; keine Personen |
 | 35services/3d & 35services/2d (Fotos/Screenshots) | GitHub `35services/3d` & `35services/2d` | auf max. 1600 px + 600 px ohne Metadaten neu gespeichert |
+| KI-CAD-Vergleich (3 Renderings: OpenSCAD, SolidCraft, Onshape) | GitHub `falkorichter/3d-cad-llm-comparison` | auf max. 1600 px + 600 px ohne Metadaten neu gespeichert |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |
