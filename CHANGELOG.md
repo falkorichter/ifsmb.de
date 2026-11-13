@@ -10,6 +10,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- RSS-Feeds zum Folgen im Feed-Reader: Neben den Neuigkeiten des Instituts gibt es jetzt eigene Feeds für jedes Projekt (Beiträge und kurze Updates aus „Stand / Updates“), für jede Person aus dem Team (alle ihre Beiträge) und für die persönlichen Blogs. Der Button „📡 RSS-Feed“ auf `/news/`, neben „Stand / Updates“ auf Projektseiten und im Teamprofil öffnet – wie beim Kalender – ein Fenster mit der Feed-Adresse zum Kopieren und Buttons für den Feed-Reader auf dem Gerät, Feedly und Inoreader. Browser und Feed-Reader finden die Feeds auf Projekt- und Teamseiten auch automatisch.
 - Jeder Termin hat oben neben Datum und Uhrzeit einen Link „📅 iCal“, der nur diesen einen Termin als `.ics` herunterlädt – zum Übernehmen in den eigenen Kalender, ohne den ganzen Kalender zu abonnieren.
 - Kalender-Fenster mit Google-Button überall, wo es Termine gibt: „📅 Abonnieren“ neben „Kommende Termine“ (`/kalender/`) und neben den Termin-Überschriften von Projekten, Teamprofilen und Partnerseiten, „📅 In den Kalender“ oben auf jeder Terminseite. Das Fenster bietet „Apple Kalender & Outlook“ (öffnet das Abo bzw. den Termin direkt im Kalender-Programm), „Google Kalender“ (fragt bei Google, ob der Kalender hinzugefügt werden soll, bzw. öffnet einen ausgefüllten neuen Termin) und den Download der iCal-Datei, mit kurzer Anleitung. `<seite>#abonnieren` öffnet das Fenster direkt.
 - Eigene iCal-Feeds für Projekte, Teamprofile und Partnerseiten: Der Button „📅 iCal“ neben der Überschrift „Termine“ bzw. „Termine & Berichte“ enthält genau die Termine dieser Seite, auch die vergangenen. So kann man ein Projekt verfolgen oder nur Falkos Termine abonnieren, ohne den ganzen Kalender des Instituts.
@@ -24,6 +25,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Bilder und Links in RSS-Beiträgen funktionieren jetzt auch in Feed-Readern, die relative Adressen nicht auflösen, und jeder Beitrag nennt seine Autor*innen.
 - iCal: Termine, bei denen nur Monat oder Jahr feststeht (`date_label`), erscheinen im Kalender nicht mehr als Eintrag über den ganzen Monat (Google zeigte „Day 1/31“ … „Day 31/31“), sondern als ein ganztägiger Termin am Monatsersten mit „TBD: “ vor dem Titel; der Text aus `date_label` steht in der Beschreibung.
 - Bearbeiten-Leiste kompakter: Der ✏️-Button zeigt jetzt den Pfad der Quelldatei statt „Diese Seite bearbeiten“, die ➕-Buttons stehen ohne „Neu anlegen:“ in derselben Zeile.
 - Changelog enthält nur noch Funktionen der Website, keine Inhalte mehr – die zeigt das Netzwerk mit seiner Zeitleiste. Bisherige Inhalts-Einträge entfernt.

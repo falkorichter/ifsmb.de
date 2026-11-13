@@ -57,8 +57,13 @@ layout: default
     {%- for po in tagged_posts -%}{%- capture k %}{{ po.date | date: "%Y-%m-%d %H:%M" }}|p|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
     {%- assign tl_keys = tl_keys | sort | reverse -%}
     {% if tl_keys.size > 0 %}
+    {%- assign feed_url = page.url | append: "feed.xml" %}
+    {%- assign feed_titel = "Updates zu „" | append: page.title | append: "“ abonnieren" %}
     <section class="project-updates" id="updates">
-      <h2>Stand / Updates</h2>
+      <div class="cal-heading-abo">
+        <h2>Stand / Updates</h2>
+        {% include feed-abo.html feed=feed_url titel=feed_titel %}
+      </div>
       <ol class="update-list">
         {%- for k in tl_keys %}
         {%- assign kp = k | split: "|" -%}{%- assign idx = kp[2] | plus: 0 %}
