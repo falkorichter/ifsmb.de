@@ -11,6 +11,11 @@ persoenlich: true
 
 Falko besucht die **Gustav-Falke-Grundschule** in Berlin und schaut sich ihren Makespace an.
 
+<a class="video-link" href="https://www.youtube.com/watch?v=sJzpJVTg7kQ" target="_blank" rel="noopener">
+  <img src="/assets/images/kalender/2026-11-11-besuch-gustav-falke-grundschule/youtube-sJzpJVTg7kQ.jpg" alt="Vorschaubild: Besuch am Makespace der Gustav-Falke-Grundschule" loading="lazy">
+  <span class="video-play">▶ Video auf YouTube ansehen</span>
+</a>
+
 Was Falko vorab über die Initiative notiert hat:
 
 - **Making im Stundenplan:** Making ist dort fest in den Stundenplan integriert – **seit 2020**.
