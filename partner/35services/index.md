@@ -7,6 +7,7 @@ verlinkt:
   - /news/2024/04/19/der-axidraw-malt-die-mona-lisa/
   - /ausstattung/laptops-druck-sticks/
   - /ausstattung/lulzbot-taz-6/
+  - /partner/jugend-hackt/
 ---
 <div class="prose" markdown="1">
 
@@ -34,9 +35,9 @@ Wie das zusammenspielt, steht im Beitrag [3D-Druck für unsere offene Werkstatt]
 - **[`3d-printing-simple-filament-tool`](https://github.com/35services/3d-printing-simple-filament-tool)** – einfache Filamentverwaltung in PHP, ganz ohne Datenbank: welche Rolle steckt in welchem Drucker, wem gehört sie?
 - **[`3d-bitwarden`](https://github.com/35services/3d-bitwarden)** – selbst gehosteter Passwortmanager (Vaultwarden) für die Werkstatt, über dieselbe Proxy-Einrichtung erreichbar
 
-### Für die 3D-Druck AG und die Schule
+### Für die 3D-Druck AG, die Schule und Jugend hackt
 
-- **[3D-Druck-Stick (`3ddruck-jugend-hackt-iso`)]({{ '/projekte/3ddruck-iso-jugend-hackt/' | relative_url }})** – Linux-Live-System auf USB-Stick für CAD und 3D-Druck, aufbauend auf dem Image von Jugend hackt; läuft auf den [Laptops der AG]({{ '/ausstattung/laptops-druck-sticks/' | relative_url }}) ([GitHub](https://github.com/35services/3ddruck-jugend-hackt-iso))
+- **[3D-Druck-Stick (`3ddruck-jugend-hackt-iso`)]({{ '/projekte/3ddruck-iso-jugend-hackt/' | relative_url }})** – Linux-Live-System auf USB-Stick für CAD und 3D-Druck, aufbauend auf dem Image von [Jugend hackt]({{ '/partner/jugend-hackt/' | relative_url }}); läuft auf den [Laptops der AG]({{ '/ausstattung/laptops-druck-sticks/' | relative_url }}) ([GitHub](https://github.com/35services/3ddruck-jugend-hackt-iso))
 - **[`3ddruck-geteilter-ordner`](https://github.com/35services/3ddruck-geteilter-ordner)** – ein „Geteilter Ordner“ auf allen Rechnern der AG, per Syncthing abgeglichen, mit Signal-Nachricht bei Änderungen
 - **[Programmierwerkstatt (`programmierwerkstatt`)]({{ '/projekte/programmierwerkstatt-lessing-gymnasium/' | relative_url }})** – Ablauf und Hinweise für eine Scratch-Programmierwerkstatt mit Schüler*innen ([GitHub](https://github.com/35services/programmierwerkstatt))
 
