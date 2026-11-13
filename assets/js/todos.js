@@ -17,7 +17,7 @@ var TodoFormat = (function () {
     { q: "done", name: "Erledigt", icon: "✅", sub: "", finde: /erledigt|gelöst|✅/i }
   ];
   var BUCKET = {}; BUCKETS.forEach(function (b) { BUCKET[b.q] = b; });
-  var FELDER = ["kurz", "art", "status", "seit", "faellig", "geloest_am", "helfer", "projekte", "tags", "verlinkt"];
+  var FELDER = ["kurz", "art", "status", "seit", "faellig", "geloest_am", "helfer", "projekte", "tags", "verlinkt", "quelle"];
   var LISTEN = { helfer: 1, projekte: 1, tags: 1, verlinkt: 1 };
 
   function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
@@ -325,6 +325,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (f.faellig) meta.push('<span class="todo-faellig' + (f.faellig < heute() && t.q !== "done" ? " ueberfaellig" : "") + '">📅 ' + esc(datumDE(f.faellig)) + "</span>");
     if ((f.projekte || []).length) meta.push('<span title="Projekte">🔧' + f.projekte.length + "</span>");
     if ((f.verlinkt || []).length) meta.push('<span title="Verknüpfte Seiten">🔗' + f.verlinkt.length + "</span>");
+    if (f.quelle) meta.push('<span title="Quelle: ' + esc(f.quelle) + '">🌐</span>');
     return '<li class="todo-karte' + (t.id === auswahl ? " ausgewaehlt" : "") + '" data-id="' + esc(t.id) + '" tabindex="0" role="button" aria-label="' + esc(t.titel) + ' – bearbeiten; Pfeiltasten verschieben">'
       + '<span class="todo-griff" aria-hidden="true">⠿</span>'
       + '<span class="todo-inhalt"><span class="todo-titel">' + (ART[f.art] ? '<span aria-hidden="true">' + ART[f.art] + "</span> " : "") + esc(t.titel) + "</span>"
@@ -564,6 +565,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       + chipFeld("projekte", "🔧 Projekte", "Projekt suchen …")
       + chipFeld("tags", "🏷️ Stichworte", "Stichwort suchen oder neu …")
       + chipFeld("verlinkt", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "Seite suchen …")
+      + '<label class="todos-feld"><span>🌐 Quelle (woher das Todo kommt)</span><input name="quelle" type="url" value="' + esc(f.quelle || "") + '" placeholder="https://…"></label>'
+      + (sichereUrl(f.quelle) ? '<p class="todos-quelle small"><a href="' + esc(f.quelle) + '" target="_blank" rel="noopener noreferrer">Quelle öffnen ↗</a></p>' : "")
       + '<label class="todos-feld"><span>Beschreibung (Markdown)</span><textarea name="text" rows="7">' + esc(t.text || "") + "</textarea></label>"
       + '<div class="todos-editor-fuss"><button type="button" class="btn btn-small btn-ghost" data-loeschen>🗑️ Löschen</button>'
       + '<span class="muted small">Jede Änderung ist sofort im Browser gespeichert.</span>'
@@ -608,7 +611,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       t.titel = v;
       if (t.autoId && v.trim()) { t.id = eindeutig(DOCS[aktuell].doc, slugify(v), t); auswahl = t.id; editor.querySelector(".todos-id").textContent = "#" + t.id; if (!EINGEBETTET) location.replace("#" + aktuell + "/" + t.id); }
     } else if (n === "text") t.text = v;
-    else if (n === "kurz" || n === "faellig") { if (v) t.felder[n] = v; else delete t.felder[n]; }
+    else if (n === "kurz" || n === "faellig" || n === "quelle") { if (v) t.felder[n] = v; else delete t.felder[n]; }
     else return;
     speichern(aktuell);
     renderMatrix();
@@ -872,7 +875,35 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       (EINGEBETTET ? matrix : matrixPlatz).innerHTML = '<p class="note">Die Datei <code>' + esc(pfad(person)) + '</code> konnte nicht geladen werden.</p>';
     });
   }
+  // Only http(s) addresses become clickable links (no javascript: from a hash or a file).
+  function sichereUrl(u) { return /^https?:\/\/\S+$/i.test(String(u || "")); }
+
+  // #neu?titel=…&text=…&quelle=…&person=…&feld=q2 – a new todo from outside, e.g. the Chrome extension
+  // (_chrome-erweiterung/). The data stays in the fragment, which the browser never sends to the server.
+  function neuAusHash(hash) {
+    var p = new URLSearchParams(hash.replace(/^neu[?&]?/, ""));
+    var person = PERSON[p.get("person")] ? p.get("person") : (CFG.dateien[0] || (CFG.personen[0] && CFG.personen[0].id));
+    var q = BUCKET[p.get("feld")] ? p.get("feld") : "q2";
+    var auszug = String(p.get("text") || "").trim();
+    var quelle = sichereUrl(p.get("quelle")) ? p.get("quelle").trim() : "";
+    var titel = String(p.get("titel") || "").trim() || auszug.split(/\n/)[0].slice(0, 80) || "Neues Todo";
+    var text = auszug ? auszug.split(/\n/).map(function (z) { return "> " + z; }).join("\n") : "";
+    if (quelle) text += (text ? "\n\n" : "") + "Quelle: [" + (String(p.get("quelle_titel") || "").trim().replace(/[\[\]]/g, "") || quelle) + "](" + quelle + ")";
+    return zeige(person).then(function () {
+      var st = DOCS[person];
+      var t = { id: eindeutig(st.doc, slugify(titel)), titel: titel, q: q, felder: { art: "aufgabe", status: "offen", seit: heute() }, text: text, autoId: true };
+      if (quelle) t.felder.quelle = quelle;
+      st.doc.todos.push(t);
+      speichern(person);
+      renderMatrix();
+      location.replace("#" + person + "/" + t.id);   // replace: reloading must not create it twice
+      oeffne(t.id);
+      sagen("Neues Todo aus der Auswahl angelegt.");
+    });
+  }
+
   function route() {
+    if (/^#neu([?&]|$)/.test(location.hash)) { neuAusHash(location.hash.slice(1)); return; }
     var h = decodeURIComponent(location.hash.slice(1)).split("/");
     var person = PERSON[h[0]] ? h[0] : (CFG.dateien[0] || (CFG.personen[0] && CFG.personen[0].id));
     if (!person) return;

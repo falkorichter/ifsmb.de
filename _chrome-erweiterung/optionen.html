@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>IfsMB Todo aus Auswahl – Einstellungen</title>
+  <style>
+    /* Same look as ifsmb.de, without loading anything from outside */
+    :root { --ink: #16161d; --bg: #faf8f3; --paper: #fff; --accent: #ffcc00; --muted: #6b6b78; }
+    /* Works both as toolbar popup (narrow) and as options page */
+    body { margin: 0; padding: 1rem; min-width: 320px; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { max-width: 34rem; margin: 0 auto; }
+    h1 { margin: 0 0 .25rem; font-size: 1.25rem; }
+    .oeffnen { display: block; margin: .75rem 0 .5rem; text-align: center; }
+    p { margin: .25rem 0 1rem; }
+    label { display: block; margin: 1rem 0 .25rem; font-weight: 700; }
+    input, select { width: 100%; box-sizing: border-box; font: inherit; padding: .45rem .6rem; border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); }
+    small { color: var(--muted); }
+    button { margin-top: 1rem; font: inherit; font-weight: 700; padding: .55rem 1.1rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--accent); box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
+    #status { color: #1a7f37; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>📋 Todo aus Auswahl</h1>
+    <p>Text markieren, Rechtsklick → <strong>„Neues Todo aus …“</strong>: Das Todo entsteht mit dem Text und der Adresse der Seite als Quelle.</p>
+    <button type="button" class="oeffnen" id="oeffnen">📋 Todos öffnen</button>
+    <form id="form">
+      <label for="basis">Website</label>
+      <input id="basis" list="basis-liste" required placeholder="https://ifsmb.de/">
+      <datalist id="basis-liste">
+        <option value="https://ifsmb.de/">
+        <option value="http://localhost:4000/">
+      </datalist>
+      <small>Für Tests auch <code>http://localhost:4000/</code> (oder der Port eines Worktrees).</small>
+
+      <label for="person">Person (Team-Kürzel)</label>
+      <input id="person" placeholder="z. B. falko-richter" pattern="[a-z0-9-]*">
+      <small>Wie im Teamprofil: <code>/team/<strong>falko-richter</strong>/</code>. Leer = die erste Person mit Todo-Datei.</small>
+
+      <label for="feld">Neue Todos landen in</label>
+      <select id="feld">
+        <option value="q1">🔥 Sofort erledigen</option>
+        <option value="q2">📌 Einplanen</option>
+        <option value="q3">🤝 Abgeben</option>
+        <option value="q4">💤 Später</option>
+      </select>
+
+      <button type="submit">Speichern</button> <span id="status" aria-live="polite"></span>
+    </form>
+  </main>
+  <script src="todo-link.js"></script>
+  <script src="optionen.js"></script>
+</body>
+</html>
