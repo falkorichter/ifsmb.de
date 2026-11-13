@@ -23,6 +23,19 @@ verlinkt: [/kalender/2027-01-04-besuch-bei-max-2027/]
 Termin kommunizieren und organisieren für Januar
 * handout bauen und ausdrucken
 
+### Betreff: gebrauchte Hardware für iServ {#betreff-gebrauchte-hardware-fur-iserv}
+
+```yaml
+art: aufgabe
+status: offen
+seit: 2026-11-13
+faellig: 2026-11-17
+projekte: [3d-druck-ag-ktg]
+tags: [ktg]
+```
+
+Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
+
 ## 📌 Einplanen
 
 ### Passen unsere Schrittmotoren für Mural? {#mural-schrittmotoren}
