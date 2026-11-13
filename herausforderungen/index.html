@@ -2,7 +2,7 @@
 suche: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Herausforderungen
-lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
+lead: Unsere Bestandsaufnahme – Aufgaben, Probleme und offene Fragen aus unseren Projekten, gesammelt und dokumentiert. Kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
 verlinkt: [/todos/]
 ---
 {%- comment -%}
@@ -11,7 +11,7 @@ verlinkt: [/todos/]
 <div class="prose intro">
   <p>Ein Projekt besteht aus vielen kleinen <strong>Herausforderungen</strong>: Welche Motoren passen? Wer besorgt die Platine? Warum haftet das Filament nicht? Jede Herausforderung gehört zu einem oder mehreren <a href="{{ '/projekte/' | relative_url }}">Projekten</a>, Terminen oder Menschen – und jemand aus dem <a href="{{ '/team/' | relative_url }}">Team</a> kümmert sich darum.</p>
   <p>Ihr wisst eine Antwort oder habt das passende Teil? Meldet euch!</p>
-  <p>🧪 <strong>Experiment:</strong> Die <a href="{{ '/todos/' | relative_url }}">Todos</a> zeigen Herausforderungen pro Person in der Eisenhower-Matrix – zum Verschieben und Bearbeiten im Browser.</p>
+  <p>Hier sammeln und dokumentieren wir erst einmal, was es zu lösen gibt. Wer etwas davon konkret anpackt, macht daraus ein <a href="{{ '/todos/' | relative_url }}">Todo</a> – die werden pro Person in der Eisenhower-Matrix verfolgt.</p>
 </div>
 {%- assign all = site.herausforderungen | sort: "title" -%}
 {%- assign inst = all | where_exp: "h", "h.persoenlich != true" -%}
@@ -31,7 +31,7 @@ verlinkt: [/todos/]
   {% for h in h_open %}{% include herausforderung-karte.html h=h %}{% endfor %}
 </div>
 {% else %}
-<p class="muted">Hier ist gerade nichts offen – die aktuellen Herausforderungen stehen pro Person in den <a href="{{ '/todos/' | relative_url }}">Todos</a>.</p>
+<p class="muted">Gerade ist hier nichts gesammelt. Neue Herausforderungen legt ihr mit „➕ Herausforderung“ unten an; was schon angepackt wird, steht in den <a href="{{ '/todos/' | relative_url }}">Todos</a>.</p>
 {% endif %}
 
 {% if h_done.size > 0 %}

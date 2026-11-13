@@ -6,14 +6,16 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
-### Geändert
-
-- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
-
 ### Hinzugefügt
 
+- „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben.
 - Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
-- Herausforderung für Falko und Anton: den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
+- Todo für Falko (mit Anton): den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
+
+### Geändert
+
+- Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
+- Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
 
 ## [2026-11-13]
 

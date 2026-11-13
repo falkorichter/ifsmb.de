@@ -1,0 +1,32 @@
+{%- comment -%}
+  Button that opens the todo pop-up (Eisenhower matrix + editor) right on this page.
+  assets/js/todos.js is only loaded on the first click.
+  Team profile: include.person = team slug. Project page: include.projekt (slug), include.tag (event_tag),
+  include.team (list of slugs) – the matrix then only shows todos of this project, from everyone.
+{%- endcomment -%}
+{%- capture tk_daten -%}
+{"titel": {{ include.titel | jsonify }}{% if include.person %}, "person": {{ include.person | jsonify }}{% endif %}{% if include.projekt %}, "projekt": {{ include.projekt | jsonify }}, "tag": {{ include.tag | default: "" | jsonify }}, "team": {{ include.team | join: "," | split: "," | jsonify }}{% endif %}}
+{%- endcapture -%}
+<p class="todos-knopf-zeile" data-pagefind-ignore>
+  <button type="button" class="btn btn-small todos-knopf" data-todos="{{ tk_daten | escape }}">📋 {{ include.label | default: "Todos" }}</button>
+  <span class="muted small">Eisenhower-Matrix – verschieben, bearbeiten, als Pull Request speichern</span>
+</p>
+{%- unless todos_knopf_geladen -%}
+{%- assign todos_knopf_geladen = true -%}
+{% include todos-config.html %}
+<script>
+  // Load the todo app lazily on the first click, then open the pop-up.
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".todos-knopf");
+    if (!b) return;
+    var o = JSON.parse(b.getAttribute("data-todos"));
+    if (window.TodoApp) { window.TodoApp.start(o); return; }
+    b.disabled = true; b.setAttribute("aria-busy", "true");
+    var s = document.createElement("script");
+    s.src = {{ '/assets/js/todos.js' | relative_url | jsonify }};
+    s.onload = function () { b.disabled = false; b.removeAttribute("aria-busy"); window.TodoApp.start(o); };
+    s.onerror = function () { b.disabled = false; b.removeAttribute("aria-busy"); window.location.href = {{ '/todos/' | relative_url | jsonify }} + (o.person ? "#" + o.person : ""); };
+    document.head.appendChild(s);
+  });
+</script>
+{%- endunless -%}

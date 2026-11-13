@@ -1,0 +1,16 @@
+{%- comment -%}
+  Configuration for assets/js/todos.js: which person files exist in todos/, the team (name + round photo),
+  addresses of the search index and the GitHub repository. Used by /todos/ and _includes/todos-knopf.html.
+{%- endcomment -%}
+{%- assign todo_files = site.static_files | where_exp: "f", "f.path contains '/todos/'" | where: "extname", ".md" -%}
+<script type="application/json" id="todos-daten">
+{
+  "dateien": [{% for f in todo_files %}{{ f.basename | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+  "personen": [{% assign tc_team = site.team | sort: "order" %}{% for m in tc_team %}{"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+  "basis": {{ '/todos/' | relative_url | jsonify }},
+  "suchindex": {{ '/todos/suchindex.json' | relative_url | jsonify }},
+  "pagefind": {{ '/pagefind/pagefind.js' | relative_url | jsonify }},
+  "github": {{ site.repository | prepend: "https://github.com/" | jsonify }},
+  "branch": {{ site.branch | jsonify }}
+}
+</script>
