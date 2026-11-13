@@ -26,6 +26,13 @@
   {%- when 'presse' -%}{%- assign dir = '_press' -%}{%- assign datei = 'JJJJ-MM-TT-titel-der-mitteilung.md' -%}
     {%- capture inhalt -%}{% include vorlagen/presse.md tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
 {%- endcase -%}
+{%- comment -%}
+  data-neu: type and connection to this page for the pop-up form (assets/js/neu.js); the href stays as fallback
+  without JS and as "Vorlage mit allen Feldern" link inside the form.
+{%- endcomment -%}
+{%- capture neu_daten -%}
+{"typ": {{ include.typ | jsonify }}, "label": {{ include.label | jsonify }}, "hinweis": {{ include.hint | jsonify }}, "werte": {"author": {{ include.author | jsonify }}, "team": {{ include.team | jsonify }}, "tags": {{ include.tags | jsonify }}, "verlinkt": {{ include.verlinkt | jsonify }}, "projekte": {{ include.projekte | jsonify }}, "partners": {{ include.partners | jsonify }}, "teil_von": {{ include.teil_von | jsonify }}, "owner_team": {{ include.owner_team | jsonify }}, "owner_partner": {{ include.owner_partner | jsonify }}, "persoenlich": {{ include.persoenlich | jsonify }}}}
+{%- endcapture -%}
 {%- comment -%} url_encode turns spaces into "+"; literal "+" is already %2B at that point, so only spaces are replaced {%- endcomment -%}
-<a class="btn btn-ghost btn-small neu-btn" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
+<a class="btn btn-ghost btn-small neu-btn" data-vorlage data-neu="{{ neu_daten | strip | escape }}" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
 ' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ include.hint | escape }}">➕ {{ include.label }}</a>

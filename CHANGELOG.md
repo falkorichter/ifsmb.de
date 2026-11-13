@@ -8,6 +8,9 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- **Formulare für alle ➕-Buttons:** Beitrag, Termin, Projekt, vergangenes Projekt, Gerät, Herausforderung, Teamprofil, Pressemitteilung, Partner und „Wir in der Presse“ öffnen jetzt ein Fenster direkt auf der Seite – wie der Todo-Editor, mit Auswahllisten, runden Personenbildern und Autovervollständigung für Personen, Projekte, Stichworte, Partner und Seiten. Rechts steht live die fertige Datei; Dateiname, Stichwort des Projekts und Terminende füllen sich von selbst. Der Entwurf bleibt im Browser, bis er abgeschickt ist. „📋 Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit fertigem Inhalt (→ Pull Request). Die Vorlage mit allen Feldern gibt es weiter über den Link oben im Fenster oder mit Strg/⌘-Klick.
+- Automatische Tests (`_scripts/test_formulare.rb`, laufen bei jedem Pull Request und vor dem Deployment): Jede Datei, die ein Formular schreiben kann, muss als YAML lesbar sein, nur Felder der Vorlage nutzen und zu Pages CMS passen; Todo-Dateien müssen beim Lesen und Schreiben unverändert bleiben.
+
 - **Netzwerk:** Todos erscheinen als kleine grüne Punkte 📋 – verbunden mit der hauptzuständigen Person („gehört“), den helfenden Händen, ihren Projekten und verknüpften Seiten; ein Klick führt direkt zur Karte in der Eisenhower-Matrix. Herausforderungen sind jetzt ebenfalls kleine Punkte.
 - „📋 Todos zum Projekt“ auf jeder Projektseite und „📋 Todos von …“ in jedem Teamprofil: öffnet die Eisenhower-Matrix mit Editor direkt auf der Seite, ohne zu `/todos/` zu wechseln. Auf Projektseiten erscheinen nur die Todos dieses Projekts – von allen Personen –, und ein neues Todo gehört gleich zum Projekt. Das Programm wird erst beim Klick geladen. Sind mehrere Tabs offen, übernehmen sie die Änderungen der anderen, statt sie zu überschreiben – auch Speicherleiste und Diff-Fenster: Wird in einem Tab gespeichert oder verworfen, verschwindet der Hinweis im anderen spätestens nach einer Sekunde.
 - Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
@@ -15,8 +18,13 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- Todo-Editor und die neuen Formulare teilen sich dieselben Bausteine (`assets/js/formular.js`); ein Klick neben das Fenster schließt es nur noch, wenn er dort auch angefangen hat (Text markieren schließt nicht mehr aus Versehen).
 - Herausforderungen und Todos sind jetzt zwei getrennte Dinge: Unter Herausforderungen sammeln und dokumentieren wir, was es zu lösen gibt (Bestandsaufnahme); Todos sind das, was jemand konkret anpackt. Texte auf beiden Seiten angepasst.
 - Die bisherigen Herausforderungen sind jetzt Todos in der Eisenhower-Matrix auf `/todos/`. Die alten Adressen `/herausforderungen/<name>/` leiten direkt auf die geöffnete Karte weiter (`/todos/#<person>/<id>`). Der Link-Check behandelt `#…` auf `/todos/` als Route der App, nicht als Anker.
+
+### Behoben
+
+- Pages CMS: Geräte können jetzt auch den Status „im-test“ und „in-reparatur“ bekommen, und „Foto ist eine eigene Illustration“ lässt sich dort setzen (beides fehlte in `.pages.yml` – gefunden von den neuen Tests).
 
 ## [2026-11-13]
 

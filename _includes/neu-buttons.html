@@ -70,9 +70,21 @@
 {%- if buttons != '' -%}
 {{ buttons }}
 <script>
+  // A plain click opens the pop-up form (assets/js/neu.js, loaded on first use); Ctrl/⌘/Shift-click, or a failed
+  // load, opens GitHub with the full template instead.
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[data-neu]');
+    if (!a || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey || !window.ladeSkripte) return;
+    ev.preventDefault();
+    a.setAttribute('aria-busy', 'true');
+    window.ladeSkripte(['formular.js', 'neu.js'])
+      .then(function () { window.NeuFormular.oeffnen(a); })
+      .catch(function () { window.location.href = a.href; })
+      .then(function () { a.removeAttribute('aria-busy'); });
+  });
   // Fill today's date and UTC offset into the template links at click time (build date would be stale).
   document.addEventListener('click', function (ev) {
-    var a = ev.target.closest && ev.target.closest('a.neu-btn');
+    var a = ev.target.closest && ev.target.closest('a[data-vorlage]');
     if (!a) return;
     var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
     var off = -d.getTimezoneOffset(), tz = (off >= 0 ? '+' : '-') + p(Math.floor(Math.abs(off) / 60)) + p(Math.abs(off) % 60);

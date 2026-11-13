@@ -369,10 +369,10 @@ content:
         type: string
       - name: status
         label: Status
-        description: "„in-aussicht“ = Gerät kommt vielleicht, ist aber noch nicht da"
+        description: "„in-aussicht“ = Gerät kommt vielleicht, ist aber noch nicht da; „im-test“ = wird gerade ausprobiert; „in-reparatur“ = gerade kaputt"
         type: select
         options:
-          values: ["", in-aussicht]
+          values: ["", in-aussicht, im-test, in-reparatur]
       - name: image
         label: Foto
         description: Achtung – Fotos ohne Metadaten und ohne lesbare Namen/Gesichter von Kindern hochladen.
@@ -386,6 +386,10 @@ content:
       - name: image_caption
         label: Bildunterschrift (optional, sichtbar unter dem Foto)
         type: string
+      - name: image_is_illustration
+        label: Foto ist eine eigene Illustration (SVG)
+        description: Ohne freies Foto eine eigene SVG-Illustration nehmen – keine Hersteller- oder Shopfotos.
+        type: boolean
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.

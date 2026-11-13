@@ -22,11 +22,10 @@
     var o = JSON.parse(b.getAttribute("data-todos"));
     if (window.TodoApp) { window.TodoApp.start(o); return; }
     b.disabled = true; b.setAttribute("aria-busy", "true");
-    var s = document.createElement("script");
-    s.src = {{ '/assets/js/todos.js' | relative_url | jsonify }};
-    s.onload = function () { b.disabled = false; b.removeAttribute("aria-busy"); window.TodoApp.start(o); };
-    s.onerror = function () { b.disabled = false; b.removeAttribute("aria-busy"); window.location.href = {{ '/todos/' | relative_url | jsonify }} + (o.person ? "#" + o.person : ""); };
-    document.head.appendChild(s);
+    function fertig() { b.disabled = false; b.removeAttribute("aria-busy"); }
+    window.ladeSkripte(["formular.js", "todos.js"])
+      .then(function () { fertig(); window.TodoApp.start(o); })
+      .catch(function () { fertig(); window.location.href = {{ '/todos/' | relative_url | jsonify }} + (o.person ? "#" + o.person : ""); });
   });
 </script>
 {%- endunless -%}

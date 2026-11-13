@@ -1,6 +1,6 @@
 {%- comment -%}
-  Configuration for assets/js/todos.js: which person files exist in todos/, the team (name + round photo),
-  addresses of the search index and the GitHub repository. Used by /todos/ and _includes/todos-knopf.html.
+  Configuration for assets/js/todos.js: which person files exist in todos/ and the team (name + round photo).
+  Search index and GitHub repository come from _includes/formular-config.html. Used by /todos/ and _includes/todos-knopf.html.
 {%- endcomment -%}
 {%- comment -%}Person files are todos/todo-<person>.md; the person id is the name without "todo-".{%- endcomment -%}
 {%- assign todo_ids = "" | split: "" -%}
@@ -11,10 +11,6 @@
 {
   "dateien": {{ todo_ids | jsonify }},
   "personen": [{% assign tc_team = site.team | sort: "order" %}{% for m in tc_team %}{"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
-  "basis": {{ '/todos/' | relative_url | jsonify }},
-  "suchindex": {{ '/todos/suchindex.json' | relative_url | jsonify }},
-  "pagefind": {{ '/pagefind/pagefind.js' | relative_url | jsonify }},
-  "github": {{ site.repository | prepend: "https://github.com/" | jsonify }},
-  "branch": {{ site.branch | jsonify }}
+  "basis": {{ '/todos/' | relative_url | jsonify }}
 }
 </script>
