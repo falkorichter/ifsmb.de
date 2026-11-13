@@ -81,6 +81,21 @@ verlinkt: [/geld-fuer-makespaces/]
 
 Mit dem Quartiersmanagement Moabit über die Stadtteilkasse sprechen.
 
+### Platanus? Tag der offenen Tür – Sekundarstufe I/II für die Jahrgangsstufen 7 bis 13? {#platanus-tag-der-offenen-tur-sekundarstufe-i-ii-fur-die-jahr}
+
+```yaml
+kurz: sollen wir da mitmachen als AG?
+art: frage
+status: offen
+seit: 2026-11-13
+faellig: 2027-01-27
+projekte: [3d-druck-ag-platanus-schule]
+tags: [platanus]
+verlinkt: [/projekte/3d-druck-ag-platanus-schule/, /news/2026/11/11/post-von-der-keramik-ag-und-ein-erster-schluesselanhaenger/]
+```
+
+https://www.platanus-schule.de/tag-der-offenen-tuer/
+
 ## 🤝 Abgeben
 
 ## 💤 Später
