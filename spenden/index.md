@@ -37,6 +37,7 @@ Materialspenden nehmen wir sehr gerne! Wir suchen:
 - 🖨️ 3D-Drucker
 - 🖱️ Alte kabelgebundene PC-Mäuse (für CAD viel praktischer als Trackpads)
 - 💾 USB-Sticks (unsere Laptops starten Linux vom Stick)
+- 🖨️ exotische 3D Drucker 
 
 Meldet euch bei Falko: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falko [at] 35services.de</a>
 
