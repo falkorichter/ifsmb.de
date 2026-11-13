@@ -36,6 +36,15 @@ tags: [ktg]
 
 Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
 
+### https://github.com/morluto/rea angucken {#https-github-com-morluto-rea-angucken}
+
+```yaml
+art: aufgabe
+status: offen
+seit: 2026-11-13
+helfer: [anton]
+```
+
 ## 📌 Einplanen
 
 ### Passen unsere Schrittmotoren für Mural? {#mural-schrittmotoren}
