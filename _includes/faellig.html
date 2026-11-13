@@ -1,0 +1,12 @@
+{%- comment -%}
+  Due date of a challenge (include.h) – "📅 fällig 01.12.2026", red and "überfällig" when the date has passed
+  and it is not solved (as of the last build).
+  include.kurz = short form without the year.
+{%- endcomment -%}
+{%- assign fd_h = include.h -%}
+{%- if fd_h.faellig -%}
+{%- assign fd_s = fd_h.faellig | date: "%Y-%m-%d" | append: " 23:59:59" | date: "%s" | plus: 0 -%}
+{%- assign fd_now = site.time | date: "%s" | plus: 0 -%}
+{%- assign fd_over = false -%}{%- if fd_h.status != "geloest" and fd_s < fd_now %}{% assign fd_over = true %}{% endif -%}
+<span class="faellig{% if fd_over %} faellig-ueber{% endif %}">📅 {% if fd_over %}überfällig seit{% else %}fällig{% endif %} {% if include.kurz %}{{ fd_h.faellig | date: "%d.%m." }}{% else %}{{ fd_h.faellig | date: "%d.%m.%Y" }}{% endif %}</span>
+{%- endif -%}

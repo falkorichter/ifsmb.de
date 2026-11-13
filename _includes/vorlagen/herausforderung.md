@@ -9,6 +9,9 @@ art: frage   # aufgabe, problem oder frage
 status: offen   # offen, in-arbeit oder geloest
 seit: JJJJ-MM-TT   # seit wann die Herausforderung besteht
 geloest_am:   # Datum, wenn gelöst
+faellig:   # bis wann, z. B. JJJJ-MM-TT – erscheint als ganztägiger Termin im Kalender (eigene .ics, Projekt- und Personen-Feed)
+wichtig: true   # Eisenhower-Matrix: true/false
+dringend: false   # Eisenhower-Matrix: true/false – wichtig+dringend = sofort, wichtig = einplanen, dringend = abgeben, keins = später
 team: [{{ include.team }}]   # Team-Kürzel der Zuständigen – eine oder mehrere Personen
 projekte: [{{ include.projekte }}]   # Dateinamen der Projekte, zu denen sie gehört (ein Projekt hat viele Herausforderungen)
 tags: [{{ include.tags }}]   # Stichworte; das event_tag eines Projekts verbindet ebenfalls mit dem Projekt

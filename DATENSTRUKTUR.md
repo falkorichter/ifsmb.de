@@ -54,6 +54,10 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
  │ team      ──► PERSON (zustän-  │      Teamprofil listet „Herausforderungen“
  │               dig, Liste)      │
  │ verlinkt  ──► jede Seite       │      Termine, Geräte, Beiträge, Partner …
+ │ faellig   ──► KALENDER         │      eigene .ics, /herausforderungen.ics,
+ │               (ganztägig)      │      Feeds von Projekt und Person
+ │ wichtig + dringend ──► MATRIX  │      Eisenhower: sofort / einplanen /
+ │                                │      abgeben / später
  └────────────────────────────────┘
  ┌─ PERSON ───────────────────────┐      └────────────────────────────────┘
  │ verlinkt  ──► jede Seite       │      ┌─ PARTNER ──────────────────────┐

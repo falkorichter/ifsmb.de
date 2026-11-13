@@ -4,6 +4,9 @@ summary: Mini oder Classic, welche Kamera – und wer macht mit?
 art: frage
 status: offen
 seit: 2026-05-23
+faellig: 2027-01-31
+wichtig: false
+dringend: false
 team: [falko-richter]
 projekte: [openscan-bauen]
 tags: [openscan]

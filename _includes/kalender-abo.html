@@ -19,7 +19,7 @@
   {%- assign ab_titel = include.titel | default: "In den Kalender übernehmen" -%}
   {%- assign ab_label = include.label | default: "📅 In den Kalender" -%}
   {%- comment -%} Google "new event" form; same date rules as _includes/ics-vevent.txt {%- endcomment -%}
-  {%- assign g_title = ab_e.title -%}
+  {%- assign g_title = ab_e.ics_titel | default: ab_e.title -%}
   {%- assign g_tz = "" -%}
   {%- if ab_e.date_label and ab_e.date_label != "" -%}
     {%- assign g_title = "TBD: " | append: g_title -%}

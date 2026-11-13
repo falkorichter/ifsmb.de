@@ -1,0 +1,17 @@
+{%- comment -%}
+  Eisenhower quadrant of a challenge (include.h), from `wichtig` and `dringend` (true/false).
+  Assigns ef_q ("q1" … "q4", or "" when neither field is set), ef_name and ef_icon.
+    q1 wichtig + dringend          Sofort erledigen
+    q2 wichtig, nicht dringend     Einplanen
+    q3 dringend, nicht wichtig     Abgeben
+    q4 weder noch                  Später
+{%- endcomment -%}
+{%- assign ef_h = include.h -%}
+{%- assign ef_q = "" -%}{%- assign ef_name = "" -%}{%- assign ef_icon = "" -%}
+{%- if ef_h.wichtig != nil or ef_h.dringend != nil -%}
+  {%- if ef_h.wichtig and ef_h.dringend -%}{%- assign ef_q = "q1" -%}{%- assign ef_name = "Sofort erledigen" -%}{%- assign ef_icon = "🔥" -%}
+  {%- elsif ef_h.wichtig -%}{%- assign ef_q = "q2" -%}{%- assign ef_name = "Einplanen" -%}{%- assign ef_icon = "📌" -%}
+  {%- elsif ef_h.dringend -%}{%- assign ef_q = "q3" -%}{%- assign ef_name = "Abgeben" -%}{%- assign ef_icon = "🤝" -%}
+  {%- else -%}{%- assign ef_q = "q4" -%}{%- assign ef_name = "Später" -%}{%- assign ef_icon = "💤" -%}
+  {%- endif -%}
+{%- endif -%}

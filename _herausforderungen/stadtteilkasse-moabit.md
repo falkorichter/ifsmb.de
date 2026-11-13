@@ -4,6 +4,8 @@ summary: Bis zu 500 € aus der Stadtteilkasse für offene Aktionen in der Nachb
 art: aufgabe
 status: offen
 seit: 2026-11-12
+wichtig: true
+dringend: false
 team: [falko-richter]
 verlinkt: [/geld-fuer-makespaces/, /news/2026/05/05/3d-drucker-in-der-schule-interview-moabit-ost/]
 ---

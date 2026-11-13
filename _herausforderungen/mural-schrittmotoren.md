@@ -4,6 +4,9 @@ summary: Mural braucht zwei NEMA-17-Motoren – im Original flache „Pancake“
 art: frage
 status: offen
 seit: 2026-11-12
+faellig: 2026-12-15
+wichtig: true
+dringend: false
 team: [falko-richter, anton]
 projekte: [mural-wandplotter]
 tags: [mural]

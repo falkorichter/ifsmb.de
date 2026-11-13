@@ -10,6 +10,7 @@
   <h3>{{ h.title }}</h3>
   {% if h.summary %}<p>{{ h.summary }}</p>{% endif %}
   {%- capture h_line -%}
+    {%- if h.faellig %}<span>{% include faellig.html h=h %}</span>{% endif -%}
     {%- if h_owners.size > 0 %}<span>👤 {% for s in h_owners %}{% assign m = site.team | where: "slug", s | first %}{{ m.title | default: s }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>{% endif -%}
     {%- unless include.ohne_projekt -%}{%- for s in h_proj %}{% assign pp = site.projects | where: "slug", s | first %}{% if pp %}<span>🔧 {{ pp.title }}</span>{% endif %}{% endfor -%}{%- endunless -%}
   {%- endcapture -%}

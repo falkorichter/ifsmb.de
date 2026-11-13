@@ -4,6 +4,8 @@ summary: Falko und Ralf schauen sich das Repair-Café in der NochMall der BSR in
 art: aufgabe
 status: offen
 seit: 2026-11-12
+wichtig: true
+dringend: false
 team: [falko-richter, ralf]
 tags: [repair-cafe]
 ---

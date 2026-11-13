@@ -868,3 +868,35 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .challenge-solution h2 { margin-top: 0; }
 #herausforderungen { margin-top: 2.5rem; margin-bottom: .9rem; }
 #herausforderungen .link-meta { font-size: .9rem; font-weight: 400; vertical-align: middle; }
+
+/* Eisenhower matrix (challenges): columns dringend / nicht dringend, rows wichtig / nicht wichtig */
+.eisenhower { display: grid; grid-template-columns: 2rem 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: .6rem; margin: 1rem 0 1.5rem; }
+.eh-axis { font-family: var(--mono); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+.eh-axis-col { text-align: center; padding-bottom: .1rem; }
+.eh-axis-row { display: flex; align-items: center; justify-content: center; }
+.eh-axis-row span { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+.eh-cell { border: 2px solid var(--ink); border-radius: var(--radius); padding: .8rem 1rem; box-shadow: 3px 3px 0 var(--ink); min-height: 7rem; }
+.eh-q1 { background: #ffd9d0; }
+.eh-q2 { background: #fff4c2; }
+.eh-q3 { background: #dbe6ff; }
+.eh-q4 { background: #eeeae1; }
+.eh-title { font-size: 1.05rem; margin: 0; display: flex; align-items: center; gap: .4rem; }
+.eh-count { margin-left: auto; font-family: var(--mono); font-size: .8rem; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; padding: 0 .5rem; }
+.eh-sub { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); margin: .15rem 0 .5rem; }
+.eh-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+.eh-list a { font-weight: 600; }
+.eh-meta { display: block; font-size: .82rem; color: var(--ink-soft); }
+.eh-meta .badge { font-size: .65rem; padding: 0 .35rem; }
+.eh-empty { color: var(--muted); margin: 0; }
+.eh-none { margin: -.5rem 0 1.5rem; padding: .6rem 1rem; border: 2px dashed var(--line); border-radius: var(--radius); }
+.eh-none p { margin: 0 0 .4rem; }
+.eh-badge { display: inline-block; font-size: .75rem; font-weight: 700; padding: .1rem .45rem; border-radius: 6px; border: 1.5px solid var(--ink); }
+.faellig { white-space: nowrap; }
+.faellig-ueber { color: #c0262d; font-weight: 700; }
+.challenge-due { margin-top: .6rem; }
+.challenge-due p { margin: 0; font-weight: 600; }
+@media (max-width: 560px) {
+  .eisenhower { grid-template-columns: 1fr; grid-template-rows: none; }
+  .eh-corner, .eh-axis { display: none; }
+  .eh-cell { min-height: 0; }
+}

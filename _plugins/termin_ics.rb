@@ -4,6 +4,12 @@
 #   /projekte/<name>.ics  all events of a project      } same selection as on the page:
 #   /team/<name>.ics      all events of a person       } _includes/termine-auswahl.html
 #   /partner/<name>.ics   all events of a partner page }
+#   /herausforderungen/<name>.ics  due date of one challenge (only with `faellig`)
+#   /herausforderungen.ics         due dates of all challenges
+# Project and team feeds also carry the due dates of their challenges
+# (same selection as on the page: _includes/herausforderungen-auswahl.html).
+# Challenges with `faellig` get `start`, `all_day` and `ics_titel` here, so the event includes
+# (ics-vevent.txt, kalender-abo.html, termin-datum.html) work for them unchanged.
 module TerminIcs
   # The CRLF inside the capture becomes `nl`; all other line breaks are stripped by Liquid.
   NL = "{% capture nl %}\r\n{% endcapture -%}\n"
@@ -13,6 +19,27 @@ module TerminIcs
     priority :low
 
     def generate(site)
+      challenges = site.collections["herausforderungen"]
+      if challenges
+        challenges.docs.each do |doc|
+          due = doc.data["faellig"]
+          next if due.nil? || due.to_s.strip.empty?
+
+          doc.data["start"] = due
+          doc.data["all_day"] = true
+          prefix = doc.data["status"] == "geloest" ? "✅ Gelöst: " : "🧗 Fällig: "
+          doc.data["ics_titel"] = prefix + doc.data["title"].to_s
+          add(site, doc.url, "h_url" => doc.url, "content" =>
+            "{%- assign h = site.herausforderungen | where: \"url\", page.h_url | first -%}\n" \
+            "{%- include ics-kopf.txt -%}\n" \
+            "{%- include ics-vevent.txt event=h -%}\n")
+        end
+        add(site, "/herausforderungen/", "content" =>
+          "{%- include herausforderungen-auswahl.html art=\"alle\" -%}\n" \
+          "{%- include ics-kopf.txt feed=true name=\"Herausforderungen\" -%}\n" \
+          "{%- for h in herausforderungen_auswahl -%}{%- if h.start -%}{%- include ics-vevent.txt event=h -%}{%- endif -%}{%- endfor -%}\n")
+      end
+
       events = site.collections["events"]
       return unless events
 
@@ -31,7 +58,9 @@ module TerminIcs
             "{%- assign res = site.#{coll} | where: \"url\", page.res_url | first -%}\n" \
             "{%- include termine-auswahl.html res=res art=\"#{art}\" -%}\n" \
             "{%- include ics-kopf.txt feed=true name=res.title -%}\n" \
-            "{%- for e in termine_auswahl -%}{%- include ics-vevent.txt event=e -%}{%- endfor -%}\n")
+            "{%- for e in termine_auswahl -%}{%- include ics-vevent.txt event=e -%}{%- endfor -%}\n" \
+            "{%- include herausforderungen-auswahl.html res=res art=\"#{art}\" -%}\n" \
+            "{%- for h in herausforderungen_auswahl -%}{%- if h.start -%}{%- include ics-vevent.txt event=h -%}{%- endif -%}{%- endfor -%}\n")
         end
       end
 

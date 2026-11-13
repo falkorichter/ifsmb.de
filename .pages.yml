@@ -442,6 +442,17 @@ content:
       - name: geloest_am
         label: Gelöst am
         type: date
+      - name: faellig
+        label: Fällig am
+        description: Erscheint als ganztägiger Termin im Kalender – eigene iCal-Datei, /herausforderungen.ics und die Feeds der Projekte und Personen.
+        type: date
+      - name: wichtig
+        label: Wichtig (Eisenhower-Matrix)
+        type: boolean
+      - name: dringend
+        label: Dringend (Eisenhower-Matrix)
+        description: wichtig + dringend = sofort erledigen, nur wichtig = einplanen, nur dringend = abgeben, keins = später
+        type: boolean
       - name: team
         label: Zuständig (Team-Kürzel, eine oder mehrere Personen)
         type: string

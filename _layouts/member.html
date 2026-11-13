@@ -57,16 +57,30 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
-    {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
-    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
-    {%- assign member_ch = member_ch | concat: member_ch_done -%}
-    {% if member_ch.size > 0 %}
-    <h2 id="herausforderungen">Herausforderungen</h2>
-    <div class="grid-2">
-      {% for h in member_ch %}{% include herausforderung-karte.html h=h %}{% endfor %}
-    </div>
-    {% endif %}
+    {%- comment -%}Challenges this person is responsible for: open ones in the Eisenhower matrix, solved ones as a list. Due dates are in the person's iCal feed.{%- endcomment -%}
+    {%- include herausforderungen-auswahl.html res=page art="team" -%}
+    {%- assign member_ch = herausforderungen_auswahl -%}
+    {%- assign member_ch_open = member_ch | where_exp: "h", "h.status != 'geloest'" -%}
+    {%- assign member_ch_done = member_ch | where: "status", "geloest" -%}
     {%- include termine-auswahl.html res=page art="team" -%}
+    {% if member_ch.size > 0 %}
+    {%- assign ch_due = member_ch | where_exp: "h", "h.faellig" -%}
+    <div class="cal-heading-abo">
+      <h2 id="herausforderungen">Herausforderungen <span class="link-meta">{{ member_ch_open.size }} offen{% if member_ch_done.size > 0 %} · {{ member_ch_done.size }} gelöst{% endif %}</span></h2>
+      {%- if ch_due.size > 0 and termine_auswahl.size == 0 %}
+      {%- assign ics_url = page.url | split: "/" | join: "/" | append: ".ics" %}
+      {%- assign abo_titel = "Fälligkeiten von " | append: page.title | append: " abonnieren" %}
+      {% include kalender-abo.html ics=ics_url titel=abo_titel %}
+      {%- endif %}
+    </div>
+    {% include eisenhower.html list=member_ch_open ohne_team=true %}
+    {% if member_ch_done.size > 0 %}
+    <h3 class="cal-heading">Gelöst</h3>
+    <ul class="link-list link-list-connections">
+      {% for h in member_ch_done %}<li><a href="{{ h.url | relative_url }}"><span aria-hidden="true">✅</span> {{ h.title }}{% if h.geloest_am %} <span class="link-meta">{{ h.geloest_am | date: "%d.%m.%Y" }}</span>{% endif %}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
     {%- assign member_events = termine_auswahl -%}
     {%- if member_events.size > 0 -%}
     {%- assign now_s = site.time | date: "%s" | plus: 0 -%}

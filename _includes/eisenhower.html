@@ -1,0 +1,55 @@
+{%- comment -%}
+  Eisenhower matrix of challenges: 2×2 grid (dringend / nicht dringend × wichtig / nicht wichtig).
+  include.list = challenges (solved ones are skipped), include.ohne_team = hide the people (team profile).
+  Challenges without `wichtig`/`dringend` are listed below the grid as "noch nicht eingeordnet".
+{%- endcomment -%}
+{%- assign em_q1 = "" | split: "" -%}{%- assign em_q2 = "" | split: "" -%}{%- assign em_q3 = "" | split: "" -%}{%- assign em_q4 = "" | split: "" -%}{%- assign em_none = "" | split: "" -%}
+{%- for h in include.list -%}
+  {%- if h.status == "geloest" %}{% continue %}{% endif -%}
+  {%- include eisenhower-feld.html h=h -%}
+  {%- case ef_q -%}
+  {%- when "q1" %}{% assign em_q1 = em_q1 | push: h %}
+  {%- when "q2" %}{% assign em_q2 = em_q2 | push: h %}
+  {%- when "q3" %}{% assign em_q3 = em_q3 | push: h %}
+  {%- when "q4" %}{% assign em_q4 = em_q4 | push: h %}
+  {%- else %}{% assign em_none = em_none | push: h %}
+  {%- endcase -%}
+{%- endfor -%}
+{%- assign em_total = em_q1.size | plus: em_q2.size | plus: em_q3.size | plus: em_q4.size -%}
+{%- if em_total > 0 or em_none.size > 0 %}
+<div class="eisenhower" role="group" aria-label="Eisenhower-Matrix: Herausforderungen nach Wichtigkeit und Dringlichkeit">
+  <div class="eh-corner" aria-hidden="true"></div>
+  <div class="eh-axis eh-axis-col" aria-hidden="true">Dringend</div>
+  <div class="eh-axis eh-axis-col" aria-hidden="true">Nicht dringend</div>
+  {%- for qi in (1..4) %}
+  {%- case qi -%}
+  {%- when 1 %}{% assign em_list = em_q1 %}{% assign em_q = "q1" %}{% assign em_name = "Sofort erledigen" %}{% assign em_icon = "🔥" %}{% assign em_sub = "wichtig · dringend" %}
+  {%- when 2 %}{% assign em_list = em_q2 %}{% assign em_q = "q2" %}{% assign em_name = "Einplanen" %}{% assign em_icon = "📌" %}{% assign em_sub = "wichtig · nicht dringend" %}
+  {%- when 3 %}{% assign em_list = em_q3 %}{% assign em_q = "q3" %}{% assign em_name = "Abgeben" %}{% assign em_icon = "🤝" %}{% assign em_sub = "nicht wichtig · dringend" %}
+  {%- when 4 %}{% assign em_list = em_q4 %}{% assign em_q = "q4" %}{% assign em_name = "Später" %}{% assign em_icon = "💤" %}{% assign em_sub = "nicht wichtig · nicht dringend" %}
+  {%- endcase %}
+  {%- if qi == 1 %}<div class="eh-axis eh-axis-row" aria-hidden="true"><span>Wichtig</span></div>{% elsif qi == 3 %}<div class="eh-axis eh-axis-row" aria-hidden="true"><span>Nicht wichtig</span></div>{% endif %}
+  <section class="eh-cell eh-{{ em_q }}">
+    <h3 class="eh-title"><span aria-hidden="true">{{ em_icon }}</span> {{ em_name }} <span class="eh-count">{{ em_list.size }}</span></h3>
+    <p class="eh-sub">{{ em_sub }}</p>
+    {%- if em_list.size > 0 %}
+    <ul class="eh-list">
+      {%- for h in em_list %}
+      <li>{% include eisenhower-eintrag.html h=h ohne_team=include.ohne_team %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p class="eh-empty">–</p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+</div>
+{%- if em_none.size > 0 %}
+<div class="eh-none">
+  <p class="muted small">Noch nicht eingeordnet (<code>wichtig</code>/<code>dringend</code> fehlen):</p>
+  <ul class="eh-list">
+    {%- for h in em_none %}<li>{% include eisenhower-eintrag.html h=h ohne_team=include.ohne_team %}</li>{% endfor %}
+  </ul>
+</div>
+{%- endif %}
+{%- endif -%}

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Picks the challenges of a resource and assigns them to `herausforderungen_auswahl`:
+  in progress first, then open (both by due date, without due date last), then solved.
+  Used by the pages (project, team profile, overview) and by the iCal feeds (_plugins/termin_ics.rb),
+  so page and feed always list the same challenges.
+  Parameters:
+    res=<doc>          the resource (not needed for art="alle")
+    art="projects"     challenges with the project in `projekte` or its event_tag in `tags`
+    art="team"         challenges with the person in `team`
+    art="alle"         all challenges
+{%- endcomment -%}
+{%- assign ha_res = include.res -%}
+{%- assign ha_hits = "" | split: "" -%}
+{%- for h in site.herausforderungen -%}
+  {%- assign ha_hit = false -%}
+  {%- if include.art == "alle" -%}{%- assign ha_hit = true -%}
+  {%- elsif include.art == "projects" -%}
+    {%- assign hp = h.projekte | join: "," | split: "," -%}{%- assign ht = h.tags | join: "," | split: "," -%}
+    {%- if hp contains ha_res.slug or ha_res.event_tag and ht contains ha_res.event_tag %}{% assign ha_hit = true %}{% endif -%}
+  {%- elsif include.art == "team" -%}
+    {%- assign hteam = h.team | join: "," | split: "," -%}
+    {%- if hteam contains ha_res.slug %}{% assign ha_hit = true %}{% endif -%}
+  {%- endif -%}
+  {%- if ha_hit %}{% assign ha_hits = ha_hits | push: h %}{% endif -%}
+{%- endfor -%}
+{%- assign ha_hits = ha_hits | sort: "title" | sort: "faellig", "last" -%}
+{%- assign ha_wip = ha_hits | where: "status", "in-arbeit" -%}
+{%- assign ha_done = ha_hits | where: "status", "geloest" -%}
+{%- assign ha_open = ha_hits | where_exp: "h", "h.status != 'in-arbeit' and h.status != 'geloest'" -%}
+{%- assign herausforderungen_auswahl = ha_wip | concat: ha_open | concat: ha_done -%}
