@@ -65,7 +65,7 @@ layout: default
       {% for h in ch_list %}{% include herausforderung-karte.html h=h ohne_projekt=true %}{% endfor %}
     </div>
     {% endif %}
-    {%- comment -%}Todos of this project (todos/<person>.md, filtered by `projekte` or the event_tag) – loaded by JS on click.{%- endcomment -%}
+    {%- comment -%}Todos of this project (todos/todo-<person>.md, filtered by `projekte` or the event_tag) – loaded by JS on click.{%- endcomment -%}
     <h2 id="todos">Todos</h2>
     {%- assign tk_titel = "Todos – " | append: page.title -%}
     {% include todos-knopf.html projekt=page.slug tag=page.event_tag team=page.team titel=tk_titel label="Todos zum Projekt" %}

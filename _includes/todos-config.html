@@ -2,10 +2,14 @@
   Configuration for assets/js/todos.js: which person files exist in todos/, the team (name + round photo),
   addresses of the search index and the GitHub repository. Used by /todos/ and _includes/todos-knopf.html.
 {%- endcomment -%}
-{%- assign todo_files = site.static_files | where_exp: "f", "f.path contains '/todos/'" | where: "extname", ".md" -%}
+{%- comment -%}Person files are todos/todo-<person>.md; the person id is the name without "todo-".{%- endcomment -%}
+{%- assign todo_ids = "" | split: "" -%}
+{%- for f in site.static_files -%}
+  {%- if f.extname == ".md" and f.path contains "/todos/todo-" -%}{%- assign tc_id = f.basename | remove_first: "todo-" -%}{%- assign todo_ids = todo_ids | push: tc_id -%}{%- endif -%}
+{%- endfor -%}
 <script type="application/json" id="todos-daten">
 {
-  "dateien": [{% for f in todo_files %}{{ f.basename | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+  "dateien": {{ todo_ids | jsonify }},
   "personen": [{% assign tc_team = site.team | sort: "order" %}{% for m in tc_team %}{"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
   "basis": {{ '/todos/' | relative_url | jsonify }},
   "suchindex": {{ '/todos/suchindex.json' | relative_url | jsonify }},

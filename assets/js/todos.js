@@ -1,12 +1,12 @@
 // Todo app on /todos/ – an experiment next to the Herausforderungen collection, without libraries.
-// One Markdown file per person (todos/<person>.md, see the comment at the top of each file):
+// One Markdown file per person (todos/todo-<person>.md, see the comment at the top of each file):
 //   ## <quadrant heading>      → Eisenhower quadrant (q1 … q4) or "Erledigt"
 //   ### <title> {#id}          → one challenge; order inside a quadrant = priority
 //   ```yaml … ```              → fields (kurz, art, status, seit, faellig, helfer, projekte, tags, verlinkt …)
 //   free Markdown text
 // Files are fetched lazily per person. Every change is written to localStorage right away;
 // "Pull Request" shows a diff, copies the new file and opens the GitHub editor.
-// Format of todos/<person>.md: parse ⇄ serialize. Pure functions, also usable from Node for tests.
+// Format of todos/todo-<person>.md: parse ⇄ serialize. Pure functions, also usable from Node for tests.
 var TodoFormat = (function () {
   "use strict";
   var BUCKETS = [
@@ -171,6 +171,9 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   var diffBody = document.getElementById("todos-diff-body");
 
   var STORE = "ifsmb-todos:";
+  // File of a person: todos/todo-<person>.md (the prefix keeps it apart from the profile _team/<person>.md)
+  function dateiname(person) { return "todo-" + person + ".md"; }
+  function pfad(person) { return "todos/" + dateiname(person); }
   var ART = { aufgabe: "📋", problem: "⚠️", frage: "❓" };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function heute() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
@@ -216,7 +219,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (DOCS[person]) return Promise.resolve(DOCS[person]);
     var hatDatei = CFG.dateien.indexOf(person) >= 0;
     var p = hatDatei
-      ? fetch(CFG.basis + encodeURIComponent(person) + ".md", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      ? fetch(CFG.basis + encodeURIComponent(dateiname(person)), { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       : Promise.resolve(null);
     return p.then(function (server) {
       ROH[person] = storeRoh(person);
@@ -296,10 +299,10 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     if (!offen.length && !(st && st.konflikt)) { leiste.hidden = true; leiste.innerHTML = ""; return; }
     leiste.hidden = false;
     leiste.innerHTML = offen.map(function (p) {
-      return '<div class="todos-leiste-zeile">' + avatar(p.id) + ' <span>Änderungen in <code>todos/' + esc(p.id) + '.md</code> – im Browser gespeichert, noch nicht auf der Website.</span>'
+      return '<div class="todos-leiste-zeile">' + avatar(p.id) + ' <span>Änderungen in <code>' + esc(pfad(p.id)) + '</code> – im Browser gespeichert, noch nicht auf der Website.</span>'
         + '<span class="todos-leiste-knoepfe"><button type="button" class="btn btn-small" data-pr="' + esc(p.id) + '">🔀 Ansehen &amp; Pull Request</button>'
         + '<button type="button" class="btn btn-small btn-ghost" data-verwerfen="' + esc(p.id) + '">↩️ Verwerfen</button></span></div>';
-    }).join("") + (st && st.konflikt ? '<p class="todos-konflikt">⚠️ <code>todos/' + esc(aktuell) + '.md</code> hat sich auf der Website geändert, seit du hier angefangen hast. Im Diff siehst du deine Fassung gegen die aktuelle – fremde Änderungen gehen beim Einfügen verloren.</p>' : "");
+    }).join("") + (st && st.konflikt ? '<p class="todos-konflikt">⚠️ <code>' + esc(pfad(aktuell)) + '</code> hat sich auf der Website geändert, seit du hier angefangen hast. Im Diff siehst du deine Fassung gegen die aktuelle – fremde Änderungen gehen beim Einfügen verloren.</p>' : "");
   }
   leiste.addEventListener("click", function (e) {
     var pr = e.target.closest("[data-pr]"), vw = e.target.closest("[data-verwerfen]");
@@ -827,9 +830,9 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     laden(person).then(function (st) {
       var neu = serialize(st.doc), alt = st.server;
       var d = diffHtml(alt, neu);
-      var datei = "todos/" + person + ".md";
+      var datei = pfad(person);
       var url = alt == null
-        ? CFG.github + "/new/" + CFG.branch + "/todos?filename=" + encodeURIComponent(person + ".md") + "&value=" + encodeURIComponent(neu)
+        ? CFG.github + "/new/" + CFG.branch + "/todos?filename=" + encodeURIComponent(dateiname(person)) + "&value=" + encodeURIComponent(neu)
         : CFG.github + "/edit/" + CFG.branch + "/" + datei;
       diffBody.innerHTML =
         "<p>" + avatar(person) + " <code>" + esc(datei) + "</code> " + (alt == null ? "(neue Datei)" : "") + ' <span class="d-zahl-plus">+' + d.plus + '</span> <span class="d-zahl-minus">−' + d.minus + "</span></p>"
@@ -866,7 +869,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       if (aktuell !== person) return;
       renderAlles();
     }).catch(function () {
-      (EINGEBETTET ? matrix : matrixPlatz).innerHTML = '<p class="note">Die Datei <code>todos/' + esc(person) + '.md</code> konnte nicht geladen werden.</p>';
+      (EINGEBETTET ? matrix : matrixPlatz).innerHTML = '<p class="note">Die Datei <code>' + esc(pfad(person)) + '</code> konnte nicht geladen werden.</p>';
     });
   }
   function route() {
@@ -899,7 +902,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     renderPersonen(); renderLeiste();
     if (diffDialog.open && diffPerson === person) {
       if (geaendert(person)) zeigeDiff(person);
-      else { diffDialog.close(); sagen("Die Änderungen an todos/" + person + ".md wurden in einem anderen Tab gespeichert oder verworfen."); }
+      else { diffDialog.close(); sagen("Die Änderungen an " + pfad(person) + " wurden in einem anderen Tab gespeichert oder verworfen."); }
     }
   }
   window.addEventListener("storage", function (e) {
