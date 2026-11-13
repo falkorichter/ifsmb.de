@@ -176,7 +176,14 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   function heute() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
   function datumDE(d) { var p = String(d || "").split("-"); return p.length === 3 ? p[2] + "." + p[1] + "." + p[0] : d; }
   function storeGet(k) { try { return JSON.parse(localStorage.getItem(STORE + k) || "null"); } catch (e) { return null; } }
-  function storeSet(k, v) { try { if (v) localStorage.setItem(STORE + k, JSON.stringify(v)); else localStorage.removeItem(STORE + k); } catch (e) { /* storage blocked */ } }
+  // ROH remembers the raw localStorage value this tab last wrote or saw per person, to notice changes from other tabs.
+  var ROH = {};
+  function storeRoh(k) { try { return localStorage.getItem(STORE + k); } catch (e) { return null; } }
+  function storeSet(k, v) {
+    var roh = v ? JSON.stringify(v) : null;
+    ROH[k] = roh;
+    try { if (roh) localStorage.setItem(STORE + k, roh); else localStorage.removeItem(STORE + k); } catch (e) { /* storage blocked */ }
+  }
   function el(html) { var t = document.createElement("template"); t.innerHTML = html.trim(); var n = t.content.firstChild; t.content.removeChild(n); return n; }
   var liveEl = el('<p class="visually-hidden" aria-live="polite"></p>');
   document.body.appendChild(liveEl);
@@ -212,6 +219,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       ? fetch(CFG.basis + encodeURIComponent(person) + ".md", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       : Promise.resolve(null);
     return p.then(function (server) {
+      ROH[person] = storeRoh(person);
       var entwurf = storeGet(person);
       var st = { server: server, doc: null, konflikt: false };
       if (entwurf && normal(entwurf.text) === normal(server)) { storeSet(person, null); entwurf = null; }
@@ -813,7 +821,9 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     return { html: html.join(""), plus: plus, minus: minus };
   }
 
+  var diffPerson = null;
   function zeigeDiff(person) {
+    diffPerson = person;
     laden(person).then(function (st) {
       var neu = serialize(st.doc), alt = st.server;
       var d = diffHtml(alt, neu);
@@ -842,7 +852,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
             function () { diffBody.querySelector("details").open = true; diffBody.querySelector("textarea").select(); oeffnen("Kopieren ging nicht – bitte den Text unten kopieren."); });
         } else { diffBody.querySelector("details").open = true; diffBody.querySelector("textarea").select(); oeffnen("Bitte den Text unten kopieren."); }
       });
-      diffDialog.showModal();
+      if (!diffDialog.open) diffDialog.showModal();
     });
   }
   diffDialog.addEventListener("click", function (e) { if (e.target === diffDialog || e.target.closest("[data-schliessen]")) diffDialog.close(); });
@@ -869,13 +879,15 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       else if (dialog.open && !h[1]) dialog.close();
     });
   }
-  // Another tab changed a draft: take over its content, so this tab does not overwrite it with an older state.
-  window.addEventListener("storage", function (e) {
-    if (!e.key || e.key.indexOf(STORE) !== 0) return;
-    var person = e.key.slice(STORE.length), st = DOCS[person];
+  // Another tab changed a draft (edited, saved, discarded): take over its content, so this tab neither shows
+  // a stale save bar / diff nor overwrites the other tab with an older state.
+  function abgleich(person, roh) {
+    if (ROH[person] === roh) return;
+    ROH[person] = roh;
+    var st = DOCS[person];
     if (st) {
       var neu = null;
-      try { neu = JSON.parse(e.newValue || "null"); } catch (x) { /* ignore broken value */ }
+      try { neu = JSON.parse(roh || "null"); } catch (x) { /* ignore broken value */ }
       st.doc = parse(neu ? neu.text : (st.server || ""));
       st.konflikt = !!neu && normal(neu.basis) !== normal(st.server);
       if (person === aktuell) {
@@ -885,7 +897,25 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       }
     }
     renderPersonen(); renderLeiste();
+    if (diffDialog.open && diffPerson === person) {
+      if (geaendert(person)) zeigeDiff(person);
+      else { diffDialog.close(); sagen("Die Änderungen an todos/" + person + ".md wurden in einem anderen Tab gespeichert oder verworfen."); }
+    }
+  }
+  window.addEventListener("storage", function (e) {
+    if (e.key === null) { pruefeTabs(); return; } // localStorage.clear() in another tab
+    if (e.key.indexOf(STORE) === 0) abgleich(e.key.slice(STORE.length), e.newValue);
   });
+  // Safety net for missed events (e.g. a tab restored from the back/forward cache): compare once per second
+  // while the tab is visible, and right away when it becomes visible again.
+  function pruefeTabs() {
+    var personen = Object.keys(ROH);
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(STORE) === 0 && personen.indexOf(k.slice(STORE.length)) < 0) personen.push(k.slice(STORE.length)); } } catch (e) { return; }
+    personen.forEach(function (p) { abgleich(p, storeRoh(p)); });
+  }
+  setInterval(function () { if (!document.hidden) pruefeTabs(); }, 1000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) pruefeTabs(); });
+  window.addEventListener("pageshow", function (e) { if (e.persisted) pruefeTabs(); });
   if (!EINGEBETTET) {
     window.addEventListener("hashchange", route);
     route();
