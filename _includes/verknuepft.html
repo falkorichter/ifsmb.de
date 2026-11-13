@@ -3,7 +3,7 @@
 {%- endcomment -%}
 {%- assign my = include.tags -%}
 {%- if my and my.size > 0 -%}
-{%- assign groups = "equipment:Ausstattung,projects:Projekte,events:Termine,posts:Beiträge,press:Presse" | split: "," -%}
+{%- assign groups = "equipment:Ausstattung,projects:Projekte,herausforderungen:Herausforderungen,events:Termine,posts:Beiträge,press:Presse" | split: "," -%}
 {%- capture rel_out -%}
 {%- for g in groups -%}
   {%- assign gk = g | split: ":" | first -%}{%- assign gl = g | split: ":" | last -%}

@@ -1,0 +1,19 @@
+{%- comment -%}
+  Card for a challenge (Herausforderung) in lists. include.h = the challenge,
+  include.ohne_projekt = hide the project line (used on project pages).
+{%- endcomment -%}
+{%- assign h = include.h -%}
+{%- assign h_proj = h.projekte | join: "," | split: "," -%}
+{%- assign h_owners = h.team | join: "," | split: "," -%}
+<a class="card card-link challenge-card{% if h.status == 'geloest' %} challenge-solved{% endif %}" href="{{ h.url | relative_url }}">
+  <p class="meta">{% include herausforderung-status.html h=h %}</p>
+  <h3>{{ h.title }}</h3>
+  {% if h.summary %}<p>{{ h.summary }}</p>{% endif %}
+  {%- capture h_line -%}
+    {%- if h_owners.size > 0 %}<span>👤 {% for s in h_owners %}{% assign m = site.team | where: "slug", s | first %}{{ m.title | default: s }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>{% endif -%}
+    {%- unless include.ohne_projekt -%}{%- for s in h_proj %}{% assign pp = site.projects | where: "slug", s | first %}{% if pp %}<span>🔧 {{ pp.title }}</span>{% endif %}{% endfor -%}{%- endunless -%}
+  {%- endcapture -%}
+  {%- if h_line != "" %}
+  <p class="muted small challenge-card-line">{{ h_line }}</p>
+  {%- endif %}
+</a>

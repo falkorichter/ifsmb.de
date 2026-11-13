@@ -1,0 +1,83 @@
+{%- comment -%}
+  "➕" buttons in the same row as the edit button: open GitHub's "new file" editor with a template from
+  _includes/vorlagen/ whose connection to the current page is already filled in.
+{%- endcomment -%}
+{%- assign c = page.collection -%}
+{%- assign tags = page.tags | join: ', ' -%}
+{%- capture buttons -%}
+{%- if c == 'team' -%}
+  {% include neu-button.html typ="beitrag" label="Beitrag" author=page.slug hint="Neuer Beitrag – Autor*in schon eingetragen" %}
+  {% include neu-button.html typ="projekt" label="Projekt" team=page.slug hint="Neues Projekt – Person schon unter team eingetragen" %}
+  {% include neu-button.html typ="termin" label="Termin" team=page.slug hint="Neuer Termin – Person schon unter team eingetragen" %}
+  {% include neu-button.html typ="geraet" label="Gerät" owner_team=page.slug hint="Neues Gerät – Person als Besitzer*in eingetragen" %}
+  {% include neu-button.html typ="herausforderung" label="Herausforderung" team=page.slug hint="Neue Herausforderung – Person schon als zuständig eingetragen" %}
+{%- elsif c == 'projects' -%}
+  {%- assign p = page.persoenlich | default: false -%}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- if page.event_tag -%}
+    {% include neu-button.html typ="beitrag" label="Beitrag zum Projekt" tags=page.event_tag persoenlich=p hint="Neuer Beitrag – Stichwort des Projekts schon eingetragen, erscheint dann hier unter „Stand / Updates“" %}
+    {% include neu-button.html typ="termin" label="Termin" tags=page.event_tag team=team persoenlich=p hint="Neuer Termin – Stichwort des Projekts und Beteiligte schon eingetragen" %}
+  {%- else -%}
+    {%- assign url = page.url -%}
+    {% include neu-button.html typ="beitrag" label="Beitrag zum Projekt" verlinkt=url persoenlich=p hint="Neuer Beitrag – mit diesem Projekt verbunden (das Projekt hat noch kein event_tag)" %}
+    {% include neu-button.html typ="termin" label="Termin" projekte=page.slug team=team persoenlich=p hint="Neuer Termin – Projekt und Beteiligte schon eingetragen" %}
+  {%- endif -%}
+  {% include neu-button.html typ="projekt" label="Teilprojekt" teil_von=page.slug team=team persoenlich=p hint="Neues Teilprojekt – übergeordnetes Projekt und Beteiligte schon eingetragen" %}
+  {% include neu-button.html typ="geraet" label="Gerät" verlinkt=page.url hint="Neues Gerät – mit diesem Projekt verbunden" %}
+  {% include neu-button.html typ="herausforderung" label="Herausforderung" projekte=page.slug team=team persoenlich=p hint="Neue Herausforderung (Aufgabe, Problem, Frage) – Projekt und Beteiligte schon eingetragen" %}
+{%- elsif c == 'events' -%}
+  {% include neu-button.html typ="beitrag" label="Bericht" tags=tags verlinkt=page.url persoenlich=page.persoenlich hint="Neuer Beitrag über diesen Termin – Stichworte und Verbindung schon eingetragen" %}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- assign proj = page.projekte | join: ', ' -%}
+  {% include neu-button.html typ="herausforderung" label="Herausforderung" team=team projekte=proj tags=tags verlinkt=page.url persoenlich=page.persoenlich hint="Neue Herausforderung zu diesem Termin – Verbindung, Stichworte und Beteiligte schon eingetragen" %}
+{%- elsif c == 'equipment' -%}
+  {% include neu-button.html typ="beitrag" label="Beitrag" tags=tags verlinkt=page.url hint="Neuer Beitrag über dieses Gerät – Stichworte und Verbindung schon eingetragen" %}
+  {% include neu-button.html typ="herausforderung" label="Herausforderung" verlinkt=page.url hint="Neue Herausforderung zu diesem Gerät (z. B. ein Defekt) – Verbindung schon eingetragen" %}
+{%- elsif c == 'herausforderungen' -%}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- assign proj = page.projekte | join: ', ' -%}
+  {%- assign auth = nil -%}{%- if team != '' -%}{%- assign auth = '[' | append: team | append: ']' -%}{%- endif -%}
+  {% include neu-button.html typ="beitrag" label="Beitrag dazu" author=auth tags=tags verlinkt=page.url persoenlich=page.persoenlich hint="Neuer Beitrag zu dieser Herausforderung – Stichworte und Verbindung schon eingetragen" %}
+  {% include neu-button.html typ="herausforderung" label="Weitere Herausforderung" team=team projekte=proj tags=tags persoenlich=page.persoenlich hint="Neue Herausforderung für dieselben Projekte und Zuständigen" %}
+{%- elsif c == 'posts' -%}
+  {% include neu-button.html typ="beitrag" label="Folgebeitrag" author=page.author tags=tags verlinkt=page.url persoenlich=page.persoenlich hint="Neuer Beitrag – Autor*in, Stichworte und Verbindung zu diesem Beitrag schon eingetragen" %}
+{%- else -%}
+  {%- assign partner = site.data.partners | where: 'page', page.url | first -%}
+  {%- if partner -%}
+    {%- capture pname -%}"{{ partner.name }}"{%- endcapture -%}
+    {% include neu-button.html typ="projekt" label="Projekt" partners=pname hint="Neues Projekt – Partner schon eingetragen" %}
+    {% include neu-button.html typ="termin" label="Termin" partners=pname hint="Neuer Termin – Partner schon eingetragen" %}
+    {% include neu-button.html typ="geraet" label="Gerät" owner_partner=pname hint="Neues Gerät – Partner als Besitzer eingetragen" %}
+    {% include neu-button.html typ="herausforderung" label="Herausforderung" verlinkt=page.url hint="Neue Herausforderung – mit dieser Partnerseite verbunden" %}
+  {%- else -%}
+    {%- case page.url -%}
+      {%- when '/team/' -%}{% include neu-button.html typ="team" label="Teamprofil" hint="Neues Teamprofil mit allen Feldern" %}
+      {%- when '/projekte/' -%}{% include neu-button.html typ="projekt" label="Projekt" hint="Neues Projekt mit allen Feldern" %}
+      {%- when '/projekte/archiv/' -%}{% include neu-button.html typ="projekt-vergangen" label="Vergangenes Projekt" hint="Abgeschlossenes Projekt nachtragen – mit Gliederung für den Rückblick" %}
+      {%- when '/projekte/persoenlich/' -%}{% include neu-button.html typ="projekt" label="Persönliches Projekt" persoenlich=true hint="Neues persönliches Projekt – Person unter team eintragen" %}
+      {%- when '/news/' -%}{% include neu-button.html typ="beitrag" label="Beitrag" hint="Neuer Beitrag mit allen Feldern" %}
+      {%- when '/news/persoenlich/' -%}{% include neu-button.html typ="beitrag" label="Persönlicher Beitrag" persoenlich=true hint="Neuer persönlicher Beitrag" %}
+      {%- when '/kalender/' -%}{% include neu-button.html typ="termin" label="Termin" hint="Neuer Termin mit allen Feldern" %}
+      {%- when '/herausforderungen/' -%}{% include neu-button.html typ="herausforderung" label="Herausforderung" hint="Neue Herausforderung (Aufgabe, Problem, Frage) mit allen Feldern" %}
+      {%- when '/ausstattung/' -%}{% include neu-button.html typ="geraet" label="Gerät" hint="Neues Gerät mit allen Feldern" %}
+      {%- when '/presse/' -%}{% include neu-button.html typ="presse" label="Pressemitteilung" hint="Neue Pressemitteilung mit allen Feldern" %}{% include neu-button.html typ="pressebericht" label="Wir in der Presse" hint="Neuer Bericht über uns – wird nach Datum einsortiert" %}
+      {%- when '/partner/' -%}{% include neu-button.html typ="partner" label="Partner" hint="Neuer Partner als eigene Datei – erscheint auf /partner/ und im Netzwerk" %}
+    {%- endcase -%}
+  {%- endif -%}
+{%- endif -%}
+{%- endcapture -%}
+{%- assign buttons = buttons | strip -%}
+{%- if buttons != '' -%}
+{{ buttons }}
+<script>
+  // Fill today's date and UTC offset into the template links at click time (build date would be stale).
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a.neu-btn');
+    if (!a) return;
+    var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
+    var off = -d.getTimezoneOffset(), tz = (off >= 0 ? '+' : '-') + p(Math.floor(Math.abs(off) / 60)) + p(Math.abs(off) % 60);
+    a.href = a.href.replace(/JJJJ-MM-TT/g, d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()))
+      .replace(/JJJJ/g, d.getFullYear()).replace(/TZTZ/g, encodeURIComponent(tz));
+  });
+</script>
+{%- endif -%}

@@ -15,6 +15,7 @@ beide Richtungen (ein Eintrag auf einer der beiden Seiten reicht).
  BEITRAG        _posts/<datum>-<name>.md       /news/<jahr>/<monat>/<tag>/<name>/
  PERSON         _team/<name>.md                /team/<name>/
  AUSSTATTUNG    _equipment/<name>.md           /ausstattung/<name>/
+ HERAUSFORDERUNG _herausforderungen/<name>.md  /herausforderungen/<name>/
  PRESSE         _press/<name>.md               /presse/<name>/
  PARTNER        _data/partners.yml (+ Seite    /partner/<name>/  (wenn `page:` gesetzt)
                 partner/<name>/index.md)
@@ -45,6 +46,15 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
                                          │  standort (Text)  ┄┄► ORT      │
                                          │ tags             ──► PROJEKT   │
                                          │ verlinkt         ──► jede Seite│
+ ┌─ HERAUSFORDERUNG ──────────────┐                     (Aufgabe, Problem, Frage)
+ │ projekte  ──► PROJEKT (viele   │      ein Projekt hat viele Herausforderungen;
+ │               je Projekt)      │      sie stehen auf der Projektseite als Karten
+ │ tags      ──► PROJEKT          │
+ │               (= event_tag)    │
+ │ team      ──► PERSON (zustän-  │      Teamprofil listet „Herausforderungen“
+ │               dig, Liste)      │
+ │ verlinkt  ──► jede Seite       │      Termine, Geräte, Beiträge, Partner …
+ └────────────────────────────────┘
  ┌─ PERSON ───────────────────────┐      └────────────────────────────────┘
  │ verlinkt  ──► jede Seite       │      ┌─ PARTNER ──────────────────────┐
  │ (alles andere zeigt auf sie)   │      │ in _data/partners.yml, keine   │
@@ -52,6 +62,21 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
                                          │ per Name oder Adresse auf ihn  │
                                          └────────────────────────────────┘
 ```
+
+## Orte auf der Karte
+
+`/karte/` zeigt die Orte aus `_data/orte.yml`. Wie eine Seite zu ihrem Ort kommt (die erste
+passende Regel gewinnt):
+
+```
+ orte: [<id>]                       ──► ORT        jede Seite, fest zugeordnet
+ ort / location / standort (Text)   ──► ORT        enthält eines der `finden`-Wörter
+ standort_partner, partners,        ──► ORT        Partnername = `partner` des Orts
+ owner_partner (Gerät ohne standort)
+ BEITRAG: tags / projekte           ──► PROJEKT ──► ORT des Projekts
+```
+
+Termine mit `location: "Berlin"` oder „Online“ landen nirgends – lieber gar kein Punkt als ein falscher.
 
 ## Besitz und Standort (Ausstattung)
 
@@ -124,8 +149,8 @@ standort_partner: Kurt-Tucholsky-Grundschule   # verlinkt den Standort mit dem P
 | `teil_von` | Projekt | Eltern-Projekt(e) | `teil_von: [3d-druck-ag-ktg]` |
 | `verwandt` | Projekt | Projekt(e) | `verwandt: [ipad-stifte-wiederbeleben]` |
 | `event_tag` / `tags` | Projekt / Termin, Beitrag, Ausstattung | gleiches Stichwort | `event_tag: ktg` ↔ `tags: [ktg]` |
-| `projekte` | Termin | Projekt(e) | `projekte: [openpress-bauen]` |
-| `team` | Projekt, Termin | Person(en) | `team: [falko-richter, anton]` |
+| `projekte` | Termin, Herausforderung | Projekt(e) | `projekte: [openpress-bauen]` |
+| `team` | Projekt, Termin, Herausforderung (= zuständig) | Person(en) | `team: [falko-richter, anton]` |
 | `author` | Beitrag | Person(en) – ein Kürzel oder eine Liste | `author: [falko-richter, frieder-euteneuer]` |
 | `partners` | Projekt, Termin | Partner (Name) | `partners: [Kurt-Tucholsky-Grundschule]` |
 | `owner_partner` / `owner_team` / `owner_name` | Ausstattung | **Besitz** – Partner / Person / Name, je eine Liste | `owner_partner: [35 services e. V., Kurt-Tucholsky-Grundschule]` |
@@ -143,6 +168,7 @@ Termin, Beitrag mit Beitrag oder Ausstattung mit Partnerseite.
  │ Verwandte Projekte / Projekte     [🔧 Projekt] [🔧 …]          │
  │ Termine                           [📅 Termin 04.01.2027]       │
  │ Beiträge                          [📰 Beitrag 29.09.2026]      │
+ │ Herausforderungen                 [🧗 Frage offen]             │
  │ Beteiligt                         [👤 Person]                  │
  │ Partner                           [🤝 Partner]                 │
  │ Ausstattung                       [🛠️ Gerät]                   │
@@ -156,6 +182,9 @@ Termin, Beitrag mit Beitrag oder Ausstattung mit Partnerseite.
   schon oben unter „Termine & Berichte“ und „Stand / Updates“.
 - Auf **Teamprofilen** stehen nur `verlinkt`-Verbindungen – alles andere listet das Profil selbst.
 - **Persönliche Termine** zeigen die Person als große Karte statt als Button.
+- **Herausforderungen** eines Projekts (über `projekte` oder `event_tag`) stehen auf der Projektseite
+  als Karten unter „Herausforderungen“, die eines Menschen (`team`) im Teamprofil – dort fehlen sie
+  unten bei „Verbindungen“.
 
 ## Netzwerk-Ansicht
 
@@ -169,7 +198,8 @@ Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Se
  ─────────────                         ────────────────────────────────────────
  _projects, _events, _posts,   ──►     JSON  ──►  Linien aus den Feldern  ──►  Canvas
  _team, _equipment, _press,            (eine Zeile    (teil_von, verwandt,       (Kräfte-Layout,
- _data/partners.yml                    pro Seite)      team, verlinkt, …)          Zoom, Filter)
+ _herausforderungen,                   pro Seite)      team, verlinkt, …)          Zoom, Filter)
+ _data/partners.yml
 ```
 
 - Klick auf einen Punkt: Verbindungen rechts als Buttons, Klick darauf springt weiter.
@@ -190,6 +220,7 @@ Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Se
                       (danach) –         ✔        ✔        –           ✔        ✔
  Persönlicher Termin         –           –        –        –           ✔            –
  Beitrag                     ✔         /news/     –        –           ✔        ✔ (Stichwort)
+ Beitrag nur_projekt         –           –        –        –           –        ✔ (Stichwort)
  Persönlicher Beitrag        –    /news/persoenlich/       –           ✔        ✔ (Stichwort)
 ```
 

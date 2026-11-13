@@ -10,6 +10,7 @@ bambu-lab-a1-mini: Bambu Lab A1 mini
 elegoo-orangestorm-giga: Elegoo OrangeStorm Giga
 waermebildkamera: Wärmebildkamera
 ki-cad: KI-Tools für CAD
+ki-server: KI-Server von Anton
 windiy: WinDIY
 flsun-v400: FLSUN V400
 prusa-mk4: Prusa MK4
@@ -25,6 +26,7 @@ lulzbot-mini: LulzBot Mini
 flexibles-filament: Flexibles Filament
 axidraw: AxiDraw
 plotter: Plotter
+mural: Mural-Wandplotter
 2d-druck: 2D-Druck
 u1: Snapmaker U1
 mehrfarbdruck: Mehrfarbdruck
@@ -68,3 +70,5 @@ itslearning-rfg: itslearning am Rosalind-Franklin-Gymnasium
 ifsmb-de: ifsmb.de
 onshape: Onshape
 lastenanhaenger-theater: Lastenanhänger vom Theater
+35services-3d: "35services/3d (3D-Druck)"
+35services-2d: "35services/2d (2D & Plotter)"

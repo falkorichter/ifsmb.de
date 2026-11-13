@@ -30,6 +30,9 @@ collections:
   equipment:
     output: true
     permalink: /ausstattung/:name/
+  herausforderungen:
+    output: true
+    permalink: /herausforderungen/:name/
 
 defaults:
   - scope:
@@ -62,6 +65,11 @@ defaults:
       type: "equipment"
     values:
       layout: "equipment"
+  - scope:
+      path: ""
+      type: "herausforderungen"
+    values:
+      layout: "herausforderung"
 
 nav:
   - title: Neuigkeiten
@@ -72,10 +80,14 @@ nav:
     children:
       - title: Netzwerk
         url: /netzwerk/
+      - title: Karte
+        url: /karte/
       - title: Projekte
         url: /projekte/
       - title: Projekt-Ideen
         url: /projekte/ideen/
+      - title: Herausforderungen
+        url: /herausforderungen/
       - title: Angebot
         url: /angebot/
       - title: Geld für Makespaces

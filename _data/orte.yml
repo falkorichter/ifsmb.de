@@ -1,0 +1,126 @@
+# Orte für die Karte (/karte/).
+#
+# id:       kurzer Name, auf den Seiten mit `orte: [<id>]` verweisen können
+# name:     Anzeigename
+# adresse:  öffentliche Adresse (Schulen, Vereine, Veranstaltungsorte – nie Wohnadressen von Personen)
+# lat, lon: Koordinaten (WGS84, Dezimalgrad), z. B. aus openstreetmap.org: Rechtsklick → „Adresse anzeigen“
+# partner:  Name aus _data/partners.yml – Projekte, Termine und Geräte dieses Partners landen hier
+# finden:   Textstücke (Groß-/Kleinschreibung egal), die in `location` (Termine), `ort` (Projekte)
+#           oder `standort` (Ausstattung) vorkommen – dann landet die Seite automatisch an diesem Ort
+# fern:     true für Orte außerhalb Berlins – die Karte startet dann trotzdem mit Berlin im Blick
+# ungefaehr: true, wenn der Punkt nur die Straße oder Gegend zeigt
+
+- id: ktg
+  name: Kurt-Tucholsky-Grundschule
+  adresse: Rathenower Straße 18, 10559 Berlin
+  lat: 52.5291
+  lon: 13.3490
+  partner: Kurt-Tucholsky-Grundschule
+  finden: [Kurt-Tucholsky-Grundschule, KTG]
+
+- id: rosalind-franklin-gymnasium
+  name: Rosalind-Franklin-Gymnasium
+  adresse: Turmstraße 75A, 10551 Berlin
+  lat: 52.5262
+  lon: 13.3445
+  partner: Rosalind-Franklin-Gymnasium
+  finden: [Rosalind-Franklin-Gymnasium, Rosalind Franklin Gymnasium]
+
+- id: kulturfabrik
+  name: 35services e. V. in der Kulturfabrik Moabit
+  adresse: Lehrter Straße 35, 10557 Berlin
+  lat: 52.5318
+  lon: 13.3633
+  partner: 35 services e. V.
+  finden: [35services, Kulturfabrik]
+
+- id: zazza
+  name: ZAZZA Café
+  adresse: Platz der Nachbarschaft, Lehrter Straße 24e, 10557 Berlin
+  lat: 52.5297
+  lon: 13.3647
+  finden: [Zazza]
+
+- id: stephanstrasse
+  name: Werkstatt von Max in der Stephanstraße
+  adresse: Stephanstraße, Berlin-Moabit
+  lat: 52.5333
+  lon: 13.3460
+  ungefaehr: true
+  finden: [Stephanstraße]
+
+- id: platanus
+  name: Platanus Schule
+  adresse: Berliner Straße 12, 13187 Berlin
+  lat: 52.5683
+  lon: 13.4080
+  partner: Platanus Schule
+  finden: [Platanus]
+
+- id: lessing-gymnasium
+  name: Lessing-Gymnasium
+  adresse: Schöningstraße 17, 13349 Berlin
+  lat: 52.5572
+  lon: 13.3439
+  finden: [Lessing-Gymnasium]
+
+- id: gymnasium-tiergarten
+  name: Gymnasium Tiergarten
+  adresse: Altonaer Straße 26, 10555 Berlin
+  lat: 52.5191
+  lon: 13.3420
+  finden: [Gymnasium Tiergarten]
+
+- id: gustav-falke-grundschule
+  name: Gustav-Falke-Grundschule
+  adresse: Strelitzer Straße 42, 13355 Berlin
+  lat: 52.5378
+  lon: 13.3920
+  finden: [Gustav-Falke-Grundschule]
+
+- id: ina-habersaathstrasse
+  name: INA Habersaathstraße
+  adresse: Habersaathstraße, Berlin-Mitte
+  lat: 52.5318
+  lon: 13.3770
+  ungefaehr: true
+  finden: [Habersaathstraße]
+
+- id: station-berlin
+  name: STATION Berlin
+  adresse: Luckenwalder Straße 4–6, 10963 Berlin
+  lat: 52.4991
+  lon: 13.3810
+  finden: [STATION Berlin]
+
+- id: theater-an-der-parkaue
+  name: Theater an der Parkaue
+  adresse: Parkaue 29, 10367 Berlin
+  lat: 52.5137
+  lon: 13.4855
+  finden: [Theater an der Parkaue]
+
+- id: suedkreuz
+  name: Am Südkreuz
+  adresse: Südkreuz, Berlin
+  lat: 52.4757
+  lon: 13.3654
+  ungefaehr: true
+  finden: [Südkreuz]
+
+- id: mafz
+  name: MAFZ Paaren im Glien
+  adresse: Gartenstraße 1–3, 14621 Paaren im Glien
+  lat: 52.7140
+  lon: 13.0158
+  fern: true
+  finden: [MAFZ, Paaren im Glien]
+
+- id: ziegeleipark-mildenberg
+  name: Ziegeleipark Mildenberg
+  adresse: Mildenberg, 16792 Zehdenick
+  ungefaehr: true
+  lat: 53.0334
+  lon: 13.2913
+  fern: true
+  finden: [Ziegeleipark Mildenberg]

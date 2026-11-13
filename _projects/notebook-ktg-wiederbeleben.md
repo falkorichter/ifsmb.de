@@ -10,6 +10,7 @@ event_tag: notebook-ktg
 verwandt: [ipad-stifte-wiederbeleben]
 team:
   - falko-richter
+  - mr-e
 partners:
   - Kurt-Tucholsky-Grundschule
 ---

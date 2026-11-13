@@ -18,6 +18,12 @@ layout: default
           {% for link in page.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a></li>{% endfor %}
         </ul>
         {% endif %}
+        {%- include feed-auswahl.html res=page art="team" -%}
+        {%- if feed_auswahl.size > 0 %}
+        {%- assign feed_url = page.url | append: "feed.xml" %}
+        {%- assign feed_titel = "Beiträge von " | append: page.title | append: " abonnieren" %}
+        <div class="feed-abo-zeile">{% include feed-abo.html feed=feed_url titel=feed_titel label="📡 Beiträge als RSS-Feed" %}</div>
+        {%- endif %}
       </div>
     </header>
     <div class="prose">
@@ -51,7 +57,17 @@ layout: default
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
-    {%- assign member_events = site.events | where_exp: "e", "e.team contains page.slug" | sort: "start" -%}
+    {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
+    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
+    {%- assign member_ch = member_ch | concat: member_ch_done -%}
+    {% if member_ch.size > 0 %}
+    <h2 id="herausforderungen">Herausforderungen</h2>
+    <div class="grid-2">
+      {% for h in member_ch %}{% include herausforderung-karte.html h=h %}{% endfor %}
+    </div>
+    {% endif %}
+    {%- include termine-auswahl.html res=page art="team" -%}
+    {%- assign member_events = termine_auswahl -%}
     {%- if member_events.size > 0 -%}
     {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
     {%- assign ev_up = "" | split: "" -%}
@@ -60,7 +76,12 @@ layout: default
       {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
       {%- if end_s >= now_s %}{% assign ev_up = ev_up | push: e %}{% else %}{% assign ev_past = ev_past | unshift: e %}{% endif -%}
     {%- endfor %}
-    <h2 id="termine">Termine</h2>
+    {%- assign ics_url = page.url | split: "/" | join: "/" | append: ".ics" %}
+    {%- assign abo_titel = "Termine von " | append: page.title | append: " abonnieren" %}
+    <div class="cal-heading-abo">
+      <h2 id="termine">Termine</h2>
+      {% include kalender-abo.html ics=ics_url titel=abo_titel %}
+    </div>
     <h3 class="cal-heading" id="member-up-heading"{% if ev_up.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
     <ul class="event-list" id="member-events-up">
       {%- for e in ev_up %}{% include termin-karte.html event=e %}{% endfor %}

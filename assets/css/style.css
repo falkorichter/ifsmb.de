@@ -168,9 +168,8 @@ img { max-width: 100%; height: auto; }
 .btn-small:hover { box-shadow: 1px 1px 0 var(--ink); }
 
 .edit-page { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 3rem auto 2rem; }
-.edit-page-source { color: var(--muted); font-size: .8rem; text-decoration: none; overflow-wrap: anywhere; }
-.edit-page-source:hover { color: var(--accent-2); }
-.edit-page-source code { font-family: var(--mono); }
+/* edit button shows the source path; the "➕" buttons (_includes/neu-buttons.html) follow in the same row */
+.edit-page code { font-family: var(--mono); font-size: .8rem; font-weight: 400; overflow-wrap: anywhere; }
 
 .section { padding: 3rem 1.25rem 0; }
 .section:last-of-type { padding-bottom: 4rem; }
@@ -383,8 +382,39 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .site-footer a:hover { color: #fff; }
 .footer-note { color: #8f8d86; font-size: .8rem; }
 
+/* calendar button + dialog (_includes/kalender-abo.html) */
+.termin-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1rem; }
 .cal-subscribe { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1.5rem 0 .75rem; }
 .cal-heading { margin-top: 2.5rem; }
+.cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 2.5rem 0 1.25rem; }
+.cal-heading-abo h2 { margin: 0; }
+.abo-open { white-space: nowrap; }
+/* subscribe dialog on /kalender/ (native <dialog>) */
+.abo-dialog {
+  margin: auto;
+  max-width: min(560px, calc(100vw - 2rem));
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--bg);
+  color: var(--ink);
+}
+.abo-dialog::backdrop { background: rgba(10, 10, 14, .55); }
+.abo-dialog h2 { margin: 0 2rem .75rem 0; font-size: clamp(1.25rem, 4vw, 1.5rem); }
+.abo-dialog code { overflow-wrap: anywhere; }
+.abo-dialog .cal-subscribe { margin: 1.25rem 0 0; }
+.abo-close-form { position: absolute; top: .6rem; right: .6rem; margin: 0; }
+.abo-close { font: inherit; font-size: 1.6rem; line-height: 1; width: 2.2rem; height: 2.2rem; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; }
+.abo-close:hover { background: var(--accent); }
+.abo-was { font-weight: 700; }
+.abo-was .meta { font-weight: 400; }
+.abo-dialog .cal-subscribe + .small { margin-top: 1rem; }
+/* feed dialog (_includes/feed-abo.html) */
+.feed-url { display: flex; gap: .5rem; margin: 1rem 0 0; }
+.feed-url input { flex: 1; min-width: 0; font: inherit; font-size: .9rem; padding: .45rem .6rem; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--bg); color: var(--ink); }
+.feed-abo-zeile { margin: 0 0 1.5rem; }
+.member-head .feed-abo-zeile { margin: 1rem 0 0; }
 
 .event-list { list-style: none; display: grid; gap: 1rem; }
 .event-list-past .event-card { opacity: .65; }
@@ -748,6 +778,46 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .netz-line-standort { border-top: 3px dashed #2f5bea; }
 .netz-line-teil { border-top-width: 4px; }
 
+/* timeline below the network graph (stacked bars per month) */
+.netz-zeit { position: relative; margin-top: 2rem; }
+.netz-zeit h2 { margin-bottom: .2rem; }
+.netz-zeit-legende { display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .85rem; color: var(--ink-soft); margin: .5rem 0; }
+.netz-zeit-key { display: inline-flex; align-items: center; gap: .35rem; }
+.netz-zeit-swatch { display: inline-block; width: .8rem; height: .8rem; border-radius: 3px; }
+.netz-zeit-swatch-future { background: linear-gradient(90deg, #ffcc00 0 25%, #2bb673 25% 50%, #2f5bea 50% 75%, #13a3b5 75%); opacity: .45; }
+.netz-zeit-frame { display: flex; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--bg); padding: .5rem 0 .25rem; overflow: hidden; }
+.netz-zeit-achse { flex: none; display: block; }
+.netz-zeit-achse text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.netz-zeit-scroll { flex: 1 1 auto; min-width: 0; overflow-x: auto; }
+#netz-zeit-svg { display: block; }
+#netz-zeit-svg text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.tl-ytick { text-anchor: end; dominant-baseline: middle; }
+#netz-zeit-svg .tl-xtick { text-anchor: middle; }
+#netz-zeit-svg .tl-now { fill: var(--ink); font-weight: 700; }
+#netz-zeit-svg .tl-year { fill: var(--ink-soft); font-weight: 700; }
+#netz-zeit-svg .tl-today-label { fill: var(--ink); font-weight: 700; }
+.tl-grid { stroke: var(--line); stroke-width: 1; }
+.tl-base { stroke: var(--ink); stroke-width: 1; }
+.tl-today { stroke: var(--ink); stroke-width: 1; }
+.tl-break { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.tl-seg.tl-future { fill-opacity: .45; }
+.tl-seg.tl-dim { fill-opacity: .22; }
+.tl-hit, .tl-hit-gap { fill: transparent; }
+.tl-hit[tabindex] { cursor: pointer; }
+.tl-hit[tabindex]:hover, .tl-hit:focus-visible { fill: rgba(22, 22, 29, .06); outline: none; }
+.tl-hit.tl-active { fill: rgba(22, 22, 29, .1); stroke: var(--ink); stroke-width: 1.5; }
+.netz-zeit-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--paper); border: 2px solid var(--ink); border-radius: 10px; padding: .4rem .6rem; font-size: .85rem; box-shadow: 3px 3px 0 var(--ink); white-space: nowrap; }
+.netz-zeit-tip p { margin: 0; }
+.netz-zeit-tip-title { font-size: .8rem; color: var(--muted); margin-bottom: .15rem !important; }
+.netz-zeit-tip-key { display: inline-block; width: .9rem; height: 0; border-top: 3px solid; vertical-align: middle; margin-right: .4rem; }
+.netz-zeit-tip-row strong { font-family: var(--mono); }
+.netz-zeit-details { margin-top: .6rem; }
+.netz-zeit-details summary { cursor: pointer; font-weight: 600; }
+.netz-zeit-table { border-collapse: collapse; margin-top: .5rem; font-size: .9rem; }
+.netz-zeit-table th, .netz-zeit-table td { padding: .2rem .7rem; border-bottom: 1px solid var(--line); text-align: right; }
+.netz-zeit-table th:first-child { text-align: left; }
+.netz-zeit-table td { font-family: var(--mono); }
+
 /* Markdown task lists (- [ ] / - [x]), e.g. a project used as a task tracker */
 .task-list { list-style: none; padding-left: 0; }
 .task-list-item { position: relative; padding-left: 1.9rem; margin: .45rem 0; }
@@ -755,3 +825,46 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 
 /* photo credit under a team member's name */
 .photo-credit { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+
+/* Map of the network (/karte/), see assets/js/karte.js */
+.karte-hinweis { margin: 0; font-size: .9rem; }
+.karte-rahmen { position: relative; }
+.karte-map { position: relative; width: 100%; height: 72vh; min-height: 420px; border: 2px solid var(--ink); border-radius: var(--radius); background: #e8e4da; overflow: hidden; outline-offset: 3px; }
+.karte-map.is-geladen { touch-action: none; cursor: grab; }
+.karte-map.is-ziehen { cursor: grabbing; }
+.karte-kacheln, .karte-marker { position: absolute; inset: 0; }
+.karte-marker { pointer-events: none; }
+.karte-kacheln img { position: absolute; top: 0; left: 0; width: 256px; height: 256px; max-width: none; user-select: none; }
+.karte-punkt { pointer-events: auto; position: absolute; top: 0; left: 0; margin: -15px 0 0 -15px; min-width: 30px; height: 30px; padding: 0 .35rem; border: 2px solid var(--ink); border-radius: 999px; background: var(--accent); color: var(--ink); font: 700 .8rem/1 var(--font); cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
+.karte-punkt:hover, .karte-punkt:focus-visible { background: var(--accent-2); color: var(--paper); z-index: 2; }
+.karte-punkt.is-aktiv { background: var(--blue); color: var(--paper); z-index: 3; }
+.karte-punkt.is-leer { min-width: 18px; height: 18px; margin: -9px 0 0 -9px; background: var(--paper); }
+.karte-punkt.is-ungefaehr { border-style: dashed; }
+.karte-zustimmung { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: .6rem; max-width: 30rem; margin: 0 auto; padding: 1.5rem; text-align: center; }
+.karte-zustimmung[hidden] { display: none; }
+.karte-zoom { position: absolute; top: .75rem; left: .75rem; display: flex; flex-direction: column; gap: .4rem; }
+.karte-zoom[hidden] { display: none; }
+.karte-zoom .btn { width: 2.4rem; height: 2.4rem; padding: 0; font-size: 1.2rem; box-shadow: 2px 2px 0 var(--ink); }
+.karte-attribution { position: absolute; right: 2px; bottom: 2px; margin: 0; padding: .1rem .5rem; font-size: .75rem; background: rgba(255, 255, 255, .85); border-radius: 0 0 calc(var(--radius) - 2px) 0; }
+.karte-aus { font: inherit; color: var(--blue); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+.karte-liste { list-style: none; display: grid; gap: .35rem; }
+.karte-ort-knopf { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: .5rem; text-align: left; font: inherit; font-size: .95rem; font-weight: 600; padding: .35rem .75rem; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper); cursor: pointer; }
+.karte-ort-knopf:hover { background: var(--accent); }
+.karte-zahl { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.karte-zurueck { padding: .25rem .8rem; font-size: .85rem; }
+.karte-osm-link { font-size: .85rem; margin: .2rem 0 0; }
+@media (max-width: 860px) {
+  .karte-map { height: 60vh; }
+}
+.karte-kommt { color: var(--accent-2); font-weight: 700; }
+
+/* Challenges (Herausforderungen) */
+.badge-open { background: #ffe0c2; color: var(--ink); }
+.badge-solved { background: #e3f6d8; color: var(--ink); }
+.challenge-owners { margin-top: .4rem; font-weight: 600; }
+.challenge-solved { opacity: .75; }
+.challenge-card-line { display: flex; flex-direction: column; gap: .15rem; margin-top: .5rem; }
+.challenge-solution { margin-top: 2rem; padding: 1rem 1.2rem; background: #f0faea; border: 2px solid var(--ink); border-radius: var(--radius); }
+.challenge-solution h2 { margin-top: 0; }
+#herausforderungen { margin-top: 2.5rem; margin-bottom: .9rem; }
+#herausforderungen .link-meta { font-size: .9rem; font-weight: 400; vertical-align: middle; }

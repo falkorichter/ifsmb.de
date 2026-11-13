@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }} – Neuigkeiten" href="{{ '/feed.xml' | relative_url }}">
+  {%- comment -%}per-page feeds from _plugins/beitrag_feeds.rb{%- endcomment -%}
+  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/persoenlich/" %}
+  <link rel="alternate" type="application/atom+xml" title="{{ page.title }} – Beiträge" href="{{ page.url | append: 'feed.xml' | relative_url }}">
+  {%- endif %}
 
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="{{ site.title }}">
@@ -53,8 +57,8 @@
   {% if site.repository and page.path %}
   {%- assign schmale_layouts = "post,project,member,event,equipment,press" | split: "," -%}
   <div class="container edit-page{% if schmale_layouts contains page.layout %} narrow{% endif %}" data-pagefind-ignore>
-    <a class="btn btn-ghost btn-small" href="https://github.com/{{ site.repository }}/edit/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener" title="Quelldatei {{ page.path }} auf GitHub bearbeiten">✏️ Diese Seite bearbeiten</a>
-    <a class="edit-page-source" href="https://github.com/{{ site.repository }}/blob/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener"><code>{{ page.path }}</code></a>
+    <a class="btn btn-ghost btn-small" href="https://github.com/{{ site.repository }}/edit/{{ site.branch | default: 'main' }}/{{ page.path }}" target="_blank" rel="noopener" title="Diese Seite auf GitHub bearbeiten: {{ page.path }}">✏️ <code>{{ page.path }}</code></a>
+    {% include neu-buttons.html %}
   </div>
   {% endif %}
 

@@ -57,6 +57,11 @@ content:
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
+        type: string
+        list: true
       - name: tags
         label: Kategorien (z. B. ktg)
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
@@ -137,9 +142,18 @@ content:
         label: Persönlicher Beitrag
         description: "Privates Makespace-Update einer Person aus dem Team: erscheint nicht unter Neuigkeiten, sondern im Profil (Autor*in) und unter „Persönliche Blogs“."
         type: boolean
+      - name: nur_projekt
+        label: Nur fürs Projekt
+        description: "Kleines Projekt-Update: erscheint nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite (über die Kategorie)."
+        type: boolean
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
       - name: tags
@@ -245,6 +259,11 @@ content:
       - name: verlinkt
         label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
+        type: string
+        list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
 
@@ -372,11 +391,81 @@ content:
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
+      - name: orte
+        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+        description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
+        type: string
+        list: true
       - name: tags
         label: Stichworte (z. B. 3d-drucker, 35services, ktg)
         description: Alles mit denselben Stichworten wird automatisch verknüpft.
         type: string
         list: true
+      - name: body
+        label: Beschreibung
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: herausforderungen
+    label: Herausforderungen
+    type: collection
+    path: _herausforderungen
+    filename: "{primary}.md"
+    view:
+      fields: [title, status, art]
+      primary: title
+      sort: title
+      order: asc
+    fields:
+      - name: title
+        label: Herausforderung (kurz, gern als Frage)
+        type: string
+        required: true
+      - name: summary
+        label: Kurzbeschreibung (ein Satz, erscheint auf der Karte)
+        type: text
+      - name: art
+        label: Art
+        type: select
+        options:
+          values: [aufgabe, problem, frage]
+      - name: status
+        label: Status
+        description: "„geloest“ = erledigt, erscheint dann unter „Gelöst“"
+        type: select
+        options:
+          values: [offen, in-arbeit, geloest]
+      - name: seit
+        label: Seit
+        type: date
+      - name: geloest_am
+        label: Gelöst am
+        type: date
+      - name: team
+        label: Zuständig (Team-Kürzel, eine oder mehrere Personen)
+        type: string
+        list: true
+      - name: projekte
+        label: Gehört zu Projekten (Dateinamen, z. B. mural-wandplotter)
+        description: Ein Projekt hat viele Herausforderungen – sie erscheinen auf der Projektseite unter „Herausforderungen“.
+        type: string
+        list: true
+      - name: persoenlich
+        label: Persönlich (aus einem privaten Projekt im Team)
+        type: boolean
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /kalender/…/ oder /ausstattung/…/)
+        description: Beliebige Seiten verlinken – Termine, Beiträge, Geräte, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten.
+        type: string
+        list: true
+      - name: tags
+        label: Stichworte (das event_tag eines Projekts verbindet auch mit dem Projekt)
+        type: string
+        list: true
+      - name: loesung
+        label: Lösung (wenn gelöst, Markdown)
+        type: text
       - name: body
         label: Beschreibung
         type: rich-text

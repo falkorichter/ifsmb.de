@@ -1,0 +1,70 @@
+---
+suche: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Karte
+lead: Wo unsere Projekte, Termine, Beiträge und Geräte zu Hause sind – das Netzwerk auf der Karte.
+permalink: /karte/
+---
+{%- comment -%}
+  Map data is rendered by Jekyll: the places from _data/orte.yml and every resource with the
+  raw fields that can tie it to a place. assets/js/karte.js resolves resources to places
+  (explicit `orte`, then text in location/ort/standort, then partner names, posts via project tags).
+{%- endcomment -%}
+{%- capture daten -%}
+{"orte":[
+{%- for o in site.data.orte -%}
+{"id":{{ o.id | jsonify }},"name":{{ o.name | jsonify }},"adresse":{{ o.adresse | jsonify }},"lat":{{ o.lat | jsonify }},"lon":{{ o.lon | jsonify }},"partner":{{ o.partner | jsonify }},"finden":{{ o.finden | jsonify }},"fern":{{ o.fern | default: false | jsonify }},"ungefaehr":{{ o.ungefaehr | default: false | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+],"partner":[
+{%- for pt in site.data.partners -%}
+{"name":{{ pt.name | jsonify }},"url":{% if pt.page %}{{ pt.page | relative_url | jsonify }}{% else %}{{ pt.url | jsonify }}{% endif %},"extern":{% if pt.page %}false{% else %}true{% endif %}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+],"seiten":[
+{%- for x in site.projects -%}
+{"url":{{ x.url | relative_url | jsonify }},"typ":"projekt","titel":{{ x.title | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"datum":{{ x.start | date: "%Y-%m-%d" | jsonify }},"text":{{ x.ort | jsonify }},"partners":{{ x.partners | jsonify }},"orte":{{ x.orte | jsonify }},"event_tag":{{ x.event_tag | jsonify }}},
+{%- endfor -%}
+{%- for x in site.events -%}
+{"url":{{ x.url | relative_url | jsonify }},"typ":"termin","titel":{{ x.title | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"datum":{{ x.start | date: "%Y-%m-%d" | jsonify }},"text":{{ x.location | jsonify }},"partners":{{ x.partners | jsonify }},"orte":{{ x.orte | jsonify }},"projekte":{{ x.projekte | jsonify }},"tags":{{ x.tags | jsonify }}},
+{%- endfor -%}
+{%- for x in site.posts -%}
+{"url":{{ x.url | relative_url | jsonify }},"typ":"beitrag","titel":{{ x.title | jsonify }},"persoenlich":{{ x.persoenlich | default: false | jsonify }},"datum":{{ x.date | date: "%Y-%m-%d" | jsonify }},"orte":{{ x.orte | jsonify }},"projekte":{{ x.projekte | jsonify }},"tags":{{ x.tags | jsonify }}},
+{%- endfor -%}
+{%- for x in site.equipment -%}
+{"url":{{ x.url | relative_url | jsonify }},"typ":"ausstattung","titel":{{ x.title | jsonify }},"text":{{ x.standort | jsonify }},"standort_partner":{{ x.standort_partner | jsonify }},"owner_partner":{{ x.owner_partner | jsonify }},"orte":{{ x.orte | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]}
+{%- endcapture -%}
+
+<div class="karte" id="karte">
+  <div class="netz-controls">
+    <label class="netz-toggle"><input type="checkbox" id="karte-persoenlich" checked> Persönliches zeigen</label>
+    <p class="karte-hinweis muted">Klicke auf einen Ort, um zu sehen, was dort passiert. Zum <a href="{{ '/netzwerk/' | relative_url }}">Netzwerk</a> als Graph.</p>
+  </div>
+  <div class="netz-stage">
+    <div class="karte-rahmen">
+      <div class="karte-map" id="karte-map" tabindex="0" role="application" aria-label="Karte mit unseren Orten – die Liste daneben ist die zugängliche Variante">
+        <div class="karte-zustimmung" id="karte-zustimmung">
+          <p><strong>Karte von OpenStreetMap laden?</strong></p>
+          <p>Die Kartenbilder kommen von den Servern der <a href="https://www.openstreetmap.org/">OpenStreetMap Foundation</a>. Dabei wird deine IP-Adresse dorthin übertragen. Mehr im <a href="{{ '/impressum/' | relative_url }}#datenschutz">Datenschutz</a>.</p>
+          <p><button type="button" class="btn" id="karte-laden">Karte laden</button></p>
+          <p class="muted"><label><input type="checkbox" id="karte-merken"> Auf diesem Gerät merken</label></p>
+        </div>
+      </div>
+      <div class="karte-zoom" id="karte-zoom" hidden>
+        <button type="button" class="btn btn-ghost" id="karte-plus" aria-label="Hineinzoomen">+</button>
+        <button type="button" class="btn btn-ghost" id="karte-minus" aria-label="Herauszoomen">−</button>
+        <button type="button" class="btn btn-ghost" id="karte-alle" aria-label="Alle Orte in Berlin zeigen">⌂</button>
+      </div>
+      <p class="karte-attribution" id="karte-attribution" hidden>© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a> · <button type="button" class="karte-aus" id="karte-aus">Karte ausblenden</button></p>
+    </div>
+    <aside class="netz-panel" id="karte-panel" aria-live="polite">
+      <h2>Orte</h2>
+      <ul class="karte-liste" id="karte-liste"></ul>
+    </aside>
+  </div>
+</div>
+
+<noscript><p>Für die Karte braucht es JavaScript. Die Orte stehen auch auf den einzelnen Projekt-, Termin- und Geräteseiten.</p></noscript>
+
+<script id="karte-daten" type="application/json">{{ daten }}</script>
+<script src="{{ '/assets/js/karte.js' | relative_url }}" defer></script>

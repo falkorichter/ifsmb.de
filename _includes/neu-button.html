@@ -1,0 +1,31 @@
+{%- comment -%}
+  One "➕ new" button: a GitHub "new file" link with file name and content prefilled from a template.
+  Params: typ (beitrag, termin, projekt, geraet, herausforderung, team, presse), label, hint (tooltip) and the template params
+  (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich).
+  Placeholders JJJJ-MM-TT / JJJJ / TZTZ are replaced at click time by the script in _includes/neu-buttons.html.
+{%- endcomment -%}
+{%- case include.typ -%}
+  {%- when 'beitrag' -%}{%- assign dir = '_posts' -%}{%- assign datei = 'JJJJ-MM-TT-titel-des-beitrags.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/beitrag.md author=include.author persoenlich=include.persoenlich tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+  {%- when 'termin' -%}{%- assign dir = '_events' -%}{%- assign datei = 'JJJJ-MM-TT-name-des-termins.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/termin.md team=include.team tags=include.tags projekte=include.projekte partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'projekt' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt.md team=include.team partners=include.partners teil_von=include.teil_von verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'projekt-vergangen' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+  {%- when 'herausforderung' -%}{%- assign dir = '_herausforderungen' -%}{%- assign datei = 'kurzer-name.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/herausforderung.md team=include.team projekte=include.projekte tags=include.tags verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+  {%- when 'partner' -%}{%- assign dir = '_data/partner' -%}{%- assign datei = 'name-des-partners.yml' -%}
+    {%- capture inhalt -%}{% include vorlagen/partner.yml %}{%- endcapture -%}
+  {%- when 'pressebericht' -%}{%- assign dir = '_data/pressebericht' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}
+    {%- capture inhalt -%}{% include vorlagen/pressebericht.yml %}{%- endcapture -%}
+  {%- when 'team' -%}{%- assign dir = '_team' -%}{%- assign datei = 'vorname-nachname.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/team.md %}{%- endcapture -%}
+  {%- when 'presse' -%}{%- assign dir = '_press' -%}{%- assign datei = 'JJJJ-MM-TT-titel-der-mitteilung.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/presse.md tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+{%- endcase -%}
+{%- comment -%} url_encode turns spaces into "+"; literal "+" is already %2B at that point, so only spaces are replaced {%- endcomment -%}
+<a class="btn btn-ghost btn-small neu-btn" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
+' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ include.hint | escape }}">➕ {{ include.label }}</a>
