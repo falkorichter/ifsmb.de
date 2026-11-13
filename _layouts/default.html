@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }} – Neuigkeiten" href="{{ '/feed.xml' | relative_url }}">
+  {%- comment -%}per-page feeds from _plugins/beitrag_feeds.rb{%- endcomment -%}
+  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/persoenlich/" %}
+  <link rel="alternate" type="application/atom+xml" title="{{ page.title }} – Beiträge" href="{{ page.url | append: 'feed.xml' | relative_url }}">
+  {%- endif %}
 
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="{{ site.title }}">

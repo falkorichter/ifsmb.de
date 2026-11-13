@@ -410,6 +410,11 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .abo-was { font-weight: 700; }
 .abo-was .meta { font-weight: 400; }
 .abo-dialog .cal-subscribe + .small { margin-top: 1rem; }
+/* feed dialog (_includes/feed-abo.html) */
+.feed-url { display: flex; gap: .5rem; margin: 1rem 0 0; }
+.feed-url input { flex: 1; min-width: 0; font: inherit; font-size: .9rem; padding: .45rem .6rem; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--bg); color: var(--ink); }
+.feed-abo-zeile { margin: 0 0 1.5rem; }
+.member-head .feed-abo-zeile { margin: 1rem 0 0; }
 
 .event-list { list-style: none; display: grid; gap: 1rem; }
 .event-list-past .event-card { opacity: .65; }
