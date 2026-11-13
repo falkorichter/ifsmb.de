@@ -38,6 +38,8 @@ Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
 
 ### https://github.com/morluto/rea angucken {#https-github-com-morluto-rea-angucken}
 
+https://docs.github.com/en/copilot/responsible-use/copilot-commit-message-generation
+
 ```yaml
 art: aufgabe
 status: offen
