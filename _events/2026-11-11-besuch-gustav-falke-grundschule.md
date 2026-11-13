@@ -16,7 +16,7 @@ Was Falko vorab über die Initiative notiert hat:
 - **Making im Stundenplan:** Making ist dort fest in den Stundenplan integriert – **seit 2020**.
 - **Auch die Kleinen:** Die 1., 2. und 3. Klassen kommen ebenfalls in den Makespace.
 - **Offener Makespace:** einmal pro Woche von 16 bis 18 Uhr.
-- **Schulfirma:** Für die Klassen 5 und 6 gibt es eine Schulfirma-AG.
+- **Schülerfirma:** Für die Klassen 5 und 6 gibt es eine Schulfirma-AG.
 
 Mehr dazu auf der Website der Schule:
 
