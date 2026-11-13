@@ -3,6 +3,7 @@ suche: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Herausforderungen
 lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
+verlinkt: [/todos/]
 ---
 {%- comment -%}
   Overview of all challenges: open / in progress first, solved below, personal ones at the end.
@@ -10,6 +11,7 @@ lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als
 <div class="prose intro">
   <p>Ein Projekt besteht aus vielen kleinen <strong>Herausforderungen</strong>: Welche Motoren passen? Wer besorgt die Platine? Warum haftet das Filament nicht? Jede Herausforderung gehört zu einem oder mehreren <a href="{{ '/projekte/' | relative_url }}">Projekten</a>, Terminen oder Menschen – und jemand aus dem <a href="{{ '/team/' | relative_url }}">Team</a> kümmert sich darum.</p>
   <p>Ihr wisst eine Antwort oder habt das passende Teil? Meldet euch!</p>
+  <p>🧪 <strong>Experiment:</strong> Die <a href="{{ '/todos/' | relative_url }}">Todos</a> zeigen Herausforderungen pro Person in der Eisenhower-Matrix – zum Verschieben und Bearbeiten im Browser.</p>
 </div>
 {%- assign all = site.herausforderungen | sort: "title" -%}
 {%- assign inst = all | where_exp: "h", "h.persoenlich != true" -%}
