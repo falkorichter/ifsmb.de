@@ -6,6 +6,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+
+- Ausstattung: zwei **Fabmaker**-Drucker an der KTG (gehören Falko, einer ist ein Geschenk vom Rosalind-Franklin-Gymnasium) mit Foto und Link zum Rettungs-Repository.
+- Herausforderung für Falko und Anton: den Windows-Slicer der Fabmaker mit Claude Code oder OpenCode zurückentwickeln, damit die Drucker auch vom Mac und aus dem Browser drucken.
+
 ## [2026-11-13]
 
 ### Hinzugefügt

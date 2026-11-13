@@ -18,6 +18,7 @@ prusa-mk3s: Prusa MK3S
 prusa-mk3s-heartlabs: Prusa MK3S (HeartLabs)
 heartlabs: HeartLabs
 3d-scanner: 3D-Scanner
+fabmaker: Fabmaker
 3dmakerpro-lynx: 3DMakerpro Lynx
 creality-ferret-se: Creality Ferret SE
 lulzbot: LulzBot
