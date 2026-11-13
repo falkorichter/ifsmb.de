@@ -6,21 +6,24 @@
   <style>
     /* Same look as ifsmb.de, without loading anything from outside */
     :root { --ink: #16161d; --bg: #faf8f3; --paper: #fff; --accent: #ffcc00; --muted: #6b6b78; }
-    body { margin: 0; padding: 2rem 1rem; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    /* Works both as toolbar popup (narrow) and as options page */
+    body { margin: 0; padding: 1rem; min-width: 320px; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
     main { max-width: 34rem; margin: 0 auto; }
-    h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+    h1 { margin: 0 0 .25rem; font-size: 1.25rem; }
+    .oeffnen { display: block; margin: .75rem 0 .5rem; text-align: center; }
     p { margin: .25rem 0 1rem; }
     label { display: block; margin: 1rem 0 .25rem; font-weight: 700; }
     input, select { width: 100%; box-sizing: border-box; font: inherit; padding: .45rem .6rem; border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); }
     small { color: var(--muted); }
-    button { margin-top: 1.5rem; font: inherit; font-weight: 700; padding: .55rem 1.1rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--accent); box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
+    button { margin-top: 1rem; font: inherit; font-weight: 700; padding: .55rem 1.1rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--accent); box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
     #status { color: #1a7f37; font-weight: 700; }
   </style>
 </head>
 <body>
   <main>
     <h1>📋 Todo aus Auswahl</h1>
-    <p>Text auf einer beliebigen Seite markieren, Rechtsklick → <strong>„Neues Todo aus …“</strong>. Die Todo-Seite öffnet sich mit dem markierten Text und der Adresse der Seite als Quelle; das Todo ist sofort im Browser gespeichert und kommt per Pull Request auf die Website.</p>
+    <p>Text markieren, Rechtsklick → <strong>„Neues Todo aus …“</strong>: Das Todo entsteht mit dem Text und der Adresse der Seite als Quelle.</p>
+    <button type="button" class="oeffnen" id="oeffnen">📋 Todos öffnen</button>
     <form id="form">
       <label for="basis">Website</label>
       <input id="basis" list="basis-liste" required placeholder="https://ifsmb.de/">

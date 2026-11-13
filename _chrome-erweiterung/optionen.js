@@ -5,6 +5,13 @@
   chrome.storage.sync.get(TODO_STANDARD).then(function (e) {
     felder.forEach(function (k) { document.getElementById(k).value = e[k] || ""; });
   });
+  // Open the todo page of the saved person (the toolbar popup replaces the former icon click).
+  document.getElementById("oeffnen").addEventListener("click", function () {
+    chrome.storage.sync.get(TODO_STANDARD).then(function (e) {
+      chrome.tabs.create({ url: String(e.basis || TODO_STANDARD.basis).replace(/\/*$/, "/") + "todos/" + (e.person ? "#" + e.person : "") });
+      window.close();
+    });
+  });
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
     var e = {};

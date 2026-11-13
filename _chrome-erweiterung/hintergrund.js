@@ -41,10 +41,3 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
     chrome.tabs.create({ url: url, index: tab ? tab.index + 1 : undefined, openerTabId: tab ? tab.id : undefined });
   });
 });
-
-// Toolbar button: open the todo page of the configured person.
-chrome.action.onClicked.addListener(function () {
-  einstellungen().then(function (e) {
-    chrome.tabs.create({ url: String(e.basis || TODO_STANDARD.basis).replace(/\/*$/, "/") + "todos/" + (e.person ? "#" + e.person : "") });
-  });
-});

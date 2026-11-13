@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "name": "IfsMB Todo aus Auswahl",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Markierten Text mit Rechtsklick als neues Todo auf ifsmb.de/todos/ anlegen – mit der Adresse der Seite als Quelle.",
   "permissions": ["contextMenus", "storage", "activeTab", "scripting"],
   "background": { "service_worker": "hintergrund.js" },
   "options_page": "optionen.html",
-  "action": { "default_title": "Todos öffnen" },
+  "action": { "default_title": "Todo aus Auswahl", "default_popup": "optionen.html" },
   "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
 }

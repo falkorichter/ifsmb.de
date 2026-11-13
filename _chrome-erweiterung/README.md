@@ -19,14 +19,14 @@ Die Daten stehen nur im Teil der Adresse nach `#`. Den schickt der Browser nicht
 
 Nach Änderungen an den Dateien auf `chrome://extensions` beim Eintrag auf ↻ klicken.
 
-Ein Klick auf das Symbol in der Leiste öffnet die Todos der eingestellten Person.
+Ein Klick auf das Symbol in der Leiste öffnet die Einstellungen als Popup – mit dem Knopf „📋 Todos öffnen“ für die Todos der eingestellten Person.
 
 ## Dateien
 
 - `manifest.json` – Manifest V3; Rechte: `contextMenus`, `storage` (Einstellungen), `activeTab` + `scripting` (Auswahl mit Zeilenumbrüchen lesen, nur im Tab, in dem man rechtsklickt)
-- `hintergrund.js` – Kontextmenü und Symbol
+- `hintergrund.js` – Kontextmenü
 - `todo-link.js` – baut die Adresse `…/todos/#neu?titel=…&text=…&quelle=…`; die Todo-Seite (`neuAusHash` in `assets/js/todos.js`) legt daraus das Todo an
-- `optionen.html`, `optionen.js` – Einstellungen
+- `optionen.html`, `optionen.js` – Einstellungen, zugleich das Popup des Symbols
 - `icons/` – Symbole (mit Pillow erzeugt)
 
 Der Ordner beginnt mit `_`, damit Jekyll ihn nicht auf die Website kopiert.
