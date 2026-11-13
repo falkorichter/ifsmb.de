@@ -25,9 +25,4 @@ Sein Ziel: 3D-Druck an möglichst viele Schulen bringen – auch zu den Lehrkrä
 
 > „Heute geht alles nur viel schneller und mit einem Hauch von KI.“
 
-### Gerade auf dem Zettel
-{: #aufgaben}
-
-- Mit dem Quartiersmanagement Moabit über die [Stadtteilkasse](https://www.berlin.de/stk-mitte/unsere-aufgaben/stadtteilkasse-1721199.php) sprechen – bis zu 500 € für offene Aktionen in der Nachbarschaft, zum Beispiel eine Makespace-Aktion im Kiez.
-
 <p class="muted small">Zitate und Angaben aus dem <a href="{{ '/news/2026/05/05/3d-drucker-in-der-schule-interview-moabit-ost/' | relative_url }}">Interview von Gerald Backhaus</a> für das Quartiersmanagement Moabit-Ost, Mai 2026.</p>
