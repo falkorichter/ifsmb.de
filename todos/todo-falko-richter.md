@@ -56,8 +56,6 @@ tags: [repair-cafe]
 - Kontakt zur BSR finden
 - NochMall anschauen: Wie läuft das Repair-Café, was können wir lernen?
 
-## 🤝 Abgeben
-
 ### Mit dem QM Moabit über die Stadtteilkasse sprechen {#stadtteilkasse-moabit}
 
 ```yaml
@@ -69,6 +67,8 @@ verlinkt: [/geld-fuer-makespaces/]
 ```
 
 Mit dem Quartiersmanagement Moabit über die Stadtteilkasse sprechen.
+
+## 🤝 Abgeben
 
 ## 💤 Später
 
