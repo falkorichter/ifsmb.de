@@ -7,6 +7,7 @@ permalink: /news/persoenlich/
 ---
 {% assign pers_posts = site.posts | where: "persoenlich", true %}
 <p class="muted">Das sind keine Beiträge des Instituts, sondern persönliche Updates von Menschen aus unserem <a href="{{ '/team/' | relative_url }}">Team</a>. Die Neuigkeiten des Instituts stehen unter <a href="{{ '/news/' | relative_url }}">Neuigkeiten</a>.</p>
+<div class="feed-abo-zeile">{% include feed-abo.html feed="/news/persoenlich/feed.xml" titel="Persönliche Blogs abonnieren" %}</div>
 {% assign members = site.team | sort: "order" %}
 {% for m in members %}
   {% assign mp = pers_posts | where: "author", m.slug %}

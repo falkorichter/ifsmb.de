@@ -1,5 +1,5 @@
 {%- comment -%}
-  "📅" button + dialog to put events into one's own calendar (assets/js/kalender-abo.js opens it).
+  "📅" button + dialog to put events into one's own calendar (assets/js/abo.js opens it).
   Without JS the button is a plain link to the .ics file.
   Parameters:
     ics=<path>      feed or event file, e.g. /kalender.ics, /team/falko-richter.ics, /kalender/<termin>.ics
@@ -7,7 +7,8 @@
     event=<doc>     single event: Apple/Outlook get the file, Google a pre-filled "new event" form
                     (without event: subscription via webcal:// and Google's "add calendar by URL" link)
     label=<text>    button text (default: "📅 Abonnieren" / "📅 In den Kalender")
-  Only one dialog per page: it always has the id "abonnieren", so <page>#abonnieren opens it.
+  The dialog has the id "abonnieren", so <page>#abonnieren opens it (only one per page;
+  the feed dialog from _includes/feed-abo.html has its own id "rss").
 {%- endcomment -%}
 {%- assign ab_ics = include.ics -%}
 {%- assign ab_host = site.url | remove: "https://" | remove: "http://" -%}
@@ -45,7 +46,7 @@
   {%- assign ab_google = "https://calendar.google.com/calendar/render?cid=" | append: ab_cid -%}
 {%- endif -%}
 <a class="btn btn-small abo-open" href="{{ ab_ics | relative_url }}" data-abo="abonnieren" aria-haspopup="dialog">{{ ab_label }}</a>
-<dialog class="abo-dialog" id="abonnieren" aria-labelledby="abonnieren-titel">
+<dialog class="abo-dialog" id="abonnieren" aria-labelledby="abonnieren-titel" data-pagefind-ignore>
   <form method="dialog" class="abo-close-form"><button class="abo-close" aria-label="Schließen">×</button></form>
   <h2 id="abonnieren-titel">{{ ab_titel }}</h2>
   {%- if ab_e %}
@@ -65,4 +66,4 @@
   <p class="muted small">„Apple Kalender &amp; Outlook“ öffnet das Abo direkt im Kalender-Programm (Mac, iPhone, iPad, Outlook, Thunderbird). „Google Kalender“ fragt im Browser, ob der Kalender hinzugefügt werden soll – in der Google-App geht das nicht. Google aktualisiert Abos nur etwa einmal am Tag. Falls es nicht klappt: bei Google „Weitere Kalender → Per URL“ und <code>{{ ab_https }}</code> eintragen.</p>
   {%- endif %}
 </dialog>
-<script src="{{ '/assets/js/kalender-abo.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/abo.js' | relative_url }}" defer></script>

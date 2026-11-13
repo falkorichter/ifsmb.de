@@ -1,0 +1,17 @@
+{%- comment -%}
+  Status badge and kind of a challenge (Herausforderung). include.h = the challenge.
+  status: offen (default) | in-arbeit | geloest – art: aufgabe | problem | frage (optional)
+{%- endcomment -%}
+{%- assign hs = include.h -%}
+{%- case hs.status -%}
+{%- when "geloest" %}<span class="badge badge-solved">Gelöst</span>
+{%- when "in-arbeit" %}<span class="badge badge-active">In Arbeit</span>
+{%- else %}<span class="badge badge-open">Offen</span>
+{%- endcase -%}
+{%- if hs.persoenlich %} <span class="badge badge-personal">Persönlich</span>{% endif -%}
+{%- case hs.art -%}
+{%- when "aufgabe" %} · 📋 Aufgabe
+{%- when "problem" %} · ⚠️ Problem
+{%- when "frage" %} · ❓ Frage
+{%- else %} · 🧗 Herausforderung
+{%- endcase -%}

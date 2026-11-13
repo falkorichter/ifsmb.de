@@ -407,6 +407,71 @@ content:
         options:
           format: markdown
 
+  - name: herausforderungen
+    label: Herausforderungen
+    type: collection
+    path: _herausforderungen
+    filename: "{primary}.md"
+    view:
+      fields: [title, status, art]
+      primary: title
+      sort: title
+      order: asc
+    fields:
+      - name: title
+        label: Herausforderung (kurz, gern als Frage)
+        type: string
+        required: true
+      - name: summary
+        label: Kurzbeschreibung (ein Satz, erscheint auf der Karte)
+        type: text
+      - name: art
+        label: Art
+        type: select
+        options:
+          values: [aufgabe, problem, frage]
+      - name: status
+        label: Status
+        description: "„geloest“ = erledigt, erscheint dann unter „Gelöst“"
+        type: select
+        options:
+          values: [offen, in-arbeit, geloest]
+      - name: seit
+        label: Seit
+        type: date
+      - name: geloest_am
+        label: Gelöst am
+        type: date
+      - name: team
+        label: Zuständig (Team-Kürzel, eine oder mehrere Personen)
+        type: string
+        list: true
+      - name: projekte
+        label: Gehört zu Projekten (Dateinamen, z. B. mural-wandplotter)
+        description: Ein Projekt hat viele Herausforderungen – sie erscheinen auf der Projektseite unter „Herausforderungen“.
+        type: string
+        list: true
+      - name: persoenlich
+        label: Persönlich (aus einem privaten Projekt im Team)
+        type: boolean
+      - name: verlinkt
+        label: Verlinkt mit (Adressen, z. B. /kalender/…/ oder /ausstattung/…/)
+        description: Beliebige Seiten verlinken – Termine, Beiträge, Geräte, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten.
+        type: string
+        list: true
+      - name: tags
+        label: Stichworte (das event_tag eines Projekts verbindet auch mit dem Projekt)
+        type: string
+        list: true
+      - name: loesung
+        label: Lösung (wenn gelöst, Markdown)
+        type: text
+      - name: body
+        label: Beschreibung
+        type: rich-text
+        options:
+          format: markdown
+
   - name: press
     label: Pressemitteilungen
     type: collection

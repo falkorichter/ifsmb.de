@@ -2,6 +2,7 @@
 title: "3D-Druck in der Werkstatt: 35services/3d"
 summary: Im GitHub-Repository 35services/3d dokumentieren Falko und Jan seit Ende 2023 die 3D-Druck-Projekte aus der Nachbarschaftswerkstatt – von Absaugadaptern und Ersatzteilen für Maschinen bis zu Druckplatten für die Schul-AG.
 status: aktuell
+persoenlich: true
 start: 2023-11-12
 zeitraum: seit November 2023
 ort: 35services e.V., Moabit

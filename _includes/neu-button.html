@@ -1,6 +1,6 @@
 {%- comment -%}
   One "➕ new" button: a GitHub "new file" link with file name and content prefilled from a template.
-  Params: typ (beitrag, termin, projekt, geraet, team, presse), label, hint (tooltip) and the template params
+  Params: typ (beitrag, termin, projekt, geraet, herausforderung, team, presse), label, hint (tooltip) and the template params
   (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich).
   Placeholders JJJJ-MM-TT / JJJJ / TZTZ are replaced at click time by the script in _includes/neu-buttons.html.
 {%- endcomment -%}
@@ -15,6 +15,8 @@
     {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
     {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+  {%- when 'herausforderung' -%}{%- assign dir = '_herausforderungen' -%}{%- assign datei = 'kurzer-name.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/herausforderung.md team=include.team projekte=include.projekte tags=include.tags verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
   {%- when 'partner' -%}{%- assign dir = '_data/partner' -%}{%- assign datei = 'name-des-partners.yml' -%}
     {%- capture inhalt -%}{% include vorlagen/partner.yml %}{%- endcapture -%}
   {%- when 'pressebericht' -%}{%- assign dir = '_data/pressebericht' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}

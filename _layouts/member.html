@@ -18,6 +18,12 @@ layout: default
           {% for link in page.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a></li>{% endfor %}
         </ul>
         {% endif %}
+        {%- include feed-auswahl.html res=page art="team" -%}
+        {%- if feed_auswahl.size > 0 %}
+        {%- assign feed_url = page.url | append: "feed.xml" %}
+        {%- assign feed_titel = "Beiträge von " | append: page.title | append: " abonnieren" %}
+        <div class="feed-abo-zeile">{% include feed-abo.html feed=feed_url titel=feed_titel label="📡 Beiträge als RSS-Feed" %}</div>
+        {%- endif %}
       </div>
     </header>
     <div class="prose">
@@ -50,6 +56,15 @@ layout: default
     <ul class="link-list">
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
+    {% endif %}
+    {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
+    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
+    {%- assign member_ch = member_ch | concat: member_ch_done -%}
+    {% if member_ch.size > 0 %}
+    <h2 id="herausforderungen">Herausforderungen</h2>
+    <div class="grid-2">
+      {% for h in member_ch %}{% include herausforderung-karte.html h=h %}{% endfor %}
+    </div>
     {% endif %}
     {%- include termine-auswahl.html res=page art="team" -%}
     {%- assign member_events = termine_auswahl -%}

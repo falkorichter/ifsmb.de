@@ -49,6 +49,22 @@ layout: default
       {% endfor %}
     </div>
     {% endif %}
+    {%- comment -%}Challenges of this project: `projekte` contains the slug, or `tags` contains the event_tag. Open ones first.{%- endcomment -%}
+    {%- assign ch_open = "" | split: "" -%}{%- assign ch_done = "" | split: "" -%}
+    {%- assign ch_all = site.herausforderungen | sort: "title" -%}
+    {%- for h in ch_all -%}
+      {%- assign hp = h.projekte | join: "," | split: "," -%}{%- assign ht = h.tags | join: "," | split: "," -%}
+      {%- if hp contains page.slug or page.event_tag and ht contains page.event_tag -%}
+        {%- if h.status == "geloest" %}{% assign ch_done = ch_done | push: h %}{% elsif h.status == "in-arbeit" %}{% assign ch_open = ch_open | unshift: h %}{% else %}{% assign ch_open = ch_open | push: h %}{% endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign ch_list = ch_open | concat: ch_done -%}
+    {% if ch_list.size > 0 %}
+    <h2 id="herausforderungen">Herausforderungen <span class="link-meta">{{ ch_open.size }} offen{% if ch_done.size > 0 %} · {{ ch_done.size }} gelöst{% endif %}</span></h2>
+    <div class="grid-2">
+      {% for h in ch_list %}{% include herausforderung-karte.html h=h ohne_projekt=true %}{% endfor %}
+    </div>
+    {% endif %}
     {%- comment -%}Stand / Updates: manuelle `updates` und alle Beiträge mit dem event_tag als eine Zeitleiste – so kann jede*r aus dem Team mit einem kleinen Beitrag zum Projekt beitragen.{%- endcomment -%}
     {%- assign tl_keys = "" | split: "" -%}
     {%- for u in page.updates -%}{%- capture k %}{{ u.datum | date: "%Y-%m-%d" }} 00:00|u|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
@@ -57,8 +73,13 @@ layout: default
     {%- for po in tagged_posts -%}{%- capture k %}{{ po.date | date: "%Y-%m-%d %H:%M" }}|p|{{ forloop.index0 }}{% endcapture %}{%- assign tl_keys = tl_keys | push: k -%}{%- endfor -%}
     {%- assign tl_keys = tl_keys | sort | reverse -%}
     {% if tl_keys.size > 0 %}
+    {%- assign feed_url = page.url | append: "feed.xml" %}
+    {%- assign feed_titel = "Updates zu „" | append: page.title | append: "“ abonnieren" %}
     <section class="project-updates" id="updates">
-      <h2>Stand / Updates</h2>
+      <div class="cal-heading-abo">
+        <h2>Stand / Updates</h2>
+        {% include feed-abo.html feed=feed_url titel=feed_titel %}
+      </div>
       <ol class="update-list">
         {%- for k in tl_keys %}
         {%- assign kp = k | split: "|" -%}{%- assign idx = kp[2] | plus: 0 %}
