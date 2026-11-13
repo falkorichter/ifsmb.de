@@ -228,3 +228,10 @@ Betreff war "Kontakt zum Offroad"
   
   
   
+# aufgabe falko: mit dem QM / der Stadtteilkoordination Moabit über die Stadtteilkasse sprechen
+  https://www.berlin.de/stk-mitte/unsere-aufgaben/stadtteilkasse-1721199.php
+  - bis 500 € pro Aktion (jeder Stadtteil in Mitte: 5.000 €/Jahr), für Material und Honorare
+  - Einzelpersonen/Initiativen ohne Verein können beantragen; Aktion offen für alle und im eigenen Stadtteil
+  - Antrag jederzeit: Idee bei der Stadtteilkoordination vorstellen (Moabit Ost: Kontakt auf der Seite), Jury aus Nachbar*innen entscheidet
+  - Logos Stadtteilkasse + Bezirksamt auf Plakat/Flyer, Abrechnung innerhalb von 4 Wochen (Rechnungen, Ausgabenliste, kurzer Bericht mit Fotos)
+  - Idee: offene Makespace-Aktion im Kiez? danach ggf. Projektidee/Termin auf der Seite anlegen
