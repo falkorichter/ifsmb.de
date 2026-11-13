@@ -1,0 +1,48 @@
+---
+suche: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Herausforderungen
+lead: Aufgaben, Probleme und offene Fragen aus unseren Projekten – kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
+---
+{%- comment -%}
+  Overview of all challenges: open / in progress first, solved below, personal ones at the end.
+{%- endcomment -%}
+<div class="prose intro">
+  <p>Ein Projekt besteht aus vielen kleinen <strong>Herausforderungen</strong>: Welche Motoren passen? Wer besorgt die Platine? Warum haftet das Filament nicht? Jede Herausforderung gehört zu einem oder mehreren <a href="{{ '/projekte/' | relative_url }}">Projekten</a>, Terminen oder Menschen – und jemand aus dem <a href="{{ '/team/' | relative_url }}">Team</a> kümmert sich darum.</p>
+  <p>Ihr wisst eine Antwort oder habt das passende Teil? Meldet euch!</p>
+</div>
+{%- assign all = site.herausforderungen | sort: "title" -%}
+{%- assign inst = all | where_exp: "h", "h.persoenlich != true" -%}
+{%- assign personal = all | where: "persoenlich", true -%}
+{%- assign h_open = inst | where_exp: "h", "h.status != 'geloest'" -%}
+{%- assign h_wip = h_open | where: "status", "in-arbeit" -%}
+{%- assign h_todo = h_open | where_exp: "h", "h.status != 'in-arbeit'" -%}
+{%- assign h_open = h_wip | concat: h_todo -%}
+{%- assign h_done = inst | where: "status", "geloest" -%}
+<nav class="equipment-jump">
+  <a href="#offen">Offen ({{ h_open.size }})</a>{% if h_done.size > 0 %} · <a href="#geloest">Gelöst ({{ h_done.size }})</a>{% endif %}{% if personal.size > 0 %} · <a href="#persoenlich">Persönlich ({{ personal.size }})</a>{% endif %}
+</nav>
+
+<h2 class="cal-heading" id="offen">Offen</h2>
+{% if h_open.size > 0 %}
+<div class="grid-2">
+  {% for h in h_open %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% else %}
+<p class="muted">Gerade ist nichts offen. 🎉</p>
+{% endif %}
+
+{% if h_done.size > 0 %}
+<h2 class="cal-heading" id="geloest">Gelöst</h2>
+<div class="grid-2">
+  {% for h in h_done %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% endif %}
+
+{% if personal.size > 0 %}
+<h2 class="cal-heading" id="persoenlich">Aus persönlichen Projekten</h2>
+<p class="muted">Herausforderungen aus privaten Makespace-Projekten im Team – keine Aufgaben des Instituts.</p>
+<div class="grid-2">
+  {% for h in personal %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% endif %}

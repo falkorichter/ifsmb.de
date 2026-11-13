@@ -5,6 +5,8 @@
     - projects:  `teil_von` (parents), `verwandt`, `projekte` (events), tags matching a project's `event_tag`
     - people:    `team`, `author`
     - partners:  `partners`
+    - challenges: `verlinkt` both ways; on project pages they are listed in their own section
+                 (via `projekte` / `tags`), on team pages the profile lists the ones a person owns (`team`)
     - equipment: owners (`owner_partner`, `owner_team`, `owner_name` – each a value or a list) and
                  location (`standort_partner`, `standort`) get their own groups "Gehört" and "Standort"
   Parameters:
@@ -86,6 +88,20 @@
   {%- if p_links contains x.url or x_links contains me_url %}{% assign g_posts = g_posts | push: x %}{% endif -%}
 {%- endfor -%}
 
+{%- comment -%}--- challenges (Herausforderungen) ---{%- endcomment -%}
+{%- assign g_challenges = "" | split: "" -%}
+{%- for x in site.herausforderungen -%}
+  {%- if x.url == P.url %}{% continue %}{% endif -%}
+  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- assign x_proj = x.projekte | join: "," | split: "," -%}
+  {%- assign x_tags = x.tags | join: "," | split: "," -%}
+  {%- if kind == "projects" -%}
+    {%- if x_proj contains P.slug %}{% continue %}{% endif -%}
+    {%- if P.event_tag and x_tags contains P.event_tag %}{% continue %}{% endif -%}
+  {%- endif -%}
+  {%- if p_links contains x.url or x_links contains me_url %}{% assign g_challenges = g_challenges | push: x %}{% endif -%}
+{%- endfor -%}
+
 {%- comment -%}--- people ---{%- endcomment -%}
 {%- assign g_people = "" | split: "" -%}
 {%- unless include.ohne_personen -%}
@@ -136,7 +152,7 @@
 {%- comment -%}--- output ---{%- endcomment -%}
 {%- assign has_owner = false -%}{%- if o_partners.size > 0 or o_team.size > 0 or o_names.size > 0 %}{% assign has_owner = true %}{% endif -%}
 {%- assign has_location = false -%}{%- if l_partners.size > 0 or P.standort %}{% assign has_location = true %}{% endif -%}
-{%- if has_owner or has_location or g_parents.size > 0 or g_projects.size > 0 or g_events.size > 0 or g_posts.size > 0 or g_people.size > 0 or g_partners.size > 0 or g_unknown_partners.size > 0 or g_equipment.size > 0 or g_pages.size > 0 %}
+{%- if has_owner or has_location or g_parents.size > 0 or g_projects.size > 0 or g_events.size > 0 or g_posts.size > 0 or g_challenges.size > 0 or g_people.size > 0 or g_partners.size > 0 or g_unknown_partners.size > 0 or g_equipment.size > 0 or g_pages.size > 0 %}
 <section class="connections" id="verbindungen" data-pagefind-ignore="all">
   {%- if g_parents.size > 0 %}
   <h2>{% if kind == "projects" %}Dieses Projekt ist ein Teil von{% else %}Teil von{% endif %}</h2>
@@ -169,6 +185,12 @@
   <h2>Beiträge</h2>
   <ul class="link-list link-list-connections">
     {% for x in g_posts %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📰</span> {{ x.title }} <span class="link-meta">{{ x.date | date: "%d.%m.%Y" }}</span>{% if x.persoenlich %} <span class="link-private">persönlich</span>{% endif %}</a></li>{% endfor %}
+  </ul>
+  {%- endif %}
+  {%- if g_challenges.size > 0 %}
+  <h2>Herausforderungen</h2>
+  <ul class="link-list link-list-connections">
+    {% for x in g_challenges %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🧗</span> {{ x.title }} <span class="link-meta">{% if x.status == "geloest" %}gelöst{% elsif x.status == "in-arbeit" %}in Arbeit{% else %}offen{% endif %}</span>{% if x.persoenlich %} <span class="link-private">persönlich</span>{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if has_owner %}

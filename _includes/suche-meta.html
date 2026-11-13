@@ -9,6 +9,7 @@
 {%- when "events" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Termine" -%}{%- else -%}{%- assign bereich = "Termine" -%}{%- endif -%}
 {%- when "team" -%}{%- assign bereich = "Team" -%}
 {%- when "equipment" -%}{%- assign bereich = "Ausstattung" -%}
+{%- when "herausforderungen" -%}{%- assign bereich = "Herausforderungen" -%}
 {%- when "press" -%}{%- assign bereich = "Presse" -%}
 {%- else -%}{%- if p.url contains "/partner/" -%}{%- assign bereich = "Partner" -%}{%- else -%}{%- assign bereich = "Seiten" -%}{%- endif -%}
 {%- endcase %}
