@@ -2,6 +2,7 @@
 title: "2D-Projekte mit dem Stiftplotter: 35services/2d"
 summary: Im GitHub-Repository 35services/2d dokumentiert Falko seit April 2024 alle Plotter-Projekte mit dem AxiDraw V3 bei 35services – von einer einlinigen Mona Lisa über eine geplottete Pflasterstein-Trophäe bis zu mehrfarbigen Gutscheinen.
 status: aktuell
+persoenlich: true
 start: 2024-04-19
 zeitraum: seit April 2024
 ort: 35services e.V., Moabit
