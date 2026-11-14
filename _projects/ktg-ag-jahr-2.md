@@ -13,6 +13,7 @@ team:
 partners:
   - Kurt-Tucholsky-Grundschule
   - 35 services e. V.
+uuid: d9c679f6-4ef6-4acf-87c8-e88cc3561fc6
 ---
 
 Im zweiten Jahr der AG an der Kurt-Tucholsky-Grundschule stand das **Konstruieren am Computer** im Mittelpunkt. Im zweiten Schulhalbjahr ist [Gregor Dill]({{ '/team/gregor-dill/' | relative_url }}) dazugestoßen – seitdem leiten Falko und Gregor die AG gemeinsam.

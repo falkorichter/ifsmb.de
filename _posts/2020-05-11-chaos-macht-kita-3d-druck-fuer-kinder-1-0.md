@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://falkorichter.github.io/volkersfreunde-jekyll/chaos-macht-kita-3d-druck-fuer-kinder-1-0/
 original_site: volkersfreunde
 tags: [kita]
+uuid: 1a6472d9-b482-4e44-ab92-919f2a837a51
 ---
 
 ![Screenshot der Streaming-Software OBS: links Falko im Kamerabild, rechts daneben dasselbe Bild durch die Wärmebildkamera in Gelb, Orange und Lila](/assets/images/news/chaos-macht-kita-3d-druck-fuer-kinder-1-0/01.jpg)

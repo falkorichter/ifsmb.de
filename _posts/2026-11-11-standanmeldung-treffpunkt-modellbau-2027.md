@@ -5,6 +5,7 @@ author: falko-richter
 persoenlich: true
 tags: [rc-modellbau, mogster]
 verlinkt: [/kalender/2027-02-13-treffpunkt-modellbau-paaren-im-glien/]
+uuid: 0019ffdf-dd5a-4fea-8a48-af29e6fae25b
 ---
 
 Nach einem freundlichen Telefonat mit dem MAFZ in Paaren im Glien habe ich die **Ausstellereinladung** für den [Treffpunkt Modellbau]({{ '/kalender/2027-02-13-treffpunkt-modellbau-paaren-im-glien/' | relative_url }}) am 13. und 14. Februar 2027 bekommen. Meine Anfrage wurde an die Projektleitung weitergegeben, die weiteren Unterlagen zur Anmeldung werden gerade erstellt.

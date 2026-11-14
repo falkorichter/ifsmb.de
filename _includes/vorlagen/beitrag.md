@@ -12,6 +12,7 @@ tags: [{{ include.tags }}]   # Stichworte, z. B. [ktg, 3d-drucker] – das event
 verlinkt: [{{ include.verlinkt }}]   # weitere Seiten, z. B. [/projekte/3d-druck-ag-ktg/, /kalender/…/] – erscheinen unten bei „Verbindungen“
 original_url:    # nur bei übernommenen Beiträgen: Adresse des Originals, sonst löschen
 original_site:   # z. B. 35services.de, sonst löschen
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Text in Markdown. Dateiname oben anpassen: Datum und kurzer Titel mit Bindestrichen.

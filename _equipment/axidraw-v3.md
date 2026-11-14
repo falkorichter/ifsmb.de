@@ -20,6 +20,7 @@ videos:
     poster: /assets/video/news/jugend-hackt-congress-2026/116361.jpg
     caption: "Vom Jugend Hackt Congress 2026: Der Hund ist fast fertig"
 tags: [axidraw, plotter, 2d-druck]
+uuid: 063fcf20-9693-4025-b045-dab9a4970dce
 ---
 
 Der AxiDraw ist ein **Stiftplotter**: Ein kleiner Roboterarm führt einen ganz normalen Stift über das Papier und zeichnet so Schrift, Muster oder Bilder.

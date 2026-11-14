@@ -7,6 +7,7 @@ location: "Kurt-Tucholsky-Grundschule, Rathenower Str. 18, 10559 Berlin"
 location_url: https://kurt-tucholsky-grundschule.de/
 summary: Schulstadtrat Benjamin Fritz besucht die 3D-Druck AG und lässt sich den neuen 4-Farb-Drucker zeigen.
 team: [falko-richter, gregor-dill, frieder-euteneuer]
+uuid: b098c2be-92b5-4e81-ad0a-104b871a5157
 ---
 
 Schulstadtrat Benjamin Fritz hat die 3D-Druck AG besucht. Gregor Dill und Falko Richter haben ihm die AG und unseren neuen, komplett spendenfinanzierten 4-Kopf-4-Farb-4-Material-Drucker gezeigt.

@@ -4,6 +4,7 @@ date: 2026-11-10 09:00:00 +0100
 author: falko-richter
 tags: [netzwerk]
 verlinkt: []
+uuid: d8248438-758f-4d0d-a0e5-cd334196612e
 ---
 Was als 3D-Druck AG an einer Grundschule angefangen hat, ist inzwischen ein ganzes Geflecht: AGs an mehreren Schulen, Ausflüge, Partner, Geräte, die bei verschiedenen Leuten stehen, und viele Menschen, die mitmachen. Damit man das auch **sehen** kann, gibt es jetzt eine neue Seite: das **[Netzwerk]({{ '/netzwerk/' | relative_url }})** (im Menü unter „Wir“).
 

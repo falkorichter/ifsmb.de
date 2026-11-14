@@ -20,6 +20,7 @@ image:   # Titelbild, z. B. /assets/images/projekte/<name>/01.jpg – ohne Metad
 updates:   # kurze Notizen ohne eigenen Beitrag, neueste zuerst – längere Updates lieber als Beitrag mit dem event_tag
 #  - datum: JJJJ-MM-TT
 #    text: Was passiert ist, in Markdown.
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Beschreibung des Projekts in Markdown: Ziel, Stand, was gebraucht wird. Dateiname oben anpassen: kurzer Name mit Bindestrichen.

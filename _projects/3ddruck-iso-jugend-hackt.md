@@ -26,6 +26,7 @@ updates:
     text: >-
       Experiment mit **MX Linux** auf einem alten 12″-MacBook: läuft spürbar besser auf
       alter Hardware. Vielleicht wird eine spätere Version des Sticks darauf aufbauen.
+uuid: 694d0a72-9d71-45f3-b2ea-ffcf892b60e9
 ---
 
 Falko baut ein **Linux-System für USB-Sticks**, das ganz auf **CAD, 3D-Druck und Plotten** ausgerichtet ist. Stick rein, Laptop starten – und schon ist alles da, was ein Kind in der AG braucht. Die Grundlage ist das Live-System von [Jugend hackt]({{ '/partner/jugend-hackt/' | relative_url }}), mit dem auch auf ihren Veranstaltungen gearbeitet wird.

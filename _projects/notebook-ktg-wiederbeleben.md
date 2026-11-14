@@ -13,6 +13,7 @@ team:
   - mr-e
 partners:
   - Kurt-Tucholsky-Grundschule
+uuid: 2aaad3a9-4741-4880-a59e-b1f2e31d181c
 ---
 
 Ein neues Projekt von Falko für die [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}): ein **Notebook der KTG wiederbeleben**. Das **Displayscharnier hat eine Macke** – das Notebook sollte aber noch nutzbar sein, zumindest **stationär** auf dem Tisch.

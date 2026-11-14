@@ -4,6 +4,7 @@ date: 2026-08-16 12:00:00 +0200
 author: falko-richter
 persoenlich: true
 tags: [mogster, rc-modellbau]
+uuid: d2e74f0d-c462-4347-9823-0ef45dee5978
 ---
 Fertig gebaut und in den Sommerferien 2026 ausgiebig gefahren: Papas Mogster in Hellblau klettert über Baumwurzeln, fährt Sandhügel hoch und transportiert sogar eine ganze Ladung Nüsse.
 

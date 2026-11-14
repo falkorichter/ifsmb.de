@@ -26,6 +26,7 @@ videos:   # Videos, Liste aus src, poster, caption (720p-MP4 in assets/video/)
 #  - src: /assets/video/ausstattung/name/01.mp4
 #    poster: /assets/video/ausstattung/name/01.jpg
 #    caption: Was im Video passiert
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Beschreibung in Markdown: Was das Gerät kann, Erfahrungen, Tipps. Dateiname oben anpassen: Modell mit Bindestrichen.

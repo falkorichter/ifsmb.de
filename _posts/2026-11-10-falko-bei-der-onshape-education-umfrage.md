@@ -5,6 +5,7 @@ author: falko-richter
 persoenlich: true
 tags: [onshape]
 verlinkt: [/news/2026/10/13/linux-laptops-fuer-die-3d-druck-ag/]
+uuid: bcdd9edd-ee51-4ba1-8e2e-f3e68c5fb26a
 ---
 Falko hat an der jährlichen **Education User Survey** von [Onshape](https://www.onshape.com/) teilgenommen – der Umfrage, mit der das Onshape-Team herausfinden will, wie Lehrkräfte und Schüler*innen mit dem CAD-Programm arbeiten und was besser werden soll.
 

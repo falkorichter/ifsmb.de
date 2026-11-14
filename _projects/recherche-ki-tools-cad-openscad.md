@@ -26,6 +26,7 @@ updates:
       ![Derselbe GN-Halter in SolidCraft, vom Agenten über MCP als B-Rep-Modell mit M4-Verbindungslaschen aufgebaut](/assets/images/projekte/recherche-ki-tools-cad-openscad/02.jpg)
       ![Das vom Agenten geschriebene Feature „GN Holder“ in Onshape mit geöffnetem Parameter-Dialog und den 18 erzeugten Bauteilen](/assets/images/projekte/recherche-ki-tools-cad-openscad/03.jpg)
       {: .gallery}
+uuid: f5664da6-2f25-45a9-b3e0-317d9a96cd93
 ---
 
 Falko experimentiert mit [Claude Code](https://claude.com/claude-code) und schaut, wie gut ein KI-Agent 3D-Modelle konstruieren kann – angefangen mit [OpenSCAD](https://openscad.org/) und inzwischen auch mit parametrischen B-Rep-Werkzeugen über MCP ([SolidCraft](https://github.com/tangency-labs/solidcraft) und [Onshape FeatureScript](https://www.onshape.com/)). Unter diesen Links könnt ihr sehen, was schon alles funktioniert:

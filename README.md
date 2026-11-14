@@ -41,6 +41,15 @@ Neue Inhalte brauchen **keinen Eintrag in `CHANGELOG.md`** – dort stehen nur F
 
 Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-Daten), auf das Gesicht quadratisch zuschneiden und als `name-480w.jpg` + `name-960w.jpg` nach `assets/images/team/` legen; im Profil `photo` und `photo_2x` setzen.
 
+## Gelesen-Markierung
+
+Besucher*innen sehen an einem kleinen ✓, welche Seiten sie schon geöffnet haben; Neuigkeiten und Projekte zeigen „X von Y gelesen“. Gespeichert wird nur im Browser (`localStorage`, Schlüssel `gelesen_<uuid>`), nichts wird übertragen.
+
+- Jede Inhaltsseite braucht eine eigene `uuid` im Front Matter. Formulare und Vorlagen der ➕-Buttons setzen sie automatisch.
+- Fehlende ergänzen: `ruby _scripts/uuids_ergaenzen.rb` – Prüfen (scheitert bei doppelten uuids, z. B. nach dem Kopieren einer Datei): `ruby _scripts/uuids_ergaenzen.rb --pruefen`
+- Markierungen zum Testen löschen: Button im [Impressum](https://ifsmb.de/impressum/) oder in der Konsole
+  `Object.keys(localStorage).filter(k => k.startsWith('gelesen_')).forEach(k => localStorage.removeItem(k))`
+
 ## Kalender (iCal)
 
 Alle Termine stehen als Abo unter **https://ifsmb.de/kalender.ics** (bzw. `webcal://ifsmb.de/kalender.ics`) bereit. Der Feed wird bei jedem Build neu erzeugt.

@@ -22,6 +22,7 @@ gallery:   # Fotos nach dem Termin, Liste aus image, thumb, alt – unter assets
 #  - image: /assets/images/kalender/name-des-termins/01.jpg
 #    thumb: /assets/images/kalender/name-des-termins/01-600w.jpg
 #    alt: Was auf dem Foto zu sehen ist
+uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---
 
 Beschreibung in Markdown: Was passiert, wer kann kommen, was mitbringen. Dateiname oben anpassen: Datum und kurzer Name mit Bindestrichen.

@@ -8,6 +8,7 @@ image: /assets/images/ausstattung/3d-scanner/illustration.svg
 image_alt: "Illustration eines 3D-Handscanners, der ein Objekt mit Lichtmustern abtastet (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [3d-scanner, creality-ferret-se, 3dmakerpro-lynx]
+uuid: 338bd88f-1935-4456-8f98-add79f6d304b
 ---
 
 Der Ferret SE gehört Falko und **wird gerade getestet**.

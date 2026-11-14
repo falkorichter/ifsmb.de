@@ -21,6 +21,7 @@ gallery:
     thumb: /assets/images/ausstattung/german-reprap-x400/05-600w.jpg
     alt: "Logo der German RepRap GmbH auf dem blauen Acrylsockel"
 tags: [german-reprap-x400, 3d-drucker, 35services]
+uuid: 1ccf68cc-fc2e-4c40-a2e6-83c6ab52fb7d
 ---
 
 **Wir bekommen vielleicht einen German RepRap X400.** Ralf von 35services hat gefragt, ob wir ihn annehmen würden.

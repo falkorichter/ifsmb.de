@@ -18,6 +18,7 @@ team:
   - jan
 partners:
   - 35 services e. V.
+uuid: 50fc05ca-0cf9-465d-9d64-4acf456f3de1
 ---
 
 Im offenen GitHub-Repository **[35services/3d](https://github.com/35services/3d)** sammeln [Falko]({{ '/team/falko-richter/' | relative_url }}) und [Jan]({{ '/team/jan/' | relative_url }}) seit **November 2023** die 3D-Druck-Projekte rund um die Nachbarschaftswerkstatt [35services e. V.]({{ '/partner/35services/' | relative_url }}): eigene Konstruktionen, Druckdateien (`.stl`, `.step`, `.3mf`), Slicer-Profile und Notizen. Was in der Werkstatt entsteht, soll für alle nachdruckbar bleiben – und das Repo dient gleichzeitig als Gedächtnis, wann welches Projekt entstanden ist.

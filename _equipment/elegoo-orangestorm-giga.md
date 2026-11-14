@@ -7,6 +7,7 @@ image: /assets/images/ausstattung/elegoo-orangestorm-giga/01.jpg
 thumb: /assets/images/ausstattung/elegoo-orangestorm-giga/01-600w.jpg
 image_alt: "Der Elegoo OrangeStorm Giga, im Druckraum ein großes orangefarbenes Objekt mit Stützstrukturen"
 tags: [elegoo-orangestorm-giga, 3d-drucker, bietenholz]
+uuid: 9efac9c8-0cc9-4459-a441-6fe6462fe4b0
 ---
 
 Der Elegoo OrangeStorm Giga ist ein Großformat-3D-Drucker: Der Bauraum ist laut Hersteller 80 × 80 × 100 cm groß. Damit lassen sich Objekte drucken, für die normale Drucker viel zu klein sind.

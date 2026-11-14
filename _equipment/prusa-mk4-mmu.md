@@ -16,6 +16,7 @@ gallery:
     thumb: /assets/images/news/3d-druck-fuer-unsere-offene-werkstatt/01-600w.png
     alt: "Screenshot: die Druckwarteschlange des Prusa MK4 in Prusa Connect"
 tags: [prusa-mk4, 3d-drucker, 35services]
+uuid: 9942347f-f333-4470-94c1-cd59a88d7db4
 ---
 
 Falko wollte endlich einen ordentlichen Drucker haben – also hat er einen Prusa MK4 als **Bausatz** gekauft und selbst aufgebaut. Bei 35services durfte ihn jeder nutzen. Irgendwann wollten die Mitglieder den Drucker für den Verein übernehmen: Die Kosten wurden Falko erstattet, und seitdem ist der MK4 **Eigentum von 35services**.

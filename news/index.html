@@ -8,6 +8,7 @@ lead: Was gerade im Institut passiert.
 {% assign pers_posts = site.posts | where: "persoenlich", true %}
 {% if inst_posts.size > 0 %}
 <div class="feed-abo-zeile">{% include feed-abo.html feed="/feed.xml" titel="Neuigkeiten des Instituts abonnieren" %}</div>
+<div class="gelesen-fortschritt" data-bereich=".post-list-full" hidden><div class="gelesen-fortschritt-balken"><span></span></div><span class="gelesen-fortschritt-text"></span></div>
 <ul class="post-list post-list-full">
   {% for post in inst_posts %}
   <li>

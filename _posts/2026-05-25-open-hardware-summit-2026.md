@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2026/open-hardware-summit-2026/
 original_site: 35services.de
 tags: [35services]
+uuid: f339708f-6e57-4fa0-be24-4753ce14ccb2
 ---
 
 Wir haben die Ankündigung für dieses Event vorbeifliegen sehen. Falko und Anton waren dort und haben erst so richtig vor Ort gemerkt wie prominent das Event ist. Letztes Jahr noch in Edinburgh, vorher Toronto. Der Open Hardware Summit ist jedes Jahr in einem anderen Land und war jetzt direkt nebenan im Mathegebäude der TU Berlin.

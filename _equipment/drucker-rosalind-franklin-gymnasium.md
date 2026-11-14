@@ -9,6 +9,7 @@ image: /assets/images/ausstattung/drucker-rosalind-franklin-gymnasium/01.jpg
 thumb: /assets/images/ausstattung/drucker-rosalind-franklin-gymnasium/01-600w.jpg
 image_alt: "Ein Bambu Lab P2S mit AMS-Filamentwechsler, daneben ein Bambu Lab A1 mini im Makespace des Rosalind-Franklin-Gymnasiums"
 tags: [rosalind-franklin-gym, 3d-drucker, bambu-lab-a1-mini]
+uuid: 0acf9116-6ff8-435e-9f7c-a72e6900acd1
 ---
 
 Der Makespace am [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) hat **sechs 3D-Drucker**:

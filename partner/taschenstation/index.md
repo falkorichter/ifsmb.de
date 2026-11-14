@@ -2,6 +2,7 @@
 layout: page
 title: Taschenstation
 lead: Partner – Taschen-Tausch-Stationen aus dem 3D-Drucker
+uuid: 94e61ff7-a731-474c-b14b-14869c175a86
 ---
 <div class="prose" markdown="1">
 

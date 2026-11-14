@@ -8,6 +8,7 @@ event_tag: tarmo5
 tags: [3d-drucker]
 team:
   - falko-richter
+uuid: 3efc772c-4d03-47a9-9bed-e7669b3a5787
 ---
 
 Der **Tarmo5** ist ein ferngesteuertes Auto, dessen Teile größtenteils aus dem 3D-Drucker kommen. Dazu kommen Motor, Regler, Servo, Akku, Lager und Schrauben. Entworfen hat ihn Engineering NS.

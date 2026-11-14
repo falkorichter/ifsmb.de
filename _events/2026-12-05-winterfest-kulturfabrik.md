@@ -6,6 +6,7 @@ location: "Kulturfabrik Moabit, Lehrter Straße 35, 10557 Berlin"
 tags: [3d-drucker]
 summary: Winterfest in der Kulturfabrik Moabit – gemeinsam mit unserem Partner 35services, mit 3D-Druck.
 team: [falko-richter]
+uuid: 21cd0b93-4266-4793-94d1-eb04c89ca797
 ---
 
 Wir feiern das Winterfest in der Kulturfabrik Moabit zusammen mit [35services](https://35services.de/), der Nachbarschaftswerkstatt im Haus.

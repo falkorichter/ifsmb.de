@@ -3,6 +3,7 @@ title: "Wette eingelöst: Der AxiDraw malt die Mona Lisa in einer Linie"
 date: 2024-04-19 11:52:14 +0200
 author: falko-richter
 tags: [ktg, ktg-ag-jahr-1, 35services, 35services-2d, axidraw, plotter, 2d-druck]
+uuid: 19b2ead9-4d30-441f-8c7b-e3e8931706c5
 ---
 
 In den ersten Stunden der [3D-Druck- und Elektronik-AG an der KTG]({{ '/projekte/ktg-ag-jahr-1/' | relative_url }}) haben wir uns angeschaut, wie unser Stiftplotter [AxiDraw V3]({{ '/ausstattung/axidraw-v3/' | relative_url }}) funktioniert – denn ein 3D-Drucker ist im Grunde auch nichts anderes als ein 2D-Drucker, der Schicht für Schicht mit einem heißen Stift übereinander malt.

@@ -10,6 +10,7 @@ image: /assets/images/ausstattung/lasercutter-ktg/illustration.svg
 image_alt: "Illustration eines Lasercutters mit geöffnetem Deckel, Laserkopf und einem ausgeschnittenen Stempel (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [lasercutter, blockface, ktg]
+uuid: 43eedda4-adc0-498b-b44a-23872ce51a55
 ---
 
 Die [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) hat einen **Lasercutter** bekommen. Bevor die Kinder damit arbeiten, müssen wir ihn noch **testen und einrichten**: Abluft, Fokus, Materialeinstellungen und vor allem die Sicherheit.

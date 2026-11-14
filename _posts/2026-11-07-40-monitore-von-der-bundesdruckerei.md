@@ -4,6 +4,7 @@ date: 2026-11-07 12:00:00 +0100
 tags: [pc-spende, monitore-bundesdruckerei]
 partners: [PC-Spende – Das macht Schule]
 verlinkt: [/geld-fuer-makespaces/, /news/2026/09/24/pc-spende-de-hardware-fuer-schulen/, /ausstattung/laptops-druck-sticks/]
+uuid: 864dab23-20d1-4483-a46f-b7ba59dc7867
 ---
 Es funktioniert: Über [PC-Spende – Das macht Schule](https://pc-spende.das-macht-schule.net/) kommen **40 Monitore von der Bundesdruckerei** an eine Berliner Schule – an eine Schule aus unserem [Netzwerk]({{ '/netzwerk/' | relative_url }}).
 

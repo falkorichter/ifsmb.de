@@ -9,6 +9,7 @@ teil_von: [3dsets-mogster-bauen]
 event_tag: mogster-pc-blend
 team:
   - falko-richter
+uuid: d2e8c144-60f4-4e7f-869d-04b9e01bd0eb
 ---
 
 Ein Teilprojekt vom [Mogster]({{ '/projekte/3dsets-mogster-bauen/' | relative_url }}): Teile aus **PC-Blend** drucken. Die ersten Drucke gibt es im Beitrag [Mogster: erste Teile aus PC-Blend]({{ '/news/2026/09/14/mogster-erste-teile-aus-pc-blend/' | relative_url }}).

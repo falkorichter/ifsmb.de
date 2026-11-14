@@ -13,6 +13,7 @@ links:
     url: http://madrid.falkorichter.de/
   - title: "Interview: „3-D-Drucker in der Schule“ (Moabit-Ost, Mai 2026)"
     url: https://www.moabit-ost.de/aktuelles/interviews-von-gerald-backhaus/3-d-drucker-in-der-schule-falko-richter-mai-2026
+uuid: 12917a5c-7d81-49d0-8960-c930308a7079
 ---
 
 Falko ist **Softwareentwickler** und beschäftigt sich seit rund 15 Jahren mit 3D-Druckern. Er kommt aus der Gegend von Schwerin, lebt seit 2006 in Berlin und hat an der HTW Berlin Internationale Medieninformatik studiert.

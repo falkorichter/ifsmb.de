@@ -2,6 +2,7 @@
 layout: page
 title: Jugend hackt
 lead: Partner – „Mit Code die Welt verbessern“
+uuid: 33908aa5-0210-4eaf-973d-3ad00d2f1da4
 ---
 <div class="prose" markdown="1">
 

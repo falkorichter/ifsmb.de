@@ -11,6 +11,7 @@ tags: []   # Stichworte; das event_tag eines Projekts verbindet ebenfalls mit de
 verlinkt: []   # weitere Seiten: Termine, Geräte, Beiträge, z. B. [/kalender/…/]
 persoenlich: false   # true = aus einem privaten Projekt im Team
 loesung:   # wenn gelöst: wie, in Markdown – erscheint unter „Lösung“
+uuid: 597d1b15-f640-4adc-999d-5de1569dcc2c
 ---
 
 Wir brauchen die offene Software https://github.com/Snapmaker/OrcaSlicer/releases auf den Rechnern um arbeiten zu können. Alternativ schaut Falko nach Hardware außerhalb des Schul-IT-Ökosystem.

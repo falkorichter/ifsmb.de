@@ -14,6 +14,10 @@ content:
       sort: start
       order: desc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Titel
         type: string
@@ -124,6 +128,10 @@ content:
       sort: date
       order: desc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Titel
         type: string
@@ -184,6 +192,10 @@ content:
       sort: start
       order: desc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Titel
         type: string
@@ -278,6 +290,10 @@ content:
       sort: order
       order: asc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Name
         type: string
@@ -336,6 +352,10 @@ content:
       sort: title
       order: asc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Name des Geräts
         type: string
@@ -422,6 +442,10 @@ content:
       sort: title
       order: asc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Herausforderung (kurz, gern als Frage)
         type: string
@@ -487,6 +511,10 @@ content:
       sort: date
       order: desc
     fields:
+      - name: uuid
+        label: Kennung (Gelesen-Markierung)
+        type: string
+        hidden: true
       - name: title
         label: Titel
         type: string

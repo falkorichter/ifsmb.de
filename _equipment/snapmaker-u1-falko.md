@@ -9,6 +9,7 @@ image_is_illustration: true
 image_alt: "Illustration eines 3D-Druckers"
 tags: [u1, 3d-drucker, mehrfarbdruck]
 verlinkt: [/ausstattung/snapmaker-u1/]
+uuid: d52eb86e-cca5-42bb-b594-f1ea25a9f680
 ---
 
 Falko hat sich **privat einen Snapmaker U1 mit Deckel** zugelegt – den gleichen Drucker, der auch in der [3D-Druck AG an der KTG]({{ '/ausstattung/snapmaker-u1/' | relative_url }}) steht. Damit kann er im Keller endlich **zuverlässig drucken**. Vielleicht unterstützt er damit auch AGs, die er ja kommerziell anbietet. Er wird am 12.11.2026 geliefert.

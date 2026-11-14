@@ -10,6 +10,7 @@ image: /assets/images/ausstattung/illustration-drucker.svg
 image_alt: "Illustration eines kartesischen 3D-Druckers (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [prusa-mk3s, prusa-mk3s-heartlabs, 3d-drucker, 35services, heartlabs]
+uuid: 4c5d9773-f63e-44e6-b398-f44643a6ff28
 ---
 
 Falko hat diesen Prusa MK3S sehr günstig von [HeartLabs]({{ '/partner/' | relative_url }}#heartlabs) erworben. Gerade steht er bei 35services **in der Reparatur**: Das Kabel zum Druckbett war nach vielen Jahren durchgescheuert und wurde heiß – ein neues ist bestellt.

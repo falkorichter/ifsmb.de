@@ -20,7 +20,7 @@
   <meta property="og:url"         content="{{ site.url }}{{ page.url }}">
   <meta property="og:locale"      content="de_DE">
 </head>
-<body>
+<body{% if page.uuid %} data-uuid="{{ page.uuid }}"{% endif %} data-gelesen-index="{{ '/gelesen.json' | relative_url }}">
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="{{ '/' | relative_url }}">
@@ -89,6 +89,7 @@
   {% endunless %}
 
   {% include formular-config.html %}
+  <script src="{{ '/assets/js/gelesen.js' | relative_url }}" defer></script>
 
   <div class="lightbox-overlay" id="lightbox" hidden>
     <button class="lb-btn lb-close" aria-label="Schließen">×</button>

@@ -8,6 +8,7 @@ verlinkt:
   - /news/2026/11/07/40-monitore-von-der-bundesdruckerei/
   - /ausstattung/laptops-druck-sticks/
   - /spenden/
+uuid: 81e1f490-46a0-4e07-9cc1-d7adaef79c9e
 ---
 <div class="wip-box">
   <strong>🚧 In Arbeit:</strong> Diese Seite sammelt, was wir bisher wissen – sie ist nicht vollständig und wächst mit jedem Makespace, den wir aufbauen. Ihr kennt einen weiteren Weg oder habt Erfahrungen mit einem der Programme? Schreibt Falko: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falko [at] 35services.de</a>

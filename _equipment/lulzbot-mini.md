@@ -21,6 +21,7 @@ videos:
     poster: /assets/video/news/jugend-hackt-congress-2026/116216.jpg
     caption: "Vom Jugend Hackt Congress 2026: Druck läuft, Laptop angeschlossen"
 tags: [lulzbot-mini, lulzbot, 3d-drucker, flexibles-filament]
+uuid: db992b1e-37a9-47e0-82d0-c3abc26f2357
 ---
 
 Auch den LulzBot Mini hat Falko bekommen – und er war mega auf dem [Jugend Hackt Congress]({{ '/news/2026/10/19/jugend-hackt-congress-2026/' | relative_url }}).

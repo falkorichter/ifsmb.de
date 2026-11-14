@@ -8,6 +8,7 @@ image: /assets/images/ausstattung/bambu-lab-a1-mini-platanus/01.jpg
 thumb: /assets/images/ausstattung/bambu-lab-a1-mini-platanus/01-600w.jpg
 image_alt: "Der Bambu Lab A1 mini mit grünen Teilen in einem Klassenraum der Platanus Schule"
 tags: [bambu-lab-a1-mini, 3d-drucker, platanus]
+uuid: c38abf23-2604-4d3d-91b4-ad79ca567d7d
 ---
 
 Dieser Bambu Lab A1 mini **gehört der Platanus Schule**. Auf ihm druckt die [3D-Druck AG an der Platanus Schule]({{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}), die sich seit September 2026 einmal pro Woche trifft.

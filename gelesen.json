@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /gelesen.json
+suche: false
+---
+{%- comment -%}
+  Map page URL → uuid for the "read" marker (assets/js/gelesen.js). Only pages with a `uuid` in the
+  front matter (added by _scripts/uuids_ergaenzen.rb) are listed.
+{%- endcomment -%}
+{%- assign eintraege = "" | split: "" -%}
+{%- for d in site.documents -%}{%- if d.uuid -%}{%- assign eintraege = eintraege | push: d -%}{%- endif -%}{%- endfor -%}
+{%- for p in site.pages -%}{%- if p.uuid -%}{%- assign eintraege = eintraege | push: p -%}{%- endif -%}{%- endfor -%}
+{
+{%- for e in eintraege %}
+  {{ e.url | relative_url | jsonify }}: {{ e.uuid | jsonify }}{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+}

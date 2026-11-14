@@ -20,6 +20,7 @@ links:
     url: https://www.morgenpost.de/berlin/article401605606/wie-klappt-es-so-mit-euren-schuelern-liebe-lehrer.html
   - title: Morgenpost-Artikel im Archiv (archive.is)
     url: https://archive.is/nIRXT
+uuid: ae1ed79e-ce9c-491c-81cf-c1e503d62c3c
 ---
 
 Frieder ist **Lehrer für Informatik, Mathematik und Forstwirtschaft** in Berlin – aktuell am [Gymnasium Tiergarten](https://gymnasium-tiergarten.de/).

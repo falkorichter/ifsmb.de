@@ -1,4 +1,5 @@
 ---
+uuid: 24d52929-a0fd-4928-bbab-f5391fd2d417
 title: "Besuch an der Gustav-Falke-Grundschule"
 start: 2026-11-11 12:30
 all_day: false

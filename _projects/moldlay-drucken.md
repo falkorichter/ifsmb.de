@@ -9,6 +9,7 @@ event_tag: moldlay
 team:
   - falko-richter
   - philipp-schalldach
+uuid: 85aa89c1-657c-4403-867d-b65df1752bdd
 ---
 
 Ein neues Projekt von Falko und Philipp: **Moldlay drucken**. Moldlay ist ein wachsähnliches Filament, mit dem man Modelle für den Metallguss im Wachsausschmelzverfahren drucken kann.

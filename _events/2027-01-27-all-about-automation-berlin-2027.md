@@ -8,6 +8,7 @@ location_url: https://www.allaboutautomation.de/en/berlin/
 tags: [rosalind-franklin-gym, ktg]
 summary: Fachmesse für Automatisierung, Robotik und Digitalisierung. Falko war 2026 dort und plant, wieder hinzugehen – vielleicht dürfen diesmal auch Kinder mit.
 team: [falko-richter]
+uuid: b5856536-0316-4780-88cd-5f9f21f7cd5f
 ---
 
 Die [all about automation](https://www.allaboutautomation.de/en/berlin/) ist eine Fachmesse für industrielle Automatisierung, Robotik und Digitalisierung in der STATION Berlin.

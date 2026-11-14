@@ -10,6 +10,7 @@ event_tag: lastenlaufrad-kiez-wm
 tags: [lastenlaufrad-kiez-wm]
 team:
   - falko-richter
+uuid: 5c10bb97-1010-4a42-8fc4-94b9a7bdb2f6
 ---
 
 Am **9. Mai 2026** fand beim Frühlingsfest im [Zazza](https://www.instagram.com/zazza_moabit/) die erste **Moabiter Lastenlaufrad Kiez-Weltmeisterschaft** statt. Falko hat das Rennen über sein Projekt [PimpMyCargo.bike](https://www.pimpmycargo.bike){: .link-tot} organisiert, unterstützt von [Super Bicycles](https://super-bicycles.com) und dem Zazza.

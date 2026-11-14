@@ -8,6 +8,7 @@ image: /assets/images/ausstattung/flsun-v400/illustration.svg
 image_alt: "Illustration eines Delta-3D-Druckers mit drei Türmen und rundem Druckbett (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [flsun-v400, 3d-drucker]
+uuid: 56a01fcc-a57e-4137-a6a0-438a515ce822
 ---
 
 **Wir bekommen vielleicht einen FLSUN V400 von pebcak.**

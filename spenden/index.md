@@ -2,6 +2,7 @@
 layout: page
 title: Spenden
 lead: Danke, dass ihr uns unterstützen wollt!
+uuid: 4b4af433-ce27-4f83-8644-503f3fb533f1
 ---
 <div class="prose donate" markdown="1">
 

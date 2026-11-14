@@ -10,6 +10,7 @@ team:
   - falko-richter
 partners:
   - Platanus Schule
+uuid: a7f143a5-5085-4259-9ba0-4bbe1594d5f1
 ---
 
 Über eine Freundin wurde Falko Richter gefragt, ob er nicht an der Platanus Schule eine AG anbieten möchte. Im September 2026 ging es los: Seitdem trifft sich die 3D-Druck-AG einmal pro Woche.

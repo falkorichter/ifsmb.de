@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2025/programmier-werkstatt-am-lessing-gymnasium/
 original_site: 35services.de
 tags: [35services, lessing-gymnasium]
+uuid: 23b64f93-ff1c-4731-a855-c0879ef57092
 ---
 
 Falko macht am Lessing Gymnasium eine 35services Programmier Werkstatt.

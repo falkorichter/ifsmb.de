@@ -10,6 +10,7 @@ gallery:
     thumb: /assets/images/kalender/2025-03-03-zweiter-besuch-bei-max/01-600w.jpg
     alt: "Kinder drängen sich im Flur von Max' Werkstatt vor einem Regal mit Kartons und Kisten (Gesichter unkenntlich gemacht)"
 team: [falko-richter]
+uuid: 4fa524d3-4125-4f2e-a650-7d6293ac99df
 ---
 
 Zum zweiten Mal war die [3D-Druck- und Elektronik-AG]({{ '/projekte/ktg-ag-jahr-2/' | relative_url }}) zu Gast bei Max in seiner Werkstatt in der Stephanstraße – nach dem [ersten Ausflug im April 2024]({{ '/kalender/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/' | relative_url }}). Max betreibt **3dBoutiqueBerlin**, eine kleine Firma, die 3D-gedruckte Objekte entwirft, druckt und verkauft.

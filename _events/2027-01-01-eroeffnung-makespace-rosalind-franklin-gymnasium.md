@@ -9,6 +9,7 @@ location: "Rosalind-Franklin-Gymnasium, Turmstraße 75A, 10551 Berlin"
 location_url: https://rosalind-franklin-gymnasium.de/
 summary: Die 6 Drucker sind seit Beginn des Schuljahres im Einsatz, die 3D-Druck-AG läuft – im Januar feiern wir das mit Gästen.
 team: [falko-richter, frieder-euteneuer]
+uuid: 9c813306-de63-4f75-81f0-0e2e76baf476
 ---
 
 Im Januar feiern wir den Makespace am [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/) mit einer kleinen feierlichen Eröffnung. Genutzt wird er schon längst: Die 6 Drucker sind seit Beginn des Schuljahres 2026/27 da und im Einsatz, die 3D-Druck-AG findet statt, dazu gibt es 2 Schneidplotter. Details zur Feier folgen.

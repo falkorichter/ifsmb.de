@@ -4,6 +4,7 @@ date: 2026-10-19 18:00:00 +0200
 author: falko-richter
 tags: [rc-modellbau]
 persoenlich: true
+uuid: 42f91d5f-a7fa-4c12-989f-6e1b2efc50d7
 ---
 
 [Falko]({{ '/team/falko-richter/' | relative_url }}) ist auf TikTok gelandet – gepostet von @ninaailenna. Und nicht nur Falko: Auch sein **RC-Controller** wurde gefilmt.

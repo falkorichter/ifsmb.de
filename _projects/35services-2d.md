@@ -16,6 +16,7 @@ team:
   - falko-richter
 partners:
   - 35 services e. V.
+uuid: 0817e72a-78c5-4ee0-b624-c639b67aa874
 ---
 
 Im offenen GitHub-Repository **[35services/2d](https://github.com/35services/2d)** dokumentiert [Falko]({{ '/team/falko-richter/' | relative_url }}) seit **April 2024** die 2D- und Plotter-Projekte aus der Nachbarschaftswerkstatt [35services e. V.]({{ '/partner/35services/' | relative_url }}) – vor allem für unseren Stiftplotter **[AxiDraw V3]({{ '/ausstattung/axidraw-v3/' | relative_url }})**.
