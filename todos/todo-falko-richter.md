@@ -36,6 +36,17 @@ tags: [ktg]
 
 Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
 
+### https://github.com/morluto/rea angucken {#https-github-com-morluto-rea-angucken}
+
+https://docs.github.com/en/copilot/responsible-use/copilot-commit-message-generation
+
+```yaml
+art: aufgabe
+status: offen
+seit: 2026-11-13
+helfer: [anton]
+```
+
 ## 📌 Einplanen
 
 ### Passen unsere Schrittmotoren für Mural? {#mural-schrittmotoren}
@@ -133,5 +144,20 @@ tags: [openscan]
 - **Variante:** OpenScan Mini oder Classic?
 - **Kamera:** Welche Kamera nehmen wir?
 - **Mitmachen:** Wer baut mit?
+
+### Non planar slicing {#non-planar-slicing}
+
+```yaml
+kurz: "Angucken "
+art: frage
+status: offen
+seit: 2026-11-13
+helfer: [anton]
+projekte: [35services-3d]
+tags: [35services-3d]
+verlinkt: [/partner/35services/, /ausstattung/bambu-lab-a1-mini/, /ausstattung/prusa-mk3s-xhain/, /projekte/prusa-mk3s-heartlabs-flott-machen/]
+```
+
+https://youtu.be/cRSoVq_reGQ?is=4-7OQB8jc_aDTww_
 
 ## ✅ Erledigt

@@ -1,13 +1,13 @@
 ---
+uuid: 24d52929-a0fd-4928-bbab-f5391fd2d417
 title: "Besuch an der Gustav-Falke-Grundschule"
-start: 2026-11-11 00:00
-all_day: true
+start: 2026-11-11 12:30
+all_day: false
 location: "Gustav-Falke-Grundschule, Berlin"
 summary: Falko besucht die Gustav-Falke-Grundschule und ihren Makespace – Making steht dort seit 2020 im Stundenplan.
 tags: [gustav-falke]
 team: [falko-richter]
-persoenlich: true
-uuid: 24d52929-a0fd-4928-bbab-f5391fd2d417
+persoenlich: false
 ---
 
 Falko besucht die **Gustav-Falke-Grundschule** in Berlin und schaut sich ihren Makespace an.
@@ -16,6 +16,17 @@ Falko besucht die **Gustav-Falke-Grundschule** in Berlin und schaut sich ihren M
   <img src="/assets/images/kalender/2026-11-11-besuch-gustav-falke-grundschule/youtube-sJzpJVTg7kQ.jpg" alt="Vorschaubild: Besuch am Makespace der Gustav-Falke-Grundschule" loading="lazy">
   <span class="video-play">▶ Video auf YouTube ansehen</span>
 </a>
+
+```
+0:28 Rundgang durch den Make Space
+1:53 Ausstattung und Sicherheit im Kreativraum
+4:06 Kreative Projekte der Kinder
+7:53 Making für Teilhabe und Inklusion
+9:34 Faire Preise und Unterstützung durch Eltern
+10:28 Arbeitssicherheit beim 3D-Druck
+12:12 Werkzeuge und getrennte Werkstattbereiche
+14:06 Filamentpflege und praktische Druckhelfer
+```
 
 Was Falko vorab über die Initiative notiert hat:
 
