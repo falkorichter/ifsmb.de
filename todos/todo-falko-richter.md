@@ -36,16 +36,27 @@ tags: [ktg]
 
 Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
 
-### https://github.com/morluto/rea angucken {#https-github-com-morluto-rea-angucken}
+### Würth, Pfefferwerk, {#wurth-pfefferwerk}
 
-https://docs.github.com/en/copilot/responsible-use/copilot-commit-message-generation
+```yaml
+kurz: Bernd Krebs
+art: aufgabe
+status: offen
+seit: 2026-11-13
+```
+
+### Social media cards für ifsmb {#social-media-cards-fur-ifsmb}
 
 ```yaml
 art: aufgabe
 status: offen
-seit: 2026-11-13
-helfer: [anton]
+seit: 2026-11-14
+projekte: [ifsmb-de]
+tags: [software]
+verlinkt: [/projekte/ifsmb-de/]
 ```
+
+Vielleicht auch nochmal vergleichen was wir beim Lastenlaufradrennen gebaut haben
 
 ## 📌 Einplanen
 
@@ -107,19 +118,31 @@ verlinkt: [/projekte/3d-druck-ag-platanus-schule/, /news/2026/11/11/post-von-der
 
 https://www.platanus-schule.de/tag-der-offenen-tuer/
 
-### Keramik Koordination {#keramik-koordination}
+### Deckel wie bei Gustav Falke - wollen wir so etwas drucken? {#deckel-wie-bei-gustav-falke-wollen-wir-so-etwas-drucken}
 
 ```yaml
-art: aufgabe
-status: in-arbeit
-seit: 2026-11-13
-faellig: 2026-11-18
-projekte: [3d-druck-ag-platanus-schule]
-tags: [platanus]
-verlinkt: [/news/2026/11/11/post-von-der-keramik-ag-und-ein-erster-schluesselanhaenger/]
+art: frage
+status: offen
+seit: 2026-11-14
+projekte: [3d-druck-ag-rosalind-franklin-gymnasium]
+tags: [rosalind-franklin-gym]
+verlinkt: [/kalender/2026-11-11-besuch-gustav-falke-grundschule/]
 ```
 
-Ich muss mit der Keramik AG klären wie viel Zeit wir dafür haben
+[Deckel Video](https://youtu.be/MLQvEFuRu9Y?is=vqGTS-Xs0ATl15Da)
+
+### Ohne Titel {#neues-todo}
+
+```yaml
+kurz: Recherche zur hotRC
+art: aufgabe
+status: offen
+seit: 2026-11-15
+projekte: [rc-tractor-professorboots]
+tags: [rc-tractor-professorboots]
+```
+
+https://youtu.be/Oes2u12HYyE?is=-JExxT82gyQGuLhL
 
 ## 🤝 Abgeben
 
