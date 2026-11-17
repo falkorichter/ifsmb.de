@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""Exportiert ein Badge nach assets/badge/ (dort liegen die Dateien für die Website):
+"""Exports a badge to assets/badge/ (the files the website serves):
 
-  <name>.3mf        zwei getrennte, eingefärbte Objekte „gelb“ und „schwarz“ (AMS/MMU)
-  <name>.obj/.mtl   dasselbe als OBJ – lädt auch der 3D-Viewer der Website (assets/js/badge3d.js)
-  <name>.stl        ein Körper, Farbwechsel per Pause bei Z = base_h
-  <name>-oben.png   Vorschau von oben
+  <name>.3mf        two separate, coloured objects "gelb" and "schwarz" (AMS/MMU)
+  <name>.obj/.mtl   the same as OBJ – also loaded by the website's 3D viewer (assets/js/badge3d.js)
+  <name>.stl        one body, colour change by pause at Z = base_h
+  <name>-oben.png   preview from above
 
-Aufruf:
-  python3 export-farbig.py                 -> ifsmb-badge.*
-  python3 export-farbig.py "Hr. Sladek"    -> ifsmb-badge-hr-sladek.*
-Neue Badges auch in _data/badges.yml eintragen.
+Usage:
+  python3 export_colored.py                 -> ifsmb-badge.*
+  python3 export_colored.py "Hr. Sladek"    -> ifsmb-badge-hr-sladek.*
+Add new badges to _data/badges.yml as well.
 """
 import os, re, subprocess, sys, tempfile, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCAD = os.path.join(HERE, "ifsmb-badge.scad")
 OUT = os.path.normpath(os.path.join(HERE, "..", "..", "assets", "badge"))
-PARTS = [("gelb", "#FFCC00"), ("schwarz", "#16161D")]
+# (part in ifsmb-badge.scad, object/material name people see in the slicer, colour)
+PARTS = [("yellow", "gelb", "#FFCC00"), ("black", "schwarz", "#16161D")]
 
 
 def render(part, name):
@@ -41,9 +42,9 @@ def render(part, name):
 
 
 def write_3mf(path, meshes):
-    mats = "".join(f'<base name="{n}" displaycolor="{c}"/>' for n, c in PARTS)
+    mats = "".join(f'<base name="{n}" displaycolor="{c}"/>' for _, n, c in PARTS)
     objs, items = [], []
-    for i, ((n, _), (verts, tris)) in enumerate(zip(PARTS, meshes)):
+    for i, ((_, n, _c), (verts, tris)) in enumerate(zip(PARTS, meshes)):
         oid = i + 2
         v = "".join(f'<vertex x="{x}" y="{y}" z="{z}"/>' for x, y, z in verts)
         t = "".join(f'<triangle v1="{a}" v2="{b}" v3="{c}"/>' for a, b, c in tris)
@@ -74,13 +75,13 @@ def write_3mf(path, meshes):
 def write_obj(path, meshes):
     mtl = os.path.splitext(path)[0] + ".mtl"
     with open(mtl, "w") as f:
-        for n, c in PARTS:
+        for _, n, c in PARTS:
             r, g, b = (int(c[i:i + 2], 16) / 255 for i in (1, 3, 5))
             f.write(f"newmtl {n}\nKd {r:.4f} {g:.4f} {b:.4f}\n\n")
     with open(path, "w") as f:
         f.write(f"mtllib {os.path.basename(mtl)}\n")
         base = 1
-        for (n, _), (verts, tris) in zip(PARTS, meshes):
+        for (_, n, _c), (verts, tris) in zip(PARTS, meshes):
             f.write(f"o {n}\nusemtl {n}\n")
             f.writelines(f"v {x} {y} {z}\n" for x, y, z in verts)
             f.writelines(f"f {a + base} {b + base} {c + base}\n" for a, b, c in tris)
@@ -90,7 +91,7 @@ def write_obj(path, meshes):
 name = sys.argv[1] if len(sys.argv) > 1 else ""
 slug = re.sub(r"[^a-z0-9äöüß]+", "-", name.lower()).strip("-")  # "Hr. Sladek" -> "hr-sladek"
 stem = "ifsmb-badge" + (f"-{slug}" if slug else "")
-meshes = [render(p, name) for p, _ in PARTS]
+meshes = [render(part, name) for part, _, _ in PARTS]
 base = os.path.join(OUT, stem)
 write_3mf(base + ".3mf", meshes)
 write_obj(base + ".obj", meshes)
@@ -99,5 +100,5 @@ subprocess.run(["openscad", "-D", f'name="{name}"', "-o", base + ".stl", SCAD], 
 subprocess.run(["openscad", "--projection=o", "--camera=0,-3,0,0,0,0,110", "--imgsize=1200,800",
                 "--colorscheme=Tomorrow", "-D", f'name="{name}"', "-o", base + "-oben.png", SCAD],
                check=True, stdout=q, stderr=q)
-for (n, _), (v, t) in zip(PARTS, meshes):
-    print(f"{stem}: {n} {len(v)} Punkte, {len(t)} Dreiecke")
+for (_, n, _c), (v, t) in zip(PARTS, meshes):
+    print(f"{stem}: {n} {len(v)} Punkte, {len(t)} Dreiecke")  # output for people: German

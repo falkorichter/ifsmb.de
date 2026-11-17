@@ -274,86 +274,87 @@ var Formular = (function () {
   // ---------- reading front matter (edit forms) ----------
   // Splits a file into front matter blocks and body, keeping every byte: joining the raw blocks with "\n" gives the
   // front matter back unchanged. A block is one top-level key with its following lines (indented lines, "- " list
-  // items, blank lines) or a top-level comment. → { bloecke: [{ key, raw }], rest } or null without front matter.
+  // items, blank lines) or a top-level comment. → { blocks: [{ key, raw }], rest } or null without front matter.
   // rest = everything after the closing "---" line, including its newline.
-  function zerlegeDatei(text) {
+  function splitFile(text) {
     text = String(text).replace(/\r\n/g, "\n");
     if (!/^---\n/.test(text)) return null;
-    var ende = text.indexOf("\n---", 3);
-    while (ende >= 0 && !/^\n---(\n|$)/.test(text.slice(ende, ende + 5))) ende = text.indexOf("\n---", ende + 1);
-    var leerFm = /^---\n---(\n|$)/.test(text);
-    if (ende < 0 && !leerFm) return null;
-    var fm = leerFm ? "" : text.slice(4, ende), rest = leerFm ? text.slice(3) : text.slice(ende + 4);
-    var bloecke = [];
-    if (fm !== "") fm.split("\n").forEach(function (z) {
-      var m = z.match(/^([A-Za-z_][\w-]*)\s*:(\s|$)/);
-      if (m) bloecke.push({ key: m[1], zeilen: [z] });
-      else if (/^#/.test(z) || !bloecke.length) bloecke.push({ key: null, zeilen: [z] });
-      else bloecke[bloecke.length - 1].zeilen.push(z);
+    var end = text.indexOf("\n---", 3);
+    while (end >= 0 && !/^\n---(\n|$)/.test(text.slice(end, end + 5))) end = text.indexOf("\n---", end + 1);
+    var emptyFrontMatter = /^---\n---(\n|$)/.test(text);
+    if (end < 0 && !emptyFrontMatter) return null;
+    var frontMatterText = emptyFrontMatter ? "" : text.slice(4, end), rest = emptyFrontMatter ? text.slice(3) : text.slice(end + 4);
+    var blocks = [];
+    if (frontMatterText !== "") frontMatterText.split("\n").forEach(function (line) {
+      var m = line.match(/^([A-Za-z_][\w-]*)\s*:(\s|$)/);
+      if (m) blocks.push({ key: m[1], lines: [line] });
+      else if (/^#/.test(line) || !blocks.length) blocks.push({ key: null, lines: [line] });
+      else blocks[blocks.length - 1].lines.push(line);
     });
-    return { bloecke: bloecke.map(function (b) { return { key: b.key, raw: b.zeilen.join("\n") }; }), rest: rest, leer: leerFm };
+    return { blocks: blocks.map(function (b) { return { key: b.key, raw: b.lines.join("\n") }; }), rest: rest };
   }
-  function setzeDatei(z, bloecke, rest) {
-    var fm = bloecke.join("\n");
-    return "---\n" + (fm === "" ? "" : fm + "\n") + "---" + rest;
+  // Inverse of splitFile: raw blocks + rest → file text
+  function joinFile(blocks, rest) {
+    var frontMatterText = blocks.join("\n");
+    return "---\n" + (frontMatterText === "" ? "" : frontMatterText + "\n") + "---" + rest;
   }
-  function ohneKommentar(s) { return s.replace(/\s+#.*$/, ""); }
-  function einWert(s) {
+  function stripComment(s) { return s.replace(/\s+#.*$/, ""); }
+  function scalarValue(s) {
     s = s.trim();
     var m = s.match(/^"((?:[^"\\]|\\.)*)"\s*(#.*)?$/);
     if (m) return m[1].replace(/\\(["\\\/])/g, "$1").replace(/\\n/g, "\n").replace(/\\t/g, "\t");
     m = s.match(/^'((?:[^']|'')*)'\s*(#.*)?$/);
     if (m) return m[1].replace(/''/g, "'");
     if (/^["']/.test(s)) return undefined; // unclosed quote (multi-line) – too complex
-    s = ohneKommentar(s);
+    s = stripComment(s);
     if (/^(true|false)$/i.test(s)) return /^true$/i.test(s);
     if (/^(null|~)?$/i.test(s)) return "";
     if (/^[\[{&*!|>]/.test(s)) return undefined;
     return s;
   }
-  function inlineListe(s) {
-    s = ohneKommentar(s.trim());
+  function inlineList(s) {
+    s = stripComment(s.trim());
     if (!/^\[.*\]$/.test(s)) return undefined;
-    var innen = s.slice(1, -1), teile = [], akt = "", q = null;
-    for (var i = 0; i < innen.length; i++) {
-      var c = innen[i];
-      if (q) { akt += c; if (c === q && innen[i - 1] !== "\\") q = null; }
-      else if (c === '"' || c === "'") { q = c; akt += c; }
-      else if (c === ",") { teile.push(akt); akt = ""; }
+    var inner = s.slice(1, -1), parts = [], current = "", quote = null;
+    for (var i = 0; i < inner.length; i++) {
+      var c = inner[i];
+      if (quote) { current += c; if (c === quote && inner[i - 1] !== "\\") quote = null; }
+      else if (c === '"' || c === "'") { quote = c; current += c; }
+      else if (c === ",") { parts.push(current); current = ""; }
       else if (c === "[" || c === "{") return undefined;
-      else akt += c;
+      else current += c;
     }
-    if (akt.trim() !== "" || teile.length) teile.push(akt);
-    var r = teile.map(einWert);
+    if (current.trim() !== "" || parts.length) parts.push(current);
+    var r = parts.map(scalarValue);
     return r.some(function (x) { return x === undefined || typeof x === "boolean"; }) ? undefined : r.map(String);
   }
-  // Value of a raw block from zerlegeDatei: string, boolean, array of strings, "" for empty, undefined if the value
+  // Value of a raw block from splitFile: string, boolean, array of strings, "" for empty, undefined if the value
   // is something the forms don't edit (objects, lists of objects, anchors …).
-  function yamlWert(raw) {
-    var zeilen = raw.split("\n"), kopf = zeilen[0].replace(/^[^:]*:\s?/, ""), weiter = zeilen.slice(1);
-    var inhalt = weiter.filter(function (z) { return z.trim() !== "" && !/^\s*#/.test(z); });
-    var b = kopf.trim().match(/^([|>])([+-]?)\s*(#.*)?$/);
-    if (b) {
-      var ein = Math.min.apply(null, inhalt.map(function (z) { return z.match(/^ */)[0].length; }).concat([Infinity]));
-      var txt = weiter.map(function (z) { return z.slice(Math.min(ein, z.length)); });
-      while (txt.length && txt[txt.length - 1] === "") txt.pop();
-      var s = b[1] === "|" ? txt.join("\n") : txt.join("\n").replace(/([^\n])\n(?=[^\n])/g, "$1 ");
-      return b[2] === "-" ? s : s + "\n";
+  function yamlValue(raw) {
+    var lines = raw.split("\n"), head = lines[0].replace(/^[^:]*:\s?/, ""), following = lines.slice(1);
+    var content = following.filter(function (l) { return l.trim() !== "" && !/^\s*#/.test(l); });
+    var block = head.trim().match(/^([|>])([+-]?)\s*(#.*)?$/);
+    if (block) {
+      var indent = Math.min.apply(null, content.map(function (l) { return l.match(/^ */)[0].length; }).concat([Infinity]));
+      var text = following.map(function (l) { return l.slice(Math.min(indent, l.length)); });
+      while (text.length && text[text.length - 1] === "") text.pop();
+      var s = block[1] === "|" ? text.join("\n") : text.join("\n").replace(/([^\n])\n(?=[^\n])/g, "$1 ");
+      return block[2] === "-" ? s : s + "\n";
     }
-    if (kopf.trim() === "" || /^#/.test(kopf.trim())) {
-      if (!inhalt.length) return "";
-      if (inhalt.every(function (z) { return /^\s*- /.test(z) || /^\s*-$/.test(z); })) {
-        var r = inhalt.map(function (z) { return einWert(z.replace(/^\s*-\s?/, "")); });
+    if (head.trim() === "" || /^#/.test(head.trim())) {
+      if (!content.length) return "";
+      if (content.every(function (l) { return /^\s*- /.test(l) || /^\s*-$/.test(l); })) {
+        var r = content.map(function (l) { return scalarValue(l.replace(/^\s*-\s?/, "")); });
         return r.some(function (x) { return x === undefined || typeof x === "boolean" || /^[\w-]+:\s/.test(x); }) ? undefined : r.map(String);
       }
       return undefined; // mapping or list of objects
     }
-    if (/^\s*\[/.test(kopf)) return inhalt.length ? undefined : inlineListe(kopf);
-    if (inhalt.length) {
-      if (/^["']/.test(kopf.trim())) return undefined;
-      return einWert([kopf].concat(inhalt.map(function (z) { return z.trim(); })).join(" ")); // folded plain scalar
+    if (/^\s*\[/.test(head)) return content.length ? undefined : inlineList(head);
+    if (content.length) {
+      if (/^["']/.test(head.trim())) return undefined;
+      return scalarValue([head].concat(content.map(function (l) { return l.trim(); })).join(" ")); // folded plain scalar
     }
-    return einWert(kopf);
+    return scalarValue(head);
   }
 
   function frontMatter(paare, text) { return "---\n" + yaml(paare) + "\n---\n" + (String(text || "").trim() ? "\n" + String(text).trim() + "\n" : ""); }
@@ -365,7 +366,7 @@ var Formular = (function () {
     return c.github + "/new/" + c.branch + "/" + ordner + "?filename=" + encodeURIComponent(datei) + (inhalt == null ? "" : "&value=" + encodeURIComponent(inhalt));
   }
   function githubEdit(pfad) { var c = cfg(); return c.github + "/edit/" + c.branch + "/" + pfad; }
-  function githubDatei(pfad) { var c = cfg(); return c.github + "/blob/" + c.branch + "/" + pfad; }
+  function githubFile(path) { var c = cfg(); return c.github + "/blob/" + c.branch + "/" + path; }
   // Copy text, then open url in a new tab. status (element) gets a hint; if copying fails, fallback() is called
   // (e.g. to show the text for manual copying).
   function kopierenUndOeffnen(text, url, status, fallback) {
@@ -383,8 +384,8 @@ var Formular = (function () {
     personen: personen, person: person, avatar: avatar,
     QUELLEN: QUELLEN, chipFeld: chipFeld, dialog: dialog,
     yaml: yaml, yamlText: yamlText, yamlListe: yamlListe, frontMatter: frontMatter, leer: leer,
-    zerlegeDatei: zerlegeDatei, setzeDatei: setzeDatei, yamlWert: yamlWert,
-    githubNeu: githubNeu, githubEdit: githubEdit, githubDatei: githubDatei, kopierenUndOeffnen: kopierenUndOeffnen
+    splitFile: splitFile, joinFile: joinFile, yamlValue: yamlValue,
+    githubNeu: githubNeu, githubEdit: githubEdit, githubFile: githubFile, kopierenUndOeffnen: kopierenUndOeffnen
   };
 })();
 if (typeof module !== "undefined") module.exports = Formular;

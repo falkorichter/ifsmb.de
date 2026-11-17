@@ -9,9 +9,9 @@ Auf der Website: [/presse/#badge](https://ifsmb.de/presse/#badge) (drehbares 3D-
 | Datei | Inhalt |
 |---|---|
 | `ifsmb-badge.scad` | OpenSCAD-Quelle; Parameter oben in der Datei (auch im Customizer von OpenSCAD) |
-| `ifsmb-schriftzug.scad` | Schriftzug „IfsMB“ als Polygon, erzeugt aus dem Logo-SVG – nicht von Hand bearbeiten |
-| `schriftzug-aus-svg.py` | erzeugt `ifsmb-schriftzug.scad` neu, falls sich das Logo-SVG ändert |
-| `export-farbig.py` | erzeugt alle Dateien eines Badges in `assets/badge/` (`python3 export-farbig.py ["Name"]`) |
+| `ifsmb-wordmark.scad` | Schriftzug „IfsMB“ als Polygon, erzeugt aus dem Logo-SVG – nicht von Hand bearbeiten |
+| `wordmark_from_svg.py` | erzeugt `ifsmb-wordmark.scad` neu, falls sich das Logo-SVG ändert |
+| `export_colored.py` | erzeugt alle Dateien eines Badges in `assets/badge/` (`python3 export_colored.py ["Name"]`) |
 
 Erzeugte Dateien in **`assets/badge/`** (von der Website ausgeliefert), je Badge:
 
@@ -58,7 +58,7 @@ openscad -D 'name="Falko"' -o ifsmb-badge-falko.stl ifsmb-badge.scad
 
 ```bash
 cd _logo/badge
-python3 export-farbig.py "Vorname"      # -> assets/badge/ifsmb-badge-vorname.*
+python3 export_colored.py "Vorname"      # -> assets/badge/ifsmb-badge-vorname.*
 ```
 
 Dann in `_data/badges.yml` eintragen (`aufschrift`, `datei`, optional `team` = Team-Kürzel → erscheint im Teamprofil).

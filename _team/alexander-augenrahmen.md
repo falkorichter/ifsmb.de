@@ -2,7 +2,7 @@
 title: Alexander von augenrahmen.de
 role: 3D-gedruckte Brillen aus Moabit
 order: 91
-nicht_im_team: true
+nicht_im_team: false
 links:
   - title: augenrahmen.de
     url: https://augenrahmen.de/

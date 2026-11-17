@@ -41,7 +41,7 @@ Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, 
 
 ## Badge zum Drucken
 
-`badge/`: das Logo-Badge als OpenSCAD-Modell für den 3D-Druck (gelbe Grundplatte, schwarze Teile erhaben, nur ein Farbwechsel), optional mit Namen im verlängerten Schatten. Die erzeugten Dateien (3MF, OBJ, STL, Vorschau) liegen in `assets/badge/`, die Liste in `_data/badges.yml`; sie erscheinen auf `/presse/#badge` und in den Teamprofilen. Der Schriftzug „IfsMB“ wird mit `badge/schriftzug-aus-svg.py` direkt aus `institut/ifsmb-logo-badge.svg` übernommen. Details in `badge/README.md`.
+`badge/`: das Logo-Badge als OpenSCAD-Modell für den 3D-Druck (gelbe Grundplatte, schwarze Teile erhaben, nur ein Farbwechsel), optional mit Namen im verlängerten Schatten. Die erzeugten Dateien (3MF, OBJ, STL, Vorschau) liegen in `assets/badge/`, die Liste in `_data/badges.yml`; sie erscheinen auf `/presse/#badge` und in den Teamprofilen. Der Schriftzug „IfsMB“ wird mit `badge/wordmark_from_svg.py` direkt aus `institut/ifsmb-logo-badge.svg` übernommen. Details in `badge/README.md`.
 
 ## Übernommene Blogbeiträge
 

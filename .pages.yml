@@ -592,6 +592,18 @@ content:
         options:
           format: markdown
 
+  - name: slogans
+    label: Startseite – Slogans
+    type: file
+    path: _data/slogans.yml
+    list: true
+    fields:
+      - name: text
+        label: Slogan
+        description: "Jede Zeile wird eine Zeile auf der Startseite, **fett** wird gelb hervorgehoben. Beispiel: Chaos Theorie. (neue Zeile) **Praktisch gestalten.**"
+        type: text
+        required: true
+
   - name: presse
     label: Presse – Kurzprofil & Kontakt
     type: file

@@ -212,57 +212,57 @@ class TodoFormatTest < Minitest::Test
   end
 end
 
-# "✏️ Bearbeiten" forms against every real page (_scripts/bearbeiten_beispiele.js):
+# Edit forms (✏️) against every real page (_scripts/edit_examples.js):
 #   - opening and saving without changes gives the same bytes,
 #   - after changing title, a list field and the text, Jekyll reads the new values and every other key is unchanged.
-class BearbeitenTest < Minitest::Test
-  def ergebnisse
-    @@ergebnisse ||= begin
-      out, err, status = Open3.capture3("node", File.join(ROOT, "_scripts/bearbeiten_beispiele.js"))
-      raise "bearbeiten_beispiele.js ist fehlgeschlagen:\n#{err}" unless status.success?
+class EditFormTest < Minitest::Test
+  def results
+    @@results ||= begin
+      out, err, status = Open3.capture3("node", File.join(ROOT, "_scripts/edit_examples.js"))
+      raise "edit_examples.js ist fehlgeschlagen:\n#{err}" unless status.success?
       JSON.parse(out)
     end
   end
 
-  def test_es_gibt_seiten_zum_bearbeiten
-    assert_operator ergebnisse.size, :>, 50
+  def test_there_are_pages_to_edit
+    assert_operator results.size, :>, 50
   end
 
-  def test_ohne_aenderung_bleibt_die_datei_gleich
-    ergebnisse.each do |r|
-      refute r["ohne_front_matter"], "#{r['pfad']}: kein Front Matter"
-      assert r["unveraendert"], "#{r['pfad']}: Öffnen und Speichern ohne Änderung verändert die Datei"
+  def test_unchanged_file_stays_identical
+    results.each do |r|
+      refute r["no_front_matter"], "#{r['path']}: kein Front Matter"
+      assert r["unchanged"], "#{r['path']}: Öffnen und Speichern ohne Änderung verändert die Datei"
     end
   end
 
-  def test_kommentar_hinter_einem_wert_bleibt
-    quelle = "---\ntitle: Test\nstatus: offen   # offen, in-arbeit oder geloest\nart: frage\n---\n\nText\n"
-    js = "const N=require('./assets/js/neu.js');process.stdout.write(N.bearbeitet('herausforderung',#{quelle.to_json},{status:'in-arbeit'}).inhalt)"
+  def test_comment_after_a_value_is_kept
+    source = "---\ntitle: Test\nstatus: offen   # offen, in-arbeit oder geloest\nart: frage\n---\n\nText\n"
+    js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{status:'in-arbeit'}).content)"
     out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
     assert status.success?, err
-    assert_equal quelle.sub("status: offen ", "status: in-arbeit "), out
+    assert_equal source.sub("status: offen ", "status: in-arbeit "), out
   end
 
-  def test_alle_formularfelder_sind_lesbar
-    ergebnisse.each { |r| assert_empty r["roh"], "#{r['pfad']}: Felder nur auf GitHub bearbeitbar: #{r['roh'].join(', ')}" }
+  def test_all_form_fields_are_readable
+    results.each { |r| assert_empty r["raw_fields"], "#{r['path']}: Felder nur auf GitHub bearbeitbar: #{r['raw_fields'].join(', ')}" }
   end
 
-  def test_aenderungen_kommen_an_und_der_rest_bleibt
-    ergebnisse.each do |r|
-      alt, = Daten.front_matter(r["original"].gsub("\r\n", "\n"))
-      neu, text = Daten.front_matter(r["geaendert"])
-      a = r["aenderung"]
-      assert_equal a["title"], neu["title"], "#{r['pfad']}: Titel" if a["title"]
-      if r["liste"]
-        assert_equal a[r["liste"]], Array(neu[r["liste"]]).map(&:to_s), "#{r['pfad']}: Liste #{r['liste']}"
+  def test_changes_arrive_and_the_rest_stays
+    results.each do |r|
+      before, = Daten.front_matter(r["original"].gsub("\r\n", "\n"))
+      after, text = Daten.front_matter(r["changed"])
+      changes = r["changes"]
+      assert_equal changes["title"], after["title"], "#{r['path']}: Titel" if changes["title"]
+      if r["list_field"]
+        assert_equal changes[r["list_field"]], Array(after[r["list_field"]]).map(&:to_s), "#{r['path']}: Liste #{r['list_field']}"
       end
-      assert_equal a["text"].strip, text.strip, "#{r['pfad']}: Text"
-      geaendert = ["title", r["liste"]].compact
-      (alt.keys - geaendert).each do |k|
-        msg = "#{r['pfad']}: Feld #{k} hat sich verändert"
-        alt[k].nil? ? assert_nil(neu[k], msg) : assert_equal(alt[k], neu[k], msg)
+      assert_equal changes["text"].strip, text.strip, "#{r['path']}: Text"
+      changed_keys = ["title", r["list_field"]].compact
+      (before.keys - changed_keys).each do |k|
+        msg = "#{r['path']}: Feld #{k} hat sich verändert"
+        before[k].nil? ? assert_nil(after[k], msg) : assert_equal(before[k], after[k], msg)
       end
-      assert_empty neu.keys - alt.keys - geaendert, "#{r['pfad']}: neue Felder"
+      assert_empty after.keys - before.keys - changed_keys, "#{r['path']}: neue Felder"
     end
   end
 end

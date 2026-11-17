@@ -97,7 +97,7 @@
   {% if site.repository and page.path %}
   {%- assign schmale_layouts = "post,project,member,event,equipment,press" | split: "," -%}
   <div class="container edit-page{% if schmale_layouts contains page.layout %} narrow{% endif %}" data-pagefind-ignore>
-    {% include bearbeiten-knopf.html %}
+    {% include edit-buttons.html %}
     {% include neu-buttons.html %}
   </div>
   {% endif %}
@@ -110,6 +110,14 @@
         <a href="{{ '/impressum/' | relative_url }}">Impressum &amp; Datenschutz</a> ·
         <a href="{{ '/projekte/archiv/' | relative_url }}">Vergangene Projekte</a> ·
         <a href="https://github.com/falkorichter/ifsmb.de" target="_blank" rel="noopener">Quelltext auf GitHub</a>
+      </p>
+      {%- comment -%}Project documentation for contributors – rendered by GitHub (the files are excluded from the site).{%- endcomment -%}
+      {%- assign doc_branch = site.branch | default: "main" -%}
+      {%- assign doc_base = "https://github.com/" | append: site.repository | append: "/blob/" | append: doc_branch | append: "/" %}
+      <p class="footer-docs">Zum Mitmachen:
+        <a href="{{ doc_base }}CHANGELOG.md" target="_blank" rel="noopener">Changelog</a> ·
+        <a href="{{ doc_base }}DATA_STRUCTURES.md" target="_blank" rel="noopener">Datenstrukturen</a> ·
+        <a href="{{ doc_base }}DEPENDENCIES.md" target="_blank" rel="noopener">Abhängigkeiten</a>
       </p>
       <p class="footer-note">Das IfsMB ist eine private, ehrenamtliche Initiative von Falko Richter – keine Hochschule, keine Behörde und kein Forschungsinstitut. <a href="{{ '/angebot/' | relative_url }}#warum-ein-institut">Warum ein Institut?</a></p>
       <p class="footer-note">Diese Seite setzt keine Cookies und lädt keine externen Inhalte.</p>

@@ -1,5 +1,5 @@
 ---
-title: Berlin-
+title: Berlin-Tag
 start: 2027-02-13 10:00
 end: 2027-02-13 18:00
 location: " STATION Berlin am U-Bahnhof Gleisdreieck"

@@ -21,7 +21,7 @@ Dir.chdir(ROOT)
 
 # Files Jekyll does not render as pages
 IGNORIERT = %r{\A(?:_site|_includes|_layouts|_data|_plugins|_scripts|_logo|_internal|_pr-vorschau|node_modules|vendor|\.)}
-OHNE_SEITE = %w[README.md CLAUDE.md CHANGELOG.md DATENSTRUKTUR.md LICENSE].freeze
+OHNE_SEITE = %w[README.md CLAUDE.md CHANGELOG.md DATA_STRUCTURES.md DEPENDENCIES.md LICENSE].freeze
 
 def front_matter(text)
   return nil unless text.start_with?("---\n", "---\r\n")

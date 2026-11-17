@@ -143,6 +143,9 @@ img { max-width: 100%; height: auto; }
 /* Wechselnder Slogan (assets/js/slogan.js) */
 .slogan-word { white-space: nowrap; }
 .slogan-char { white-space: pre; }
+/* Highlight per character while scrambling; no padding so the text does not shift afterwards */
+.slogan .hl { padding: 0; }
+.slogan-char.hl-char { background: linear-gradient(transparent 55%, var(--accent) 55%); }
 .slogan .slogan-char.scrambling { font-family: var(--mono); font-weight: 700; color: var(--accent-2); }
 
 .hero-text { max-width: 640px; font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 2rem; }
@@ -1071,7 +1074,7 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
 .badge-3d img { display: block; width: 100%; height: 100%; object-fit: contain; border: 0; border-radius: 0; }
 .badge-3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
 .badge-3d canvas:active { cursor: grabbing; }
-.badge-3d-aktiv img { visibility: hidden; }
+.badge-3d-active img { visibility: hidden; }
 .badge-downloads { margin-bottom: 0; }
 .badge-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-bottom: 1.5rem; }
 .badge-intro ol { padding-left: 1.2rem; }
@@ -1079,13 +1082,13 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
 .badge-karte h3 { margin-bottom: .5rem; }
 .member-badge { max-width: 480px; }
 
-/* Bearbeiten-Zeile: ✏️ Bearbeiten (Formular) + GitHub-Logo mit Dateipfad (_includes/bearbeiten-knopf.html) */
+/* Edit row: ✏️ (form) + GitHub logo with file path (_includes/edit-buttons.html) */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.github-datei { display: inline-flex; align-items: center; gap: .4rem; }
+.github-file { display: inline-flex; align-items: center; gap: .4rem; }
 .github-logo { flex: none; }
-.bearbeiten-btn[aria-busy=true] { opacity: .6; cursor: progress; }
-.neu-vorschau mark.neu-geaendert { background: #fff1a8; color: inherit; border-radius: 2px; box-shadow: -.3rem 0 0 #fff1a8, .3rem 0 0 #fff1a8; }
-[data-senden]:disabled { opacity: .5; cursor: not-allowed; }
+.edit-btn[aria-busy=true] { opacity: .6; cursor: progress; }
+.neu-vorschau mark.changed-line { background: #fff1a8; color: inherit; border-radius: 2px; box-shadow: -.3rem 0 0 #fff1a8, .3rem 0 0 #fff1a8; }
+[data-submit]:disabled { opacity: .5; cursor: not-allowed; }
 
 /* Eisenhower matrix of challenges (/herausforderungen/): columns dringend / nicht dringend, rows wichtig / nicht wichtig.
    Own hm-* classes so the todo matrix (.todos-*) stays independent. */
@@ -1117,3 +1120,17 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
   .hm-corner, .hm-axis { display: none; }
   .hm-cell { min-height: 0; }
 }
+
+/* Markdown-Editor in den Formularen (OverType, assets/js/third-party/overtype/; assets/js/neu.js) */
+.form-md-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.form-md-toggle { padding: .15rem .55rem; font-size: .78rem; }
+.form-md-toggle[aria-pressed=true] { background: var(--accent); }
+.form-md-editor { border: 2px solid var(--ink); border-radius: 8px; overflow: hidden; background: var(--paper); }
+.form-md-editor:focus-within { outline: 3px solid var(--blue); outline-offset: 1px; }
+.form-md.toolbar-hidden .overtype-toolbar { display: none !important; } /* OverType setzt display: flex !important */
+/* Werkzeugleiste umbrechen statt seitlich scrollen (OverType: overflow-x auto !important) */
+.form-md .overtype-toolbar { flex-wrap: wrap !important; overflow-x: visible !important; row-gap: 2px !important; }
+
+/* Tastenkürzel in Beiträgen (<kbd>) */
+kbd { display: inline-block; font-family: var(--mono); font-size: .8em; line-height: 1.3; padding: .05em .4em; border: 1.5px solid var(--ink); border-bottom-width: 3px; border-radius: 5px; background: var(--paper); color: var(--ink); white-space: nowrap; }
+.prose td:has(kbd) { white-space: nowrap; } /* Tastenkombination nicht auseinanderreißen */

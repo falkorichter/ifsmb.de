@@ -6,11 +6,11 @@
 // localStorage and creates it through GitHub's "new file" editor (→ pull request).
 // NeuFormular.datei(typ, werte) builds a file without DOM – used by the tests (_scripts/test_formulare.rb).
 //
-// "✏️ Bearbeiten" (_includes/bearbeiten-knopf.html) opens the same form for an existing page: NeuFormular.bearbeiten(link)
-// loads the unprocessed source from /quelltext/<pfad> (_plugins/quelltexte.rb), fills the fields and writes back only
+// The ✏️ button (_includes/edit-buttons.html) opens the same form for an existing page: NeuFormular.edit(link)
+// loads the unprocessed source from /source/<path> (_plugins/source_files.rb), fills the fields and writes back only
 // what was changed – every other line (unknown fields, comments, galleries, formatting) stays byte for byte.
 // GitHub's edit page can't be prefilled, so saving copies the file and opens the editor to paste it.
-// NeuFormular.bearbeitet(typ, quelle, aenderungen) does the same without DOM (tests).
+// NeuFormular.editedFile(type, source, changes, path) does the same without DOM (tests).
 var NeuFormular = (function () {
   "use strict";
   var F = typeof Formular !== "undefined" ? Formular : require("./formular.js");
@@ -31,7 +31,7 @@ var NeuFormular = (function () {
   function auswahl(name, label, optionen, x) { return feld("auswahl", name, label, Object.assign({ optionen: optionen, standard: optionen[0][0] }, x)); }
   function chips(name, label, quelle, x) { return feld("chips", name, label, Object.assign({ quelle: quelle }, x)); }
   function titel(platzhalter, x) { return text("title", "Titel", Object.assign({ pflicht: true, platzhalter: platzhalter, klasse: "form-feld-titel" }, x)); }
-  function inhalt(platzhalter, x) { return feld("langtext", "text", "Text (Markdown)", Object.assign({ intern: true, zeilen: 10, platzhalter: platzhalter }, x)); }
+  function inhalt(platzhalter, x) { return feld("langtext", "text", "Text (Markdown)", Object.assign({ intern: true, markdown: true, zeilen: 10, platzhalter: platzhalter }, x)); }
 
   // fields that many types share
   var stichworte = function (x) { return chips("tags", "🏷️ Stichworte", "stichworte", Object.assign({ platzhalter: "Stichwort suchen oder neu …" }, x)); };
@@ -185,7 +185,7 @@ var NeuFormular = (function () {
         persoenlich("Aus einem privaten Projekt im Team"),
         inhalt("Was ist das Problem, was wurde schon probiert, was wird gebraucht?"),
         datum("geloest_am", "Gelöst am", { mehr: true }),
-        feld("langtext", "loesung", "Lösung (Markdown)", { mehr: true, zeilen: 4 }),
+        feld("langtext", "loesung", "Lösung (Markdown)", { mehr: true, markdown: true, zeilen: 4 }),
         socialBild()
       ]
     },
@@ -245,8 +245,8 @@ var NeuFormular = (function () {
   // ---------- state ----------
   var STORE = "ifsmb-neu:";
   var d = null, form, links, mehrBox, vorschau, socialBox, socialImg, socialTitel, socialBeschr, dateiInput, ordnerEl, status, hinweisEl, vorlageLink;
-  var aktiv = null; // { typ, schema, w (values), beruehrt (edited by hand), schluessel, gesendet, felder, bearbeiten }
-  var schritteEl, verwerfenBtn, sendenBtn;
+  var aktiv = null; // { typ, schema, w (values), beruehrt (edited by hand), schluessel, gesendet, felder, edit, path }
+  var stepsEl, discardBtn, submitBtn;
 
   function alleFelder(schema) {
     return schema.felder.reduce(function (a, z) { return a.concat(z); }, []).concat([{ name: "datei", intern: true, folgt: schema.datei }]);
@@ -277,7 +277,7 @@ var NeuFormular = (function () {
     }).map(function (f) { return f.name; });
   }
   function speichereEntwurf() {
-    try { localStorage.setItem(aktiv.schluessel, JSON.stringify({ w: aktiv.w, beruehrt: aktiv.beruehrt, quelle: aktiv.bearbeiten && aktiv.bearbeiten.quelle })); } catch (e) { /* storage blocked */ }
+    try { localStorage.setItem(aktiv.schluessel, JSON.stringify({ w: aktiv.w, beruehrt: aktiv.beruehrt, source: aktiv.edit && aktiv.edit.source })); } catch (e) { /* storage blocked */ }
   }
   function ladeEntwurf() {
     try { return JSON.parse(localStorage.getItem(aktiv.schluessel) || "null"); } catch (e) { return null; }
@@ -305,12 +305,12 @@ var NeuFormular = (function () {
     }
     return schema.format === "yaml" ? F.yaml(paare) + "\n" : F.frontMatter(paare, w.text);
   }
-  function dateiInhalt() { return aktiv.bearbeiten ? bearbeiteterText(aktiv.schema, aktiv.bearbeiten, aktiv.w) : dateiText(aktiv.schema, aktiv.w); }
+  function dateiInhalt() { return aktiv.edit ? editedText(aktiv.schema, aktiv.edit, aktiv.w) : dateiText(aktiv.schema, aktiv.w); }
 
   // ---------- editing an existing file ----------
-  function gleich(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
-  // value from the file → value of the form field
-  function alsFeldwert(f, v) {
+  function sameValue(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  // value from the file → value of the form field (undefined: the form can't show it)
+  function toFieldValue(f, v) {
     if (f.typ === "chips") return Array.isArray(v) ? v.map(String) : F.leer(v) ? [] : [String(v)];
     if (f.typ === "haken") return v === true || v === "true";
     if (Array.isArray(v) || typeof v === "boolean") return undefined;
@@ -320,62 +320,64 @@ var NeuFormular = (function () {
     if (f.typ === "langtext" || f.typ === "text" || f.typ === "adresse") return v.replace(/\n$/, "");
     return v;
   }
-  // Reads a source file for a type. → { quelle, z (blocks), w0 (values as loaded), roh ({ name: true } for fields the
-  // form can't show, e.g. lists of objects) } or null if the file has no front matter.
-  function liesQuelle(schema, quelle, pfad) {
-    var z = F.zerlegeDatei(quelle);
-    if (!z) return null;
-    var felder = alleFelder(schema), w = anfangswerte(schema), roh = {};
-    felder.forEach(function (f) { if (f.typ) w[f.name] = f.typ === "chips" ? [] : f.typ === "haken" ? false : ""; });
-    z.bloecke.forEach(function (b) {
-      var f = b.key && felder.filter(function (x) { return x.name === b.key && x.typ && !x.intern; })[0];
+  // Reads a source file for a type. → { source, file (blocks + rest), w0 (values as loaded), rawFields ({ name: true }
+  // for fields the form can't show, e.g. lists of objects) } or null if the file has no front matter.
+  function readSource(schema, source, path) {
+    var file = F.splitFile(source);
+    if (!file) return null;
+    var fields = alleFelder(schema), w = anfangswerte(schema), rawFields = {};
+    fields.forEach(function (f) { if (f.typ) w[f.name] = f.typ === "chips" ? [] : f.typ === "haken" ? false : ""; });
+    file.blocks.forEach(function (block) {
+      if (block.key === "uuid") { w.uuid = F.yamlValue(block.raw); return; }
+      var f = block.key && fields.filter(function (x) { return x.name === block.key && x.typ && !x.intern; })[0];
       if (!f) return;
-      var v = F.yamlWert(b.raw), fw = v === undefined ? undefined : alsFeldwert(f, v);
-      if (fw === undefined) roh[f.name] = true; else w[f.name] = fw;
-      if (b.key === "uuid") w.uuid = v;
+      var v = F.yamlValue(block.raw), value = v === undefined ? undefined : toFieldValue(f, v);
+      if (value === undefined) rawFields[f.name] = true; else w[f.name] = value;
     });
-    z.bloecke.forEach(function (b) { if (b.key === "uuid") w.uuid = F.yamlWert(b.raw); });
-    w.text = z.rest.replace(/^\n+/, "").replace(/\s+$/, "");
-    w.datei = pfad ? pfad.split("/").pop() : "";
-    return { quelle: quelle, z: z, w0: JSON.parse(JSON.stringify(w)), roh: roh };
+    w.text = file.rest.replace(/^\n+/, "").replace(/\s+$/, "");
+    w.datei = path ? path.split("/").pop() : "";
+    return { source: source, file: file, w0: JSON.parse(JSON.stringify(w)), rawFields: rawFields };
   }
   // The file with the changed fields: unchanged blocks stay as they were, changed ones are written anew (or removed
   // when emptied), new fields go to the end of the front matter. The body only changes when the text was edited.
-  function bearbeiteterText(schema, b, w) {
-    var felder = alleFelder(schema).filter(function (f) { return f.typ && !f.intern; }), gesehen = {};
-    function zeile(f) { return F.yaml([[f.name, f.ausgabe ? f.ausgabe(w[f.name], w) : w[f.name]]]); }
-    var bloecke = [];
-    b.z.bloecke.forEach(function (bl) {
-      var f = bl.key && felder.filter(function (x) { return x.name === bl.key; })[0];
-      if (f) gesehen[f.name] = true;
-      if (!f || b.roh[f.name] || gleich(w[f.name], b.w0[f.name])) { bloecke.push(bl.raw); return; }
-      var neu = zeile(f), leerzeilen = (bl.raw.match(/(\n\s*)*$/) || [""])[0];
+  function editedText(schema, edit, w) {
+    var fields = alleFelder(schema).filter(function (f) { return f.typ && !f.intern; }), seen = {};
+    function yamlLine(f) { return F.yaml([[f.name, f.ausgabe ? f.ausgabe(w[f.name], w) : w[f.name]]]); }
+    var blocks = [];
+    edit.file.blocks.forEach(function (block) {
+      var f = block.key && fields.filter(function (x) { return x.name === block.key; })[0];
+      if (f) seen[f.name] = true;
+      if (!f || edit.rawFields[f.name] || sameValue(w[f.name], edit.w0[f.name])) { blocks.push(block.raw); return; }
+      var line = yamlLine(f), trailingBlank = (block.raw.match(/(\n\s*)*$/) || [""])[0];
       // keep a trailing comment of a one-line value ("status: offen   # offen, in-arbeit oder geloest")
-      var erste = bl.raw.split("\n")[0], ohne = erste.replace(/\s+#[^"'\n]*$/, "");
-      if (neu && neu.indexOf("\n") < 0 && ohne !== erste && gleich(F.yamlWert(ohne), F.yamlWert(erste))) neu += erste.slice(ohne.length);
-      if (neu) bloecke.push(neu + leerzeilen); else if (leerzeilen.length > 1) bloecke.push(leerzeilen.slice(1));
+      var first = block.raw.split("\n")[0], withoutComment = first.replace(/\s+#[^"'\n]*$/, "");
+      if (line && line.indexOf("\n") < 0 && withoutComment !== first && sameValue(F.yamlValue(withoutComment), F.yamlValue(first))) {
+        line += first.slice(withoutComment.length);
+      }
+      if (line) blocks.push(line + trailingBlank); else if (trailingBlank.length > 1) blocks.push(trailingBlank.slice(1));
     });
-    felder.forEach(function (f) {
-      if (gesehen[f.name] || gleich(w[f.name], b.w0[f.name])) return;
-      var neu = zeile(f);
-      if (!neu) return;
-      var i = bloecke.length; // before a trailing uuid
-      if (b.z.bloecke.length && b.z.bloecke[b.z.bloecke.length - 1].key === "uuid") i = bloecke.length - 1;
-      bloecke.splice(i, 0, neu);
+    fields.forEach(function (f) {
+      if (seen[f.name] || sameValue(w[f.name], edit.w0[f.name])) return;
+      var line = yamlLine(f);
+      if (!line) return;
+      var i = blocks.length; // before a trailing uuid
+      var original = edit.file.blocks;
+      if (original.length && original[original.length - 1].key === "uuid") i = blocks.length - 1;
+      blocks.splice(i, 0, line);
     });
-    var rest = w.text === b.w0.text ? b.z.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
-    return F.setzeDatei(b.z, bloecke, rest);
+    var rest = w.text === edit.w0.text ? edit.file.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
+    return F.joinFile(blocks, rest);
   }
-  // Without DOM: the file after changing some values (tests). → { inhalt, roh, werte }
-  function bearbeitet(typ, quelle, aenderungen, pfad) {
-    var schema = TYPEN[typ], b = liesQuelle(schema, quelle, pfad);
-    if (!b) return null;
-    var w = Object.assign(JSON.parse(JSON.stringify(b.w0)), aenderungen || {});
-    return { inhalt: bearbeiteterText(schema, b, w), roh: Object.keys(b.roh), werte: b.w0 };
+  // Without DOM: the file after changing some values (tests). → { content, rawFields, values }
+  function editedFile(type, source, changes, path) {
+    var schema = TYPEN[type], edit = readSource(schema, source, path);
+    if (!edit) return null;
+    var w = Object.assign(JSON.parse(JSON.stringify(edit.w0)), changes || {});
+    return { content: editedText(schema, edit, w), rawFields: Object.keys(edit.rawFields), values: edit.w0 };
   }
-  // Lines of neu that are not in alt (longest common subsequence) → array of booleans
-  function geaenderteZeilen(alt, neu) {
-    var a = alt.split("\n"), n = neu.split("\n"), L = [];
+  // Lines of after that are not in before (longest common subsequence) → array of booleans
+  function changedLines(before, after) {
+    var a = before.split("\n"), n = after.split("\n"), L = [];
     for (var i = a.length; i >= 0; i--) { L[i] = []; for (var j = n.length; j >= 0; j--) L[i][j] = i === a.length || j === n.length ? 0 : a[i] === n[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]); }
     var r = n.map(function () { return true; }), x = 0, y = 0;
     while (x < a.length && y < n.length) {
@@ -406,7 +408,7 @@ var NeuFormular = (function () {
       + '<ol class="neu-schritte small"></ol></aside></div>'
       + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-verwerfen></button>'
       + '<span class="muted small" data-status aria-live="polite"></span>'
-      + '<button type="submit" class="btn" data-senden></button></div></form>');
+      + '<button type="submit" class="btn" data-submit></button></div></form>');
     form = d.querySelector("form");
     links = d.querySelector(".neu-links > .neu-felder");
     mehrBox = d.querySelector(".neu-mehr");
@@ -420,36 +422,37 @@ var NeuFormular = (function () {
     status = d.querySelector("[data-status]");
     hinweisEl = d.querySelector(".neu-hinweis");
     vorlageLink = d.querySelector(".neu-vorlage");
-    schritteEl = d.querySelector(".neu-schritte");
-    verwerfenBtn = d.querySelector("[data-verwerfen]");
-    sendenBtn = d.querySelector("[data-senden]");
+    stepsEl = d.querySelector(".neu-schritte");
+    discardBtn = d.querySelector("[data-verwerfen]");
+    submitBtn = d.querySelector("[data-submit]");
 
     form.addEventListener("input", aenderung);
     form.addEventListener("change", aenderung);
     // Enter in a one-line field must not send the form
     form.addEventListener("keydown", function (e) { if (e.key === "Enter" && e.target.tagName === "INPUT" && e.target.type !== "submit") e.preventDefault(); });
     form.addEventListener("submit", function (e) { e.preventDefault(); anlegen(); });
-    verwerfenBtn.addEventListener("click", function () {
+    discardBtn.addEventListener("click", function () {
       loescheEntwurf();
-      if (aktiv.bearbeiten) { aktiv.w = JSON.parse(JSON.stringify(aktiv.bearbeiten.w0)); aktiv.beruehrt = alleBeruehrt(); }
+      if (aktiv.edit) { aktiv.w = JSON.parse(JSON.stringify(aktiv.edit.w0)); aktiv.beruehrt = allTouched(); }
       else { aktiv.w = anfangswerte(aktiv.schema, aktiv.vorgabe); aktiv.beruehrt = {}; }
       folge(); baueFelder(); zeigeVorschau();
-      status.textContent = aktiv.bearbeiten ? "Änderungen verworfen." : "Neu angefangen.";
+      status.textContent = aktiv.edit ? "Änderungen verworfen." : "Neu angefangen.";
     });
-    d.addEventListener("close", function () { if (aktiv && aktiv.gesendet) loescheEntwurf(); aktiv = null; });
+    // "close" fires a moment after close(); if the dialog was opened again meanwhile, leave the new form alone
+    d.addEventListener("close", function () { if (d.open) return; if (aktiv && aktiv.gesendet) loescheEntwurf(); destroyEditors(); aktiv = null; });
   }
 
   // in edit mode a required field only stays required if the file had a value (old posts without date: …)
-  function pflicht(f) { return f.pflicht && !(aktiv.bearbeiten && F.leer(aktiv.bearbeiten.w0[f.name])); }
+  function isRequired(f) { return f.pflicht && !(aktiv.edit && F.leer(aktiv.edit.w0[f.name])); }
   function baueFeld(f) {
-    if (aktiv.bearbeiten && aktiv.bearbeiten.roh[f.name]) {
+    if (aktiv.edit && aktiv.edit.rawFields[f.name]) {
       return F.el('<label class="form-feld"><span>' + esc(f.label) + '</span><input type="text" disabled value="(in der Datei als Liste/Objekt – bitte auf GitHub bearbeiten)"></label>');
     }
     var w = aktiv.w[f.name], hilfe = f.hilfe ? '<small class="form-hilfe">' + esc(f.hilfe) + "</small>" : "";
-    var label = esc(f.label) + (pflicht(f) ? ' <span class="form-pflicht" aria-hidden="true">*</span>' : "");
+    var label = esc(f.label) + (isRequired(f) ? ' <span class="form-pflicht" aria-hidden="true">*</span>' : "");
     if (f.typ === "chips") {
       return F.chipFeld({
-        label: f.label + (pflicht(f) ? " *" : ""), quelle: f.quelle, placeholder: f.platzhalter, hilfe: f.hilfe, einzeln: f.einzeln,
+        label: f.label + (isRequired(f) ? " *" : ""), quelle: f.quelle, placeholder: f.platzhalter, hilfe: f.hilfe, einzeln: f.einzeln,
         werte: function () { return aktiv.w[f.name]; },
         setze: function (a) { aktiv.w[f.name] = a; nachAenderung(); }
       });
@@ -457,7 +460,7 @@ var NeuFormular = (function () {
     if (f.typ === "haken") {
       return F.el('<label class="form-check"><input type="checkbox" name="' + f.name + '"' + (w ? " checked" : "") + "><span>" + label + "</span>" + hilfe + "</label>");
     }
-    var attr = ' name="' + f.name + '"' + (pflicht(f) ? " required" : "") + (f.platzhalter ? ' placeholder="' + esc(f.platzhalter) + '"' : "");
+    var attr = ' name="' + f.name + '"' + (isRequired(f) ? " required" : "") + (f.platzhalter ? ' placeholder="' + esc(f.platzhalter) + '"' : "");
     var eingabe;
     if (f.typ === "auswahl") {
       eingabe = "<select" + attr + ">" + f.optionen.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === w ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select>";
@@ -471,6 +474,7 @@ var NeuFormular = (function () {
   }
 
   function baueFelder() {
+    destroyEditors();
     var mehrFelder = mehrBox.querySelector(".neu-felder");
     links.innerHTML = ""; mehrFelder.innerHTML = "";
     aktiv.schema.felder.forEach(function (zeile) {
@@ -485,11 +489,123 @@ var NeuFormular = (function () {
     mehrBox.open = aktiv.felder.some(function (f) { return f.mehr && !F.leer(aktiv.w[f.name]); });
     dateiInput.value = aktiv.w.datei;
     aktiv.felder.forEach(function (f) { if (f.liste) fuelleListe(f.liste); });
+    createMarkdownEditors();
   }
   function fuelleListe(key) {
     F.ladeIndex().then(function (I) {
       if (document.getElementById("neu-liste-" + key)) return;
       d.insertAdjacentHTML("beforeend", '<datalist id="neu-liste-' + key + '">' + (I[key] || []).map(function (x) { return '<option value="' + esc(x) + '">'; }).join("") + "</datalist>");
+    });
+  }
+
+  // ---------- markdown editor ----------
+  // Fields with markdown: true get OverType (assets/js/third-party/overtype/, MIT, copied unchanged – no external files,
+  // see DEPENDENCIES.md), loaded on first use. Its textarea keeps the field's name, so input, preview and draft work as
+  // before; if the script can't load, the plain textarea stays. The toolbar can be switched off (🛠️) – off by default
+  // on phones, the choice is remembered in this browser.
+  var editors = [], TOOLBAR_KEY = "ifsmb-md-toolbar";
+  var NAV = typeof navigator !== "undefined" ? navigator : {};
+  var IS_MAC = /Mac|iPhone|iPad/.test(NAV.platform || NAV.userAgent || "");
+  // shortcut hints shown to visitors (German UI text)
+  var MOD = IS_MAC ? "⌘" : "Strg+", SHIFT_MOD = IS_MAC ? "⇧⌘" : "Strg+Umschalt+";
+  var LABELS = {
+    toolbar: "Formatierung",
+    viewModes: { normal: "Bearbeiten", plain: "Nur Text", preview: "Vorschau" },
+    buttons: { bold: "Fett", italic: "Kursiv", strikethrough: "Durchgestrichen (" + SHIFT_MOD + "X)", code: "Code", link: "Link einfügen",
+      h1: "Überschrift 1", h2: "Überschrift 2", h3: "Überschrift 3", h4: "Überschrift 4", h5: "Überschrift 5", h6: "Überschrift 6",
+      bulletList: "Liste", orderedList: "Nummerierte Liste", taskList: "Aufgabenliste", outdent: "Ausrücken", indent: "Einrücken",
+      quote: "Zitat", upload: "Datei hochladen", viewMode: "Ansicht", underline: "Unterstrichen (" + MOD + "U)" }
+  };
+  // Shortcuts on top of OverType's own (⌘B, ⌘I, ⌘K, ⌘E, ⌥⌘1–3, ⇧⌘7/8/9, ⇧⌘.): ⇧⌘X strikethrough (~~ ~~),
+  // ⌘U underline. Markdown has no underline – <u>…</u> is HTML that kramdown passes through. Ctrl instead of ⌘ off Mac.
+  var STROKE = 'stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"';
+  function toggleUnderline(ta) {
+    var OPEN = "<u>", CLOSE = "</u>", value = ta.value, from = ta.selectionStart, to = ta.selectionEnd;
+    var selected = value.slice(from, to), replacement, start;
+    if (selected.length >= OPEN.length + CLOSE.length && selected.indexOf(OPEN) === 0 && selected.slice(-CLOSE.length) === CLOSE) {
+      replacement = selected.slice(OPEN.length, -CLOSE.length); start = from;            // tags selected too → remove
+    } else if (value.slice(from - OPEN.length, from) === OPEN && value.slice(to, to + CLOSE.length) === CLOSE) {
+      ta.setSelectionRange(from - OPEN.length, to + CLOSE.length);                       // tags around → remove
+      replacement = selected; start = from - OPEN.length;
+    } else {
+      replacement = OPEN + selected + CLOSE; start = from + OPEN.length;                  // wrap
+    }
+    var innerLength = replacement === selected || replacement.indexOf(OPEN) !== 0 ? replacement.length : selected.length;
+    ta.focus();
+    // insertText keeps undo (⌘Z) working; fallback for browsers without it
+    if (!(document.execCommand && document.execCommand("insertText", false, replacement))) {
+      ta.setRangeText(replacement);
+      ta.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    ta.setSelectionRange(start, start + innerLength);
+  }
+  function toolbarButtons() {
+    var T = window.toolbarButtons, buttons = (window.defaultToolbarButtons || []).slice();
+    if (!T || !buttons.length) return null; // OverType without exports: keep its default toolbar
+    var underline = {
+      name: "underline", actionId: "toggleUnderline", title: "Unterstrichen (" + MOD + "U)",
+      icon: '<svg viewBox="0 0 18 18"><path ' + STROKE + ' d="M5,3v5a4,4,0,0,0,8,0V3"></path><line ' + STROKE + ' x1="4" x2="14" y1="15.5" y2="15.5"></line></svg>',
+      action: function (o) { toggleUnderline(o.editor.textarea); }
+    };
+    var i = buttons.indexOf(T.italic);
+    buttons.splice(i < 0 ? 2 : i + 1, 0, T.strikethrough, underline);
+    return buttons;
+  }
+  function onEditorKeydown(e, editor) {
+    if (!(IS_MAC ? e.metaKey : e.ctrlKey) || e.altKey) return;
+    var key = (e.key || "").toLowerCase();
+    if (key === "u" && !e.shiftKey) { e.preventDefault(); editor.performAction("toggleUnderline", e); }
+    else if (key === "x" && e.shiftKey) { e.preventDefault(); editor.performAction("toggleStrikethrough", e); }
+  }
+  // toolbarVisible() reads the remembered choice (default: off on phones), toolbarVisible(bool) stores it
+  function toolbarVisible(visible) {
+    if (visible != null) { try { localStorage.setItem(TOOLBAR_KEY, visible ? "1" : "0"); } catch (e) { /* storage blocked */ } return visible; }
+    try { var stored = localStorage.getItem(TOOLBAR_KEY); if (stored != null) return stored === "1"; } catch (e) { /* storage blocked */ }
+    return !(window.matchMedia && window.matchMedia("(max-width: 640px)").matches);
+  }
+  function destroyEditors() {
+    editors.forEach(function (e) { try { e.destroy(); } catch (x) { /* already gone */ } });
+    editors = [];
+  }
+  function createMarkdownEditors() {
+    var state = aktiv, fields = aktiv.felder.filter(function (f) { return f.markdown && form.elements[f.name]; });
+    if (!fields.length || !window.ladeSkripte) return;
+    window.ladeSkripte(["third-party/overtype/overtype.min.js"]).then(function () {
+      if (aktiv !== state || !window.OverType) return; // dialog closed or reopened meanwhile
+      fields.forEach(function (f) { createEditor(f, state); });
+    }).catch(function () { /* plain textarea stays */ });
+  }
+  function createEditor(f, state) {
+    var ta = form.elements[f.name];
+    if (!ta || ta.tagName !== "TEXTAREA") return;
+    var oldField = ta.closest(".form-feld"), visible = toolbarVisible();
+    // a <div> instead of the <label>: clicks on the toolbar must not jump into the text
+    var field = F.el('<div class="form-feld form-md' + (visible ? "" : " toolbar-hidden") + '"><div class="form-md-head"><span>'
+      + esc(f.label) + '</span><button type="button" class="btn btn-ghost btn-small form-md-toggle" aria-pressed="' + visible
+      + '" title="Werkzeugleiste ein- oder ausblenden">🛠️ <span class="form-md-toggle-text">Werkzeugleiste</span></button></div>'
+      + '<div class="form-md-editor"></div>' + (f.hilfe ? '<small class="form-hilfe">' + esc(f.hilfe) + "</small>" : "") + "</div>");
+    oldField.replaceWith(field);
+    var editor = new window.OverType(field.querySelector(".form-md-editor"), {
+      value: aktiv.w[f.name] || "",
+      toolbar: true, toolbarButtons: toolbarButtons() || undefined, labels: LABELS, placeholder: f.platzhalter || "",
+      onKeydown: onEditorKeydown,
+      fontFamily: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace", fontSize: "14px", lineHeight: 1.6,
+      autoResize: true, minHeight: Math.max(6, (f.zeilen || 8) * 1.6) + "em", maxHeight: "60vh",
+      spellcheck: true,
+      textareaProps: { name: f.name, "aria-label": f.label },
+      onChange: function (value) {
+        if (aktiv !== state || value === aktiv.w[f.name]) return;
+        aktiv.w[f.name] = value;
+        nachAenderung();
+      }
+    })[0];
+    editors.push(editor);
+    var toggle = field.querySelector(".form-md-toggle");
+    toggle.addEventListener("click", function () {
+      var show = toggle.getAttribute("aria-pressed") !== "true";
+      toolbarVisible(show);
+      toggle.setAttribute("aria-pressed", String(show));
+      field.classList.toggle("toolbar-hidden", !show);
     });
   }
 
@@ -527,11 +643,11 @@ var NeuFormular = (function () {
   }
   function zeigeVorschau() {
     var text = dateiInhalt();
-    if (aktiv.bearbeiten) {
-      var markiert = geaenderteZeilen(aktiv.bearbeiten.quelle.replace(/\r\n/g, "\n"), text), zahl = markiert.filter(Boolean).length;
-      vorschau.innerHTML = text.split("\n").map(function (z, i) { return markiert[i] ? '<mark class="neu-geaendert">' + esc(z || " ") + "</mark>" : esc(z); }).join("\n");
-      sendenBtn.disabled = !zahl;
-      sendenBtn.title = zahl ? "" : "Noch nichts geändert";
+    if (aktiv.edit) {
+      var marked = changedLines(aktiv.edit.source.replace(/\r\n/g, "\n"), text), count = marked.filter(Boolean).length;
+      vorschau.innerHTML = text.split("\n").map(function (line, i) { return marked[i] ? '<mark class="changed-line">' + esc(line || " ") + "</mark>" : esc(line); }).join("\n");
+      submitBtn.disabled = !count;
+      submitBtn.title = count ? "" : "Noch nichts geändert";
     } else vorschau.textContent = text;
     if (!socialBox) return;
     var w = aktiv.w, istSeite = aktiv.schema.format !== "yaml";
@@ -544,17 +660,17 @@ var NeuFormular = (function () {
   }
 
   function fehlt() {
-    var leer = aktiv.felder.filter(function (f) { return pflicht(f) && f.typ === "chips" && !aktiv.w[f.name].length; })[0];
+    var leer = aktiv.felder.filter(function (f) { return isRequired(f) && f.typ === "chips" && !aktiv.w[f.name].length; })[0];
     if (leer) return "Bitte „" + leer.label.replace(/^\W+\s*/, "") + "“ ausfüllen.";
     return aktiv.schema.pruefe && aktiv.schema.pruefe(aktiv.w);
   }
   function anlegen() {
     var fehler = fehlt();
     if (fehler) { status.textContent = "⚠️ " + fehler; return; }
-    if (aktiv.bearbeiten) {
-      var neuText = dateiInhalt();
-      if (neuText === aktiv.bearbeiten.quelle) { status.textContent = "Noch nichts geändert."; return; }
-      F.kopierenUndOeffnen(neuText, F.githubEdit(aktiv.pfad), status, function () { getSelection().selectAllChildren(vorschau); });
+    if (aktiv.edit) {
+      var newText = dateiInhalt();
+      if (newText === aktiv.edit.source) { status.textContent = "Noch nichts geändert."; return; }
+      F.kopierenUndOeffnen(newText, F.githubEdit(aktiv.path), status, function () { getSelection().selectAllChildren(vorschau); });
       setTimeout(function () { if (/^Kopiert/.test(status.textContent)) status.textContent = "Kopiert – im GitHub-Editor alles markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V)."; }, 50);
       aktiv.gesendet = true;
       return;
@@ -567,23 +683,25 @@ var NeuFormular = (function () {
     aktiv.gesendet = true;
   }
 
-  var SCHRITTE_NEU = '<li>„Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit dem fertigen Inhalt.</li>'
+  // step lists shown in the dialog (German UI text)
+  var STEPS_NEW = '<li>„Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit dem fertigen Inhalt.</li>'
     + "<li>Dort „Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.</li>"
     + "<li>Nach dem Merge erscheint die Seite nach ein paar Minuten auf der Website.</li>";
-  var SCHRITTE_BEARBEITEN = "<li>„Auf GitHub speichern“ kopiert die geänderte Datei und öffnet sie im GitHub-Editor.</li>"
+  var STEPS_EDIT = "<li>„Auf GitHub speichern“ kopiert die geänderte Datei und öffnet sie im GitHub-Editor.</li>"
     + "<li>Dort den ganzen Inhalt markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V).</li>"
     + "<li>„Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.</li>"
     + "<li>Nach dem Merge ist die Änderung nach ein paar Minuten auf der Website.</li>";
-  function modus(bearbeiten) {
-    schritteEl.innerHTML = bearbeiten ? SCHRITTE_BEARBEITEN : SCHRITTE_NEU;
-    verwerfenBtn.textContent = bearbeiten ? "↩️ Änderungen verwerfen" : "🗑️ Neu anfangen";
-    sendenBtn.textContent = bearbeiten ? "📋 Auf GitHub speichern" : "📋 Auf GitHub anlegen";
-    sendenBtn.disabled = false; sendenBtn.title = "";
-    dateiInput.readOnly = !!bearbeiten;
-    d.querySelector(".neu-pfad").previousElementSibling.textContent = bearbeiten ? "Datei" : "Neue Datei";
-    vorlageLink.textContent = bearbeiten ? "Auf GitHub ansehen ↗" : "Vorlage mit allen Feldern ↗";
+  // switch the dialog between "new file" and "edit existing file"
+  function setMode(editing) {
+    stepsEl.innerHTML = editing ? STEPS_EDIT : STEPS_NEW;
+    discardBtn.textContent = editing ? "↩️ Änderungen verwerfen" : "🗑️ Neu anfangen";
+    submitBtn.textContent = editing ? "📋 Auf GitHub speichern" : "📋 Auf GitHub anlegen";
+    submitBtn.disabled = false; submitBtn.title = "";
+    dateiInput.readOnly = !!editing;
+    d.querySelector(".neu-pfad").previousElementSibling.textContent = editing ? "Datei" : "Neue Datei";
+    vorlageLink.textContent = editing ? "Auf GitHub ansehen ↗" : "Vorlage mit allen Feldern ↗";
   }
-  function alleBeruehrt() { var b = {}; aktiv.felder.forEach(function (f) { b[f.name] = true; }); return b; }
+  function allTouched() { var touched = {}; aktiv.felder.forEach(function (f) { touched[f.name] = true; }); return touched; }
 
   // ---------- open ----------
   // link: an a[data-neu] from _includes/neu-button.html
@@ -599,7 +717,7 @@ var NeuFormular = (function () {
     if (entwurf) aktiv.beruehrt = entwurf.beruehrt || {};
     folge();
 
-    modus(false);
+    setMode(false);
     d.titel("➕ " + (daten.label || schema.titel));
     hinweisEl.textContent = daten.hinweis || "";
     hinweisEl.hidden = !daten.hinweis;
@@ -614,35 +732,35 @@ var NeuFormular = (function () {
     F.ladeIndex();
   }
 
-  // link: an a[data-bearbeiten] from _includes/bearbeiten-knopf.html, data = { typ, pfad, quelle }. → Promise
-  function bearbeiten(link) {
-    var daten = JSON.parse(link.getAttribute("data-bearbeiten")), schema = TYPEN[daten.typ];
-    if (!schema) return Promise.reject(new Error("typ"));
-    return fetch(daten.quelle, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (quelle) {
-      var b = liesQuelle(schema, quelle, daten.pfad);
-      if (!b) throw new Error("kein Front Matter");
+  // link: an a[data-edit] from _includes/edit-buttons.html, data = { type, path, source }. → Promise
+  function edit(link) {
+    var data = JSON.parse(link.getAttribute("data-edit")), schema = TYPEN[data.type];
+    if (!schema) return Promise.reject(new Error("type"));
+    return fetch(data.source, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (source) {
+      var loaded = readSource(schema, source, data.path);
+      if (!loaded) throw new Error("no front matter");
       if (!d) baueDialog();
-      var teile = daten.pfad.split("/");
-      aktiv = { typ: daten.typ, schema: schema, felder: alleFelder(schema), gesendet: false, bearbeiten: b, pfad: daten.pfad,
-        schluessel: "ifsmb-bearbeiten:" + daten.pfad };
-      aktiv.beruehrt = alleBeruehrt(); // nothing is derived while editing (file name, event_tag, end …)
-      var entwurf = ladeEntwurf(), passt = entwurf && entwurf.quelle === quelle;
-      aktiv.w = passt ? Object.assign(JSON.parse(JSON.stringify(b.w0)), entwurf.w) : JSON.parse(JSON.stringify(b.w0));
-      if (entwurf && !passt) loescheEntwurf(); // the file changed on GitHub since – old draft no longer fits
-      modus(true);
+      var folder = data.path.split("/").slice(0, -1).join("/");
+      aktiv = { typ: data.type, schema: schema, felder: alleFelder(schema), gesendet: false, edit: loaded, path: data.path,
+        schluessel: "ifsmb-edit:" + data.path };
+      aktiv.beruehrt = allTouched(); // nothing is derived while editing (file name, event_tag, end …)
+      var draft = ladeEntwurf(), draftFits = draft && draft.source === source;
+      aktiv.w = draftFits ? Object.assign(JSON.parse(JSON.stringify(loaded.w0)), draft.w) : JSON.parse(JSON.stringify(loaded.w0));
+      if (draft && !draftFits) loescheEntwurf(); // the file changed on GitHub since – old draft no longer fits
+      setMode(true);
       d.titel("✏️ " + schema.titel + " bearbeiten");
-      hinweisEl.textContent = "Änderungen an " + daten.pfad + " – nur geänderte Zeilen werden neu geschrieben, alles andere bleibt wie es ist.";
+      hinweisEl.textContent = "Änderungen an " + data.path + " – nur geänderte Zeilen werden neu geschrieben, alles andere bleibt wie es ist.";
       hinweisEl.hidden = false;
-      vorlageLink.href = F.githubDatei(daten.pfad);
-      ordnerEl.textContent = teile.slice(0, -1).join("/") + "/";
+      vorlageLink.href = F.githubFile(data.path);
+      ordnerEl.textContent = folder + "/";
       baueFelder();
       zeigeVorschau();
-      status.textContent = passt ? "Entwurf wiederhergestellt." : "";
+      status.textContent = draftFits ? "Entwurf wiederhergestellt." : "";
       if (!d.open) d.showModal();
       F.ladeIndex();
     });
   }
 
-  return { oeffnen: oeffnen, bearbeiten: bearbeiten, datei: datei, bearbeitet: bearbeitet, TYPEN: TYPEN, alleFelder: alleFelder };
+  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, TYPEN: TYPEN, alleFelder: alleFelder };
 })();
 if (typeof module !== "undefined") module.exports = NeuFormular;

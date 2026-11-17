@@ -29,11 +29,11 @@ layout: default
     <div class="prose">
       {{ content }}
     </div>
-    {%- assign mein_badge = site.data.badges | where: "team", page.slug | first -%}
-    {% if mein_badge %}
+    {%- assign member_badge = site.data.badges | where: "team", page.slug | first -%}
+    {% if member_badge %}
     <h2 id="badge">IfsMB-Badge</h2>
     <div class="member-badge">
-      {% include badge-3d.html b=mein_badge %}
+      {% include badge-3d.html b=member_badge %}
       <p class="muted small">Zum Drehen ins Modell ziehen. Gedruckt in Gelb und Schwarz mit nur einem Farbwechsel – <a href="{{ '/presse/#badge' | relative_url }}">mehr zum Badge</a>.</p>
     </div>
     {% endif %}

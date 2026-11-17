@@ -1,6 +1,6 @@
 # IfsMB-Badges zum 3D-Drucken – erscheinen auf /presse/#badge und (mit team) im Teamprofil als drehbares 3D-Modell.
 # Dateien: assets/badge/<datei>.{3mf,obj,mtl,stl} und <datei>-oben.png,
-# erzeugt mit: cd _logo/badge && python3 export-farbig.py "<aufschrift>"  (Details: _logo/badge/README.md)
+# erzeugt mit: cd _logo/badge && python3 export_colored.py "<aufschrift>"  (Details: _logo/badge/README.md)
 #
 # aufschrift: Name auf dem Badge (leer = nur Logo)
 # datei:      Dateiname ohne Endung
