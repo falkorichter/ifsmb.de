@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Hinzugefügt
 
+- **Dankeschön bei Partnern:** Neue Felder `thanks` und `thanks_url` in `_data/partners.yml` (auch in Pages CMS) zeigen auf `/partner/` ein hervorgehobenes Dankeschön, optional als Link – z. B. bei Philippe Bietenholz „Danke für den Ausflug 2025!“ mit Link zum Termin.
 - **Dokumentation im Footer verlinkt:** „Zum Mitmachen: Changelog · Datenstrukturen · Abhängigkeiten“ führt auf jeder Seite zu `CHANGELOG.md`, `DATA_STRUCTURES.md` und `DEPENDENCIES.md` auf GitHub (die Dateien selbst werden nicht als Seiten veröffentlicht).
 - **`DEPENDENCIES.md` – Liste aller Abhängigkeiten:** Bibliotheken im Browser (OverType 2.9.0, Pagefind 1.5.2), Build (Ruby, Jekyll, GitHub Actions), Tests (Node) und lokale Werkzeuge (Python/Pillow, Chrome, OpenSCAD) – jeweils mit genauer Version, Herkunft, Lizenz, Prüfungen, Aktualisieren und Entfernen, dazu offene Punkte (`Gemfile.lock` nicht eingecheckt, Actions nur mit Major-Tag, Node-Version nicht festgelegt). Neuer Abschnitt „Abhängigkeiten“ in `CLAUDE.md`: Was dort nicht steht, wird nicht benutzt.
 - **Slogans als Datendatei:** Die wechselnden Slogans der Startseite stehen jetzt in `_data/slogans.yml` (ein Textblock pro Slogan: jede Zeile eine Zeile, `**fett**` wird gelb hervorgehoben – an beliebiger Stelle) und lassen sich auch in Pages CMS bearbeiten – ein neuer Slogan ist ein neuer Eintrag, kein Basteln mehr am HTML-Attribut.
