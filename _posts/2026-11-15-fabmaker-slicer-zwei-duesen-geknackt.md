@@ -4,6 +4,7 @@ date: 2026-11-15 15:00:00 +0100
 author: falko-richter
 tags: [fabmaker]
 verlinkt: [/ausstattung/fabmaker/]
+uuid: 90c80ac2-0d84-47ac-a0a3-95dc8ea4be6c
 ---
 
 Große Neuigkeit für die [zwei Fabmaker]({{ '/ausstattung/fabmaker/' | relative_url }}): Falko hat den alten Windows-Slicer mit [Claude Code](https://claude.com/claude-code) auseinandergenommen – und damit das [Todo „Fabmaker-Slicer für Mac und Web“]({{ '/todos/#falko-richter/fabmaker-slicer-mac-web' | relative_url }}) einen großen Schritt vorangebracht. Die wichtigste Erkenntnis: **Der Drucker braucht kein geheimes Dateiformat.** Er versteht ganz normales G-Code über die serielle Schnittstelle (115200 Baud). Damit ist der Weg zu Mac und Browser offen.

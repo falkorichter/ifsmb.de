@@ -83,14 +83,26 @@
       .then(function () { a.removeAttribute('aria-busy'); });
   });
   // Fill today's date, UTC offset and a fresh uuid into the template links at click time (build date would be stale).
+  // Every click starts again from the original link, so clicking twice never gives two files the same uuid.
+  // crypto.randomUUID needs a secure context – otherwise a v4 UUID from getRandomValues/Math.random, never "UUID-NEU".
+  function neueUuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    var b = new Uint8Array(16);
+    if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(b);
+    else for (var i = 0; i < 16; i++) b[i] = Math.random() * 256 | 0;
+    b[6] = b[6] & 15 | 64; b[8] = b[8] & 63 | 128;
+    var h = Array.prototype.map.call(b, function (x) { return (x + 256).toString(16).slice(1); }).join('');
+    return h.slice(0, 8) + '-' + h.slice(8, 12) + '-' + h.slice(12, 16) + '-' + h.slice(16, 20) + '-' + h.slice(20);
+  }
   document.addEventListener('click', function (ev) {
     var a = ev.target.closest && ev.target.closest('a[data-vorlage]');
     if (!a) return;
     var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
     var off = -d.getTimezoneOffset(), tz = (off >= 0 ? '+' : '-') + p(Math.floor(Math.abs(off) / 60)) + p(Math.abs(off) % 60);
-    a.href = a.href.replace(/JJJJ-MM-TT/g, d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()))
+    if (!a.dataset.vorlageRoh) a.dataset.vorlageRoh = a.href;
+    a.href = a.dataset.vorlageRoh.replace(/JJJJ-MM-TT/g, d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()))
       .replace(/JJJJ/g, d.getFullYear()).replace(/TZTZ/g, encodeURIComponent(tz))
-      .replace(/UUID-NEU/g, window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'UUID-NEU');
+      .replace(/UUID-NEU/g, neueUuid);
   });
 </script>
 {%- endif -%}

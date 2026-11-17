@@ -365,6 +365,11 @@ var NeuFormular = (function () {
       if (original.length && original[original.length - 1].key === "uuid") i = blocks.length - 1;
       blocks.splice(i, 0, line);
     });
+    // pages without a uuid get one on saving (kept in w, so it stays the same while editing); _data/*.yml entries don't
+    if (schema.format !== "yaml" && !edit.file.blocks.some(function (b) { return b.key === "uuid"; })) {
+      if (!w.uuid) w.uuid = neueUuid();
+      blocks.push("uuid: " + w.uuid);
+    }
     var rest = w.text === edit.w0.text ? edit.file.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
     return F.joinFile(blocks, rest);
   }

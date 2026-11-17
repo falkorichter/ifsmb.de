@@ -3,6 +3,7 @@ title: berlincreators - ein der freundliche makespace
 date: 2026-11-13 22:00:00 +0100
 author: falko-richter
 verlinkt: [/partner/35services/, /projekte/recherche-ki-tools-cad-openscad/, /news/2026/10/13/linux-laptops-fuer-die-3d-druck-ag/, /news/2026/11/12/ki-server-pi4-proxy/]
+uuid: f87c7b47-4683-4914-b299-04ef1f55dd99
 ---
 
 Manchmal ist gute so nah. [berlincreators.de](https://berlincreators.de/) sollte man mal besucht haben wenn man in Moabit/Mitte unterwegs ist. Ein toller space und die Leute berlincreators machen tolle 3d-druck/Elektronik/Repair-cafe/retro-computing projekte.

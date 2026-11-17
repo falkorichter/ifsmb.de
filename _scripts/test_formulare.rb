@@ -7,7 +7,8 @@
 #     boolean, number, date and select values as the CMS expects them,
 #   - only use fields that the matching template in _includes/vorlagen/ documents.
 # Also: every ➕ button type has a form, every chip field uses a known autocomplete source,
-# and the todo files survive parse → serialize unchanged.
+# and the todo files survive parse → serialize unchanged. Every way of creating a page (forms, template links,
+# Pages CMS, ✏️ edit form) gives it a random uuid.
 #
 #   ruby _scripts/test_formulare.rb      (needs Node; runs in the workflows "Prüfen" and "Pages")
 
@@ -18,6 +19,7 @@ require "date"
 require "open3"
 
 ROOT = File.expand_path("..", __dir__)
+UUID_V4 = /[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/
 
 module Daten
   module_function
@@ -196,6 +198,42 @@ class FormulareTest < Minitest::Test
   end
 end
 
+# Every content page needs its own uuid (read marker, _scripts/uuids_ergaenzen.rb --pruefen fails pull requests
+# without one) – so every way of creating a page must generate a random one.
+class UuidTest < Minitest::Test
+  def test_markdown_vorlagen_haben_den_uuid_platzhalter
+    Dir.glob(File.join(ROOT, "_includes/vorlagen/*.md")).each do |v|
+      assert_match(/^uuid: UUID-NEU\b/, File.read(v), "#{File.basename(v)}: „uuid: UUID-NEU“ fehlt (wird beim Klick durch eine zufällige uuid ersetzt)")
+    end
+  end
+
+  def test_vorlagen_links_ersetzen_den_platzhalter_immer
+    html = File.read(File.join(ROOT, "_includes/neu-buttons.html"))
+    assert_includes html, ".replace(/UUID-NEU/g, neueUuid)"
+    refute_match(/:\s*'UUID-NEU'/, html, "kein Rückfall auf den Platzhalter „UUID-NEU“")
+  end
+
+  def test_jede_seite_aus_dem_formular_hat_eine_eigene_uuid
+    seiten = Daten.beispiele["proben"].reject { |p| p["format"] == "yaml" }
+    refute_empty seiten
+    uuids = seiten.map do |p|
+      felder, = Daten.front_matter(p["inhalt"])
+      assert_match(/\A#{UUID_V4.source}\z/, felder["uuid"].to_s, "#{p['typ']} (#{p['fall']}): keine zufällige uuid")
+      felder["uuid"]
+    end
+    assert_equal uuids.size, uuids.uniq.size, "Formulare erzeugen doppelte uuids"
+  end
+
+  def test_pages_cms_erzeugt_die_uuid_selbst
+    Daten.cms.select { |c| c["type"] == "collection" }.each do |c|
+      f = (c["fields"] || []).find { |x| x["name"] == "uuid" }
+      refute_nil f, "#{c['name']}: Feld uuid fehlt in .pages.yml"
+      assert_equal "uuid", f["type"], "#{c['name']}: uuid muss „type: uuid“ sein, damit Pages CMS sie beim Anlegen erzeugt"
+      refute_equal "", f["default"], "#{c['name']}: default: \"\" würde die automatische uuid abschalten"
+    end
+  end
+end
+
 class TodoFormatTest < Minitest::Test
   # TodoFormat.normal(md) = serialize(parse(md)) must not change a file the app wrote.
   def test_todo_dateien_bleiben_beim_lesen_und_schreiben_gleich
@@ -236,11 +274,19 @@ class EditFormTest < Minitest::Test
   end
 
   def test_comment_after_a_value_is_kept
-    source = "---\ntitle: Test\nstatus: offen   # offen, in-arbeit oder geloest\nart: frage\n---\n\nText\n"
+    source = "---\ntitle: Test\nstatus: offen   # offen, in-arbeit oder geloest\nart: frage\nuuid: 0b7d8a52-3f1e-4c2a-9d6b-1e2f3a4b5c6d\n---\n\nText\n"
     js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{status:'in-arbeit'}).content)"
     out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
     assert status.success?, err
     assert_equal source.sub("status: offen ", "status: in-arbeit "), out
+  end
+
+  def test_page_without_uuid_gets_one_on_saving
+    source = "---\ntitle: Test\nart: frage\n---\n\nText\n"
+    js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{}).content)"
+    out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+    assert status.success?, err
+    assert_match(/\A---\ntitle: Test\nart: frage\nuuid: #{UUID_V4.source}\n---\n\nText\n\z/, out)
   end
 
   def test_all_form_fields_are_readable

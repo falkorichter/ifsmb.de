@@ -16,8 +16,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Titel
         type: string
@@ -134,8 +137,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Titel
         type: string
@@ -202,8 +208,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Titel
         type: string
@@ -304,8 +313,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Name
         type: string
@@ -374,8 +386,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Name des Geräts
         type: string
@@ -468,8 +483,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Herausforderung (kurz, gern als Frage)
         type: string
@@ -548,8 +566,11 @@ content:
     fields:
       - name: uuid
         label: Kennung (Gelesen-Markierung)
-        type: string
-        hidden: true
+        description: Wird beim Anlegen automatisch erzeugt und bleibt fest – Pflicht für jeden Pull Request.
+        type: uuid
+        options:
+          editable: false
+          generate: false
       - name: title
         label: Titel
         type: string

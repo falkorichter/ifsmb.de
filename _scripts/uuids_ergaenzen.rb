@@ -9,8 +9,11 @@
 # layout-rendered HTML output (feeds, JSON, ICS) and everything Jekyll does not build.
 #
 #   ruby _scripts/uuids_ergaenzen.rb           # add missing UUIDs
-#   ruby _scripts/uuids_ergaenzen.rb --pruefen # only check: duplicate UUIDs fail (exit 1),
-#                                              # missing ones are only listed (e.g. pages created in Pages CMS)
+#   ruby _scripts/uuids_ergaenzen.rb --pruefen # only check: duplicate AND missing UUIDs fail (exit 1) –
+#                                              # required for every pull request (workflow "Prüfen")
+#   ruby _scripts/uuids_ergaenzen.rb --pruefen --nur-warnen
+#                                              # missing ones are only listed (deploy of main, so a page
+#                                              # committed directly on main doesn't stop the whole site)
 
 require "securerandom"
 require "yaml"
@@ -49,6 +52,7 @@ def kandidaten
 end
 
 pruefen = ARGV.include?("--pruefen")
+nur_warnen = ARGV.include?("--nur-warnen")
 fehlend = []
 neu = 0
 vergeben = Hash.new { |h, k| h[k] = [] }
@@ -87,10 +91,11 @@ if pruefen
   if fehlend.empty?
     puts "✓ Alle Inhaltsseiten haben eine eigene uuid." if doppelt.empty?
   else
-    puts "! Ohne uuid (#{fehlend.size}) – keine Gelesen-Markierung; ergänzen mit: ruby _scripts/uuids_ergaenzen.rb"
-    fehlend.each { |p| puts "    #{p}" }
+    puts "#{nur_warnen ? '!' : '✗'} Ohne uuid (#{fehlend.size}) – jede Inhaltsseite braucht eine eigene uuid. " \
+         "Ergänzen mit „ruby _scripts/uuids_ergaenzen.rb“ oder diese Zeile ins Front Matter kopieren (vor das schließende ---):"
+    fehlend.each { |p| puts "    #{p}:  uuid: #{SecureRandom.uuid}" }
   end
 else
   puts "uuid ergänzt in #{neu} Datei(en)."
 end
-exit(doppelt.empty? ? 0 : 1)
+exit(doppelt.empty? && (fehlend.empty? || nur_warnen || !pruefen) ? 0 : 1)

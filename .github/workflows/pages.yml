@@ -45,7 +45,7 @@ jobs:
       - name: Fotos auf Geokoordinaten prüfen
         run: ruby _scripts/check_geodaten.rb
       - name: Seiten-Kennungen (uuid) prüfen
-        run: ruby _scripts/uuids_ergaenzen.rb --pruefen
+        run: ruby _scripts/uuids_ergaenzen.rb --pruefen --nur-warnen
       - name: Formulare und Pages-CMS-Felder testen
         run: ruby _scripts/test_formulare.rb
       - run: bundle exec jekyll build

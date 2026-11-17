@@ -45,8 +45,8 @@ Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-D
 
 Besucher*innen sehen an einem kleinen ✓, welche Seiten sie schon geöffnet haben; Neuigkeiten und Projekte zeigen „X von Y gelesen“. Gespeichert wird nur im Browser (`localStorage`, Schlüssel `gelesen_<uuid>`), nichts wird übertragen.
 
-- Jede Inhaltsseite braucht eine eigene `uuid` im Front Matter. Formulare und Vorlagen der ➕-Buttons setzen sie automatisch.
-- Fehlende ergänzen: `ruby _scripts/uuids_ergaenzen.rb` – Prüfen (scheitert bei doppelten uuids, z. B. nach dem Kopieren einer Datei): `ruby _scripts/uuids_ergaenzen.rb --pruefen`
+- Jede Inhaltsseite braucht eine eigene `uuid` im Front Matter – **Pflicht für jeden Pull Request**. ➕-Formulare, Vorlagen, Pages CMS und das ✏️-Formular setzen sie automatisch.
+- Fehlende ergänzen: `ruby _scripts/uuids_ergaenzen.rb` – Prüfen (scheitert bei fehlenden und doppelten uuids, z. B. nach dem Kopieren einer Datei, und schlägt für jede fehlende eine `uuid:`-Zeile zum Einfügen vor): `ruby _scripts/uuids_ergaenzen.rb --pruefen`
 - Markierungen zum Testen löschen: Button im [Impressum](https://ifsmb.de/impressum/) oder in der Konsole
   `Object.keys(localStorage).filter(k => k.startsWith('gelesen_')).forEach(k => localStorage.removeItem(k))`
 
