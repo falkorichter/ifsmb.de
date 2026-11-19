@@ -5,7 +5,7 @@ art: frage
 status: in-arbeit
 seit: 2026-11-19
 wichtig: true
-team: [falko-richter]
+team: [falko-richter,ploenne]
 verlinkt: [/news/2026/11/18/die-keramik-ag-war-zu-besuch/, /news/2026/11/11/post-von-der-keramik-ag-und-ein-erster-schluesselanhaenger/]
 persoenlich: true
 social_media_preview_image: /assets/images/herausforderungen/kontakt-mit-greenlab-tegel-wegen-keramik-drucken/04-social.jpg
