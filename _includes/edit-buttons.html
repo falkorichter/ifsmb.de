@@ -19,7 +19,7 @@
 {%- assign github_branch = site.branch | default: 'main' -%}
 {%- assign edit_url = github_base | append: "/edit/" | append: github_branch | append: "/" | append: page.path -%}
 {%- if edit_type -%}
-{%- capture edit_data -%}{"type": {{ edit_type | jsonify }}, "path": {{ page.path | jsonify }}, "source": {{ "/source/" | append: page.path | relative_url | jsonify }}}{%- endcapture -%}
+{%- capture edit_data -%}{"type": {{ edit_type | jsonify }}, "path": {{ page.path | jsonify }}, "url": {{ page.url | relative_url | jsonify }}, "source": {{ "/source/" | append: page.path | relative_url | jsonify }}}{%- endcapture -%}
 <a class="btn btn-small edit-btn" data-edit="{{ edit_data | escape }}" href="{{ edit_url }}" target="_blank" rel="noopener" title="Diese Seite im Formular bearbeiten (Strg/⌘-Klick: direkt auf GitHub)"><span aria-hidden="true">✏️</span><span class="sr-only">Bearbeiten</span></a>
 <script>
   // A plain click opens the edit form (assets/js/neu.js, loaded on first use); Ctrl/⌘/Shift-click, or a failed load,

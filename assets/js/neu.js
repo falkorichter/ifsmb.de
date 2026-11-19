@@ -480,6 +480,15 @@ var NeuFormular = (function () {
     });
   }
 
+  // The page being edited, in every spelling a link to it can have – never offered as a link to itself (#128).
+  function ownAddresses(url) {
+    if (!url) return [];
+    var path = url.replace(/^https?:\/\/[^/]+/, "").replace(/index\.html$/, ""), bare = path.replace(/\/$/, "");
+    var forms = [path, bare, bare + "/", bare + "/index.html"];
+    var hosts = ["https://ifsmb.de"].concat(typeof location !== "undefined" && location.origin ? [location.origin] : []);
+    return forms.concat.apply(forms, hosts.map(function (h) { return forms.map(function (x) { return h + x; }); }));
+  }
+
   // in edit mode a required field only stays required if the file had a value (old posts without date: …)
   function isRequired(f) { return f.pflicht && !(aktiv.edit && F.leer(aktiv.edit.w0[f.name])); }
   function baueFeld(f) {
@@ -492,6 +501,7 @@ var NeuFormular = (function () {
       return F.chipFeld({
         label: f.label + (isRequired(f) ? " *" : ""), quelle: f.quelle, placeholder: f.platzhalter, hilfe: f.hilfe, einzeln: f.einzeln,
         werte: function () { return aktiv.w[f.name]; },
+        ausser: f.quelle === "seiten" ? function () { return ownAddresses(aktiv.url); } : null,
         setze: function (a) { aktiv.w[f.name] = a; nachAenderung(); }
       });
     }
@@ -1361,7 +1371,7 @@ var NeuFormular = (function () {
       if (!d) baueDialog();
       var folder = data.path.split("/").slice(0, -1).join("/");
       aktiv = { typ: data.type, schema: schema, felder: alleFelder(schema), gesendet: false, photos: [], edit: loaded, path: data.path,
-        schluessel: "ifsmb-edit:" + data.path };
+        url: data.url || (typeof location !== "undefined" ? location.pathname : ""), schluessel: "ifsmb-edit:" + data.path };
       aktiv.beruehrt = allTouched(); // nothing is derived while editing (file name, event_tag, end …)
       var draft = ladeEntwurf(), draftFits = draft && draft.source === source && !draft.pr;
       aktiv.w = draftFits ? Object.assign(JSON.parse(JSON.stringify(loaded.w0)), draft.w) : JSON.parse(JSON.stringify(loaded.w0));
