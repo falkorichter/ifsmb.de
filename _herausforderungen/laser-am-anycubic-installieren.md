@@ -1,7 +1,7 @@
 ---
 title: Laser am Anycubic installieren
-art: frage
-status: offen
+art: aufgabe
+status: in-arbeit
 seit: 2026-07-01
 team: [falko-richter]
 projekte: [blockface-klassensatz]
