@@ -11,6 +11,8 @@ team:
   - falko-richter
 partners:
   - Kurt-Tucholsky-Grundschule
+image: /assets/images/projekte/blockface-klassensatz/01.jpg
+social_media_preview_image: /assets/images/projekte/blockface-klassensatz/01-social.jpg
 uuid: 6cfaedcf-2f91-4217-b48e-06c08782602e
 ---
 
@@ -22,6 +24,10 @@ BlockFace ist Open Source: Die Dateien gibt es unter einer nicht-kommerziellen C
 
 Unterstützt wird das Projekt von **Frau S.**
 
-<span class="todo">Fotos folgen.</span>
+Wollt ihr mithelfen? Meldet euch bei Falko in der schul.cloud.
 
 Vom selben Team stammt auch die Tiefdruckpresse aus unserem anderen Teilprojekt: [Open Press bauen]({{ '/projekte/openpress-bauen/' | relative_url }}).
+
+![Kartons mit den Sets.](/assets/images/projekte/blockface-klassensatz/01.jpg)
+![Zubehör](/assets/images/projekte/blockface-klassensatz/02.jpg)
+{: .gallery}
