@@ -2,6 +2,8 @@
 
 Stand: 18.11.2026 · erste Version gemergt mit PR #110 (zum Testen auf ifsmb.de) · Fortsetzung: Abschnitt [Offene Punkte](#offene-punkte)
 
+**Aufgabenliste:** offene Punkte werden in Issue #129 verfolgt und dort abgehakt – dieses Dokument bleibt die ausführliche Beschreibung.
+
 ## Ziel
 
 So bequem wie [Pages CMS](https://app.pagescms.org), aber mit unseren eigenen Formularen (➕/✏️, OverType-Editor, Autovervollständigung, Social-Media-Vorschau):

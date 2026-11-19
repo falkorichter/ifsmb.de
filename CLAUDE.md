@@ -148,6 +148,17 @@ Ziel: kein Abhängigkeits-Wildwuchs. Jede Abhängigkeit ist **genau dokumentiert
 - **Jede Änderung an Abhängigkeiten** (neu, Update, entfernt) zusätzlich mit genauer Version im `CHANGELOG.md` und in der PR-Beschreibung; `DEPENDENCIES.md` im selben Commit aktualisieren (auch das Datum „Stand“).
 - **Offene Punkte** (z. B. nicht festgelegte Versionen) bleiben in `DEPENDENCIES.md` sichtbar, bis sie erledigt sind.
 
+## GitHub Issues
+
+**Aufgaben, Bugs und offene Punkte leben als GitHub Issues** (`gh issue …`) – nicht nur im Chat oder in Markdown-Dateien. So bleibt nichts liegen, wenn eine Sitzung endet, und alle sehen den Stand. Vorbild: #129 (Sammel-Issue „Direkt bearbeiten“).
+
+- **Bugs aus der Claude-CLI melden:** Meldet Falko einen Fehler oder Wunsch in einer Sitzung („das geht nicht“, „wir sollten …“), sofort ein Issue anlegen – vorher mit `gh issue list --search "…"` nach einem passenden suchen und dann lieber das bestehende ergänzen. Inhalt auf Deutsch: was passiert, was erwartet war, Schritte zum Nachstellen, Seite/Adresse, Screenshot oder Link zum fehlgeschlagenen Workflow; Label `bug` bzw. `enhancement`.
+- **Beim Arbeiten an einem Issue** es aktuell halten: zu Beginn kurz kommentieren (Branch/PR), Checkboxen abhaken, sobald etwas erledigt ist, neue Erkenntnisse und Teilaufgaben ergänzen. Die PR-Beschreibung verweist darauf („Teil von #N“, oder „Closes #N“, wenn der PR es ganz erledigt).
+- **Erledigtes schließen** – mit einem Kommentar, was wo erledigt wurde (PR-Nummern); Reste in ein bestehendes oder neues Issue übertragen und verlinken.
+- **Sitzung beenden:** Alles, was offen bleibt (auch Ideen und Entscheidungen, die noch anstehen), steht danach in einem Issue. Markdown-Pläne im Repo (z. B. `PLAN_DIRECT_EDITING.md`, `EDITING_CONFLICTS.md`) bleiben die ausführliche Beschreibung; das Issue ist die Aufgabenliste und verlinkt sie.
+- **Größere Brocken** als eigenes Issue abspalten und im Sammel-Issue verlinken; Einstellungen, die nur Falko ändern kann (Branch-Schutz, Collaborators), als solche kennzeichnen.
+- Keine nackten `@namen` in Issues (GitHub benachrichtigt sonst echte Accounts) – Rollen oder Code-Schreibweise nutzen.
+
 ## Branches und Pull Requests
 
 **Jede Sitzung bekommt einen eigenen Pull Request.** Falko arbeitet nicht Vollzeit an der Seite; Worktrees und Claude-Sitzungen gehen zwischendurch verloren. Deshalb jede Sitzung (jeden Auftrag) sofort in einem eigenen Worktree auf einem neuen Branch von `origin/main` beginnen und, sobald es eine erste Änderung gibt, committen, pushen und einen Pull Request öffnen (bei Unfertigem als Draft mit `gh pr create --draft`). Nie Änderungen nur unkommittiert im Haupt-Checkout oder in einem Worktree liegen lassen – am Ende der Sitzung muss alles in einem PR stehen. Folgeaufträge in derselben Sitzung kommen in denselben PR.
@@ -157,5 +168,5 @@ Wer einen Branch pusht (nicht `main`), öffnet dazu immer einen Pull Request mit
 1. `bundle exec jekyll build`, dann Screenshots der betroffenen Seiten:
    `python3 -I _scripts/pr_vorschau.py /pfad/der/seite/ …` (Seitenanfang) oder mit `--unten` (Ausschnitt über dem Footer, z. B. für Änderungen am Seitenende). Das Skript nimmt Desktop (1280 px) und Handy (390 px) mit Headless-Chrome auf, lädt die Bilder auf den Branch `pr-previews` (Ordner = Branchname, nie in den Feature-Branch) und gibt eine Markdown-Tabelle für die PR-Beschreibung aus.
 2. Bilder vor dem Hochladen selbst ansehen (`--nur-lokal` speichert nur nach `_pr-vorschau/`, in `.gitignore`). Es gelten dieselben Regeln wie auf der Seite: keine erkennbaren Kindergesichter, keine Kennzeichen, Namen oder Zugangscodes.
-3. PR-Beschreibung: **Was** sich ändert, **warum**, **wie geprüft** (Build, Link-Check, angesehene Seiten), dann die Vorschau-Tabelle. Titel wie die Commit-Message; die Makespace-Regel gilt auch hier.
+3. PR-Beschreibung: **Was** sich ändert, **warum**, **wie geprüft**, zugehöriges Issue („Teil von #N“ / „Closes #N“) (Build, Link-Check, angesehene Seiten), dann die Vorschau-Tabelle. Titel wie die Commit-Message; die Makespace-Regel gilt auch hier.
 4. Bei Inhaltsänderungen reicht ein Screenshot der geänderten Seite. Ohne sichtbare Änderung (Workflow, Skripte) keine Vorschau – dann kurz sagen, warum.

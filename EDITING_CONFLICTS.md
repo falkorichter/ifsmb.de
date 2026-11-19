@@ -8,6 +8,8 @@ Ziel: **Konflikte werden im Browser erkannt und gelöst** – die Person bekommt
 
 ## Stand der Umsetzung
 
+Offene Szenarien werden in Issue #129 (Abschnitt „Konflikte“) verfolgt.
+
 Umgesetzt mit PR #118 (Integrations-Branch `editing-polish`), jeweils mit End-to-End-Test in `_tests/e2e/conflicts.test.js` (✅ = Test, ☑️ = umgesetzt, aber noch ohne eigenen Test):
 
 | ID | Lösung | Test |
