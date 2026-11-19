@@ -5,6 +5,7 @@ persoenlich: true
 author: falko-richter
 tags: [blockface]
 verlinkt: [/ausstattung/lasercutter-ktg/, /herausforderungen/laser-am-anycubic-installieren/]
+social_media_preview_image: /assets/images/news/falko-und-frau-s-sind-verabredet-um-den-laser-umzurusten/01-social.jpg
 uuid: eaade6f7-4036-431b-854a-d4d1fdf14779
 ---
 
