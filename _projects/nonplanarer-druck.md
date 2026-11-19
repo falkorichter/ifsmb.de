@@ -16,6 +16,7 @@ partners:
 verlinkt:
   - /todos/#falko-richter/non-planar-slicing
   - /ausstattung/35services-bambu-lab-a1-mini/
+  - /presse/#badge
 updates:
   - datum: 2026-11-17
     text: |-
@@ -77,6 +78,21 @@ Impasto ist **kein Slicer** und will keiner sein. Es kann keine Stützstrukturen
 - Die Stapelung liest die gedruckten Linien an ihrer Mitte. Überlappungen unter etwa einer halben Linienbreite heben nicht an.
 - Der Warp-Ausgleich ist ein Modell, keine Messung: Er hebt ein Bauteil zu den Enden hin an, damit die Düse auf einem verzogenen Teil nicht schleift. Wie stark, muss man am eigenen Druck messen.
 - Auf Schrägen sitzt eine flache Düse zwangsläufig höher. Der Spalt wird über den Volumenstrom ausgeglichen, nicht über die Geometrie.
+
+## Das Badge als Testobjekt
+{: #badge}
+
+Ein Anstecker ist ein dankbares Testteil für die ganze Kette: zwei Farben, eine gewölbte Deckplatte, ein Schriftzug, der als Aussparung stehen bleiben muss – und eine Fläche, an der man Muster ausprobieren kann, ohne ein ganzes Bauteil zu drucken.
+
+Die Bilder zeigen den gedruckten Stand mit „Alex" im Schriftband. Die schwarze Platte wölbt sich zur Mitte hin; auf der weißen Grundplatte laufen die Bahnen strahlenförmig nach außen, der Namenszug liegt als Aussparung darin und lässt die schwarze Schicht darunter durchscheinen.
+
+![Das gedruckte Badge von oben: weiße Grundplatte mit strahlenförmig nach außen laufenden Bahnen, darüber die schwarze Platte mit erhabenem weißem Schriftzug „IfsMB“, unten der Namenszug „Alex“ als Aussparung](/assets/images/projekte/nonplanarer-druck/05.jpg)
+{: .gallery}
+
+![Nahaufnahme von der Seite: die schwarze Platte wölbt sich zur Mitte, die weißen Buchstaben stehen erhaben darauf; auf der weißen Fläche laufen die Bahnen strahlenförmig nach außen](/assets/images/projekte/nonplanarer-druck/06.jpg)
+{: .gallery}
+
+Das Badge gibt es zum Selbstdrucken: [Badges auf der Presseseite]({{ '/presse/#badge' | relative_url }}) — als 3MF mit zwei eingefärbten Objekten, als STL für den Farbwechsel per Pause und als drehbares Modell im Browser.
 
 ## Stand
 
