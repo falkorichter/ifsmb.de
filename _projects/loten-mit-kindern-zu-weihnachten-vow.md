@@ -15,3 +15,6 @@ uuid: b3eb1431-2ffd-4f7a-a517-3b325d5ecefc
 - https://shop.blinkyparts.com/de/Bausaetze/?p=3
 - https://www.eurocircuits.com/ falko hat Erfahrung mit Rückrechnung
 - https://aisler.net/de
+
+todo
+- [ ] Preise vergleichen 
