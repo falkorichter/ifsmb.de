@@ -17,4 +17,4 @@ uuid: b3eb1431-2ffd-4f7a-a517-3b325d5ecefc
 - https://aisler.net/de
 
 todo
-- [ ] Preise vergleichen 
+- [ ] Preise vergleichen mit Lisa von der Glasbox
