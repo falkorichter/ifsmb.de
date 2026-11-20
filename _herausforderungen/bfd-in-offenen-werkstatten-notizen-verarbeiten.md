@@ -50,6 +50,9 @@ Seminar
 - 10
 - gemischte Seminare möglich (privat)
 
+Betreuuung
+- Hauptamtliche sind benötigt
+
 Anerkennung
 - Unverbindlich
 - Stempel benötigt
