@@ -470,7 +470,11 @@ var NeuFormular = (function () {
       if (original.length && original[original.length - 1].key === "uuid") i = blocks.length - 1;
       blocks.splice(i, 0, line);
     });
-    var rest = w.text === edit.w0.text ? edit.file.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
+    // a changed body keeps the file's own spacing after "---" (Markdown: an empty line, index.html: none) and the
+    // indentation of its first line – only line breaks around it are dropped, like readSource does
+    var body = String(w.text).replace(/^\n+/, "").replace(/\s+$/, ""), gap = (edit.file.rest.match(/^\n*/)[0] || "") || "\n\n";
+    if (!/\S/.test(edit.file.rest)) gap = "\n\n";
+    var rest = w.text === edit.w0.text ? edit.file.rest : body ? gap + body + "\n" : "\n";
     return F.joinFile(blocks, rest);
   }
   // Without DOM: the file after changing some values (tests). → { content, rawFields, values }
@@ -807,7 +811,8 @@ var NeuFormular = (function () {
     bild = direct.previewFor(bild); // photos not uploaded yet: show the local preview
     if (socialImg.getAttribute("src") !== bild) socialImg.src = bild;
     socialTitel.textContent = w.title || aktiv.schema.titel;
-    socialBeschr.textContent = (w.summary || w.subtitle || w.role || w.lead || ersteTextzeile(w.text) || "Institut für spontane Makespace Buildung").slice(0, 160);
+    var codeText = aktiv.felder.some(function (f) { return f.name === "text" && f.code; }); // HTML is no description
+    socialBeschr.textContent = (w.summary || w.subtitle || w.role || w.lead || (codeText ? "" : ersteTextzeile(w.text)) || "Institut für spontane Makespace Buildung").slice(0, 160);
   }
 
   function fehlt() {

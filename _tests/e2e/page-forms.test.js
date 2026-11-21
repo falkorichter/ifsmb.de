@@ -63,3 +63,25 @@ test("✏️ Markdown-Seite /partner/rfflabs/: Formular „Seite“ mit Text", a
   const d = diffLines(original, env.control.readFile({ ref: pr.head.ref, path: file }).text);
   assert.deepEqual(d.added, ['title: RFFLabs (E2E)'], d.patch);
 });
+
+test("✏️ Startseite: HTML von index.html ändern → Pull Request mit genau dieser Zeile", async () => {
+  const file = "index.html", original = read(file);
+  env.seedSource([file]);
+  const alice = await env.person("token-alice");
+  await alice.openEdit("/");
+  const html = await alice.value("text");
+  assert.match(html, /slogan/i, "HTML der Startseite im Feld");
+  // change the first line of the HTML that is plain markup (no Liquid), e.g. a heading or a paragraph
+  const lines = html.split("\n"), i = lines.findIndex((l) => /<(h2|p)\b[^>]*>[^<{]+</.test(l));
+  assert.ok(i >= 0, "keine Zeile mit Überschrift/Absatz gefunden");
+  const before = lines[i], after = before.replace(/>([^<{]+)</, ">E2E geänderter Text<");
+  lines[i] = after;
+  await alice.fill({ text: lines.join("\n") });
+  await alice.submit();
+  await alice.waitStatus(/Pull Request #1.*angelegt/);
+  const pr = env.control.state().pulls[0];
+  assert.deepEqual(pr.files.map((f) => [f.filename, f.status]), [[file, "modified"]]);
+  const d = diffLines(original, env.control.readFile({ ref: pr.head.ref, path: file }).text);
+  assert.deepEqual(d.removed, [before], d.patch);
+  assert.deepEqual(d.added, [after], d.patch);
+});

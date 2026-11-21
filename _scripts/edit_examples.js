@@ -10,7 +10,7 @@ const ROOT = path.join(__dirname, "..");
 const FOLDERS = { _posts: "beitrag", _events: "termin", _projects: "projekt", _equipment: "geraet",
   _herausforderungen: "herausforderung", _team: "team", _press: "presse" };
 
-// Plain pages with `layout: page` outside the collections – same rule as _plugins/source_files.rb (#154):
+// Plain pages with `layout: page` (or `default`, the start page) outside the collections – same rule as _plugins/source_files.rb (#154):
 // Markdown → "seite", HTML → "uebersicht".
 function plainPages(dir) {
   return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((e) => {
@@ -19,7 +19,7 @@ function plainPages(dir) {
     const type = /\.(md|markdown)$/.test(e.name) ? "seite" : /\.html$/.test(e.name) ? "uebersicht" : null;
     if (!type) return [];
     const fm = fs.readFileSync(path.join(ROOT, rel), "utf8").match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    return fm && /^layout:\s*page\s*$/m.test(fm[1]) && !/^edit_form:/m.test(fm[1]) ? [[rel, type]] : [];
+    return fm && /^layout:\s*(page|default)\s*$/m.test(fm[1]) && !/^edit_form:/m.test(fm[1]) ? [[rel, type]] : [];
   });
 }
 

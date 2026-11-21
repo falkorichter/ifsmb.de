@@ -258,6 +258,22 @@ class EditFormTest < Minitest::Test
   end
 
   # owner_name is written as a list with one entry (alsEintrag) – the form must read that back as text
+  # a changed body keeps the file's spacing after "---" and the indentation of its first line (index.html: no empty line)
+  def test_changed_body_keeps_spacing
+    cases = [
+      ["uebersicht", "---\ntitle: A\n---\n<main>\n  <p>x</p>\n</main>\n", "<main>\n  <p>y</p>\n</main>", "---\ntitle: A\n---\n<main>\n  <p>y</p>\n</main>\n"],
+      ["beitrag", "---\ntitle: B\n---\n\nText\n", "Neu", "---\ntitle: B\n---\n\nNeu\n"],
+      ["beitrag", "---\ntitle: C\n---\n", "Neu", "---\ntitle: C\n---\n\nNeu\n"],
+      ["uebersicht", "---\ntitle: D\n---\n  <div>\n</div>\n", "  <div>\n<b>x</b></div>", "---\ntitle: D\n---\n  <div>\n<b>x</b></div>\n"]
+    ]
+    cases.each do |typ, source, text, expected|
+      js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile(#{typ.to_json},#{source.to_json},{text:#{text.to_json}}).content)"
+      out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+      assert status.success?, err
+      assert_equal expected, out, "#{typ}: #{source.inspect}"
+    end
+  end
+
   def test_text_field_reads_a_one_entry_list
     source = "---\ntitle: Test\nowner_name: [\"Ralf, Falko\"]\n---\n\nText\n"
     js = "const N=require('./assets/js/neu.js');const r=N.editedFile('geraet',#{source.to_json},{});" \

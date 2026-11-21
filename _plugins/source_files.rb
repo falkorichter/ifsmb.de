@@ -9,20 +9,23 @@ module IfsmbSourceFiles
   # data files edited from the site itself (slogan editor: _includes/slogan-editor.html)
   DATA_FILES = %w[_data/slogans.yml].freeze
 
-  # Pages outside the collections get a form too (#154): every real file with `layout: page` – Markdown pages
+  # Pages outside the collections get a form too (#154): every real file with `layout: page` (or `default`, the
+  # start page) – Markdown pages
   # (partner/<name>/index.md, angebot/ …) the form "seite", HTML overview pages (team/, partner/ …) "uebersicht".
   # page.edit_form tells _includes/edit-buttons.html which one; generated pages have no file and get none.
   # `edit_form: false` in the front matter keeps a page on GitHub's editor (e.g. /mitmachen/offen/, mostly JS).
   # HTML sources are published as <path>.txt (page.edit_source): as .html they would be pages of their own – found
   # by the link check, indexed by Pagefind, opened with raw Liquid.
   PAGE_FORMS = { ".md" => "seite", ".markdown" => "seite", ".html" => "uebersicht" }.freeze
+  # `page` for ordinary pages, `default` for the start page (index.html)
+  FORM_LAYOUTS = %w[page default].freeze
 
   def self.source_path(relative_path)
     File.extname(relative_path) == ".html" ? "#{relative_path}.txt" : relative_path
   end
 
   def self.page_form(site, page)
-    return nil unless page.instance_of?(Jekyll::Page) && page.data["layout"] == "page"
+    return nil unless page.instance_of?(Jekyll::Page) && FORM_LAYOUTS.include?(page.data["layout"])
     return nil if page.data.key?("edit_form")
     return nil unless File.file?(File.join(site.source, page.relative_path))
 
