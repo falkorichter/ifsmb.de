@@ -316,6 +316,8 @@ equipment:
   filter_reset: Alle zeigen
   of_partner: "Ausstattung von {name}"
   at_partner: "Ausstattung bei {name}"
+  link_owned: "Eigene Geräte ({n})"
+  link_located: "Geräte vor Ort ({n})"
 
 team:
   photo_of: Foto von {name}

@@ -1,0 +1,45 @@
+{%- comment -%}
+  Links to the filtered equipment list (/ausstattung/?owner=<key> / ?location=<key>, assets/js/equipment-filter.js).
+  include.partner = a partner's name as in owner_partner / standort_partner, or include.team = a team member's slug.
+  include.heading = true: the heading "Ausstattung" with compact links next to it ("Eigene Geräte (4) →",
+  "Geräte vor Ort (5) →") – for the connections on partner pages and the team profile; otherwise a paragraph
+  ("Ausstattung von … (4) · Ausstattung bei … (5)"). Shows nothing (and no heading) without devices.
+  Keys as in _includes/equipment-keys.html.
+{%- endcomment -%}
+{%- assign el_owned = 0 -%}{%- assign el_located = 0 -%}
+{%- if include.team -%}
+  {%- assign el_key = include.team -%}
+  {%- assign el_member = site.team | where: "slug", include.team | first -%}
+  {%- assign el_name = el_member.title | default: include.team -%}
+  {%- for it in site.equipment -%}
+    {%- assign el_o = it.owner_team | join: "|" | split: "|" -%}
+    {%- if el_o contains include.team -%}{%- assign el_owned = el_owned | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign el_name = include.partner -%}
+  {%- assign el_partner = site.data.partners | where: "name", el_name | first -%}
+  {%- if el_partner.page -%}{%- assign el_key = el_partner.page | split: "/" | last -%}{%- else -%}{%- assign el_key = el_name | slugify -%}{%- endif -%}
+  {%- for it in site.equipment -%}
+    {%- assign el_o = it.owner_partner | join: "|" | split: "|" -%}
+    {%- assign el_l = it.standort_partner | join: "|" | split: "|" -%}
+    {%- if el_o contains el_name -%}{%- assign el_owned = el_owned | plus: 1 -%}{%- endif -%}
+    {%- if el_l contains el_name -%}{%- assign el_located = el_located | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign el_base = '/ausstattung/' | relative_url -%}
+{%- if include.heading -%}
+<div class="heading-row">
+  <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>
+  {%- if el_owned > 0 or el_located > 0 %}
+  <p class="heading-links">
+    {%- if el_owned > 0 %}<a href="{{ el_base }}?owner={{ el_key }}" data-i18n="equipment.link_owned" data-i18n-params="{{ "n" | i18n_params: el_owned }}">{{ "equipment.link_owned" | t: "n", el_owned }}</a>{% endif -%}
+    {%- if el_located > 0 %}<a href="{{ el_base }}?location={{ el_key }}" data-i18n="equipment.link_located" data-i18n-params="{{ "n" | i18n_params: el_located }}">{{ "equipment.link_located" | t: "n", el_located }}</a>{% endif -%}
+  </p>
+  {%- endif %}
+</div>
+{%- elsif el_owned > 0 or el_located > 0 -%}
+<p class="equipment-links">🔧
+{%- if el_owned > 0 %} <a href="{{ el_base }}?owner={{ el_key }}" data-i18n="equipment.of_partner" data-i18n-params="{{ "name" | i18n_params: el_name }}">{{ "equipment.of_partner" | t: "name", el_name }}</a> ({{ el_owned }}){% endif -%}
+{%- if el_owned > 0 and el_located > 0 %} ·{% endif -%}
+{%- if el_located > 0 %} <a href="{{ el_base }}?location={{ el_key }}" data-i18n="equipment.at_partner" data-i18n-params="{{ "name" | i18n_params: el_name }}">{{ "equipment.at_partner" | t: "name", el_name }}</a> ({{ el_located }}){% endif %}</p>
+{%- endif -%}

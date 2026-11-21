@@ -227,7 +227,8 @@
   </ul>
   {%- endif %}
   {%- if g_equipment.size > 0 %}
-  <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>
+  {%- if kind == "partner" %}{% include equipment-links.html partner=include.partner heading=true %}{% else %}
+  <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>{% endif %}
   <ul class="link-list link-list-connections">
     {% for x in g_equipment %}{% assign x_op = x.owner_partner | join: "|" | split: "|" %}{% assign x_sp = x.standort_partner | join: "|" | split: "|" %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🛠️</span> {{ x.title }}{% if kind == "partner" %}{% if x_op contains include.partner %} <span class="link-meta" data-i18n="connections.ownership">{{ "connections.ownership" | t }}</span>{% endif %}{% if x_sp contains include.partner %} <span class="link-meta" data-i18n="connections.location">{{ "connections.location" | t }}</span>{% endif %}{% endif %}</a></li>{% endfor %}
   </ul>

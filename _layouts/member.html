@@ -118,7 +118,7 @@ layout: default
     {%- endif %}
     {% assign my_eq = site.equipment | where: "owner_team", page.slug %}
     {% if my_eq.size > 0 %}
-    <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>
+    {% include equipment-links.html team=page.slug heading=true %}
     <ul class="link-list">
       {% for it in my_eq %}<li><a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endfor %}
     </ul>

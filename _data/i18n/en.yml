@@ -313,6 +313,8 @@ equipment:
   filter_reset: Show all
   of_partner: "Equipment of {name}"
   at_partner: "Equipment at {name}"
+  link_owned: "Own devices ({n})"
+  link_located: "Devices on site ({n})"
 
 team:
   photo_of: Photo of {name}

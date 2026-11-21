@@ -314,6 +314,8 @@ equipment:
   filter_reset: Tout afficher
   of_partner: "Équipement de {name}"
   at_partner: "Équipement chez {name}"
+  link_owned: "Ses appareils ({n})"
+  link_located: "Appareils sur place ({n})"
 
 team:
   photo_of: Photo de {name}
