@@ -51,7 +51,7 @@ var GitHubApi = (function () {
     var owner = repo().split("/")[0];
     return "https://github.com/settings/personal-access-tokens/new?name=" + encodeURIComponent("ifsmb.de bearbeiten")
       + "&description=" + encodeURIComponent("Pull Requests direkt von ifsmb.de aus") + "&target_name=" + encodeURIComponent(owner)
-      + "&expires_in=30&contents=write&pull_requests=write";
+      + "&expires_in=30&contents=write&pull_requests=write&issues=write";
   }
 
   // ---------- requests ----------
@@ -133,8 +133,9 @@ var GitHubApi = (function () {
   }
 
   // All open pull requests with their changed files (max. 30 PRs), cached for 30 s – used for "is this page being
-  // edited?", the page warning and for photo numbers already taken in open PRs.
-  // → [{ number, title, url, branch, user, sameRepo, files: [{ filename, previous_filename, status }] }]
+  // edited?", the page warning, for photo numbers already taken in open PRs and the overview /mitmachen/offen/.
+  // → [{ number, title, url, branch, user, sameRepo, files: [{ filename, previous_filename, status }], draft, sha, body,
+  //      createdAt, labels }]
   var pullsCache = null;
   function openPulls(fresh) {
     if (!fresh && pullsCache && Date.now() - pullsCache.at < 30000) return pullsCache.list;
@@ -144,7 +145,8 @@ var GitHubApi = (function () {
         return call("GET", r + "/pulls/" + pr.number + "/files?per_page=100").then(function (files) { return files; }, function () { return []; })
           .then(function (files) {
             return { number: pr.number, title: pr.title, url: pr.html_url, branch: pr.head.ref, user: pr.user && pr.user.login,
-              sameRepo: !!(pr.head.repo && pr.head.repo.full_name === repo()), files: files };
+              sameRepo: !!(pr.head.repo && pr.head.repo.full_name === repo()), files: files,
+              draft: !!pr.draft, sha: pr.head.sha, body: pr.body || "", createdAt: pr.created_at, labels: pr.labels || [] };
           });
       }));
     });
@@ -182,6 +184,52 @@ var GitHubApi = (function () {
   function headSha(branch) {
     return call("GET", "/repos/" + repo() + "/git/ref/heads/" + (branch || baseBranch()).split("/").map(encodeURIComponent).join("/"))
       .then(function (ref) { return ref.object.sha; }, function (e) { if (e.status === 404) return null; throw e; });
+  }
+
+  // ---------- overview of open work (/mitmachen/offen/, assets/js/open-work.js) ----------
+  // Can a pull request be merged? → { mergeable: true | false | null (GitHub still computing), state: "clean" |
+  // "dirty" (conflict) | "behind" | "blocked" | "unstable" | "unknown" | … }
+  function pullMergeState(number) {
+    return call("GET", "/repos/" + repo() + "/pulls/" + number).then(function (pr) {
+      return { mergeable: pr.mergeable === undefined ? null : pr.mergeable, state: pr.mergeable_state || "unknown" };
+    });
+  }
+  // All checks of a commit: check runs (GitHub Actions) and commit statuses, as one list
+  // → { readable, items: [{ name, state: "success" | "failure" | "pending" | "neutral" }] } – readable: false if the
+  // token may not read them (403), so the overview can say so instead of failing completely.
+  function commitChecks(sha) {
+    var r = "/repos/" + repo() + "/commits/" + encodeURIComponent(sha);
+    function soft(p) { return p.catch(function (e) { if (e.kind === "permission" || e.kind === "notfound") return null; throw e; }); }
+    return Promise.all([soft(call("GET", r + "/check-runs?per_page=100")), soft(call("GET", r + "/status?per_page=100"))]).then(function (res) {
+      var items = [];
+      ((res[0] && res[0].check_runs) || []).forEach(function (c) {
+        var bad = ["failure", "timed_out", "cancelled", "action_required", "startup_failure", "stale"];
+        items.push({ name: c.name, state: c.status !== "completed" ? "pending" : c.conclusion === "success" ? "success"
+          : bad.indexOf(c.conclusion) >= 0 ? "failure" : "neutral" });
+      });
+      ((res[1] && res[1].statuses) || []).forEach(function (s) {
+        items.push({ name: s.context, state: s.state === "error" ? "failure" : s.state });
+      });
+      return { readable: !!(res[0] || res[1]), items: items };
+    });
+  }
+  // Open issues without pull requests (GitHub lists both under /issues), newest first (max. 100)
+  // → [{ number, title, url, user, createdAt, labels: [{ name, color }], assignees: [login] }]
+  function openIssues() {
+    return call("GET", "/repos/" + repo() + "/issues?state=open&per_page=100").then(function (list) {
+      return (list || []).filter(function (i) { return !i.pull_request; }).map(function (i) {
+        return { number: i.number, title: i.title, url: i.html_url, user: i.user && i.user.login, createdAt: i.created_at,
+          labels: (i.labels || []).map(function (l) { return typeof l === "string" ? { name: l, color: "" } : { name: l.name, color: l.color || "" }; }),
+          assignees: (i.assignees || []).map(function (a) { return a.login; }) };
+      });
+    });
+  }
+  // Assign an issue to someone ("Übernehmen") → the new list of assignees. GitHub silently ignores people who may
+  // not be assigned (no write access) – the caller checks whether the login is in the result.
+  function assignIssue(number, login) {
+    return call("POST", "/repos/" + repo() + "/issues/" + number + "/assignees", { assignees: [login] }).then(function (i) {
+      return ((i && i.assignees) || []).map(function (a) { return a.login; });
+    });
   }
 
   function branchName(hint) {
@@ -257,7 +305,8 @@ var GitHubApi = (function () {
     token: token, setToken: setToken, logout: logout, connected: connected, tokenUrl: tokenUrl, repo: repo,
     whoAmI: whoAmI, readFile: readFile, listFolder: listFolder, openPullsForFile: openPullsForFile, openPulls: openPulls,
     namesInOpenPulls: namesInOpenPulls, getPull: getPull, headSha: headSha, createPullRequest: createPullRequest,
-    finishPullRequest: finishPullRequest
+    finishPullRequest: finishPullRequest, pullMergeState: pullMergeState, commitChecks: commitChecks, openIssues: openIssues,
+    assignIssue: assignIssue
   };
 })();
 if (typeof module !== "undefined") module.exports = GitHubApi;

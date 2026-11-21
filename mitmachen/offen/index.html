@@ -1,0 +1,35 @@
+---
+suche: false # tool page, only useful with a GitHub connection
+layout: page
+title: "Offen: Pull Requests und Aufgaben"
+lead: Was gerade auf GitHub offen ist – Pull Requests, die durchgesehen und gemergt werden können, und Aufgaben, die jemand übernehmen kann.
+---
+{%- comment -%}
+  Overview of open work on GitHub (assets/js/open-work.js): open pull requests grouped by check/merge state and open
+  issues (pickable vs. in progress). Only with a GitHub connection (token from "🔑 GitHub verbinden", github-api.js) –
+  without one the page sends no request to GitHub. #open-work-pages maps source files to their address on the site.
+{%- endcomment -%}
+<link rel="stylesheet" href="{{ '/assets/css/open-work.css' | relative_url }}">
+<div id="open-work" class="open-work">
+  <div class="note" data-open-work-intro>
+    <p>Diese Übersicht holt die <strong>offenen Pull Requests</strong> und <strong>offenen Aufgaben</strong> (GitHub Issues) des Repositorys <a href="https://github.com/{{ site.repository }}" target="_blank" rel="noopener">{{ site.repository }}</a> direkt von GitHub: Was ist bereit zum Mergen, wo sind Checks rot, was kann jemand übernehmen?</p>
+    <p>Sie funktioniert nur mit einer <strong>GitHub-Verbindung</strong> (dasselbe Token wie für „Direkt bearbeiten“ in den ➕/✏️-Formularen). Ohne Verbindung fragt diese Seite nichts bei GitHub an.</p>
+    <p><button type="button" class="btn btn-small" data-open-work-connect hidden>🔑 GitHub verbinden</button>
+      <noscript>Diese Seite braucht JavaScript.</noscript>
+      <a class="btn btn-small btn-ghost" href="https://github.com/{{ site.repository }}/pulls" target="_blank" rel="noopener">Pull Requests auf GitHub ↗</a>
+      <a class="btn btn-small btn-ghost" href="https://github.com/{{ site.repository }}/issues" target="_blank" rel="noopener">Issues auf GitHub ↗</a></p>
+  </div>
+  <div data-open-work-body hidden></div>
+</div>
+<script type="application/json" id="open-work-pages">
+{
+{%- assign first = true -%}
+{%- for p in site.documents -%}{% unless first %},{% endunless %}{% assign first = false %}
+{{ p.path | jsonify }}: [{{ p.url | relative_url | jsonify }}, {{ p.title | default: p.slug | jsonify }}]
+{%- endfor -%}
+{%- for p in site.pages -%}{%- assign ext = p.path | split: "." | last -%}{%- if ext == "md" or ext == "html" -%}{%- unless p.layout == "weiterleitung" or p.url contains ".json" or p.url contains ".xml" or p.url contains ".ics" -%},
+{{ p.path | jsonify }}: [{{ p.url | relative_url | jsonify }}, {{ p.title | default: p.url | jsonify }}]
+{%- endunless -%}{%- endif -%}{%- endfor %}
+}
+</script>
+<script src="{{ '/assets/js/open-work.js' | relative_url }}" defer></script>

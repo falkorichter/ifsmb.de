@@ -1,5 +1,5 @@
 // Fake GitHub for the end-to-end tests: an in-memory git repository (blobs, trees, commits, branches) plus pull
-// requests, served with exactly the REST endpoints assets/js/github-api.js uses – realistic status codes and error
+// requests, issues and checks (check runs + commit statuses, set by the tests), served with exactly the REST endpoints assets/js/github-api.js uses – realistic status codes and error
 // bodies, CORS, several tokens/users. No dependencies (node:http, node:crypto).
 //
 // Usable in-process (tests call the control methods directly) or standalone:
@@ -151,7 +151,8 @@ function createFakeGitHub(options) {
   function pullJson(pr) {
     const full = st.owner + "/" + st.repo;
     return {
-      number: pr.number, title: pr.title, body: pr.body, state: pr.state, draft: false, locked: false,
+      number: pr.number, title: pr.title, body: pr.body, state: pr.state, draft: !!pr.draft, locked: false,
+      labels: labelsJson(pr.labels), assignees: [],
       html_url: "https://github.com/" + full + "/pull/" + pr.number,
       url: url + "/repos/" + full + "/pulls/" + pr.number,
       user: userJson(pr.user), created_at: pr.created_at, updated_at: pr.updated_at,
@@ -161,7 +162,40 @@ function createFakeGitHub(options) {
       base: { ref: pr.base.ref, sha: resolve(pr.base.ref), label: st.owner + ":" + pr.base.ref, repo: repoJson() }
     };
   }
-  function openPullInternal({ head, base, title, body, user, headRepo }) {
+  // labels as GitHub returns them; input: names or { name, color }
+  function labelsJson(list) {
+    return (list || []).map((l, i) => typeof l === "string" ? { id: 500 + i, name: l, color: "ededed" } : Object.assign({ id: 500 + i, color: "ededed" }, l));
+  }
+  function issueJson(i) {
+    const full = st.owner + "/" + st.repo;
+    return { number: i.number, title: i.title, body: i.body, state: i.state, html_url: "https://github.com/" + full + "/issues/" + i.number,
+      url: url + "/repos/" + full + "/issues/" + i.number, user: userJson(i.user), labels: labelsJson(i.labels),
+      assignees: i.assignees.map(userJson), assignee: i.assignees[0] ? userJson(i.assignees[0]) : null,
+      created_at: i.created_at, updated_at: i.updated_at, closed_at: i.closed_at || null };
+  }
+  // a pull request in the /issues list, like GitHub (with a pull_request key)
+  function pullAsIssueJson(pr) {
+    const p = pullJson(pr);
+    return { number: p.number, title: p.title, body: p.body, state: p.state, html_url: p.html_url, user: p.user, labels: p.labels,
+      assignees: [], assignee: null, created_at: p.created_at, updated_at: p.updated_at, closed_at: p.closed_at,
+      pull_request: { url: p.url, html_url: p.html_url, merged_at: p.merged_at } };
+  }
+  function findUser(login) { return Object.values(st.users).find((u) => u.login === login) || null; }
+  // branch, sha or pull request number → commit sha whose checks are meant
+  function checkSha({ sha, ref, number }) {
+    if (number != null) return pullHeadSha(getPull(number));
+    const s = sha || resolve(ref);
+    if (!s) throw new ApiError(422, "No commit found for " + (sha || ref));
+    return s;
+  }
+  function checksOf(sha) { return st.checks.get(sha) || { checkRuns: [], statuses: [] }; }
+  // combined status like GitHub: failure if one failed/errored, pending if one is pending or there are none, else success
+  function combinedState(statuses) {
+    if (statuses.some((x) => x.state === "failure" || x.state === "error")) return "failure";
+    if (!statuses.length || statuses.some((x) => x.state === "pending")) return "pending";
+    return "success";
+  }
+  function openPullInternal({ head, base, title, body, user, headRepo, draft, createdAt, labels }) {
     const full = st.owner + "/" + st.repo;
     base = base || st.base;
     const errs = [];
@@ -172,8 +206,8 @@ function createFakeGitHub(options) {
       throw new ApiError(422, "Validation Failed", { errors: [{ resource: "PullRequest", code: "custom", message: "A pull request already exists for " + st.owner + ":" + head + "." }] });
     if (isAncestor(st.refs.get(head), st.refs.get(base)))
       throw new ApiError(422, "Validation Failed", { errors: [{ resource: "PullRequest", code: "custom", message: "No commits between " + base + " and " + head }] });
-    const now = new Date().toISOString();
-    const pr = { number: ++st.issueCounter, title: title || head, body: body || "", state: "open", user,
+    const now = createdAt || new Date().toISOString();
+    const pr = { number: ++st.issueCounter, title: title || head, body: body || "", state: "open", user, draft: !!draft, labels: labels || [],
       head: { ref: head, repo: headRepo || full }, base: { ref: base }, headSha: st.refs.get(head),
       baseSha: mergeBase(st.refs.get(head), st.refs.get(base)), created_at: now, updated_at: now };
     st.pulls.push(pr);
@@ -208,15 +242,17 @@ function createFakeGitHub(options) {
     reset(args = {}) {
       const users = {};
       let id = 1000;
-      for (const [tok, u] of Object.entries(args.users || opts.users)) users[tok] = Object.assign({ id: ++id, name: u.login, push: true, expired: false }, u);
+      for (const [tok, u] of Object.entries(args.users || opts.users)) users[tok] = Object.assign({ id: ++id, name: u.login, push: true, expired: false, issues: true, checks: true }, u);
       st = { owner: args.owner || opts.owner, repo: args.repo || opts.repo, base: args.base || opts.base,
-        objects: new Map(), refs: new Map(), pulls: [], users, requests: [], rules: [], counter: 0, issueCounter: 0 };
+        objects: new Map(), refs: new Map(), pulls: [], issues: [], checks: new Map(), users, requests: [], rules: [], counter: 0, issueCounter: 0 };
       st.refs.set(st.base, putCommit({ tree: putTree({}), parents: [], message: "Initial commit", login: st.owner }));
       return { ok: true };
     },
-    // add or change a token → user mapping: { token, login, name, push, expired }
+    // add or change a token → user mapping: { token, login, name, push, expired, issues, checks }
+    // issues: false / checks: false = the token lacks that permission → 403 on those endpoints; issues: "read" = may
+    // list issues but not assign them
     setUser({ token, ...u }) {
-      const old = st.users[token] || { id: 2000 + Object.keys(st.users).length, push: true, expired: false };
+      const old = st.users[token] || { id: 2000 + Object.keys(st.users).length, push: true, expired: false, issues: true, checks: true };
       st.users[token] = Object.assign({}, old, u, { name: u.name || old.name || u.login || old.login });
       return userJson(st.users[token]);
     },
@@ -247,10 +283,42 @@ function createFakeGitHub(options) {
       st.pulls.forEach((p) => { if (p.state === "open" && p.head.ref === name) { pullHeadSha(p); p.state = "closed"; p.closed_at = new Date().toISOString(); } });
       st.refs.delete(name); return { ok: true };
     },
-    // { head, base, title, body, login, headRepo ("someone/ifsmb.de" = from a fork) }
-    openPull({ head, base, title, body, login, headRepo }) {
-      const user = Object.values(st.users).find((u) => u.login === (login || st.owner)) || { login: login || st.owner, id: 1 };
-      return pullJson(openPullInternal({ head, base, title, body, user, headRepo }));
+    // { head, base, title, body, login, headRepo ("someone/ifsmb.de" = from a fork), draft, createdAt (ISO), labels }
+    openPull({ head, base, title, body, login, headRepo, draft, createdAt, labels }) {
+      const user = findUser(login || st.owner) || { login: login || st.owner, id: 1 };
+      return pullJson(openPullInternal({ head, base, title, body, user, headRepo, draft, createdAt, labels }));
+    },
+    // change a pull request: { number, draft?, title?, body?, labels?, mergeable? (true | false | null = "still
+    // computing"), mergeableState? ("clean" | "dirty" | "behind" | "blocked" | "unstable" | "unknown") } – without
+    // mergeable/mergeableState GET /pulls/:n computes them (conflict → dirty, failing checks → unstable, else clean)
+    setPull({ number, ...ch }) {
+      const pr = getPull(number);
+      for (const k of ["draft", "title", "body", "labels"]) if (k in ch) pr[k] = ch[k];
+      if ("mergeable" in ch) pr.mergeableOverride = ch.mergeable;
+      if ("mergeableState" in ch) pr.mergeableStateOverride = ch.mergeableState;
+      return pullJson(pr);
+    },
+    // checks of a commit: { number (its head) | ref | sha, checkRuns: [{ name, status: "queued" | "in_progress" |
+    // "completed", conclusion: "success" | "failure" | … }], statuses: [{ context, state: "success" | "failure" |
+    // "error" | "pending", description }] } – replaces the earlier checks of that commit
+    setChecks({ number, ref, sha, checkRuns = [], statuses = [] }) {
+      const s = checkSha({ number, ref, sha });
+      st.checks.set(s, { checkRuns: checkRuns.map((c, i) => Object.assign({ id: 9000 + i, status: "completed", conclusion: "success" }, c)),
+        statuses: statuses.map((x) => Object.assign({ state: "success", description: "" }, x)) });
+      return { sha: s };
+    },
+    // { title, body, login, labels: [name | { name, color }], assignees: [login], createdAt } → issue JSON
+    openIssue({ title, body, login, labels, assignees, createdAt }) {
+      const now = createdAt || new Date().toISOString();
+      const who = (l) => findUser(l) || { login: l, id: 3000 + l.length };
+      const i = { number: ++st.issueCounter, title: title || "Aufgabe", body: body || "", state: "open", user: who(login || st.owner),
+        labels: labels || [], assignees: (assignees || []).map(who), created_at: now, updated_at: now };
+      st.issues.push(i);
+      return issueJson(i);
+    },
+    closeIssue({ number }) {
+      const i = st.issues.find((x) => x.number === Number(number)); if (!i) throw new ApiError(404, "Not Found");
+      i.state = "closed"; i.closed_at = new Date().toISOString(); return issueJson(i);
     },
     // { number, method: "merge" | "squash", deleteBranch, login }
     mergePull({ number, method = "merge", deleteBranch = false, login }) {
@@ -306,6 +374,7 @@ function createFakeGitHub(options) {
           login: pr.user.login, merged: !!pr.merged_at, commits: pullCommits(pr).length,
           files: pullFiles(pr).map((f) => ({ filename: f.filename, status: f.status, previous_filename: f.previous_filename, additions: f.additions, deletions: f.deletions }))
         })),
+        issues: st.issues.map((i) => Object.assign(issueJson(i), { assignees: i.assignees.map((a) => a.login), labels: labelsJson(i.labels).map((l) => l.name) })),
         requests: st.requests.length
       };
     },
@@ -377,12 +446,56 @@ function createFakeGitHub(options) {
     if (method === "POST" && rest === "/pulls") {
       const u = needPush(req);
       const head = String(body.head || "").replace(/^[^:]+:/, "");
-      return [201, pullJson(openPullInternal({ head, base: body.base, title: body.title, body: body.body, user: u }))];
+      return [201, pullJson(openPullInternal({ head, base: body.base, title: body.title, body: body.body, user: u, draft: body.draft }))];
     }
     if (method === "GET" && (x = rest.match(/^\/pulls\/(\d+)$/))) {
       const pr = getPull(x[1]), json = pullJson(pr);
-      if (pr.state === "open") json.mergeable = control.mergeable({ number: pr.number }).mergeable;
+      if (pr.state === "open") {
+        json.mergeable = "mergeableOverride" in pr ? pr.mergeableOverride : control.mergeable({ number: pr.number }).mergeable;
+        const c = checksOf(pullHeadSha(pr));
+        const failing = combinedState(c.statuses) === "failure" || c.checkRuns.some((r) => r.status === "completed" && r.conclusion !== "success" && r.conclusion !== "neutral" && r.conclusion !== "skipped");
+        json.mergeable_state = pr.mergeableStateOverride || (json.mergeable === null ? "unknown" : json.mergeable === false ? "dirty" : failing ? "unstable" : "clean");
+      } else { json.mergeable = null; json.mergeable_state = "unknown"; }
       return [200, json];
+    }
+    if (method === "GET" && (x = rest.match(/^\/commits\/([^/]+)\/(check-runs|status)$/))) {
+      const u = needUser(req);
+      const s = resolve(decodeURIComponent(x[1]));
+      if (!s) throw new ApiError(422, "No commit found for SHA: " + x[1]);
+      const c = checksOf(s);
+      if (x[2] === "check-runs") {
+        if (u.checks === false) throw new ApiError(403, "Resource not accessible by personal access token");
+        return [200, { total_count: c.checkRuns.length, check_runs: c.checkRuns.map((r) => Object.assign({ head_sha: s }, r)) }];
+      }
+      if (u.checks === false) throw new ApiError(403, "Resource not accessible by personal access token");
+      return [200, { state: combinedState(c.statuses), sha: s, total_count: c.statuses.length, statuses: c.statuses }];
+    }
+    if (method === "GET" && rest === "/issues") {
+      const u = needUser(req);
+      if (u.issues === false) throw new ApiError(403, "Resource not accessible by personal access token");
+      const state = q.get("state") || "open", per = Math.min(+q.get("per_page") || 30, 100), page = +q.get("page") || 1;
+      const all = st.issues.map((i) => ({ n: i.number, state: i.state, json: () => issueJson(i) }))
+        .concat(st.pulls.map((pr) => ({ n: pr.number, state: pr.state, json: () => pullAsIssueJson(pr) })))
+        .filter((i) => state === "all" || i.state === state).sort((a, b) => b.n - a.n);
+      return [200, all.slice((page - 1) * per, page * per).map((i) => i.json())];
+    }
+    if (method === "GET" && (x = rest.match(/^\/issues\/(\d+)$/))) {
+      const i = st.issues.find((y) => y.number === Number(x[1]));
+      if (i) return [200, issueJson(i)];
+      return [200, pullAsIssueJson(getPull(x[1]))];
+    }
+    if (method === "POST" && (x = rest.match(/^\/issues\/(\d+)\/assignees$/))) {
+      const u = needUser(req);
+      if (u.issues !== true || !u.push) throw new ApiError(403, "Resource not accessible by personal access token");
+      const i = st.issues.find((y) => y.number === Number(x[1]));
+      if (!i) throw new ApiError(404, "Not Found");
+      // like GitHub: people who may not be assigned (no write access) are silently left out
+      for (const l of body.assignees || []) {
+        const who = findUser(l);
+        if (who && who.push && !i.assignees.some((a) => a.login === l)) i.assignees.push(who);
+      }
+      i.updated_at = new Date().toISOString();
+      return [201, issueJson(i)];
     }
     if (method === "GET" && (x = rest.match(/^\/pulls\/(\d+)\/files$/))) {
       const per = Math.min(+q.get("per_page") || 30, 100), page = +q.get("page") || 1;

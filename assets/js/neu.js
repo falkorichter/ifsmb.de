@@ -1264,14 +1264,15 @@ var NeuFormular = (function () {
       status.textContent = "";
     },
     // small dialog: paste a fine-grained token, check it, remember it (or not), disconnect
+    // → Promise of the open <dialog> (the overview /mitmachen/offen/ listens for "close", assets/js/open-work.js)
     connectDialog: function (then) {
-      window.ladeSkripte(["github-api.js"]).then(function () {
+      return window.ladeSkripte(["github-api.js"]).then(function () {
         var g = document.getElementById("github-connect");
         if (!g) {
           g = F.dialog({ id: "github-connect", klasse: "github-dialog", titel: "🔑 Mit GitHub verbinden" });
           g.insertAdjacentHTML("beforeend", '<div class="github-body">'
             + '<p>Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.</p>'
-            + '<ol class="small"><li><a data-token-link target="_blank" rel="noopener">Token auf GitHub erstellen ↗</a> – Name, Laufzeit (30 Tage) und die Berechtigungen <em>Contents</em> und <em>Pull requests</em> („Read and write“) sind schon ausgefüllt. Unter „Repository access“ bitte <strong>„Only select repositories“</strong> und <code>' + esc(GitHubApi.repo()) + '</code> wählen, dann „Generate token“.</li>'
+            + '<ol class="small"><li><a data-token-link target="_blank" rel="noopener">Token auf GitHub erstellen ↗</a> – Name, Laufzeit (30 Tage) und die Berechtigungen <em>Contents</em> und <em>Pull requests</em> („Read and write“) sind schon ausgefüllt (dazu <em>Issues</em>, um Aufgaben auf der Seite „Offen“ zu übernehmen). Unter „Repository access“ bitte <strong>„Only select repositories“</strong> und <code>' + esc(GitHubApi.repo()) + '</code> wählen, dann „Generate token“.</li>'
             + "<li>Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.</li></ol>"
             + '<label class="form-feld"><span>Token</span><input type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>'
             + '<label class="form-check"><input type="checkbox" data-remember><span>Auf diesem Gerät merken</span><small class="form-hilfe">Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.</small></label>'
@@ -1295,9 +1296,10 @@ var NeuFormular = (function () {
           show(); direct.update();
           GitHubApi.whoAmI().then(function (me) { if (me.canPush && then) { g.close(); then(); } }, function () {});
         };
-        g.querySelector("[data-logout]").onclick = function () { GitHubApi.logout(); show(); direct.update(); setMode(!!(aktiv && aktiv.edit)); };
+        g.querySelector("[data-logout]").onclick = function () { GitHubApi.logout(); show(); direct.update(); if (d) setMode(!!(aktiv && aktiv.edit)); };
         show();
         g.showModal();
+        return g;
       });
     }
   };
@@ -1397,6 +1399,7 @@ var NeuFormular = (function () {
     });
   }
 
-  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, TYPEN: TYPEN, alleFelder: alleFelder };
+  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, TYPEN: TYPEN, alleFelder: alleFelder,
+    connect: function () { return direct.connectDialog(); } };
 })();
 if (typeof module !== "undefined") module.exports = NeuFormular;

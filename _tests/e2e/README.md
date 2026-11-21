@@ -28,6 +28,7 @@ Oder direkt: `node --test _tests/e2e/*.test.js` (nach `bundle exec jekyll build`
 | `lib/helpers.js` | `startEnv()`, `env.person(token)` und die Formular-Schritte (`openNew`, `openEdit`, `fill`, `addPhotos`, `toggleUse`, `submit`, `waitStatus` …) |
 | `baseline.test.js` | Grundszenarien (neuer Beitrag, Bearbeiten, Fotos, offener PR, doppelt senden, ohne Token) |
 | `fake-github.test.js` | Tests für das Fake selbst (Statuscodes, Merges, Konflikte, Fehler einschleusen) |
+| `open-work.test.js` | Übersicht „Offen“ (`/mitmachen/offen/`): PRs nach Checks/Konflikt gruppiert, Issues übernehmbar/in Arbeit, „Übernehmen“, Cache, Fehler, ohne Token keine Anfrage |
 
 Wie die Seite das Fake findet: `github-api.js` nimmt statt `https://api.github.com` die Adresse aus `localStorage["ifsmb-github-api"]` – **nur**, wenn die Seite auf `localhost`/`127.0.0.1` läuft und die Adresse selbst lokal ist. Auf ifsmb.de geht ein Token also nie woandershin. `env.person()` setzt das und das Token (`ifsmb-github-token`, Standard: `sessionStorage`) auf einer leeren Seite des Servers, bevor der Test eine echte Seite öffnet.
 
@@ -72,27 +73,31 @@ Im Test direkt als `env.control.<methode>(args)`; von außen als `POST /__fake/<
 | Methode | Argumente | Wirkung |
 |---|---|---|
 | `reset` | `{ users?, owner?, repo?, base? }` | alles leeren, ein leerer Start-Commit auf `main` |
-| `setUser` | `{ token, login, name?, push?, expired? }` | Token anlegen/ändern |
+| `setUser` | `{ token, login, name?, push?, expired?, issues?, checks? }` | Token anlegen/ändern; `issues: false` / `checks: false` = dem Token fehlt die Berechtigung (403), `issues: "read"` = Issues lesen, aber nicht zuweisen |
 | `expireToken` | `{ token }` | Token läuft ab → `401 Bad credentials` |
 | `seed` | `{ files: { pfad: text \| {base64} }, fromDir?: { root, paths }, message? }` | Commit auf `main` |
 | `commit` | `{ branch, from?, files: { pfad: inhalt \| null }, login?, message? }` | jemand anderes committet (Branch wird aus `from`/main angelegt; `null` löscht) |
 | `createBranch` / `moveBranch` / `deleteBranch` | `{ name, from? \| sha? }` | Branch anlegen / hart verschieben (Force-Push) / löschen (schließt offene PRs dazu, wie GitHub) |
-| `openPull` | `{ head, base?, title, body?, login?, headRepo? }` | PR öffnen (`headRepo` ≠ Repo = aus einem Fork) |
+| `openPull` | `{ head, base?, title, body?, login?, headRepo?, draft?, createdAt?, labels? }` | PR öffnen (`headRepo` ≠ Repo = aus einem Fork, `createdAt` ISO-Datum fürs Alter) |
+| `setPull` | `{ number, draft?, title?, body?, labels?, mergeable?, mergeableState? }` | PR ändern; `mergeable: null` = „GitHub rechnet noch“, `mergeableState` z. B. `"behind"`/`"blocked"` – sonst berechnet `GET …/pulls/:n` beides (Konflikt → `dirty`, rote Checks → `unstable`, sonst `clean`) |
+| `setChecks` | `{ number \| ref \| sha, checkRuns: [{ name, status?, conclusion? }], statuses: [{ context, state, description? }] }` | Checks eines Commits (bei `number` der Kopf des PRs) setzen; Standard `status: "completed"`, `conclusion: "success"` |
+| `openIssue` | `{ title, body?, login?, labels?: [name \| { name, color }], assignees?: [login], createdAt? }` | Issue öffnen (Nummern gemeinsam mit den PRs, wie bei GitHub) |
+| `closeIssue` | `{ number }` | Issue schließen |
 | `mergePull` | `{ number, method?: "merge" \| "squash", deleteBranch? }` | mergen; zeilenweiser Drei-Wege-Merge, bei Konflikt Fehler 405 |
 | `closePull` / `reopenPull` | `{ number }` | schließen / wieder öffnen |
 | `mergeable` | `{ number }` | `{ mergeable, conflicts }` |
 | `fail` | `{ method?, path? (RegExp), nth?, times?, status?, message?, delayMs?, run?: { op, args } }` | ab der n-ten passenden API-Anfrage (`times`-mal) verzögern, mit Status antworten und/oder vorher eine Steuer-Methode ausführen („in der Zwischenzeit committet Bob“) |
 | `clearFailures` | – | Regeln löschen |
-| `state` | – | `{ branches, pulls: [{ number, state, merged, login, head, base, commits, files: [{ filename, status, previous_filename, additions, deletions }] }] }` |
+| `state` | – | `{ branches, pulls: [{ number, state, merged, login, head, base, commits, files: [{ filename, status, previous_filename, additions, deletions }] }], issues: [{ number, title, state, assignees: [login], labels: [name] }] }` |
 | `readFile` | `{ ref?, path }` | `{ text, base64, sha, size }` oder `null` |
 | `listFiles` | `{ ref?, prefix? }` | Pfade |
 | `log` | `{ ref?, limit? }` | Commits, neueste zuerst: `{ sha, message, login, parents }` |
 | `requests` / `clearRequests` | `{ since? }` | Protokoll aller API-Anfragen (`method`, `path`, `login`, `status`, `body`, `injected`) |
 
-REST-Endpunkte wie bei GitHub: `GET /user`, `GET /repos/:o/:r` (`permissions.push` je Token), `GET …/pulls?state=`, `GET …/pulls/:n`, `GET …/pulls/:n/files`, `POST …/pulls`, `GET …/contents/:pfad?ref=`, `GET …/git/ref/heads/:branch`, `GET …/git/commits/:sha`, `GET …/git/blobs/:sha`, `POST …/git/blobs|trees|commits|refs`, `PATCH|DELETE …/git/refs/heads/:branch` (`force: false` → `422 Update is not a fast forward`). Fehler mit `{ message, documentation_url, status }` wie bei GitHub: 401 (ungültig/abgelaufen), 403 (keine Schreibrechte), 404, 405 (nicht mergebar), 422 (Validation Failed, Reference already exists …).
+REST-Endpunkte wie bei GitHub: `GET /user`, `GET /repos/:o/:r` (`permissions.push` je Token), `GET …/pulls?state=`, `GET …/pulls/:n`, `GET …/pulls/:n/files`, `POST …/pulls`, `GET …/contents/:pfad?ref=`, `GET …/git/ref/heads/:branch`, `GET …/git/commits/:sha`, `GET …/git/blobs/:sha`, `POST …/git/blobs|trees|commits|refs`, `PATCH|DELETE …/git/refs/heads/:branch` (`force: false` → `422 Update is not a fast forward`), für die Übersicht „Offen“ außerdem `GET …/pulls/:n` mit `mergeable`/`mergeable_state`, `GET …/commits/:ref/check-runs`, `GET …/commits/:ref/status` (kombinierter Status), `GET …/issues?state=` (enthält wie bei GitHub auch PRs mit `pull_request`), `GET …/issues/:n`, `POST …/issues/:n/assignees` (Personen ohne Schreibrechte werden still übergangen). Fehler mit `{ message, documentation_url, status }` wie bei GitHub: 401 (ungültig/abgelaufen), 403 (keine Schreibrechte), 404, 405 (nicht mergebar), 422 (Validation Failed, Reference already exists …).
 
 ## Grenzen
 
-- Das Fake ist kein vollständiges GitHub: Trees sind flach, keine Paginierungs-Header (`Link`), kein Rate-Limit, keine Checks/Reviews, Branch-Schutz fehlt, PR-Dateien ohne Begrenzung auf 3000.
+- Das Fake ist kein vollständiges GitHub: Trees sind flach, keine Paginierungs-Header (`Link`), kein Rate-Limit, keine Reviews, Checks nur so, wie ein Test sie mit `setChecks` setzt, Branch-Schutz fehlt, PR-Dateien ohne Begrenzung auf 3000.
 - Uhrzeit und Datum kommen vom Rechner – Dateinamen neuer Beiträge enthalten das heutige Datum; Tests lesen Pfade deshalb aus dem Fake statt sie fest zu erwarten.
 - Die Bearbeiten-Tests nehmen den ersten Beitrag aus `_site/` (`editPage("beitrag")`) und legen dessen Quelldatei aus dem Arbeitsverzeichnis ins Fake.

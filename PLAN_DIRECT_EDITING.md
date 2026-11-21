@@ -31,6 +31,7 @@ Nichts geht direkt auf `main`. Ohne Verbindung bleibt alles wie bisher (Kopieren
 | Fotos ziehen mit um, wenn sich der Dateiname danach ändert (alle Varianten, in allen Feldern) | `direct.submit` | ✅ |
 | Bilder je Typ unter `assets/images/<bereich>/<name>/` (`IMAGE_FOLDERS`: news, kalender, projekte, ausstattung, team, partner, presse, herausforderungen); Nummer `NN` = nächste freie im Ordner auf GitHub | `direct.folder`, `direct.nextNumber` | ✅ |
 | `#bearbeiten` in der Adresse, solange ✏️ offen ist; `<seite>#bearbeiten` / `#edit` öffnet das Formular | `neu.js` (`EDIT_HASH`), `_includes/edit-buttons.html` | ✅ |
+| Übersicht „Offen“: offene PRs nach Check-/Merge-Status, offene Issues (übernehmbar / in Arbeit), „Übernehmen“ – nur für Verbundene (#146; Mergen von dort ist ein offener Punkt) | `assets/js/open-work.js`, `/mitmachen/offen/`, `GitHubApi.commitChecks/pullMergeState/openIssues/assignIssue` | ✅ gegen simulierte API |
 | Offene PRs zur selben Markdown-Datei: Warnung im Formular mit „In #N weiterarbeiten“ (lädt den Stand aus dem PR-Branch, Speichern = Commit auf diesen Branch, `force: false`) und – nur für Verbundene – oben auf der Seite | `GitHubApi.openPullsForFile`, `direct.checkOpenPulls/pickUp`, `edit-buttons.html` | ✅ gegen simulierte API |
 
 Neue Abhängigkeiten: **keine** – nur Browser-APIs (Canvas, Fetch, FileReader, DataTransfer). Externe Anfragen gehen nur an `api.github.com` und nur nach aktivem Verbinden (Impressum, Abschnitt Datenschutz).
