@@ -57,3 +57,9 @@ Anerkennung
 - Unverbindlich
 - Stempel benötigt
 -
+
+# Mario mit Inventar
+
+- Teedy https://inventory.fab-access.org/#/login
+- [https://inventory.fab-access.org/#/document/edit/fb4b06cb-853b-447f-b1c6-e26e4499e0ef](https://inventory.fab-access.org/#/document/edit/fb4b06cb-853b-447f-b1c6-e26e4499e0ef)
+- [https://docs.fab-access.org/books/awesome-fabinfra/page/sammlung-systeme-fur-inventar-und-dokumentenverwaltung](https://docs.fab-access.org/books/awesome-fabinfra/page/sammlung-systeme-fur-inventar-und-dokumentenverwaltung)
