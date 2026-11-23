@@ -2,10 +2,10 @@
 title: Löten mit Kindern zu Weihnachten (VOW)
 status: aktuell
 start: 2026-11-20
-zeitraum: seit 2026
+period: seit 2026
 event_tag: loten-mit-kindern-zu-weihnachten-vow
 team: [falko-richter]
-persoenlich: true
+personal: true
 uuid: b3eb1431-2ffd-4f7a-a517-3b325d5ecefc
 ---
 
