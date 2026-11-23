@@ -13,7 +13,8 @@
 {%- if tbd -%}{%- assign label = e.date_label | strip_newlines | replace: '\', '\\' | replace: ';', '\;' | replace: ',', '\,' -%}{%- assign desc = label | append: '\n\n' | append: desc -%}{%- endif -%}
 {%- assign desc = desc | append: url -%}
 BEGIN:VEVENT{{ nl -}}
-UID:{{ e.url | split: "/" | join: "-" | remove_first: "-" }}@{{ host }}{{ nl -}}
+{%- comment -%} UID stays as before the URL rename (kalender-<name>), so calendar apps don't see new events {%- endcomment -%}
+UID:{{ e.url | replace_first: "/calendar/", "/kalender/" | split: "/" | join: "-" | remove_first: "-" }}@{{ host }}{{ nl -}}
 DTSTAMP:{{ stamp }}{{ nl -}}
 {%- if tbd -%}
 {%- assign first_day = e.start | date: "%Y-%m-01" -%}

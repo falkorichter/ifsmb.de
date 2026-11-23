@@ -2,13 +2,14 @@
 title: "Makespace Tiergarten"
 summary: Frieders Makespace in Raum 226 – mit 3D-Drucker, Ton- und Videostudio samt Greenscreen und einer großen Werkzeugkiste.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2025-12-05
-zeitraum: seit 2025
+period: seit 2025
 event_tag: makespace-tiergarten
 tags: [makespace-tiergarten]
 team:
   - frieder-euteneuer
+uuid: d85a8b22-da23-429c-8f59-0eba0bd25162
 ---
 
 Frieder baut den **Makespace Tiergarten** auf – in **Raum 226**. Das handgemalte Plakat an der Tür verspricht: „Lass deine Ideen Wirklichkeit werden“ – mit einem 3D-Drucker, einem Ton- und Videostudio, einem großen Werkzeugarsenal und vielem mehr.

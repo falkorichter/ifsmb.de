@@ -1,0 +1,15 @@
+{%- comment -%}
+  Eisenhower quadrant of a challenge (include.h), from `important` and `urgent` (true/false, missing = false).
+  Assigns ef_q ("q1" … "q4"), ef_name (German, = UI string matrix.<q>) and ef_icon.
+    q1 wichtig + dringend          Sofort erledigen
+    q2 wichtig, nicht dringend     Einplanen
+    q3 dringend, nicht wichtig     Abgeben
+    q4 weder noch                  Später
+  Only challenges use this – the todos have their own matrix in assets/js/todos.js.
+{%- endcomment -%}
+{%- assign ef_h = include.h -%}
+{%- if ef_h.important and ef_h.urgent -%}{%- assign ef_q = "q1" -%}{%- assign ef_name = "matrix.q1" | t -%}{%- assign ef_icon = "🔥" -%}
+{%- elsif ef_h.important -%}{%- assign ef_q = "q2" -%}{%- assign ef_name = "matrix.q2" | t -%}{%- assign ef_icon = "📌" -%}
+{%- elsif ef_h.urgent -%}{%- assign ef_q = "q3" -%}{%- assign ef_name = "matrix.q3" | t -%}{%- assign ef_icon = "🤝" -%}
+{%- else -%}{%- assign ef_q = "q4" -%}{%- assign ef_name = "matrix.q4" | t -%}{%- assign ef_icon = "💤" -%}
+{%- endif -%}

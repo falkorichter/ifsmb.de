@@ -9,20 +9,22 @@
 {%- assign owners = "" | split: "" -%}
 {%- for n in o_partners -%}
   {%- assign op = site.data.partners | where: "name", n | first -%}
-  {%- if op and include.plain == nil -%}{%- capture o %}<a href="{{ op.page | default: '/partner/' | relative_url }}{% unless op.page %}#{{ op.name | slugify }}{% endunless %}">{{ op.name }}</a>{% endcapture -%}{%- else -%}{%- assign o = n -%}{%- endif -%}
+  {%- if op and include.plain == nil -%}{%- capture o %}<a href="{{ op.page | default: '/partners/' | relative_url }}{% unless op.page %}#{{ op.name | slugify }}{% endunless %}">{{ op.name }}</a>{% endcapture -%}{%- else -%}{%- assign o = n -%}{%- endif -%}
   {%- assign owners = owners | push: o -%}
 {%- endfor -%}
+{%- assign team_in_list = false -%}
 {%- for s in o_team -%}
   {%- assign om = site.team | where: "slug", s | first -%}
+  {%- if om and om.not_in_team != true -%}{%- assign team_in_list = true -%}{%- endif -%}
   {%- if om and include.plain == nil -%}{%- capture o %}<a href="{{ om.url | relative_url }}">{{ om.title }}</a>{% endcapture -%}{%- elsif om -%}{%- assign o = om.title -%}{%- else -%}{%- assign o = s -%}{%- endif -%}
   {%- assign owners = owners | push: o -%}
 {%- endfor -%}
 {%- for n in o_names -%}{%- assign owners = owners | push: n -%}{%- endfor -%}
 {%- if owners.size == 0 -%}
-  Gehört dem Institut
+  <span data-i18n="owner.institute">{{ "owner.institute" | t }}</span>
 {%- else -%}
-  {%- if it.status == "in-aussicht" %}Vielleicht von {% else %}Gehört {% endif -%}
-  {%- if o_partners.size > 0 and owners.size == 1 %}unserem Partner {% endif -%}
-  {%- for o in owners -%}{{ o }}{% if forloop.rindex == 2 %} und {% elsif forloop.last == false %}, {% endif %}{%- endfor -%}
-  {%- if o_team.size > 0 and owners.size == 1 %} aus unserem Team{% endif -%}
+  {%- if it.status == "in-aussicht" %}<span data-i18n="owner.maybe_from">{{ "owner.maybe_from" | t }}</span> {% else %}<span data-i18n="owner.owned_by">{{ "owner.owned_by" | t }}</span> {% endif -%}
+  {%- if o_partners.size > 0 and owners.size == 1 %}<span data-i18n="owner.our_partner">{{ "owner.our_partner" | t }}</span> {% endif -%}
+  {%- for o in owners -%}{{ o }}{% if forloop.rindex == 2 %} <span data-i18n="common.and">{{ "common.and" | t }}</span> {% elsif forloop.last == false %}, {% endif %}{%- endfor -%}
+  {%- if team_in_list and owners.size == 1 %} <span data-i18n="owner.from_our_team">{{ "owner.from_our_team" | t }}</span>{% endif -%}
 {%- endif -%}

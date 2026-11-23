@@ -1,0 +1,38 @@
+# End-to-end tests of the ➕/✏️ forms with "direct editing" (pull requests via the GitHub API): headless Chrome
+# against a fake GitHub (_tests/e2e/, _scripts/test_e2e.sh). Only runs when code that the forms depend on changes.
+name: E2E-Tests
+
+on:
+  pull_request:
+    paths:
+      - "assets/js/**"
+      - "_includes/**"
+      - "_layouts/**"
+      - "_plugins/**"
+      - "_tests/**"
+      - "_scripts/test_e2e.sh"
+      - ".github/workflows/e2e.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          # .ruby-version (3.1.2) is no longer available on new runners – use the latest 3.1.x
+          ruby-version: "3.1"
+          bundler-cache: true
+      # Node >= 22 for the built-in WebSocket (Chrome DevTools Protocol); exact version, see DEPENDENCIES.md
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+      - name: Chrome-Version
+        run: google-chrome --version
+      - name: Formulare im Browser testen (E2E gegen Fake-GitHub)
+        run: _scripts/test_e2e.sh

@@ -1,5 +1,5 @@
-{%- comment -%}Gibt das Datum des letzten Updates eines Projekts aus (dd.mm.yyyy): manuelle `updates` und Beiträge mit dem `event_tag` des Projekts. Aufruf: include projekt-letztes-update.html project=p{%- endcomment -%}
+{%- comment -%}Gibt das Datum des letzten Updates eines Projekts aus (<time> mit dd.mm.yyyy, assets/js/i18n.js formatiert es in anderen Sprachen): manuelle `updates` und Beiträge mit dem `event_tag` des Projekts. Aufruf: include projekt-letztes-update.html project=p{%- endcomment -%}
 {%- assign _plu = "" -%}
-{%- for _u in include.project.updates -%}{%- assign _d = _u.datum | date: "%Y-%m-%d" -%}{%- if _d > _plu -%}{%- assign _plu = _d -%}{%- endif -%}{%- endfor -%}
+{%- for _u in include.project.updates -%}{%- assign _d = _u.date | date: "%Y-%m-%d" -%}{%- if _d > _plu -%}{%- assign _plu = _d -%}{%- endif -%}{%- endfor -%}
 {%- if include.project.event_tag -%}{%- for _po in site.posts -%}{%- if _po.tags contains include.project.event_tag -%}{%- assign _d = _po.date | date: "%Y-%m-%d" -%}{%- if _d > _plu -%}{%- assign _plu = _d -%}{%- endif -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endif -%}
-{%- if _plu != "" -%}{{ _plu | date: "%d.%m.%Y" }}{%- endif -%}
+{%- if _plu != "" -%}{{ _plu | i18n_date }}{%- endif -%}

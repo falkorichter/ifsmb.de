@@ -1,10 +1,10 @@
 ---
 title: Prusa MK3S (xHain)
-kategorie: 3D-Drucker (FDM)
+category: 3D-Drucker (FDM)
 summary: Ein sehr günstig gekaufter MK3S mit gehärteter Düse – er druckt in einem geschlossenen Bauraum bei 35services.
 owner_team: falko-richter
-standort_partner: 35 services e. V.
-standort: 35services e.V. (offene Werkstatt)
+location_partner: 35 services e. V.
+location: 35services e.V. (offene Werkstatt)
 image: /assets/video/ausstattung/prusa-mk3s-xhain/01.jpg
 image_alt: "Ein pinker „Infinite Cube“ aus PETG auf dem Druckbett des Prusa MK3S, im Hintergrund die mit Alufolie ausgekleidete Einhausung"
 videos:
@@ -18,6 +18,7 @@ videos:
     poster: /assets/video/ausstattung/prusa-mk3s-xhain/03.jpg
     caption: "Zeitraffer über OctoPrint: ein Achsgehäuse für ein RC-Modell (4 h 51 min)"
 tags: [prusa-mk3s, 3d-drucker, 35services]
+uuid: 5a5d2217-6713-4c2c-a614-69e87b52c16d
 ---
 
 Falko hat diesen Prusa MK3S sehr günstig gekauft. Er druckt mit seiner **gehärteten Düse** in einem **geschlossenen Bauraum** bei 35services.
@@ -28,4 +29,4 @@ Die gehärtete Düse verträgt auch abrasive Filamente (zum Beispiel mit Carbonf
 - **Düse:** gehärtet
 - **Steuerung:** OctoPrint mit Kamera
 
-Es gibt noch einen zweiten MK3S: den [Prusa MK3S (HeartLabs)]({{ '/ausstattung/prusa-mk3s-heartlabs/' | relative_url }}), der gerade repariert wird.
+Es gibt noch einen zweiten MK3S: den [Prusa MK3S (HeartLabs)]({{ '/equipment/prusa-mk3s-heartlabs/' | relative_url }}), der gerade repariert wird.

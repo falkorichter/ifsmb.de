@@ -3,11 +3,12 @@ title: "3D-Druck für Kinder – Falko auf dem Chaos Communication Camp 2023"
 date: 2023-08-16 20:00:00 +0200
 author: falko-richter
 tags: [kita, waermebildkamera, ccc]
+uuid: 656fa1c6-dca1-4c1a-aee8-43236acb75f9
 ---
 
 Auf dem **Chaos Communication Camp 2023** hat [Falko]({{ '/team/falko-richter/' | relative_url }}) in einem der „Fünf-Minuten-Termine“ vorgestellt, wie man schon **Kindergartenkindern 3D-Druck** näherbringen kann – und dabei nach Mitstreiter*innen gesucht.
 
-Angefangen hat alles in der Pandemie: Damals hat Falko versucht, 3D-Druck per Livestream in die Kita zu bringen – mit einer [Wärmebildkamera]({{ '/ausstattung/waermebildkamera/' | relative_url }}) und OBS, damit die Kinder sehen konnten, wie heiß Düse und Druckbett werden. Dabei sind YouTube-Videos und Material entstanden.
+Angefangen hat alles in der Pandemie: Damals hat Falko versucht, 3D-Druck per Livestream in die Kita zu bringen – mit einer [Wärmebildkamera]({{ '/equipment/waermebildkamera/' | relative_url }}) und OBS, damit die Kinder sehen konnten, wie heiß Düse und Druckbett werden. Dabei sind YouTube-Videos und Material entstanden.
 
 **Die Idee dahinter:** Kinder sollen den 3D-Drucker als ganz normales Werkzeug kennenlernen – so wie Buntstift und Papier oder Knete. Und sie sollen erleben, dass kaputte Dinge repariert werden können, statt im Müll zu landen.
 

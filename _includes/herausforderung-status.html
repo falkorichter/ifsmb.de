@@ -1,17 +1,21 @@
 {%- comment -%}
   Status badge and kind of a challenge (Herausforderung). include.h = the challenge.
   status: offen (default) | in-arbeit | geloest – art: aufgabe | problem | frage (optional)
+  Unsolved ones also get their Eisenhower quadrant (wichtig/dringend).
 {%- endcomment -%}
 {%- assign hs = include.h -%}
 {%- case hs.status -%}
-{%- when "geloest" %}<span class="badge badge-solved">Gelöst</span>
-{%- when "in-arbeit" %}<span class="badge badge-active">In Arbeit</span>
-{%- else %}<span class="badge badge-open">Offen</span>
+{%- when "geloest" %}<span class="badge badge-solved" data-i18n="badge.solved">{{ "badge.solved" | t }}</span>
+{%- when "in-arbeit" %}<span class="badge badge-active" data-i18n="badge.in_progress">{{ "badge.in_progress" | t }}</span>
+{%- else %}<span class="badge badge-open" data-i18n="badge.open">{{ "badge.open" | t }}</span>
 {%- endcase -%}
-{%- if hs.persoenlich %} <span class="badge badge-personal">Persönlich</span>{% endif -%}
-{%- case hs.art -%}
-{%- when "aufgabe" %} · 📋 Aufgabe
-{%- when "problem" %} · ⚠️ Problem
-{%- when "frage" %} · ❓ Frage
-{%- else %} · 🧗 Herausforderung
+{%- if hs.personal %} <span class="badge badge-personal" data-i18n="badge.personal">{{ "badge.personal" | t }}</span>{% endif -%}
+{%- case hs.kind -%}
+{%- when "aufgabe" %} · <span data-i18n="challenge.kind_task">{{ "challenge.kind_task" | t }}</span>
+{%- when "problem" %} · <span data-i18n="challenge.kind_problem">{{ "challenge.kind_problem" | t }}</span>
+{%- when "frage" %} · <span data-i18n="challenge.kind_question">{{ "challenge.kind_question" | t }}</span>
+{%- else %} · <span data-i18n="challenge.kind_challenge">{{ "challenge.kind_challenge" | t }}</span>
 {%- endcase -%}
+{%- unless hs.status == "geloest" -%}
+{%- include eisenhower-feld.html h=hs %} <span class="hm-badge hm-{{ ef_q }}" title="{{ 'matrix.name' | t }}" data-i18n-attr="title:matrix.name">{{ ef_icon }} <span data-i18n="matrix.{{ ef_q }}">{{ ef_name }}</span></span>
+{%- endunless -%}

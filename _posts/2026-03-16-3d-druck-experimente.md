@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2026/3d-druck-experimente/
 original_site: 35services.de
 tags: [35services]
+uuid: 42a57b16-245a-4ded-8d8a-e6c0839ecb6f
 ---
 
 wir haben uns getroffen und mal ein bisschen experimentiert mit unseren 3-D Druckern

@@ -2,13 +2,14 @@
 title: "KI-Server von Anton"
 summary: Anton baut einen Server für lokale KI – per Tailscale erreichbar, zum agentischen Programmieren mit OpenCode.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-11-12
-zeitraum: seit November 2026
+period: seit November 2026
 event_tag: ki-server
 team:
   - anton
   - falko-richter
+uuid: 3cc62aab-2f02-4316-9a94-177b49fbd147
 ---
 
 ## how it started

@@ -11,6 +11,8 @@ Originale, unbearbeitete Logo-Dateien. Ausgeliefert werden nur die Kopien in `as
 | `partner/pc-spende.svg` | pc-spende.das-macht-schule.net (Header-Logo pcspende_logo.svg, abgerufen 06.11.2026) |
 | `partner/taschenstation.svg` | taschenstation.de (inline-SVG-Symbol `#cf-icon--logo` aus dem Seitenkopf extrahiert, Schriftzug „ReUseMe“, abgerufen 06.11.2026) |
 | `partner/bietenholz.jpeg` | bietenholz.design (Site-Icon logo_bietenholz2.jpeg, 512 × 512; für die Website auf 400 px verkleinert, abgerufen 06.11.2026) |
+| `partner/verbund-offene-werkstaetten.png` | vom Verbund Offener Werkstätten bereitgestellt (Logo-Paket von 2010, Nutzung abgestimmt). Aus `logo_VOW.tif` (CMYK, 2465 × 826, 300 dpi): Deckung aus dem Gelb-Kanal, Farben aus der offiziellen RGB-Datei (Rot `#bd1320`, Orange `#f29400`), transparenter Hintergrund, ohne Metadaten; für die Website auf 600 px Breite verkleinert. EPS/TIF/BMP-Originale nicht im Repo |
+| `partner/rfflabs.svg` | rfflabs.fr (Hero-Logo `logos-planche-RVB1_Old-04.svg`, weiß, abgerufen 21.11.2026; Nutzung abgestimmt). Im Repo das Original; die Website nutzt `assets/images/partner/rfflabs.svg` mit der Füllfarbe des Netzwerks `#222D49` statt Weiß |
 | HeartLabs | **fehlt** – Printables blockiert automatische Abrufe, Instagram braucht Login; Text-Platzhalter wird angezeigt |
 | Förderverein der Kurt-Tucholsky-Grundschule | **fehlt** – Website hat kein Logo, Text-Platzhalter wird angezeigt |
 
@@ -35,8 +37,13 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 | `institut/ifsmb-logo-wortmarke.png` | wie oben, mit Schriftzug „Institut für spontane Makespace Buildung“ |
 | `institut/ifsmb-logo-badge.svg` | Vektorversion des Badges, nach den Maßen des PNG nachgebaut |
 | `institut/ifsmb-logo-wortmarke.svg` | Vektorversion mit Schriftzug |
+| `../assets/images/og-preview.jpg` | 1200 × 630 px Social-Media-Vorschaubild (Open Graph / Twitter Card) in den Institutsfarben (`#ffcc00` / `#16161d`), ohne Metadaten; Vorschau in `_logo/social-preview.html` |
 
 Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, wght 800; SF Pro, wght 700, opsz 28). In den SVGs ist der Text mit fontTools in Pfade umgewandelt, sie brauchen also keine installierte Schrift. Farben: `#ffcc00` (Gelb), `#16161d` (Schwarz), Badge um −3° gedreht.
+
+## Badge zum Drucken
+
+`badge/`: das Logo-Badge als OpenSCAD-Modell für den 3D-Druck (gelbe Grundplatte, schwarze Teile erhaben, nur ein Farbwechsel), optional mit Namen im verlängerten Schatten. Die erzeugten Dateien (3MF, OBJ, STL, Vorschau) liegen in `assets/badge/`, die Liste in `_data/badges.yml`; sie erscheinen auf `/press/#badge` und in den Teamprofilen. Der Schriftzug „IfsMB“ wird mit `badge/wordmark_from_svg.py` direkt aus `institut/ifsmb-logo-badge.svg` übernommen. Details in `badge/README.md`.
 
 ## Übernommene Blogbeiträge
 

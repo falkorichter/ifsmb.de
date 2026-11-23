@@ -2,15 +2,16 @@
 title: "Mogster: PC-Blend drucken"
 summary: Teile für den Mogster aus PC-Blend drucken – schwierig, aber die Zahnräder sehen schon gut aus.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-09-13
-zeitraum: seit September 2026
-teil_von: [3dsets-mogster-bauen]
+period: seit September 2026
+part_of: [3dsets-mogster-bauen]
 event_tag: mogster-pc-blend
 team:
   - falko-richter
+uuid: d2e8c144-60f4-4e7f-869d-04b9e01bd0eb
 ---
 
-Ein Teilprojekt vom [Mogster]({{ '/projekte/3dsets-mogster-bauen/' | relative_url }}): Teile aus **PC-Blend** drucken. Die ersten Drucke gibt es im Beitrag [Mogster: erste Teile aus PC-Blend]({{ '/news/2026/09/14/mogster-erste-teile-aus-pc-blend/' | relative_url }}).
+Ein Teilprojekt vom [Mogster]({{ '/projects/3dsets-mogster-bauen/' | relative_url }}): Teile aus **PC-Blend** drucken. Die ersten Drucke gibt es im Beitrag [Mogster: erste Teile aus PC-Blend]({{ '/news/2026/09/14/mogster-erste-teile-aus-pc-blend/' | relative_url }}).
 
 PC-Blend ist schwierig zu drucken. Vielleicht ist das Filament schon sehr alt – getrocknet haben wir es aber. Der Druckraum in der IKEA-Kiste war eigentlich ganz gut aufgeheizt. Als Nächstes testen wir ein **Satin-Druckbett**, das Falko gekauft hat.

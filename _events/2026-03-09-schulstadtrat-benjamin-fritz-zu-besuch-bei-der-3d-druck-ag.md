@@ -7,16 +7,17 @@ location: "Kurt-Tucholsky-Grundschule, Rathenower Str. 18, 10559 Berlin"
 location_url: https://kurt-tucholsky-grundschule.de/
 summary: Schulstadtrat Benjamin Fritz besucht die 3D-Druck AG und lässt sich den neuen 4-Farb-Drucker zeigen.
 team: [falko-richter, gregor-dill, frieder-euteneuer]
+uuid: b098c2be-92b5-4e81-ad0a-104b871a5157
 ---
 
 Schulstadtrat Benjamin Fritz hat die 3D-Druck AG besucht. Gregor Dill und Falko Richter haben ihm die AG und unseren neuen, komplett spendenfinanzierten 4-Kopf-4-Farb-4-Material-Drucker gezeigt.
 
 Auch [Frieder Euteneuer]({{ '/team/frieder-euteneuer/' | relative_url }}) war dabei – zum Netzwerken und um mit uns den Snapmaker U1 zu feiern.
 
-So etwas machen wir wieder: Im Januar 2027 gibt es eine [kleine feierliche Eröffnung des Makespace am Rosalind-Franklin-Gymnasium]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
+So etwas machen wir wieder: Im Januar 2027 gibt es eine [kleine feierliche Eröffnung des Makespace am Rosalind-Franklin-Gymnasium]({{ '/calendar/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}).
 
 - [📷 Fotos im Google-Fotos-Album](https://photos.app.goo.gl/3gHcYyH5wt71wuyM6)
 - [🦋 Beitrag des Bezirksamts Mitte auf Bluesky](https://bsky.app/profile/ba-mitte-berlin.bsky.social/post/3mgpafkllzg2x)
 - [✖️ Beitrag des Bezirksamts Mitte auf X](https://x.com/BA_Mitte_Berlin/status/2031327219788697932) (Wir werden nicht gerne bei x.com veröffentlicht)
 - [📘 Beitrag auf Facebook](https://www.facebook.com/share/p/1B4VgwPxu1/)
-- [Zur Pressemitteilung]({{ '/presse/schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }})
+- [Zur Pressemitteilung]({{ '/press/schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }})

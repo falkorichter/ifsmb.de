@@ -1,0 +1,625 @@
+# UI strings (German) – the site chrome, not the content. Same keys in en.yml and fr.yml
+# (_scripts/test_i18n.js checks that). Templates render German with {{ "key" | t }} (_plugins/i18n.rb),
+# assets/js/i18n.js swaps in the other languages. {name} = parameter, {0}/{1} = an HTML child of the element
+# (link, code) that stays in place; { one: …, other: … } = plural forms picked by {n}.
+
+site:
+  description: Wir bauen Makespaces – spontan, gemeinsam und dort, wo Kinder und Jugendliche lernen.
+
+common:
+  and: und
+  by: von
+  close: Schließen
+  copy: Kopieren
+  copied: Kopiert ✓
+
+language:
+  label: "Sprache:"
+  note: Nur Menüs und Knöpfe – die Inhalte sind auf Deutsch.
+
+nav:
+  open_menu: Menü öffnen
+  news: Neuigkeiten
+  calendar: Kalender
+  about_us: Wir
+  network: Netzwerk
+  map: Karte
+  projects: Projekte
+  project_ideas: Projekt-Ideen
+  challenges: Herausforderungen
+  offer: Angebot
+  funding: Geld für Makespaces
+  equipment: Ausstattung
+  team: Team
+  partners: Partner
+  press: Presse
+  search: Suche
+
+footer:
+  donate: Spenden
+  imprint: Impressum & Datenschutz
+  past_projects: Vergangene Projekte
+  source: Quelltext auf GitHub
+  contribute: "Zum Mitmachen:"
+  data_structures: Datenstrukturen
+  dependencies: Abhängigkeiten
+  disclaimer: Das IfsMB ist eine private, ehrenamtliche Initiative von Falko Richter – keine Hochschule, keine Behörde und kein Forschungsinstitut.
+  why_institute: Warum ein Institut?
+  no_cookies: Diese Seite setzt keine Cookies und lädt keine externen Inhalte.
+
+lightbox:
+  previous: Vorheriges Bild
+  next: Nächstes Bild
+
+home:
+  our_projects: Unsere Projekte
+  who_we_are: Wer wir sind
+  an_institute: Ein Institut
+  next_events: Nächste Termine
+  to_calendar: Zum Kalender →
+  current_projects: Aktuelle Projekte
+  all_projects: Alle Projekte →
+  all_news: Alle Neuigkeiten →
+  more_partners: Mehr über unsere Partner →
+
+pages:
+  news:
+    title: Neuigkeiten
+    lead: Was gerade im Institut passiert.
+    empty: Noch keine Neuigkeiten.
+    personal_link: → Persönliche Blogs aus dem Team ({n})
+  personal_news:
+    title: Persönliche Blogs
+    lead: Private Makespace-Updates aus dem Team – was wir zu Hause und nebenbei bauen.
+    intro: Das sind keine Beiträge des Instituts, sondern persönliche Updates von Menschen aus unserem {0}. Die Neuigkeiten des Instituts stehen unter {1}.
+    empty: Noch keine persönlichen Beiträge.
+  calendar:
+    title: Kalender
+    lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
+  projects:
+    title: Projekte
+    lead: Woran wir gerade arbeiten.
+    none: Gerade läuft kein Projekt – aber das kann sich spontan ändern.
+    inquiries: Anfragen
+    inquiries_intro: Bei uns eingegangene Anfragen – vielleicht wird daraus bald ein Projekt.
+    ideas: Ideen
+    ideas_intro: Was wir vielleicht als Nächstes bauen – noch nichts Festes. Mehr Anregungen gibt es auf der Seite {0}.
+    archive_link: → Vergangene Projekte ansehen
+    personal_link: → Persönliche Projekte aus dem Team ({n})
+  archive:
+    title: Vergangene Projekte
+    lead: Was wir schon gebaut haben.
+    empty: Noch keine abgeschlossenen Projekte.
+    back: ← Aktuelle Projekte
+  personal_projects:
+    title: Persönliche Projekte
+    lead: Woran Menschen aus unserem Team privat bauen.
+    intro: Das sind keine Projekte des Instituts, sondern private Makespace-Projekte aus unserem {0}. Die Projekte des Instituts stehen unter {1}.
+    empty: Noch keine persönlichen Projekte.
+  team:
+    title: Team
+    lead: Die Menschen hinter dem Institut.
+  partners:
+    title: Partner
+    lead: Ohne unsere Partner wäre kein Makespace spontan entstanden. Danke!
+  challenges:
+    title: Herausforderungen
+    lead: Unsere Bestandsaufnahme – Aufgaben, Probleme und offene Fragen aus unseren Projekten, gesammelt und dokumentiert. Kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
+    open_heading: "Offen: Was ist wichtig, was ist dringend?"
+    open_intro: Die offenen Herausforderungen, sortiert nach der {0} – eingeordnet über {1} und {2} in der Datei. Mit ➕ legt ihr eine neue Herausforderung direkt im passenden Feld an.
+    personal_heading: Aus persönlichen Projekten
+    personal_intro: Herausforderungen aus privaten Makespace-Projekten im Team – keine Aufgaben des Instituts.
+  equipment:
+    title: Ausstattung
+    lead: Womit wir arbeiten – und wem es gehört.
+  tags:
+    title: Stichworte
+    lead: Alles auf einen Blick – nach Themen, Orten, Partnern und Geräten.
+  search:
+    title: Suche
+    lead: Volltextsuche über Neuigkeiten, Projekte, Termine, Ausstattung, Team und mehr.
+    missing: "Der Suchindex fehlt: Er wird erst nach {0} mit {1} erzeugt (siehe README)."
+  todos:
+    title: Todos
+    lead: Was wir gerade anpacken – pro Person in der Eisenhower-Matrix. Verschieben, bearbeiten, als Pull Request speichern.
+  network:
+    title: Netzwerk
+    lead: Wie unsere Projekte, Herausforderungen, Todos, Termine, Beiträge, Menschen, Partner und Geräte zusammenhängen. Ziehen, zoomen, anklicken – und von Punkt zu Punkt weiterwandern.
+  map:
+    title: Karte
+    lead: Wo unsere Projekte, Termine, Beiträge und Geräte zu Hause sind – das Netzwerk auf der Karte.
+  press:
+    title: Presse
+    lead: Informationen, Pressemitteilungen und Material für Journalist*innen.
+
+badge:
+  active: Aktuell
+  completed: Abgeschlossen
+  inquiry: Anfrage
+  idea: Idee
+  personal: Persönlich
+  open: Offen
+  in_progress: In Arbeit
+  solved: Gelöst
+  prospect: In Aussicht
+  in_repair: In Reparatur
+  testing: Im Test
+
+post:
+  personal: ✍️ Persönlicher Beitrag
+  personal_note: – ein privates Makespace-Update aus dem Team, kein Beitrag des Instituts.
+  more_in_blog: Mehr im
+  personal_blog_of: persönlichen Blog von {name}
+  originally_published: Ursprünglich veröffentlicht
+  on_site: auf
+  original_site: der Originalseite
+  project_update: 🔧 Update zum Projekt
+  back: ← Alle Neuigkeiten
+  back_personal: ← Alle persönlichen Blogs
+
+project:
+  last_update: "Letztes Update:"
+  update_short: "Update:"
+  part_of: "Dieses Projekt ist ein Teil von:"
+  personal: 🏠 Persönliches Projekt
+  personal_note: – ein privates Makespace-Projekt aus dem Team, kein Projekt des Instituts.
+  idea_note: Das ist eine Idee – noch kein festes Projekt. Wenn ihr Lust habt mitzumachen, meldet euch!
+  inquiry_note: Das ist eine Anfrage, die bei uns eingegangen ist. Ob und wie daraus ein Projekt wird, ist noch offen.
+  subprojects: Teilprojekte
+  updates: Stand / Updates
+  events: Termine & Berichte
+  back: ← Alle Projekte
+  back_personal: ← Alle persönlichen Projekte
+
+activity:
+  subprojects: { one: "{n} Teilprojekt", other: "{n} Teilprojekte" }
+  subprojects_words: { one: Teilprojekt, other: Teilprojekte }
+  challenges: { one: "{n} offene Herausforderung", other: "{n} offene Herausforderungen" }
+  challenges_words: { one: offene Herausforderung, other: offene Herausforderungen }
+  events: { one: "{n} Termin", other: "{n} Termine" }
+  events_words: { one: Termin, other: Termine }
+  events_upcoming: { one: "{n} Termin, davon {up} kommend", other: "{n} Termine, davon {up} kommend" }
+  events_upcoming_words: { one: "Termin, davon {up} kommend", other: "Termine, davon {up} kommend" }
+  updates: { one: "{n} Update", other: "{n} Updates" }
+  updates_words: { one: Update, other: Updates }
+  devices: { one: "{n} Gerät", other: "{n} Geräte" }
+  devices_words: { one: Gerät, other: Geräte }
+  people: "{n} Beteiligte"
+  people_words: Beteiligte
+
+challenge:
+  heading: Herausforderungen
+  open_count: "{n} offen"
+  solved_count: "{n} gelöst"
+  kind_task: 📋 Aufgabe
+  kind_problem: ⚠️ Problem
+  kind_question: ❓ Frage
+  kind_challenge: 🧗 Herausforderung
+  since: seit
+  solved_on: gelöst am
+  owners: "Zuständig:"
+  personal: 🏠 Persönliche Herausforderung
+  personal_note: – aus einem privaten Makespace-Projekt, keine Aufgabe des Instituts.
+  solution: Lösung
+  unsolved_note: Diese Herausforderung ist noch nicht gelöst. Ihr habt eine Idee, kennt jemanden oder habt das passende Teil? Meldet euch!
+  back: ← Alle Herausforderungen
+
+matrix:
+  name: Eisenhower-Matrix
+  label: "Eisenhower-Matrix: offene Herausforderungen nach Wichtigkeit und Dringlichkeit"
+  urgent: Dringend
+  not_urgent: Nicht dringend
+  important: Wichtig
+  not_important: Nicht wichtig
+  q1: Sofort erledigen
+  q1_sub: wichtig · dringend
+  q2: Einplanen
+  q2_sub: wichtig · nicht dringend
+  q3: Abgeben
+  q3_sub: nicht wichtig · dringend
+  q4: Später
+  q4_sub: nicht wichtig · nicht dringend
+
+event:
+  personal_of: Persönlicher Termin von
+  personal: 🏠 Persönlicher Termin
+  personal_note: – ein privater Makespace-Termin aus dem Team, kein Termin des Instituts. Er steht nicht im Kalender des Instituts, sondern nur im Teamprofil.
+  project_only_note: 📌 Ein Termin für die Beteiligten des Projekts – er erscheint erst im öffentlichen Kalender, wenn er stattgefunden hat.
+  subscribe_all: 📅 Alle Termine abonnieren
+  back: ← Zum Kalender
+  photos: { one: "{n} Foto", other: "{n} Fotos" }
+
+calendar:
+  events: Termine
+  upcoming: Kommende Termine
+  past: Vergangene Termine
+  none: Gerade sind keine Termine geplant – aber das kann sich spontan ändern.
+  button_subscribe: 📅 Abonnieren
+  button_add: 📅 In den Kalender
+  title_subscribe: Kalender abonnieren
+  title_add: In den Kalender übernehmen
+  title_institute: Kalender des Instituts abonnieren
+  title_events_of: Termine von „{name}“ abonnieren
+  title_events_person: Termine von {name} abonnieren
+  title_events_with: Termine mit {name} abonnieren
+  intro: Neue und geänderte Termine kommen automatisch dazu.
+  apple_outlook: Apple Kalender & Outlook
+  google: Google Kalender
+  download: iCal-Datei herunterladen
+  help_event: „Apple Kalender & Outlook“ lädt eine iCal-Datei, die sich im Kalender-Programm öffnet (auch Thunderbird). „Google Kalender“ öffnet ein ausgefülltes Formular für einen neuen Termin bei Google.
+  help_subscribe: "„Apple Kalender & Outlook“ öffnet das Abo direkt im Kalender-Programm (Mac, iPhone, iPad, Outlook, Thunderbird). „Google Kalender“ fragt im Browser, ob der Kalender hinzugefügt werden soll – in der Google-App geht das nicht. Google aktualisiert Abos nur etwa einmal am Tag. Falls es nicht klappt: bei Google „Weitere Kalender → Per URL“ und {0} eintragen."
+
+feed:
+  button: 📡 RSS-Feed
+  button_posts: 📡 Beiträge als RSS-Feed
+  title: Neuigkeiten abonnieren
+  title_institute: Neuigkeiten des Instituts abonnieren
+  title_personal: Persönliche Blogs abonnieren
+  title_updates: Updates zu „{name}“ abonnieren
+  title_posts_person: Beiträge von {name} abonnieren
+  intro: Mit einem Feed-Reader (RSS) kommen neue Beiträge automatisch – ohne Anmeldung, ohne Newsletter, ohne Tracking.
+  address: Adresse des Feeds
+  open_reader: Im Feed-Reader öffnen
+  help: „Im Feed-Reader öffnen“ übergibt den Feed an das Feed-Programm auf dem Gerät (z. B. NetNewsWire, Reeder, Thunderbird). Feedly und Inoreader sind Feed-Reader im Browser. Jeder andere Feed-Reader nimmt die Adresse oben – einfach kopieren und dort als neuen Feed eintragen.
+
+connections:
+  project_part_of: Dieses Projekt ist ein Teil von
+  part_of: Teil von
+  related_projects: Verwandte Projekte
+  event_belongs_to: Dieser Termin gehört zu
+  projects: Projekte
+  posts: Beiträge
+  press: Presse
+  personal: persönlich
+  personal_project: Persönliches Projekt
+  solved: gelöst
+  in_progress: in Arbeit
+  open: offen
+  maybe_from: Kommt vielleicht von
+  owned_by: Gehört
+  location: Standort
+  ownership: Besitz
+  people: Beteiligt
+  partners: Partner
+  pages: Seiten
+  related: Verknüpft
+
+owner:
+  institute: Gehört dem Institut
+  maybe_from: Vielleicht von
+  owned_by: Gehört
+  our_partner: unserem Partner
+  from_our_team: aus unserem Team
+
+equipment:
+  heading: Ausstattung
+  location: "Standort:"
+  illustration: Illustration – ein Foto folgt.
+  illustration_prospect: Illustration – ein Foto folgt, sobald das Gerät da ist.
+  photos: Fotos
+  videos: Videos
+  prospect_note: Dieses Gerät ist noch nicht da – wir bekommen es vielleicht. Sobald es so weit ist, aktualisieren wir diese Seite.
+  no_own_devices: Das Institut besitzt (noch) keine eigenen Geräte.
+  use_by_arrangement: – darüber können wir es je nach Absprache nutzen.
+  printers: 3D-Drucker
+  scanners: 3D-Scanner
+  others: Plotter, Messgeräte und mehr
+  back: ← Alle Ausstattung
+  filter_owner: "Gehört:"
+  filter_location: "Steht bei:"
+  filter_active_owner: "Geräte von {name}"
+  filter_active_location: "Geräte bei {name}"
+  filter_count:
+    one: "1 Gerät"
+    other: "{n} Geräte"
+  filter_none: keine Geräte für diesen Filter
+  filter_reset: Alle zeigen
+  of_partner: "Ausstattung von {name}"
+  at_partner: "Ausstattung bei {name}"
+
+team:
+  photo_of: Foto von {name}
+  photo_credit: "Foto:"
+  badge: IfsMB-Badge
+  badge_help: Zum Drehen ins Modell ziehen. Gedruckt in Gelb und Schwarz mit nur einem Farbwechsel – {0}.
+  badge_more: mehr zum Badge
+  personal_projects: Persönliche Projekte
+  personal_blog: Persönlicher Blog
+  institute_projects: Projekte im Institut
+  back: ← Zum Team
+
+todos:
+  heading: Todos
+  project_button: Todos zum Projekt
+  person_button: Todos von {name}
+  button_hint: Eisenhower-Matrix – verschieben, bearbeiten, als Pull Request speichern
+
+partner:
+  logo_of: Logo {name}
+  equipment: "Ausstattung:"
+  projects: "Projekte:"
+  events: "Termine:"
+  more: Mehr über die Zusammenarbeit →
+
+press:
+  release: Pressemitteilung
+  about: Über das Institut
+  back: ← Zum Pressebereich
+  contact: Pressekontakt
+  phone_needs_js: Telefon (JavaScript nötig)
+  profile: Kurzprofil
+  fact_name: "Name:"
+  fact_seat: "Sitz:"
+  fact_team: "Team:"
+  fact_partners: "Partner:"
+  people: "{n} Personen"
+  to_team: zum Team
+  releases: Pressemitteilungen
+  no_releases: Noch keine Pressemitteilungen.
+  coverage: Wir in der Presse
+  more_on_it: mehr dazu
+  material: Pressematerial
+  download: ⬇ Herunterladen
+  badge: Badge zum 3D-Drucken
+  badges_names: Badges mit Namen
+
+badge3d:
+  3mf_note: (zwei Objekte gelb/schwarz)
+  stl_note: (Farbwechsel per Pause)
+
+tags:
+  project: Projekt
+  challenge: Herausforderung
+  event: Termin
+  post: Beitrag
+
+dead_link:
+  explanation: 🪦 = Dieser Link funktioniert nicht mehr (die Seite ist offline oder wurde entfernt). Wir lassen ihn stehen, damit nachvollziehbar bleibt, worauf sich der Text bezieht.
+  search: neuen Link suchen
+  archive: alte Version im Internet Archive
+
+edit:
+  edit: Bearbeiten
+  form_title: "Diese Seite im Formular bearbeiten (Strg/⌘-Klick: direkt auf GitHub)"
+  github_title: Diese Seite auf GitHub bearbeiten
+  view_file: "Datei auf GitHub ansehen: {path}"
+  on_github: "Auf GitHub:"
+  pr_warning: "✏️ Diese Seite wird gerade bearbeitet:"
+  pr_continue: bitte {0} statt einen zweiten Pull Request zu starten.
+  pr_continue_link: dort weiterarbeiten
+
+# open pull requests and issues (/mitmachen/offen/, button in the edit row only with a GitHub connection)
+open_work:
+  button: 🧩 Offen
+  button_title: Offene Pull Requests und Aufgaben auf GitHub
+  all_open_prs: Alle offenen Pull Requests
+
+# theme picker in the footer (assets/js/theme.js)
+theme:
+  label: "Aussehen:"
+  like_page: Wie die Seite ({name})
+  what_is_this: Was ist das?
+
+# ➕ buttons (_includes/neu-buttons.html): label = button text, hint = tooltip
+new:
+  matrix:
+    label: "Neue Herausforderung: {quadrant}"
+    hint: Neue Herausforderung in „{quadrant}“ ({sub}) – schon eingeordnet
+  team_post:
+    label: "Beitrag"
+    hint: "Neuer Beitrag – Autor*in schon eingetragen"
+  team_project:
+    label: "Projekt"
+    hint: "Neues Projekt – Person schon unter team eingetragen"
+  team_event:
+    label: "Termin"
+    hint: "Neuer Termin – Person schon unter team eingetragen"
+  team_device:
+    label: "Gerät"
+    hint: "Neues Gerät – Person als Besitzer*in eingetragen"
+  team_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung – Person schon als zuständig eingetragen"
+  project_post:
+    label: "Beitrag zum Projekt"
+    hint: "Neuer Beitrag – Stichwort des Projekts schon eingetragen, erscheint dann hier unter „Stand / Updates“"
+  project_event:
+    label: "Termin"
+    hint: "Neuer Termin – Stichwort des Projekts und Beteiligte schon eingetragen"
+  project_post_untagged:
+    label: "Beitrag zum Projekt"
+    hint: "Neuer Beitrag – mit diesem Projekt verbunden (das Projekt hat noch kein event_tag)"
+  project_event_untagged:
+    label: "Termin"
+    hint: "Neuer Termin – Projekt und Beteiligte schon eingetragen"
+  project_subproject:
+    label: "Teilprojekt"
+    hint: "Neues Teilprojekt – übergeordnetes Projekt und Beteiligte schon eingetragen"
+  project_device:
+    label: "Gerät"
+    hint: "Neues Gerät – mit diesem Projekt verbunden"
+  project_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung (Aufgabe, Problem, Frage) – Projekt und Beteiligte schon eingetragen"
+  event_report:
+    label: "Bericht"
+    hint: "Neuer Beitrag über diesen Termin – Stichworte und Verbindung schon eingetragen"
+  event_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung zu diesem Termin – Verbindung, Stichworte und Beteiligte schon eingetragen"
+  device_post:
+    label: "Beitrag"
+    hint: "Neuer Beitrag über dieses Gerät – Stichworte und Verbindung schon eingetragen"
+  device_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung zu diesem Gerät (z. B. ein Defekt) – Verbindung schon eingetragen"
+  challenge_post:
+    label: "Beitrag dazu"
+    hint: "Neuer Beitrag zu dieser Herausforderung – Stichworte und Verbindung schon eingetragen"
+  challenge_more:
+    label: "Weitere Herausforderung"
+    hint: "Neue Herausforderung für dieselben Projekte und Zuständigen"
+  post_followup:
+    label: "Folgebeitrag"
+    hint: "Neuer Beitrag – Autor*in, Stichworte und Verbindung zu diesem Beitrag schon eingetragen"
+  partner_project:
+    label: "Projekt"
+    hint: "Neues Projekt – Partner schon eingetragen"
+  partner_event:
+    label: "Termin"
+    hint: "Neuer Termin – Partner schon eingetragen"
+  partner_device:
+    label: "Gerät"
+    hint: "Neues Gerät – Partner als Besitzer eingetragen"
+  partner_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung – mit dieser Partnerseite verbunden"
+  team_profile:
+    label: "Teamprofil"
+    hint: "Neues Teamprofil mit allen Feldern"
+  projects_project:
+    label: "Projekt"
+    hint: "Neues Projekt mit allen Feldern"
+  archive_project:
+    label: "Vergangenes Projekt"
+    hint: "Abgeschlossenes Projekt nachtragen – mit Gliederung für den Rückblick"
+  personal_project:
+    label: "Persönliches Projekt"
+    hint: "Neues persönliches Projekt – Person unter team eintragen"
+  news_post:
+    label: "Beitrag"
+    hint: "Neuer Beitrag mit allen Feldern"
+  personal_post:
+    label: "Persönlicher Beitrag"
+    hint: "Neuer persönlicher Beitrag"
+  calendar_event:
+    label: "Termin"
+    hint: "Neuer Termin mit allen Feldern"
+  challenges_challenge:
+    label: "Herausforderung"
+    hint: "Neue Herausforderung (Aufgabe, Problem, Frage) mit allen Feldern"
+  equipment_device:
+    label: "Gerät"
+    hint: "Neues Gerät mit allen Feldern"
+  press_release:
+    label: "Pressemitteilung"
+    hint: "Neue Pressemitteilung mit allen Feldern"
+  press_report:
+    label: "Wir in der Presse"
+    hint: "Neuer Bericht über uns – wird nach Datum einsortiert"
+  partners_partner:
+    label: "Partner"
+    hint: "Neuer Partner als eigene Datei – erscheint auf /partners/ und im Netzwerk"
+
+# assets/js/gelesen.js
+read:
+  check: gelesen
+  check_title: Schon gelesen (nur in diesem Browser gespeichert)
+  progress: "{n} von {total} gelesen"
+  deleted: ✓ Gelöscht
+
+# ➕/✏️ forms (assets/js/formular.js, assets/js/neu.js) – the field labels of the forms are not translated yet
+form:
+  search: Suchen …
+  remove: "{name} entfernen"
+  index_loading: Suchindex lädt …
+  copied_github: Kopiert – GitHub ist in einem neuen Tab offen.
+  copied_paste: Kopiert – im GitHub-Editor alles markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V).
+  copy_failed: Kopieren ging nicht – bitte den Text unten kopieren.
+  copy_manually: Bitte den Text unten kopieren.
+  more_fields: Weitere Felder
+  file: Datei
+  new_file: Neue Datei
+  file_preview: Vorschau der Datei
+  social_preview: Social-Media-Vorschau (WhatsApp, Signal, X …)
+  new_photos: Neue Fotos
+  add_photos: 📷 Fotos hinzufügen
+  template_link: Vorlage mit allen Feldern ↗
+  view_on_github: Auf GitHub ansehen ↗
+  discard: ↩️ Änderungen verwerfen
+  restart: 🗑️ Neu anfangen
+  discarded: Änderungen verworfen.
+  restarted: Neu angefangen.
+  draft_restored: Entwurf wiederhergestellt.
+  submit_new: 📋 Auf GitHub anlegen
+  submit_edit: 📋 Auf GitHub speichern
+  submit_pr_new: 🚀 Als Pull Request anlegen
+  submit_pr_edit: 🚀 Änderung als Pull Request
+  submit_pr_into: "🚀 In #{number} speichern"
+  fill_in: Bitte „{field}“ ausfüllen.
+  unchanged: Noch nichts geändert.
+  unchanged_short: Noch nichts geändert
+  too_long: Die Datei ist zu lang für die Adresse – sie ist kopiert, bitte im GitHub-Editor einfügen.
+  edit_title: ✏️ {type} bearbeiten
+  edit_hint: Änderungen an {path} – nur geänderte Zeilen werden neu geschrieben, alles andere bleibt wie es ist.
+  steps_new_1: „Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit dem fertigen Inhalt.
+  steps_commit_html: Dort „Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.
+  steps_new_3: Nach dem Merge erscheint die Seite nach ein paar Minuten auf der Website.
+  steps_edit_1: „Auf GitHub speichern“ kopiert die geänderte Datei und öffnet sie im GitHub-Editor.
+  steps_edit_2: Dort den ganzen Inhalt markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V).
+  steps_edit_commit_html: „Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.
+  steps_edit_4: Nach dem Merge ist die Änderung nach ein paar Minuten auf der Website.
+  steps_pr_new: „Als Pull Request“ legt einen neuen Branch mit der neuen Datei und allen verwendeten Fotos an und öffnet einen Pull Request.
+  steps_pr_edit: „Als Pull Request“ legt einen neuen Branch mit der geänderten Datei und allen verwendeten Fotos an und öffnet einen Pull Request.
+  steps_pr_review: Jemand aus dem Team sieht ihn durch und mergt ihn – dann ist alles nach ein paar Minuten auf der Website.
+  types:
+    post: Beitrag
+    event: Termin
+    project: Projekt
+    past_project: Vergangenes Projekt
+    device: Gerät
+    challenge: Herausforderung
+    team_profile: Teamprofil
+    press_release: Pressemitteilung
+    partner: Partner
+    press_report: Wir in der Presse
+
+# GitHub connection (assets/js/github-api.js, connect dialog in assets/js/neu.js)
+github:
+  create_token: "Token auf GitHub erstellen ↗"
+  token_classic_html: "<em>public_repo</em> ist schon angehakt, kurzes Ablaufdatum wählen (der Token gilt für alle öffentlichen Repositories, in die du schreiben darfst), „Generate token“. Geht mit jedem GitHub-Konto: mit Schreibrechten auf {repo} direkt, sonst über deinen eigenen Fork – der wird beim ersten Senden angelegt."
+  collaborator_classic_html: "du bist Collaborator auf {repo}, aber dieser <strong>fine-grained Token</strong> gilt nur für deine eigenen Repositories. Für Pull Requests direkt im Repository oben einen neuen Token erstellen – mit diesem geht es über deinen Fork."
+  fork_behind: "Dein Fork ist nicht auf dem neuesten Stand – er wird vor dem Senden abgeglichen, deine Änderung baut auf dem aktuellen Stand auf."
+  fork_stale_html: "⚠️ Dein Fork {fork} ließ sich nicht automatisch auf den neuesten Stand bringen. Deine Änderung baut trotzdem auf dem aktuellen Stand auf – für später auf <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">GitHub</a> „Sync fork“ klicken."
+  connect: 🔑 GitHub verbinden
+  reconnect: 🔑 Neu verbinden
+  connect_title: Mit einem GitHub-Token Pull Requests direkt von hier erstellen (mit Fotos)
+  connected_title: Mit GitHub verbunden – Pull Requests direkt von hier
+  dialog_title: 🔑 Mit GitHub verbinden
+  intro_html: Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.
+  paste_token: Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.
+  remember: Auf diesem Gerät merken
+  remember_hint: Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.
+  logout: Abmelden
+  connect_button: Verbinden
+  not_connected_short: Nicht verbunden.
+  checking: Prüfe …
+  connected_as_html: Verbunden als {login}
+  can_push: darf Pull Requests anlegen ✅
+  not_connected: Nicht mit GitHub verbunden.
+  network: Keine Verbindung zu GitHub – bitte die Internetverbindung prüfen und nochmal versuchen.
+  error: Fehler
+  auth: Dein GitHub-Token ist abgelaufen oder ungültig. Bitte neu verbinden – deine Eingaben bleiben erhalten.
+  rate: GitHub bremst gerade (zu viele Anfragen).
+  rate_until: Ab {time} Uhr geht es wieder.
+  rate_later: Bitte in ein paar Minuten nochmal versuchen.
+  permission: Das Token darf das nicht ({message}). Beim Token für {repo} „Contents“ und „Pull requests“ auf „Read and write“ stellen.
+  not_found: Nicht gefunden ({message}) – fehlt dem Token der Zugriff auf {repo}?
+  rejected: "GitHub hat die Änderung abgelehnt: {message}"
+  server: GitHub hat gerade ein Problem ({status}). Bitte gleich nochmal versuchen.
+  step_base: Stand von {branch} holen …
+  step_upload: Datei {n} von {total} hochladen …
+  step_commit: Commit anlegen …
+  step_update_pr: "Pull Request #{number} ergänzen …"
+  step_branch: Branch {branch} anlegen …
+  step_open_pr: Pull Request öffnen …
+  no_token_html: "Ganz ohne Token geht es mit jedem Konto auch: „📋 Auf GitHub speichern“ – GitHub legt dann selbst einen Fork an und bietet „Create pull request“ an. Hast du schon einen älteren Fork, dort vorher „Sync fork“ klicken."
+  cannot_push_html: "hat keine Schreibrechte auf {repo} – beim ersten Senden wird <strong>dein eigener Fork</strong> angelegt ✅"
+  cannot_push_fork_html: "hat keine Schreibrechte auf {repo} – Änderungen gehen über deinen Fork <strong>{fork}</strong> ✅"
+  sent_fork_html: "{link} ist angelegt (aus deinem Fork {fork}) – danke!"
+  sent_fork_compare_html: "Deine Änderung liegt in deinem Fork {fork}. Letzter Schritt: {link} – dort „Create pull request“ klicken."
+  compare_link: "Pull Request auf GitHub anlegen ↗"
+  step_sync_fork: "Fork {fork} auf den neuesten Stand bringen …"
+  step_create_fork: "Eigenen Fork von {repo} anlegen …"
+  fork_permission: "Das Token darf keinen Fork anlegen. Entweder den Fork von {repo} einmal auf GitHub anlegen („Fork“ oben rechts) oder beim Token „Administration“ auf „Read and write“ stellen."
+  fork_no_continue: "Ohne Schreibrechte kannst du nicht in #{number} mitschicken – bitte als eigenen Pull Request senden."

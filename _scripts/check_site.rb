@@ -4,15 +4,19 @@
 # Prüft die fertig gebaute Seite in _site/:
 #   1. Tote interne Links (href, src, poster, srcset) und fehlende #Anker
 #   2. Verwaiste Seiten: HTML-Seiten, die von der Startseite aus über Links nicht erreichbar sind
-#   3. Optional (--extern): externe Links per HTTP prüfen
+#   3. Keine Geokoordinaten (EXIF-GPS/XMP) in Bildern unter assets/ (_scripts/check_geodaten.rb)
+#   4. `theme:` im Front Matter und `default_theme:` in _config.yml nennen ein Theme aus _data/themes.yml
+#   5. Optional (--extern): externe Links per HTTP prüfen
 #
 # Aufruf:  bundle exec jekyll build && ruby _scripts/check_site.rb [--extern]
-# Exit-Code 1, wenn tote interne Links oder verwaiste Seiten gefunden wurden.
+# Exit-Code 1, wenn tote interne Links, verwaiste Seiten, Fotos mit Geokoordinaten oder unbekannte Themes gefunden wurden.
 
+require "rbconfig"
 require "set"
 require "uri"
 require "cgi"
 require "net/http"
+require "yaml"
 
 SITE = File.expand_path("../_site", __dir__)
 HOST = "ifsmb.de"
@@ -142,6 +146,30 @@ else
     note = linked_anywhere.include?(f) ? " (nur von anderen verwaisten Seiten verlinkt)" : " (nirgends verlinkt)"
     puts "  #{url_path_for(f)}#{note}"
   end
+end
+
+ok = false unless system(RbConfig.ruby, File.expand_path("check_geodaten.rb", __dir__))
+
+# Themes: an unknown id would silently fall back to the default look (_layouts/default.html)
+root = File.expand_path("..", __dir__)
+theme_ids = YAML.safe_load(File.read(File.join(root, "_data/themes.yml"))).map { |t| t["id"] }
+bad_themes = []
+config_theme = YAML.safe_load(File.read(File.join(root, "_config.yml")))["default_theme"]
+bad_themes << "_config.yml: default_theme: #{config_theme}" if config_theme && !theme_ids.include?(config_theme)
+skip_dirs = %r{\A(_site|vendor|node_modules|_tests|_logo|_pr-vorschau|\.git)/}
+Dir.glob("**/*.{md,html}", base: root).reject { |f| f.match?(skip_dirs) }.each do |f|
+  head = File.read(File.join(root, f), 8000)
+  fm = head[/\A---\s*\n(.*?)\n---/m, 1] or next
+  value = fm[/^theme:[ \t]*([^#\n]*)/, 1]&.strip&.delete("\"'")
+  next if value.nil? || value.empty?
+  bad_themes << "#{f}: theme: #{value}" unless theme_ids.include?(value)
+end
+if bad_themes.empty?
+  puts "✓ Alle Themes bekannt (#{theme_ids.join(', ')})"
+else
+  ok = false
+  puts "\n✗ Unbekannte Themes (erlaubt: #{theme_ids.join(', ')} – siehe _data/themes.yml):"
+  bad_themes.each { |b| puts "  #{b}" }
 end
 
 if CHECK_EXTERNAL

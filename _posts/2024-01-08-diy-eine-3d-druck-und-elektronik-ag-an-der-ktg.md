@@ -4,7 +4,9 @@ date: 2024-01-08 08:31:26 +0100
 author: falko-richter
 original_url: https://35services.de/2024/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/
 original_site: 35services.de
-tags: [35services, ktg, ktg-ag-jahr-1, rc-modellbau, axidraw, prusa-mk4]
+tags: [35services, ktg, ktg-ag-jahr-1, rc-modellbau, axidraw, prusa-mk4, zazza]
+linked: [/partners/zazza/]
+uuid: 69781c47-bbeb-4388-8eac-fdd26e08c7ce
 ---
 
 Am 8. April um 15:00Uhr startet eine AG an der Kurt-Tucholsky-Grundschule und wir lernen 3D Druck, Löten und Basteln einen fertgesteuerten Bagger oder Kipplaster. Dies ist ein Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) (und [Jan]({{ '/team/jan/' | relative_url }}) von 35services).
