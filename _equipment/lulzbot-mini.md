@@ -1,6 +1,6 @@
 ---
 title: LulzBot Mini
-kategorie: 3D-Drucker (FDM)
+category: 3D-Drucker (FDM)
 summary: Ein kleiner, robuster Drucker mit Flexystruder – mega für flexibles Filament, braucht aber immer einen Computer.
 owner_team: falko-richter
 image: /assets/images/ausstattung/lulzbot-mini/01.jpg
@@ -37,4 +37,4 @@ Der Haken: Er hat **nicht einmal einen SD-Karten-Slot** und braucht deshalb imme
 
 Mehr zum Drucker beim Hersteller: [LulzBot Mini (Legacy-Drucker)](https://lulzbot.com/legacy-printers/lulzbot-mini)
 
-Sein großer Bruder ist der [LulzBot TAZ 6]({{ '/ausstattung/lulzbot-taz-6/' | relative_url }}).
+Sein großer Bruder ist der [LulzBot TAZ 6]({{ '/equipment/lulzbot-taz-6/' | relative_url }}).

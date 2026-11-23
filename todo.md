@@ -68,7 +68,7 @@ https://www.tiktok.com/@ninaailenna/video/7698402514328243488?lang=en und https:
 bitte ohne cookies verlinken
 
 
-# http://localhost:4000/projekte/archiv/:
+# http://localhost:4000/projects/archive/:
 "KTG AG Jahr 1"
 TODO: Zusammenfassung schreiben
 

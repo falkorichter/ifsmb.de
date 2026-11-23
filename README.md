@@ -25,19 +25,21 @@ ruby _scripts/check_site.rb --extern                                # zusätzlic
 | Was | Wo | Hinweise |
 |---|---|---|
 | Neuigkeiten | `_posts/YYYY-MM-DD-slug.md` | Front Matter: `title`, `date` |
-| Team-Mitglied | `_team/vorname-nachname.md` | `title` (Name), `role`, `order`, optional `nicht_im_team: true` (eigene Seite zum Verlinken, nicht auf `/team/` gelistet), `photo`, `links` |
-| Projekt | `_projects/slug.md` | `title`, `summary`, `status` (`aktuell` / `abgeschlossen`), `start`, `zeitraum`, `ort`, `team` (Slugs aus `_team`), `partners` (Namen aus `_data/partners.yml`) |
+| Team-Mitglied | `_team/vorname-nachname.md` | `title` (Name), `role`, `order`, optional `not_in_team: true` (eigene Seite zum Verlinken, nicht auf `/team/` gelistet), `photo`, `links` |
+| Projekt | `_projects/slug.md` | `title`, `summary`, `status` (`aktuell` / `abgeschlossen`), `start`, `period`, `location`, `team` (Slugs aus `_team`), `partners` (Namen aus `_data/partners.yml`) |
 | Partner | `_data/partners.yml` oder `_data/partner/<name>.yml` (ein Partner pro Datei) | Logo nach `assets/images/partner/` legen, Original nach `_logo/partner/` |
 | Termin | `_events/YYYY-MM-DD-slug.md` | `title`, `start` / `end` (`2026-11-28 15:00`), `all_day`, `location`, `summary` |
 | Pressemitteilung | `_press/YYYY-MM-DD-slug.md` | `title`, `subtitle`, `date` |
-| Presse-Kurzprofil & Kontakt | `_data/presse.yml` | |
-| Pressematerial | `_data/pressematerial.yml` | Dateien nach `assets/presse/` |
-| Wir in der Presse | `_data/presseberichte.yml` oder `_data/pressebericht/<name>.yml` (wird nach `datum` einsortiert) | neueste zuerst; `titel`, optional `datum`, `hinweis`,, `medium`, `url`, optional `anlass` (eigene Seite zum Anlass) |
+| Presse-Kurzprofil & Kontakt | `_data/press.yml` | |
+| Pressematerial | `_data/press_kit.yml` | Dateien nach `assets/presse/` |
+| Wir in der Presse | `_data/press_reports.yml` oder `_data/press_report/<name>.yml` (wird nach `date` einsortiert) | neueste zuerst; `title`, optional `date`, `note`, `medium`, `url`, optional `occasion` (eigene Seite zum Anlass) |
 | Impressum | `impressum/index.md` | |
 
-Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projekte/archiv/`).
+Projekte mit `status: abgeschlossen` erscheinen automatisch unter **Vergangene Projekte** (`/projects/archive/`).
 
-Neue Inhalte brauchen **keinen Eintrag in `CHANGELOG.md`** – dort stehen nur Funktionen der Website. Welche Inhalte wann dazukamen, zeigt das [Netzwerk](https://ifsmb.de/netzwerk/) mit seiner Zeitleiste.
+**Adressen:** Die Ordner für Ressourcen-Typen sind englisch (`/projects/`, `/calendar/`, `/challenges/`, `/equipment/`, `/partners/`, `/press/`, `/news/personal/`, dazu `/search/`, `/network/`, `/map/`, `/tags/`), die Texte bleiben deutsch. Einzelne Textseiten wie `/angebot/` oder `/impressum/` behalten ihre deutsche Adresse. Die früheren deutschen Adressen (`/projekte/…`, `/kalender/…` usw.) leitet `_plugins/alte_adressen.rb` automatisch weiter; Kalender- und RSS-Feeds gibt es dort weiter als Kopie.
+
+Neue Inhalte brauchen **keinen Eintrag in `CHANGELOG.md`** – dort stehen nur Funktionen der Website. Welche Inhalte wann dazukamen, zeigt das [Netzwerk](https://ifsmb.de/network/) mit seiner Zeitleiste.
 
 Teamfotos: Original nach `_logo/team/` (wird nicht committet, enthält oft GPS-Daten), auf das Gesicht quadratisch zuschneiden und als `name-480w.jpg` + `name-960w.jpg` nach `assets/images/team/` legen; im Profil `photo` und `photo_2x` setzen.
 
@@ -52,19 +54,19 @@ Besucher*innen sehen an einem kleinen ✓, welche Seiten sie schon geöffnet hab
 
 ## Kalender (iCal)
 
-Alle Termine stehen als Abo unter **https://ifsmb.de/kalender.ics** (bzw. `webcal://ifsmb.de/kalender.ics`) bereit. Der Feed wird bei jedem Build neu erzeugt.
+Alle Termine stehen als Abo unter **https://ifsmb.de/calendar.ics** (bzw. `webcal://ifsmb.de/calendar.ics`) bereit. Der Feed wird bei jedem Build neu erzeugt.
 
 ## Suche
 
-Die Suche (`/suche/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus dem fertigen HTML nach `jekyll build` erzeugt (macht der Pages-Workflow) und liegt unter `/pagefind/` – alles lokal, keine externen Ressourcen. `jekyll serve` erzeugt keinen Index. Lokal einfach neben dem laufenden `jekyll serve` einmal ausführen (und nach größeren Änderungen wiederholen) – `keep_files: [pagefind]` in `_config.yml` sorgt dafür, dass Jekyll den Index beim Neubauen nicht löscht:
+Die Suche (`/search/`) nutzt [Pagefind](https://pagefind.app): Der Index wird aus dem fertigen HTML nach `jekyll build` erzeugt (macht der Pages-Workflow) und liegt unter `/pagefind/` – alles lokal, keine externen Ressourcen. `jekyll serve` erzeugt keinen Index. Lokal einfach neben dem laufenden `jekyll serve` einmal ausführen (und nach größeren Änderungen wiederholen) – `keep_files: [pagefind]` in `_config.yml` sorgt dafür, dass Jekyll den Index beim Neubauen nicht löscht:
 
 ```sh
-npx -y pagefind@1.5.2 --site _site   # danach funktioniert http://localhost:4000/suche/
+npx -y pagefind@1.5.2 --site _site   # danach funktioniert http://localhost:4000/search/
 ```
 
 **Wichtig:** Unter Settings → Pages → Build and deployment muss „Source: GitHub Actions“ stehen. Bei „Deploy from a branch“ baut GitHub zusätzlich selbst und überschreibt die Version mit Index – `/pagefind/` liefert dann 404 und die Suche zeigt nur „Der Suchindex fehlt“. Der Workflow bricht in diesem Fall mit einer Fehlermeldung ab.
 
-Indexiert wird der Seiteninhalt (`data-pagefind-body` in `_layouts/default.html`) mit den Filtern „Bereich“ und „Stichwort“ (`_includes/suche-meta.html`). Übersichtsseiten tragen `suche: false` und fehlen im Index; der Block „Verknüpft“ wird ignoriert.
+Indexiert wird der Seiteninhalt (`data-pagefind-body` in `_layouts/default.html`) mit den Filtern „Bereich“ und „Stichwort“ (`_includes/suche-meta.html`). Übersichtsseiten tragen `search: false` und fehlen im Index; der Block „Verknüpft“ wird ignoriert.
 
 ## CMS (Pages CMS)
 

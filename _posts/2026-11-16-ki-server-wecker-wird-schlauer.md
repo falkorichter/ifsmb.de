@@ -2,9 +2,9 @@
 title: "KI-Server: Der Wecker wird schlauer"
 date: 2026-11-16 18:00:00 +0100
 author: anton
-persoenlich: true
+personal: true
 tags: [ki-server]
-projekte: [ki-server-anton]
+projects: [ki-server-anton]
 team: [falko-richter]
 uuid: 47496529-e9c1-4d05-8a11-ee59f5ae8108
 ---

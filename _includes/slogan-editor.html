@@ -1,0 +1,41 @@
+{%- comment -%}
+  Small editor for proposing a homepage slogan (assets/js/slogan-editor.js).
+  Live preview in the hero style; "copy and open on GitHub" puts the whole _data/slogans.yml
+  (loaded from /source/_data/slogans.yml, see _plugins/source_files.rb) plus the new entry
+  on the clipboard and opens GitHub's editor for the file. Without JS only the GitHub link remains.
+{%- endcomment -%}
+{%- assign kontakt = site.data.press -%}
+<div class="slogan-editor card" id="slogan-vorschlagen" data-pagefind-ignore
+     data-source="{{ '/source/_data/slogans.yml' | relative_url }}"
+     data-datei="_data/slogans.yml">
+  <h3>Dein Slogan</h3>
+  <div class="form-feld">
+    <label for="slogan-text">Text – jede Zeile wird eine Zeile, <strong>**fett**</strong> wird gelb</label>
+    <textarea id="slogan-text" rows="3" spellcheck="true" placeholder="Chaos Theorie.&#10;**Praktisch gestalten.**"></textarea>
+  </div>
+  <p class="slogan-editor-werkzeug">
+    <button type="button" class="btn btn-ghost btn-small" data-aktion="fett" title="Markierten Text gelb hervorheben (Strg/⌘+B)"><strong>B</strong> Hervorheben</button>
+    <button type="button" class="btn btn-ghost btn-small" data-aktion="zufall" title="Einen bisherigen Slogan als Beispiel einsetzen">🎲 Beispiel</button>
+  </p>
+  <div class="slogan-editor-vorschau hero" aria-live="polite">
+    <p class="kicker">Vorschau</p>
+    <p class="slogan slogan-preview"><span class="muted">Hier erscheint dein Slogan.</span></p>
+  </div>
+  <p class="slogan-editor-hinweis small muted" hidden></p>
+  <p class="slogan-editor-aktionen">
+    <a class="btn" data-aktion="github" href="{{ site.repository | prepend: 'https://github.com/' }}/edit/{{ site.branch }}/_data/slogans.yml" target="_blank" rel="noopener">📋 Kopieren und auf GitHub vorschlagen</a>
+  </p>
+  <p class="slogan-editor-status small" role="status"></p>
+  <pre class="slogan-editor-fallback" hidden></pre>
+  <p class="small muted">Kein GitHub-Konto? Schick uns deinen Slogan per E-Mail an <a href="#" class="obf-mail" data-em="{{ kontakt.contact_email_b64 }}">{{ kontakt.contact_email_display }}</a>.</p>
+  <details class="slogan-editor-liste">
+    <summary>Alle {{ site.data.slogans | size }} bisherigen Slogans</summary>
+    <ul>
+      {%- for s in site.data.slogans %}
+      <li>{% assign zeilen = s.text | strip | newline_to_br | split: '<br />' %}{% for zeile in zeilen %}{% unless forloop.first %} / {% endunless %}{% assign teile = zeile | strip | split: '**' %}{% for teil in teile %}{% assign rest = forloop.index0 | modulo: 2 %}{% if rest == 1 %}<mark class="hl">{{ teil | escape }}</mark>{% else %}{{ teil | escape }}{% endif %}{% endfor %}{% endfor %}</li>
+      {%- endfor %}
+    </ul>
+  </details>
+</div>
+<script type="application/json" id="slogan-beispiele">{{ site.data.slogans | map: 'text' | jsonify }}</script>
+<script src="{{ '/assets/js/slogan-editor.js' | relative_url }}" defer></script>

@@ -1,0 +1,15 @@
+---
+layout: null
+permalink: /calendar.ics
+---
+{% capture nl %}
+{% endcapture -%}
+{%- include ics-kopf.txt feed=true -%}
+{%- assign events = site.events | sort: "start" -%}
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+{%- for e in events -%}
+{%- if e.personal -%}{%- continue -%}{%- endif -%}
+{%- if e.project_only -%}{%- if e.end and e.end != "" -%}{%- assign e_end = e.end | date: "%s" | plus: 0 -%}{%- else -%}{%- assign e_end = e.start | date: "%s" | plus: 7200 -%}{%- endif -%}{%- if e_end >= now_s -%}{%- continue -%}{%- endif -%}{%- endif -%}
+{%- include ics-vevent.txt event=e -%}
+{%- endfor -%}
+END:VCALENDAR{{ nl -}}

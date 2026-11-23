@@ -24,7 +24,7 @@
     b.addEventListener('click', function () {
       var label = b.textContent;
       var done = function () {
-        b.textContent = 'Kopiert ✓';
+        b.textContent = window.I18n ? window.I18n.t('common.copied') : 'Kopiert ✓';
         setTimeout(function () { b.textContent = label; }, 2000);
       };
       var fallback = function () {

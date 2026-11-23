@@ -1,6 +1,6 @@
 ---
 title: Wärmebildkamera
-kategorie: Messgerät
+category: Messgerät
 summary: Macht Wärme sichtbar – so sieht man, wie heiß Düse und Druckbett eines 3D-Druckers werden.
 owner_team: falko-richter
 image: /assets/images/ausstattung/waermebildkamera/01.jpg

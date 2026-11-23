@@ -1,11 +1,11 @@
 {%- comment -%}
-  Drehbares 3D-Modell eines Badges mit Downloads. Param: b = Eintrag aus _data/badges.yml.
-  Ohne JS/WebGL bleibt das Vorschaubild stehen (assets/js/badge3d.js, ohne Bibliothek).
+  Rotatable 3D model of a badge with downloads. Param: b = entry from _data/badges.yml.
+  Without JS/WebGL the preview image stays (assets/js/badge3d.js, no library).
 {%- endcomment -%}
-{%- assign b3_pfad = "/assets/badge/" | append: include.b.datei -%}
-{%- if include.b.aufschrift -%}{%- assign b3_alt = "IfsMB-Badge mit dem Namen „" | append: include.b.aufschrift | append: "“" -%}{%- else -%}{%- assign b3_alt = "IfsMB-Badge (Logo)" -%}{%- endif -%}
-<figure class="badge-3d" data-modell="{{ b3_pfad | append: '.obj' | relative_url }}">
-  <img src="{{ b3_pfad | append: '-oben.png' | relative_url }}" alt="{{ b3_alt }}" width="1200" height="800" loading="lazy">
+{%- assign b3_path = "/assets/badge/" | append: include.b.file -%}
+{%- if include.b.label -%}{%- assign b3_alt = "IfsMB-Badge mit dem Namen „" | append: include.b.label | append: "“" -%}{%- else -%}{%- assign b3_alt = "IfsMB-Badge (Logo)" -%}{%- endif -%}
+<figure class="badge-3d" data-model="{{ b3_path | append: '.obj' | relative_url }}">
+  <img src="{{ b3_path | append: '-oben.png' | relative_url }}" alt="{{ b3_alt }}" width="1200" height="800" loading="lazy">
 </figure>
-<p class="badge-downloads small">⬇ <a href="{{ b3_pfad | append: '.3mf' | relative_url }}" download>3MF</a> <span class="muted">(zwei Objekte gelb/schwarz)</span> · <a href="{{ b3_pfad | append: '.stl' | relative_url }}" download>STL</a> <span class="muted">(Farbwechsel per Pause)</span> · <a href="{{ b3_pfad | append: '.obj' | relative_url }}" download>OBJ</a> + <a href="{{ b3_pfad | append: '.mtl' | relative_url }}" download>MTL</a></p>
+<p class="badge-downloads small">⬇ <a href="{{ b3_path | append: '.3mf' | relative_url }}" download>3MF</a> <span class="muted" data-i18n="badge3d.3mf_note">{{ "badge3d.3mf_note" | t }}</span> · <a href="{{ b3_path | append: '.stl' | relative_url }}" download>STL</a> <span class="muted" data-i18n="badge3d.stl_note">{{ "badge3d.stl_note" | t }}</span> · <a href="{{ b3_path | append: '.obj' | relative_url }}" download>OBJ</a> + <a href="{{ b3_path | append: '.mtl' | relative_url }}" download>MTL</a></p>
 <script src="{{ '/assets/js/badge3d.js' | relative_url }}" defer></script>

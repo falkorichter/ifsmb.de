@@ -1,9 +1,9 @@
-# iCal files next to the pages, built from the same includes as the feed kalender.ics
+# iCal files next to the pages, built from the same includes as the feed calendar.ics
 # (_includes/ics-kopf.txt, _includes/ics-vevent.txt):
-#   /kalender/<name>.ics  one event
-#   /projekte/<name>.ics  all events of a project      } same selection as on the page:
+#   /calendar/<name>.ics  one event
+#   /projects/<name>.ics  all events of a project      } same selection as on the page:
 #   /team/<name>.ics      all events of a person       } _includes/termine-auswahl.html
-#   /partner/<name>.ics   all events of a partner page }
+#   /partners/<name>.ics   all events of a partner page }
 module TerminIcs
   # The CRLF inside the capture becomes `nl`; all other line breaks are stripped by Liquid.
   NL = "{% capture nl %}\r\n{% endcapture -%}\n"
@@ -48,7 +48,7 @@ module TerminIcs
 
     private
 
-    # /projekte/foo/ → /projekte/foo.ics
+    # /projects/foo/ → /projects/foo.ics
     def add(site, url, data)
       parts = url.split("/").reject(&:empty?)
       name = parts.pop
@@ -57,7 +57,7 @@ module TerminIcs
       page.data.merge!(data)
       page.data["layout"] = nil
       page.data["sitemap"] = false
-      page.data["suche"] = false
+      page.data["search"] = false
       page.content = NL + content + "END:VCALENDAR{{ nl -}}\n"
       site.pages << page
     end

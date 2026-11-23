@@ -1,12 +1,12 @@
 ---
-title: Berlin-
+title: Berlin-Tag
 start: 2027-02-13 10:00
 end: 2027-02-13 18:00
 location: " STATION Berlin am U-Bahnhof Gleisdreieck"
 location_url: https://www.openstreetmap.org/?mlat=52.49995&mlon=13.37572#map=18/52.499950/13.375720
 summary: Der Berlin-Tag ist Deutschlands größte Berufs- und Informationsmesse im Bildungsbereich.
 team: [falko-richter]
-projekte: [ifsmb-de]
+projects: [ifsmb-de]
 uuid: 36677cd4-fbbf-40b1-b2e9-faf813e23885
 ---
 
