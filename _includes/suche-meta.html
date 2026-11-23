@@ -4,24 +4,24 @@
 {%- endcomment -%}
 {%- assign p = include.page -%}
 {%- case p.collection -%}
-{%- when "posts" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönlicher Blog" -%}{%- else -%}{%- assign bereich = "Neuigkeiten" -%}{%- endif -%}
-{%- when "projects" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Projekte" -%}{%- else -%}{%- assign bereich = "Projekte" -%}{%- endif -%}
-{%- when "events" -%}{%- if p.persoenlich -%}{%- assign bereich = "Persönliche Termine" -%}{%- else -%}{%- assign bereich = "Termine" -%}{%- endif -%}
+{%- when "posts" -%}{%- if p.personal -%}{%- assign bereich = "Persönlicher Blog" -%}{%- else -%}{%- assign bereich = "Neuigkeiten" -%}{%- endif -%}
+{%- when "projects" -%}{%- if p.personal -%}{%- assign bereich = "Persönliche Projekte" -%}{%- else -%}{%- assign bereich = "Projekte" -%}{%- endif -%}
+{%- when "events" -%}{%- if p.personal -%}{%- assign bereich = "Persönliche Termine" -%}{%- else -%}{%- assign bereich = "Termine" -%}{%- endif -%}
 {%- when "team" -%}{%- assign bereich = "Team" -%}
 {%- when "equipment" -%}{%- assign bereich = "Ausstattung" -%}
-{%- when "herausforderungen" -%}{%- assign bereich = "Herausforderungen" -%}
+{%- when "challenges" -%}{%- assign bereich = "Herausforderungen" -%}
 {%- when "press" -%}{%- assign bereich = "Presse" -%}
-{%- else -%}{%- if p.url contains "/partner/" -%}{%- assign bereich = "Partner" -%}{%- else -%}{%- assign bereich = "Seiten" -%}{%- endif -%}
+{%- else -%}{%- if p.url contains "/partners/" -%}{%- assign bereich = "Partner" -%}{%- else -%}{%- assign bereich = "Seiten" -%}{%- endif -%}
 {%- endcase %}
 <span data-pagefind-filter="Bereich:{{ bereich }}" hidden></span>
 {%- if p.collection == "posts" or p.collection == "press" %}
-<span data-pagefind-meta="datum:{{ p.date | date: '%d.%m.%Y' }}" hidden></span>
+<span data-pagefind-meta="date:{{ p.date | date: '%d.%m.%Y' }}" hidden></span>
 {%- elsif p.collection == "events" %}
-<span data-pagefind-meta="datum:{% if p.date_label %}{{ p.date_label | escape }}{% else %}{{ p.start | date: '%d.%m.%Y' }}{% endif %}" hidden></span>
+<span data-pagefind-meta="date:{% if p.date_label %}{{ p.date_label | escape }}{% else %}{{ p.start | date: '%d.%m.%Y' }}{% endif %}" hidden></span>
 {%- endif %}
 {%- for t in p.tags %}
-<span data-pagefind-filter="Stichwort:{{ site.data.stichworte[t] | default: t | escape }}" hidden></span>
+<span data-pagefind-filter="Stichwort:{{ site.data.tags[t] | default: t | escape }}" hidden></span>
 {%- endfor %}
 {%- if p.event_tag %}
-<span data-pagefind-filter="Stichwort:{{ site.data.stichworte[p.event_tag] | default: p.event_tag | escape }}" hidden></span>
+<span data-pagefind-filter="Stichwort:{{ site.data.tags[p.event_tag] | default: p.event_tag | escape }}" hidden></span>
 {%- endif %}

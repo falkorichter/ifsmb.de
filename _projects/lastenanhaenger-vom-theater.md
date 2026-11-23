@@ -2,9 +2,9 @@
 title: "Lastenanhänger vom Theater"
 summary: "Über 35services kam eine Anfrage rein: Dreirädrige Bühnenwagen aus einem Theater abholen und gemeinsam mit dem Lastenrad-Netzwerk in Berlin zu Lastenanhängern ausbauen."
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-11-11
-zeitraum: seit November 2026
+period: seit November 2026
 event_tag: lastenanhaenger-theater
 team:
   - falko-richter
@@ -13,7 +13,7 @@ partners:
 uuid: bf70675e-50ab-432d-bf51-fdfd51f49556
 ---
 
-Über [35services e. V.]({{ '/partner/35services/' | relative_url }}) haben wir eine Anfrage bekommen: In einem Theater stehen mehrere dreirädrige Bühnenwagen, die abgegeben werden. Die Idee: Wir holen die Teile ab und bauen sie gemeinsam mit dem **Lastenrad-Netzwerk in Berlin** zu tollen **Lastenanhängern** aus.
+Über [35services e. V.]({{ '/partners/35services/' | relative_url }}) haben wir eine Anfrage bekommen: In einem Theater stehen mehrere dreirädrige Bühnenwagen, die abgegeben werden. Die Idee: Wir holen die Teile ab und bauen sie gemeinsam mit dem **Lastenrad-Netzwerk in Berlin** zu tollen **Lastenanhängern** aus.
 
 Auf dem Foto stehen die Wagen in einer Lagerhalle: geschweißte Stahlrahmen auf Fahrradrädern mit kleinem gelenkten Vorderrad, runder Tischplattform und Bühnenverkleidung – jeweils ein zweites Gestell kopfüber darauf gestapelt.
 

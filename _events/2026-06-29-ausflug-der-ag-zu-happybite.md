@@ -8,7 +8,7 @@ tags: [ktg]
 uuid: dbc45d41-48a2-46b1-8c30-2590a00e98fe
 ---
 
-Danke an **happybite** für den tollen Ausflug mit den Schüler*innen der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }})!
+Danke an **happybite** für den tollen Ausflug mit den Schüler*innen der [3D-Druck AG an der KTG]({{ '/projects/3d-druck-ag-ktg/' | relative_url }})!
 
 <span class="todo">[Was haben wir gesehen und gemacht? Fotos? – Details folgen.]</span>
 

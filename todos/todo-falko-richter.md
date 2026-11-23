@@ -10,14 +10,14 @@ Die Person dieser Datei ist hauptzuständig; helfer = helfende Hände (Team-Kür
 ### Ausflug organisieren {#ausflug-organisieren}
 
 ```yaml
-kurz: Eine(r) muss es tun
-art: aufgabe
+summary: Eine(r) muss es tun
+kind: aufgabe
 status: offen
-seit: 2026-11-13
-helfer: [gregor-dill]
-projekte: [ktg-ag]
+since: 2026-11-13
+helpers: [gregor-dill]
+projects: [ktg-ag]
 tags: [ktg]
-verlinkt: [/kalender/2027-01-04-besuch-bei-max-2027/]
+linked: [/calendar/2027-01-04-besuch-bei-max-2027/]
 ```
 
 Termin kommunizieren und organisieren für Januar
@@ -26,11 +26,11 @@ Termin kommunizieren und organisieren für Januar
 ### Betreff: gebrauchte Hardware für iServ {#betreff-gebrauchte-hardware-fur-iserv}
 
 ```yaml
-art: aufgabe
+kind: aufgabe
 status: offen
-seit: 2026-11-13
-faellig: 2026-11-17
-projekte: [3d-druck-ag-ktg]
+since: 2026-11-13
+due: 2026-11-17
+projects: [3d-druck-ag-ktg]
 tags: [ktg]
 ```
 
@@ -39,21 +39,21 @@ Es gibt evtl ca. 80  Dell OptiPlex 7440 bzw. 7450  AIO
 ### Würth, Pfefferwerk, {#wurth-pfefferwerk}
 
 ```yaml
-kurz: Bernd Krebs
-art: aufgabe
+summary: Bernd Krebs
+kind: aufgabe
 status: offen
-seit: 2026-11-13
+since: 2026-11-13
 ```
 
 ### Social media cards für ifsmb {#social-media-cards-fur-ifsmb}
 
 ```yaml
-art: aufgabe
+kind: aufgabe
 status: offen
-seit: 2026-11-14
-projekte: [ifsmb-de]
+since: 2026-11-14
+projects: [ifsmb-de]
 tags: [software]
-verlinkt: [/projekte/ifsmb-de/]
+linked: [/projects/ifsmb-de/]
 ```
 
 Vielleicht auch nochmal vergleichen was wir beim Lastenlaufradrennen gebaut haben
@@ -61,10 +61,10 @@ Vielleicht auch nochmal vergleichen was wir beim Lastenlaufradrennen gebaut habe
 ### Alt makers besuchen  {#alt-makers-besuchen}
 
 ```yaml
-art: aufgabe
+kind: aufgabe
 status: offen
-seit: 2026-11-15
-helfer: [jan]
+since: 2026-11-15
+helpers: [jan]
 ```
 
 https://www.alt-makers.de/das-team
@@ -74,12 +74,12 @@ https://www.alt-makers.de/das-team
 ### Passen unsere Schrittmotoren für Mural? {#mural-schrittmotoren}
 
 ```yaml
-kurz: Mural braucht zwei NEMA-17-Motoren – im Original flache „Pancake“-Motoren. Welche haben wir da, und reichen sie?
-art: frage
+summary: Mural braucht zwei NEMA-17-Motoren – im Original flache „Pancake“-Motoren. Welche haben wir da, und reichen sie?
+kind: frage
 status: offen
-seit: 2026-11-12
-helfer: [anton]
-projekte: [mural-wandplotter]
+since: 2026-11-12
+helpers: [anton]
+projects: [mural-wandplotter]
 tags: [mural]
 ```
 
@@ -91,11 +91,11 @@ tags: [mural]
 ### Repair-Café in der NochMall anschauen {#repair-cafe-nochmall}
 
 ```yaml
-kurz: Falko und Ralf schauen sich das Repair-Café in der NochMall der BSR in Reinickendorf an und suchen Kontakt zur BSR.
-art: aufgabe
+summary: Falko und Ralf schauen sich das Repair-Café in der NochMall der BSR in Reinickendorf an und suchen Kontakt zur BSR.
+kind: aufgabe
 status: offen
-seit: 2026-11-12
-helfer: [ralf]
+since: 2026-11-12
+helpers: [ralf]
 tags: [repair-cafe]
 ```
 
@@ -105,11 +105,11 @@ tags: [repair-cafe]
 ### Mit dem QM Moabit über die Stadtteilkasse sprechen {#stadtteilkasse-moabit}
 
 ```yaml
-kurz: Bis zu 500 € aus der Stadtteilkasse für offene Aktionen in der Nachbarschaft – zum Beispiel eine Makespace-Aktion im Kiez.
-art: aufgabe
+summary: Bis zu 500 € aus der Stadtteilkasse für offene Aktionen in der Nachbarschaft – zum Beispiel eine Makespace-Aktion im Kiez.
+kind: aufgabe
 status: offen
-seit: 2026-11-12
-verlinkt: [/geld-fuer-makespaces/]
+since: 2026-11-12
+linked: [/geld-fuer-makespaces/]
 ```
 
 Mit dem Quartiersmanagement Moabit über die Stadtteilkasse sprechen.
@@ -117,14 +117,14 @@ Mit dem Quartiersmanagement Moabit über die Stadtteilkasse sprechen.
 ### Platanus? Tag der offenen Tür – Sekundarstufe I/II für die Jahrgangsstufen 7 bis 13? {#platanus-tag-der-offenen-tur-sekundarstufe-i-ii-fur-die-jahr}
 
 ```yaml
-kurz: sollen wir da mitmachen als AG?
-art: frage
+summary: sollen wir da mitmachen als AG?
+kind: frage
 status: offen
-seit: 2026-11-13
-faellig: 2027-01-27
-projekte: [3d-druck-ag-platanus-schule]
+since: 2026-11-13
+due: 2027-01-27
+projects: [3d-druck-ag-platanus-schule]
 tags: [platanus]
-verlinkt: [/projekte/3d-druck-ag-platanus-schule/, /news/2026/11/11/post-von-der-keramik-ag-und-ein-erster-schluesselanhaenger/]
+linked: [/projects/3d-druck-ag-platanus-schule/, /news/2026/11/11/post-von-der-keramik-ag-und-ein-erster-schluesselanhaenger/]
 ```
 
 https://www.platanus-schule.de/tag-der-offenen-tuer/
@@ -132,12 +132,12 @@ https://www.platanus-schule.de/tag-der-offenen-tuer/
 ### Deckel wie bei Gustav Falke - wollen wir so etwas drucken? {#deckel-wie-bei-gustav-falke-wollen-wir-so-etwas-drucken}
 
 ```yaml
-art: frage
+kind: frage
 status: offen
-seit: 2026-11-14
-projekte: [3d-druck-ag-rosalind-franklin-gymnasium]
+since: 2026-11-14
+projects: [3d-druck-ag-rosalind-franklin-gymnasium]
 tags: [rosalind-franklin-gym]
-verlinkt: [/kalender/2026-11-11-besuch-gustav-falke-grundschule/]
+linked: [/calendar/2026-11-11-besuch-gustav-falke-grundschule/]
 ```
 
 [Deckel Video](https://youtu.be/MLQvEFuRu9Y?is=vqGTS-Xs0ATl15Da)
@@ -145,11 +145,11 @@ verlinkt: [/kalender/2026-11-11-besuch-gustav-falke-grundschule/]
 ### Ohne Titel {#neues-todo}
 
 ```yaml
-kurz: Recherche zur hotRC
-art: aufgabe
+summary: Recherche zur hotRC
+kind: aufgabe
 status: offen
-seit: 2026-11-15
-projekte: [rc-tractor-professorboots]
+since: 2026-11-15
+projects: [rc-tractor-professorboots]
 tags: [rc-tractor-professorboots]
 ```
 
@@ -162,16 +162,16 @@ https://youtu.be/Oes2u12HYyE?is=-JExxT82gyQGuLhL
 ### Fabmaker-Slicer für Mac und Web 'craften' {#fabmaker-slicer-mac-web}
 
 ```yaml
-kurz: Den Windows-Slicer der Fabmaker-Drucker mit Claude Code oder OpenCode untersuchen, damit die Drucker auch vom Mac oder aus dem Browser drucken.
-art: aufgabe
+summary: Den Windows-Slicer der Fabmaker-Drucker mit Claude Code oder OpenCode untersuchen, damit die Drucker auch vom Mac oder aus dem Browser drucken.
+kind: aufgabe
 status: in-arbeit
-seit: 2026-11-13
-helfer: [anton]
+since: 2026-11-13
+helpers: [anton]
 tags: [fabmaker]
-verlinkt: [/ausstattung/fabmaker/]
+linked: [/equipment/fabmaker/]
 ```
 
-Unsere zwei [Fabmaker](/ausstattung/fabmaker/) lassen sich nur mit dem **Fabmaker Slicer** für Windows ansteuern (`SetupFabmakerSlicer_1.1.1.9.exe`), und den Hersteller gibt es nicht mehr. Falko und Anton wollen das Programm mit **Claude Code** oder **OpenCode** per Reverse Engineering untersuchen, damit die Drucker auch **auf dem Mac/linux oder im Browser** nutzbar werden.
+Unsere zwei [Fabmaker](/equipment/fabmaker/) lassen sich nur mit dem **Fabmaker Slicer** für Windows ansteuern (`SetupFabmakerSlicer_1.1.1.9.exe`), und den Hersteller gibt es nicht mehr. Falko und Anton wollen das Programm mit **Claude Code** oder **OpenCode** per Reverse Engineering untersuchen, damit die Drucker auch **auf dem Mac/linux oder im Browser** nutzbar werden.
 
 - Installer und Wartungsprogramme aus [35services/fabmaker-rettung](https://github.com/35services/fabmaker-rettung) auseinandernehmen: Womit ist der Slicer gebaut, steckt ein bekannter Slicer darunter?
 - Herausfinden, welches Dateiformat und welches Protokoll der Drucker erwartet (G-Code? eigenes Format? USB, Netzwerk, Speicherkarte?)
@@ -190,11 +190,11 @@ Noch offen: die Umschalt-Positionen vorsichtig am echten Gerät prüfen (erst oh
 ### Welcher OpenScan soll es werden? {#openscan-variante}
 
 ```yaml
-kurz: Mini oder Classic, welche Kamera – und wer macht mit?
-art: frage
+summary: Mini oder Classic, welche Kamera – und wer macht mit?
+kind: frage
 status: offen
-seit: 2026-05-23
-projekte: [openscan-bauen]
+since: 2026-05-23
+projects: [openscan-bauen]
 tags: [openscan]
 ```
 
@@ -205,14 +205,14 @@ tags: [openscan]
 ### Non planar slicing {#non-planar-slicing}
 
 ```yaml
-kurz: "Angucken "
-art: frage
+summary: "Angucken "
+kind: frage
 status: offen
-seit: 2026-11-13
-helfer: [anton]
-projekte: [35services-3d]
+since: 2026-11-13
+helpers: [anton]
+projects: [35services-3d]
 tags: [35services-3d]
-verlinkt: [/partner/35services/, /ausstattung/35services-bambu-lab-a1-mini/, /ausstattung/prusa-mk3s-xhain/, /projekte/prusa-mk3s-heartlabs-flott-machen/]
+linked: [/partners/35services/, /equipment/35services-bambu-lab-a1-mini/, /equipment/prusa-mk3s-xhain/, /projects/prusa-mk3s-heartlabs-flott-machen/]
 ```
 
 https://youtu.be/cRSoVq_reGQ?is=4-7OQB8jc_aDTww_

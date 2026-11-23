@@ -9,6 +9,8 @@
 (function () {
   "use strict";
   var PREFIX = "gelesen_";
+  // UI strings: assets/js/i18n.js (German fallback if it is missing)
+  function t(key, params, fallback) { return window.I18n ? window.I18n.t(key, params) : fallback; }
 
   function lesen(uuid) { try { return localStorage.getItem(PREFIX + uuid) === "1"; } catch (e) { return false; } }
   function merken(uuid) { try { localStorage.setItem(PREFIX + uuid, "1"); } catch (e) { /* storage blocked */ } }
@@ -47,10 +49,14 @@
       if (gelesen && !haken) {
         haken = document.createElement("span");
         haken.className = "gelesen-haken";
-        haken.title = "Schon gelesen (nur in diesem Browser gespeichert)";
-        haken.innerHTML = '<span aria-hidden="true">✓</span><span class="visually-hidden"> (gelesen)</span>';
+        haken.innerHTML = '<span aria-hidden="true">✓</span><span class="visually-hidden"></span>';
         a.appendChild(haken);
-      } else if (!gelesen && haken) {
+      }
+      if (haken) {
+        haken.title = t("read.check_title", null, "Schon gelesen (nur in diesem Browser gespeichert)");
+        haken.querySelector(".visually-hidden").textContent = " (" + t("read.check", null, "gelesen") + ")";
+      }
+      if (!gelesen && haken) {
         haken.remove();
       }
     });
@@ -68,7 +74,7 @@
       });
       if (!gesamt) return;
       box.querySelector(".gelesen-fortschritt-balken span").style.width = (gelesen / gesamt * 100) + "%";
-      box.querySelector(".gelesen-fortschritt-text").textContent = gelesen + " von " + gesamt + " gelesen";
+      box.querySelector(".gelesen-fortschritt-text").textContent = t("read.progress", { n: gelesen, total: gesamt }, gelesen + " von " + gesamt + " gelesen");
       box.hidden = false;
     });
   }
@@ -86,6 +92,8 @@
   window.addEventListener("pageshow", function (e) { if (e.persisted && karte) anwenden(karte); });
   window.addEventListener("storage", function (e) { if (karte && e.key && e.key.indexOf(PREFIX) === 0) anwenden(karte); });
   document.addEventListener("visibilitychange", function () { if (!document.hidden && karte) anwenden(karte); });
+  // another UI language was chosen (assets/js/i18n.js)
+  document.addEventListener("i18n:change", function () { if (karte) anwenden(karte); });
 
   // "Gelesen-Markierungen löschen" button (e.g. in the privacy section of the imprint)
   document.querySelectorAll("[data-gelesen-loeschen]").forEach(function (b) {
@@ -95,7 +103,7 @@
         Object.keys(localStorage).forEach(function (k) { if (k.indexOf(PREFIX) === 0) localStorage.removeItem(k); });
       } catch (e) { /* storage blocked */ }
       if (karte) anwenden(karte);
-      b.textContent = "✓ Gelöscht";
+      b.textContent = t("read.deleted", null, "✓ Gelöscht");
     });
   });
 })();

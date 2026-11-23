@@ -7,28 +7,29 @@ layout: default
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{{ page.date | date: "%d.%m.%Y" }}{% if author_slugs.size > 0 %} · {% include autoren.html author=page.author %}{% endif %}</p>
+      <p class="meta">{{ page.date | i18n_date }}{% if author_slugs.size > 0 %} · {% include autoren.html author=page.author %}{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% include stichworte.html tags=page.tags %}
     </header>
-    {% if page.persoenlich %}
-    <p class="personal-note">✍️ Persönlicher Beitrag{% if author_slugs.size > 0 %} von {% include autoren.html author=page.author %}{% endif %} – ein privates Makespace-Update aus dem Team, kein Beitrag des Instituts.{% if author %} Mehr im <a href="{{ author.url | relative_url }}#persoenlicher-blog">persönlichen Blog von {{ author.title | split: " " | first }}</a>.{% endif %}</p>
+    {% if page.personal %}
+    {%- assign author_first = author.title | split: " " | first %}
+    <p class="personal-note"><span data-i18n="post.personal">{{ "post.personal" | t }}</span>{% if author_slugs.size > 0 %} <span data-i18n="common.by">{{ "common.by" | t }}</span> {% include autoren.html author=page.author %}{% endif %} <span data-i18n="post.personal_note">{{ "post.personal_note" | t }}</span>{% if author %} <span data-i18n="post.more_in_blog">{{ "post.more_in_blog" | t }}</span> <a href="{{ author.url | relative_url }}#persoenlicher-blog" data-i18n="post.personal_blog_of" data-i18n-params="{{ "name" | i18n_params: author_first }}">{{ "post.personal_blog_of" | t: "name", author_first }}</a>.{% endif %}</p>
     {% endif %}
     {% if page.original_url %}
     <p class="original-note">
-      Ursprünglich veröffentlicht {% if author_slugs.size > 0 %}von {% include autoren.html author=page.author %} {% endif %}auf
-      <a href="{{ page.original_url }}" target="_blank" rel="noopener">{{ page.original_site | default: "der Originalseite" }}</a>:<br>
+      <span data-i18n="post.originally_published">{{ "post.originally_published" | t }}</span> {% if author_slugs.size > 0 %}<span data-i18n="common.by">{{ "common.by" | t }}</span> {% include autoren.html author=page.author %} {% endif %}<span data-i18n="post.on_site">{{ "post.on_site" | t }}</span>
+      <a href="{{ page.original_url }}" target="_blank" rel="noopener">{% if page.original_site %}{{ page.original_site }}{% else %}<span data-i18n="post.original_site">{{ "post.original_site" | t }}</span>{% endif %}</a>:<br>
       <a href="{{ page.original_url }}" target="_blank" rel="noopener" class="small">{{ page.original_url }}</a>
     </p>
     {% endif %}
     {%- assign post_projects = "" | split: "" -%}
     {%- for pr in site.projects -%}{%- if pr.event_tag and page.tags contains pr.event_tag -%}{%- assign post_projects = post_projects | push: pr -%}{%- endif -%}{%- endfor -%}
-    {% if post_projects.size > 0 %}<p class="post-project">🔧 Update zum Projekt {% for pr in post_projects %}<a href="{{ pr.url | relative_url }}#updates">{{ pr.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
+    {% if post_projects.size > 0 %}<p class="post-project"><span data-i18n="post.project_update">{{ "post.project_update" | t }}</span> {% for pr in post_projects %}<a href="{{ pr.url | relative_url }}#updates">{{ pr.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
     <div class="prose">
       {{ content }}
     </div>
     {% include verbindungen.html %}
     {% include verknuepft.html tags=page.tags %}
-    {% if page.persoenlich %}<a href="{{ '/news/persoenlich/' | relative_url }}" class="back-link">← Alle persönlichen Blogs</a>{% else %}<a href="{{ '/news/' | relative_url }}" class="back-link">← Alle Neuigkeiten</a>{% endif %}
+    {% if page.personal %}<a href="{{ '/news/personal/' | relative_url }}" class="back-link" data-i18n="post.back_personal">{{ "post.back_personal" | t }}</a>{% else %}<a href="{{ '/news/' | relative_url }}" class="back-link" data-i18n="post.back">{{ "post.back" | t }}</a>{% endif %}
   </article>
 </main>

@@ -1,25 +1,25 @@
-# IfsMB-Badges zum 3D-Drucken – erscheinen auf /presse/#badge und (mit team) im Teamprofil als drehbares 3D-Modell.
-# Dateien: assets/badge/<datei>.{3mf,obj,mtl,stl} und <datei>-oben.png,
-# erzeugt mit: cd _logo/badge && python3 export_colored.py "<aufschrift>"  (Details: _logo/badge/README.md)
+# IfsMB-Badges zum 3D-Drucken – erscheinen auf /press/#badge und (mit team) im Teamprofil als drehbares 3D-Modell.
+# Dateien: assets/badge/<file>.{3mf,obj,mtl,stl} und <file>-oben.png,
+# erzeugt mit: cd _logo/badge && python3 export_colored.py "<label>"  (Details: _logo/badge/README.md)
 #
 # aufschrift: Name auf dem Badge (leer = nur Logo)
 # datei:      Dateiname ohne Endung
 # team:       Team-Kürzel (optional) – dann zeigt das Teamprofil das Badge
 
-- aufschrift:
-  datei: ifsmb-badge
+- label:
+  file: ifsmb-badge
 
-- aufschrift: Falko
-  datei: ifsmb-badge-falko
+- label: Falko
+  file: ifsmb-badge-falko
   team: falko-richter
 
-- aufschrift: Gregor
-  datei: ifsmb-badge-gregor
+- label: Gregor
+  file: ifsmb-badge-gregor
   team: gregor-dill
 
-- aufschrift: Mr E
-  datei: ifsmb-badge-mr-e
+- label: Mr E
+  file: ifsmb-badge-mr-e
   team: mr-e
 
-- aufschrift: Hr. Sladek
-  datei: ifsmb-badge-hr-sladek
+- label: Hr. Sladek
+  file: ifsmb-badge-hr-sladek

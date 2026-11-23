@@ -7,6 +7,9 @@ lang: de
 timezone: Europe/Berlin
 future: true
 
+# Look of the site (_data/themes.yml): default for every page without `theme:` – not `theme:`, Jekyll uses that for gem themes
+# default_theme: ifsmb
+
 # Bearbeiten-Button (_layouts/default.html)
 repository: falkorichter/ifsmb.de
 branch: main
@@ -20,19 +23,19 @@ collections:
     permalink: /team/:name/
   projects:
     output: true
-    permalink: /projekte/:name/
+    permalink: /projects/:name/
   events:
     output: true
-    permalink: /kalender/:name/
+    permalink: /calendar/:name/
   press:
     output: true
-    permalink: /presse/:slug/
+    permalink: /press/:slug/
   equipment:
     output: true
-    permalink: /ausstattung/:name/
-  herausforderungen:
+    permalink: /equipment/:name/
+  challenges:
     output: true
-    permalink: /herausforderungen/:name/
+    permalink: /challenges/:name/
 
 defaults:
   - scope:
@@ -67,41 +70,57 @@ defaults:
       layout: "equipment"
   - scope:
       path: ""
-      type: "herausforderungen"
+      type: "challenges"
     values:
       layout: "herausforderung"
 
+# Navigation: `key` = UI string in _data/i18n/*.yml (English/French in the browser, assets/js/i18n.js)
 nav:
   - title: Neuigkeiten
+    key: nav.news
     url: /news/
   - title: Kalender
-    url: /kalender/
+    key: nav.calendar
+    url: /calendar/
   - title: Wir
+    key: nav.about_us
     children:
       - title: Netzwerk
-        url: /netzwerk/
+        key: nav.network
+        url: /network/
       - title: Karte
-        url: /karte/
+        key: nav.map
+        url: /map/
       - title: Projekte
-        url: /projekte/
+        key: nav.projects
+        url: /projects/
       - title: Projekt-Ideen
-        url: /projekte/ideen/
+        key: nav.project_ideas
+        url: /project/ideas/
       - title: Herausforderungen
-        url: /herausforderungen/
+        key: nav.challenges
+        url: /challenges/
       - title: Angebot
+        key: nav.offer
         url: /angebot/
       - title: Geld für Makespaces
+        key: nav.funding
         url: /geld-fuer-makespaces/
       - title: Ausstattung
-        url: /ausstattung/
+        key: nav.equipment
+        url: /equipment/
       - title: Team
+        key: nav.team
         url: /team/
   - title: Partner
-    url: /partner/
+    key: nav.partners
+    url: /partners/
   - title: Presse
-    url: /presse/
+    key: nav.press
+    url: /press/
   - title: Suche
-    url: /suche/
+    key: nav.search
+    url: /search/
 
 # Pagefind-Index (_site/pagefind/) beim Neubauen nicht löschen – lokal mit `npx pagefind --site _site` erzeugt
 keep_files:
@@ -117,6 +136,8 @@ exclude:
   - CHANGELOG.md
   - DATA_STRUCTURES.md
   - DEPENDENCIES.md
+  - PLAN_DIRECT_EDITING.md
+  - EDITING_CONFLICTS.md
   - LICENSE
   - .pages.yml
   - todo.md

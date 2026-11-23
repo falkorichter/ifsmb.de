@@ -1,0 +1,486 @@
+/*
+  Themes – the look of the site in other contexts. Chosen per page (front matter `theme:`), site-wide
+  (`default_theme:` in _config.yml) or by the visitor (footer, localStorage "ifsmb-theme", ?theme=<id>);
+  the active one is html[data-theme] (_layouts/default.html). List of themes: _data/themes.yml.
+
+  The default theme "ifsmb" is assets/css/style.css itself – nothing here applies to it.
+  Every theme first sets the variables from :root in style.css, then adjusts a few components.
+  Fonts are self-hosted (assets/fonts/, see DEPENDENCIES.md); browsers only fetch a font once a theme uses it.
+*/
+
+@font-face { font-family: 'VT323'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/vt323/vt323-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/carlito/carlito-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-style: italic; font-weight: 400; font-display: swap; src: url(../fonts/carlito/carlito-latin-400-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/carlito/carlito-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-style: italic; font-weight: 700; font-display: swap; src: url(../fonts/carlito/carlito-latin-700-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter/InterVariable.woff2) format('woff2-variations'), url(../fonts/inter/InterVariable.woff2) format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url(../fonts/instrument-serif/InstrumentSerif-Italic.woff2) format('woff2'); }
+@font-face { font-family: 'Lexend'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/lexend/lexend-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/lexend/lexend-latin-wght-normal.woff2) format('woff2'); }
+
+/* theme picker in the footer – same in every theme */
+.theme-picker { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; font-size: .85rem; }
+.theme-picker select { font: inherit; padding: .2rem .4rem; border-radius: 6px; border: 1px solid currentColor; background: var(--paper); color: var(--ink); }
+
+/* ======================================================================
+   Offene Werkstätten – after offene-werkstaetten.org (Verbund Offener Werkstätten):
+   red header with a slanted edge, white logo panel, pixel font (VT323) in capitals for
+   navigation, headings and buttons, Carlito for text, light grey page, white cards with a
+   soft shadow, orange outline buttons, no rounded corners.
+   ====================================================================== */
+:root[data-theme="offene-werkstaetten"] {
+  --ink:      #222222;
+  --ink-soft: #3d3d3d;
+  --muted:    #595959;
+  --bg:       #e8e8e8;
+  --paper:    #ffffff;
+  --accent:   #fb7f05;
+  --accent-2: #be0101;
+  --blue:     #a14b00;   /* links: darker orange, 4.5:1 on white and on the grey page */
+  --line:     #d4d4d4;
+  --radius:   0px;
+  --font:     'Carlito', Calibri, 'Segoe UI', Arial, sans-serif;
+  --heading-font: 'VT323', ui-monospace, monospace;
+  --shadow-color: transparent;
+  --header-bg:   #be0101;
+  --header-ink:  #ffffff;
+  --header-line: 0;
+  --nav-radius:  0;
+  --btn-radius:  0;
+  --footer-bg:   #be0101;
+  --footer-ink:  #ffffff;
+  --footer-strong: #ffffff;
+  --footer-link: #ffe0b8;
+  --footer-link-hover: #ffffff;
+  --footer-note: #ffd9d9;
+  --footer-note-link: #ffffff;
+}
+[data-theme="offene-werkstaetten"] body { font-size: 1.06rem; }
+[data-theme="offene-werkstaetten"] h1,
+[data-theme="offene-werkstaetten"] h2,
+[data-theme="offene-werkstaetten"] h3 { font-weight: 400; text-transform: uppercase; letter-spacing: .03em; line-height: 1.05; }
+[data-theme="offene-werkstaetten"] .page-header h1,
+[data-theme="offene-werkstaetten"] .member-head h1 { font-size: clamp(2.3rem, 6vw, 3.4rem); }
+[data-theme="offene-werkstaetten"] .section h2,
+[data-theme="offene-werkstaetten"] .page h2 { font-size: 2.1rem; }
+[data-theme="offene-werkstaetten"] .prose h2 { font-size: 1.85rem; }
+[data-theme="offene-werkstaetten"] h3,
+[data-theme="offene-werkstaetten"] .card h3 { font-size: 1.45rem; }
+[data-theme="offene-werkstaetten"] .related-group h3 { font-family: var(--heading-font); font-size: 1.1rem; }
+
+/* header: red band, slanted lower edge, white logo panel */
+/* The header's height is fractional (e.g. 53.42px), so its lower edge and the top edge of the
+   slanted band both end mid-pixel; the two half-covered pixels blend into a light line (#158).
+   The band therefore starts 1px higher and keeps its slope below that; z-index -1 (inside the
+   header's stacking context) keeps that 1px behind the white logo panel. */
+[data-theme="offene-werkstaetten"] .site-header::after {
+  content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: calc(100% - 1px); height: 31px;
+  background: var(--header-bg); clip-path: polygon(0 0, 100% 0, 100% 1px, 0 100%); pointer-events: none;
+}
+[data-theme="offene-werkstaetten"] .header-inner { padding-top: .5rem; padding-bottom: .5rem; }
+[data-theme="offene-werkstaetten"] .brand {
+  background: #fff; color: var(--accent-2); padding: .55rem 1.6rem .75rem .9rem; margin: -.5rem 0 -.5rem -1.25rem;
+  clip-path: polygon(0 0, 100% 0, 91% 100%, 0 92%);
+}
+[data-theme="offene-werkstaetten"] .brand:hover { color: var(--accent-2); }
+[data-theme="offene-werkstaetten"] .brand-mark {
+  font-family: var(--heading-font); font-weight: 400; font-size: 1.6rem; line-height: 1;
+  background: none; border: 0; box-shadow: none; transform: none; padding: 0; color: var(--accent-2);
+}
+[data-theme="offene-werkstaetten"] .brand-name { font-style: italic; color: #a14b00; }
+[data-theme="offene-werkstaetten"] .site-nav a,
+[data-theme="offene-werkstaetten"] .nav-group-toggle { font-family: var(--heading-font); font-weight: 400; font-size: 1.35rem; text-transform: uppercase; letter-spacing: .04em; line-height: 1.2; }
+[data-theme="offene-werkstaetten"] .site-nav a:hover,
+[data-theme="offene-werkstaetten"] .site-nav a.active,
+[data-theme="offene-werkstaetten"] .nav-group-toggle:hover,
+[data-theme="offene-werkstaetten"] .nav-group-toggle.active,
+[data-theme="offene-werkstaetten"] .nav-group:focus-within .nav-group-toggle { background: none; color: #fff; box-shadow: inset 0 -3px 0 var(--accent); }
+[data-theme="offene-werkstaetten"] .nav-sub { border: 0; box-shadow: 0 4px 14px rgba(0, 0, 0, .25); }
+@media (min-width: 721px) {
+  [data-theme="offene-werkstaetten"] .nav-sub a { color: var(--ink); }
+  [data-theme="offene-werkstaetten"] .nav-sub a:hover,
+  [data-theme="offene-werkstaetten"] .nav-sub a.active { color: var(--ink); background: var(--accent); box-shadow: none; }
+}
+@media (max-width: 720px) {
+  [data-theme="offene-werkstaetten"] .brand { margin-left: -1.25rem; }
+  [data-theme="offene-werkstaetten"] .nav-group-toggle:hover,
+  [data-theme="offene-werkstaetten"] .nav-group:focus-within .nav-group-toggle { box-shadow: none; }
+}
+@media (max-width: 1080px) and (min-width: 721px) {
+  [data-theme="offene-werkstaetten"] .site-nav a,
+  [data-theme="offene-werkstaetten"] .nav-group-toggle { font-size: 1.2rem; }
+}
+
+/* start page: grey stage with orange and red shapes, the text on a white panel */
+[data-theme="offene-werkstaetten"] .hero {
+  position: relative; overflow: hidden; border-bottom: 0; text-align: center;
+  background:
+    linear-gradient(to top right, var(--accent) 50%, transparent 50.5%) left bottom / 22% 45% no-repeat,
+    linear-gradient(to bottom left, var(--accent-2) 50%, transparent 50.5%) right bottom / 30% 24% no-repeat,
+    var(--bg);
+}
+[data-theme="offene-werkstaetten"] .hero .container {
+  max-width: 760px; background: #fff; padding: 2.5rem clamp(1.25rem, 4vw, 3rem); box-shadow: 0 4px 18px rgba(0, 0, 0, .18);
+}
+[data-theme="offene-werkstaetten"] .kicker { font-family: var(--heading-font); font-size: 1.35rem; letter-spacing: .06em; color: var(--accent-2); }
+[data-theme="offene-werkstaetten"] .hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); letter-spacing: .02em; }
+/* the brush script of the original (EdoSZ) is not freely licensed – heavy italic capitals instead */
+[data-theme="offene-werkstaetten"] .hero .hl,
+[data-theme="offene-werkstaetten"] .slogan-char.hl-char { background: none; font-family: var(--font); font-weight: 700; font-style: italic; letter-spacing: -.01em; }
+[data-theme="offene-werkstaetten"] .hero-text { margin-left: auto; margin-right: auto; color: var(--ink); font-size: 1.1rem; }
+[data-theme="offene-werkstaetten"] .hero-actions { justify-content: center; }
+
+/* buttons: orange outline, pixel font in capitals */
+[data-theme="offene-werkstaetten"] .btn {
+  font-family: var(--heading-font); font-weight: 400; font-size: 1.4rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .04em;
+  color: #a14b00; background: #fff; border: 2px solid var(--accent); padding: .35rem .9rem; transition: background .15s, color .15s;
+}
+[data-theme="offene-werkstaetten"] .btn:hover { color: var(--ink); background: var(--accent); transform: none; }
+[data-theme="offene-werkstaetten"] .btn-small { font-size: 1.15rem; padding: .2rem .65rem; }
+[data-theme="offene-werkstaetten"] .btn code { font-family: var(--mono); text-transform: none; letter-spacing: 0; font-size: .8rem; }
+
+/* cards: white, no frame, soft shadow */
+[data-theme="offene-werkstaetten"] .card,
+[data-theme="offene-werkstaetten"] .logo-tile { border: 0; box-shadow: 0 3px 12px rgba(0, 0, 0, .14); }
+[data-theme="offene-werkstaetten"] .card-link:hover,
+[data-theme="offene-werkstaetten"] .logo-tile:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
+[data-theme="offene-werkstaetten"] .card p { color: var(--ink); }
+[data-theme="offene-werkstaetten"] .meta { font-family: var(--font); font-weight: 700; color: #a14b00; }
+[data-theme="offene-werkstaetten"] .badge { font-family: var(--heading-font); font-weight: 400; font-size: .95rem; border: 0; }
+[data-theme="offene-werkstaetten"] .badge-active { background: var(--accent); color: var(--ink); }
+[data-theme="offene-werkstaetten"] .event-date { border: 0; }
+[data-theme="offene-werkstaetten"] .event-day { font-family: var(--heading-font); font-weight: 400; font-size: 2.2rem; }
+[data-theme="offene-werkstaetten"] .link-list a,
+[data-theme="offene-werkstaetten"] .tag-list a,
+[data-theme="offene-werkstaetten"] .activity-item { border: 2px solid var(--accent); background: #fff; }
+[data-theme="offene-werkstaetten"] .link-list a:hover,
+[data-theme="offene-werkstaetten"] .tag-list a:hover,
+[data-theme="offene-werkstaetten"] .activity-item:hover { background: var(--accent); }
+[data-theme="offene-werkstaetten"] .prose img,
+[data-theme="offene-werkstaetten"] .project-image,
+[data-theme="offene-werkstaetten"] .gallery a,
+[data-theme="offene-werkstaetten"] .post-video,
+[data-theme="offene-werkstaetten"] .video-link,
+[data-theme="offene-werkstaetten"] .avatar { border: 0; }
+[data-theme="offene-werkstaetten"] .avatar { border-radius: 50%; }
+[data-theme="offene-werkstaetten"] .site-footer { border-top: 8px solid var(--accent); }
+
+/* ======================================================================
+   RFFLabs – after rfflabs.fr (Réseau Français des FabLabs):
+   white header with logo above a row of small capital links with hairlines, Lexend,
+   navy (#222D49) stage and footer, grey text, blue links, red/blue/green buttons,
+   rounded cards with a light shadow.
+   ====================================================================== */
+:root[data-theme="rfflabs"] {
+  --ink:      #222d49;
+  --ink-soft: #5c5959;
+  --muted:    #6b6767;
+  --bg:       #ffffff;
+  --paper:    #ffffff;
+  --accent:   #e2ecf7;
+  --accent-2: #d71f29;
+  --blue:     #2957cb;
+  --line:     #e2ecf7;
+  --radius:   10px;
+  --font:     'Lexend', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --heading-font: var(--font);
+  --shadow-color: transparent;
+  --header-bg:   #ffffff;
+  --header-ink:  #222d49;
+  --header-line: 1px solid #e2ecf7;
+  --nav-radius:  0;
+  --btn-radius:  6px;
+  --footer-bg:   #222d49;
+  --footer-ink:  #e2ecf7;
+  --footer-strong: #ffffff;
+  --footer-link: #9fb6e8;
+  --footer-link-hover: #ffffff;
+  --footer-note: #c9d4ec;
+  --footer-note-link: #ffffff;
+}
+[data-theme="rfflabs"] body { color: var(--ink-soft); font-weight: 300; }
+[data-theme="rfflabs"] strong, [data-theme="rfflabs"] b { font-weight: 600; }
+[data-theme="rfflabs"] .prose { line-height: 1.85; }
+[data-theme="rfflabs"] h1,
+[data-theme="rfflabs"] h2,
+[data-theme="rfflabs"] h3 { color: var(--muted); font-weight: 700; letter-spacing: 0; }
+[data-theme="rfflabs"] .page-header h1,
+[data-theme="rfflabs"] .member-head h1 { font-weight: 300; letter-spacing: 0; }
+[data-theme="rfflabs"] .card h3 { color: var(--ink); }
+
+/* header: logo on top, a row of small capitals with hairlines above */
+@media (min-width: 721px) {
+  [data-theme="rfflabs"] .header-inner { flex-direction: column; align-items: flex-start; gap: .6rem; padding-top: 1rem; padding-bottom: .9rem; }
+  [data-theme="rfflabs"] .site-nav { gap: .25rem 1.6rem; }
+}
+[data-theme="rfflabs"] .brand-mark {
+  font-family: var(--font); font-weight: 600; font-size: 1rem; color: #fff; background: var(--ink);
+  border: 0; border-radius: 10px; box-shadow: none; transform: none; padding: .3rem .55rem;
+}
+[data-theme="rfflabs"] .brand-name { font-weight: 500; }
+[data-theme="rfflabs"] .site-nav a,
+[data-theme="rfflabs"] .nav-group-toggle {
+  font-size: .8rem; font-weight: 500; text-transform: uppercase; letter-spacing: .03em;
+  padding: .3rem .1rem .2rem; border-top: 1px solid #b9c6e0;
+}
+[data-theme="rfflabs"] .nav-sub a { border-top: 0; padding: .35rem .6rem; }
+[data-theme="rfflabs"] .site-nav a:hover,
+[data-theme="rfflabs"] .site-nav a.active,
+[data-theme="rfflabs"] .nav-group-toggle:hover,
+[data-theme="rfflabs"] .nav-group-toggle.active,
+[data-theme="rfflabs"] .nav-group:focus-within .nav-group-toggle { background: none; color: var(--accent-2); border-top-color: var(--accent-2); }
+[data-theme="rfflabs"] .nav-sub { border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(34, 45, 73, .14); }
+@media (max-width: 1080px) and (min-width: 721px) {
+  [data-theme="rfflabs"] .site-nav a, [data-theme="rfflabs"] .nav-group-toggle { font-size: .78rem; padding: .3rem .1rem .2rem; }
+  [data-theme="rfflabs"] .brand-name { display: block; }
+}
+@media (max-width: 720px) {
+  [data-theme="rfflabs"] .site-nav a, [data-theme="rfflabs"] .nav-group-toggle { border-top: 0; font-size: .9rem; padding: .45rem .2rem; }
+}
+
+/* start page: navy stage, centred white headline, notch at the bottom */
+[data-theme="rfflabs"] .hero { position: relative; background: var(--ink); color: #fff; border-bottom: 0; text-align: center; }
+[data-theme="rfflabs"] .hero::after {
+  content: ''; position: absolute; left: 50%; bottom: -1px; width: 36px; height: 18px; margin-left: -18px;
+  background: var(--bg); clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+[data-theme="rfflabs"] .hero h1 { color: #fff; font-weight: 700; letter-spacing: -.01em; }
+[data-theme="rfflabs"] .hero .hl,
+[data-theme="rfflabs"] .slogan-char.hl-char { background: none; color: #9fb6e8; }
+[data-theme="rfflabs"] .slogan .slogan-char.scrambling { color: #fa6f76; }
+[data-theme="rfflabs"] .kicker { font-family: var(--font); color: #c9d4ec; }
+[data-theme="rfflabs"] .hero-text { color: #e2ecf7; margin-left: auto; margin-right: auto; }
+[data-theme="rfflabs"] .hero-actions { justify-content: center; }
+
+/* buttons: solid colour, white text, slightly rounded – red, blue, green like the three calls to action */
+[data-theme="rfflabs"] .btn {
+  font-weight: 600; color: #fff; background: var(--blue); border: 0; padding: .45rem 1rem; transition: filter .15s, transform .15s;
+}
+[data-theme="rfflabs"] .btn:hover { color: #fff; transform: scale(1.04); filter: brightness(1.08); }
+[data-theme="rfflabs"] .btn-ghost { color: var(--ink); background: #fff; box-shadow: inset 0 0 0 2px var(--ink); }
+[data-theme="rfflabs"] .btn-ghost:hover { color: var(--ink); }
+[data-theme="rfflabs"] .hero-actions .btn:nth-child(3n+1) { background: var(--accent-2); color: #fff; box-shadow: none; }
+[data-theme="rfflabs"] .hero-actions .btn:nth-child(3n+2) { background: var(--blue); color: #fff; box-shadow: none; }
+[data-theme="rfflabs"] .hero-actions .btn:nth-child(3n) { background: #067d3c; color: #fff; box-shadow: none; }
+[data-theme="rfflabs"] .btn-small { padding: .3rem .75rem; }
+
+/* cards: rounded, hairline, light shadow */
+[data-theme="rfflabs"] .card,
+[data-theme="rfflabs"] .logo-tile { border: 1px solid var(--line); box-shadow: 0 4px 18px rgba(34, 45, 73, .08); }
+[data-theme="rfflabs"] .card-link:hover,
+[data-theme="rfflabs"] .logo-tile:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(34, 45, 73, .16); }
+[data-theme="rfflabs"] .meta { font-family: var(--font); }
+[data-theme="rfflabs"] .badge { font-family: var(--font); font-weight: 600; border: 0; border-radius: 30px; padding: .15rem .65rem; }
+[data-theme="rfflabs"] .badge-active { background: #d8ffe9; color: #003319; }
+[data-theme="rfflabs"] .event-date { background: var(--ink); color: #fff; border: 0; }
+[data-theme="rfflabs"] .link-list a,
+[data-theme="rfflabs"] .activity-item { border: 1.5px solid #c9d4ec; border-radius: 30px; }
+[data-theme="rfflabs"] .link-list a:hover,
+[data-theme="rfflabs"] .tag-list a:hover,
+[data-theme="rfflabs"] .activity-item:hover { background: var(--accent); }
+[data-theme="rfflabs"] .tag-list a { font-family: var(--font); }
+[data-theme="rfflabs"] .prose img,
+[data-theme="rfflabs"] .project-image,
+[data-theme="rfflabs"] .gallery a,
+[data-theme="rfflabs"] .post-video,
+[data-theme="rfflabs"] .video-link,
+[data-theme="rfflabs"] .avatar { border: 0; }
+[data-theme="rfflabs"] .prose blockquote { border-left-color: var(--blue); }
+
+/* ======================================================================
+   Slop ✨ – a parody of the "hastily vibecoded" look, after slopstrap.mikelacher.com
+   (look only, no code or assets copied): near-black page (#030712) with a grid and
+   purple/cyan glow orbs, washed-out slate-400 text, gradient headings with an italic
+   serif word, emoji in front of every heading, pill "eyebrows", frosted glass cards with
+   a thick gradient stripe on the left and a rotating conic border beam, gradient pill
+   buttons with glow and shimmer, glowing badges. Fonts Inter and Instrument Serif Italic are self-hosted (assets/fonts/).
+   ====================================================================== */
+@property --slop-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes slop-spin { to { --slop-angle: 360deg; } }
+@keyframes slop-rainbow { to { background-position: 200% 50%; } }
+@keyframes slop-shimmer { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(220%) skewX(-20deg); } }
+@keyframes slop-float { 50% { transform: translateY(-4px); } }
+
+:root[data-theme="slop"] {
+  --ink:      #94a3b8;   /* slate-400, the famous washed-out body copy */
+  --ink-soft: #94a3b8;
+  --muted:    #8391a7;
+  --bg:       #030712;
+  --paper:    #0b1120;
+  --accent:   #a855f7;
+  --accent-2: #ec4899;
+  --blue:     #22d3ee;
+  --line:     rgba(148, 163, 184, .16);
+  --radius:   20px;
+  --font:     'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --heading-font: var(--font);
+  --shadow-color: transparent;
+  --header-bg:   rgba(3, 7, 18, .72);
+  --header-ink:  #e2e8f0;
+  --header-line: 1px solid rgba(168, 85, 247, .25);
+  --nav-radius:  999px;
+  --btn-radius:  999px;
+  --footer-bg:   #020617;
+  --footer-ink:  #94a3b8;
+  --footer-strong: #f8fafc;
+  --footer-link: #c084fc;
+  --footer-link-hover: #22d3ee;
+  --footer-note: #8391a7;
+  --footer-note-link: #e2e8f0;
+  --slop-gradient: linear-gradient(90deg, #a855f7, #22d3ee);
+  --slop-rainbow: linear-gradient(90deg, #f472b6, #a855f7, #6366f1, #22d3ee, #34d399, #fbbf24, #f472b6);
+  --slop-beam: conic-gradient(from var(--slop-angle), transparent 0 55%, #a855f7 70%, #22d3ee 80%, #ec4899 90%, transparent 100%);
+  --slop-glow: 0 0 24px rgba(168, 85, 247, .35), 0 0 48px rgba(34, 211, 238, .15);
+  color-scheme: dark;
+}
+
+/* page: grid + blurred orbs, fixed behind everything */
+[data-theme="slop"] body {
+  background:
+    radial-gradient(40rem 30rem at 12% 8%, rgba(168, 85, 247, .22), transparent 70%),
+    radial-gradient(36rem 28rem at 88% 22%, rgba(34, 211, 238, .16), transparent 70%),
+    radial-gradient(30rem 24rem at 50% 95%, rgba(236, 72, 153, .12), transparent 70%),
+    linear-gradient(rgba(148, 163, 184, .06) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, rgba(148, 163, 184, .06) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--bg);
+  background-attachment: fixed;
+}
+[data-theme="slop"] ::selection { background: #ec4899; color: #fff; }
+
+/* headings: white-to-gradient text, an emoji in front of everything */
+[data-theme="slop"] h1,
+[data-theme="slop"] h2,
+[data-theme="slop"] h3 {
+  color: #f8fafc; letter-spacing: -.03em;
+  background: linear-gradient(90deg, #f8fafc 30%, #c084fc 70%, #22d3ee);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+[data-theme="slop"] .page-header h1::after { content: " 🚀"; content: " 🚀" / ""; -webkit-text-fill-color: initial; }
+[data-theme="slop"] .section h2::before,
+[data-theme="slop"] .page h2::before { content: "✨ "; content: "✨ " / ""; -webkit-text-fill-color: initial; }
+[data-theme="slop"] .prose h2::before { content: "💡 "; content: "💡 " / ""; -webkit-text-fill-color: initial; }
+[data-theme="slop"] .prose h3::before { content: "🔥 "; content: "🔥 " / ""; -webkit-text-fill-color: initial; }
+[data-theme="slop"] .card h3::before { content: "⚡ "; content: "⚡ " / ""; -webkit-text-fill-color: initial; }
+
+/* header: frosted glass */
+[data-theme="slop"] .site-header { -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
+[data-theme="slop"] .brand-mark {
+  font-family: var(--font); font-weight: 800; color: #fff; background: var(--slop-gradient);
+  border: 0; border-radius: 12px; transform: none; box-shadow: var(--slop-glow); animation: slop-float 3s ease-in-out infinite;
+}
+[data-theme="slop"] .brand-mark::after { content: " ✨"; content: " ✨" / ""; }
+[data-theme="slop"] .site-nav a:hover,
+[data-theme="slop"] .site-nav a.active,
+[data-theme="slop"] .nav-group-toggle:hover,
+[data-theme="slop"] .nav-group-toggle.active { background: rgba(168, 85, 247, .18); color: #fff; box-shadow: inset 0 0 0 1px rgba(168, 85, 247, .45), 0 0 18px rgba(168, 85, 247, .3); }
+[data-theme="slop"] .nav-sub { background: #0b1120; border: 1px solid rgba(168, 85, 247, .3); box-shadow: var(--slop-glow); }
+
+/* hero: transparent over the orbs, eyebrow pill, rainbow serif word */
+[data-theme="slop"] .hero { background: transparent; border-bottom: 1px solid var(--line); text-align: center; }
+[data-theme="slop"] .hero h1 { margin-left: auto; margin-right: auto; }
+[data-theme="slop"] .hero-text { margin-left: auto; margin-right: auto; }
+[data-theme="slop"] .hero-actions { justify-content: center; }
+[data-theme="slop"] .kicker {
+  display: inline-block; font-family: var(--font); font-weight: 600; letter-spacing: .02em; text-transform: none;
+  color: #e9d5ff; background: rgba(168, 85, 247, .12); border: 1px solid rgba(168, 85, 247, .45);
+  border-radius: 999px; padding: .3rem .9rem; box-shadow: 0 0 20px rgba(168, 85, 247, .25);
+}
+[data-theme="slop"] .kicker::before { content: "✨ New · "; content: "✨ New · " / ""; }
+[data-theme="slop"] .hl,
+[data-theme="slop"] .slogan-char.hl-char {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400;
+  background: var(--slop-rainbow) 0 50% / 200% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: slop-rainbow 4s linear infinite;
+}
+[data-theme="slop"] .slogan .slogan-char.scrambling { color: #22d3ee; -webkit-text-fill-color: #22d3ee; }
+
+/* buttons: gradient pills that glow and shimmer */
+[data-theme="slop"] .btn {
+  position: relative; overflow: hidden; color: #fff; font-weight: 600;
+  background: linear-gradient(90deg, #ec4899, #a855f7, #6366f1); border: 0; box-shadow: var(--slop-glow);
+}
+[data-theme="slop"] .btn::after {
+  content: ""; position: absolute; inset: 0; width: 40%; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent); transform: translateX(-120%) skewX(-20deg);
+}
+[data-theme="slop"] .btn:hover { color: #fff; transform: translateY(-2px) scale(1.03); box-shadow: 0 0 32px rgba(236, 72, 153, .55), 0 0 64px rgba(99, 102, 241, .35); }
+[data-theme="slop"] .btn:hover::after { animation: slop-shimmer .9s ease-out; }
+[data-theme="slop"] .btn-ghost { background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px rgba(168, 85, 247, .5), 0 0 18px rgba(168, 85, 247, .2); }
+[data-theme="slop"] .btn-small { box-shadow: 0 0 14px rgba(168, 85, 247, .4); }
+
+/* cards: frosted glass, 4px gradient stripe, rotating conic border beam */
+[data-theme="slop"] .card,
+[data-theme="slop"] .logo-tile {
+  position: relative; color: var(--ink);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: inset 4px 0 0 #a855f7, 0 10px 40px rgba(0, 0, 0, .45);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+[data-theme="slop"] .grid-2 > .card:nth-child(4n+2), [data-theme="slop"] .grid-3 > .card:nth-child(4n+2) { box-shadow: inset 4px 0 0 #22d3ee, 0 10px 40px rgba(0, 0, 0, .45); }
+[data-theme="slop"] .grid-2 > .card:nth-child(4n+3), [data-theme="slop"] .grid-3 > .card:nth-child(4n+3) { box-shadow: inset 4px 0 0 #34d399, 0 10px 40px rgba(0, 0, 0, .45); }
+[data-theme="slop"] .grid-2 > .card:nth-child(4n),   [data-theme="slop"] .grid-3 > .card:nth-child(4n)   { box-shadow: inset 4px 0 0 #fbbf24, 0 10px 40px rgba(0, 0, 0, .45); }
+[data-theme="slop"] .card::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: var(--slop-beam); animation: slop-spin 4s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+[data-theme="slop"] .card p { color: var(--ink); }
+[data-theme="slop"] .card-link:hover,
+[data-theme="slop"] .logo-tile:hover { transform: translateY(-4px); box-shadow: inset 4px 0 0 #ec4899, var(--slop-glow), 0 20px 50px rgba(0, 0, 0, .5); }
+[data-theme="slop"] .card-icon {
+  display: inline-grid; place-items: center; width: 3rem; height: 3rem; border-radius: 30%;
+  background: linear-gradient(135deg, rgba(168, 85, 247, .35), rgba(34, 211, 238, .25)); box-shadow: var(--slop-glow);
+}
+
+/* badges, pills, meta */
+[data-theme="slop"] .badge {
+  font-family: var(--font); text-transform: none; letter-spacing: 0; border-radius: 999px; border: 1px solid rgba(168, 85, 247, .5);
+  background: rgba(168, 85, 247, .14); color: #e9d5ff; box-shadow: 0 0 12px rgba(168, 85, 247, .35);
+}
+[data-theme="slop"] .badge-active { background: rgba(52, 211, 153, .14); color: #a7f3d0; border-color: rgba(52, 211, 153, .5); box-shadow: 0 0 12px rgba(52, 211, 153, .35); }
+[data-theme="slop"] .badge-active::before { content: "🟢 "; content: "🟢 " / ""; }
+[data-theme="slop"] .badge-past { background: rgba(148, 163, 184, .1); color: #cbd5e1; border-color: rgba(148, 163, 184, .4); box-shadow: none; }
+[data-theme="slop"] .meta { font-family: var(--font); }
+[data-theme="slop"] .activity-item,
+[data-theme="slop"] .link-list a { color: #e2e8f0; background: rgba(255, 255, 255, .04); border-color: rgba(168, 85, 247, .4); }
+[data-theme="slop"] .activity-item:hover,
+[data-theme="slop"] .link-list a:hover,
+[data-theme="slop"] .tag-list a:hover { background: rgba(168, 85, 247, .22); color: #fff; }
+[data-theme="slop"] .activity-hot { background: rgba(251, 191, 36, .14); border-color: rgba(251, 191, 36, .6); }
+[data-theme="slop"] .event-date { background: var(--slop-gradient); color: #fff; border: 0; box-shadow: var(--slop-glow); }
+
+/* text: shimmering marker underline on links, glowing images, gradient quotes */
+[data-theme="slop"] .prose a { color: #67e8f9; text-decoration: none; background: linear-gradient(90deg, #a855f7, #22d3ee) 0 100% / 100% 2px no-repeat; }
+[data-theme="slop"] .prose a:hover { color: #fff; background-size: 100% 100%; }
+[data-theme="slop"] .prose strong { color: #f1f5f9; }
+[data-theme="slop"] .prose img,
+[data-theme="slop"] .project-image,
+[data-theme="slop"] .gallery a,
+[data-theme="slop"] .post-video,
+[data-theme="slop"] .video-link,
+[data-theme="slop"] .avatar { border: 1px solid rgba(168, 85, 247, .4); box-shadow: var(--slop-glow); }
+[data-theme="slop"] .prose blockquote {
+  border-left: 4px solid #a855f7; border-radius: 0 16px 16px 0; padding: .8rem 1rem;
+  background: rgba(168, 85, 247, .08); color: #cbd5e1;
+}
+[data-theme="slop"] .prose blockquote > :first-child::before { content: "💬 "; content: "💬 " / ""; }
+[data-theme="slop"] .prose code { background: rgba(168, 85, 247, .15); color: #f0abfc; }
+[data-theme="slop"] .todo { background: rgba(236, 72, 153, .15); color: #f9a8d4; }
+
+/* footer */
+[data-theme="slop"] .site-footer { border-top: 1px solid rgba(168, 85, 247, .25); box-shadow: 0 -20px 60px rgba(168, 85, 247, .08); }
+
+/* forms and dialogs follow the dark page */
+[data-theme="slop"] input,
+[data-theme="slop"] select,
+[data-theme="slop"] textarea { color: #e2e8f0; background-color: #0b1120; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="slop"] .card::before,
+  [data-theme="slop"] .hl,
+  [data-theme="slop"] .slogan-char.hl-char,
+  [data-theme="slop"] .brand-mark,
+  [data-theme="slop"] .btn:hover::after { animation: none; }
+}
