@@ -15,6 +15,7 @@ uuid: 27acbb70-b7ee-43c0-9d16-ff70e7ea93e6
     <div>
       <h3><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.name }}</a></h3>
       {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+      {% if p.thanks %}<p class="partner-thanks">{% if p.thanks_url %}<a href="{{ p.thanks_url | relative_url }}">{{ p.thanks }}</a>{% else %}{{ p.thanks }}{% endif %}</p>{% endif %}
       {% if p.instagram %}<p><a href="{{ p.instagram }}" target="_blank" rel="noopener">Instagram</a></p>{% endif %}
       {%- assign p_eq = site.equipment | where: "owner_partner", p.name -%}
       {% if p_eq.size > 0 %}<p class="small"><span data-i18n="partner.equipment">{{ "partner.equipment" | t }}</span> {% for it in p_eq %}<a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
