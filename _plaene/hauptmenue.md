@@ -79,10 +79,10 @@ Jeder Untereintrag bekommt in `_config.yml` ein Feld `info:`, das im Untermenü 
 - title: Projekte
   children:
     - title: Aktuelle Projekte
-      url: /projekte/
+      url: /projects/
       info: Was gerade gebaut wird
     - title: Ideen
-      url: /projekte/ideen/
+      url: /project/ideas/
       info: Linksammlung – ✅ schon gebaut
 ```
 
@@ -97,7 +97,7 @@ Am Desktop hilft das bei der Orientierung. Am Handy wird `info` ausgeblendet, da
 5. **Suche als Symbol**: neues Feld `icon: 🔍` im `nav`-Eintrag. Am Desktop wird nur das Symbol mit `aria-label` gezeigt, am Handy der Text.
 6. **Footer** aufräumen: „Vergangene Projekte“ steht dann im Menü und kann aus dem Footer raus. Spenden und Impressum bleiben im Footer.
 7. **Doku**: In `CLAUDE.md` den Satz zur Navigation (Untermenü-Beispiel „Wir“) und die neuen Felder `info`/`aktiv`/`icon` anpassen. `CHANGELOG.md` unter `[Unreleased]` → `### Geändert`.
-8. **Prüfen**: `bundle exec jekyll build`, `ruby _scripts/check_site.rb` und Screenshots für den PR (Desktop und Handy, aufgeklapptes Menü) mit `python3 -I _scripts/pr_vorschau.py / /projekte/ideen/ /netzwerk/`. Außerdem den Zwischenbereich 721–1080 px ansehen, damit die Leiste nicht umbricht.
+8. **Prüfen**: `bundle exec jekyll build`, `ruby _scripts/check_site.rb` und Screenshots für den PR (Desktop und Handy, aufgeklapptes Menü) mit `python3 -I _scripts/pr_vorschau.py / /project/ideas/ /network/`. Außerdem den Zwischenbereich 721–1080 px ansehen, damit die Leiste nicht umbricht.
 
 Aufwand: etwa ein Nachmittag. Die Schritte 1, 2 und 7 reichen für eine erste Version, 3–5 können ein eigener PR werden.
 
