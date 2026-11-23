@@ -1,10 +1,10 @@
 ---
 title: "Mehr aus Instagram "
 date: 2026-11-17 06:25:00 +0100
-persoenlich: true
+personal: true
 author: [falko-richter, alexander-augenrahmen]
 tags: [nonplanar]
-verlinkt: [/news/2026/03/16/3d-druck-experimente/, /projekte/nonplanarer-druck/]
+linked: [/news/2026/03/16/3d-druck-experimente/, /projects/nonplanarer-druck/]
 uuid: a7bc0b52-4100-4068-ae20-2cd2ab6dc33b
 ---
 
