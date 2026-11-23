@@ -1,29 +1,49 @@
 {%- comment -%}
   One "➕ new" button: a GitHub "new file" link with file name and content prefilled from a template.
-  Params: typ (beitrag, termin, projekt, geraet, team, presse), label, hint (tooltip) and the template params
-  (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich).
+  Params: typ (beitrag, termin, projekt, geraet, herausforderung, team, presse), i18n (UI strings <i18n>.label and
+  <i18n>.hint = tooltip in _data/i18n/*.yml; i18n_quadrant=q1…q4 fills {quadrant}/{sub} in the matrix strings) and the template params
+  (author, team, tags, verlinkt, projekte, partners, teil_von, owner_team, owner_partner, persoenlich, wichtig, dringend).
+  klein=true renders only a small "➕" (label goes into aria-label), e.g. inside a quadrant of the Eisenhower matrix.
   Placeholders JJJJ-MM-TT / JJJJ / TZTZ are replaced at click time by the script in _includes/neu-buttons.html.
 {%- endcomment -%}
 {%- case include.typ -%}
   {%- when 'beitrag' -%}{%- assign dir = '_posts' -%}{%- assign datei = 'JJJJ-MM-TT-titel-des-beitrags.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/beitrag.md author=include.author persoenlich=include.persoenlich tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/beitrag.md author=include.author personal=include.personal tags=include.tags linked=include.linked %}{%- endcapture -%}
   {%- when 'termin' -%}{%- assign dir = '_events' -%}{%- assign datei = 'JJJJ-MM-TT-name-des-termins.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/termin.md team=include.team tags=include.tags projekte=include.projekte partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/termin.md team=include.team tags=include.tags projects=include.projects partners=include.partners linked=include.linked personal=include.personal %}{%- endcapture -%}
   {%- when 'projekt' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/projekt.md team=include.team partners=include.partners teil_von=include.teil_von verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt.md team=include.team partners=include.partners part_of=include.part_of linked=include.linked personal=include.personal %}{%- endcapture -%}
   {%- when 'projekt-vergangen' -%}{%- assign dir = '_projects' -%}{%- assign datei = 'name-des-projekts.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners verlinkt=include.verlinkt persoenlich=include.persoenlich %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/projekt-vergangen.md team=include.team partners=include.partners linked=include.linked personal=include.personal %}{%- endcapture -%}
   {%- when 'geraet' -%}{%- assign dir = '_equipment' -%}{%- assign datei = 'hersteller-modell.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/geraet.md owner_team=include.owner_team owner_partner=include.owner_partner tags=include.tags linked=include.linked %}{%- endcapture -%}
+  {%- when 'herausforderung' -%}{%- assign dir = '_challenges' -%}{%- assign datei = 'kurzer-name.md' -%}
+    {%- capture inhalt -%}{% include vorlagen/herausforderung.md team=include.team projects=include.projects tags=include.tags linked=include.linked personal=include.personal important=include.important urgent=include.urgent %}{%- endcapture -%}
   {%- when 'partner' -%}{%- assign dir = '_data/partner' -%}{%- assign datei = 'name-des-partners.yml' -%}
     {%- capture inhalt -%}{% include vorlagen/partner.yml %}{%- endcapture -%}
-  {%- when 'pressebericht' -%}{%- assign dir = '_data/pressebericht' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}
+  {%- when 'pressebericht' -%}{%- assign dir = '_data/press_report' -%}{%- assign datei = 'JJJJ-MM-TT-medium.yml' -%}
     {%- capture inhalt -%}{% include vorlagen/pressebericht.yml %}{%- endcapture -%}
   {%- when 'team' -%}{%- assign dir = '_team' -%}{%- assign datei = 'vorname-nachname.md' -%}
     {%- capture inhalt -%}{% include vorlagen/team.md %}{%- endcapture -%}
   {%- when 'presse' -%}{%- assign dir = '_press' -%}{%- assign datei = 'JJJJ-MM-TT-titel-der-mitteilung.md' -%}
-    {%- capture inhalt -%}{% include vorlagen/presse.md tags=include.tags verlinkt=include.verlinkt %}{%- endcapture -%}
+    {%- capture inhalt -%}{% include vorlagen/presse.md tags=include.tags linked=include.linked %}{%- endcapture -%}
 {%- endcase -%}
+{%- assign nb_label_key = include.i18n | append: ".label" -%}{%- assign nb_hint_key = include.i18n | append: ".hint" -%}
+{%- if include.i18n_quadrant -%}
+  {%- assign nb_q_key = "matrix." | append: include.i18n_quadrant -%}{%- assign nb_sub_key = nb_q_key | append: "_sub" -%}
+  {%- assign nb_q = nb_q_key | t -%}{%- assign nb_sub = nb_sub_key | t -%}
+  {%- assign nb_label = nb_label_key | t: "quadrant", nb_q -%}{%- assign nb_hint = nb_hint_key | t: "quadrant", nb_q, "sub", nb_sub -%}
+  {%- capture nb_params -%}{"quadrant": {{ "@" | append: nb_q_key | jsonify }}, "sub": {{ "@" | append: nb_sub_key | jsonify }}}{%- endcapture -%}
+{%- else -%}
+  {%- assign nb_label = nb_label_key | t -%}{%- assign nb_hint = nb_hint_key | t -%}{%- assign nb_params = "{}" -%}
+{%- endif -%}
+{%- comment -%}
+  data-neu: type and connection to this page for the pop-up form (assets/js/neu.js); the href stays as fallback
+  without JS and as "Vorlage mit allen Feldern" link inside the form.
+{%- endcomment -%}
+{%- capture neu_daten -%}
+{"typ": {{ include.typ | jsonify }}, "label": {{ nb_label | jsonify }}, "hinweis": {{ nb_hint | jsonify }}, "i18n": {{ include.i18n | jsonify }}, "i18nParams": {{ nb_params }}, "werte": {"author": {{ include.author | jsonify }}, "team": {{ include.team | jsonify }}, "tags": {{ include.tags | jsonify }}, "linked": {{ include.linked | jsonify }}, "projects": {{ include.projects | jsonify }}, "partners": {{ include.partners | jsonify }}, "part_of": {{ include.part_of | jsonify }}, "owner_team": {{ include.owner_team | jsonify }}, "owner_partner": {{ include.owner_partner | jsonify }}, "personal": {{ include.personal | jsonify }}, "important": {{ include.important | jsonify }}, "urgent": {{ include.urgent | jsonify }}}}
+{%- endcapture -%}
 {%- comment -%} url_encode turns spaces into "+"; literal "+" is already %2B at that point, so only spaces are replaced {%- endcomment -%}
-<a class="btn btn-ghost btn-small neu-btn" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
-' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ include.hint | escape }}">➕ {{ include.label }}</a>
+<a class="{% if include.klein %}neu-btn neu-btn-klein{% else %}btn btn-ghost btn-small neu-btn{% endif %}" data-vorlage data-neu="{{ neu_daten | strip | escape }}" href="https://github.com/{{ site.repository }}/new/{{ site.branch | default: 'main' }}/{{ dir }}?filename={{ datei }}&amp;value={{ inhalt | strip | append: '
+' | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" title="{{ nb_hint }}" data-i18n-params="{{ nb_params | escape }}"{% if include.klein %} aria-label="{{ nb_label }}" data-i18n-attr="title:{{ nb_hint_key }};aria-label:{{ nb_label_key }}">➕{% else %} data-i18n-attr="title:{{ nb_hint_key }}">➕ <span data-i18n="{{ nb_label_key }}">{{ nb_label }}</span>{% endif %}</a>

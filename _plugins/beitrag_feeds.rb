@@ -1,8 +1,8 @@
 # Atom feeds next to the pages, built with _includes/atom-feed.xml (same as /feed.xml):
-#   /projekte/<name>/feed.xml   posts with the project's event_tag + manual `updates:`
+#   /projects/<name>/feed.xml   posts with the project's event_tag + manual `updates:`
 #                               (same as "Stand / Updates" on the project page)
 #   /team/<name>/feed.xml       all posts by the person (`author`), personal ones included
-#   /news/persoenlich/feed.xml  all personal posts
+#   /news/personal/feed.xml  all personal posts
 # The buttons on the pages come from _includes/feed-abo.html.
 module BeitragFeeds
   class Generator < Jekyll::Generator
@@ -30,15 +30,15 @@ module BeitragFeeds
         end
       end
 
-      add(site, "/news/persoenlich/", "content" =>
-        "{%- assign pers = site.posts | where: \"persoenlich\", true -%}\n" \
+      add(site, "/news/personal/", "content" =>
+        "{%- assign pers = site.posts | where: \"personal\", true -%}\n" \
         "{%- assign t = site.short_title | append: \" – Persönliche Blogs aus dem Team\" -%}\n" \
-        "{%- include atom-feed.xml titel=t self=page.url alt=\"/news/persoenlich/\" beitraege=pers -%}\n")
+        "{%- include atom-feed.xml titel=t self=page.url alt=\"/news/personal/\" beitraege=pers -%}\n")
     end
 
     private
 
-    # /projekte/foo/ → /projekte/foo/feed.xml
+    # /projects/foo/ → /projects/foo/feed.xml
     def add(site, url, data)
       dir = url.split("/").reject(&:empty?).join("/")
       page = Jekyll::PageWithoutAFile.new(site, site.source, dir, "feed.xml")
@@ -46,7 +46,7 @@ module BeitragFeeds
       page.data.merge!(data)
       page.data["layout"] = nil
       page.data["sitemap"] = false
-      page.data["suche"] = false
+      page.data["search"] = false
       site.pages << page
     end
   end

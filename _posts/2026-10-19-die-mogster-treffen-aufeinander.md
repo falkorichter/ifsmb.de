@@ -2,10 +2,13 @@
 title: "Die Mogster treffen aufeinander"
 date: 2026-10-19 12:00:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
+linked:
+  - /team/opa-andi/
+uuid: 8f03298a-a732-424a-80d5-00eda79d654a
 ---
-Am 19. Oktober 2026 standen die beiden Mogster zum ersten Mal nebeneinander: Papas hellblauer Mogster – fertig, mit Pritsche – und Falkos gelber, bei dem hinten noch der nackte Leiterrahmen zu sehen ist.
+Am 19. Oktober 2026 standen die beiden Mogster zum ersten Mal nebeneinander: [Papas]({{ '/team/opa-andi/' | relative_url }}) hellblauer Mogster – fertig, mit Pritsche – und Falkos gelber, bei dem hinten noch der nackte Leiterrahmen zu sehen ist.
 
 Danach ging es für Falkos Mogster zum **ersten Praxistest** nach draußen: einen Sandhügel hinauf und durch Erde und Laub. Und an der Front sitzt ein kleiner, mit einem Servo bewegter **Kran**, der eine Holzlatte an einem Nagel einhakt und anhebt.
 

@@ -7,14 +7,15 @@ location: "MAFZ – Märkisches Ausstellungs- und Freizeitzentrum, Gartenstraße
 location_url: https://www.messen.de/de/17933/paaren-im-glien/treffpunkt-modellbau/info
 summary: Die Havelländischen Modellbautage – Falko will seine Modellbau-Autos mitbringen, und „Opa Andi“ kommt mit seinem 3D-gedruckten Mogster.
 tags: [rc-modellbau, mogster]
-team: [falko-richter,anton,jan]
+team: [falko-richter, anton, jan, opa-andi]
+uuid: e4b3a170-7bf0-4d60-b71c-663ebe1ca4d8
 ---
 
 Der **Treffpunkt Modellbau** sind die Havelländischen Modellbautage im MAFZ in Paaren im Glien – mit Fachhändlern, Clubs, Vereinen, Modellbaufreund*innen und Bastler*innen, für Große und Kleine. Die Messe ist für alle offen (Samstag und Sonntag jeweils 10–17 Uhr).
 
-**Wir sind dabei – hoffentlich mit Fahrzeugen:** Falko ist mit den Veranstaltern in Kontakt und will seine **Modellbau-Autos** mitbringen. Und **„Opa Andi“** – Falkos Papa – will mit seinem **3D-gedruckten Mogster** vorbeikommen.
+**Wir sind dabei – hoffentlich mit Fahrzeugen:** Falko ist mit den Veranstaltern in Kontakt und will seine **Modellbau-Autos** mitbringen. Und **[„Opa Andi“]({{ '/team/opa-andi/' | relative_url }})** – Falkos Papa – will mit seinem **3D-gedruckten Mogster** vorbeikommen.
 
-**Die Mogster in Falkos persönlichem Blog:** So sind die beiden Mogster entstanden (mehr im persönlichen Projekt [3DSets Mogster bauen]({{ '/projekte/3dsets-mogster-bauen/' | relative_url }})):
+**Die Mogster in Falkos persönlichem Blog:** So sind die beiden Mogster entstanden (mehr im persönlichen Projekt [3DSets Mogster bauen]({{ '/projects/3dsets-mogster-bauen/' | relative_url }})):
 
 - [Papas Mogster rollt]({% post_url 2026-08-16-papas-mogster-rollt %})
 - [Falko baut seinen Mogster an zwei Abenden]({% post_url 2026-10-01-falko-baut-seinen-mogster-an-zwei-abenden %})

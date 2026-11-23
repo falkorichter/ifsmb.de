@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2026/falko-erkundet-die-all-about-automation/
 original_site: 35services.de
 tags: [Messe]
+uuid: 82a2b4c6-1471-44b9-b0cc-155e167807d9
 ---
 
 <a class="video-link" href="https://www.youtube.com/watch?v=eHz2jel4Lr8" target="_blank" rel="noopener">

@@ -1,4 +1,4 @@
-// Map of the network (/karte/): a small slippy map without libraries.
+// Map of the network (/map/): a small slippy map without libraries.
 // Tiles come from tile.openstreetmap.org and are only requested after the visitor agrees.
 (function () {
   "use strict";
@@ -39,7 +39,7 @@
   function storageDel(k) { try { window.localStorage.removeItem(k); } catch (e) { /* ignore */ } }
 
   // ---------- resolve resources to places ----------
-  var places = DATA.orte.filter(function (o) { return typeof o.lat === "number" && typeof o.lon === "number"; });
+  var places = DATA.places.filter(function (o) { return typeof o.lat === "number" && typeof o.lon === "number"; });
   var byId = {};
   places.forEach(function (o) {
     o.items = { projekt: [], termin: [], beitrag: [], ausstattung: [] };
@@ -53,7 +53,7 @@
     var t = lower(text);
     if (!t) return [];
     return places.filter(function (o) {
-      return list(o.finden).some(function (f) { return f && t.indexOf(lower(f)) !== -1; });
+      return list(o.match).some(function (f) { return f && t.indexOf(lower(f)) !== -1; });
     });
   }
   function byPartner(names) {
@@ -66,9 +66,9 @@
 
   var projectPlaces = {}; // project slug or event_tag -> places
   function placesFor(x) {
-    var found = explicit(x.orte);
+    var found = explicit(x.places);
     if (!found.length) found = byText(x.text);
-    if (!found.length && x.typ === "ausstattung") found = byPartner(x.standort_partner);
+    if (!found.length && x.typ === "ausstattung") found = byPartner(x.location_partner);
     if (!found.length && x.typ === "ausstattung" && !x.text) found = byPartner(x.owner_partner);
     if (!found.length && (x.typ === "projekt" || x.typ === "termin")) found = byPartner(x.partners);
     return found;
@@ -91,7 +91,7 @@
   });
   function viaProjects(x) {
     var out = [];
-    list(x.projekte).forEach(function (s) { out = out.concat(projectPlaces["slug:" + s] || []); });
+    list(x.projects).forEach(function (s) { out = out.concat(projectPlaces["slug:" + s] || []); });
     list(x.tags).forEach(function (t) { out = out.concat(projectPlaces["tag:" + t] || []); });
     return out;
   }
@@ -122,7 +122,7 @@
   var selected = null;
 
   function visibleItems(o, typ) {
-    return o.items[typ].filter(function (x) { return showPersonal || !x.persoenlich; });
+    return o.items[typ].filter(function (x) { return showPersonal || !x.personal; });
   }
   function count(o) {
     return TYPES.reduce(function (n, t) { return n + visibleItems(o, t.key).length; }, 0);
@@ -156,7 +156,7 @@
     back.addEventListener("click", function () { select(null, false); });
     panel.appendChild(back);
     panel.appendChild(el("h2", null, o.name));
-    var addr = el("p", "muted", o.adresse + (o.ungefaehr ? " (ungefähre Lage)" : ""));
+    var addr = el("p", "muted", o.address + (o.approximate ? " (ungefähre Lage)" : ""));
     panel.appendChild(addr);
     var osm = el("p", "karte-osm-link");
     var a = el("a", null, "Auf openstreetmap.org öffnen");
@@ -191,7 +191,7 @@
           la.appendChild(document.createTextNode(" "));
           la.appendChild(el("span", "link-meta" + (x.datum >= TODAY ? " karte-kommt" : ""), x.datum >= TODAY ? "kommt · " + datumDE(x.datum) : datumDE(x.datum)));
         }
-        if (x.persoenlich) {
+        if (x.personal) {
           la.appendChild(document.createTextNode(" "));
           la.appendChild(el("span", "link-private", "persönlich"));
         }
@@ -293,7 +293,7 @@
         b.textContent = n ? String(n) : "";
         b.classList.toggle("is-leer", !n);
         b.classList.toggle("is-aktiv", selected === o);
-        b.classList.toggle("is-ungefaehr", !!o.ungefaehr);
+        b.classList.toggle("is-ungefaehr", !!o.approximate);
         b.style.transform = "translate(" + Math.round(p.x - cx + s.w / 2) + "px," + Math.round(p.y - cy + s.h / 2) + "px)";
       });
     };
@@ -412,7 +412,7 @@
   var consentEl = document.getElementById("karte-zustimmung");
   var zoomEl = document.getElementById("karte-zoom");
   var attrEl = document.getElementById("karte-attribution");
-  var home = places.filter(function (o) { return !o.fern; });
+  var home = places.filter(function (o) { return !o.remote; });
 
   function startMap() {
     if (map) return;

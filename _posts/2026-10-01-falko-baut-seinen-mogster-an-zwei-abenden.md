@@ -2,10 +2,13 @@
 title: "Falko baut seinen Mogster an zwei Abenden"
 date: 2026-10-01 22:30:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
+linked:
+  - /team/opa-andi/
+uuid: 7cebe213-da7c-45db-9aa2-19d67f812022
 ---
-Nach Papas Mogster wollte Falko auch einen: Am **30. September und 1. Oktober 2026** hat er seinen gelben Mogster an zwei Abenden in der Werkstatt zusammengebaut. Als Extra sitzt im Führerhaus eine **kleine Kamera auf einem Servo**, die sich hin und her drehen kann. Kurz darauf ging es zur ersten Ausfahrt ins Gelände.
+Nach [Papas]({{ '/team/opa-andi/' | relative_url }}) Mogster wollte Falko auch einen: Am **30. September und 1. Oktober 2026** hat er seinen gelben Mogster an zwei Abenden in der Werkstatt zusammengebaut. Als Extra sitzt im Führerhaus eine **kleine Kamera auf einem Servo**, die sich hin und her drehen kann. Kurz darauf ging es zur ersten Ausfahrt ins Gelände.
 
 ![Erster Abend: Leiterrahmen mit Achsen und Rädern auf einer Kiste in der Werkstatt](/assets/images/news/falko-baut-seinen-mogster-an-zwei-abenden/01.jpg)
 ![Werkstatttisch voller Teile: pinke Zahnräder, Schrauben, Werkzeug und Kabel](/assets/images/news/falko-baut-seinen-mogster-an-zwei-abenden/02.jpg)

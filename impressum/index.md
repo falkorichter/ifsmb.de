@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Impressum
+uuid: 6e37240e-4c67-4153-b0f9-b9ecc5b5cdef
 ---
 <div class="prose" markdown="1">
 
@@ -38,7 +39,17 @@ Diese Website wird über [GitHub Pages](https://pages.github.com/) (GitHub Inc.,
 
 Wir selbst setzen keine Cookies, verwenden keine Tracking- oder Analysewerkzeuge und laden keine Schriften oder Skripte von fremden Servern.
 
-**Karte:** Die [Karte]({{ '/karte/' | relative_url }}) zeigt Kartenbilder von [OpenStreetMap](https://www.openstreetmap.org/) (OpenStreetMap Foundation, Vereinigtes Königreich). Sie werden erst geladen, wenn du auf „Karte laden“ klickst; dabei wird deine IP-Adresse an die Server der OpenStreetMap Foundation übertragen. Details in der [Datenschutzerklärung der OSMF](https://osmfoundation.org/wiki/Privacy_Policy). Wenn du „Auf diesem Gerät merken“ wählst, speichert dein Browser das lokal (kein Cookie); mit „Karte ausblenden“ wird das wieder gelöscht.
+**Sprache:** Menüs, Knöpfe und Hinweise gibt es auf Deutsch, Englisch und Französisch (die Inhalte bleiben deutsch). Ohne eigene Wahl nimmt die Seite die Sprache, die dein Browser bevorzugt – das liest das Skript nur in deinem Browser aus, es wird nichts übertragen. Wählst du unten auf einer Seite eine Sprache (oder öffnest einen Link mit `?lang=de`, `?lang=en` oder `?lang=fr`), merkt sich dein Browser das lokal in seinem Speicher (kein Cookie); die Wahl verlässt dein Gerät nie. Über die Browser-Einstellungen („Websitedaten löschen“) ist sie wieder weg.
+{: #sprache}
+
+**Karte:** Die [Karte]({{ '/map/' | relative_url }}) zeigt Kartenbilder von [OpenStreetMap](https://www.openstreetmap.org/) (OpenStreetMap Foundation, Vereinigtes Königreich). Sie werden erst geladen, wenn du auf „Karte laden“ klickst; dabei wird deine IP-Adresse an die Server der OpenStreetMap Foundation übertragen. Details in der [Datenschutzerklärung der OSMF](https://osmfoundation.org/wiki/Privacy_Policy). Wenn du „Auf diesem Gerät merken“ wählst, speichert dein Browser das lokal (kein Cookie); mit „Karte ausblenden“ wird das wieder gelöscht.
+
+**Mit GitHub verbinden (nur für Mitwirkende):** In den Formularen zum Anlegen und Bearbeiten kann man sich mit einem eigenen GitHub-Token verbinden, um Pull Requests mit Fotos direkt von hier aus zu erstellen. Erst dann schickt dein Browser Anfragen an [api.github.com](https://api.github.com) (GitHub Inc., USA) – mit dem Token, den Inhalten und Fotos, die du einreichst, und deiner IP-Adresse; es gilt die [Datenschutzerklärung von GitHub](https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement). Solange du verbunden bist, fragt eine Seite mit ✏️-Knopf beim Öffnen bei GitHub nach, ob schon ein offener Pull Request diese Seite ändert. Die Übersicht [„Offen“]({{ '/mitmachen/offen/' | relative_url }}) holt nur mit Verbindung die offenen Pull Requests und Aufgaben (Issues) von GitHub und merkt sich das Ergebnis für zwei Minuten im Sitzungsspeicher des Tabs (`sessionStorage`, weg, sobald der Tab zu ist); „Übernehmen“ trägt dich auf GitHub als zuständig für eine Aufgabe ein. Das Token bleibt in deinem Browser (bis der Tab geschlossen wird, mit „Auf diesem Gerät merken“ dauerhaft im lokalen Speicher, kein Cookie) und geht an keinen anderen Server; „Abmelden“ löscht es. Fotos werden vorher in deinem Browser verkleinert und ohne Metadaten (auch ohne Standortdaten) neu gespeichert.
+
+**Gelesen-Markierung:** Damit du siehst, welche Seiten du schon kennst, merkt sich dein Browser beim Öffnen einer Seite deren Kennung (eine zufällige Nummer, ohne Datum oder Uhrzeit) lokal in seinem Speicher (kein Cookie). Links zu diesen Seiten bekommen dann ein ✓. Diese Angaben verlassen dein Gerät nie und werden nicht an uns oder andere übertragen. Du kannst sie jederzeit über die Browser-Einstellungen („Websitedaten löschen“) oder hier löschen: <button type="button" class="btn btn-ghost btn-small" data-gelesen-loeschen hidden>Gelesen-Markierungen löschen</button>
+
+**Aussehen (Themes):** Unten auf jeder Seite kannst du unter „Aussehen“ wählen, wie die Seite aussieht – im gewohnten Stil des Instituts oder im Stil befreundeter Netzwerke ([Verbund Offener Werkstätten](https://offene-werkstaetten.org/de), [Réseau Français des FabLabs](https://www.rfflabs.fr/); beide haben zugestimmt) – oder, mit einem Augenzwinkern, im „Slop“-Look nach [Slopstrap](https://slopstrap.mikelacher.com/). Manche Seiten bringen ihr eigenes Aussehen mit, ein Link mit `?theme=…` am Ende wählt eines für dich. Deine Wahl merkt sich dein Browser lokal in seinem Speicher (kein Cookie); sie verlässt dein Gerät nie. Alle Schriften dafür liegen auf dieser Website – es wird nichts von den Seiten der Netzwerke oder anderen Servern geladen. Mit „Wie die Seite“ oder über die Browser-Einstellungen („Websitedaten löschen“) ist die Wahl wieder weg.
+{: #theme-wahl}
 
 Wenn du uns per E-Mail kontaktierst, verwenden wir deine Angaben nur, um deine Anfrage zu beantworten.
 

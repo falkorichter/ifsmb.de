@@ -3,6 +3,7 @@ title: "3D-Drucker im Fröbel-Kindergarten eingeweiht"
 date: 2024-01-12 16:00:00 +0100
 author: falko-richter
 tags: [kita]
+uuid: 4ec91de6-ea8e-4b18-a5f8-9dcc4816ee0b
 ---
 
 Am 12. Januar 2024 haben wir im Fröbel-Kindergarten in der Lisa-Fittko-Straße einen 3D-Drucker eingeweiht: einen da Vinci mini von XYZprinting. Morgens wurde ausgepackt und aufgebaut, am Nachmittag liefen die ersten Drucke.

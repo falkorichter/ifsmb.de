@@ -3,11 +3,12 @@ layout: page
 title: Geld für Makespaces
 lead: Wie kommt eine Schule an Drucker, Plotter und Material? Wege, die wir selbst gegangen sind oder die andere uns empfohlen haben.
 partners: [PC-Spende – Das macht Schule]
-verlinkt:
+linked:
   - /news/2026/09/24/pc-spende-de-hardware-fuer-schulen/
   - /news/2026/11/07/40-monitore-von-der-bundesdruckerei/
-  - /ausstattung/laptops-druck-sticks/
+  - /equipment/laptops-druck-sticks/
   - /spenden/
+uuid: 81e1f490-46a0-4e07-9cc1-d7adaef79c9e
 ---
 <div class="wip-box">
   <strong>🚧 In Arbeit:</strong> Diese Seite sammelt, was wir bisher wissen – sie ist nicht vollständig und wächst mit jedem Makespace, den wir aufbauen. Ihr kennt einen weiteren Weg oder habt Erfahrungen mit einem der Programme? Schreibt Falko: <a href="#" class="obf-mail" data-em="ZmFsa29AMzVzZXJ2aWNlcy5kZQ==">falko [at] 35services.de</a>
@@ -47,17 +48,17 @@ verlinkt:
 ## 🚀 Einfach anfangen: der IfsMB-Weg
 {: #bootstrapping}
 
-Unser Name ist Programm: *spontane* Makespace Buildung heißt, mit dem anzufangen, was da ist – ohne monatelang auf einen Förderbescheid zu warten. Die [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) ist komplett so entstanden, bis hin zum [Snapmaker U1]({{ '/ausstattung/snapmaker-u1/' | relative_url }}), einem 4-Farb-Drucker. Was dabei funktioniert hat:
+Unser Name ist Programm: *spontane* Makespace Buildung heißt, mit dem anzufangen, was da ist – ohne monatelang auf einen Förderbescheid zu warten. Die [3D-Druck AG an der KTG]({{ '/projects/3d-druck-ag-ktg/' | relative_url }}) ist komplett so entstanden, bis hin zum [Snapmaker U1]({{ '/equipment/snapmaker-u1/' | relative_url }}), einem 4-Farb-Drucker. Was dabei funktioniert hat:
 
 1. **Mit einem Gerät und einer AG starten.** Ein Drucker, ein paar alte Laptops, eine Stunde pro Woche. Ehrenamtliche AG-Leitung kostet die Schule nichts.
 2. **Spenden über einen Verein sammeln.** Schulen und Privatpersonen können schlecht Spendenquittungen ausstellen – ein gemeinnütziger Verein schon. Bei uns läuft das über [35services e.V.](https://35services.de/ag/) und eine [Spendenseite bei betterplace]({{ '/spenden/' | relative_url }}). Auch der Förderverein der Schule ist ein guter Partner.
-3. **Die Kinder machen mit.** In der AG haben die Kinder selbst Sponsoren gesucht, eine Kasse geführt und ausgerechnet, was ein Projekt kostet ([AG-Jahr 1]({{ '/projekte/ktg-ag-jahr-1/' | relative_url }})). Das ist gleichzeitig Unterricht – und überzeugt Spender*innen mehr als jeder Antrag.
+3. **Die Kinder machen mit.** In der AG haben die Kinder selbst Sponsoren gesucht, eine Kasse geführt und ausgerechnet, was ein Projekt kostet ([AG-Jahr 1]({{ '/projects/ktg-ag-jahr-1/' | relative_url }})). Das ist gleichzeitig Unterricht – und überzeugt Spender*innen mehr als jeder Antrag.
 4. **Lokale Sponsoren fragen.** Restaurants, Läden und Firmen aus dem Kiez, Eltern, Platinenhersteller – kleine Beträge und Sachspenden summieren sich.
-5. **Ergebnisse zeigen.** Fotos, Beiträge, ein Besuch vom [Schulstadtrat]({{ '/kalender/2026-03-09-schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }}): Wer sieht, was aus dem Geld wird, spendet wieder. Deshalb gibt es diese Website.
+5. **Ergebnisse zeigen.** Fotos, Beiträge, ein Besuch vom [Schulstadtrat]({{ '/calendar/2026-03-09-schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }}): Wer sieht, was aus dem Geld wird, spendet wieder. Deshalb gibt es diese Website.
 6. **Notfalls vorstrecken – aber transparent.** Manchmal ist ein Gerät nötig, bevor die Spenden reichen. Falko ist dann privat in Vorleistung gegangen; sobald genug Spenden da sind, übernimmt der Verein die Kosten und das Gerät gehört ihm (siehe [Spenden]({{ '/spenden/' | relative_url }})).
 7. **Spenden nur für Material.** Bei uns fließt jeder Euro in Geräte und Material – das macht das Sammeln leichter.
 
-**Zweites Beispiel: [Platanus Schule]({{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}).** Hier ging es noch kleiner los: Die Schule hat selbst einen Drucker gekauft, einen Bambu Lab A1 mini, und Falko bietet seit September 2026 eine AG an. Wohin das führt, schauen wir uns an. Die Kinder haben Spaß, und die ersten Lehrkräfte sehen, was in so einem Drucker steckt – aus dem Töpferunterricht kam schon die Frage nach einem 3D-gedruckten Stempel. Genau so wächst ein Makespace: erst ein Gerät und eine AG, dann Ideen aus der ganzen Schule.
+**Zweites Beispiel: [Platanus Schule]({{ '/projects/3d-druck-ag-platanus-schule/' | relative_url }}).** Hier ging es noch kleiner los: Die Schule hat selbst einen Drucker gekauft, einen Bambu Lab A1 mini, und Falko bietet seit September 2026 eine AG an. Wohin das führt, schauen wir uns an. Die Kinder haben Spaß, und die ersten Lehrkräfte sehen, was in so einem Drucker steckt – aus dem Töpferunterricht kam schon die Frage nach einem 3D-gedruckten Stempel. Genau so wächst ein Makespace: erst ein Gerät und eine AG, dann Ideen aus der ganzen Schule.
 
 **Vorteile:** Man kann sofort loslegen, ist an keine Fristen und Förderbedingungen gebunden und wächst mit dem, was wirklich gebraucht wird. **Nachteile:** Sammeln ist Daueraufgabe, und für eine komplette Erstausstattung reicht es oft nicht auf einmal – dann lohnt sich zusätzlich ein Förderprogramm.
 
@@ -105,9 +106,9 @@ Aus dem Maker-Space-Newsletter vom April 2026 – nützlich für die Planung und
 
 [junior1stein](https://junior1stein.de/) ist eine MINT-Initiative der Berliner Senatsverwaltung für Bildung, Jugend und Familie, angesiedelt am Landesinstitut BLiQ und unterstützt aus dem Masterplan Industriestadt Berlin. Ein offenes Förderprogramm mit Antrag steht nicht auf der Website – der Weg führt über die Cluster im Bezirk. Für Berliner Schulen ist junior1stein ein guter Ausgangspunkt:
 
-- **Cluster im Bezirk:** In vier Bezirken (Mitte, Neukölln, Spandau, Marzahn-Hellersdorf) arbeiten jeweils 5–7 Einrichtungen von der Kita bis zum Oberstufenzentrum im MINT-Bereich zusammen, ausgewählt mit der Regionalen Schulaufsicht. Zum [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/) gehört auch das [Rosalind-Franklin-Gymnasium]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}), das seit dem Schuljahr 2026/27 einen Makespace hat.
-- **Erfahrung aus unserem Umfeld:** Die **6 Drucker** im Makespace des Rosalind-Franklin-Gymnasiums kommen aus der Förderung über junior1stein. Sie sind seit Beginn des Schuljahres 2026/27 im Einsatz, die 3D-Druck-AG läuft, und Falko berät die Schule. Im Januar 2027 gibt es eine [kleine feierliche Eröffnung]({{ '/kalender/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}). <span class="todo">[Wie lief die Förderung ab? – Details folgen.]</span>
-- **Wir fragen gerade an:** Die Kurt-Tucholsky-Grundschule gehört nicht zum Cluster. Falko hat im November 2026 bei junior1stein nachgefragt, welche Möglichkeiten es für die KTG gibt – Stand und Antwort im Projekt [junior1stein für die KTG]({{ '/projekte/junior1stein-ktg/' | relative_url }}).
+- **Cluster im Bezirk:** In vier Bezirken (Mitte, Neukölln, Spandau, Marzahn-Hellersdorf) arbeiten jeweils 5–7 Einrichtungen von der Kita bis zum Oberstufenzentrum im MINT-Bereich zusammen, ausgewählt mit der Regionalen Schulaufsicht. Zum [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/) gehört auch das [Rosalind-Franklin-Gymnasium]({{ '/projects/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}), das seit dem Schuljahr 2026/27 einen Makespace hat.
+- **Erfahrung aus unserem Umfeld:** Die **6 Drucker** im Makespace des Rosalind-Franklin-Gymnasiums kommen aus der Förderung über junior1stein. Sie sind seit Beginn des Schuljahres 2026/27 im Einsatz, die 3D-Druck-AG läuft, und Falko berät die Schule. Im Januar 2027 gibt es eine [kleine feierliche Eröffnung]({{ '/calendar/2027-01-01-eroeffnung-makespace-rosalind-franklin-gymnasium/' | relative_url }}). <span class="todo">[Wie lief die Förderung ab? – Details folgen.]</span>
+- **Wir fragen gerade an:** Die Kurt-Tucholsky-Grundschule gehört nicht zum Cluster. Falko hat im November 2026 bei junior1stein nachgefragt, welche Möglichkeiten es für die KTG gibt – Stand und Antwort im Projekt [junior1stein für die KTG]({{ '/projects/junior1stein-ktg/' | relative_url }}).
 - **Fördermittel-Übersicht:** In der [MINT-Schatzkiste](https://junior1stein.de/MINT-SCHATZKISTE/MINT-Foerdermittel/) gibt es eine regelmäßig aktualisierte Übersicht über Stiftungen, Vereine und Verbände, die MINT-Projekte fördern.
 - **Fortbildung:** Für Lehrkräfte gibt es Fortbildungen, zum Beispiel am 19.11.2026 zu Maker Education und Berufsorientierung (Anmeldung über Fortbildung Berlin, Kurs 26.2-138115).
 - **Weitere Angebote:** Boxen zum Tüfteln und Forschen, ein Kalender der MINT-Wettbewerbe in Berlin, MINT-News.
@@ -121,7 +122,7 @@ Aus dem Maker-Space-Newsletter vom April 2026 – nützlich für die Planung und
 Ein Makespace braucht nicht nur Drucker, sondern auch Rechner für CAD und Slicer. Die müssen nicht neu sein:
 
 - **[PC-Spende – Das macht Schule](https://pc-spende.das-macht-schule.net/):** Firmen inserieren aussortierte Hardware, Schulen bewerben sich, „Das macht Schule“ klärt die Rahmenbedingungen. **Beispiel:** Über „Das macht Schule“ kommen gerade [40 Monitore von der Bundesdruckerei]({{ '/news/2026/11/07/40-monitore-von-der-bundesdruckerei/' | relative_url }}) an eine Berliner Schule. Mehr im Beitrag [„pc-spende.de – Hardware für Schulen“]({{ '/news/2026/09/24/pc-spende-de-hardware-fuer-schulen/' | relative_url }}).
-- **Alte Laptops mit Linux vom Stick:** Die [Laptops der 3D-Druck AG]({{ '/ausstattung/laptops-druck-sticks/' | relative_url }}) wären sonst im Müll gelandet – mit einem USB-Stick, von dem Linux startet, laufen sie für CAD und Slicer.
+- **Alte Laptops mit Linux vom Stick:** Die [Laptops der 3D-Druck AG]({{ '/equipment/laptops-druck-sticks/' | relative_url }}) wären sonst im Müll gelandet – mit einem USB-Stick, von dem Linux startet, laufen sie für CAD und Slicer.
 - **Materialspenden an uns:** Laptops, Monitore, 3D-Drucker, kabelgebundene Mäuse und USB-Sticks nehmen wir gerne und geben sie an Schulen weiter (siehe [Materialspenden]({{ '/spenden/' | relative_url }}#materialspenden)).
 
 ## Noch zu recherchieren

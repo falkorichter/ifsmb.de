@@ -1,14 +1,18 @@
 /*
- * Network view of all connections (/netzwerk/).
+ * Network view of all connections (/network/).
  * No libraries: a small force-directed layout drawn on a canvas.
  * Node data comes from the JSON rendered by Jekyll in netzwerk/index.html; edges are derived here
- * with the same rules as _includes/verbindungen.html.
+ * with the same rules as _includes/verbindungen.html. Todos (todos/todo-<person>.md) are not rendered by
+ * Jekyll: they are fetched first and parsed with TodoFormat from assets/js/todos.js (see the loader at the end).
  */
 (function () {
   'use strict';
+  function netzStart(raw) {
 
   var TYPES = {
     projekt:     { label: 'Projekte', one: 'Projekt',     color: '#ffcc00', icon: '🔧' },
+    herausforderung: { label: 'Herausforderungen', one: 'Herausforderung', color: '#ff9f1c', icon: '🧗' },
+    todo:        { label: 'Todos', one: 'Todo',            color: '#8fd16a', icon: '📋' },
     termin:      { label: 'Termine', one: 'Termin',      color: '#2f5bea', icon: '📅' },
     beitrag:     { label: 'Beiträge', one: 'Beitrag',     color: '#2bb673', icon: '📰' },
     person:      { label: 'Personen', one: 'Person',     color: '#ff5a36', icon: '👤' },
@@ -27,7 +31,6 @@
     link:     { color: INK,       dash: [],     label: '' }
   };
 
-  var raw = JSON.parse(document.getElementById('netz-daten').textContent);
   var canvas = document.getElementById('netz-canvas');
   var ctx = canvas.getContext('2d');
   var panel = document.getElementById('netz-panel');
@@ -61,7 +64,7 @@
   }
   raw.filter(function (n) { return n.type === 'ausstattung'; }).forEach(function (n) {
     list(n.owner_name).forEach(function (s) { n._owners = (n._owners || []).concat(textNode('name', s)); });
-    if (n.standort && !list(n.standort_partner).length) n._location = textNode('ort', n.standort);
+    if (n.location && !list(n.location_partner).length) n._location = textNode('ort', n.location);
   });
 
   var edges = [], seen = {};
@@ -76,22 +79,26 @@
     seen[k] = e; edges.push(e);
   }
   nodes.forEach(function (n) {
-    list(n.verlinkt).forEach(function (u) { link(n, byId[norm(u)]); });
+    list(n.linked).forEach(function (u) { link(n, byId[norm(u)]); });
     list(n.team).forEach(function (s) { link(n, personBySlug[s]); });
     list(n.author).forEach(function (s) { link(n, personBySlug[s]); });
     list(n.partners).forEach(function (s) { link(n, partnerByName[s]); });
+    if (n.type === 'todo') {               // main person "owns" the todo, helping hands are plain links
+      link(n, personBySlug[n.person], 'besitz');
+      list(n.helpers).forEach(function (s) { link(n, personBySlug[s]); });
+    }
     if (n.type === 'ausstattung') {
       list(n.owner_partner).forEach(function (s) { link(n, partnerByName[s], 'besitz'); });
       list(n.owner_team).forEach(function (s) { link(n, personBySlug[s], 'besitz'); });
       (n._owners || []).forEach(function (o) { link(n, o, 'besitz'); });
-      list(n.standort_partner).forEach(function (s) { link(n, partnerByName[s], 'standort'); });
+      list(n.location_partner).forEach(function (s) { link(n, partnerByName[s], 'standort'); });
       if (n._location) link(n, n._location, 'standort');
     }
     if (n.type === 'projekt') {
-      list(n.teil_von).forEach(function (s) { link(n, projectBySlug[s], 'teil'); });
-      list(n.verwandt).forEach(function (s) { link(n, projectBySlug[s]); });
+      list(n.part_of).forEach(function (s) { link(n, projectBySlug[s], 'teil'); });
+      list(n.related).forEach(function (s) { link(n, projectBySlug[s]); });
     } else {
-      list(n.projekte).forEach(function (s) { link(n, projectBySlug[s]); });
+      list(n.projects).forEach(function (s) { link(n, projectBySlug[s]); });
       list(n.tags).forEach(function (t) { link(n, projectByTag[t]); });
     }
   });
@@ -100,7 +107,9 @@
     e.source.links.push(e.target); e.target.links.push(e.source);
     e.source.kinds[e.target.id] = e.kind; e.target.kinds[e.source.id] = e.kind;
   });
-  nodes.forEach(function (n) { n.r = 5 + Math.min(14, Math.sqrt(n.links.length) * 2.6); });
+  // challenges and todos are small steps inside projects: little nodes
+  var KLEIN = { herausforderung: 1, todo: 1 };
+  nodes.forEach(function (n) { n.r = KLEIN[n.type] ? 3 + Math.min(3, Math.sqrt(n.links.length)) : 5 + Math.min(14, Math.sqrt(n.links.length) * 2.6); });
 
   // ---------- filters ----------
   var shownTypes = {}; Object.keys(TYPES).forEach(function (t) { shownTypes[t] = true; });
@@ -133,7 +142,7 @@
   var visible = [], visibleEdges = [];
   function isVisible(n) {
     if (!shownTypes[n.type]) return false;
-    if (!showPersonal && n.persoenlich) return false;
+    if (!showPersonal && n.personal) return false;
     return true;
   }
   function refilter() {
@@ -231,7 +240,7 @@
       ctx.fillStyle = TYPES[n.type].color; ctx.fill();
       ctx.lineWidth = (n === selected || hit ? 3 : 1.5) * lw;
       ctx.strokeStyle = n === selected || hit ? INK : 'rgba(22,22,29,.55)';
-      if (n.persoenlich) ctx.setLineDash([3 * lw, 2 * lw]);
+      if (n.personal) ctx.setLineDash([3 * lw, 2 * lw]);
       ctx.stroke(); ctx.setLineDash([]);
     });
     ctx.globalAlpha = 1;
@@ -264,7 +273,7 @@
         .forEach(function (m) {
           var role = roleOf && roleOf(m), roleTxt = role === 'besitz' || role === 'standort' ? ' <span class="link-meta">' + KIND[role].label + '</span>' : '';
           html += '<li><a href="' + esc(m.url || '#') + '" data-node="' + esc(m.id) + '"><span aria-hidden="true">' + TYPES[type].icon + '</span> ' + esc(m.title) +
-            (m.persoenlich ? ' <span class="link-private">persönlich</span>' : '') + roleTxt + '</a></li>';
+            (m.personal ? ' <span class="link-private">persönlich</span>' : '') + roleTxt + '</a></li>';
         });
       html += '</ul>';
     });
@@ -282,7 +291,7 @@
     if (visible.indexOf(n) === -1) { visible.push(n); }
     var t = TYPES[n.type];
     var html = '<p class="meta"><span class="netz-dot" style="background:' + t.color + '"></span> ' + t.one +
-      (n.date ? ' · ' + n.date.split('-').reverse().join('.') : '') + (n.persoenlich ? ' · <span class="link-private">persönlich</span>' : '') + '</p>' +
+      (n.date ? ' · ' + n.date.split('-').reverse().join('.') : '') + (n.personal ? ' · <span class="link-private">persönlich</span>' : '') + '</p>' +
       '<h2>' + esc(n.title) + '</h2>' +
       (n.url ? '<p><a class="btn" href="' + esc(n.url) + '"' + (n.extern ? ' target="_blank" rel="noopener"' : '') + '>Seite öffnen →</a></p>' : '');
     html += groupedList(n.links, function (m) { return n.kinds[m.id]; });
@@ -638,4 +647,23 @@
   if (start) { select(start); view.x = start.x; view.y = start.y; view.k = 1.3; draw(); }
   else if (/^zeit:\d{4}-\d{2}$/.test(hash)) selectPeriod(hash.slice(5));
   scrollTimeline();
+  }
+
+  // ---------- loader: Jekyll data + todo files ----------
+  var raw = JSON.parse(document.getElementById('netz-daten').textContent);
+  var cfgEl = document.getElementById('netz-todos');
+  var cfg = cfgEl ? JSON.parse(cfgEl.textContent) : null;
+  if (!cfg || !cfg.dateien.length || !window.TodoFormat || !window.fetch) { netzStart(raw); return; }
+  Promise.all(cfg.dateien.map(function (person) {
+    return fetch(cfg.basis + 'todo-' + encodeURIComponent(person) + '.md')
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (md) {
+        return window.TodoFormat.parse(md).todos.map(function (t) {
+          var f = t.felder;
+          return { id: 'todo:' + person + '/' + t.id, url: cfg.basis + '#' + person + '/' + t.id, type: 'todo', title: t.titel,
+            status: f.status, date: f.since, person: person, helpers: f.helpers, projects: f.projects, tags: f.tags, linked: f.linked };
+        });
+      })
+      .catch(function () { return []; });
+  })).then(function (listen) { netzStart(raw.concat([].concat.apply([], listen))); }, function () { netzStart(raw); });
 })();

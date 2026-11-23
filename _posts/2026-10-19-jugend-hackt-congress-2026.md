@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2026/jugend-hackt-congress-2026/
 original_site: 35services.de
 tags: [35services, jugend-hackt, lulzbot-mini, lulzbot-taz-6, axidraw, flexibles-filament]
+uuid: 811bae4b-9e7b-4549-b7a2-1b046ba511c4
 ---
 
 <a class="video-link" href="https://www.youtube.com/watch?v=2nlEtCjD7ok" target="_blank" rel="noopener">

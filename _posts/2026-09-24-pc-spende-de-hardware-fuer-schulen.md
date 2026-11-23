@@ -5,6 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2026/pc-spende-de-hardware-fuer-schulen/
 original_site: 35services.de
 tags: [35services, pc-spende]
+uuid: 65413af4-071b-4346-ad7b-5d5259e8d335
 ---
 
 Falko hat Erfahrungen mit „das macht Schule“ gemacht und will es mir euch teilen und dafür werben:
