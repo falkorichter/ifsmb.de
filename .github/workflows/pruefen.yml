@@ -1,5 +1,6 @@
 # Checks every pull request before it can be merged: galleries must be Markdown, the forms must
-# write files that fit Pages CMS (_scripts/test_formulare.rb),
+# write files that fit Pages CMS (_scripts/test_formulare.rb), the UI strings must be complete in
+# German, English and French (_scripts/test_i18n.rb),
 # the site must build (the gallery plugin stops on images without alt text),
 # and the link check must pass.
 name: Prüfen
@@ -28,7 +29,11 @@ jobs:
         run: ruby _scripts/uuids_ergaenzen.rb --pruefen
       - name: Formulare und Pages-CMS-Felder testen
         run: ruby _scripts/test_formulare.rb
+      - name: Zusammenführen (Konflikte) testen
+        run: node _scripts/test_merge.js
       - name: Seite bauen
         run: bundle exec jekyll build
       - name: Links und erreichbare Seiten prüfen
         run: ruby _scripts/check_site.rb
+      - name: Sprachen der Bedienung prüfen (de/en/fr)
+        run: ruby _scripts/test_i18n.rb

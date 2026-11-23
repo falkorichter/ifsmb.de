@@ -21,7 +21,7 @@ Dir.chdir(ROOT)
 
 # Files Jekyll does not render as pages
 IGNORIERT = %r{\A(?:_site|_includes|_layouts|_data|_plugins|_scripts|_logo|_internal|_pr-vorschau|node_modules|vendor|\.)}
-OHNE_SEITE = %w[README.md CLAUDE.md CHANGELOG.md DATENSTRUKTUR.md LICENSE].freeze
+OHNE_SEITE = %w[README.md CLAUDE.md CHANGELOG.md DATA_STRUCTURES.md DEPENDENCIES.md LICENSE].freeze
 
 def front_matter(text)
   return nil unless text.start_with?("---\n", "---\r\n")
@@ -36,7 +36,7 @@ rescue Psych::SyntaxError
 end
 
 def zaehlt?(daten)
-  return false if daten["suche"] == false
+  return false if daten["search"] == false
   return false if daten["layout"] == "weiterleitung"
 
   !daten["permalink"].to_s.match?(/\.(xml|json|ics|txt|js|css)\z/)

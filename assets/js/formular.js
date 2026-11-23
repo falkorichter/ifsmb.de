@@ -8,6 +8,10 @@ var Formular = (function () {
   "use strict";
 
   // ---------- helpers ----------
+  // UI string (assets/js/i18n.js, _data/i18n/*.yml); German fallback where the page has no i18n.js (and in Node)
+  function t(key, params, fallback) {
+    return typeof window !== "undefined" && window.I18n ? window.I18n.t(key, params) : (fallback != null ? fallback : key);
+  }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
   function slugify(s, ersatz) {
@@ -129,7 +133,7 @@ var Formular = (function () {
     var id = "fc" + (++zaehler);
     var feld = el('<div class="form-feld form-chips-feld"><span id="' + id + '-l">' + esc(o.label) + "</span>"
       + '<div class="form-chips"><ul class="form-chip-liste"></ul><div class="form-ac">'
-      + '<input type="text" class="form-ac-input" aria-labelledby="' + id + '-l" placeholder="' + esc(o.placeholder || "Suchen …") + '"'
+      + '<input type="text" class="form-ac-input" aria-labelledby="' + id + '-l" placeholder="' + esc(o.placeholder || t("form.search", null, "Suchen …")) + '"'
       + ' role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + id + '-a">'
       + '<ul class="form-ac-liste" id="' + id + '-a" role="listbox" hidden></ul></div></div>'
       + (o.hilfe ? '<small class="form-hilfe">' + esc(o.hilfe) + "</small>" : "") + "</div>");
@@ -143,7 +147,7 @@ var Formular = (function () {
         var info = q.beschreibe(v);
         return '<li class="form-chip' + (info.person ? " form-chip-person" : "") + '">' + (info.person ? avatar(info.person) : "")
           + (info.url ? '<a href="' + esc(info.url) + '" target="_blank" rel="noopener">' + esc(info.name) + "</a>" : "<span>" + esc(info.name) + "</span>")
-          + '<button type="button" data-i="' + i + '" aria-label="' + esc(info.name) + ' entfernen">✕</button></li>';
+          + '<button type="button" data-i="' + i + '" aria-label="' + esc(t("form.remove", { name: info.name }, info.name + " entfernen")) + '">✕</button></li>';
       }).join("");
       input.hidden = !!o.einzeln && w.length > 0;
     }
@@ -159,7 +163,7 @@ var Formular = (function () {
         return '<li role="option" id="' + id + "-" + i + '" data-wert="' + esc(x.wert) + '"' + (i === 0 ? ' aria-selected="true"' : "") + ">"
           + (x.person ? avatar(x.person) : "") + '<span class="form-ac-name">' + esc(x.name) + "</span>"
           + (x.typ ? '<span class="form-ac-typ">' + esc(x.typ) + "</span>" : "") + "</li>";
-      }).join("") || (INDEX ? "" : '<li class="muted small">Suchindex lädt …</li>');
+      }).join("") || (INDEX ? "" : '<li class="muted small">' + esc(t("form.index_loading", null, "Suchindex lädt …")) + "</li>");
       liste.hidden = !liste.innerHTML;
       input.setAttribute("aria-expanded", liste.hidden ? "false" : "true");
       if (r.length) input.setAttribute("aria-activedescendant", id + "-0"); else input.removeAttribute("aria-activedescendant");
@@ -236,7 +240,7 @@ var Formular = (function () {
   function dialog(o) {
     var d = el('<dialog class="form-dialog ' + (o.klasse || "") + '" id="' + o.id + '" aria-labelledby="' + o.id + '-titel">'
       + '<div class="form-dialog-kopf"><h2 id="' + o.id + '-titel">' + esc(o.titel || "") + "</h2>" + (o.kopf || "")
-      + '<button type="button" class="btn btn-small btn-ghost" data-schliessen aria-label="Schließen">✕</button></div></dialog>');
+      + '<button type="button" class="btn btn-small btn-ghost" data-schliessen aria-label="' + esc(t("common.close", null, "Schließen")) + '">✕</button></div></dialog>');
     var start = null;
     d.addEventListener("pointerdown", function (e) { start = e.target; });
     d.addEventListener("click", function (e) {
@@ -271,6 +275,92 @@ var Formular = (function () {
       return k + ": " + yamlText(v);
     }).join("\n");
   }
+  // ---------- reading front matter (edit forms) ----------
+  // Splits a file into front matter blocks and body, keeping every byte: joining the raw blocks with "\n" gives the
+  // front matter back unchanged. A block is one top-level key with its following lines (indented lines, "- " list
+  // items, blank lines) or a top-level comment. → { blocks: [{ key, raw }], rest } or null without front matter.
+  // rest = everything after the closing "---" line, including its newline.
+  function splitFile(text) {
+    text = String(text).replace(/\r\n/g, "\n");
+    if (!/^---\n/.test(text)) return null;
+    var end = text.indexOf("\n---", 3);
+    while (end >= 0 && !/^\n---(\n|$)/.test(text.slice(end, end + 5))) end = text.indexOf("\n---", end + 1);
+    var emptyFrontMatter = /^---\n---(\n|$)/.test(text);
+    if (end < 0 && !emptyFrontMatter) return null;
+    var frontMatterText = emptyFrontMatter ? "" : text.slice(4, end), rest = emptyFrontMatter ? text.slice(3) : text.slice(end + 4);
+    var blocks = [];
+    if (frontMatterText !== "") frontMatterText.split("\n").forEach(function (line) {
+      var m = line.match(/^([A-Za-z_][\w-]*)\s*:(\s|$)/);
+      if (m) blocks.push({ key: m[1], lines: [line] });
+      else if (/^#/.test(line) || !blocks.length) blocks.push({ key: null, lines: [line] });
+      else blocks[blocks.length - 1].lines.push(line);
+    });
+    return { blocks: blocks.map(function (b) { return { key: b.key, raw: b.lines.join("\n") }; }), rest: rest };
+  }
+  // Inverse of splitFile: raw blocks + rest → file text
+  function joinFile(blocks, rest) {
+    var frontMatterText = blocks.join("\n");
+    return "---\n" + (frontMatterText === "" ? "" : frontMatterText + "\n") + "---" + rest;
+  }
+  function stripComment(s) { return s.replace(/\s+#.*$/, ""); }
+  function scalarValue(s) {
+    s = s.trim();
+    var m = s.match(/^"((?:[^"\\]|\\.)*)"\s*(#.*)?$/);
+    if (m) return m[1].replace(/\\(["\\\/])/g, "$1").replace(/\\n/g, "\n").replace(/\\t/g, "\t");
+    m = s.match(/^'((?:[^']|'')*)'\s*(#.*)?$/);
+    if (m) return m[1].replace(/''/g, "'");
+    if (/^["']/.test(s)) return undefined; // unclosed quote (multi-line) – too complex
+    s = stripComment(s);
+    if (/^(true|false)$/i.test(s)) return /^true$/i.test(s);
+    if (/^(null|~)?$/i.test(s)) return "";
+    if (/^[\[{&*!|>]/.test(s)) return undefined;
+    return s;
+  }
+  function inlineList(s) {
+    s = stripComment(s.trim());
+    if (!/^\[.*\]$/.test(s)) return undefined;
+    var inner = s.slice(1, -1), parts = [], current = "", quote = null;
+    for (var i = 0; i < inner.length; i++) {
+      var c = inner[i];
+      if (quote) { current += c; if (c === quote && inner[i - 1] !== "\\") quote = null; }
+      else if (c === '"' || c === "'") { quote = c; current += c; }
+      else if (c === ",") { parts.push(current); current = ""; }
+      else if (c === "[" || c === "{") return undefined;
+      else current += c;
+    }
+    if (current.trim() !== "" || parts.length) parts.push(current);
+    var r = parts.map(scalarValue);
+    return r.some(function (x) { return x === undefined || typeof x === "boolean"; }) ? undefined : r.map(String);
+  }
+  // Value of a raw block from splitFile: string, boolean, array of strings, "" for empty, undefined if the value
+  // is something the forms don't edit (objects, lists of objects, anchors …).
+  function yamlValue(raw) {
+    var lines = raw.split("\n"), head = lines[0].replace(/^[^:]*:\s?/, ""), following = lines.slice(1);
+    var content = following.filter(function (l) { return l.trim() !== "" && !/^\s*#/.test(l); });
+    var block = head.trim().match(/^([|>])([+-]?)\s*(#.*)?$/);
+    if (block) {
+      var indent = Math.min.apply(null, content.map(function (l) { return l.match(/^ */)[0].length; }).concat([Infinity]));
+      var text = following.map(function (l) { return l.slice(Math.min(indent, l.length)); });
+      while (text.length && text[text.length - 1] === "") text.pop();
+      var s = block[1] === "|" ? text.join("\n") : text.join("\n").replace(/([^\n])\n(?=[^\n])/g, "$1 ");
+      return block[2] === "-" ? s : s + "\n";
+    }
+    if (head.trim() === "" || /^#/.test(head.trim())) {
+      if (!content.length) return "";
+      if (content.every(function (l) { return /^\s*- /.test(l) || /^\s*-$/.test(l); })) {
+        var r = content.map(function (l) { return scalarValue(l.replace(/^\s*-\s?/, "")); });
+        return r.some(function (x) { return x === undefined || typeof x === "boolean" || /^[\w-]+:\s/.test(x); }) ? undefined : r.map(String);
+      }
+      return undefined; // mapping or list of objects
+    }
+    if (/^\s*\[/.test(head)) return content.length ? undefined : inlineList(head);
+    if (content.length) {
+      if (/^["']/.test(head.trim())) return undefined;
+      return scalarValue([head].concat(content.map(function (l) { return l.trim(); })).join(" ")); // folded plain scalar
+    }
+    return scalarValue(head);
+  }
+
   function frontMatter(paare, text) { return "---\n" + yaml(paare) + "\n---\n" + (String(text || "").trim() ? "\n" + String(text).trim() + "\n" : ""); }
 
   // ---------- GitHub ----------
@@ -280,24 +370,26 @@ var Formular = (function () {
     return c.github + "/new/" + c.branch + "/" + ordner + "?filename=" + encodeURIComponent(datei) + (inhalt == null ? "" : "&value=" + encodeURIComponent(inhalt));
   }
   function githubEdit(pfad) { var c = cfg(); return c.github + "/edit/" + c.branch + "/" + pfad; }
+  function githubFile(path) { var c = cfg(); return c.github + "/blob/" + c.branch + "/" + path; }
   // Copy text, then open url in a new tab. status (element) gets a hint; if copying fails, fallback() is called
   // (e.g. to show the text for manual copying).
   function kopierenUndOeffnen(text, url, status, fallback) {
     function oeffnen(msg) { status.textContent = msg; window.open(url, "_blank", "noopener"); }
     function manuell(msg) { if (fallback) fallback(); oeffnen(msg); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { oeffnen("Kopiert – GitHub ist in einem neuen Tab offen."); },
-        function () { manuell("Kopieren ging nicht – bitte den Text unten kopieren."); });
-    } else manuell("Bitte den Text unten kopieren.");
+      navigator.clipboard.writeText(text).then(function () { oeffnen(t("form.copied_github", null, "Kopiert – GitHub ist in einem neuen Tab offen.")); },
+        function () { manuell(t("form.copy_failed", null, "Kopieren ging nicht – bitte den Text unten kopieren.")); });
+    } else manuell(t("form.copy_manually", null, "Bitte den Text unten kopieren."));
   }
 
   return {
-    esc: esc, norm: norm, slugify: slugify, heute: heute, datumDE: datumDE, el: el, zwei: zwei,
+    t: t, esc: esc, norm: norm, slugify: slugify, heute: heute, datumDE: datumDE, el: el, zwei: zwei,
     cfg: cfg, ladeIndex: ladeIndex, index: function () { return INDEX; },
     personen: personen, person: person, avatar: avatar,
     QUELLEN: QUELLEN, chipFeld: chipFeld, dialog: dialog,
     yaml: yaml, yamlText: yamlText, yamlListe: yamlListe, frontMatter: frontMatter, leer: leer,
-    githubNeu: githubNeu, githubEdit: githubEdit, kopierenUndOeffnen: kopierenUndOeffnen
+    splitFile: splitFile, joinFile: joinFile, yamlValue: yamlValue,
+    githubNeu: githubNeu, githubEdit: githubEdit, githubFile: githubFile, kopierenUndOeffnen: kopierenUndOeffnen
   };
 })();
 if (typeof module !== "undefined") module.exports = Formular;

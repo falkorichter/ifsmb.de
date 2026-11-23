@@ -1,15 +1,17 @@
 ---
-suche: false # Übersichtsseite, nicht im Suchindex
+search: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Team
+i18n_title: pages.team.title
+i18n_lead: pages.team.lead
 lead: Die Menschen hinter dem Institut.
 ---
-{% assign members = site.team | where_exp: "m", "m.nicht_im_team != true" | sort: "order" %}
+{% assign members = site.team | where_exp: "m", "m.not_in_team != true" | sort: "order" %}
 <div class="grid-3">
   {% for m in members %}
   <a class="card card-link member-card" href="{{ m.url | relative_url }}">
     {% if m.photo %}
-    <img class="avatar" src="{{ m.photo | relative_url }}"{% if m.photo_2x %} srcset="{{ m.photo | relative_url }} 1x, {{ m.photo_2x | relative_url }} 2x"{% endif %} alt="Foto von {{ m.title }}" loading="lazy">
+    <img class="avatar" src="{{ m.photo | relative_url }}"{% if m.photo_2x %} srcset="{{ m.photo | relative_url }} 1x, {{ m.photo_2x | relative_url }} 2x"{% endif %} alt="{{ "team.photo_of" | t: "name", m.title }}" data-i18n-attr="alt:team.photo_of" data-i18n-params="{{ "name" | i18n_params: m.title }}" loading="lazy">
     {% else %}
     <div class="avatar avatar-initials" aria-hidden="true">{% assign words = m.title | split: ' ' %}{% for w in words limit: 2 %}{{ w | slice: 0 }}{% endfor %}</div>
     {% endif %}

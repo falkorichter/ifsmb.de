@@ -26,7 +26,7 @@ PATTERNS = [
 ].freeze
 
 # documentation that shows HTML on purpose (not published)
-SKIP_FILES = %w[CLAUDE.md README.md CHANGELOG.md DATENSTRUKTUR.md].freeze
+SKIP_FILES = %w[CLAUDE.md README.md CHANGELOG.md DATA_STRUCTURES.md DEPENDENCIES.md].freeze
 
 def content_files(args)
   candidates =

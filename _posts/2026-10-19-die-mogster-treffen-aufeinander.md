@@ -2,9 +2,9 @@
 title: "Die Mogster treffen aufeinander"
 date: 2026-10-19 12:00:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
-verlinkt:
+linked:
   - /team/opa-andi/
 uuid: 8f03298a-a732-424a-80d5-00eda79d654a
 ---

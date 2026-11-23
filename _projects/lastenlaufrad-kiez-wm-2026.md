@@ -2,14 +2,15 @@
 title: "Moabiter Lastenlaufrad Kiez-WM 2026"
 summary: Falko hat das erste Lastenlaufrad-Rennen für Kinder (und Erwachsene) in Moabit organisiert – beim Frühlingsfest im Zazza.
 status: abgeschlossen
-persoenlich: true
+personal: true
 start: 2026-05-09
-zeitraum: Mai 2026
-ort: Zazza, Moabit
+period: Mai 2026
+location: Zazza, Moabit
 event_tag: lastenlaufrad-kiez-wm
-tags: [lastenlaufrad-kiez-wm]
+tags: [lastenlaufrad-kiez-wm, zazza]
 team:
   - falko-richter
+partners: ["Zazza Moabit / Pajas Kaffee"]
 uuid: 5c10bb97-1010-4a42-8fc4-94b9a7bdb2f6
 ---
 

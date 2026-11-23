@@ -1,9 +1,9 @@
 ---
 title: LulzBot TAZ 6
-kategorie: 3D-Drucker (FDM)
+category: 3D-Drucker (FDM)
 summary: Ein robuster Open-Source-Drucker mit großem Bauraum – unser Spezialist für superweiches TPU, den wir auf Events mitnehmen.
 owner_team: falko-richter
-standort: Unterwegs auf Events
+location: Unterwegs auf Events
 image: /assets/images/ausstattung/illustration-drucker.svg
 image_alt: "Illustration eines kartesischen 3D-Druckers (kein Foto des Geräts)"
 image_is_illustration: true
@@ -28,4 +28,4 @@ Der Drucker ist **echt robust** und hat einen **SD-Karten-Slot**, kann also auch
 
 Mehr zum Drucker beim Hersteller: [LulzBot TAZ 6 (Legacy-Drucker)](https://lulzbot.com/legacy-printers/taz-6)
 
-Sein kleiner Bruder ist der [LulzBot Mini]({{ '/ausstattung/lulzbot-mini/' | relative_url }}).
+Sein kleiner Bruder ist der [LulzBot Mini]({{ '/equipment/lulzbot-mini/' | relative_url }}).

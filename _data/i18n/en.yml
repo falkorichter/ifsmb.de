@@ -1,0 +1,616 @@
+# UI strings (English) – same keys as de.yml (see there). The content of the site stays German.
+
+site:
+  description: We build Makespaces – spontaneously, together and right where children and young people learn.
+
+common:
+  and: and
+  by: by
+  close: Close
+  copy: Copy
+  copied: Copied ✓
+
+language:
+  label: "Language:"
+  note: Menus and buttons only – the content is in German.
+
+nav:
+  open_menu: Open menu
+  news: News
+  calendar: Calendar
+  about_us: About us
+  network: Network
+  map: Map
+  projects: Projects
+  project_ideas: Project ideas
+  challenges: Challenges
+  offer: What we offer
+  funding: Funding for Makespaces
+  equipment: Equipment
+  team: Team
+  partners: Partners
+  press: Press
+  search: Search
+
+footer:
+  donate: Donate
+  imprint: Legal notice & privacy
+  past_projects: Past projects
+  source: Source code on GitHub
+  contribute: "Get involved:"
+  data_structures: Data structures
+  dependencies: Dependencies
+  disclaimer: IfsMB is a private, volunteer initiative by Falko Richter – not a university, not a public authority and not a research institute.
+  why_institute: Why an institute?
+  no_cookies: This site sets no cookies and loads no external content.
+
+lightbox:
+  previous: Previous image
+  next: Next image
+
+home:
+  our_projects: Our projects
+  who_we_are: Who we are
+  an_institute: An institute
+  next_events: Upcoming events
+  to_calendar: Go to the calendar →
+  current_projects: Current projects
+  all_projects: All projects →
+  all_news: All news →
+  more_partners: More about our partners →
+
+pages:
+  news:
+    title: News
+    lead: What’s happening at the institute right now.
+    empty: No news yet.
+    personal_link: → Personal blogs from the team ({n})
+  personal_news:
+    title: Personal blogs
+    lead: Private Makespace updates from the team – what we build at home and on the side.
+    intro: These aren’t posts by the institute but personal updates from people on our {0}. The institute’s news is under {1}.
+    empty: No personal posts yet.
+  calendar:
+    title: Calendar
+    lead: Workshops, open workshop sessions and everything you can drop in on.
+  projects:
+    title: Projects
+    lead: What we’re working on right now.
+    none: No project is running right now – but that can change at short notice.
+    inquiries: Requests
+    inquiries_intro: Requests we’ve received – one of them may soon become a project.
+    ideas: Ideas
+    ideas_intro: What we might build next – nothing settled yet. You’ll find more inspiration on the {0} page.
+    archive_link: → See past projects
+    personal_link: → Personal projects from the team ({n})
+  archive:
+    title: Past projects
+    lead: What we’ve already built.
+    empty: No completed projects yet.
+    back: ← Current projects
+  personal_projects:
+    title: Personal projects
+    lead: What people on our team build in their spare time.
+    intro: These aren’t projects of the institute but private Makespace projects from our {0}. The institute’s projects are under {1}.
+    empty: No personal projects yet.
+  team:
+    title: Team
+    lead: The people behind the institute.
+  partners:
+    title: Partners
+    lead: Without our partners, no Makespace would ever have sprung up. Thank you!
+  challenges:
+    title: Challenges
+    lead: Our inventory – tasks, problems and open questions from our projects, collected and documented. Smaller than a project, but often exactly where you can help.
+    open_heading: "Open: what’s important, what’s urgent?"
+    open_intro: The open challenges, sorted by the {0} – placed via {1} and {2} in the file. Use ➕ to add a new challenge straight into the right quadrant.
+    personal_heading: From personal projects
+    personal_intro: Challenges from private Makespace projects in the team – not tasks of the institute.
+  equipment:
+    title: Equipment
+    lead: What we work with – and who it belongs to.
+  tags:
+    title: Tags
+    lead: Everything at a glance – by topic, place, partner and device.
+  search:
+    title: Search
+    lead: Full-text search across news, projects, events, equipment, the team and more.
+    missing: "The search index is missing: it is only created after {0} with {1} (see README)."
+  todos:
+    title: Todos
+    lead: What we’re tackling right now – per person in an Eisenhower matrix. Move, edit, save as a pull request.
+  network:
+    title: Network
+    lead: How our projects, challenges, todos, events, posts, people, partners and devices are connected. Drag, zoom, click – and wander from point to point.
+  map:
+    title: Map
+    lead: Where our projects, events, posts and devices are at home – the network on a map.
+  press:
+    title: Press
+    lead: Information, press releases and material for journalists.
+
+badge:
+  active: Current
+  completed: Completed
+  inquiry: Request
+  idea: Idea
+  personal: Personal
+  open: Open
+  in_progress: In progress
+  solved: Solved
+  prospect: Expected
+  in_repair: Being repaired
+  testing: Being tested
+
+post:
+  personal: ✍️ Personal post
+  personal_note: – a private Makespace update from the team, not a post by the institute.
+  more_in_blog: More on
+  personal_blog_of: "{name}’s personal blog"
+  originally_published: Originally published
+  on_site: "on"
+  original_site: the original site
+  project_update: 🔧 Update on the project
+  back: ← All news
+  back_personal: ← All personal blogs
+
+project:
+  last_update: "Last update:"
+  update_short: "Update:"
+  part_of: "This project is part of:"
+  personal: 🏠 Personal project
+  personal_note: – a private Makespace project from the team, not a project of the institute.
+  idea_note: This is an idea – not a fixed project yet. If you’d like to join in, get in touch!
+  inquiry_note: This is a request we’ve received. Whether and how it becomes a project is still open.
+  subprojects: Subprojects
+  updates: Progress / updates
+  events: Events & reports
+  back: ← All projects
+  back_personal: ← All personal projects
+
+activity:
+  subprojects: { one: "{n} subproject", other: "{n} subprojects" }
+  subprojects_words: { one: subproject, other: subprojects }
+  challenges: { one: "{n} open challenge", other: "{n} open challenges" }
+  challenges_words: { one: open challenge, other: open challenges }
+  events: { one: "{n} event", other: "{n} events" }
+  events_words: { one: event, other: events }
+  events_upcoming: { one: "{n} event, {up} upcoming", other: "{n} events, {up} of them upcoming" }
+  events_upcoming_words: { one: "event, {up} upcoming", other: "events, {up} of them upcoming" }
+  updates: { one: "{n} update", other: "{n} updates" }
+  updates_words: { one: update, other: updates }
+  devices: { one: "{n} device", other: "{n} devices" }
+  devices_words: { one: device, other: devices }
+  people: { one: "{n} person involved", other: "{n} people involved" }
+  people_words: { one: person involved, other: people involved }
+
+challenge:
+  heading: Challenges
+  open_count: "{n} open"
+  solved_count: "{n} solved"
+  kind_task: 📋 Task
+  kind_problem: ⚠️ Problem
+  kind_question: ❓ Question
+  kind_challenge: 🧗 Challenge
+  since: since
+  solved_on: solved on
+  owners: "In charge:"
+  personal: 🏠 Personal challenge
+  personal_note: – from a private Makespace project, not a task of the institute.
+  solution: Solution
+  unsolved_note: This challenge hasn’t been solved yet. Got an idea, know someone or have the right part? Get in touch!
+  back: ← All challenges
+
+matrix:
+  name: Eisenhower matrix
+  label: "Eisenhower matrix: open challenges by importance and urgency"
+  urgent: Urgent
+  not_urgent: Not urgent
+  important: Important
+  not_important: Not important
+  q1: Do it now
+  q1_sub: important · urgent
+  q2: Schedule
+  q2_sub: important · not urgent
+  q3: Delegate
+  q3_sub: not important · urgent
+  q4: Later
+  q4_sub: not important · not urgent
+
+event:
+  personal_of: Personal event of
+  personal: 🏠 Personal event
+  personal_note: – a private Makespace event from the team, not an event of the institute. It isn’t in the institute’s calendar, only in the team profile.
+  project_only_note: 📌 An event for the people in the project – it only appears in the public calendar once it has taken place.
+  subscribe_all: 📅 Subscribe to all events
+  back: ← Back to the calendar
+  photos: { one: "{n} photo", other: "{n} photos" }
+
+calendar:
+  events: Events
+  upcoming: Upcoming events
+  past: Past events
+  none: No events are planned right now – but that can change at short notice.
+  button_subscribe: 📅 Subscribe
+  button_add: 📅 Add to calendar
+  title_subscribe: Subscribe to the calendar
+  title_add: Add to your calendar
+  title_institute: Subscribe to the institute’s calendar
+  title_events_of: Subscribe to events of “{name}”
+  title_events_person: Subscribe to {name}’s events
+  title_events_with: Subscribe to events with {name}
+  intro: New and changed events are added automatically.
+  apple_outlook: Apple Calendar & Outlook
+  google: Google Calendar
+  download: Download iCal file
+  help_event: “Apple Calendar & Outlook” downloads an iCal file that opens in your calendar app (Thunderbird too). “Google Calendar” opens a pre-filled form for a new event at Google.
+  help_subscribe: "“Apple Calendar & Outlook” opens the subscription right in your calendar app (Mac, iPhone, iPad, Outlook, Thunderbird). “Google Calendar” asks in the browser whether to add the calendar – this doesn’t work in the Google app. Google only refreshes subscriptions about once a day. If it doesn’t work: in Google go to “Other calendars → From URL” and enter {0}."
+
+feed:
+  button: 📡 RSS feed
+  button_posts: 📡 Posts as RSS feed
+  title: Follow the news
+  title_institute: Follow the institute’s news
+  title_personal: Follow the personal blogs
+  title_updates: Follow updates on “{name}”
+  title_posts_person: Follow posts by {name}
+  intro: With a feed reader (RSS), new posts arrive automatically – no sign-up, no newsletter, no tracking.
+  address: Feed address
+  open_reader: Open in feed reader
+  help: “Open in feed reader” hands the feed to the feed app on your device (e.g. NetNewsWire, Reeder, Thunderbird). Feedly and Inoreader are feed readers in the browser. Any other feed reader takes the address above – just copy it and add it there as a new feed.
+
+connections:
+  project_part_of: This project is part of
+  part_of: Part of
+  related_projects: Related projects
+  event_belongs_to: This event belongs to
+  projects: Projects
+  posts: Posts
+  press: Press
+  personal: personal
+  personal_project: Personal project
+  solved: solved
+  in_progress: in progress
+  open: open
+  maybe_from: Maybe coming from
+  owned_by: Owned by
+  location: Location
+  ownership: Owner
+  people: Involved
+  partners: Partners
+  pages: Pages
+  related: Related
+
+owner:
+  institute: Owned by the institute
+  maybe_from: Maybe from
+  owned_by: Owned by
+  our_partner: our partner
+  from_our_team: from our team
+
+equipment:
+  heading: Equipment
+  location: "Location:"
+  illustration: Illustration – a photo will follow.
+  illustration_prospect: Illustration – a photo will follow once the device is here.
+  photos: Photos
+  videos: Videos
+  prospect_note: This device isn’t here yet – we may get it. As soon as it arrives, we’ll update this page.
+  no_own_devices: The institute doesn’t own any devices (yet).
+  use_by_arrangement: – through them we can use it, depending on what we agree.
+  printers: 3D printers
+  scanners: 3D scanners
+  others: Plotters, measuring devices and more
+  back: ← All equipment
+  filter_owner: "Owned by:"
+  filter_location: "Located at:"
+  filter_active_owner: "Equipment of {name}"
+  filter_active_location: "Equipment at {name}"
+  filter_count:
+    one: "1 device"
+    other: "{n} devices"
+  filter_none: no devices for this filter
+  filter_reset: Show all
+  of_partner: "Equipment of {name}"
+  at_partner: "Equipment at {name}"
+
+team:
+  photo_of: Photo of {name}
+  photo_credit: "Photo:"
+  badge: IfsMB badge
+  badge_help: Drag the model to rotate it. Printed in yellow and black with just one colour change – {0}.
+  badge_more: more about the badge
+  personal_projects: Personal projects
+  personal_blog: Personal blog
+  institute_projects: Projects at the institute
+  back: ← Back to the team
+
+todos:
+  heading: Todos
+  project_button: Todos for this project
+  person_button: Todos of {name}
+  button_hint: Eisenhower matrix – move, edit, save as a pull request
+
+partner:
+  logo_of: "{name} logo"
+  equipment: "Equipment:"
+  projects: "Projects:"
+  events: "Events:"
+  more: More about working together →
+
+press:
+  release: Press release
+  about: About the institute
+  back: ← Back to the press area
+  contact: Press contact
+  phone_needs_js: Phone (requires JavaScript)
+  profile: Profile
+  fact_name: "Name:"
+  fact_seat: "Based in:"
+  fact_team: "Team:"
+  fact_partners: "Partners:"
+  people: { one: "{n} person", other: "{n} people" }
+  to_team: meet the team
+  releases: Press releases
+  no_releases: No press releases yet.
+  coverage: In the press
+  more_on_it: more on this
+  material: Press material
+  download: ⬇ Download
+  badge: Badge for 3D printing
+  badges_names: Badges with names
+
+badge3d:
+  3mf_note: (two objects, yellow/black)
+  stl_note: (colour change via pause)
+
+tags:
+  project: Project
+  challenge: Challenge
+  event: Event
+  post: Post
+
+dead_link:
+  explanation: 🪦 = This link no longer works (the page is offline or was removed). We keep it so it stays clear what the text refers to.
+  search: search for a new link
+  archive: old version in the Internet Archive
+
+edit:
+  edit: Edit
+  form_title: "Edit this page in the form (Ctrl/⌘-click: straight to GitHub)"
+  github_title: Edit this page on GitHub
+  view_file: "View file on GitHub: {path}"
+  on_github: "On GitHub:"
+  pr_warning: "✏️ This page is being edited right now:"
+  pr_continue: please {0} instead of starting a second pull request.
+  pr_continue_link: continue there
+
+open_work:
+  button: 🧩 Open
+  button_title: Open pull requests and tasks on GitHub
+  all_open_prs: All open pull requests
+
+theme:
+  label: "Look:"
+  like_page: As the page sets it ({name})
+  what_is_this: What’s this?
+
+new:
+  matrix:
+    label: "New challenge: {quadrant}"
+    hint: New challenge in “{quadrant}” ({sub}) – already sorted in
+  team_post:
+    label: Post
+    hint: New post – author already filled in
+  team_project:
+    label: Project
+    hint: New project – person already listed under team
+  team_event:
+    label: Event
+    hint: New event – person already listed under team
+  team_device:
+    label: Device
+    hint: New device – person entered as owner
+  team_challenge:
+    label: Challenge
+    hint: New challenge – person already entered as responsible
+  project_post:
+    label: Post about the project
+    hint: New post – the project’s tag is already filled in, so it shows up here under “Progress / updates”
+  project_event:
+    label: Event
+    hint: New event – the project’s tag and the people involved are already filled in
+  project_post_untagged:
+    label: Post about the project
+    hint: New post – linked to this project (the project has no event_tag yet)
+  project_event_untagged:
+    label: Event
+    hint: New event – project and people involved already filled in
+  project_subproject:
+    label: Subproject
+    hint: New subproject – parent project and people involved already filled in
+  project_device:
+    label: Device
+    hint: New device – linked to this project
+  project_challenge:
+    label: Challenge
+    hint: New challenge (task, problem, question) – project and people involved already filled in
+  event_report:
+    label: Report
+    hint: New post about this event – tags and link already filled in
+  event_challenge:
+    label: Challenge
+    hint: New challenge for this event – link, tags and people involved already filled in
+  device_post:
+    label: Post
+    hint: New post about this device – tags and link already filled in
+  device_challenge:
+    label: Challenge
+    hint: New challenge for this device (e.g. a defect) – link already filled in
+  challenge_post:
+    label: Post about it
+    hint: New post about this challenge – tags and link already filled in
+  challenge_more:
+    label: Another challenge
+    hint: New challenge for the same projects and people in charge
+  post_followup:
+    label: Follow-up post
+    hint: New post – author, tags and link to this post already filled in
+  partner_project:
+    label: Project
+    hint: New project – partner already filled in
+  partner_event:
+    label: Event
+    hint: New event – partner already filled in
+  partner_device:
+    label: Device
+    hint: New device – partner entered as owner
+  partner_challenge:
+    label: Challenge
+    hint: New challenge – linked to this partner page
+  team_profile:
+    label: Team profile
+    hint: New team profile with all fields
+  projects_project:
+    label: Project
+    hint: New project with all fields
+  archive_project:
+    label: Past project
+    hint: Add a completed project – with an outline for the look back
+  personal_project:
+    label: Personal project
+    hint: New personal project – add the person under team
+  news_post:
+    label: Post
+    hint: New post with all fields
+  personal_post:
+    label: Personal post
+    hint: New personal post
+  calendar_event:
+    label: Event
+    hint: New event with all fields
+  challenges_challenge:
+    label: Challenge
+    hint: New challenge (task, problem, question) with all fields
+  equipment_device:
+    label: Device
+    hint: New device with all fields
+  press_release:
+    label: Press release
+    hint: New press release with all fields
+  press_report:
+    label: In the press
+    hint: New report about us – sorted in by date
+  partners_partner:
+    label: Partner
+    hint: New partner as its own file – appears on /partners/ and in the network
+
+read:
+  check: read
+  check_title: Already read (only stored in this browser)
+  progress: "{n} of {total} read"
+  deleted: ✓ Deleted
+
+form:
+  search: Search …
+  remove: Remove {name}
+  index_loading: Loading search index …
+  copied_github: Copied – GitHub is open in a new tab.
+  copied_paste: Copied – in the GitHub editor, select everything (⌘A / Ctrl+A) and paste (⌘V / Ctrl+V).
+  copy_failed: Copying didn’t work – please copy the text below.
+  copy_manually: Please copy the text below.
+  more_fields: More fields
+  file: File
+  new_file: New file
+  file_preview: File preview
+  social_preview: Social media preview (WhatsApp, Signal, X …)
+  new_photos: New photos
+  add_photos: 📷 Add photos
+  template_link: Template with all fields ↗
+  view_on_github: View on GitHub ↗
+  discard: ↩️ Discard changes
+  restart: 🗑️ Start over
+  discarded: Changes discarded.
+  restarted: Started over.
+  draft_restored: Draft restored.
+  submit_new: 📋 Create on GitHub
+  submit_edit: 📋 Save on GitHub
+  submit_pr_new: 🚀 Create as pull request
+  submit_pr_edit: 🚀 Change as pull request
+  submit_pr_into: "🚀 Save into #{number}"
+  fill_in: Please fill in “{field}”.
+  unchanged: Nothing changed yet.
+  unchanged_short: Nothing changed yet
+  too_long: The file is too long for the address – it has been copied, please paste it in the GitHub editor.
+  edit_title: "✏️ Edit: {type}"
+  edit_hint: Changes to {path} – only the changed lines are rewritten, everything else stays exactly as it is.
+  steps_new_1: “Create on GitHub” copies the file and opens GitHub with the finished content.
+  steps_commit_html: There, “Commit changes …” → <strong>“Create a new branch … and start a pull request”</strong>.
+  steps_new_3: After the merge, the page appears on the website within a few minutes.
+  steps_edit_1: “Save on GitHub” copies the changed file and opens it in the GitHub editor.
+  steps_edit_2: There, select the whole content (⌘A / Ctrl+A) and paste (⌘V / Ctrl+V).
+  steps_edit_commit_html: “Commit changes …” → <strong>“Create a new branch … and start a pull request”</strong>.
+  steps_edit_4: After the merge, the change is on the website within a few minutes.
+  steps_pr_new: “As pull request” creates a new branch with the new file and all photos used, and opens a pull request.
+  steps_pr_edit: “As pull request” creates a new branch with the changed file and all photos used, and opens a pull request.
+  steps_pr_review: Someone from the team reviews and merges it – a few minutes later everything is on the website.
+  types:
+    post: Post
+    event: Event
+    project: Project
+    past_project: Past project
+    device: Device
+    challenge: Challenge
+    team_profile: Team profile
+    press_release: Press release
+    partner: Partner
+    press_report: In the press
+
+github:
+  create_token: "Create a token on GitHub ↗"
+  token_classic_html: "<em>public_repo</em> is already ticked, choose a short expiry date (the token works for all public repositories you may write to), “Generate token”. Works with any GitHub account: with write access to {repo} directly, otherwise through your own fork – it is created the first time you send."
+  collaborator_classic_html: "you are a collaborator on {repo}, but this <strong>fine-grained token</strong> only works for your own repositories. For pull requests directly in the repository, create a new token above – with this one it goes through your fork."
+  fork_behind: "Your fork is not up to date – it is synced before sending, and your change is based on the current state."
+  fork_stale_html: "⚠️ Your fork {fork} couldn’t be brought up to date automatically. Your change is still based on the current state – for later, click “Sync fork” on <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">GitHub</a>."
+  connect: 🔑 Connect GitHub
+  reconnect: 🔑 Reconnect
+  connect_title: Create pull requests right from here with a GitHub token (with photos)
+  connected_title: Connected to GitHub – pull requests right from here
+  dialog_title: 🔑 Connect to GitHub
+  intro_html: With a GitHub token the forms <strong>create pull requests directly</strong> – with photos, no copying. As always, nothing is merged before a review.
+  paste_token: Paste the token here. It stays in this browser and is only sent to api.github.com.
+  remember: Remember on this device
+  remember_hint: Otherwise it’s gone once the tab is closed. Don’t tick this on someone else’s device.
+  logout: Sign out
+  connect_button: Connect
+  not_connected_short: Not connected.
+  checking: Checking …
+  connected_as_html: Connected as {login}
+  can_push: may create pull requests ✅
+  not_connected: Not connected to GitHub.
+  network: No connection to GitHub – please check your internet connection and try again.
+  error: Error
+  auth: Your GitHub token has expired or is invalid. Please reconnect – what you entered is kept.
+  rate: GitHub is slowing things down right now (too many requests).
+  rate_until: It works again from {time}.
+  rate_later: Please try again in a few minutes.
+  permission: The token isn’t allowed to do that ({message}). Set “Contents” and “Pull requests” to “Read and write” for {repo} in the token.
+  not_found: Not found ({message}) – is the token missing access to {repo}?
+  rejected: "GitHub rejected the change: {message}"
+  server: GitHub is having a problem right now ({status}). Please try again shortly.
+  step_base: Fetching the current state of {branch} …
+  step_upload: Uploading file {n} of {total} …
+  step_commit: Creating commit …
+  step_update_pr: "Adding to pull request #{number} …"
+  step_branch: Creating branch {branch} …
+  step_open_pr: Opening pull request …
+  no_token_html: "Without any token it works with every account too: “📋 Save on GitHub” – GitHub then creates a fork itself and offers “Create pull request”. If you already have an older fork, click “Sync fork” there first."
+  cannot_push_html: "has no write access to {repo} – <strong>your own fork</strong> is created the first time you send ✅"
+  cannot_push_fork_html: "has no write access to {repo} – changes go through your fork <strong>{fork}</strong> ✅"
+  sent_fork_html: "{link} has been opened (from your fork {fork}) – thank you!"
+  sent_fork_compare_html: "Your change is in your fork {fork}. Last step: {link} – click “Create pull request” there."
+  compare_link: "Open the pull request on GitHub ↗"
+  step_sync_fork: "Bringing fork {fork} up to date …"
+  step_create_fork: "Creating your own fork of {repo} …"
+  fork_permission: "The token may not create a fork. Either fork {repo} once on GitHub (“Fork” at the top right) or set “Administration” to “Read and write” on the token."
+  fork_no_continue: "Without write access you can’t add to #{number} – please send it as your own pull request."

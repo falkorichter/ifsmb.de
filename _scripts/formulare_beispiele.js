@@ -11,7 +11,7 @@ const BEISPIEL_CHIPS = {
   personen: ["falko-richter", "jan"],
   projekte: ["3d-druck-ag-ktg", "ktg-orca-slicer-hardware"],
   stichworte: ["ktg", "3d-drucker"],
-  seiten: ["/projekte/3d-druck-ag-ktg/", "/kalender/"],
+  seiten: ["/projects/3d-druck-ag-ktg/", "/calendar/"],
   partner: ["Kurt-Tucholsky-Grundschule", "35services e.V."]
 };
 

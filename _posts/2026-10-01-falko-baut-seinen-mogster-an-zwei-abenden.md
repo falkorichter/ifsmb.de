@@ -2,9 +2,9 @@
 title: "Falko baut seinen Mogster an zwei Abenden"
 date: 2026-10-01 22:30:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
-verlinkt:
+linked:
   - /team/opa-andi/
 uuid: 7cebe213-da7c-45db-9aa2-19d67f812022
 ---

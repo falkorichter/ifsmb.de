@@ -22,6 +22,15 @@ ROOT = File.expand_path("..", __dir__)
 module Daten
   module_function
 
+  # edit forms against every real page (_scripts/edit_examples.js)
+  def edit_results
+    @edit_results ||= begin
+      out, err, status = Open3.capture3("node", File.join(ROOT, "_scripts/edit_examples.js"))
+      raise "edit_examples.js ist fehlgeschlagen:\n#{err}" unless status.success?
+      JSON.parse(out)
+    end
+  end
+
   def beispiele
     @beispiele ||= begin
       out, err, status = Open3.capture3("node", File.join(ROOT, "_scripts/formulare_beispiele.js"))
@@ -58,13 +67,17 @@ ZUORDNUNG = {
   "projekt" => { cms: "projects", vorlage: "projekt.md" },
   "projekt-vergangen" => { cms: "projects", vorlage: "projekt-vergangen.md" },
   "geraet" => { cms: "equipment", vorlage: "geraet.md" },
-  "herausforderung" => { cms: "herausforderungen", vorlage: "herausforderung.md" },
+  "herausforderung" => { cms: "challenges", vorlage: "herausforderung.md" },
   "team" => { cms: "team", vorlage: "team.md" },
   "presse" => { cms: "press", vorlage: "presse.md" },
   # one file per partner in _data/partner/ – same fields as an entry of the CMS list file _data/partners.yml
   "partner" => { cms: "partners", vorlage: "partner.yml", ordner: "_data/partner" },
   # not in the CMS – checked against the template only
-  "pressebericht" => { cms: nil, vorlage: "pressebericht.yml", ordner: "_data/pressebericht" }
+  "pressebericht" => { cms: nil, vorlage: "pressebericht.yml", ordner: "_data/press_report" },
+  # plain pages outside the collections, edit only (#154): Markdown pages with a template for new ones,
+  # HTML overview pages without (their HTML is written by hand)
+  "seite" => { cms: nil, vorlage: "seite.md", ordner: "" },
+  "uebersicht" => { cms: nil, vorlage: nil, ordner: "", endung: "html" }
 }.freeze
 
 class FormulareTest < Minitest::Test
@@ -126,7 +139,7 @@ class FormulareTest < Minitest::Test
   def test_dateiname_und_ordner
     proben.each do |p|
       ort = "#{p['typ']} (#{p['fall']})"
-      endung = p["format"] == "yaml" ? "yml" : "md"
+      endung = p["format"] == "yaml" ? "yml" : (ZUORDNUNG.fetch(p["typ"])[:endung] || "md")
       assert_match(/\A[a-z0-9][a-z0-9-]*\.#{endung}\z/, p["datei"], "#{ort}: Dateiname")
       c = cms_eintrag(p["typ"])
       erwartet = ZUORDNUNG[p["typ"]][:ordner] || c["path"]
@@ -174,6 +187,8 @@ class FormulareTest < Minitest::Test
 
   def test_nur_felder_aus_der_vorlage
     typen.each do |typ, t|
+      next unless ZUORDNUNG.fetch(typ)[:vorlage]
+
       erlaubt = Daten.vorlage_felder(ZUORDNUNG.fetch(typ)[:vorlage])
       t["felder"].each do |f|
         assert_includes erlaubt, f["name"], "#{typ}: Feld „#{f['name']}“ steht nicht in _includes/vorlagen/#{ZUORDNUNG[typ][:vorlage]}"
@@ -184,6 +199,8 @@ class FormulareTest < Minitest::Test
   def test_auswahl_werte_sind_in_der_vorlage_beschrieben
     typen.each do |typ, t|
       # templates of the same CMS collection count together (projekt-vergangen.md only shows "abgeschlossen")
+      next unless ZUORDNUNG.fetch(typ)[:vorlage]
+
       geschwister = ZUORDNUNG.select { |_, z| z[:cms] && z[:cms] == ZUORDNUNG.fetch(typ)[:cms] }.map { |_, z| z[:vorlage] } | [ZUORDNUNG[typ][:vorlage]]
       vorlage = geschwister.map { |v| File.read(File.join(ROOT, "_includes/vorlagen", v)) }.join("\n")
       t["felder"].select { |f| f["typ"] == "auswahl" }.each do |f|
@@ -209,5 +226,162 @@ class TodoFormatTest < Minitest::Test
       assert r["gleich"], "#{File.basename(datei)}: parse → serialize ist nicht stabil"
       assert_operator r["todos"], :>, 0, "#{File.basename(datei)}: keine Todos gelesen"
     end
+  end
+end
+
+# Edit forms (✏️) against every real page (_scripts/edit_examples.js):
+#   - opening and saving without changes gives the same bytes,
+#   - after changing title, a list field and the text, Jekyll reads the new values and every other key is unchanged.
+class EditFormTest < Minitest::Test
+  def results = Daten.edit_results
+
+  def test_there_are_pages_to_edit
+    assert_operator results.size, :>, 50
+    # plain pages (#154): Markdown pages and HTML overview pages
+    assert_operator results.count { |r| r["type"] == "seite" }, :>, 5
+    assert_operator results.count { |r| r["type"] == "uebersicht" }, :>, 10
+  end
+
+  def test_unchanged_file_stays_identical
+    results.each do |r|
+      refute r["no_front_matter"], "#{r['path']}: kein Front Matter"
+      assert r["unchanged"], "#{r['path']}: Öffnen und Speichern ohne Änderung verändert die Datei"
+    end
+  end
+
+  def test_comment_after_a_value_is_kept
+    source = "---\ntitle: Test\nstatus: offen   # offen, in-arbeit oder geloest\nart: frage\n---\n\nText\n"
+    js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{status:'in-arbeit'}).content)"
+    out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+    assert status.success?, err
+    assert_equal source.sub("status: offen ", "status: in-arbeit "), out
+  end
+
+  # owner_name is written as a list with one entry (alsEintrag) – the form must read that back as text
+  # a changed body keeps the file's spacing after "---" and the indentation of its first line (index.html: no empty line)
+  def test_changed_body_keeps_spacing
+    cases = [
+      ["uebersicht", "---\ntitle: A\n---\n<main>\n  <p>x</p>\n</main>\n", "<main>\n  <p>y</p>\n</main>", "---\ntitle: A\n---\n<main>\n  <p>y</p>\n</main>\n"],
+      ["beitrag", "---\ntitle: B\n---\n\nText\n", "Neu", "---\ntitle: B\n---\n\nNeu\n"],
+      ["beitrag", "---\ntitle: C\n---\n", "Neu", "---\ntitle: C\n---\n\nNeu\n"],
+      ["uebersicht", "---\ntitle: D\n---\n  <div>\n</div>\n", "  <div>\n<b>x</b></div>", "---\ntitle: D\n---\n  <div>\n<b>x</b></div>\n"]
+    ]
+    cases.each do |typ, source, text, expected|
+      js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile(#{typ.to_json},#{source.to_json},{text:#{text.to_json}}).content)"
+      out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+      assert status.success?, err
+      assert_equal expected, out, "#{typ}: #{source.inspect}"
+    end
+  end
+
+  def test_text_field_reads_a_one_entry_list
+    source = "---\ntitle: Test\nowner_name: [\"Ralf, Falko\"]\n---\n\nText\n"
+    js = "const N=require('./assets/js/neu.js');const r=N.editedFile('geraet',#{source.to_json},{});" \
+         "process.stdout.write(JSON.stringify({raw:r.rawFields,owner:r.values.owner_name}))"
+    out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+    assert status.success?, err
+    assert_equal({ "raw" => [], "owner" => "Ralf, Falko" }, JSON.parse(out))
+  end
+
+  def test_all_form_fields_are_readable
+    results.each { |r| assert_empty r["raw_fields"], "#{r['path']}: Felder nur auf GitHub bearbeitbar: #{r['raw_fields'].join(', ')}" }
+  end
+
+  def test_changes_arrive_and_the_rest_stays
+    results.each do |r|
+      before, = Daten.front_matter(r["original"].gsub("\r\n", "\n"))
+      after, text = Daten.front_matter(r["changed"])
+      changes = r["changes"]
+      assert_equal changes["title"], after["title"], "#{r['path']}: Titel" if changes["title"]
+      if r["list_field"]
+        assert_equal changes[r["list_field"]], Array(after[r["list_field"]]).map(&:to_s), "#{r['path']}: Liste #{r['list_field']}"
+      end
+      assert_equal changes["text"].strip, text.strip, "#{r['path']}: Text"
+      changed_keys = ["title", r["list_field"]].compact
+      (before.keys - changed_keys).each do |k|
+        msg = "#{r['path']}: Feld #{k} hat sich verändert"
+        before[k].nil? ? assert_nil(after[k], msg) : assert_equal(before[k], after[k], msg)
+      end
+      assert_empty after.keys - before.keys - changed_keys, "#{r['path']}: neue Felder"
+    end
+  end
+end
+
+# Themes (_data/themes.yml): the form, Pages CMS and the templates offer exactly the themes the layout knows,
+# and setting a theme on an existing page with ✏️ only adds that one line.
+# HTML field of overview pages (#154): NeuFormular.checkHtml in assets/js/neu.js
+class HtmlCheckTest < Minitest::Test
+  def check(sources)
+    js = "const N=require('./assets/js/neu.js');process.stdout.write(JSON.stringify(#{sources.to_json}.map(N.checkHtml)))"
+    out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+    assert status.success?, err
+    JSON.parse(out)
+  end
+
+  def test_no_false_alarm_on_existing_overview_pages
+    pages = Daten.edit_results.select { |r| r["type"] == "uebersicht" }
+    assert_operator pages.size, :>, 10
+    bodies = pages.map { |r| r["original"].sub(/\A---\n.*?\n---\n/m, "") }
+    check(bodies).zip(pages).each { |msg, r| assert_nil msg, "#{r['path']}: #{msg}" }
+  end
+
+  def test_finds_mistakes_with_line_numbers
+    msgs = check([
+      "<section>\n<div>\n</section>", "{% for x in y %}\n<p>{{ x }}", "{% for x in y %}\n{% endif %}",
+      "<p>{{ page.title </p>", "<p>{% if a </p>", "<p>x</p>{% endif %}", "<div>\n<span>"
+    ])
+    assert_match(/<\/section>.*Zeile 3.*<div>.*Zeile 2/, msgs[0])
+    assert_match(/\{% for %\}.*Zeile 1.*endfor/, msgs[1])
+    assert_match(/endif.*Zeile 2.*for/, msgs[2])
+    assert_match(/\{\{/, msgs[3])
+    assert_match(/\{%/, msgs[4])
+    assert_match(/endif.*keinen Anfang/, msgs[5])
+    assert_match(/<span>.*Zeile 2/, msgs[6])
+  end
+
+  def test_allows_what_html_allows
+    assert_equal [nil] * 4, check([
+      "<ul><li>a<li>b</ul>", "<p><img src=\"a.png\"><br></p>",
+      "<script>if (a < b) { x = \"</div>\"; }</script>", "{% comment %}<div>{% if %}{% endcomment %}<p>x"
+    ])
+  end
+end
+
+class ThemeTest < Minitest::Test
+  def theme_ids
+    YAML.safe_load(File.read(File.join(ROOT, "_data/themes.yml"))).map { |t| t["id"] }
+  end
+
+  def test_form_offers_every_theme
+    Daten.beispiele["typen"].each do |typ, t|
+      f = t["felder"].find { |x| x["name"] == "theme" } or next
+      assert_equal [""] + theme_ids, f["optionen"], "#{typ}: Auswahl „theme“ in neu.js passt nicht zu _data/themes.yml"
+    end
+  end
+
+  def test_pages_cms_offers_every_theme
+    Daten.cms.each do |c|
+      f = (c["fields"] || []).find { |x| x["name"] == "theme" } or next
+      assert_equal [""] + theme_ids, f.dig("options", "values").map(&:to_s), "#{c['name']}: theme in .pages.yml passt nicht zu _data/themes.yml"
+    end
+  end
+
+  def test_content_types_have_a_theme_field
+    ZUORDNUNG.each do |typ, z|
+      next unless z[:vorlage].to_s.end_with?(".md")
+      assert_includes Daten.vorlage_felder(z[:vorlage]), "theme", "#{z[:vorlage]}: Feld theme fehlt"
+      assert(Daten.beispiele["typen"].fetch(typ)["felder"].any? { |x| x["name"] == "theme" }, "#{typ}: Feld theme fehlt im Formular")
+    end
+  end
+
+  def test_setting_a_theme_adds_one_line
+    source = "---\ntitle: Test\nstatus: offen\nkind: frage\n---\n\nText\n"
+    js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{theme:'rfflabs'}).content)"
+    out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
+    assert status.success?, err
+    fm, text = Daten.front_matter(out)
+    assert_equal "rfflabs", fm["theme"]
+    assert_equal({ "title" => "Test", "status" => "offen", "kind" => "frage" }, fm.reject { |k, _| k == "theme" })
+    assert_equal "Text", text.strip
   end
 end

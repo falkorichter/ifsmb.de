@@ -1,0 +1,19 @@
+# Rotating slogans on the homepage (assets/js/slogan.js).
+# One entry per slogan. Every line of "text" is one line on the page,
+# **bold** marks the yellow highlight (anywhere, also several times).
+# The first entry is rendered as plain HTML (search engines, no JavaScript).
+- text: |
+    Wir bauen Makespaces.
+    **Spontan.**
+- text: |
+    Kompetent improvisieren.
+    **Seit gestern.**
+- text: |
+    Chaos Theorie.
+    **Organisiert gestalten.**
+- text: |
+    kein Thinktank
+    ein **Make**tank
+- text: |
+    measure once
+    cut **twice**

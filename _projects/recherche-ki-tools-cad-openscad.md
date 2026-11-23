@@ -3,16 +3,16 @@ title: "Recherche: KI-Tools für CAD mit OpenSCAD"
 summary: Falko testet, wie gut KI-Agenten wie Claude Code 3D-Modelle konstruieren – erst mit OpenSCAD, dann im direkten Vergleich mit SolidCraft und Onshape FeatureScript über MCP.
 status: aktuell
 start: 2026-11-01
-zeitraum: seit November 2026
+period: seit November 2026
 event_tag: ki-cad
 tags: [ki-cad, onshape]
 team:
   - falko-richter
 partners:
   - 35 services e. V.
-persoenlich: true
+personal: true
 updates:
-  - datum: 2026-11-11
+  - date: 2026-11-11
     text: |-
       **Ein Bauteil, drei CAD-Wege (`3d-cad-llm-comparison`):** Im neuen Repository **[3d-cad-llm-comparison](https://github.com/falkorichter/3d-cad-llm-comparison)** hat Falko denselben parametrischen, 3D-druckbaren **Halter für Gastronorm-Behälter (GN 1/1)** – geteilt für ein `256×256-mm`-Druckbett – parallel von KI-Agenten in drei verschiedenen Werkzeugen konstruieren lassen ([Protokoll](https://github.com/falkorichter/3d-cad-llm-comparison/blob/main/challenges/01-gn-holder/LOG.md) & [Gegenüberstellung](https://github.com/falkorichter/3d-cad-llm-comparison/blob/main/docs/featurescript-openscad-solidcraft.md)):
 

@@ -5,14 +5,14 @@ layout: default
   <article class="member-profile">
     <header class="member-head">
       {% if page.photo %}
-      <img class="avatar avatar-lg" src="{{ page.photo | relative_url }}"{% if page.photo_2x %} srcset="{{ page.photo | relative_url }} 1x, {{ page.photo_2x | relative_url }} 2x"{% endif %} alt="Foto von {{ page.title }}">
+      <img class="avatar avatar-lg" src="{{ page.photo | relative_url }}"{% if page.photo_2x %} srcset="{{ page.photo | relative_url }} 1x, {{ page.photo_2x | relative_url }} 2x"{% endif %} alt="{{ "team.photo_of" | t: "name", page.title }}" data-i18n-attr="alt:team.photo_of" data-i18n-params="{{ "name" | i18n_params: page.title }}">
       {% else %}
       <div class="avatar avatar-lg avatar-initials" aria-hidden="true">{% assign words = page.title | split: ' ' %}{% for w in words limit: 2 %}{{ w | slice: 0 }}{% endfor %}</div>
       {% endif %}
       <div>
         <h1>{{ page.title }}</h1>
         {% if page.role %}<p class="lead">{{ page.role }}</p>{% endif %}
-        {% if page.photo and page.photo_credit %}<p class="photo-credit">Foto: {{ page.photo_credit }}</p>{% endif %}
+        {% if page.photo and page.photo_credit %}<p class="photo-credit"><span data-i18n="team.photo_credit">{{ "team.photo_credit" | t }}</span> {{ page.photo_credit }}</p>{% endif %}
         {% if page.links %}
         <ul class="link-list">
           {% for link in page.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.title }}</a></li>{% endfor %}
@@ -21,24 +21,32 @@ layout: default
         {%- include feed-auswahl.html res=page art="team" -%}
         {%- if feed_auswahl.size > 0 %}
         {%- assign feed_url = page.url | append: "feed.xml" %}
-        {%- assign feed_titel = "Beiträge von " | append: page.title | append: " abonnieren" %}
-        <div class="feed-abo-zeile">{% include feed-abo.html feed=feed_url titel=feed_titel label="📡 Beiträge als RSS-Feed" %}</div>
+        <div class="feed-abo-zeile">{% include feed-abo.html feed=feed_url title_key="feed.title_posts_person" title_name=page.title label_key="feed.button_posts" %}</div>
         {%- endif %}
       </div>
     </header>
     <div class="prose">
       {{ content }}
     </div>
+    {%- assign member_badge = site.data.badges | where: "team", page.slug | first -%}
+    {% if member_badge %}
+    <h2 id="badge" data-i18n="team.badge">{{ "team.badge" | t }}</h2>
+    <div class="member-badge">
+      {% include badge-3d.html b=member_badge %}
+      {%- capture badge_link %}<a href="{{ '/press/#badge' | relative_url }}" data-i18n="team.badge_more">{{ "team.badge_more" | t }}</a>{% endcapture %}
+      <p class="muted small" data-i18n="team.badge_help">{{ "team.badge_help" | t_html: badge_link }}</p>
+    </div>
+    {% endif %}
     {% assign member_all = site.projects | where_exp: "p", "p.team contains page.slug" %}
-    {% assign member_projects = member_all | where_exp: "p", "p.persoenlich != true" %}
-    {% assign member_personal = member_all | where: "persoenlich", true | sort: "start" | reverse %}
-    {% assign member_posts = site.posts | where: "author", page.slug | where: "persoenlich", true %}
+    {% assign member_projects = member_all | where_exp: "p", "p.personal != true" %}
+    {% assign member_personal = member_all | where: "personal", true | sort: "start" | reverse %}
+    {% assign member_posts = site.posts | where: "author", page.slug | where: "personal", true %}
     {% if member_personal.size > 0 %}
-    <h2 id="persoenliche-projekte">Persönliche Projekte</h2>
+    <h2 id="persoenliche-projekte" data-i18n="team.personal_projects">{{ "team.personal_projects" | t }}</h2>
     <div class="grid-2">
       {% for p in member_personal %}
       <a class="card card-link" href="{{ p.url | relative_url }}">
-        <p class="meta"><span class="badge badge-personal">Persönlich</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · Update: {{ lu }}{% endif %}</p>
+        <p class="meta"><span class="badge badge-personal" data-i18n="badge.personal">{{ "badge.personal" | t }}</span>{% if p.period %} · {{ p.period }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · <span data-i18n="project.update_short">{{ "project.update_short" | t }}</span> {{ lu }}{% endif %}</p>
         <h3>{{ p.title }}</h3>
         {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
       </a>
@@ -46,22 +54,22 @@ layout: default
     </div>
     {% endif %}
     {% if member_posts.size > 0 %}
-    <h2 id="persoenlicher-blog">Persönlicher Blog</h2>
+    <h2 id="persoenlicher-blog" data-i18n="team.personal_blog">{{ "team.personal_blog" | t }}</h2>
     <ul class="post-list">
-      {% for po in member_posts %}<li><span class="meta">{{ po.date | date: "%d.%m.%Y" }}</span> <a href="{{ po.url | relative_url }}">{{ po.title }}</a></li>{% endfor %}
+      {% for po in member_posts %}<li><span class="meta">{{ po.date | i18n_date }}</span> <a href="{{ po.url | relative_url }}">{{ po.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
     {% if member_projects.size > 0 %}
-    <h2>Projekte im Institut</h2>
+    <h2 data-i18n="team.institute_projects">{{ "team.institute_projects" | t }}</h2>
     <ul class="link-list">
       {% for p in member_projects %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
     {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
-    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
+    {%- for h in site.challenges -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
     {%- assign member_ch = member_ch | concat: member_ch_done -%}
     {% if member_ch.size > 0 %}
-    <h2 id="herausforderungen">Herausforderungen</h2>
+    <h2 id="herausforderungen" data-i18n="challenge.heading">{{ "challenge.heading" | t }}</h2>
     <div class="grid-2">
       {% for h in member_ch %}{% include herausforderung-karte.html h=h %}{% endfor %}
     </div>
@@ -69,11 +77,10 @@ layout: default
     {%- comment -%}This person's todos (todos/todo-<slug>.md) – loaded by JS on click.{%- endcomment -%}
     {%- assign todo_file = "/todos/todo-" | append: page.slug | append: ".md" -%}
     {%- assign has_todo_file = site.static_files | where: "path", todo_file | first -%}
-    {% if page.nicht_im_team != true or has_todo_file %}
-    <h2 id="todos">Todos</h2>
+    {% if page.not_in_team != true or has_todo_file %}
+    <h2 id="todos" data-i18n="todos.heading">{{ "todos.heading" | t }}</h2>
     {%- assign tk_titel = "Todos von " | append: page.title -%}
-    {%- assign tk_label = "Todos von " | append: page.title -%}
-    {% include todos-knopf.html person=page.slug titel=tk_titel label=tk_label %}
+    {% include todos-knopf.html person=page.slug titel=tk_titel label_key="todos.person_button" label_name=page.title %}
     {% endif %}
     {%- include termine-auswahl.html res=page art="team" -%}
     {%- assign member_events = termine_auswahl -%}
@@ -86,16 +93,15 @@ layout: default
       {%- if end_s >= now_s %}{% assign ev_up = ev_up | push: e %}{% else %}{% assign ev_past = ev_past | unshift: e %}{% endif -%}
     {%- endfor %}
     {%- assign ics_url = page.url | split: "/" | join: "/" | append: ".ics" %}
-    {%- assign abo_titel = "Termine von " | append: page.title | append: " abonnieren" %}
     <div class="cal-heading-abo">
-      <h2 id="termine">Termine</h2>
-      {% include kalender-abo.html ics=ics_url titel=abo_titel %}
+      <h2 id="termine" data-i18n="calendar.events">{{ "calendar.events" | t }}</h2>
+      {% include kalender-abo.html ics=ics_url title_key="calendar.title_events_person" title_name=page.title %}
     </div>
-    <h3 class="cal-heading" id="member-up-heading"{% if ev_up.size == 0 %} hidden{% endif %}>Kommende Termine</h3>
+    <h3 class="cal-heading" id="member-up-heading"{% if ev_up.size == 0 %} hidden{% endif %} data-i18n="calendar.upcoming">{{ "calendar.upcoming" | t }}</h3>
     <ul class="event-list" id="member-events-up">
       {%- for e in ev_up %}{% include termin-karte.html event=e %}{% endfor %}
     </ul>
-    <h3 class="cal-heading" id="member-past-heading"{% if ev_past.size == 0 %} hidden{% endif %}>Vergangene Termine</h3>
+    <h3 class="cal-heading" id="member-past-heading"{% if ev_past.size == 0 %} hidden{% endif %} data-i18n="calendar.past">{{ "calendar.past" | t }}</h3>
     <ul class="event-list event-list-past" id="member-events-past">
       {%- for e in ev_past %}{% include termin-karte.html event=e %}{% endfor %}
     </ul>
@@ -112,12 +118,12 @@ layout: default
     {%- endif %}
     {% assign my_eq = site.equipment | where: "owner_team", page.slug %}
     {% if my_eq.size > 0 %}
-    <h2>Ausstattung</h2>
+    <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>
     <ul class="link-list">
       {% for it in my_eq %}<li><a href="{{ it.url | relative_url }}">{{ it.title }}</a></li>{% endfor %}
     </ul>
     {% endif %}
     {% include verbindungen.html %}
-    <a href="{{ '/team/' | relative_url }}" class="back-link">← Zum Team</a>
+    <a href="{{ '/team/' | relative_url }}" class="back-link" data-i18n="team.back">{{ "team.back" | t }}</a>
   </article>
 </main>

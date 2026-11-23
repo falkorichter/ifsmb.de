@@ -2,15 +2,15 @@
 # (_includes/neu-buttons.html) can create a new entry as a new file on GitHub:
 #
 #   _data/partner/<name>.yml        → appended to site.data["partners"]        (partner page, network, map …)
-#   _data/pressebericht/<name>.yml  → inserted into site.data["presseberichte"] ("Wir in der Presse"),
-#                                     sorted in by `datum` (newest first, entries without a date at the end)
+#   _data/press_report/<name>.yml   → inserted into site.data["press_reports"] ("Wir in der Presse"),
+#                                     sorted in by `date` (newest first, entries without a date at the end)
 #
 # Each file holds one entry with the same fields as an item of the list file.
 module IfsmbEinzeldateien
   LISTEN = {
     # directory => [list in _data, field that identifies an entry, field to sort in by (newest first)]
     "partner" => ["partners", "name", nil],
-    "pressebericht" => ["presseberichte", "url", "datum"]
+    "press_report" => ["press_reports", "url", "date"]
   }.freeze
 
   class Generator < Jekyll::Generator
