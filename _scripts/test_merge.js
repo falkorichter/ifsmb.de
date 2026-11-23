@@ -134,7 +134,7 @@ test("gleicher Wert, anders geschrieben (Anführungszeichen) → kein Konflikt, 
 });
 test("alle echten Inhaltsdateien: mit sich selbst und mit einer fremden Änderung unverändert bzw. sauber", () => {
   const fs = require("node:fs"), path = require("node:path"), root = path.join(__dirname, "..");
-  const dirs = ["_posts", "_events", "_projects", "_equipment", "_team", "_herausforderungen", "_press", "_data/partner"];
+  const dirs = ["_posts", "_events", "_projects", "_equipment", "_team", "_challenges", "_press", "_data/partner"];
   let n = 0;
   for (const d of dirs) {
     const dir = path.join(root, d);

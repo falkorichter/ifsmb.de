@@ -12,7 +12,7 @@ uuid: 9c813306-de63-4f75-81f0-0e2e76baf476
 
 Im Januar feiern wir den Makespace am [Rosalind-Franklin-Gymnasium](https://rosalind-franklin-gymnasium.de/) mit einer kleinen feierlichen Eröffnung. Genutzt wird er schon längst: Die 6 Drucker sind seit Beginn des Schuljahres 2026/27 da und im Einsatz, die 3D-Druck-AG findet statt, dazu gibt es 2 Schneidplotter. Details zur Feier folgen.
 
-Wir stellen uns das ähnlich vor wie an der KTG, als [Schulstadtrat Benjamin Fritz zu Besuch bei der 3D-Druck AG]({{ '/kalender/2026-03-09-schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }}) war: Die AG zeigt, was sie mit den Druckern macht, Gäste schauen vorbei, und es bleibt Zeit zum Netzwerken.
+Wir stellen uns das ähnlich vor wie an der KTG, als [Schulstadtrat Benjamin Fritz zu Besuch bei der 3D-Druck AG]({{ '/calendar/2026-03-09-schulstadtrat-benjamin-fritz-zu-besuch-bei-der-3d-druck-ag/' | relative_url }}) war: Die AG zeigt, was sie mit den Druckern macht, Gäste schauen vorbei, und es bleibt Zeit zum Netzwerken.
 
 Die 6 Drucker kommen aus der Förderung über [junior1stein](https://junior1stein.de/), die Berliner MINT-Initiative – das Gymnasium gehört dort zum [Cluster Mitte](https://junior1stein.de/CLUSTER/Cluster-Mitte/). Mehr dazu unter [Geld für Makespaces]({{ '/geld-fuer-makespaces/' | relative_url }}#junior1stein).
 

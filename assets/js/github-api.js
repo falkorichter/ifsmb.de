@@ -46,12 +46,11 @@ var GitHubApi = (function () {
     me = null;
   }
   function connected() { return !!token(); }
-  // Page that creates a fine-grained token for this repository (fields may be pre-filled; GitHub ignores unknown ones).
+  // Page that creates a classic token with public_repo – one way for every account (#186): the owner, collaborators
+  // (fine-grained tokens never reach another person's repository) and everyone else, who send through their own fork
+  // (only a classic token may open a pull request from a fork via the API). Fine-grained tokens still work if pasted.
   function tokenUrl() {
-    var owner = repo().split("/")[0];
-    return "https://github.com/settings/personal-access-tokens/new?name=" + encodeURIComponent("ifsmb.de bearbeiten")
-      + "&description=" + encodeURIComponent("Pull Requests direkt von ifsmb.de aus") + "&target_name=" + encodeURIComponent(owner)
-      + "&expires_in=30&contents=write&pull_requests=write&issues=write";
+    return "https://github.com/settings/tokens/new?scopes=public_repo&description=" + encodeURIComponent("ifsmb.de bearbeiten");
   }
 
   // UI string (assets/js/i18n.js); German fallback without it. Commit messages and PR titles stay German.
@@ -98,15 +97,70 @@ var GitHubApi = (function () {
     return failure("other", r.status, gh);
   }
 
-  // Who is connected and may they push to the repository? → { login, avatar, name, canPush }
+  // Who is connected and may they push to the repository? → { login, avatar, name, canPush, fork }
+  // fork = "login/name" of the person's own fork of the repository (only looked up without push access), or null.
   var me = null;
   function whoAmI() {
     if (me) return Promise.resolve(me);
+    var u;
     return Promise.all([call("GET", "/user"), call("GET", "/repos/" + repo())]).then(function (r) {
-      me = { login: r[0].login, name: r[0].name || r[0].login, avatar: r[0].avatar_url,
-        canPush: !!(r[1].permissions && r[1].permissions.push) };
-      return me;
+      var rolePush = !!(r[1].permissions && r[1].permissions.push), owner = r[1].owner || {};
+      // permissions.push is the account's role. A fine-grained token (github_pat_…) never reaches a personal repository
+      // of somebody else – not even as a collaborator (403 on every write) → then it goes through the fork (#186)
+      var fineGrainedForeign = /^github_pat_/.test(token() || "") && owner.type !== "Organization" && owner.login && owner.login !== r[0].login;
+      u = { login: r[0].login, name: r[0].name || r[0].login, avatar: r[0].avatar_url,
+        canPush: rolePush && !fineGrainedForeign, collaboratorNeedsClassic: rolePush && fineGrainedForeign, fork: null };
+      if (u.canPush) return null;
+      return call("GET", "/repos/" + u.login + "/" + repo().split("/")[1]).then(function (f) {
+        var parent = (f.parent && f.parent.full_name) || (f.source && f.source.full_name);
+        if (!f.fork || parent !== repo()) return null;
+        u.fork = f.full_name;
+        // behind the repository? (an outdated fork is synced before sending – but say so, #186)
+        var ref = "/git/ref/heads/" + encodeURIComponent(baseBranch());
+        return Promise.all([call("GET", "/repos/" + f.full_name + ref), call("GET", "/repos/" + repo() + ref)]).then(function (r) {
+          u.forkBehind = r[0].object.sha !== r[1].object.sha;
+        }, function () { /* unknown – no hint */ });
+      }, function (err) { if (err.kind === "auth") throw err; }); // 404: no fork yet
+    }).then(function () { me = u; return me; });
+  }
+  // Known without a request: false = connected without push access (contributions go through a fork), null = unknown.
+  function canPushKnown() { return me ? me.canPush : null; }
+
+  // The person's fork, created if needed and brought up to date with the base branch → Promise<"login/name">
+  function ensureFork(step) {
+    var base = baseBranch();
+    return whoAmI().then(function (u) {
+      if (u.fork) {
+        step(tr("github.step_sync_fork", { fork: u.fork }, "Fork " + u.fork + " auf den neuesten Stand bringen …"));
+        // fast-forward the fork's base branch; if that fails (diverged), the commit is built on the upstream state anyway
+        return call("POST", "/repos/" + u.fork + "/merge-upstream", { branch: base }).then(function () { u.forkBehind = false; u.forkStale = false; }, function (err) {
+          if (err.kind === "auth") throw err;
+          u.forkStale = true; // fork's base branch couldn't be synced (own commits on it?) – the branch is built on the repository's state anyway
+        }).then(function () { return u.fork; });
+      }
+      step(tr("github.step_create_fork", { repo: repo() }, "Eigenen Fork von " + repo() + " anlegen …"));
+      return call("POST", "/repos/" + repo() + "/forks", {}).then(function (f) {
+        // GitHub creates forks in the background: wait until the base branch is there (max. ~30 s)
+        var tries = 0;
+        function ready() {
+          return call("GET", "/repos/" + f.full_name + "/git/ref/heads/" + encodeURIComponent(base)).then(function () {
+            u.fork = f.full_name; return f.full_name;
+          }, function (err) {
+            if (err.kind !== "notfound" || ++tries > 15) throw err;
+            return new Promise(function (res) { setTimeout(res, 2000); }).then(ready);
+          });
+        }
+        return ready();
+      }, function (err) {
+        if (err.kind === "permission") throw failure("permission", 403, tr("github.fork_permission", { repo: repo() }, "Das Token darf keinen Fork anlegen. Entweder den Fork von " + repo() + " einmal auf GitHub anlegen („Fork“ oben rechts) oder beim Token „Administration“ auf „Read and write“ stellen."));
+        throw err;
+      });
     });
+  }
+  // GitHub's page to open the pull request by hand (fine-grained tokens may not open it from a fork via the API)
+  function compareUrl(fork, branch, title, body) {
+    return "https://github.com/" + repo() + "/compare/" + encodeURIComponent(baseBranch()) + "..." + fork.split("/")[0] + ":" + fork.split("/")[1] + ":"
+      + branch.split("/").map(encodeURIComponent).join("/") + "?expand=1&title=" + encodeURIComponent(title || "") + "&body=" + encodeURIComponent(body || "");
   }
 
   // ---------- encoding ----------
@@ -247,14 +301,22 @@ var GitHubApi = (function () {
   // o = { title, body, files: [{ path, text } | { path, blob }], branchHint, onStep(text), parent? (commit SHA to build on) }
   // With o.pr = { number, url, branch } the commit goes on top of that open pull request's branch instead (no new PR).
   // → Promise<{ url, number, branch, updated }>
+  // Without push access the branch goes to the person's own fork (created if needed, #186): o.pr then must be one of
+  // their own fork branches (o.pr.fork); the pull request is opened from "login:branch", or – if GitHub refuses that
+  // token – the result has no number but compareUrl, GitHub's page to open it with one click.
   function createPullRequest(o) {
-    var r = "/repos/" + repo(), step = o.onStep || function () {}, base = o.pr ? o.pr.branch : baseBranch(), branch, baseSha;
-    return whoAmI().then(function (u) {
-      if (!u.canPush) throw new Error(tr("github.no_push", { login: u.login, repo: repo() }, "@" + u.login + " darf in " + repo() + " keine Branches anlegen (Pull Requests aus Forks kommen später)."));
+    var up = "/repos/" + repo(), r = up, step = o.onStep || function () {}, base = o.pr ? o.pr.branch : baseBranch(), branch, baseSha, fork = null, u;
+    return whoAmI().then(function (who) {
+      u = who;
       branch = o.pr ? o.pr.branch : branchName(o.branchHint);
+      if (u.canPush) return null;
+      if (o.pr && !o.pr.fork) throw new Error(tr("github.fork_no_continue", { number: o.pr.number }, "Ohne Schreibrechte kannst du nicht in #" + o.pr.number + " mitschicken – bitte als eigenen Pull Request senden."));
+      return ensureFork(step).then(function (f) { fork = f; r = "/repos/" + f; });
+    }).then(function () {
       if (o.parent) return { object: { sha: o.parent } }; // the commit the form merged against (see neu.js direct.submit)
       step(tr("github.step_base", { branch: base }, "Stand von " + base + " holen …"));
-      return call("GET", r + "/git/ref/heads/" + base.split("/").map(encodeURIComponent).join("/"));
+      // a fork branch of one's own pull request lives in the fork; the base branch always comes from the repository
+      return call("GET", (o.pr && fork ? r : up) + "/git/ref/heads/" + base.split("/").map(encodeURIComponent).join("/"));
     }).then(function (ref) {
       baseSha = ref.object.sha;
       return call("GET", r + "/git/commits/" + baseSha);
@@ -291,9 +353,22 @@ var GitHubApi = (function () {
     }).then(function (res) {
       if (res && res.pr) return { html_url: res.pr.url, number: res.pr.number, updated: true };
       step(tr("github.step_open_pr", null, "Pull Request öffnen …"));
-      return call("POST", r + "/pulls", { title: o.title, head: branch, base: base, body: o.body || "", maintainer_can_modify: true })
-        .catch(function (err) { err.pendingBranch = branch; throw err; }); // branch exists → finishPullRequest can carry on
-    }).then(function (pr) { return { url: pr.html_url, number: pr.number, branch: branch, updated: !!pr.updated }; });
+      return openPull({ title: o.title, body: o.body, branch: branch, fork: fork })
+        .catch(function (err) { err.pendingBranch = branch; err.pendingFork = fork; throw err; }); // branch exists → finishPullRequest can carry on
+    }).then(function (pr) {
+      var stale = !!(fork && u.forkStale);
+      if (pr.compareUrl) return { compareUrl: pr.compareUrl, branch: branch, fork: fork, forkStale: stale };
+      return { url: pr.html_url, number: pr.number, branch: branch, fork: fork, forkStale: stale, updated: !!pr.updated };
+    });
+  }
+  // POST the pull request; from a fork with a token GitHub refuses for that (fine-grained, outside collaborator):
+  // → { compareUrl } instead of failing
+  function openPull(o) {
+    var body = { title: o.title, head: o.fork ? o.fork.split("/")[0] + ":" + o.branch : o.branch, base: baseBranch(), body: o.body || "", maintainer_can_modify: true };
+    return call("POST", "/repos/" + repo() + "/pulls", body).catch(function (err) {
+      if (o.fork && (err.kind === "permission" || err.kind === "notfound")) return { compareUrl: compareUrl(o.fork, o.branch, o.title, o.body) };
+      throw err;
+    });
   }
 
   // Carry on after an interrupted send: the branch with the commit exists, the pull request maybe (answer lost) or not.
@@ -301,14 +376,17 @@ var GitHubApi = (function () {
   function finishPullRequest(o) {
     return openPulls(true).then(function (list) {
       var found = list.filter(function (pr) { return pr.branch === o.branch; })[0];
-      if (found) return { url: found.url, number: found.number, branch: o.branch };
-      return call("POST", "/repos/" + repo() + "/pulls", { title: o.title, head: o.branch, base: baseBranch(), body: o.body || "", maintainer_can_modify: true })
-        .then(function (pr) { return { url: pr.html_url, number: pr.number, branch: o.branch }; });
+      if (found) return { url: found.url, number: found.number, branch: o.branch, fork: o.fork || null };
+      return openPull({ title: o.title, body: o.body, branch: o.branch, fork: o.fork }).then(function (pr) {
+        if (pr.compareUrl) return { compareUrl: pr.compareUrl, branch: o.branch, fork: o.fork };
+        return { url: pr.html_url, number: pr.number, branch: o.branch, fork: o.fork || null };
+      });
     });
   }
 
   return {
     token: token, setToken: setToken, logout: logout, connected: connected, tokenUrl: tokenUrl, repo: repo,
+    canPushKnown: canPushKnown, ensureFork: ensureFork, compareUrl: compareUrl,
     whoAmI: whoAmI, readFile: readFile, listFolder: listFolder, openPullsForFile: openPullsForFile, openPulls: openPulls,
     namesInOpenPulls: namesInOpenPulls, getPull: getPull, headSha: headSha, createPullRequest: createPullRequest,
     finishPullRequest: finishPullRequest, pullMergeState: pullMergeState, commitChecks: commitChecks, openIssues: openIssues,

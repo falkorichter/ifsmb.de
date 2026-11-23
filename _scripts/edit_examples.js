@@ -8,7 +8,7 @@ const Neu = require(path.join(__dirname, "..", "assets", "js", "neu.js"));
 const ROOT = path.join(__dirname, "..");
 // collection folder → form type (same map as _includes/edit-buttons.html)
 const FOLDERS = { _posts: "beitrag", _events: "termin", _projects: "projekt", _equipment: "geraet",
-  _herausforderungen: "herausforderung", _team: "team", _press: "presse" };
+  _challenges: "herausforderung", _team: "team", _press: "presse" };
 
 // Plain pages with `layout: page` (or `default`, the start page) outside the collections – same rule as _plugins/source_files.rb (#154):
 // Markdown → "seite", HTML → "uebersicht".

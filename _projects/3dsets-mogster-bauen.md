@@ -2,9 +2,9 @@
 title: "3DSets Mogster bauen"
 summary: Falko baut den Mogster 4x4 Tipper von 3DSets – einen ferngesteuerten Kipper im Maßstab 1:8, fast komplett aus dem 3D-Drucker. Anton baut sich auch einen.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-08-16
-zeitraum: seit Sommer 2026
+period: seit Sommer 2026
 event_tag: mogster
 tags: [mogster, rc-modellbau]
 team:

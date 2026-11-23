@@ -49,11 +49,11 @@ test("✏️ Übersichtsseite: kaputtes HTML wird nicht gespeichert, Meldung nen
   assert.equal(env.control.state().pulls.length, 0, "kein Pull Request");
 });
 
-test("✏️ Markdown-Seite /partner/rfflabs/: Formular „Seite“ mit Text", async () => {
-  const file = "partner/rfflabs/index.md", original = read(file);
+test("✏️ Markdown-Seite /partners/rfflabs/: Formular „Seite“ mit Text", async () => {
+  const file = "partners/rfflabs/index.md", original = read(file);
   env.seedSource([file]);
   const alice = await env.person("token-alice");
-  await alice.openEdit("/partner/rfflabs/");
+  await alice.openEdit("/partners/rfflabs/");
   assert.equal(await alice.value("title"), "RFFLabs");
   assert.equal(await alice.value("theme"), "rfflabs");
   await alice.fill({ title: "RFFLabs (E2E)" });

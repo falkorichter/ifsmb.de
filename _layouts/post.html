@@ -11,7 +11,7 @@ layout: default
       <h1>{{ page.title }}</h1>
       {% include stichworte.html tags=page.tags %}
     </header>
-    {% if page.persoenlich %}
+    {% if page.personal %}
     {%- assign author_first = author.title | split: " " | first %}
     <p class="personal-note"><span data-i18n="post.personal">{{ "post.personal" | t }}</span>{% if author_slugs.size > 0 %} <span data-i18n="common.by">{{ "common.by" | t }}</span> {% include autoren.html author=page.author %}{% endif %} <span data-i18n="post.personal_note">{{ "post.personal_note" | t }}</span>{% if author %} <span data-i18n="post.more_in_blog">{{ "post.more_in_blog" | t }}</span> <a href="{{ author.url | relative_url }}#persoenlicher-blog" data-i18n="post.personal_blog_of" data-i18n-params="{{ "name" | i18n_params: author_first }}">{{ "post.personal_blog_of" | t: "name", author_first }}</a>.{% endif %}</p>
     {% endif %}
@@ -30,6 +30,6 @@ layout: default
     </div>
     {% include verbindungen.html %}
     {% include verknuepft.html tags=page.tags %}
-    {% if page.persoenlich %}<a href="{{ '/news/persoenlich/' | relative_url }}" class="back-link" data-i18n="post.back_personal">{{ "post.back_personal" | t }}</a>{% else %}<a href="{{ '/news/' | relative_url }}" class="back-link" data-i18n="post.back">{{ "post.back" | t }}</a>{% endif %}
+    {% if page.personal %}<a href="{{ '/news/personal/' | relative_url }}" class="back-link" data-i18n="post.back_personal">{{ "post.back_personal" | t }}</a>{% else %}<a href="{{ '/news/' | relative_url }}" class="back-link" data-i18n="post.back">{{ "post.back" | t }}</a>{% endif %}
   </article>
 </main>

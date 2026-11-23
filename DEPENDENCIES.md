@@ -24,7 +24,7 @@ Stand: 23.11.2026
 | Aktualisieren | neue Version wie oben holen, beide Dateien ersetzen, Version/SHA-256 hier und in der README daneben eintragen, Bundle wieder auf externe Adressen prüfen, Formulare im Browser testen (Editor da, Werkzeugleiste und 🛠️-Schalter, Kürzel aus dem Beitrag `_posts/2026-11-17-mitschreiben-leicht-gemacht.md`, ✏️ markiert nur geänderte Zeilen), `CHANGELOG.md` |
 | Entfernen | Ordner löschen und `markdown: true` bzw. `createMarkdownEditors()` in `neu.js` entfernen – die Formulare fallen dann auf das normale Textfeld zurück |
 
-### Pagefind – Volltextsuche (`/suche/`)
+### Pagefind – Volltextsuche (`/search/`)
 
 | | |
 |---|---|
@@ -33,8 +33,8 @@ Stand: 23.11.2026
 | Herkunft | npm, beim Deployment mit `npx -y pagefind@1.5.2 --site _site` (`.github/workflows/pages.yml`) – erzeugt `_site/pagefind/` |
 | Liegt in | nicht im Repo; entsteht bei jedem Deployment |
 | Lizenz | MIT |
-| Benutzt von | `suche/`, `_includes/formular-config.html` (Volltextsuche in den Chip-Feldern der Formulare), `_includes/verknuepft.html`, `_includes/todos-knopf.html` |
-| Aktualisieren | Version in `pages.yml` ändern, nach dem Deployment `/suche/` und die Seitensuche in den Formularen testen |
+| Benutzt von | `search/`, `_includes/formular-config.html` (Volltextsuche in den Chip-Feldern der Formulare), `_includes/verknuepft.html`, `_includes/todos-knopf.html` |
+| Aktualisieren | Version in `pages.yml` ändern, nach dem Deployment `/search/` und die Seitensuche in den Formularen testen |
 
 ### VT323 – Schrift für Themes
 

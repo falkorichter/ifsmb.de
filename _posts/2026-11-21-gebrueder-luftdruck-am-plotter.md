@@ -2,9 +2,9 @@
 title: "Gebrüder Luftdruck am Plotter"
 date: 2026-11-21 20:50:00 +0100
 author: flojo
-persoenlich: true
+personal: true
 tags: [axidraw, plotter, 2d-druck, cad]
-verlinkt: [/team/falko-richter/]
+linked: [/team/falko-richter/]
 social_media_preview_image: /assets/images/news/gebrueder-luftdruck-am-plotter/01-social.jpg
 uuid: f58c0f47-fd6e-427f-85a9-c7db47e36e85
 ---

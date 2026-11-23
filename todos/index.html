@@ -1,21 +1,21 @@
 ---
-suche: false # rendered by JS, nothing to index
+search: false # rendered by JS, nothing to index
 layout: page
 title: Todos
 i18n_title: pages.todos.title
 i18n_lead: pages.todos.lead
 lead: Was wir gerade anpacken – pro Person in der Eisenhower-Matrix. Verschieben, bearbeiten, als Pull Request speichern.
-verlinkt: [/herausforderungen/]
+linked: [/challenges/]
 ---
 {%- comment -%}
-  Todo app (experiment, separate from _herausforderungen/): one Markdown file per person in todos/todo-<person>.md,
+  Todo app (experiment, separate from _challenges/): one Markdown file per person in todos/todo-<person>.md,
   served as static files and loaded lazily by assets/js/todos.js. Every change is kept in localStorage at once;
   "Pull Request" copies the new file and opens the GitHub editor. Format: see the comment at the top of each file.
 {%- endcomment -%}
 {% include todos-config.html %}
 
 <div class="prose intro">
-  <p>Todos sind das, was jemand aus dem Team konkret erledigt: Jedes gehört einer Person, die sich hauptsächlich kümmert, oft mit helfenden Händen. Gesammelt und dokumentiert werden Aufgaben, Probleme und offene Fragen erst einmal unter <a href="{{ '/herausforderungen/' | relative_url }}">Herausforderungen</a> – wer davon etwas anpackt, macht hier ein Todo daraus.</p>
+  <p>Todos sind das, was jemand aus dem Team konkret erledigt: Jedes gehört einer Person, die sich hauptsächlich kümmert, oft mit helfenden Händen. Gesammelt und dokumentiert werden Aufgaben, Probleme und offene Fragen erst einmal unter <a href="{{ '/challenges/' | relative_url }}">Herausforderungen</a> – wer davon etwas anpackt, macht hier ein Todo daraus.</p>
 </div>
 
 <div class="todos-app" id="todos-app">

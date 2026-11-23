@@ -2,8 +2,8 @@
   Rotatable 3D model of a badge with downloads. Param: b = entry from _data/badges.yml.
   Without JS/WebGL the preview image stays (assets/js/badge3d.js, no library).
 {%- endcomment -%}
-{%- assign b3_path = "/assets/badge/" | append: include.b.datei -%}
-{%- if include.b.aufschrift -%}{%- assign b3_alt = "IfsMB-Badge mit dem Namen „" | append: include.b.aufschrift | append: "“" -%}{%- else -%}{%- assign b3_alt = "IfsMB-Badge (Logo)" -%}{%- endif -%}
+{%- assign b3_path = "/assets/badge/" | append: include.b.file -%}
+{%- if include.b.label -%}{%- assign b3_alt = "IfsMB-Badge mit dem Namen „" | append: include.b.label | append: "“" -%}{%- else -%}{%- assign b3_alt = "IfsMB-Badge (Logo)" -%}{%- endif -%}
 <figure class="badge-3d" data-model="{{ b3_path | append: '.obj' | relative_url }}">
   <img src="{{ b3_path | append: '-oben.png' | relative_url }}" alt="{{ b3_alt }}" width="1200" height="800" loading="lazy">
 </figure>

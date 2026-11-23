@@ -28,7 +28,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }} – Neuigkeiten" href="{{ '/feed.xml' | relative_url }}">
   {%- comment -%}per-page feeds from _plugins/beitrag_feeds.rb{%- endcomment -%}
-  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/persoenlich/" %}
+  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/personal/" %}
   <link rel="alternate" type="application/atom+xml" title="{{ page.title }} – Beiträge" href="{{ page.url | append: 'feed.xml' | relative_url }}">
   {%- endif %}
 
@@ -134,11 +134,11 @@
     </div>
   </header>
 
-  {% unless page.suche == false %}<div class="search-body" data-pagefind-body>
+  {% unless page.search == false %}<div class="search-body" data-pagefind-body>
   {% include suche-meta.html page=page %}{% endunless %}
   {{ content }}
   {% if content contains "link-tot" %}{% include link-tot-hinweis.html html=content %}{% endif %}
-  {% unless page.suche == false %}</div>{% endunless %}
+  {% unless page.search == false %}</div>{% endunless %}
 
   {% if site.repository and page.path %}
   {%- assign schmale_layouts = "post,project,member,event,equipment,press" | split: "," -%}
@@ -154,7 +154,7 @@
       <p>
         <a href="{{ '/spenden/' | relative_url }}" data-i18n="footer.donate">{{ "footer.donate" | t }}</a> ·
         <a href="{{ '/impressum/' | relative_url }}" data-i18n="footer.imprint">{{ "footer.imprint" | t }}</a> ·
-        <a href="{{ '/projekte/archiv/' | relative_url }}" data-i18n="footer.past_projects">{{ "footer.past_projects" | t }}</a> ·
+        <a href="{{ '/projects/archive/' | relative_url }}" data-i18n="footer.past_projects">{{ "footer.past_projects" | t }}</a> ·
         <a href="https://github.com/falkorichter/ifsmb.de" target="_blank" rel="noopener" data-i18n="footer.source">{{ "footer.source" | t }}</a>
       </p>
       {%- comment -%}Project documentation for contributors – rendered by GitHub (the files are excluded from the site).{%- endcomment -%}

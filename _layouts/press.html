@@ -16,8 +16,8 @@ layout: default
     {% include verknuepft.html tags=page.tags %}
     <hr class="divider">
     <h2 data-i18n="press.about">{{ "press.about" | t }}</h2>
-    <p>{{ site.data.presse.kurzprofil }}</p>
+    <p>{{ site.data.press.short_profile }}</p>
     {% include pressekontakt.html %}
-    <a href="{{ '/presse/' | relative_url }}" class="back-link" data-i18n="press.back">{{ "press.back" | t }}</a>
+    <a href="{{ '/press/' | relative_url }}" class="back-link" data-i18n="press.back">{{ "press.back" | t }}</a>
   </article>
 </main>

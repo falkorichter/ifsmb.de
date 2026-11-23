@@ -1,17 +1,17 @@
 ---
 layout: default
 ---
-{%- if page.standort_partner -%}{%- assign sp = site.data.partners | where: "name", page.standort_partner | first -%}{%- endif -%}
+{%- if page.location_partner -%}{%- assign sp = site.data.partners | where: "name", page.location_partner | first -%}{%- endif -%}
 {%- assign eq_updates = "" | split: "" -%}{%- if page.updates -%}{%- assign eq_updates = page.updates | sort: "datum" | reverse -%}{%- endif -%}
 {%- assign eq_last = eq_updates | first -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry" data-i18n="badge.prospect">{{ "badge.prospect" | t }}</span> · {% elsif page.status == "in-reparatur" %}<span class="badge badge-inquiry" data-i18n="badge.in_repair">{{ "badge.in_repair" | t }}</span> · {% elsif page.status == "im-test" %}<span class="badge badge-inquiry" data-i18n="badge.testing">{{ "badge.testing" | t }}</span> · {% endif %}{% if page.kategorie %}{{ page.kategorie }} · {% endif %}{% include besitz.html item=page %}{% if eq_last %} · <span data-i18n="project.last_update">{{ "project.last_update" | t }}</span> <a href="#updates">{{ eq_last.datum | i18n_date }}</a>{% endif %}</p>
+      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry" data-i18n="badge.prospect">{{ "badge.prospect" | t }}</span> · {% elsif page.status == "in-reparatur" %}<span class="badge badge-inquiry" data-i18n="badge.in_repair">{{ "badge.in_repair" | t }}</span> · {% elsif page.status == "im-test" %}<span class="badge badge-inquiry" data-i18n="badge.testing">{{ "badge.testing" | t }}</span> · {% endif %}{% if page.category %}{{ page.category }} · {% endif %}{% include besitz.html item=page %}{% if eq_last %} · <span data-i18n="project.last_update">{{ "project.last_update" | t }}</span> <a href="#updates">{{ eq_last.date | i18n_date }}</a>{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
-      {% if page.standort or sp %}
-      <p class="equipment-location">📍 <span data-i18n="equipment.location">{{ "equipment.location" | t }}</span> {% if sp %}<a href="{{ '/partner/' | relative_url }}#{{ sp.name | slugify }}">{{ page.standort | default: sp.name }}</a>{% else %}{{ page.standort }}{% endif %}</p>
+      {% if page.location or sp %}
+      <p class="equipment-location">📍 <span data-i18n="equipment.location">{{ "equipment.location" | t }}</span> {% if sp %}<a href="{{ '/partners/' | relative_url }}#{{ sp.name | slugify }}">{{ page.location | default: sp.name }}</a>{% else %}{{ page.location }}{% endif %}</p>
       {% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
@@ -49,7 +49,7 @@ layout: default
       <ol class="update-list">
         {%- for u in eq_updates %}
         <li class="update-item">
-          <span class="meta update-date">{{ u.datum | i18n_date }}</span>
+          <span class="meta update-date">{{ u.date | i18n_date }}</span>
           <div class="update-text">{{ u.text | markdownify }}</div>
         </li>
         {%- endfor %}
@@ -62,10 +62,10 @@ layout: default
     <p class="note"><span data-i18n="equipment.no_own_devices">{{ "equipment.no_own_devices" | t }}</span> {% include besitz.html item=page %} <span data-i18n="equipment.use_by_arrangement">{{ "equipment.use_by_arrangement" | t }}</span></p>
     {% endif %}
     {%- assign rel_tags = "" | split: "" -%}
-    {%- for t in page.tags -%}{%- unless site.data.stichworte_breit contains t -%}{%- assign rel_tags = rel_tags | push: t -%}{%- endunless -%}{%- endfor -%}
+    {%- for t in page.tags -%}{%- unless site.data.tags_broad contains t -%}{%- assign rel_tags = rel_tags | push: t -%}{%- endunless -%}{%- endfor -%}
     {%- if rel_tags.size == 0 -%}{%- assign rel_tags = page.tags -%}{%- endif %}
     {% include verbindungen.html %}
     {% include verknuepft.html tags=rel_tags %}
-    <a href="{{ '/ausstattung/' | relative_url }}" class="back-link" data-i18n="equipment.back">{{ "equipment.back" | t }}</a>
+    <a href="{{ '/equipment/' | relative_url }}" class="back-link" data-i18n="equipment.back">{{ "equipment.back" | t }}</a>
   </article>
 </main>

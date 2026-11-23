@@ -3,7 +3,7 @@ title: "Mitschreiben leicht gemacht: Beiträge direkt auf ifsmb.de schreiben und
 date: 2026-11-17 10:30:00 +0100
 author: falko-richter
 tags: [ifsmb-de]
-verlinkt: [/news/, /kalender/, /projekte/, /herausforderungen/, /impressum/, /partner/zazza/]
+linked: [/news/, /calendar/, /projects/, /challenges/, /impressum/, /partners/zazza/]
 uuid: 545b983e-f39f-440d-9f92-f773987d53fc
 ---
 
@@ -60,7 +60,7 @@ Noch einmal dasselbe Kürzel nimmt die Formatierung wieder weg. In einer Liste m
 
 ### So kommt dein Text auf die Website
 
-1. Formular ausfüllen – zum Beispiel mit **➕ Beitrag** auf den [Neuigkeiten](/news/), **➕ Termin** im [Kalender](/kalender/), **➕ Projekt** bei den [Projekten](/projekte/) oder **➕ Herausforderung** bei den [Herausforderungen](/herausforderungen/). Dein Entwurf bleibt in deinem Browser gespeichert, bis du ihn abschickst.
+1. Formular ausfüllen – zum Beispiel mit **➕ Beitrag** auf den [Neuigkeiten](/news/), **➕ Termin** im [Kalender](/calendar/), **➕ Projekt** bei den [Projekten](/projects/) oder **➕ Herausforderung** bei den [Herausforderungen](/challenges/). Dein Entwurf bleibt in deinem Browser gespeichert, bis du ihn abschickst.
 2. **„📋 Auf GitHub anlegen“** (bzw. beim Bearbeiten **„📋 Auf GitHub speichern“**) kopiert die fertige Datei und öffnet GitHub. Bei neuen Seiten steht der Inhalt dort schon drin; beim Bearbeiten den ganzen Inhalt markieren (<kbd>⌘</kbd> <kbd>A</kbd> bzw. <kbd>Strg</kbd> <kbd>A</kbd>) und einfügen.
 3. Unten auf **„Commit changes …“** klicken und **„Create a new branch … and start a pull request“** wählen.
 4. Wir schauen kurz drüber. Sobald der Vorschlag übernommen ist, steht er nach ein paar Minuten auf der Website.
@@ -90,7 +90,7 @@ Noch zwei Kleinigkeiten, die beim gemeinsamen Schreiben helfen:
 - **Schon in Arbeit?** Wenn jemand dieselbe Seite gerade in einem offenen Pull Request ändert, zeigt das Formular das an – und mit **„In #… weiterarbeiten“** landet deine Änderung im selben Pull Request statt in einem zweiten.
 - **Link zum Bearbeiten:** Solange das Formular offen ist, steht `#bearbeiten` in der Adresse. So kannst du jemandem direkt einen Link schicken, der die Seite gleich zum Bearbeiten öffnet.
 
-Das erste Ergebnis ist schon online: Unser neuer Partner [Zazza Moabit / Pajas Kaffee]({{ '/partner/zazza/' | relative_url }}) kam genau so auf die Website. Videos gehen im Browser noch nicht – die schickt ihr bitte weiter an Falko.
+Das erste Ergebnis ist schon online: Unser neuer Partner [Zazza Moabit / Pajas Kaffee]({{ '/partners/zazza/' | relative_url }}) kam genau so auf die Website. Videos gehen im Browser noch nicht – die schickt ihr bitte weiter an Falko.
 
 Im Moment können das alle, die im Repository mitarbeiten dürfen; „Mit GitHub anmelden“ ohne Token und Vorschläge für alle anderen kommen später.
 

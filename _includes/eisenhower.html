@@ -1,6 +1,6 @@
 {%- comment -%}
-  Eisenhower matrix of challenges on /herausforderungen/: 2×2 grid (dringend / nicht dringend × wichtig / nicht wichtig).
-  include.list = challenges (solved ones are skipped). Missing `wichtig`/`dringend` count as false (→ „Später“).
+  Eisenhower matrix of challenges on /challenges/: 2×2 grid (dringend / nicht dringend × wichtig / nicht wichtig).
+  include.list = challenges (solved ones are skipped). Missing `important`/`urgent` count as false (→ „Später“).
   Each quadrant has a small "➕" that opens the challenge form with wichtig/dringend already set.
   Separate from the todo matrix (assets/js/todos.js), which is built in the browser from todos/todo-*.md.
 {%- endcomment -%}
@@ -31,7 +31,7 @@
   {%- if qi == 1 %}<div class="hm-axis hm-axis-row" aria-hidden="true"><span data-i18n="matrix.important">{{ "matrix.important" | t }}</span></div>{% elsif qi == 3 %}<div class="hm-axis hm-axis-row" aria-hidden="true"><span data-i18n="matrix.not_important">{{ "matrix.not_important" | t }}</span></div>{% endif %}
   <section class="hm-cell hm-{{ em_q }}" id="{{ em_q }}">
     <h3 class="hm-title"><span aria-hidden="true">{{ em_icon }}</span> <span data-i18n="{{ em_name_key }}">{{ em_name }}</span> <span class="hm-count">{{ em_list.size }}</span>
-      {% include neu-button.html typ="herausforderung" klein=true i18n="new.matrix" i18n_quadrant=em_q wichtig=em_w dringend=em_d %}</h3>
+      {% include neu-button.html typ="herausforderung" klein=true i18n="new.matrix" i18n_quadrant=em_q important=em_w urgent=em_d %}</h3>
     <p class="hm-sub" data-i18n="{{ em_sub_key }}">{{ em_sub }}</p>
     {%- if em_list.size > 0 %}
     <ul class="hm-list">

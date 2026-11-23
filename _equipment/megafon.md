@@ -1,8 +1,8 @@
 ---
 title: Megafon
-kategorie: Audio
+category: Audio
 owner_team: [falko-richter]
-standort: Unterwegs
+location: Unterwegs
 image: /assets/images/ausstattung/megafon/01.jpg
 image_alt: Megafon
 social_media_preview_image: /assets/images/ausstattung/megafon/01-social.jpg

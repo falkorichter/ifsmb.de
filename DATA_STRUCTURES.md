@@ -10,16 +10,19 @@ beide Richtungen (ein Eintrag auf einer der beiden Seiten reicht).
 ```
  Ressource      Datei                          Adresse
  ─────────────  ─────────────────────────────  ───────────────────────────────
- PROJEKT        _projects/<name>.md            /projekte/<name>/
- TERMIN         _events/<name>.md              /kalender/<name>/
+ PROJEKT        _projects/<name>.md            /projects/<name>/
+ TERMIN         _events/<name>.md              /calendar/<name>/
  BEITRAG        _posts/<datum>-<name>.md       /news/<jahr>/<monat>/<tag>/<name>/
  PERSON         _team/<name>.md                /team/<name>/
- AUSSTATTUNG    _equipment/<name>.md           /ausstattung/<name>/
- HERAUSFORDERUNG _herausforderungen/<name>.md  /herausforderungen/<name>/
- PRESSE         _press/<name>.md               /presse/<name>/
- PARTNER        _data/partners.yml (+ Seite    /partner/<name>/  (wenn `page:` gesetzt)
-                partner/<name>/index.md)
+ AUSSTATTUNG    _equipment/<name>.md           /equipment/<name>/
+ HERAUSFORDERUNG _challenges/<name>.md  /challenges/<name>/
+ PRESSE         _press/<name>.md               /press/<name>/
+ PARTNER        _data/partners.yml (+ Seite    /partners/<name>/  (wenn `page:` gesetzt)
+                partners/<name>/index.md)
 ```
+
+Frühere deutsche Adressen (`/projekte/…`, `/kalender/…`, `/herausforderungen/…`, `/ausstattung/…`,
+`/partner/…`, `/presse/…`, `/news/persoenlich/`, `/suche/`, `/netzwerk/`, `/karte/`, `/stichworte/`) leitet `_plugins/alte_adressen.rb` automatisch weiter.
 
 ## Wie sie zusammenhängen
 
@@ -54,7 +57,7 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
  │ team      ──► PERSON (zustän-  │      Teamprofil listet „Herausforderungen“
  │               dig, Liste)      │
  │ verlinkt  ──► jede Seite       │      Termine, Geräte, Beiträge, Partner …
- │ wichtig + dringend ──► MATRIX  │      Eisenhower auf /herausforderungen/:
+ │ wichtig + dringend ──► MATRIX  │      Eisenhower auf /challenges/:
  │                                │      sofort / einplanen / abgeben / später
  └────────────────────────────────┘
  ┌─ PERSON ───────────────────────┐      └────────────────────────────────┘
@@ -67,12 +70,12 @@ Die Zielseite zeigt die Verbindung ebenfalls an.
 
 ## Orte auf der Karte
 
-`/karte/` zeigt die Orte aus `_data/orte.yml`. Wie eine Seite zu ihrem Ort kommt (die erste
+`/map/` zeigt die Orte aus `_data/places.yml`. Wie eine Seite zu ihrem Ort kommt (die erste
 passende Regel gewinnt):
 
 ```
  orte: [<id>]                       ──► ORT        jede Seite, fest zugeordnet
- ort / location / standort (Text)   ──► ORT        enthält eines der `finden`-Wörter
+ ort / location / standort (Text)   ──► ORT        enthält eines der `match`-Wörter
  standort_partner, partners,        ──► ORT        Partnername = `partner` des Orts
  owner_partner (Gerät ohne standort)
  BEITRAG: tags / projekte           ──► PROJEKT ──► ORT des Projekts
@@ -111,12 +114,12 @@ standort: Kurt-Tucholsky-Grundschule (3D-Druck AG)
 standort_partner: Kurt-Tucholsky-Grundschule   # verlinkt den Standort mit dem Partner
 ```
 
-- Ohne `standort_partner` wird der Text aus `standort` im Netzwerk ein eigener **Ort** (Quadrat);
+- Ohne `location_partner` wird der Text aus `location` im Netzwerk ein eigener **Ort** (Quadrat);
   Geräte mit gleichem Text teilen sich den Ort.
 - `owner_name` wird im Netzwerk ein Quadrat „Weitere Besitzer*innen“.
 - Das Institut selbst besitzt (noch) nichts – jedes Gerät braucht mindestens einen Besitz-Eintrag.
 
-**Filtern per Link:** `/ausstattung/?owner=<schlüssel>` zeigt nur die Geräte einer Besitzer*in, `/ausstattung/?location=<schlüssel>` die Geräte, die bei einem Partner stehen (`assets/js/equipment-filter.js`, Leiste mit allen Besitzer*innen und Standorten oben auf der Seite). Schlüssel: bei Partnern der letzte Teil ihrer Seite (`page: /partner/35services/` → `35services`), sonst der Name als Slug; bei Teammitgliedern das Kürzel (`falko-richter`); `owner_name` als Slug (`_includes/equipment-keys.html`). Partnerseiten verlinken das mit `{% include partner-equipment-links.html partner="35 services e. V." %}` – „Ausstattung von …“ und „Ausstattung bei …“ mit Anzahl, nichts, wenn der Partner keine Geräte hat.
+**Filtern per Link:** `/equipment/?owner=<schlüssel>` zeigt nur die Geräte einer Besitzer*in, `/equipment/?location=<schlüssel>` die Geräte, die bei einem Partner stehen (`assets/js/equipment-filter.js`, Leiste mit allen Besitzer*innen und Standorten oben auf der Seite). Schlüssel: bei Partnern der letzte Teil ihrer Seite (`page: /partners/35services/` → `35services`), sonst der Name als Slug; bei Teammitgliedern das Kürzel (`falko-richter`); `owner_name` als Slug (`_includes/equipment-keys.html`). Partnerseiten verlinken das mit `{% include partner-equipment-links.html partner="35 services e. V." %}` – „Ausstattung von …“ und „Ausstattung bei …“ mit Anzahl, nichts, wenn der Partner keine Geräte hat.
 
 ## Projekte und Teilprojekte
 
@@ -140,8 +143,8 @@ standort_partner: Kurt-Tucholsky-Grundschule   # verlinkt den Standort mit dem P
                                  └──────────────────────────────┘
 ```
 
-- Ein Teilprojekt kann **mehrere Eltern** haben: `teil_von: [a, b]`.
-- Teilprojekte stehen **nicht** in den Übersichten (Startseite, `/projekte/`, Archiv), sondern als
+- Ein Teilprojekt kann **mehrere Eltern** haben: `part_of: [a, b]`.
+- Teilprojekte stehen **nicht** in den Übersichten (Startseite, `/projects/`, Archiv), sondern als
   Karten unter „Teilprojekte“ auf jeder Elternseite.
 - Teilprojekte zeigen oben und unten „Dieses Projekt ist ein Teil von: …“ (gelbe Buttons).
 
@@ -149,18 +152,18 @@ standort_partner: Kurt-Tucholsky-Grundschule   # verlinkt den Standort mit dem P
 
 | Feld | steht in | zeigt auf | Beispiel |
 |---|---|---|---|
-| `verlinkt` | **allen** Ressourcen | beliebige Seite (Adresse) | `verlinkt: [/team/anton/, /partner/taschenstation/]` |
-| `teil_von` | Projekt | Eltern-Projekt(e) | `teil_von: [3d-druck-ag-ktg]` |
-| `verwandt` | Projekt | Projekt(e) | `verwandt: [ipad-stifte-wiederbeleben]` |
+| `linked` | **allen** Ressourcen | beliebige Seite (Adresse) | `linked: [/team/anton/, /partners/taschenstation/]` |
+| `part_of` | Projekt | Eltern-Projekt(e) | `part_of: [3d-druck-ag-ktg]` |
+| `related` | Projekt | Projekt(e) | `related: [ipad-stifte-wiederbeleben]` |
 | `event_tag` / `tags` | Projekt / Termin, Beitrag, Ausstattung | gleiches Stichwort | `event_tag: ktg` ↔ `tags: [ktg]` |
-| `projekte` | Termin, Herausforderung | Projekt(e) | `projekte: [openpress-bauen]` |
+| `projects` | Termin, Herausforderung | Projekt(e) | `projects: [openpress-bauen]` |
 | `team` | Projekt, Termin, Herausforderung (= zuständig) | Person(en) | `team: [falko-richter, anton]` |
 | `author` | Beitrag | Person(en) – ein Kürzel oder eine Liste | `author: [falko-richter, frieder-euteneuer]` |
 | `partners` | Projekt, Termin | Partner (Name) | `partners: [Kurt-Tucholsky-Grundschule]` |
 | `owner_partner` / `owner_team` / `owner_name` | Ausstattung | **Besitz** – Partner / Person / Name, je eine Liste | `owner_partner: [35 services e. V., Kurt-Tucholsky-Grundschule]` |
-| `standort_partner` / `standort` | Ausstattung | **Standort** – Partner / Ort (Text) | `standort_partner: Kurt-Tucholsky-Grundschule` |
+| `location_partner` / `location` | Ausstattung | **Standort** – Partner / Ort (Text) | `location_partner: Kurt-Tucholsky-Grundschule` |
 
-`verlinkt` ist die allgemeine Verbindung (auch zu normalen Seiten wie `/geld-fuer-makespaces/` – die erscheinen unten unter „Seiten“; solche Seiten zeigen ihre Verbindungen, wenn sie `{% include verbindungen.html %}` einbinden): Es nimmt die **Adresse** der anderen Seite, so wie sie im
+`linked` ist die allgemeine Verbindung (auch zu normalen Seiten wie `/geld-fuer-makespaces/` – die erscheinen unten unter „Seiten“; solche Seiten zeigen ihre Verbindungen, wenn sie `{% include verbindungen.html %}` einbinden): Es nimmt die **Adresse** der anderen Seite, so wie sie im
 Browser steht (ohne `https://ifsmb.de`). So lässt sich alles mit allem verbinden – auch Person mit
 Termin, Beitrag mit Beitrag oder Ausstattung mit Partnerseite.
 
@@ -184,17 +187,17 @@ Termin, Beitrag mit Beitrag oder Ausstattung mit Partnerseite.
 - Persönliche Projekte, Termine und Beiträge bekommen im Button das Etikett „persönlich“.
 - Auf **Projektseiten** fehlen Termine und Beiträge mit dem `event_tag` des Projekts – die stehen
   schon oben unter „Termine & Berichte“ und „Stand / Updates“.
-- Auf **Teamprofilen** stehen nur `verlinkt`-Verbindungen – alles andere listet das Profil selbst.
+- Auf **Teamprofilen** stehen nur `linked`-Verbindungen – alles andere listet das Profil selbst.
 - **Persönliche Termine** zeigen die Person als große Karte statt als Button.
-- **Herausforderungen** eines Projekts (über `projekte` oder `event_tag`) stehen auf der Projektseite
+- **Herausforderungen** eines Projekts (über `projects` oder `event_tag`) stehen auf der Projektseite
   als Karten unter „Herausforderungen“, die eines Menschen (`team`) im Teamprofil – dort fehlen sie
   unten bei „Verbindungen“.
 
 ## Netzwerk-Ansicht
 
-`/netzwerk/` (Menü „Wir“ → „Netzwerk“) zeigt alle Ressourcen als Punkte und alle Verbindungen als
+`/network/` (Menü „Wir“ → „Netzwerk“) zeigt alle Ressourcen als Punkte und alle Verbindungen als
 Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Seite
-(`netzwerk/index.html`), `assets/js/netzwerk.js` macht daraus die Linien – nach denselben Regeln wie
+(`network/index.html`), `assets/js/netzwerk.js` macht daraus die Linien – nach denselben Regeln wie
 `_includes/verbindungen.html` – und zeichnet sie ohne externe Bibliothek auf ein Canvas.
 
 ```
@@ -202,12 +205,12 @@ Linien. Jekyll schreibt beim Bauen die Rohdaten (Felder oben) als JSON in die Se
  ─────────────                         ────────────────────────────────────────
  _projects, _events, _posts,   ──►     JSON  ──►  Linien aus den Feldern  ──►  Canvas
  _team, _equipment, _press,            (eine Zeile    (teil_von, verwandt,       (Kräfte-Layout,
- _herausforderungen,                   pro Seite)      team, verlinkt, …)          Zoom, Filter)
+ _challenges,                   pro Seite)      team, verlinkt, …)          Zoom, Filter)
  _data/partners.yml
 ```
 
 - Klick auf einen Punkt: Verbindungen rechts als Buttons, Klick darauf springt weiter.
-- Doppelklick oder „Seite öffnen“: zur Seite. Die Adresse `/netzwerk/#/projekte/<name>/` öffnet
+- Doppelklick oder „Seite öffnen“: zur Seite. Die Adresse `/network/#/projects/<name>/` öffnet
   das Netzwerk direkt mit diesem Punkt.
 - Gestrichelter Rand = persönlich, dicke Linie = Teilprojekt, rote Linie = gehört,
   blau gestrichelt = steht bei, Quadrate = Orte und weitere Besitzer*innen (aus Text).
@@ -245,15 +248,15 @@ Seiten außerhalb der Sammlungen mit `layout: page` – und die Startseite `inde
 
 | Datei | Formular | Felder |
 |---|---|---|
-| Markdown (`partner/<name>/index.md`, `angebot/index.md`, `spenden/index.md` …) | `seite` | `title`, `lead`, `verlinkt`, Text, `social_media_preview_image`, `theme` |
-| HTML (`index.html` (Startseite), `team/index.html`, `partner/index.html`, `projekte/index.html` …) | `uebersicht` | `title`, `lead`, `social_media_preview_image`, `theme` und das HTML selbst (unter „Weitere Felder“, wird vor dem Speichern geprüft) |
+| Markdown (`partners/<name>/index.md`, `angebot/index.md`, `spenden/index.md` …) | `seite` | `title`, `lead`, `linked`, Text, `social_media_preview_image`, `theme` |
+| HTML (`index.html` (Startseite), `team/index.html`, `partners/index.html`, `projects/index.html` …) | `uebersicht` | `title`, `lead`, `social_media_preview_image`, `theme` und das HTML selbst (unter „Weitere Felder“, wird vor dem Speichern geprüft) |
 
-Alle anderen Felder (`i18n_title`, `suche` …) bleiben unverändert. `edit_form: false` im Front Matter lässt eine Seite beim GitHub-Editor. Vorlage für neue Markdown-Seiten: `_includes/vorlagen/seite.md`.
+Alle anderen Felder (`i18n_title`, `search` …) bleiben unverändert. `edit_form: false` im Front Matter lässt eine Seite beim GitHub-Editor. Vorlage für neue Markdown-Seiten: `_includes/vorlagen/seite.md`.
 
 ## Sichtbarkeit
 
 ```
-                         Startseite  /kalender/  iCal  /projekte/  Teamprofil  Projektseite
+                         Startseite  /calendar/  iCal  /projects/  Teamprofil  Projektseite
  Projekt                     ✔           –        –        ✔           ✔            –
  Teilprojekt (teil_von)      –           –        –        –           ✔        ✔ (Eltern)
  Persönliches Projekt        –           –        –   /persoenlich/   ✔            –
@@ -263,7 +266,7 @@ Alle anderen Felder (`i18n_title`, `suche` …) bleiben unverändert. `edit_form
  Persönlicher Termin         –           –        –        –           ✔            –
  Beitrag                     ✔         /news/     –        –           ✔        ✔ (Stichwort)
  Beitrag nur_projekt         –           –        –        –           –        ✔ (Stichwort)
- Persönlicher Beitrag        –    /news/persoenlich/       –           ✔        ✔ (Stichwort)
+ Persönlicher Beitrag        –    /news/personal/       –           ✔        ✔ (Stichwort)
 ```
 
 Jede Seite ist trotzdem über ihre Adresse erreichbar und erscheint unten bei allen Seiten, mit

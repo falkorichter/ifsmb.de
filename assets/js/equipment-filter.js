@@ -1,4 +1,4 @@
-// Filter on /ausstattung/ (ausstattung/index.html): ?owner=<key> shows the devices someone owns, ?location=<key> the
+// Filter on /equipment/ (equipment/index.html): ?owner=<key> shows the devices someone owns, ?location=<key> the
 // devices located at a partner. Keys: _includes/equipment-keys.html (partner: last part of its page, e.g. 35services;
 // team members: their slug). Builds a small bar with every owner/location and its count. Without JS all devices show.
 (function () {

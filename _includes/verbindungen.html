@@ -1,14 +1,14 @@
 {%- comment -%}
   Links of a resource, shown the same way on every page (buttons grouped by type).
   Collects links in both directions:
-    - explicit:  `verlinkt: [/url/, …]` on this page, or other pages whose `verlinkt` contains this page's URL
-    - projects:  `teil_von` (parents), `verwandt`, `projekte` (events), tags matching a project's `event_tag`
+    - explicit:  `verlinkt: [/url/, …]` on this page, or other pages whose `linked` contains this page's URL
+    - projects:  `part_of` (parents), `related`, `projects` (events), tags matching a project's `event_tag`
     - people:    `team`, `author`
     - partners:  `partners`
-    - challenges: `verlinkt` both ways; on project pages they are listed in their own section
-                 (via `projekte` / `tags`), on team pages the profile lists the ones a person owns (`team`)
+    - challenges: `linked` both ways; on project pages they are listed in their own section
+                 (via `projects` / `tags`), on team pages the profile lists the ones a person owns (`team`)
     - equipment: owners (`owner_partner`, `owner_team`, `owner_name` – each a value or a list) and
-                 location (`standort_partner`, `standort`) get their own groups "Gehört" and "Standort"
+                 location (`location_partner`, `location`) get their own groups "Gehört" and "Standort"
   Parameters:
     partner=<name>   use on a partner page (pages that are not documents)
     ohne_personen    skip the people group (personal events show cards instead)
@@ -19,10 +19,10 @@
 {%- assign P = page -%}
 {%- assign kind = P.collection | default: "page" -%}
 {%- if include.partner %}{% assign kind = "partner" %}{% endif -%}
-{%- assign p_links = P.verlinkt | join: "," | split: "," -%}
-{%- assign p_parents = P.teil_von | join: "," | split: "," -%}
-{%- assign p_rel = P.verwandt | join: "," | split: "," -%}
-{%- assign p_proj = P.projekte | join: "," | split: "," -%}
+{%- assign p_links = P.linked | join: "," | split: "," -%}
+{%- assign p_parents = P.part_of | join: "," | split: "," -%}
+{%- assign p_rel = P.related | join: "," | split: "," -%}
+{%- assign p_proj = P.projects | join: "," | split: "," -%}
 {%- assign p_tags = P.tags | join: "," | split: "," -%}
 {%- assign p_team = P.team | join: "," | split: "," -%}
 {%- assign p_authors = P.author | join: "," | split: "," -%}{%- assign p_team = p_team | concat: p_authors -%}
@@ -31,7 +31,7 @@
 {%- assign o_partners = P.owner_partner | join: "|" | split: "|" -%}
 {%- assign o_team = P.owner_team | join: "|" | split: "|" -%}
 {%- assign o_names = P.owner_name | join: "|" | split: "|" -%}
-{%- assign l_partners = P.standort_partner | join: "|" | split: "|" -%}
+{%- assign l_partners = P.location_partner | join: "|" | split: "|" -%}
 {%- assign me_url = P.url -%}
 {%- if include.partner %}{% assign me_pt = site.data.partners | where: "name", include.partner | first %}{% assign me_url = me_pt.page | default: P.url %}{% endif -%}
 
@@ -40,9 +40,9 @@
 {%- assign g_projects = "" | split: "" -%}
 {%- for x in site.projects -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
-  {%- assign x_parents = x.teil_von | join: "," | split: "," -%}
-  {%- assign x_rel = x.verwandt | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
+  {%- assign x_parents = x.part_of | join: "," | split: "," -%}
+  {%- assign x_rel = x.related | join: "," | split: "," -%}
   {%- assign x_partners = x.partners | join: "," | split: "," -%}
   {%- if kind == "projects" and p_parents contains x.slug %}{% assign g_parents = g_parents | push: x %}{% continue %}{% endif -%}
   {%- if kind == "projects" and x_parents contains P.slug %}{% continue %}{% endif -%}
@@ -63,8 +63,8 @@
 {%- assign g_events = "" | split: "" -%}
 {%- for x in site.events -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
-  {%- assign x_proj = x.projekte | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
+  {%- assign x_proj = x.projects | join: "," | split: "," -%}
   {%- assign x_tags = x.tags | join: "," | split: "," -%}
   {%- assign x_partners = x.partners | join: "," | split: "," -%}
   {%- if kind == "projects" -%}
@@ -73,7 +73,7 @@
   {%- endif -%}
   {%- assign hit = false -%}
   {%- if p_links contains x.url or x_links contains me_url %}{% assign hit = true %}{% endif -%}
-  {%- if kind == "partner" and x.persoenlich != true and x_partners contains include.partner %}{% assign hit = true %}{% endif -%}
+  {%- if kind == "partner" and x.personal != true and x_partners contains include.partner %}{% assign hit = true %}{% endif -%}
   {%- if hit %}{% assign g_events = g_events | push: x %}{% endif -%}
 {%- endfor -%}
 {%- assign g_events = g_events | sort: "start" | reverse -%}
@@ -82,7 +82,7 @@
 {%- assign g_posts = "" | split: "" -%}
 {%- for x in site.posts -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
   {%- assign x_tags = x.tags | join: "," | split: "," -%}
   {%- if kind == "projects" and P.event_tag and x_tags contains P.event_tag %}{% continue %}{% endif -%}
   {%- if p_links contains x.url or x_links contains me_url %}{% assign g_posts = g_posts | push: x %}{% endif -%}
@@ -90,10 +90,10 @@
 
 {%- comment -%}--- challenges (Herausforderungen) ---{%- endcomment -%}
 {%- assign g_challenges = "" | split: "" -%}
-{%- for x in site.herausforderungen -%}
+{%- for x in site.challenges -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
-  {%- assign x_proj = x.projekte | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
+  {%- assign x_proj = x.projects | join: "," | split: "," -%}
   {%- assign x_tags = x.tags | join: "," | split: "," -%}
   {%- if kind == "projects" -%}
     {%- if x_proj contains P.slug %}{% continue %}{% endif -%}
@@ -107,7 +107,7 @@
 {%- unless include.ohne_personen -%}
 {%- for x in site.team -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
   {%- assign hit = false -%}
   {%- if p_links contains x.url or x_links contains me_url %}{% assign hit = true %}{% endif -%}
   {%- if kind != "team" and p_team contains x.slug %}{% assign hit = true %}{% endif -%}
@@ -129,29 +129,30 @@
 {%- assign g_equipment = "" | split: "" -%}
 {%- for x in site.equipment -%}
   {%- if x.url == P.url %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
   {%- assign x_tags = x.tags | join: "," | split: "," -%}
   {%- assign hit = false -%}
   {%- if p_links contains x.url or x_links contains me_url %}{% assign hit = true %}{% endif -%}
   {%- if kind == "projects" and P.event_tag and x_tags contains P.event_tag %}{% assign hit = true %}{% endif -%}
   {%- if kind == "partner" -%}
-    {%- assign x_op = x.owner_partner | join: "|" | split: "|" -%}{%- assign x_sp = x.standort_partner | join: "|" | split: "|" -%}
+    {%- assign x_op = x.owner_partner | join: "|" | split: "|" -%}{%- assign x_sp = x.location_partner | join: "|" | split: "|" -%}
     {%- if x_op contains include.partner or x_sp contains include.partner %}{% assign hit = true %}{% endif -%}
   {%- endif -%}
   {%- if hit %}{% assign g_equipment = g_equipment | push: x %}{% endif -%}
 {%- endfor -%}
 
-{%- comment -%}--- plain pages (e.g. /geld-fuer-makespaces/), linked via `verlinkt`; partner pages are in the partner group ---{%- endcomment -%}
+{%- comment -%}--- plain pages (e.g. /geld-fuer-makespaces/), linked via `linked`; partner pages are in the partner group ---{%- endcomment -%}
 {%- assign g_pages = "" | split: "" -%}
 {%- for x in site.html_pages -%}
-  {%- if x.url == P.url or x.url contains "/partner/" %}{% continue %}{% endif -%}
-  {%- assign x_links = x.verlinkt | join: "," | split: "," -%}
+  {%- if x.url == P.url or x.url contains "/partners/" %}{% continue %}{% endif -%}
+  {%- assign x_links = x.linked | join: "," | split: "," -%}
   {%- if p_links contains x.url or x_links contains me_url %}{% assign g_pages = g_pages | push: x %}{% endif -%}
 {%- endfor -%}
 
 {%- comment -%}--- output ---{%- endcomment -%}
 {%- assign has_owner = false -%}{%- if o_partners.size > 0 or o_team.size > 0 or o_names.size > 0 %}{% assign has_owner = true %}{% endif -%}
-{%- assign has_location = false -%}{%- if l_partners.size > 0 or P.standort %}{% assign has_location = true %}{% endif -%}
+{%- comment -%}`location` is free text on events and projects too – the "Standort" group is only for equipment{%- endcomment -%}
+{%- assign has_location = false -%}{%- if P.collection == "equipment" -%}{%- if l_partners.size > 0 or P.location %}{% assign has_location = true %}{% endif -%}{%- endif -%}
 {%- if has_owner or has_location or g_parents.size > 0 or g_projects.size > 0 or g_events.size > 0 or g_posts.size > 0 or g_challenges.size > 0 or g_people.size > 0 or g_partners.size > 0 or g_unknown_partners.size > 0 or g_equipment.size > 0 or g_pages.size > 0 %}
 <section class="connections" id="verbindungen" data-pagefind-ignore="all">
   {%- if g_parents.size > 0 %}
@@ -163,7 +164,7 @@
   {%- if g_projects.size > 0 %}
   {% if kind == "projects" %}<h2 data-i18n="connections.related_projects">{{ "connections.related_projects" | t }}</h2>{% elsif kind == "events" %}<h2 data-i18n="connections.event_belongs_to">{{ "connections.event_belongs_to" | t }}</h2>{% else %}<h2 data-i18n="connections.projects">{{ "connections.projects" | t }}</h2>{% endif %}
   <ul class="link-list link-list-connections">
-    {% for x in g_projects %}<li><a href="{{ x.url | relative_url }}"{% if x.persoenlich %} title="{{ 'connections.personal_project' | t }}" data-i18n-attr="title:connections.personal_project"{% endif %}><span aria-hidden="true">🔧</span> {{ x.title }}{% if x.persoenlich %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
+    {% for x in g_projects %}<li><a href="{{ x.url | relative_url }}"{% if x.personal %} title="{{ 'connections.personal_project' | t }}" data-i18n-attr="title:connections.personal_project"{% endif %}><span aria-hidden="true">🔧</span> {{ x.title }}{% if x.personal %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if g_events.size > 0 %}
@@ -177,19 +178,19 @@
   <h2 data-i18n="calendar.events">{{ "calendar.events" | t }}</h2>
   {%- endif %}
   <ul class="link-list link-list-connections">
-    {% for x in g_events %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📅</span> {{ x.title }} <span class="link-meta">{% if x.date_label and x.date_label != "" %}{{ x.start | date: "%m/%Y" }}{% else %}{{ x.start | i18n_date }}{% endif %}</span>{% if x.persoenlich %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
+    {% for x in g_events %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📅</span> {{ x.title }} <span class="link-meta">{% if x.date_label and x.date_label != "" %}{{ x.start | date: "%m/%Y" }}{% else %}{{ x.start | i18n_date }}{% endif %}</span>{% if x.personal %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if g_posts.size > 0 %}
   <h2 data-i18n="connections.posts">{{ "connections.posts" | t }}</h2>
   <ul class="link-list link-list-connections">
-    {% for x in g_posts %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📰</span> {{ x.title }} <span class="link-meta">{{ x.date | i18n_date }}</span>{% if x.persoenlich %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
+    {% for x in g_posts %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">📰</span> {{ x.title }} <span class="link-meta">{{ x.date | i18n_date }}</span>{% if x.personal %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if g_challenges.size > 0 %}
   <h2 data-i18n="challenge.heading">{{ "challenge.heading" | t }}</h2>
   <ul class="link-list link-list-connections">
-    {% for x in g_challenges %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🧗</span> {{ x.title }} {% if x.status == "geloest" %}<span class="link-meta" data-i18n="connections.solved">{{ "connections.solved" | t }}</span>{% elsif x.status == "in-arbeit" %}<span class="link-meta" data-i18n="connections.in_progress">{{ "connections.in_progress" | t }}</span>{% else %}<span class="link-meta" data-i18n="connections.open">{{ "connections.open" | t }}</span>{% endif %}{% if x.persoenlich %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
+    {% for x in g_challenges %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🧗</span> {{ x.title }} {% if x.status == "geloest" %}<span class="link-meta" data-i18n="connections.solved">{{ "connections.solved" | t }}</span>{% elsif x.status == "in-arbeit" %}<span class="link-meta" data-i18n="connections.in_progress">{{ "connections.in_progress" | t }}</span>{% else %}<span class="link-meta" data-i18n="connections.open">{{ "connections.open" | t }}</span>{% endif %}{% if x.personal %} <span class="link-private" data-i18n="connections.personal">{{ "connections.personal" | t }}</span>{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
   {%- if has_owner %}
@@ -203,8 +204,8 @@
   {%- if has_location %}
   <h2 data-i18n="connections.location">{{ "connections.location" | t }}</h2>
   <ul class="link-list link-list-connections link-list-location">
-    {% for n in l_partners %}{% assign pt = site.data.partners | where: "name", n | first %}<li>{% if pt %}<a href="{{ pt.page | default: pt.url | relative_url }}"{% unless pt.page %} target="_blank" rel="noopener"{% endunless %}><span aria-hidden="true">📍</span> {{ P.standort | default: pt.name }}</a>{% else %}<span class="link-list-plain"><span aria-hidden="true">📍</span> {{ n }}</span>{% endif %}</li>{% endfor %}
-    {% if l_partners.size == 0 %}<li><span class="link-list-plain"><span aria-hidden="true">📍</span> {{ P.standort }}</span></li>{% endif %}
+    {% for n in l_partners %}{% assign pt = site.data.partners | where: "name", n | first %}<li>{% if pt %}<a href="{{ pt.page | default: pt.url | relative_url }}"{% unless pt.page %} target="_blank" rel="noopener"{% endunless %}><span aria-hidden="true">📍</span> {{ P.location | default: pt.name }}</a>{% else %}<span class="link-list-plain"><span aria-hidden="true">📍</span> {{ n }}</span>{% endif %}</li>{% endfor %}
+    {% if l_partners.size == 0 %}<li><span class="link-list-plain"><span aria-hidden="true">📍</span> {{ P.location }}</span></li>{% endif %}
   </ul>
   {%- endif %}
   {%- if g_people.size > 0 %}
@@ -229,7 +230,7 @@
   {%- if g_equipment.size > 0 %}
   <h2 data-i18n="equipment.heading">{{ "equipment.heading" | t }}</h2>
   <ul class="link-list link-list-connections">
-    {% for x in g_equipment %}{% assign x_op = x.owner_partner | join: "|" | split: "|" %}{% assign x_sp = x.standort_partner | join: "|" | split: "|" %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🛠️</span> {{ x.title }}{% if kind == "partner" %}{% if x_op contains include.partner %} <span class="link-meta" data-i18n="connections.ownership">{{ "connections.ownership" | t }}</span>{% endif %}{% if x_sp contains include.partner %} <span class="link-meta" data-i18n="connections.location">{{ "connections.location" | t }}</span>{% endif %}{% endif %}</a></li>{% endfor %}
+    {% for x in g_equipment %}{% assign x_op = x.owner_partner | join: "|" | split: "|" %}{% assign x_sp = x.location_partner | join: "|" | split: "|" %}<li><a href="{{ x.url | relative_url }}"><span aria-hidden="true">🛠️</span> {{ x.title }}{% if kind == "partner" %}{% if x_op contains include.partner %} <span class="link-meta" data-i18n="connections.ownership">{{ "connections.ownership" | t }}</span>{% endif %}{% if x_sp contains include.partner %} <span class="link-meta" data-i18n="connections.location">{{ "connections.location" | t }}</span>{% endif %}{% endif %}</a></li>{% endfor %}
   </ul>
   {%- endif %}
 </section>

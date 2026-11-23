@@ -1,4 +1,4 @@
-// /ausstattung/?owner=<key> / ?location=<key> (assets/js/equipment-filter.js) and the links from a partner page.
+// /equipment/?owner=<key> / ?location=<key> (assets/js/equipment-filter.js) and the links from a partner page.
 "use strict";
 const { test, before, after, afterEach } = require("node:test");
 const assert = require("node:assert/strict");
@@ -16,7 +16,7 @@ const total = (p) => p.page.evaluate(() => document.querySelectorAll(".equipment
 
 test("Ausstattung ohne Filter: alle Geräte, Filterleiste mit Besitz und Standort", async () => {
   const p = await env.person(null);
-  await p.open("/ausstattung/");
+  await p.open("/equipment/");
   await p.page.waitFor(() => !document.querySelector("[data-equipment-filter]").hidden);
   assert.equal((await visible(p)).length, await total(p));
   const bar = await p.page.text("[data-equipment-filter]");
@@ -26,7 +26,7 @@ test("Ausstattung ohne Filter: alle Geräte, Filterleiste mit Besitz und Standor
 
 test("?owner=35services zeigt nur Geräte von 35services, „Alle zeigen“ hebt den Filter auf", async () => {
   const p = await env.person(null);
-  await p.open("/ausstattung/?owner=35services");
+  await p.open("/equipment/?owner=35services");
   await p.page.waitFor(() => !!document.querySelector(".equipment-filter-status"));
   const shown = await visible(p);
   assert.ok(shown.length > 0 && shown.length < await total(p));
@@ -42,7 +42,7 @@ test("?owner=35services zeigt nur Geräte von 35services, „Alle zeigen“ hebt
 
 test("?location=35services zeigt die Geräte, die bei 35services stehen", async () => {
   const p = await env.person(null);
-  await p.open("/ausstattung/?location=35services");
+  await p.open("/equipment/?location=35services");
   await p.page.waitFor(() => !!document.querySelector(".equipment-filter-status"));
   const shown = await visible(p);
   assert.ok(shown.length > 0);
@@ -52,18 +52,18 @@ test("?location=35services zeigt die Geräte, die bei 35services stehen", async 
 
 test("Partnerseite 35services verlinkt die gefilterte Ausstattung, Zahl stimmt", async () => {
   const p = await env.person(null);
-  await p.open("/partner/35services/");
+  await p.open("/partners/35services/");
   const links = await p.page.evaluate(() => [...document.querySelectorAll(".partner-equipment-links a")].map((a) => [a.getAttribute("href"), a.nextSibling ? a.nextSibling.textContent : ""]));
-  assert.deepEqual(links.map(([h]) => h), ["/ausstattung/?owner=35services", "/ausstattung/?location=35services"]);
+  assert.deepEqual(links.map(([h]) => h), ["/equipment/?owner=35services", "/equipment/?location=35services"]);
   const owned = Number(/\((\d+)\)/.exec(links[0][1])[1]);
   await p.page.click(".partner-equipment-links a");
-  await p.page.waitFor(() => location.pathname === "/ausstattung/" && !!document.querySelector(".equipment-filter-status"));
+  await p.page.waitFor(() => location.pathname === "/equipment/" && !!document.querySelector(".equipment-filter-status"));
   assert.equal((await visible(p)).length, owned);
 });
 
 test("Filter auf Französisch: Beschriftung übersetzt, Namen bleiben", async () => {
   const p = await env.person(null, { language: "fr" });
-  await p.open("/ausstattung/?owner=35services");
+  await p.open("/equipment/?owner=35services");
   await p.page.waitFor(() => /Équipement de 35 services e\. V\./.test((document.querySelector(".equipment-filter-status") || {}).textContent || ""));
   assert.match(await p.page.text("[data-equipment-filter]"), /Appartient à :/);
 });

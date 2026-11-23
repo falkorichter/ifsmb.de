@@ -2,12 +2,12 @@
 title: "Moldlay drucken: die ersten Versuche"
 date: 2026-09-24 12:00:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [moldlay]
-verlinkt: [/ausstattung/prusa-mk4-mmu/]
+linked: [/equipment/prusa-mk4-mmu/]
 uuid: 7bc18da0-eaf7-4121-9a39-d94ef9a5f5d2
 ---
-Die ersten Versuche für das Projekt [Moldlay drucken]({{ '/projekte/moldlay-drucken/' | relative_url }}) von Falko und Philipp auf einem Prusa MK4. Die Fotos zeigen auch einen ausgebauten Heizblock voller verbranntem Filament – und wie er nach dem Reinigen aussah.
+Die ersten Versuche für das Projekt [Moldlay drucken]({{ '/projects/moldlay-drucken/' | relative_url }}) von Falko und Philipp auf einem Prusa MK4. Die Fotos zeigen auch einen ausgebauten Heizblock voller verbranntem Filament – und wie er nach dem Reinigen aussah.
 
 Moldlay ist **extrem brüchig**. Mit einem Föhn haben wir versucht, das Filament geschmeidiger zu bekommen – geholfen hat es nur wenig. Nächste Schritte: einen anderen Drucker oder **2,85-mm-Filament** ausprobieren.
 

@@ -6,7 +6,7 @@
 {%- if ee.summary %}<span class="hm-summary">{{ ee.summary }}</span>{% endif -%}
 {%- assign ee_teile = "" | split: "" -%}
 {%- if ee.status == "in-arbeit" %}{% assign ee_teile = ee_teile | push: '<span class="badge badge-active" data-i18n="badge.in_progress">In Arbeit</span>' %}{% endif -%}
-{%- case ee.art -%}
+{%- case ee.kind -%}
 {%- when "aufgabe" %}{% capture ee_k %}<span data-i18n="challenge.kind_task">{{ "challenge.kind_task" | t }}</span>{% endcapture %}{% assign ee_teile = ee_teile | push: ee_k %}
 {%- when "problem" %}{% capture ee_k %}<span data-i18n="challenge.kind_problem">{{ "challenge.kind_problem" | t }}</span>{% endcapture %}{% assign ee_teile = ee_teile | push: ee_k %}
 {%- when "frage" %}{% capture ee_k %}<span data-i18n="challenge.kind_question">{{ "challenge.kind_question" | t }}</span>{% endcapture %}{% assign ee_teile = ee_teile | push: ee_k %}

@@ -1,11 +1,11 @@
 {%- comment -%}
-  JSON { key: label } for every owner and location key on /ausstattung/ (_includes/equipment-keys.html); duplicate
+  JSON { key: label } for every owner and location key on /equipment/ (_includes/equipment-keys.html); duplicate
   keys are fine in JSON.parse (the last one wins, all are equal). include.items = the devices.
 {%- endcomment -%}
 {%- assign first_entry = true -%}
 { {%- for it in include.items -%}
   {%- assign l_owner = it.owner_partner | join: "|" | split: "|" -%}
-  {%- assign l_location = it.standort_partner | join: "|" | split: "|" -%}
+  {%- assign l_location = it.location_partner | join: "|" | split: "|" -%}
   {%- assign l_partners = l_owner | concat: l_location -%}
   {%- for n in l_partners -%}{%- assign kp = site.data.partners | where: "name", n | first -%}
     {%- if kp.page -%}{%- assign key = kp.page | split: "/" | last -%}{%- else -%}{%- assign key = n | slugify -%}{%- endif -%}

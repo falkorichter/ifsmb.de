@@ -82,15 +82,15 @@ test("Theme: ?theme=… wählt ein Theme, ?theme=auto vergisst es, Unbekanntes w
   assert.equal(s.stored, "offene-werkstaetten");
   assert.equal(s.pickerValue, "offene-werkstaetten");
 
-  await p.open("/kalender/");
+  await p.open("/calendar/");
   assert.equal((await state(p.page)).theme, "offene-werkstaetten", "Wahl gilt weiter ohne Parameter");
 
-  await p.open("/kalender/?theme=gibt-es-nicht");
+  await p.open("/calendar/?theme=gibt-es-nicht");
   s = await state(p.page);
   assert.equal(s.theme, "offene-werkstaetten", "unbekannter Wert ändert nichts");
   assert.equal(s.stored, "offene-werkstaetten");
 
-  await p.open("/kalender/?theme=auto");
+  await p.open("/calendar/?theme=auto");
   s = await state(p.page);
   assert.equal(s.theme, "ifsmb");
   assert.equal(s.stored, null);
@@ -105,6 +105,6 @@ test("Theme: das Theme steht schon vor dem ersten Zeichnen fest (Skript im <head
     "new MutationObserver(function (m, o) { if (document.body) { window.__themeAtBody = document.documentElement.getAttribute('data-theme'); o.disconnect(); } })" +
     ".observe(document, { childList: true, subtree: true });"
   );
-  await p.open("/projekte/");
+  await p.open("/projects/");
   assert.equal(await p.page.evaluate(() => window.__themeAtBody), "rfflabs");
 });

@@ -3,10 +3,10 @@ title: "Infinite Cube in der AG an der Platanus Schule"
 date: 2026-09-30 22:55:00 +0200
 author: falko-richter
 tags: [platanus, infinite-cube]
-verlinkt: [/news/2026/10/06/wuerfel-mit-baumstuetzen-am-rosalind-franklin-gymnasium/]
+linked: [/news/2026/10/06/wuerfel-mit-baumstuetzen-am-rosalind-franklin-gymnasium/]
 uuid: c7d94b94-3aa9-47f4-9657-abf6ec3e8226
 ---
-Aus der [3D-Druck AG an der Platanus Schule]({{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}): ein rosa [Infinite Cube](https://makerworld.com/en/models/909738-infinite-cube) von MakerWorld, auf eine Ecke gestellt gedruckt. Daran lernen wir, wie man **Stützstrukturen** baut – und wie gut der Drucker Überhänge schafft.
+Aus der [3D-Druck AG an der Platanus Schule]({{ '/projects/3d-druck-ag-platanus-schule/' | relative_url }}): ein rosa [Infinite Cube](https://makerworld.com/en/models/909738-infinite-cube) von MakerWorld, auf eine Ecke gestellt gedruckt. Daran lernen wir, wie man **Stützstrukturen** baut – und wie gut der Drucker Überhänge schafft.
 
 Das Gleiche machen wir gerade auch am [Rosalind-Franklin-Gymnasium]({{ '/news/2026/10/06/wuerfel-mit-baumstuetzen-am-rosalind-franklin-gymnasium/' | relative_url }}) – zwei Schulen, ein Würfel :)
 

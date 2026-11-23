@@ -67,13 +67,13 @@ ZUORDNUNG = {
   "projekt" => { cms: "projects", vorlage: "projekt.md" },
   "projekt-vergangen" => { cms: "projects", vorlage: "projekt-vergangen.md" },
   "geraet" => { cms: "equipment", vorlage: "geraet.md" },
-  "herausforderung" => { cms: "herausforderungen", vorlage: "herausforderung.md" },
+  "herausforderung" => { cms: "challenges", vorlage: "herausforderung.md" },
   "team" => { cms: "team", vorlage: "team.md" },
   "presse" => { cms: "press", vorlage: "presse.md" },
   # one file per partner in _data/partner/ – same fields as an entry of the CMS list file _data/partners.yml
   "partner" => { cms: "partners", vorlage: "partner.yml", ordner: "_data/partner" },
   # not in the CMS – checked against the template only
-  "pressebericht" => { cms: nil, vorlage: "pressebericht.yml", ordner: "_data/pressebericht" },
+  "pressebericht" => { cms: nil, vorlage: "pressebericht.yml", ordner: "_data/press_report" },
   # plain pages outside the collections, edit only (#154): Markdown pages with a template for new ones,
   # HTML overview pages without (their HTML is written by hand)
   "seite" => { cms: nil, vorlage: "seite.md", ordner: "" },
@@ -375,13 +375,13 @@ class ThemeTest < Minitest::Test
   end
 
   def test_setting_a_theme_adds_one_line
-    source = "---\ntitle: Test\nstatus: offen\nart: frage\n---\n\nText\n"
+    source = "---\ntitle: Test\nstatus: offen\nkind: frage\n---\n\nText\n"
     js = "const N=require('./assets/js/neu.js');process.stdout.write(N.editedFile('herausforderung',#{source.to_json},{theme:'rfflabs'}).content)"
     out, err, status = Open3.capture3("node", "-e", js, chdir: ROOT)
     assert status.success?, err
     fm, text = Daten.front_matter(out)
     assert_equal "rfflabs", fm["theme"]
-    assert_equal({ "title" => "Test", "status" => "offen", "art" => "frage" }, fm.reject { |k, _| k == "theme" })
+    assert_equal({ "title" => "Test", "status" => "offen", "kind" => "frage" }, fm.reject { |k, _| k == "theme" })
     assert_equal "Text", text.strip
   end
 end

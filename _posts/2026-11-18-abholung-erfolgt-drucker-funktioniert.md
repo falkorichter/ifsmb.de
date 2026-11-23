@@ -1,10 +1,10 @@
 ---
 title: Abholung erfolgt - Drucker funktioniert
 date: 2026-11-18 07:09:00 +0100
-persoenlich: true
+personal: true
 author: falko-richter
 tags: [german-reprap-x400, 3d-drucker, 35services]
-verlinkt: [/news/2026/11/14/abholung-wird-geplant/, /ausstattung/german-reprap-x400/]
+linked: [/news/2026/11/14/abholung-wird-geplant/, /equipment/german-reprap-x400/]
 uuid: c93d6844-2ad4-4e62-8499-f10a59a60c33
 ---
 

@@ -5,23 +5,23 @@ layout: default
   <article>
     <header class="page-header">
       {%- assign ics_name = page.url | split: "/" | last %}
-      {%- assign ics_url = "/kalender/" | append: ics_name | append: ".ics" %}
+      {%- assign ics_url = "/calendar/" | append: ics_name | append: ".ics" %}
       <div class="termin-meta">
         <p class="meta">{% include termin-datum.html event=page %}</p>
         {% include kalender-abo.html ics=ics_url event=page %}
       </div>
       <h1>{{ page.title }}</h1>
-      {%- if page.persoenlich and page.team %}
+      {%- if page.personal and page.team %}
       <p class="event-byline"><span data-i18n="event.personal_of">{{ "event.personal_of" | t }}</span> {% for slug in page.team %}{% assign m = site.team | where: "slug", slug | first %}{% if m %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% else %}{{ slug }}{% endif %}{% if forloop.rindex == 2 %} <span data-i18n="common.and">{{ "common.and" | t }}</span> {% elsif forloop.last == false %}, {% endif %}{% endfor %}</p>
       {%- endif %}
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
-    {%- if page.persoenlich %}
+    {%- if page.personal %}
     {%- assign owners = "" | split: "" -%}{%- for slug in page.team -%}{%- assign m = site.team | where: "slug", slug | first -%}{%- if m -%}{%- assign owners = owners | push: m -%}{%- endif -%}{%- endfor %}
     <p class="personal-note"><span data-i18n="event.personal">{{ "event.personal" | t }}</span>{% if owners.size > 0 %} <span data-i18n="common.by">{{ "common.by" | t }}</span> {% for m in owners %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %} <span data-i18n="event.personal_note">{{ "event.personal_note" | t }}</span></p>
     {%- endif %}
-    {%- if page.nur_projekt %}
+    {%- if page.project_only %}
     {%- if page.end and page.end != "" %}{% assign p_end = page.end | date: "%s" | plus: 0 %}{% else %}{% assign p_end = page.start | date: "%s" | plus: 7200 %}{% endif -%}
     {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
     {%- if p_end >= now_s %}
@@ -41,7 +41,7 @@ layout: default
       {% endfor %}
     </div>
     {% endif %}
-    {%- if page.persoenlich and page.team and page.team.size > 0 %}
+    {%- if page.personal and page.team and page.team.size > 0 %}
     <h2 data-i18n="event.personal_of">{{ "event.personal_of" | t }}</h2>
     {% include team-karten.html team=page.team %}
     {% include verbindungen.html ohne_personen=true %}
@@ -50,8 +50,8 @@ layout: default
     {%- endif %}
     {% include verknuepft.html tags=page.tags %}
     <p class="cal-subscribe">
-      <a class="btn btn-ghost" href="{{ '/kalender/#abonnieren' | relative_url }}" data-i18n="event.subscribe_all">{{ "event.subscribe_all" | t }}</a>
+      <a class="btn btn-ghost" href="{{ '/calendar/#abonnieren' | relative_url }}" data-i18n="event.subscribe_all">{{ "event.subscribe_all" | t }}</a>
     </p>
-    <a href="{{ '/kalender/' | relative_url }}" class="back-link" data-i18n="event.back">{{ "event.back" | t }}</a>
+    <a href="{{ '/calendar/' | relative_url }}" class="back-link" data-i18n="event.back">{{ "event.back" | t }}</a>
   </article>
 </main>

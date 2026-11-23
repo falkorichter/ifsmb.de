@@ -82,7 +82,7 @@ test("🌐 Browser in einer anderen Sprache (Spanisch) → Englisch", async () =
 
 test("🌐 Browser auf Deutsch → bleibt Deutsch wie ohne JavaScript", async () => {
   const de = await env.person(null, { language: null, locale: "de-DE,de" });
-  await de.open("/projekte/");
+  await de.open("/projects/");
   const s = await state(de);
   assert.equal(s.lang, "de");
   assert.equal(s.nav, "Neuigkeiten");
@@ -91,7 +91,7 @@ test("🌐 Browser auf Deutsch → bleibt Deutsch wie ohne JavaScript", async ()
 
 test("🌐 Umschalter DE/EN/FR: Wahl bleibt nach dem Neuladen, zurück auf Deutsch zeigt den Text der Seite", async () => {
   const p = await env.person(null); // stored choice: German
-  await p.open("/projekte/");
+  await p.open("/projects/");
   const german = await p.page.evaluate(() => [...document.querySelectorAll("[data-i18n]")].map((e) => e.textContent));
   assert.equal((await state(p)).nav, "Neuigkeiten");
 
@@ -103,7 +103,7 @@ test("🌐 Umschalter DE/EN/FR: Wahl bleibt nach dem Neuladen, zurück auf Deuts
   assert.equal(s.stored, "en");
   assert.equal(await p.page.text('.site-nav [data-i18n="nav.projects"]'), "Projects");
 
-  await p.page.goto(env.siteUrl + "/projekte/");
+  await p.page.goto(env.siteUrl + "/projects/");
   s = await state(p);
   assert.equal(s.lang, "en", "nach dem Neuladen weiter Englisch");
   assert.equal(s.nav, "News");
@@ -120,11 +120,11 @@ test("🌐 Umschalter DE/EN/FR: Wahl bleibt nach dem Neuladen, zurück auf Deuts
 
 test("🌐 ?lang=fr wählt Französisch und merkt es sich", async () => {
   const p = await env.person(null);
-  await p.open("/kalender/?lang=fr");
+  await p.open("/calendar/?lang=fr");
   let s = await state(p);
   assert.equal(s.lang, "fr");
   assert.equal(s.stored, "fr");
-  await p.page.goto(env.siteUrl + "/kalender/");
+  await p.page.goto(env.siteUrl + "/calendar/");
   s = await state(p);
   assert.equal(s.lang, "fr");
   assert.equal(await p.page.text('[data-i18n="calendar.upcoming"]'), "Prochains rendez-vous");
@@ -139,7 +139,7 @@ test("🌐 ➕-Formular: Titel, Hinweis und Knöpfe in der gewählten Sprache (a
   assert.equal(await en.page.text("#neu-dialog [data-github]"), "🔑 Connect GitHub");
 
   const fr = await env.person(null, { language: "fr" });
-  await fr.open("/herausforderungen/");
+  await fr.open("/challenges/");
   await fr.page.evaluate(() => document.querySelector(".hm-q1 .neu-btn-klein").click());
   await fr.waitDialog();
   assert.equal(await fr.page.text("#neu-dialog h2"), "➕ Nouveau défi\u00a0: À faire tout de suite");

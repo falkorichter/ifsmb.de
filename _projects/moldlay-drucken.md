@@ -2,19 +2,19 @@
 title: "Moldlay drucken"
 summary: Falko und Philipp drucken mit Moldlay – einem wachsähnlichen Filament für Gussformen.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-09-24
-zeitraum: seit September 2026
+period: seit September 2026
 event_tag: moldlay
 tags: [moldlay, 3d-drucker, prusa-mk4]
-verlinkt:
-  - /ausstattung/prusa-mk4-mmu/
+linked:
+  - /equipment/prusa-mk4-mmu/
   - /news/2026/09/24/moldlay-drucken-die-ersten-versuche/
 team:
   - falko-richter
   - philipp-schalldach
 updates:
-  - datum: 2026-11-16
+  - date: 2026-11-16
     text: |-
       **Austausch auf der MUTEC & denkmal mit der Kunstgießerei Gebr. Ihle:** Ploenne und [Falko](/team/falko-richter/) waren auf der Fachmesse [MUTEC](https://www.mutec.de/) in Leipzig und haben nebenan noch ein bisschen auf der [denkmal](https://www.denkmal-leipzig.de/) gestöbert. Am Stand der **[Kunstgießerei Gebr. Ihle](https://www.bildguss.de/)** aus Dresden haben wir mit Thomas Ihle über 3D-Druck für den Metallguss und unsere Erfahrungen mit **Moldlay** gesprochen:
 
@@ -36,6 +36,6 @@ uuid: 85aa89c1-657c-4403-867d-b65df1752bdd
 
 Ein neues Projekt von [Falko]({{ '/team/falko-richter/' | relative_url }}) und [Philipp]({{ '/team/philipp-schalldach/' | relative_url }}): **Moldlay drucken**. Moldlay ist ein wachsähnliches Filament, mit dem man Modelle für den Metallguss im Wachsausschmelzverfahren drucken kann.
 
-Die ersten Versuche liefen im September 2026 auf einem [Prusa MK4]({{ '/ausstattung/prusa-mk4-mmu/' | relative_url }}) – Fotos gibt es im Beitrag [Moldlay drucken: die ersten Versuche]({{ '/news/2026/09/24/moldlay-drucken-die-ersten-versuche/' | relative_url }}).
+Die ersten Versuche liefen im September 2026 auf einem [Prusa MK4]({{ '/equipment/prusa-mk4-mmu/' | relative_url }}) – Fotos gibt es im Beitrag [Moldlay drucken: die ersten Versuche]({{ '/news/2026/09/24/moldlay-drucken-die-ersten-versuche/' | relative_url }}).
 
 **Stand:** Moldlay ist **extrem brüchig**. Mit einem Föhn haben wir versucht, das Filament geschmeidiger zu bekommen – geholfen hat es nur wenig. Nächste Schritte: einen anderen Drucker, **2,85-mm-Filament** oder Alternativen wie **[PolyCast](https://shop.polymaker.com/en-eu/products/polycast)** ausprobieren.

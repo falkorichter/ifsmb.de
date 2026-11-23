@@ -1,12 +1,12 @@
 {%- comment -%}
-  Filter keys of a device for /ausstattung/?owner=… / ?location=… (assets/js/equipment-filter.js), space-separated.
+  Filter keys of a device for /equipment/?owner=… / ?location=… (assets/js/equipment-filter.js), space-separated.
   include.item = the device, include.field = "owner" (owner_partner, owner_team, owner_name) or "location"
-  (standort_partner). A partner's key is the last part of its own page (/partner/35services/ → 35services),
+  (standort_partner). A partner's key is the last part of its own page (/partners/35services/ → 35services),
   otherwise its name slugified; team members use their slug; free names are slugified.
 {%- endcomment -%}
 {%- assign it = include.item -%}
 {%- if include.field == "location" -%}
-  {%- assign k_partners = it.standort_partner | join: "|" | split: "|" -%}
+  {%- assign k_partners = it.location_partner | join: "|" | split: "|" -%}
   {%- assign k_team = "" | split: "" -%}{%- assign k_names = "" | split: "" -%}
 {%- else -%}
   {%- assign k_partners = it.owner_partner | join: "|" | split: "|" -%}

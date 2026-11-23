@@ -4,7 +4,7 @@
 {%- assign my = include.tags -%}
 {%- if my and my.size > 0 -%}
 {%- comment -%}collection:UI string of the group heading (_data/i18n/*.yml){%- endcomment -%}
-{%- assign groups = "equipment:equipment.heading,projects:connections.projects,herausforderungen:challenge.heading,events:calendar.events,posts:connections.posts,press:connections.press" | split: "," -%}
+{%- assign groups = "equipment:equipment.heading,projects:connections.projects,challenges:challenge.heading,events:calendar.events,posts:connections.posts,press:connections.press" | split: "," -%}
 {%- capture rel_out -%}
 {%- for g in groups -%}
   {%- assign gk = g | split: ":" | first -%}{%- assign gl = g | split: ":" | last -%}

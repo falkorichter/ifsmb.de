@@ -5,8 +5,8 @@ end: 2026-12-13 17:00
 location: Dachboden
 location_url: https://dachboden.berlin/
 team: [falko-richter, philipp-schalldach]
-persoenlich: true
-nur_projekt: true
+personal: true
+project_only: true
 summary: Philipp und Falko stellen aus und verkaufen Kunstdrucke und kleine 3D-gedruckte Gimmicks.
 social_media_preview_image: /assets/images/kalender/2026-12-13-weihnachtsmarkt-dachboden-evtl-mit-3d-druck/01-social.jpg
 tags: [2d-druck, 3d-druck]

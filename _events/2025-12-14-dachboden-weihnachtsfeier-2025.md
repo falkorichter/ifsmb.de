@@ -6,8 +6,8 @@ location: Dachboden
 summary: Weihnachtsfeier auf dem Dachboden – mit Falko und Philipp.
 team: [falko-richter, philipp-schalldach]
 tags: [weihnachten]
-verlinkt: [/kalender/2026-12-13-weihnachtsmarkt-dachboden-evtl-mit-3d-druck/]
-persoenlich: true
+linked: [/calendar/2026-12-13-weihnachtsmarkt-dachboden-evtl-mit-3d-druck/]
+personal: true
 social_media_preview_image: /assets/images/kalender/2025-12-14-dachboden-weihnachtsfeier-2025/12-social.jpg
 uuid: 83439a09-201f-4873-916b-bfb4c68a1b0d
 ---

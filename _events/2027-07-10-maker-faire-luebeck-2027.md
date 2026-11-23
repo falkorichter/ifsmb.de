@@ -7,12 +7,12 @@ location: "Musik- und Kongresshalle (MuK), Lübeck"
 location_url: https://makerfaire-luebeck.de/
 summary: Die erste Maker Faire Lübeck – zwei Tage Mitmachen und Selbermachen in der MuK an der Trave. Werkstätten und Initiativen können kostenfrei ausstellen.
 partners: ["Verbund Offener Werkstätten"]
-verlinkt: [/partner/offene-werkstaetten/]
+linked: [/partners/offene-werkstaetten/]
 tags: [maker-faire]
 uuid: 7f608357-0200-400d-97ba-aadafdac6a10
 ---
 
-Das FabLab Lübeck richtet die **erste Maker Faire Lübeck** aus – nach eigener Aussage die einzige nördlich von Hannover. Der Aufruf kam über das Netzwerk des [Verbunds Offener Werkstätten]({{ '/partner/offene-werkstaetten/' | relative_url }}).
+Das FabLab Lübeck richtet die **erste Maker Faire Lübeck** aus – nach eigener Aussage die einzige nördlich von Hannover. Der Aufruf kam über das Netzwerk des [Verbunds Offener Werkstätten]({{ '/partners/offene-werkstaetten/' | relative_url }}).
 
 - 📅 **10. und 11. Juli 2027**
 - 📍 **Musik- und Kongresshalle Lübeck**, drinnen und draußen direkt an der Trave, rund 4.500 m²

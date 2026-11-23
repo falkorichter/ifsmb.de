@@ -2,10 +2,10 @@
 title: "WordPress-Support an der KTG"
 summary: Falko unterstützt die Kurt-Tucholsky-Grundschule bei ihrer WordPress-Website – und hat dafür sogar Plugin geschrieben, das CSV-Dateien in Tabellen verwandelt.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2023-09-01
-zeitraum: seit 2023
-ort: Kurt-Tucholsky-Grundschule, Moabit
+period: seit 2023
+location: Kurt-Tucholsky-Grundschule, Moabit
 event_tag: wordpress-ktg
 tags: [wordpress, ktg]
 team:
