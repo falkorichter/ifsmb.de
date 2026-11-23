@@ -1,5 +1,5 @@
 ---
-title: Falko Richter
+title: Falko Richter test
 role: Gründer/AG-Leiter/Netzwerker
 order: 1
 photo: /assets/images/team/falko-richter-480w.jpg
