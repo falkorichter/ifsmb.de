@@ -1,17 +1,17 @@
 // IfsMB-Pin – Logo-Badge „IfsMB“ als Anstecker für den 2-Farb-Druck
-// Farbe 1 (gelb):    Fläche des Badges          -> part = "gelb"
-// Farbe 2 (schwarz): Rückplatte mit Schatten, Rand und Schrift -> part = "schwarz"
+// Farbe 1 (gelb):    Fläche des Badges          -> part = "yellow"
+// Farbe 2 (schwarz): Rückplatte mit Schatten, Rand und Schrift -> part = "black"
 // Beide STLs im Slicer als Teile EINES Objekts laden (gleicher Ursprung) und je eine Farbe zuweisen.
 //
 // Export:
-//   openscad -D 'part="gelb"'    -o ifsmb-pin-gelb.stl    ifsmb-pin.scad
-//   openscad -D 'part="schwarz"' -o ifsmb-pin-schwarz.stl ifsmb-pin.scad
+//   openscad -D 'part="yellow"'    -o ifsmb-pin-yellow.stl    ifsmb-pin.scad
+//   openscad -D 'part="black"' -o ifsmb-pin-black.stl ifsmb-pin.scad
 //
 // Schrift: wie das Logo auf ifsmb.de die Monospace-Systemschrift von macOS (SF Mono Heavy).
 // Die Datei liegt im Terminal-Programm von macOS und wird hier nur zum Rendern geladen (nicht im Repo).
 use </System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SF-Mono-Heavy.otf>
 
-part      = "beide";      // "gelb" | "schwarz" | "beide" (Vorschau)
+part      = "both";       // "yellow" | "black" | "both" (preview)
 label     = "IfsMB";
 font      = "SF Mono:style=Heavy";
 
@@ -62,6 +62,6 @@ module yellow() {
 }
 
 rotate([0, 0, tilt]) {
-  if (part == "schwarz" || part == "beide") color("#16161d") black();
-  if (part == "gelb"    || part == "beide") color("#ffcc00") yellow();
+  if (part == "black" || part == "both") color("#16161d") black();
+  if (part == "yellow"  || part == "both") color("#ffcc00") yellow();
 }

@@ -1,0 +1,47 @@
+{%- comment -%}
+  Eisenhower matrix of challenges on /challenges/: 2×2 grid (dringend / nicht dringend × wichtig / nicht wichtig).
+  include.list = challenges (solved ones are skipped). Missing `important`/`urgent` count as false (→ „Später“).
+  Each quadrant has a small "➕" that opens the challenge form with wichtig/dringend already set.
+  Separate from the todo matrix (assets/js/todos.js), which is built in the browser from todos/todo-*.md.
+{%- endcomment -%}
+{%- assign em_q1 = "" | split: "" -%}{%- assign em_q2 = "" | split: "" -%}{%- assign em_q3 = "" | split: "" -%}{%- assign em_q4 = "" | split: "" -%}
+{%- for h in include.list -%}
+  {%- if h.status == "geloest" %}{% continue %}{% endif -%}
+  {%- include eisenhower-feld.html h=h -%}
+  {%- case ef_q -%}
+  {%- when "q1" %}{% assign em_q1 = em_q1 | push: h %}
+  {%- when "q2" %}{% assign em_q2 = em_q2 | push: h %}
+  {%- when "q3" %}{% assign em_q3 = em_q3 | push: h %}
+  {%- else %}{% assign em_q4 = em_q4 | push: h %}
+  {%- endcase -%}
+{%- endfor %}
+<div class="hm-matrix" role="group" aria-label="{{ 'matrix.label' | t }}" data-i18n-attr="aria-label:matrix.label">
+  <div class="hm-corner" aria-hidden="true"></div>
+  <div class="hm-axis hm-axis-col" aria-hidden="true" data-i18n="matrix.urgent">{{ "matrix.urgent" | t }}</div>
+  <div class="hm-axis hm-axis-col" aria-hidden="true" data-i18n="matrix.not_urgent">{{ "matrix.not_urgent" | t }}</div>
+  {%- for qi in (1..4) %}
+  {%- case qi -%}
+  {%- when 1 %}{% assign em_list = em_q1 %}{% assign em_q = "q1" %}{% assign em_icon = "🔥" %}{% assign em_w = "true" %}{% assign em_d = "true" %}
+  {%- when 2 %}{% assign em_list = em_q2 %}{% assign em_q = "q2" %}{% assign em_icon = "📌" %}{% assign em_w = "true" %}{% assign em_d = "false" %}
+  {%- when 3 %}{% assign em_list = em_q3 %}{% assign em_q = "q3" %}{% assign em_icon = "🤝" %}{% assign em_w = "false" %}{% assign em_d = "true" %}
+  {%- when 4 %}{% assign em_list = em_q4 %}{% assign em_q = "q4" %}{% assign em_icon = "💤" %}{% assign em_w = "false" %}{% assign em_d = "false" %}
+  {%- endcase %}
+  {%- assign em_name_key = "matrix." | append: em_q -%}{%- assign em_sub_key = em_name_key | append: "_sub" -%}
+  {%- assign em_name = em_name_key | t -%}{%- assign em_sub = em_sub_key | t -%}
+  {%- if qi == 1 %}<div class="hm-axis hm-axis-row" aria-hidden="true"><span data-i18n="matrix.important">{{ "matrix.important" | t }}</span></div>{% elsif qi == 3 %}<div class="hm-axis hm-axis-row" aria-hidden="true"><span data-i18n="matrix.not_important">{{ "matrix.not_important" | t }}</span></div>{% endif %}
+  <section class="hm-cell hm-{{ em_q }}" id="{{ em_q }}">
+    <h3 class="hm-title"><span aria-hidden="true">{{ em_icon }}</span> <span data-i18n="{{ em_name_key }}">{{ em_name }}</span> <span class="hm-count">{{ em_list.size }}</span>
+      {% include neu-button.html typ="herausforderung" klein=true i18n="new.matrix" i18n_quadrant=em_q important=em_w urgent=em_d %}</h3>
+    <p class="hm-sub" data-i18n="{{ em_sub_key }}">{{ em_sub }}</p>
+    {%- if em_list.size > 0 %}
+    <ul class="hm-list">
+      {%- for h in em_list %}
+      <li>{% include eisenhower-eintrag.html h=h %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p class="hm-empty">–</p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+</div>

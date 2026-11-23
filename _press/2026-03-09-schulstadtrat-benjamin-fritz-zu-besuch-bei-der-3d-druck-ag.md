@@ -4,8 +4,9 @@ date: 2026-03-09
 album_url: https://photos.app.goo.gl/3gHcYyH5wt71wuyM6
 contact_name: Falko Richter
 contact_email_b64: ZmFsa29AMzVzZXJ2aWNlcy5kZQ==
-contact_email_anzeige: falko [at] 35services.de
+contact_email_display: falko [at] 35services.de
 tags: [ktg, waermebildkamera, u1]
+uuid: 37c02e15-1583-44ed-bea4-33068b616994
 ---
 
 <p class="album-link"><a class="btn" href="https://photos.app.goo.gl/3gHcYyH5wt71wuyM6" target="_blank" rel="noopener">📷 Alle Fotos im Google-Fotos-Album</a></p>
@@ -23,6 +24,8 @@ Links im Bild Frau Nicole Henschke aus der Schulleitung der Kurt-Tucholsky-Grund
 Kinder mit grünem Pin haben eine Fotoerlaubnis von den Eltern bekommen. Gedruckt, selbstverständlich, von unserem neuen Drucker.
 
 Wir haben einen mehrfarbigen Würfel als Anschauungsobjekt gedruckt. Ein sehr erfolgreicher Nachmittag mit sehr guten Gesprächen. Unter [35services.de/ag](https://35services.de/ag/) freuen wir uns weiter über Spenden, um das Projekt weiterführen und ausbauen zu können. Wir nutzen die Spenden dabei einzig für Material, die Arbeit der AG-Leitung ist komplett ehrenamtlich.
+
+Auch das Bezirksamt Mitte hat über den Besuch berichtet: [🦋 Beitrag auf Bluesky](https://bsky.app/profile/ba-mitte-berlin.bsky.social/post/3mgpafkllzg2x) und auf [✖️ X](https://x.com/BA_Mitte_Berlin/status/2031327219788697932) (Wir werden nicht gerne bei x.com veröffentlicht). Außerdem gibt es einen [📘 Beitrag auf Facebook](https://www.facebook.com/share/p/1B4VgwPxu1/).
 
 ## Unboxing am 16.02.2026
 

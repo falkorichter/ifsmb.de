@@ -1,12 +1,13 @@
 ---
 title: Jimumeta / 3DMakerpro Lynx
-kategorie: 3D-Scanner
+category: 3D-Scanner
 summary: Ein Handscanner für große Objekte – von Autoteilen bis zu Möbeln. Mit Mobil-Adapter, den wir testen wollen, und ausführlichem Vergleich zum Creality Ferret SE.
 owner_team: falko-richter
 image: /assets/images/ausstattung/3d-scanner/illustration.svg
 image_alt: "Illustration eines 3D-Handscanners, der ein Objekt mit Lichtmustern abtastet (kein Foto des Geräts)"
 image_is_illustration: true
 tags: [3d-scanner, 3dmakerpro-lynx, creality-ferret-se]
+uuid: 37a48ddf-fd7a-421f-8cc2-2585f9b3f680
 ---
 
 Der Lynx gehört Falko.
@@ -19,7 +20,7 @@ Wichtig: Ganz ohne Computer geht es auch damit nicht – ein Laptop oder PC ist 
 
 Wie gut das klappt, berichten wir, sobald wir es getestet haben.
 
-Weil wir gerade auch den [Creality Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}) testen, hat Falko einen ausführlichen Vergleich der beiden Scanner erstellen lassen – größtenteils mit KI. Hier ist der komplette Vergleich.
+Weil wir gerade auch den [Creality Ferret SE]({{ '/equipment/creality-ferret-se/' | relative_url }}) testen, hat Falko einen ausführlichen Vergleich der beiden Scanner erstellen lassen – größtenteils mit KI. Hier ist der komplette Vergleich.
 
 ## 3D-Scanner im Vergleich: Jimumeta (3DMakerpro) Lynx vs. Creality CR-Scan Ferret SE {#vergleich}
 

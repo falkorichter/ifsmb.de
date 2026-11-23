@@ -2,17 +2,19 @@
 title: "Moabiter Lastenlaufrad Kiez-WM 2026"
 summary: Falko hat das erste Lastenlaufrad-Rennen für Kinder (und Erwachsene) in Moabit organisiert – beim Frühlingsfest im Zazza.
 status: abgeschlossen
-persoenlich: true
+personal: true
 start: 2026-05-09
-zeitraum: Mai 2026
-ort: Zazza, Moabit
+period: Mai 2026
+location: Zazza, Moabit
 event_tag: lastenlaufrad-kiez-wm
-tags: [lastenlaufrad-kiez-wm]
+tags: [lastenlaufrad-kiez-wm, zazza]
 team:
   - falko-richter
+partners: ["Zazza Moabit / Pajas Kaffee"]
+uuid: 5c10bb97-1010-4a42-8fc4-94b9a7bdb2f6
 ---
 
-Am **9. Mai 2026** fand beim Frühlingsfest im [Zazza](https://www.instagram.com/zazza_moabit/) die erste **Moabiter Lastenlaufrad Kiez-Weltmeisterschaft** statt. Falko hat das Rennen über sein Projekt [PimpMyCargo.bike](https://www.pimpmycargo.bike) organisiert, unterstützt von [Super Bicycles](https://super-bicycles.com) und dem Zazza.
+Am **9. Mai 2026** fand beim Frühlingsfest im [Zazza](https://www.instagram.com/zazza_moabit/) die erste **Moabiter Lastenlaufrad Kiez-Weltmeisterschaft** statt. Falko hat das Rennen über sein Projekt [PimpMyCargo.bike](https://www.pimpmycargo.bike){: .link-tot} organisiert, unterstützt von [Super Bicycles](https://super-bicycles.com) und dem Zazza.
 
 Gefahren wurde auf einem Lastenlaufrad – einem Laufrad mit Ladefläche für Kinder – in drei Klassen:
 

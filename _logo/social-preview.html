@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Social-Media-Vorschau – ifsmb.de</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 36px 24px 60px;
+    background: #13161c;
+    color: #e6e8ec;
+    font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    max-width: 1200px;
+    margin: 0 auto 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 22px; color: #ffcc00; }
+  header p { margin: 0; color: #9aa0aa; font-size: 14px; }
+  header code {
+    background: #1f2430;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+  }
+
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    gap: 28px;
+    align-items: start;
+  }
+
+  .platform {
+    background: #1b1f27;
+    border: 1px solid #2a303c;
+    border-radius: 12px;
+    padding: 18px 20px 22px;
+  }
+  .platform-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9aa0aa;
+    margin-bottom: 12px;
+  }
+
+  /* 1. Facebook / LinkedIn large link preview */
+  .fb-card {
+    background: #242526;
+    border: 1px solid #3a3b3c;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 500px;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .fb-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+  .fb-meta {
+    padding: 10px 12px 12px;
+    background: #3a3b3c;
+  }
+  .fb-domain {
+    font-size: 12px;
+    color: #b0b3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .fb-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e4e6eb;
+    margin: 3px 0 4px;
+    line-height: 1.25;
+  }
+  .fb-desc {
+    font-size: 14px;
+    color: #b0b3b8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 2. Twitter / X summary_large_image */
+  .x-card {
+    max-width: 506px;
+    border: 1px solid #2f3336;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+  }
+  .x-img-wrap {
+    position: relative;
+  }
+  .x-img-wrap img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.91 / 1;
+    object-fit: cover;
+  }
+  .x-badge {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(15, 20, 25, 0.78);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 13px;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .x-domain {
+    font-size: 13px;
+    color: #71767b;
+    margin-top: 6px;
+  }
+
+  /* 3. WhatsApp / Signal / iMessage bubble */
+  .wa-chat {
+    background: #0b141a;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .wa-bubble {
+    background: #005c4b;
+    border-radius: 10px;
+    padding: 6px;
+    max-width: 360px;
+    color: #e9edef;
+  }
+  .wa-preview {
+    background: #025144;
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .wa-preview img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+  .wa-text {
+    padding: 8px 10px;
+  }
+  .wa-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .wa-desc {
+    font-size: 12.5px;
+    color: #bfd6d1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .wa-domain {
+    font-size: 11.5px;
+    color: #8bb5ad;
+    margin-top: 4px;
+  }
+  .wa-msg {
+    padding: 2px 6px 4px;
+    font-size: 14px;
+  }
+  .wa-msg a { color: #53bdeb; text-decoration: underline; }
+
+  /* 4. Raw 1200x630 */
+  .raw img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #2a303c;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Social-Media-Vorschau (Open Graph / Twitter Card)</h1>
+  <p>Standardbild: <code>assets/images/og-preview.jpg</code> (1200 × 630 px) · Seiten-Override im Front Matter / CMS: <code>social_media_preview_image</code></p>
+</header>
+
+<div class="grid">
+
+  <div class="platform">
+    <div class="platform-label">Facebook · LinkedIn · Mastodon · Discord</div>
+    <div class="fb-card">
+      <img src="../assets/images/og-preview.jpg" alt="OG Preview">
+      <div class="fb-meta">
+        <div class="fb-domain">ifsmb.de</div>
+        <div class="fb-title">Start – Institut für spontane Makespace Buildung</div>
+        <div class="fb-desc">Wir unterstützen Bildungseinrichtungen unbürokratisch beim Aufbau und Betrieb von Makespaces.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="platform">
+    <div class="platform-label">X / Twitter (summary_large_image)</div>
+    <div class="x-card">
+      <div class="x-img-wrap">
+        <img src="../assets/images/og-preview.jpg" alt="OG Preview">
+        <div class="x-badge">Start – Institut für spontane Makespace Buildung</div>
+      </div>
+    </div>
+    <div class="x-domain">Von ifsmb.de</div>
+  </div>
+
+  <div class="platform">
+    <div class="platform-label">WhatsApp · Signal · Telegram · iMessage</div>
+    <div class="wa-chat">
+      <div class="wa-bubble">
+        <div class="wa-preview">
+          <img src="../assets/images/og-preview.jpg" alt="OG Preview">
+          <div class="wa-text">
+            <div class="wa-title">Start – Institut für spontane Makespace Buildung</div>
+            <div class="wa-desc">Wir unterstützen Bildungseinrichtungen unbürokratisch beim Aufbau und Betrieb von Makespaces.</div>
+            <div class="wa-domain">ifsmb.de</div>
+          </div>
+        </div>
+        <div class="wa-msg">Schau mal: <a>https://ifsmb.de/</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="platform raw">
+    <div class="platform-label">Originalbild (1200 × 630 px)</div>
+    <img src="../assets/images/og-preview.jpg" alt="OG Preview">
+  </div>
+
+</div>
+
+</body>
+</html>

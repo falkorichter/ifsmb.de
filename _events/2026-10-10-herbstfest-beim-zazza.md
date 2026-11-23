@@ -15,6 +15,13 @@ gallery:
   - image: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/gebasteltes.jpg
     thumb: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/gebasteltes-600w.jpg
     alt: "Kastanienfigur mit 3D-gedrucktem rosa Hut und Stiefeln"
+  - image: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/huete-und-stiefel.jpg
+    thumb: /assets/images/kalender/2026-10-10-herbstfest-beim-zazza/huete-und-stiefel-600w.jpg
+    alt: "Vorbereitet fürs Herbstbasteln: 3D-gedruckte schwarze Zipfelmützen, rosa Stiefel und Schaumstoff-Finger neben einem Kürbis, Kastanien und Herbstlaub"
+team: [falko-richter]
+partners: ["Zazza Moabit / Pajas Kaffee"]
+tags: [zazza]
+uuid: fa55c289-ca10-4555-a820-2d557846f1a4
 ---
 
 Herbstfest beim Zazza mit Kastanienbasteln – mit live 3D-Druck von Zubehör: Hüte, Stiefel und mehr für eure Kastanienfiguren kamen direkt aus dem Drucker.

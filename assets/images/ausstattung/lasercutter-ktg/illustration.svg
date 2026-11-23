@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 320" role="img" aria-label="Illustration eines Lasercutters">
+  <title>Illustration: Lasercutter</title>
+  <rect width="420" height="320" fill="#ffffff"/>
+  <g fill="none" stroke="#16161d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- body -->
+    <rect x="40" y="130" width="340" height="150" rx="10" fill="#ffffff"/>
+    <!-- lid (open, tinted window) -->
+    <path d="M40 130 L80 50 L340 50 L380 130 Z" fill="#ffcc00"/>
+    <path d="M95 115 L120 68 L300 68 L325 115 Z" fill="#ff5a36" fill-opacity=".35"/>
+    <!-- work area -->
+    <rect x="70" y="150" width="230" height="110" rx="4" fill="#e5e1d8"/>
+    <!-- gantry and laser head -->
+    <line x1="70" y1="190" x2="300" y2="190"/>
+    <rect x="160" y="178" width="26" height="24" rx="3" fill="#ffffff"/>
+    <line x1="173" y1="202" x2="173" y2="232" stroke="#ff5a36" stroke-width="3"/>
+    <!-- cut part on bed (letter stamp) -->
+    <rect x="200" y="222" width="40" height="28" rx="2" fill="#ffffff"/>
+    <!-- control panel -->
+    <rect x="318" y="160" width="44" height="30" rx="4" fill="#16161d"/>
+    <circle cx="330" cy="215" r="7" fill="#ff5a36"/>
+    <circle cx="350" cy="215" r="7" fill="#ffffff"/>
+    <!-- exhaust -->
+    <path d="M380 240 L405 240 L405 300" />
+  </g>
+</svg>

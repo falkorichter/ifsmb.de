@@ -3,13 +3,14 @@ title: "Programmierwerkstatt am Lessing-Gymnasium"
 summary: Eine Programmierwerkstatt von 35services am Lessing-Gymnasium – Programmieren lernen mit Scratch.
 status: abgeschlossen
 start: 2025-10-01
-zeitraum: Herbst 2025
-ort: Lessing-Gymnasium, Berlin
+period: Herbst 2025
+location: Lessing-Gymnasium, Berlin
 event_tag: lessing-gymnasium
 team:
   - falko-richter
 partners:
   - 35 services e. V.
+uuid: 38ab2b0d-7f8e-4ab2-b112-af8b7ee29f73
 ---
 
 Im Herbst 2025 hat Falko am Lessing-Gymnasium eine **Programmierwerkstatt** von 35services angeboten. Die Idee: Fortschritt und Ideen dokumentieren, damit es ähnliche Werkstätten später auch an anderen Orten geben kann.

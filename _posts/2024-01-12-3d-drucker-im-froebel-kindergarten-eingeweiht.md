@@ -3,6 +3,7 @@ title: "3D-Drucker im Fröbel-Kindergarten eingeweiht"
 date: 2024-01-12 16:00:00 +0100
 author: falko-richter
 tags: [kita]
+uuid: 4ec91de6-ea8e-4b18-a5f8-9dcc4816ee0b
 ---
 
 Am 12. Januar 2024 haben wir im Fröbel-Kindergarten in der Lisa-Fittko-Straße einen 3D-Drucker eingeweiht: einen da Vinci mini von XYZprinting. Morgens wurde ausgepackt und aufgebaut, am Nachmittag liefen die ersten Drucke.
@@ -12,18 +13,17 @@ Damit niemand einfach so losdruckt, steht ein Schild auf dem Drucker: „STOP! �
 Die Einführung ist offen dokumentiert – als Open Educational Resource: [chaos-macht-kita auf GitHub](https://github.com/falkorichter/chaos-macht-kita). Wie alles angefangen hat, steht im Beitrag über [Falkos Vortrag auf dem Chaos Communication Camp 2023]({{ '/news/2023/08/16/3d-druck-fuer-kinder-auf-dem-cccamp23/' | relative_url }}).
 
 
-<div class="gallery">
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/05.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/05-600w.jpg" alt="Der neue 3D-Drucker steht ausgepackt auf einem Hocker, daneben der Karton" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/06.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/06-600w.jpg" alt="Blick in den Drucker: Transportsicherungen und Druckkopf" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/07.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/07-600w.jpg" alt="Die orangefarbene Transportsicherung im Drucker" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/08.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/08-600w.jpg" alt="Der Druckkopf, noch mit blauem Klebeband gesichert" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/10.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/10-600w.jpg" alt="Der fertig aufgestellte Drucker auf einer Holzkiste mit dem Schild „STOP! → Yvonne fragen“" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/09.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/09-600w.jpg" alt="Servicekarte des Händlers aus dem Karton" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/01.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/01-600w.jpg" alt="Ausmessen mit dem Zollstock" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/02.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/02-600w.jpg" alt="Ausmessen der Papierschneidemaschine" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/03.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/03-600w.jpg" alt="Ausmessen der Papierschneidemaschine, Detail" loading="lazy"></a>
-  <a href="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/04.jpg" class="lightbox"><img src="/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/04-600w.jpg" alt="Die Papierschneidemaschine an der Wand" loading="lazy"></a>
-</div>
+![Der neue 3D-Drucker steht ausgepackt auf einem Hocker, daneben der Karton](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/05.jpg)
+![Blick in den Drucker: Transportsicherungen und Druckkopf](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/06.jpg)
+![Die orangefarbene Transportsicherung im Drucker](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/07.jpg)
+![Der Druckkopf, noch mit blauem Klebeband gesichert](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/08.jpg)
+![Der fertig aufgestellte Drucker auf einer Holzkiste mit dem Schild „STOP! → Yvonne fragen“](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/10.jpg)
+![Servicekarte des Händlers aus dem Karton](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/09.jpg)
+![Ausmessen mit dem Zollstock](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/01.jpg)
+![Ausmessen der Papierschneidemaschine](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/02.jpg)
+![Ausmessen der Papierschneidemaschine, Detail](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/03.jpg)
+![Die Papierschneidemaschine an der Wand](/assets/images/news/3d-drucker-im-froebel-kindergarten-eingeweiht/04.jpg)
+{: .gallery}
 
 ## Die ersten Drucke
 

@@ -1,0 +1,20 @@
+<!doctype html>
+{%- comment -%}
+  Redirect for an address that no longer exists. Front matter: `target` (new address, may include #anchor).
+  Static hosting (GitHub Pages) can't send HTTP redirects, so this uses meta refresh + canonical + a visible link.
+{%- endcomment -%}
+{%- assign ziel_url = page.target | relative_url -%}
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Weitergeleitet – {{ site.title }}</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.url }}{{ ziel_url }}">
+  <meta http-equiv="refresh" content="0; url={{ ziel_url }}">
+  {%- comment -%} keep ?query and #anchor of the old address (e.g. /projekte/x/#abonnieren), unless ziel has its own {%- endcomment %}
+  <script>(function () { var z = {{ ziel_url | jsonify }}; if (z.indexOf("#") < 0) { location.replace(z + location.search + location.hash); } })();</script>
+</head>
+<body>
+  <p>Diese Seite gibt es nicht mehr – weiter zu <a href="{{ ziel_url }}">{{ page.target_title | default: ziel_url }}</a>.</p>
+</body>
+</html>

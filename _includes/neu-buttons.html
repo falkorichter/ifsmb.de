@@ -1,0 +1,96 @@
+{%- comment -%}
+  "➕" buttons in the same row as the edit button: open GitHub's "new file" editor with a template from
+  _includes/vorlagen/ whose connection to the current page is already filled in.
+{%- endcomment -%}
+{%- assign c = page.collection -%}
+{%- assign tags = page.tags | join: ', ' -%}
+{%- capture buttons -%}
+{%- if c == 'team' -%}
+  {% include neu-button.html typ="beitrag" i18n="new.team_post" author=page.slug %}
+  {% include neu-button.html typ="projekt" i18n="new.team_project" team=page.slug %}
+  {% include neu-button.html typ="termin" i18n="new.team_event" team=page.slug %}
+  {% include neu-button.html typ="geraet" i18n="new.team_device" owner_team=page.slug %}
+  {% include neu-button.html typ="herausforderung" i18n="new.team_challenge" team=page.slug %}
+{%- elsif c == 'projects' -%}
+  {%- assign p = page.personal | default: false -%}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- if page.event_tag -%}
+    {% include neu-button.html typ="beitrag" i18n="new.project_post" tags=page.event_tag personal=p %}
+    {% include neu-button.html typ="termin" i18n="new.project_event" tags=page.event_tag team=team personal=p %}
+  {%- else -%}
+    {%- assign url = page.url -%}
+    {% include neu-button.html typ="beitrag" i18n="new.project_post_untagged" linked=url personal=p %}
+    {% include neu-button.html typ="termin" i18n="new.project_event_untagged" projects=page.slug team=team personal=p %}
+  {%- endif -%}
+  {% include neu-button.html typ="projekt" i18n="new.project_subproject" part_of=page.slug team=team personal=p %}
+  {% include neu-button.html typ="geraet" i18n="new.project_device" linked=page.url %}
+  {% include neu-button.html typ="herausforderung" i18n="new.project_challenge" projects=page.slug team=team personal=p %}
+{%- elsif c == 'events' -%}
+  {% include neu-button.html typ="beitrag" i18n="new.event_report" tags=tags linked=page.url personal=page.personal %}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- assign proj = page.projects | join: ', ' -%}
+  {% include neu-button.html typ="herausforderung" i18n="new.event_challenge" team=team projects=proj tags=tags linked=page.url personal=page.personal %}
+{%- elsif c == 'equipment' -%}
+  {% include neu-button.html typ="beitrag" i18n="new.device_post" tags=tags linked=page.url %}
+  {% include neu-button.html typ="herausforderung" i18n="new.device_challenge" linked=page.url %}
+{%- elsif c == 'challenges' -%}
+  {%- assign team = page.team | join: ', ' -%}
+  {%- assign proj = page.projects | join: ', ' -%}
+  {%- assign auth = nil -%}{%- if team != '' -%}{%- assign auth = '[' | append: team | append: ']' -%}{%- endif -%}
+  {% include neu-button.html typ="beitrag" i18n="new.challenge_post" author=auth tags=tags linked=page.url personal=page.personal %}
+  {% include neu-button.html typ="herausforderung" i18n="new.challenge_more" team=team projects=proj tags=tags personal=page.personal %}
+{%- elsif c == 'posts' -%}
+  {% include neu-button.html typ="beitrag" i18n="new.post_followup" author=page.author tags=tags linked=page.url personal=page.personal %}
+{%- else -%}
+  {%- assign partner = site.data.partners | where: 'page', page.url | first -%}
+  {%- if partner -%}
+    {%- capture pname -%}"{{ partner.name }}"{%- endcapture -%}
+    {% include neu-button.html typ="projekt" i18n="new.partner_project" partners=pname %}
+    {% include neu-button.html typ="termin" i18n="new.partner_event" partners=pname %}
+    {% include neu-button.html typ="geraet" i18n="new.partner_device" owner_partner=pname %}
+    {% include neu-button.html typ="herausforderung" i18n="new.partner_challenge" linked=page.url %}
+  {%- else -%}
+    {%- case page.url -%}
+      {%- when '/team/' -%}{% include neu-button.html typ="team" i18n="new.team_profile" %}
+      {%- when '/projects/' -%}{% include neu-button.html typ="projekt" i18n="new.projects_project" %}
+      {%- when '/projects/archive/' -%}{% include neu-button.html typ="projekt-vergangen" i18n="new.archive_project" %}
+      {%- when '/projects/personal/' -%}{% include neu-button.html typ="projekt" i18n="new.personal_project" personal=true %}
+      {%- when '/news/' -%}{% include neu-button.html typ="beitrag" i18n="new.news_post" %}
+      {%- when '/news/personal/' -%}{% include neu-button.html typ="beitrag" i18n="new.personal_post" personal=true %}
+      {%- when '/calendar/' -%}{% include neu-button.html typ="termin" i18n="new.calendar_event" %}
+      {%- when '/challenges/' -%}{% include neu-button.html typ="herausforderung" i18n="new.challenges_challenge" %}
+      {%- when '/equipment/' -%}{% include neu-button.html typ="geraet" i18n="new.equipment_device" %}
+      {%- when '/press/' -%}{% include neu-button.html typ="presse" i18n="new.press_release" %}{% include neu-button.html typ="pressebericht" i18n="new.press_report" %}
+      {%- when '/partners/' -%}{% include neu-button.html typ="partner" i18n="new.partners_partner" %}
+    {%- endcase -%}
+  {%- endif -%}
+{%- endif -%}
+{%- endcapture -%}
+{%- assign buttons = buttons | strip -%}
+{%- if buttons != '' -%}
+{{ buttons }}
+<script>
+  // A plain click opens the pop-up form (assets/js/neu.js, loaded on first use); Ctrl/⌘/Shift-click, or a failed
+  // load, opens GitHub with the full template instead.
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[data-neu]');
+    if (!a || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey || !window.ladeSkripte) return;
+    ev.preventDefault();
+    a.setAttribute('aria-busy', 'true');
+    window.ladeSkripte(['formular.js', 'neu.js'])
+      .then(function () { window.NeuFormular.oeffnen(a); })
+      .catch(function () { window.location.href = a.href; })
+      .then(function () { a.removeAttribute('aria-busy'); });
+  });
+  // Fill today's date, UTC offset and a fresh uuid into the template links at click time (build date would be stale).
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[data-vorlage]');
+    if (!a) return;
+    var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
+    var off = -d.getTimezoneOffset(), tz = (off >= 0 ? '+' : '-') + p(Math.floor(Math.abs(off) / 60)) + p(Math.abs(off) % 60);
+    a.href = a.href.replace(/JJJJ-MM-TT/g, d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()))
+      .replace(/JJJJ/g, d.getFullYear()).replace(/TZTZ/g, encodeURIComponent(tz))
+      .replace(/UUID-NEU/g, window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'UUID-NEU');
+  });
+</script>
+{%- endif -%}

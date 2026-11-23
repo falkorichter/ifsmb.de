@@ -1,0 +1,48 @@
+---
+search: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Projekte
+i18n_title: pages.projects.title
+i18n_lead: pages.projects.lead
+lead: Woran wir gerade arbeiten.
+---
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.personal != true" | where_exp: "p", "p.part_of == nil" | sort: "start" | reverse %}
+{% assign ideas = site.projects | where: "status", "idee" | where_exp: "p", "p.personal != true" | where_exp: "p", "p.part_of == nil" | sort: "start" | reverse %}
+{% assign inquiries = site.projects | where: "status", "anfrage" | where_exp: "p", "p.personal != true" | where_exp: "p", "p.part_of == nil" | sort: "start" | reverse %}
+{% assign personal = site.projects | where: "personal", true %}
+{% if active.size > 0 %}
+<div class="gelesen-fortschritt" data-bereich=".gelesen-projekte" hidden><div class="gelesen-fortschritt-balken"><span></span></div><span class="gelesen-fortschritt-text"></span></div>
+<div class="grid-2 gelesen-projekte">
+  {% for p in active %}
+  {% include projekt-karte.html project=p badge="aktiv" meta=true %}
+  {% endfor %}
+</div>
+{% else %}
+<p data-i18n="pages.projects.none">{{ "pages.projects.none" | t }}</p>
+{% endif %}
+
+{% if inquiries.size > 0 %}
+<h2 class="cal-heading" data-i18n="pages.projects.inquiries">{{ "pages.projects.inquiries" | t }}</h2>
+<p class="muted" data-i18n="pages.projects.inquiries_intro">{{ "pages.projects.inquiries_intro" | t }}</p>
+<div class="grid-2">
+  {% for p in inquiries %}
+  {% include projekt-karte.html project=p badge="anfrage" meta=true %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if ideas.size > 0 %}
+<h2 class="cal-heading" data-i18n="pages.projects.ideas">{{ "pages.projects.ideas" | t }}</h2>
+{%- capture link_ideas %}<a href="{{ '/project/ideas/' | relative_url }}" data-i18n="nav.project_ideas">{{ "nav.project_ideas" | t }}</a>{% endcapture %}
+<p class="muted" data-i18n="pages.projects.ideas_intro">{{ "pages.projects.ideas_intro" | t_html: link_ideas }}</p>
+<div class="grid-2">
+  {% for p in ideas %}
+  {% include projekt-karte.html project=p badge="idee" meta=true %}
+  {% endfor %}
+</div>
+{% endif %}
+
+<p class="section-foot"><a href="{{ '/projects/archive/' | relative_url }}" data-i18n="pages.projects.archive_link">{{ "pages.projects.archive_link" | t }}</a></p>
+{% if personal.size > 0 %}
+<p class="section-foot"><a href="{{ '/projects/personal/' | relative_url }}" data-i18n="pages.projects.personal_link" data-i18n-params="{{ "n" | i18n_params: personal.size }}">{{ "pages.projects.personal_link" | t: "n", personal.size }}</a></p>
+{% endif %}

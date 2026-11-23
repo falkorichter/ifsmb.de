@@ -2,13 +2,14 @@
 title: "Prusa MK3S (HeartLabs) flott machen"
 summary: Falko repariert einen Prusa MK3S von HeartLabs bei 35services – danach soll er zu Events mitkommen und ausgeliehen werden können.
 status: aktuell
+personal: true
 start: 2026-11-01
-zeitraum: seit November 2026
-ort: 35services e.V.
+period: seit November 2026
+location: 35services e.V.
 event_tag: prusa-mk3s-heartlabs
 tags: [prusa-mk3s-heartlabs]
 updates:
-  - datum: 2026-11-07
+  - date: 2026-11-07
     text: >-
       Anton von 35services hat ein **neues Kabel für das Druckbett** bestellt:
       das [Heatbed-Einsy-Stromkabel (verschraubt) von Prusa](https://www.prusa3d.com/de/produkt/heatbed-einsy-power-cable-screw-attached/).
@@ -16,11 +17,13 @@ updates:
       hat nicht mehr zuverlässig Strom geführt und ist dabei heiß geworden.
 team:
   - falko-richter
+  - anton
 partners:
   - HeartLabs
   - 35 services e. V.
+uuid: 8f46d01b-411f-49eb-a53f-d60e35fd1a1f
 ---
 
-Falko hat sehr günstig einen [Prusa MK3S]({{ '/ausstattung/prusa-mk3s-heartlabs/' | relative_url }}) von HeartLabs erworben. Der Drucker steht jetzt bei 35services und wird dort repariert.
+Falko hat sehr günstig einen [Prusa MK3S]({{ '/equipment/prusa-mk3s-heartlabs/' | relative_url }}) von HeartLabs erworben. Der Drucker steht jetzt bei 35services und wird dort repariert.
 
 Ziel: Der Drucker soll wieder zuverlässig drucken, damit wir ihn **zu Events mitnehmen** oder **ausleihen** können.

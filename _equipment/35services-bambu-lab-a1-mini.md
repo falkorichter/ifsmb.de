@@ -1,0 +1,15 @@
+---
+title: 35services Bambu Lab A1 mini
+category: 3D-Drucker (FDM)
+summary: Kompakter, schneller 3D-Drucker – ideal zum Einstieg und für kleine Teile.
+owner_partner: 35 services e. V.
+image: /assets/images/ausstattung/35services-bambu-lab-a1-mini/01.jpg
+thumb: /assets/images/ausstattung/35services-bambu-lab-a1-mini/01-600w.jpg
+image_alt: "Der Bambu Lab A1 mini auf einem Tisch, daneben wird ein Anmeldezettel für die 3D-Druck-AG ausgefüllt (Name und Zugangscode unkenntlich gemacht)"
+tags: [bambu-lab-a1-mini, 3d-drucker, 35services, ktg]
+uuid: 8cc5777e-55cb-4469-9662-d5c5dd084178
+---
+
+Der Bambu Lab A1 mini ist ein kompakter FDM-Drucker mit einem Bauraum von 18 × 18 × 18 cm. Er kalibriert sich weitgehend selbst und eignet sich deshalb gut für Einsteiger*innen und für die Arbeit mit Kindern.
+
+Der Drucker gehört [35services e.V.](https://35services.de/) und wird unter anderem in der offenen Werkstatt und bei der 3D-Druck-AG eingesetzt.

@@ -1,0 +1,12 @@
+{%- comment -%}
+  Template for a "Wir in der Presse" entry as its own file (_data/press_report/<name>.yml),
+  sorted into the list by _plugins/einzeldateien.rb. JJJJ-MM-TT is replaced with today's date at click time.
+{%- endcomment -%}
+# Neuer Bericht über uns für „Wir in der Presse“ auf /press/ – wird automatisch nach Datum einsortiert (neueste zuerst).
+# Dateiname oben anpassen: datum-und-medium.yml (nur Kleinbuchstaben und Bindestriche).
+date: JJJJ-MM-TT   # Erscheinungsdatum – ganz löschen, wenn unbekannt (steht dann am Ende der Liste)
+title: "Überschrift des Berichts"
+medium: "Name der Zeitung, Website oder des Kanals"   # z. B. „Bezirksamt Mitte auf Bluesky“
+url: https://beispiel.de/artikel   # Pflicht: Link zum Bericht, ohne Tracking-Parameter (?si=, utm_ …)
+occasion:   # optional: unsere eigene Seite zum Anlass, z. B. /calendar/…/ oder /news/…/
+note:   # optional: Anmerkung, erscheint in Klammern hinter dem Eintrag

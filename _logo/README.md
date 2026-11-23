@@ -11,6 +11,8 @@ Originale, unbearbeitete Logo-Dateien. Ausgeliefert werden nur die Kopien in `as
 | `partner/pc-spende.svg` | pc-spende.das-macht-schule.net (Header-Logo pcspende_logo.svg, abgerufen 06.11.2026) |
 | `partner/taschenstation.svg` | taschenstation.de (inline-SVG-Symbol `#cf-icon--logo` aus dem Seitenkopf extrahiert, Schriftzug „ReUseMe“, abgerufen 06.11.2026) |
 | `partner/bietenholz.jpeg` | bietenholz.design (Site-Icon logo_bietenholz2.jpeg, 512 × 512; für die Website auf 400 px verkleinert, abgerufen 06.11.2026) |
+| `partner/verbund-offene-werkstaetten.png` | vom Verbund Offener Werkstätten bereitgestellt (Logo-Paket von 2010, Nutzung abgestimmt). Aus `logo_VOW.tif` (CMYK, 2465 × 826, 300 dpi): Deckung aus dem Gelb-Kanal, Farben aus der offiziellen RGB-Datei (Rot `#bd1320`, Orange `#f29400`), transparenter Hintergrund, ohne Metadaten; für die Website auf 600 px Breite verkleinert. EPS/TIF/BMP-Originale nicht im Repo |
+| `partner/rfflabs.svg` | rfflabs.fr (Hero-Logo `logos-planche-RVB1_Old-04.svg`, weiß, abgerufen 21.11.2026; Nutzung abgestimmt). Im Repo das Original; die Website nutzt `assets/images/partner/rfflabs.svg` mit der Füllfarbe des Netzwerks `#222D49` statt Weiß |
 | HeartLabs | **fehlt** – Printables blockiert automatische Abrufe, Instagram braucht Login; Text-Platzhalter wird angezeigt |
 | Förderverein der Kurt-Tucholsky-Grundschule | **fehlt** – Website hat kein Logo, Text-Platzhalter wird angezeigt |
 
@@ -33,8 +35,15 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 |---|---|
 | `institut/ifsmb-logo-badge.png` | Badge aus dem Website-Header, mit Headless Chrome in 3× Auflösung gerendert (transparenter Hintergrund) |
 | `institut/ifsmb-logo-wortmarke.png` | wie oben, mit Schriftzug „Institut für spontane Makespace Buildung“ |
+| `institut/ifsmb-logo-badge.svg` | Vektorversion des Badges, nach den Maßen des PNG nachgebaut |
+| `institut/ifsmb-logo-wortmarke.svg` | Vektorversion mit Schriftzug |
+| `../assets/images/og-preview.jpg` | 1200 × 630 px Social-Media-Vorschaubild (Open Graph / Twitter Card) in den Institutsfarben (`#ffcc00` / `#16161d`), ohne Metadaten; Vorschau in `_logo/social-preview.html` |
 
-Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS – es gibt (noch) keine Vektorversion. Das Logo bleibt vorerst so, auch wenn die Website die Berlin Type nutzt (Varianten zum Feedback in PR #6).
+Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, wght 800; SF Pro, wght 700, opsz 28). In den SVGs ist der Text mit fontTools in Pfade umgewandelt, sie brauchen also keine installierte Schrift. Farben: `#ffcc00` (Gelb), `#16161d` (Schwarz), Badge um −3° gedreht. Das Logo bleibt vorerst so, auch wenn die Website die Berlin Type nutzt (Varianten zum Feedback in PR #6).
+
+## Badge zum Drucken
+
+`badge/`: das Logo-Badge als OpenSCAD-Modell für den 3D-Druck (gelbe Grundplatte, schwarze Teile erhaben, nur ein Farbwechsel), optional mit Namen im verlängerten Schatten. Die erzeugten Dateien (3MF, OBJ, STL, Vorschau) liegen in `assets/badge/`, die Liste in `_data/badges.yml`; sie erscheinen auf `/press/#badge` und in den Teamprofilen. Der Schriftzug „IfsMB“ wird mit `badge/wordmark_from_svg.py` direkt aus `institut/ifsmb-logo-badge.svg` übernommen. Details in `badge/README.md`.
 
 ## Pin
 
@@ -70,4 +79,16 @@ Bilder: auf max. 1600 px verkleinert plus 600-px-Vorschau, ohne Metadaten neu ge
 | MK3S-Zeitraffer (Infinite Cube, Servo-Halterung, Achsgehäuse) | `~/Downloads/*MK3S*.mp4` (OctoPrint-Kamera) | 720p bzw. 480p, ohne Ton/Metadaten (≈ 7 MB zusammen) |
 | Bilder aus „DIY – eine 3D Druck und Elektronik AG“ (2024) | 35services.de | 9 Bilder, ohne Metadaten; keine Personen |
 | Instagram-QR-Code im Rosalind-Franklin-Beitrag | 35services.de | übernommen |
+| German RepRap X400 (5 Fotos, per Signal von Ralf) | `_logo/ausstattung/german-reprap-x400/` | ohne Metadaten neu gespeichert, 1600 px + 600 px; keine Personen |
+| iPad-Stifte (KTG, 10.11.2026) | nicht im Repo (Chat-Upload) | ohne Metadaten neu gespeichert, unten abgeschnitten (Füße einer Person im Bild), 1600 px + 600 px |
+| Foto-Import 10.11.2026 (Mikroskop, Dracheneier, Filamentspende, Herbstbasteln, Moldlay, PC-Blend, Mogster, Rosalind-Franklin-Gymnasium, Platanus, ReUseMe) | `_logo/news/2026-11-10-import/` (Ordner = Dateiname des Uploads, Zips daneben) | alle ohne Metadaten (enthielten GPS), 1600 px + 600 px; ReUseMe: Kamerabild der Klasse auf Tafel und Laptop sowie ein Hinterkopf unkenntlich, die Fotos mit vielen Kindern und Zugangsdaten an der Tafel (132529429, 132618970) nicht verwendet; Videos 720p ohne Ton, keine Personen |
+| Platanus Mehrfarbdruck (04.11.2026) | `_logo/news/2026-11-10-platanus-mehrfarbdruck/` (mit Zip) | ohne Metadaten (enthielten GPS); auf Foto 2 die Schrift auf dem Anhänger (wohl ein Name) unkenntlich gemacht |
+| Infinite Cube Referenz (03.11.2026) | `_logo/news/2026-11-10-infinite-cube-referenz/` (mit Zip) | 4 Fotos ohne Metadaten (enthielten GPS); keine Personen |
+| iPad-Stifte laden (02.11.2026) | `_logo/news/2026-11-10-ipad-stifte-laden/` (mit Zip) | 4 Fotos ohne Metadaten; geprägte Beschriftung zweier gedruckter Haken (wohl Namen) unkenntlich, Foto 1 unten abgeschnitten (Schuh) |
+| Notebook der KTG (02.11.2026) | `_logo/news/2026-11-10-notebook-ktg/` | ohne Metadaten |
+| Tag der offenen Tür RFG (Druckauftrag) | `_logo/kalender/2026-11-28-tag-der-offenen-tuer-rosalind-franklin-gymnasium/` | Screenshot als JPG; Zeitraffer der Druckerkamera 720p ohne Ton, keine Personen |
+| itslearning-Kurs RFG (Screenshot) | `_logo/news/2026-11-10-itslearning/` | Namen und Foto der Kursleitung außer Falko Richter unkenntlich gemacht |
+| Profilfoto Frieder | `_logo/team/frieder-euteneuer-original.png` | quadratisch zugeschnitten (480 px + 48 px); © Sergej Glanze / FUNKE Foto Services – Nachweis im Profil (`photo_credit`) |
+| Lastenanhänger vom Theater (11.11.2026) | `_logo/news/2026-11-11-lastenanhaenger-vom-theater/` | ohne Metadaten neu gespeichert; keine Personen |
+| 35services/3d & 35services/2d (Fotos/Screenshots) | GitHub `35services/3d` & `35services/2d` | auf max. 1600 px + 600 px ohne Metadaten neu gespeichert |
 | Illustrationen | eigene SVGs | `assets/images/ausstattung/illustration-drucker.svg` (kartesischer Drucker), `3d-scanner/illustration.svg`, `flsun-v400/illustration.svg` |

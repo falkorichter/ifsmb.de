@@ -10,3 +10,8 @@ _logo/news/
 _logo/ausstattung/
 .jekyll-metadata
 .claude/
+_pr-vorschau/
+
+# review notes before pushing (see CLAUDE.md)
+_review.md
+_feedback.md
