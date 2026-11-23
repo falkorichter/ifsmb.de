@@ -39,6 +39,8 @@ Diese Website wird über [GitHub Pages](https://pages.github.com/) (GitHub Inc.,
 
 Wir selbst setzen keine Cookies, verwenden keine Tracking- oder Analysewerkzeuge und laden keine Schriften oder Skripte von fremden Servern.
 
+Die Schrift dieser Website ist die [Berlin Type](https://wir.berlin/kampagnen/die-typo) des Landes Berlin (wir.berlin). Sie wird unverändert von ifsmb.de selbst ausgeliefert.
+
 **Sprache:** Menüs, Knöpfe und Hinweise gibt es auf Deutsch, Englisch und Französisch (die Inhalte bleiben deutsch). Ohne eigene Wahl nimmt die Seite die Sprache, die dein Browser bevorzugt – das liest das Skript nur in deinem Browser aus, es wird nichts übertragen. Wählst du unten auf einer Seite eine Sprache (oder öffnest einen Link mit `?lang=de`, `?lang=en` oder `?lang=fr`), merkt sich dein Browser das lokal in seinem Speicher (kein Cookie); die Wahl verlässt dein Gerät nie. Über die Browser-Einstellungen („Websitedaten löschen“) ist sie wieder weg.
 {: #sprache}
 

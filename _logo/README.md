@@ -39,11 +39,19 @@ Werkzeug: Python/Pillow (`ImageOps.exif_transpose`, Zuschnitt, Neuspeichern ohne
 | `institut/ifsmb-logo-wortmarke.svg` | Vektorversion mit Schriftzug |
 | `../assets/images/og-preview.jpg` | 1200 × 630 px Social-Media-Vorschaubild (Open Graph / Twitter Card) in den Institutsfarben (`#ffcc00` / `#16161d`), ohne Metadaten; Vorschau in `_logo/social-preview.html` |
 
-Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, wght 800; SF Pro, wght 700, opsz 28). In den SVGs ist der Text mit fontTools in Pfade umgewandelt, sie brauchen also keine installierte Schrift. Farben: `#ffcc00` (Gelb), `#16161d` (Schwarz), Badge um −3° gedreht.
+Die Schrift ist die System-Monospace bzw. System-UI-Schrift von macOS (SF Mono, wght 800; SF Pro, wght 700, opsz 28). In den SVGs ist der Text mit fontTools in Pfade umgewandelt, sie brauchen also keine installierte Schrift. Farben: `#ffcc00` (Gelb), `#16161d` (Schwarz), Badge um −3° gedreht. Das Logo bleibt vorerst so, auch wenn die Website die Berlin Type nutzt (Varianten zum Feedback in PR #6).
 
 ## Badge zum Drucken
 
 `badge/`: das Logo-Badge als OpenSCAD-Modell für den 3D-Druck (gelbe Grundplatte, schwarze Teile erhaben, nur ein Farbwechsel), optional mit Namen im verlängerten Schatten. Die erzeugten Dateien (3MF, OBJ, STL, Vorschau) liegen in `assets/badge/`, die Liste in `_data/badges.yml`; sie erscheinen auf `/press/#badge` und in den Teamprofilen. Der Schriftzug „IfsMB“ wird mit `badge/wordmark_from_svg.py` direkt aus `institut/ifsmb-logo-badge.svg` übernommen. Details in `badge/README.md`.
+
+## Pin
+
+`pin/`: das Logo-Badge als 2-Farb-Anstecker für den 3D-Drucker (OpenSCAD + STLs), siehe `pin/README.md`.
+
+## Schrift: Berlin Type
+
+Die Website nutzt die **Berlin Type** von [wir.berlin](https://wir.berlin/kampagnen/die-typo) („für alle frei zugänglich und nutzbar“, Modifikation nicht zulässig). Download: `Wir.Berlin_Schrift.zip` (Version 1.3). Ausgeliefert werden nur die Web-Fonts `BerlinTypeWeb-Regular/Bold` als woff2/woff, **unverändert** (kein Subsetting) in `assets/fonts/berlin-type/`. Die Desktop- und Office-Fonts aus dem ZIP werden nicht committet.
 
 ## Übernommene Blogbeiträge
 
