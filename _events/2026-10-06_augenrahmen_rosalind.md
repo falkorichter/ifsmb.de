@@ -10,4 +10,4 @@ team: [falko-richter, alexander-riedel]
 uuid: 46a2f0be-f7bc-4f6e-8799-b3be87010ab4
 ---
 
-Danke an **[Alexander Riedel]({{ '/team/alexander-riedel/' | relative_url }})** ([augenrahmen.de](https://augenrahmen.de/)), der in der [3D-Druck AG]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) vorbeigekommen ist und uns von seinen **3D-gedruckten Brillen** erzählt hat. Alexander kommt aus dem Kiez – 3D-Druck-Kiez Moabit!
+Danke an **[Alexander Riedel]({{ '/team/alexander-riedel/' | relative_url }})** ([augenrahmen.de](https://augenrahmen.de/)), der in der [3D-Druck AG]({{ '/projects/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) vorbeigekommen ist und uns von seinen **3D-gedruckten Brillen** erzählt hat. Alexander kommt aus dem Kiez – 3D-Druck-Kiez Moabit!

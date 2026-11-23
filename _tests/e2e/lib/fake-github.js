@@ -1,5 +1,5 @@
 // Fake GitHub for the end-to-end tests: an in-memory git repository (blobs, trees, commits, branches) plus pull
-// requests, served with exactly the REST endpoints assets/js/github-api.js uses – realistic status codes and error
+// requests, issues and checks (check runs + commit statuses, set by the tests), served with exactly the REST endpoints assets/js/github-api.js uses – realistic status codes and error
 // bodies, CORS, several tokens/users. No dependencies (node:http, node:crypto).
 //
 // Usable in-process (tests call the control methods directly) or standalone:
@@ -102,8 +102,9 @@ function createFakeGitHub(options) {
   }
 
   // ---------- pull requests ----------
+  function headRefs(pr) { const f = st.forks.get(pr.head.repo); return f ? f.refs : st.refs; }
   function pullHeadSha(pr) {
-    if (pr.state === "open" && st.refs.has(pr.head.ref)) pr.headSha = st.refs.get(pr.head.ref);
+    if (pr.state === "open" && headRefs(pr).has(pr.head.ref)) pr.headSha = headRefs(pr).get(pr.head.ref);
     return pr.headSha;
   }
   function blobText(sha) { const b = obj(sha, "blob"); return b && isText(b.data) ? b.data.toString("utf8") : null; }
@@ -146,12 +147,13 @@ function createFakeGitHub(options) {
     while (s && !stop.has(s)) { list.unshift(s); s = obj(s, "commit").parents[0]; }
     return list;
   }
-  function repoJson(fullName) { return { full_name: fullName || st.owner + "/" + st.repo, name: (fullName || st.repo).split("/").pop(), owner: { login: (fullName || st.owner).split("/")[0] } }; }
+  function repoJson(fullName) { return { full_name: fullName || st.owner + "/" + st.repo, name: (fullName || st.repo).split("/").pop(), owner: { login: (fullName || st.owner).split("/")[0], type: "User" } }; }
   function userJson(u) { return { login: u.login, id: u.id, type: "User", avatar_url: url + "/__fake/avatar/" + u.login + ".svg", html_url: "https://github.com/" + u.login }; }
   function pullJson(pr) {
     const full = st.owner + "/" + st.repo;
     return {
-      number: pr.number, title: pr.title, body: pr.body, state: pr.state, draft: false, locked: false,
+      number: pr.number, title: pr.title, body: pr.body, state: pr.state, draft: !!pr.draft, locked: false,
+      labels: labelsJson(pr.labels), assignees: [],
       html_url: "https://github.com/" + full + "/pull/" + pr.number,
       url: url + "/repos/" + full + "/pulls/" + pr.number,
       user: userJson(pr.user), created_at: pr.created_at, updated_at: pr.updated_at,
@@ -161,21 +163,55 @@ function createFakeGitHub(options) {
       base: { ref: pr.base.ref, sha: resolve(pr.base.ref), label: st.owner + ":" + pr.base.ref, repo: repoJson() }
     };
   }
-  function openPullInternal({ head, base, title, body, user, headRepo }) {
+  // labels as GitHub returns them; input: names or { name, color }
+  function labelsJson(list) {
+    return (list || []).map((l, i) => typeof l === "string" ? { id: 500 + i, name: l, color: "ededed" } : Object.assign({ id: 500 + i, color: "ededed" }, l));
+  }
+  function issueJson(i) {
+    const full = st.owner + "/" + st.repo;
+    return { number: i.number, title: i.title, body: i.body, state: i.state, html_url: "https://github.com/" + full + "/issues/" + i.number,
+      url: url + "/repos/" + full + "/issues/" + i.number, user: userJson(i.user), labels: labelsJson(i.labels),
+      assignees: i.assignees.map(userJson), assignee: i.assignees[0] ? userJson(i.assignees[0]) : null,
+      created_at: i.created_at, updated_at: i.updated_at, closed_at: i.closed_at || null };
+  }
+  // a pull request in the /issues list, like GitHub (with a pull_request key)
+  function pullAsIssueJson(pr) {
+    const p = pullJson(pr);
+    return { number: p.number, title: p.title, body: p.body, state: p.state, html_url: p.html_url, user: p.user, labels: p.labels,
+      assignees: [], assignee: null, created_at: p.created_at, updated_at: p.updated_at, closed_at: p.closed_at,
+      pull_request: { url: p.url, html_url: p.html_url, merged_at: p.merged_at } };
+  }
+  function findUser(login) { return Object.values(st.users).find((u) => u.login === login) || null; }
+  // branch, sha or pull request number → commit sha whose checks are meant
+  function checkSha({ sha, ref, number }) {
+    if (number != null) return pullHeadSha(getPull(number));
+    const s = sha || resolve(ref);
+    if (!s) throw new ApiError(422, "No commit found for " + (sha || ref));
+    return s;
+  }
+  function checksOf(sha) { return st.checks.get(sha) || { checkRuns: [], statuses: [] }; }
+  // combined status like GitHub: failure if one failed/errored, pending if one is pending or there are none, else success
+  function combinedState(statuses) {
+    if (statuses.some((x) => x.state === "failure" || x.state === "error")) return "failure";
+    if (!statuses.length || statuses.some((x) => x.state === "pending")) return "pending";
+    return "success";
+  }
+  function openPullInternal({ head, base, title, body, user, headRepo, draft, createdAt, labels }) {
     const full = st.owner + "/" + st.repo;
     base = base || st.base;
     const errs = [];
     if (!st.refs.has(base)) errs.push({ resource: "PullRequest", field: "base", code: "invalid" });
-    if (!st.refs.has(head)) errs.push({ resource: "PullRequest", field: "head", code: "invalid" });
+    const fork = headRepo && headRepo !== full ? st.forks.get(headRepo) : null, hRefs = fork ? fork.refs : st.refs;
+    if (!hRefs.has(head)) errs.push({ resource: "PullRequest", field: "head", code: "invalid" });
     if (errs.length) throw new ApiError(422, "Validation Failed", { errors: errs });
-    if (st.pulls.some((p) => p.state === "open" && p.head.ref === head && p.base.ref === base))
+    if (st.pulls.some((p) => p.state === "open" && p.head.ref === head && (p.head.repo || full) === (headRepo || full) && p.base.ref === base))
       throw new ApiError(422, "Validation Failed", { errors: [{ resource: "PullRequest", code: "custom", message: "A pull request already exists for " + st.owner + ":" + head + "." }] });
-    if (isAncestor(st.refs.get(head), st.refs.get(base)))
+    if (isAncestor(hRefs.get(head), st.refs.get(base)))
       throw new ApiError(422, "Validation Failed", { errors: [{ resource: "PullRequest", code: "custom", message: "No commits between " + base + " and " + head }] });
-    const now = new Date().toISOString();
-    const pr = { number: ++st.issueCounter, title: title || head, body: body || "", state: "open", user,
-      head: { ref: head, repo: headRepo || full }, base: { ref: base }, headSha: st.refs.get(head),
-      baseSha: mergeBase(st.refs.get(head), st.refs.get(base)), created_at: now, updated_at: now };
+    const now = createdAt || new Date().toISOString();
+    const pr = { number: ++st.issueCounter, title: title || head, body: body || "", state: "open", user, draft: !!draft, labels: labels || [],
+      head: { ref: head, repo: headRepo || full }, base: { ref: base }, headSha: hRefs.get(head),
+      baseSha: mergeBase(hRefs.get(head), st.refs.get(base)), created_at: now, updated_at: now };
     st.pulls.push(pr);
     return pr;
   }
@@ -208,17 +244,42 @@ function createFakeGitHub(options) {
     reset(args = {}) {
       const users = {};
       let id = 1000;
-      for (const [tok, u] of Object.entries(args.users || opts.users)) users[tok] = Object.assign({ id: ++id, name: u.login, push: true, expired: false }, u);
+      for (const [tok, u] of Object.entries(args.users || opts.users)) users[tok] = Object.assign({ id: ++id, name: u.login, push: true, expired: false, issues: true, checks: true }, u);
       st = { owner: args.owner || opts.owner, repo: args.repo || opts.repo, base: args.base || opts.base,
-        objects: new Map(), refs: new Map(), pulls: [], users, requests: [], rules: [], counter: 0, issueCounter: 0 };
+        objects: new Map(), refs: new Map(), forks: new Map(), pulls: [], issues: [], checks: new Map(), users, requests: [], rules: [], counter: 0, issueCounter: 0 };
       st.refs.set(st.base, putCommit({ tree: putTree({}), parents: [], message: "Initial commit", login: st.owner }));
       return { ok: true };
     },
-    // add or change a token → user mapping: { token, login, name, push, expired }
+    // add or change a token → user mapping: { token, login, name, push, expired, issues, checks }
+    // issues: false / checks: false = the token lacks that permission → 403 on those endpoints; issues: "read" = may
+    // list issues but not assign them
     setUser({ token, ...u }) {
-      const old = st.users[token] || { id: 2000 + Object.keys(st.users).length, push: true, expired: false };
+      const old = st.users[token] || { id: 2000 + Object.keys(st.users).length, push: true, expired: false, issues: true, checks: true };
       st.users[token] = Object.assign({}, old, u, { name: u.name || old.name || u.login || old.login });
       return userJson(st.users[token]);
+    },
+    // fork of the repository for a user: own branches, starting with a copy of the base branch (GitHub's default)
+    createFork({ login }) {
+      const full = login + "/" + st.repo;
+      if (!st.forks.has(full)) st.forks.set(full, { owner: login, full, refs: new Map([[st.base, st.refs.get(st.base)]]) });
+      return st.forks.get(full);
+    },
+    // someone commits on a fork branch (e.g. its main, so the fork can't be fast-forwarded any more) → { sha }
+    forkCommit({ login, branch, files, message }) {
+      const f = st.forks.get(login + "/" + st.repo);
+      if (!f) throw new ApiError(404, "no fork for " + login);
+      const b = branch || st.base, parent = f.refs.get(b);
+      const tree = Object.assign({}, treeFiles(parent));
+      for (const [pp, v] of Object.entries(files || {})) { if (v === null) delete tree[pp]; else tree[pp] = { sha: putBlob(toBuffer(v)), mode: "100644" }; }
+      const sha = putCommit({ tree: putTree(tree), parents: [parent], message: message || "Änderung im Fork", login });
+      f.refs.set(b, sha);
+      return { sha };
+    },
+    // branches of a fork → { name: sha } (null if the fork doesn't exist)
+    forkBranches({ login }) {
+      const f = st.forks.get(login + "/" + st.repo);
+      if (!f) return null;
+      const out = {}; for (const [k, v] of f.refs) out[k] = v; return out;
     },
     expireToken({ token }) { if (!st.users[token]) throw new ApiError(404, "unknown token"); st.users[token].expired = true; return { ok: true }; },
     // files on the base branch: { files: { path: text | {base64} }, fromDir: { root, paths: [file or folder, …] } }
@@ -247,10 +308,42 @@ function createFakeGitHub(options) {
       st.pulls.forEach((p) => { if (p.state === "open" && p.head.ref === name) { pullHeadSha(p); p.state = "closed"; p.closed_at = new Date().toISOString(); } });
       st.refs.delete(name); return { ok: true };
     },
-    // { head, base, title, body, login, headRepo ("someone/ifsmb.de" = from a fork) }
-    openPull({ head, base, title, body, login, headRepo }) {
-      const user = Object.values(st.users).find((u) => u.login === (login || st.owner)) || { login: login || st.owner, id: 1 };
-      return pullJson(openPullInternal({ head, base, title, body, user, headRepo }));
+    // { head, base, title, body, login, headRepo ("someone/ifsmb.de" = from a fork), draft, createdAt (ISO), labels }
+    openPull({ head, base, title, body, login, headRepo, draft, createdAt, labels }) {
+      const user = findUser(login || st.owner) || { login: login || st.owner, id: 1 };
+      return pullJson(openPullInternal({ head, base, title, body, user, headRepo, draft, createdAt, labels }));
+    },
+    // change a pull request: { number, draft?, title?, body?, labels?, mergeable? (true | false | null = "still
+    // computing"), mergeableState? ("clean" | "dirty" | "behind" | "blocked" | "unstable" | "unknown") } – without
+    // mergeable/mergeableState GET /pulls/:n computes them (conflict → dirty, failing checks → unstable, else clean)
+    setPull({ number, ...ch }) {
+      const pr = getPull(number);
+      for (const k of ["draft", "title", "body", "labels"]) if (k in ch) pr[k] = ch[k];
+      if ("mergeable" in ch) pr.mergeableOverride = ch.mergeable;
+      if ("mergeableState" in ch) pr.mergeableStateOverride = ch.mergeableState;
+      return pullJson(pr);
+    },
+    // checks of a commit: { number (its head) | ref | sha, checkRuns: [{ name, status: "queued" | "in_progress" |
+    // "completed", conclusion: "success" | "failure" | … }], statuses: [{ context, state: "success" | "failure" |
+    // "error" | "pending", description }] } – replaces the earlier checks of that commit
+    setChecks({ number, ref, sha, checkRuns = [], statuses = [] }) {
+      const s = checkSha({ number, ref, sha });
+      st.checks.set(s, { checkRuns: checkRuns.map((c, i) => Object.assign({ id: 9000 + i, status: "completed", conclusion: "success" }, c)),
+        statuses: statuses.map((x) => Object.assign({ state: "success", description: "" }, x)) });
+      return { sha: s };
+    },
+    // { title, body, login, labels: [name | { name, color }], assignees: [login], createdAt } → issue JSON
+    openIssue({ title, body, login, labels, assignees, createdAt }) {
+      const now = createdAt || new Date().toISOString();
+      const who = (l) => findUser(l) || { login: l, id: 3000 + l.length };
+      const i = { number: ++st.issueCounter, title: title || "Aufgabe", body: body || "", state: "open", user: who(login || st.owner),
+        labels: labels || [], assignees: (assignees || []).map(who), created_at: now, updated_at: now };
+      st.issues.push(i);
+      return issueJson(i);
+    },
+    closeIssue({ number }) {
+      const i = st.issues.find((x) => x.number === Number(number)); if (!i) throw new ApiError(404, "Not Found");
+      i.state = "closed"; i.closed_at = new Date().toISOString(); return issueJson(i);
     },
     // { number, method: "merge" | "squash", deleteBranch, login }
     mergePull({ number, method = "merge", deleteBranch = false, login }) {
@@ -301,11 +394,12 @@ function createFakeGitHub(options) {
     state() {
       const branches = {}; for (const [k, v] of st.refs) branches[k] = v;
       return {
-        owner: st.owner, repo: st.repo, base: st.base, branches,
+        owner: st.owner, repo: st.repo, base: st.base, branches, forks: [...st.forks.keys()],
         pulls: st.pulls.map((pr) => Object.assign(pullJson(pr), {
           login: pr.user.login, merged: !!pr.merged_at, commits: pullCommits(pr).length,
           files: pullFiles(pr).map((f) => ({ filename: f.filename, status: f.status, previous_filename: f.previous_filename, additions: f.additions, deletions: f.deletions }))
         })),
+        issues: st.issues.map((i) => Object.assign(issueJson(i), { assignees: i.assignees.map((a) => a.login), labels: labelsJson(i.labels).map((l) => l.name) })),
         requests: st.requests.length
       };
     },
@@ -328,7 +422,10 @@ function createFakeGitHub(options) {
   function needUser(req) { if (!req.user) throw new ApiError(401, "Requires authentication"); return req.user; }
   function needPush(req) {
     const u = needUser(req);
+    if (req.forkOwner) return u; // writing objects for the caller's own fork (forkRoute)
     if (!u.push) throw new ApiError(403, "Resource not accessible by personal access token");
+    // a fine-grained token only reaches its owner's repositories – a collaborator's role doesn't help (like GitHub)
+    if (u.fineGrained && u.login !== st.owner) throw new ApiError(403, "Resource not accessible by personal access token");
     return u;
   }
   function commitJson(sha) {
@@ -361,6 +458,8 @@ function createFakeGitHub(options) {
     if (method === "GET" && p === "/user") { const u = needUser(req); return [200, Object.assign(userJson(u), { name: u.name })]; }
     const m = p.match(/^\/repos\/([^/]+)\/([^/]+)(\/.*)?$/);
     if (!m) throw new ApiError(404, "Not Found");
+    const fork = st.forks.get(m[1] + "/" + m[2]);
+    if (fork) return forkRoute(req, method, fork, m[3] || "", q, body);
     if (m[1] !== st.owner || m[2] !== st.repo) throw new ApiError(404, "Not Found");
     const rest = m[3] || "";
     let x;
@@ -374,15 +473,72 @@ function createFakeGitHub(options) {
       const list = st.pulls.filter((pr) => state === "all" || pr.state === state).sort((a, b) => b.number - a.number);
       return [200, list.slice((page - 1) * per, page * per).map(pullJson)];
     }
+    if (method === "POST" && rest === "/forks") {
+      const u = needUser(req);
+      // a fine-grained token needs "Administration: write" (on the caller's account) to fork
+      if (u.fork === false) throw new ApiError(403, "Resource not accessible by personal access token");
+      return [202, forkJson(control.createFork({ login: u.login }))];
+    }
     if (method === "POST" && rest === "/pulls") {
-      const u = needPush(req);
+      const owner = /:/.test(String(body.head || "")) ? String(body.head).split(":")[0] : st.owner;
       const head = String(body.head || "").replace(/^[^:]+:/, "");
-      return [201, pullJson(openPullInternal({ head, base: body.base, title: body.title, body: body.body, user: u }))];
+      if (owner !== st.owner) {
+        // from a fork: anyone may open it on a public repository – but GitHub refuses fine-grained tokens of outside users
+        const u = needUser(req);
+        if (!u.classic && (!u.push || u.fineGrained)) throw new ApiError(403, "Resource not accessible by personal access token");
+        return [201, pullJson(openPullInternal({ head, headRepo: owner + "/" + st.repo, base: body.base, title: body.title, body: body.body, user: u, draft: body.draft }))];
+      }
+      const u = needPush(req);
+      return [201, pullJson(openPullInternal({ head, base: body.base, title: body.title, body: body.body, user: u, draft: body.draft }))];
     }
     if (method === "GET" && (x = rest.match(/^\/pulls\/(\d+)$/))) {
       const pr = getPull(x[1]), json = pullJson(pr);
-      if (pr.state === "open") json.mergeable = control.mergeable({ number: pr.number }).mergeable;
+      if (pr.state === "open") {
+        json.mergeable = "mergeableOverride" in pr ? pr.mergeableOverride : control.mergeable({ number: pr.number }).mergeable;
+        const c = checksOf(pullHeadSha(pr));
+        const failing = combinedState(c.statuses) === "failure" || c.checkRuns.some((r) => r.status === "completed" && r.conclusion !== "success" && r.conclusion !== "neutral" && r.conclusion !== "skipped");
+        json.mergeable_state = pr.mergeableStateOverride || (json.mergeable === null ? "unknown" : json.mergeable === false ? "dirty" : failing ? "unstable" : "clean");
+      } else { json.mergeable = null; json.mergeable_state = "unknown"; }
       return [200, json];
+    }
+    if (method === "GET" && (x = rest.match(/^\/commits\/([^/]+)\/(check-runs|status)$/))) {
+      const u = needUser(req);
+      const s = resolve(decodeURIComponent(x[1]));
+      if (!s) throw new ApiError(422, "No commit found for SHA: " + x[1]);
+      const c = checksOf(s);
+      if (x[2] === "check-runs") {
+        if (u.checks === false) throw new ApiError(403, "Resource not accessible by personal access token");
+        return [200, { total_count: c.checkRuns.length, check_runs: c.checkRuns.map((r) => Object.assign({ head_sha: s }, r)) }];
+      }
+      if (u.checks === false) throw new ApiError(403, "Resource not accessible by personal access token");
+      return [200, { state: combinedState(c.statuses), sha: s, total_count: c.statuses.length, statuses: c.statuses }];
+    }
+    if (method === "GET" && rest === "/issues") {
+      const u = needUser(req);
+      if (u.issues === false) throw new ApiError(403, "Resource not accessible by personal access token");
+      const state = q.get("state") || "open", per = Math.min(+q.get("per_page") || 30, 100), page = +q.get("page") || 1;
+      const all = st.issues.map((i) => ({ n: i.number, state: i.state, json: () => issueJson(i) }))
+        .concat(st.pulls.map((pr) => ({ n: pr.number, state: pr.state, json: () => pullAsIssueJson(pr) })))
+        .filter((i) => state === "all" || i.state === state).sort((a, b) => b.n - a.n);
+      return [200, all.slice((page - 1) * per, page * per).map((i) => i.json())];
+    }
+    if (method === "GET" && (x = rest.match(/^\/issues\/(\d+)$/))) {
+      const i = st.issues.find((y) => y.number === Number(x[1]));
+      if (i) return [200, issueJson(i)];
+      return [200, pullAsIssueJson(getPull(x[1]))];
+    }
+    if (method === "POST" && (x = rest.match(/^\/issues\/(\d+)\/assignees$/))) {
+      const u = needUser(req);
+      if (u.issues !== true || !u.push) throw new ApiError(403, "Resource not accessible by personal access token");
+      const i = st.issues.find((y) => y.number === Number(x[1]));
+      if (!i) throw new ApiError(404, "Not Found");
+      // like GitHub: people who may not be assigned (no write access) are silently left out
+      for (const l of body.assignees || []) {
+        const who = findUser(l);
+        if (who && who.push && !i.assignees.some((a) => a.login === l)) i.assignees.push(who);
+      }
+      i.updated_at = new Date().toISOString();
+      return [201, issueJson(i)];
     }
     if (method === "GET" && (x = rest.match(/^\/pulls\/(\d+)\/files$/))) {
       const per = Math.min(+q.get("per_page") || 30, 100), page = +q.get("page") || 1;
@@ -454,6 +610,58 @@ function createFakeGitHub(options) {
       if (!body.force && !isAncestor(st.refs.get(name), body.sha)) throw new ApiError(422, "Update is not a fast forward");
       st.refs.set(name, body.sha);
       st.pulls.forEach((pr) => { if (pr.state === "open" && pr.head.ref === name) { pr.headSha = body.sha; pr.updated_at = new Date().toISOString(); } });
+      return [200, { ref: "refs/heads/" + name, object: { sha: body.sha, type: "commit" } }];
+    }
+    throw new ApiError(404, "Not Found");
+  }
+
+  // ---------- forks: own branches, objects shared with the upstream repository (like GitHub's fork network) ----------
+  function forkJson(f) {
+    return { full_name: f.full, name: st.repo, owner: { login: f.owner }, fork: true, default_branch: st.base, private: false,
+      parent: repoJson(), source: repoJson(), permissions: { admin: true, maintain: true, push: true, triage: true, pull: true } };
+  }
+  function forkRoute(req, method, f, rest, q, body) {
+    const u = req.user;
+    const isOwner = u && u.login === f.owner;
+    let x;
+    if (method === "GET" && rest === "") {
+      const json = forkJson(f);
+      if (!isOwner) json.permissions = { admin: false, maintain: false, push: false, triage: false, pull: true };
+      return [200, json];
+    }
+    if (method === "GET" && (x = rest.match(/^\/git\/ref\/(heads\/.+)$/))) {
+      const name = decodePath(x[1]).replace(/^heads\//, "");
+      if (!f.refs.has(name)) throw new ApiError(404, "Not Found");
+      return [200, { ref: "refs/heads/" + name, object: { sha: f.refs.get(name), type: "commit" } }];
+    }
+    if (method === "GET" && /^\/git\/commits\/[0-9a-f]{40}$/.test(rest)) return route(req, method, "/repos/" + st.owner + "/" + st.repo + rest, q, body);
+    if (!isOwner) { needUser(req); throw new ApiError(403, "Resource not accessible by personal access token"); }
+    if (method === "POST" && rest === "/merge-upstream") {
+      const b = body.branch || st.base, up = st.refs.get(b), mine = f.refs.get(b);
+      if (!up) throw new ApiError(422, "Branch not found upstream");
+      if (mine === up) return [200, { message: "This branch is not behind the upstream", merge_type: "none", base_branch: st.owner + ":" + b }];
+      if (mine && !isAncestor(mine, up)) throw new ApiError(409, "There are merge conflicts");
+      f.refs.set(b, up);
+      return [200, { message: "Successfully fetched and fast-forwarded from upstream", merge_type: "fast-forward", base_branch: st.owner + ":" + b }];
+    }
+    if (method === "POST" && /^\/git\/(blobs|trees|commits)$/.test(rest))
+      return route(Object.assign({}, req, { forkOwner: true }), method, "/repos/" + st.owner + "/" + st.repo + rest, q, body);
+    if (method === "POST" && rest === "/git/refs") {
+      const ref = String(body.ref || "");
+      if (!/^refs\/heads\/.+/.test(ref)) throw new ApiError(422, "Reference name is invalid");
+      if (!obj(body.sha, "commit")) throw new ApiError(422, "Object does not exist");
+      const name = ref.replace(/^refs\/heads\//, "");
+      if (f.refs.has(name)) throw new ApiError(422, "Reference already exists");
+      f.refs.set(name, body.sha);
+      return [201, { ref, object: { sha: body.sha, type: "commit" } }];
+    }
+    if (method === "PATCH" && (x = rest.match(/^\/git\/refs\/heads\/(.+)$/))) {
+      const name = decodePath(x[1]);
+      if (!f.refs.has(name)) throw new ApiError(422, "Reference does not exist");
+      if (!obj(body.sha, "commit")) throw new ApiError(422, "Object does not exist");
+      if (!body.force && !isAncestor(f.refs.get(name), body.sha)) throw new ApiError(422, "Update is not a fast forward");
+      f.refs.set(name, body.sha);
+      st.pulls.forEach((pr) => { if (pr.state === "open" && pr.head.repo === f.full && pr.head.ref === name) { pr.headSha = body.sha; pr.updated_at = new Date().toISOString(); } });
       return [200, { ref: "refs/heads/" + name, object: { sha: body.sha, type: "commit" } }];
     }
     throw new ApiError(404, "Not Found");

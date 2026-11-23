@@ -10,7 +10,7 @@ partners: ["Zazza Moabit / Pajas Kaffee"]
 uuid: 21cd0b93-4266-4793-94d1-eb04c89ca797
 ---
 
-Wir feiern das Winterfest in der Kulturfabrik Moabit zusammen mit [35services](https://35services.de/), der Nachbarschaftswerkstatt im Haus. Auch unser Partner [Zazza]({{ '/partner/zazza/' | relative_url }}) vom Platz der Nachbarschaft ist mit dabei.
+Wir feiern das Winterfest in der Kulturfabrik Moabit zusammen mit [35services](https://35services.de/), der Nachbarschaftswerkstatt im Haus. Auch unser Partner [Zazza]({{ '/partners/zazza/' | relative_url }}) vom Platz der Nachbarschaft ist mit dabei.
 
 Mit dabei: 3D-Druck – wir zeigen vor Ort 3D-Drucker. Vielleicht drucken wir wieder Schneepersonen. [github.com/35services/3d/tree/main/weihnachten](https://github.com/35services/3d/tree/main/weihnachten)
 

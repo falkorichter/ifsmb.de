@@ -2,7 +2,7 @@
 title: "Erste Reparatur am Mogster: Portalzahnrad gebrochen"
 date: 2026-10-08 12:00:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
 uuid: 1b288b3d-c290-4ad8-a607-a3c5f335b1ea
 ---

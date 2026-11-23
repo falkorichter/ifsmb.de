@@ -4,7 +4,7 @@ Das Logo „Logo (Badge) als SVG“ (`../institut/ifsmb-logo-badge.svg`) als fla
 
 ![Badge](../../assets/badge/ifsmb-badge-oben.png) ![Badge mit Namen](../../assets/badge/ifsmb-badge-falko-oben.png)
 
-Auf der Website: [/presse/#badge](https://ifsmb.de/presse/#badge) (drehbares 3D-Modell, Downloads) und im Teamprofil jeder Person mit Badge.
+Auf der Website: [/press/#badge](https://ifsmb.de/press/#badge) (drehbares 3D-Modell, Downloads) und im Teamprofil jeder Person mit Badge.
 
 | Datei | Inhalt |
 |---|---|
@@ -61,4 +61,4 @@ cd _logo/badge
 python3 export_colored.py "Vorname"      # -> assets/badge/ifsmb-badge-vorname.*
 ```
 
-Dann in `_data/badges.yml` eintragen (`aufschrift`, `datei`, optional `team` = Team-Kürzel → erscheint im Teamprofil).
+Dann in `_data/badges.yml` eintragen (`label`, `file`, optional `team` = Team-Kürzel → erscheint im Teamprofil).

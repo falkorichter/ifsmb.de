@@ -1,0 +1,44 @@
+---
+search: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Kalender
+i18n_title: pages.calendar.title
+i18n_lead: pages.calendar.lead
+lead: Workshops, offene Werkstatt-Termine und alles, wo man vorbeikommen kann.
+---
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+{%- comment -%}Personal events (persoenlich: true) only appear in the team profile.{%- endcomment -%}
+{%- assign sorted = site.events | where_exp: "e", "e.personal != true" | sort: "start" -%}
+{%- assign upcoming = "" | split: "" -%}
+{%- assign past = "" | split: "" -%}
+{%- for e in sorted -%}
+  {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
+  {%- if end_s >= now_s %}{% assign upcoming = upcoming | push: e %}{% else %}{% assign past = past | unshift: e %}{% endif -%}
+{%- endfor -%}
+
+<div class="cal-heading-abo">
+  <h2 class="cal-heading" data-i18n="calendar.upcoming">{{ "calendar.upcoming" | t }}</h2>
+  {% include kalender-abo.html ics="/calendar.ics" title_key="calendar.title_institute" %}
+</div>
+<ul class="event-list" id="events-upcoming">
+  {%- for e in upcoming %}{% include termin-karte.html event=e versteckt=e.project_only %}{% endfor %}
+</ul>
+{%- assign upcoming_public = upcoming | where_exp: "e", "e.project_only != true" -%}
+<p class="muted" id="events-none"{% if upcoming_public.size > 0 %} hidden{% endif %} data-i18n="calendar.none">{{ "calendar.none" | t }}</p>
+
+<h2 class="cal-heading" id="past-heading"{% if past.size == 0 %} hidden{% endif %} data-i18n="calendar.past">{{ "calendar.past" | t }}</h2>
+<ul class="event-list event-list-past" id="events-past">
+  {%- for e in past %}{% include termin-karte.html event=e %}{% endfor %}
+</ul>
+
+<script>
+  (function () {
+    var now = Date.now() / 1000, up = document.getElementById('events-upcoming'), past = document.getElementById('events-past');
+    Array.prototype.slice.call(up.children).reverse().forEach(function (li) {
+      if (+li.dataset.end < now) { li.hidden = false; past.insertBefore(li, past.firstChild); }
+    });
+    // project-only events stay hidden while upcoming
+    document.getElementById('events-none').hidden = up.querySelectorAll('li:not([hidden])').length > 0;
+    document.getElementById('past-heading').hidden = past.children.length === 0;
+  })();
+</script>

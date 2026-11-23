@@ -3,5 +3,5 @@ layout: null
 sitemap: false
 suche: false
 ---
-{%- assign feed_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" -%}
+{%- assign feed_posts = site.posts | where_exp: "p", "p.personal != true" | where_exp: "p", "p.project_only != true" -%}
 {%- include atom-feed.xml titel=site.title self="/feed.xml" alt="/news/" beitraege=feed_posts limit=20 -%}

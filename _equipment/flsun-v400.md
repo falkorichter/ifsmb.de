@@ -1,6 +1,6 @@
 ---
 title: FLSUN V400
-kategorie: 3D-Drucker (Delta, FDM)
+category: 3D-Drucker (Delta, FDM)
 status: in-aussicht
 summary: Ein schneller Delta-Drucker mit rundem Druckbett – den bekommen wir vielleicht.
 owner_name: pebcak

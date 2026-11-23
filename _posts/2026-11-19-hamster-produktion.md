@@ -3,7 +3,7 @@ title: Hamster Produktion 🐹
 date: 2026-11-19 07:32:00 +0100
 author: falko-richter
 tags: [ktg]
-verlinkt: [/ausstattung/snapmaker-u1/]
+linked: [/equipment/snapmaker-u1/]
 social_media_preview_image: /assets/images/news/hamster-produktion/01-social.jpg
 uuid: 5354c359-9a30-4d0b-8840-6179af874bbe
 ---

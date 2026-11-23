@@ -2,20 +2,20 @@
 title: "augenrahmen – 3D-gedruckte Brillen aus Moabit"
 summary: Brillenfassungen aus dem 3D-Drucker – individuell angepasst, auf Abruf in Berlin gedruckt und aus einem Biopolymer, das im Boden vollständig zerfällt.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2022-01-01
-zeitraum: seit Januar 2022
-ort: Berlin-Moabit
+period: seit Januar 2022
+location: Berlin-Moabit
 event_tag: augenrahmen
 tags: [augenrahmen, 3d-drucker, pha]
 team:
   - alexander-riedel
-verlinkt:
-  - /projekte/3d-druck-ag-ktg/
-  - /projekte/3d-druck-ag-rosalind-franklin-gymnasium/
-  - /kalender/2026-10-05-augenrahmen-zu-besuch-in-der-ag/
-  - /kalender/2026-10-06-augenrahmen-rosalind/
-  - /projekte/nonplanarer-druck/#impasto
+linked:
+  - /projects/3d-druck-ag-ktg/
+  - /projects/3d-druck-ag-rosalind-franklin-gymnasium/
+  - /calendar/2026-10-05-augenrahmen-zu-besuch-in-der-ag/
+  - /calendar/2026-10-06-augenrahmen-rosalind/
+  - /projects/nonplanarer-druck/#impasto
 image: /assets/images/projekte/augenrahmen/01.jpg
 uuid: 52931a75-f8b0-44ae-8fc8-e1542f29e662
 ---
@@ -46,10 +46,10 @@ Seit Herbst 2026 ist das Produkt am Markt. Wer eine Fassung anschauen möchte, k
 
 ## In der Schule
 
-Im Oktober 2026 war Alexander zu Gast in den 3D-Druck-AGs der [Kurt-Tucholsky-Grundschule]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) und des [Rosalind-Franklin-Gymnasiums]({{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) und hat gezeigt, wie aus einem Drucker ein Gegenstand wird, den man wirklich trägt – inklusive der Frage, was passiert, wenn man draufsetzt.
+Im Oktober 2026 war Alexander zu Gast in den 3D-Druck-AGs der [Kurt-Tucholsky-Grundschule]({{ '/projects/3d-druck-ag-ktg/' | relative_url }}) und des [Rosalind-Franklin-Gymnasiums]({{ '/projects/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}) und hat gezeigt, wie aus einem Drucker ein Gegenstand wird, den man wirklich trägt – inklusive der Frage, was passiert, wenn man draufsetzt.
 
-- [Alexander Riedel zu Besuch in der 3D-Druck AG an der KTG]({{ '/kalender/2026-10-05-augenrahmen-zu-besuch-in-der-ag/' | relative_url }})
-- [Alexander Riedel zu Besuch in der 3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/kalender/2026-10-06-augenrahmen-rosalind/' | relative_url }})
+- [Alexander Riedel zu Besuch in der 3D-Druck AG an der KTG]({{ '/calendar/2026-10-05-augenrahmen-zu-besuch-in-der-ag/' | relative_url }})
+- [Alexander Riedel zu Besuch in der 3D-Druck AG am Rosalind-Franklin-Gymnasium]({{ '/calendar/2026-10-06-augenrahmen-rosalind/' | relative_url }})
 
 ## Was noch offen ist
 

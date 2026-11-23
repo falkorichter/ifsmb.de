@@ -4,7 +4,7 @@
   (loaded from /source/_data/slogans.yml, see _plugins/source_files.rb) plus the new entry
   on the clipboard and opens GitHub's editor for the file. Without JS only the GitHub link remains.
 {%- endcomment -%}
-{%- assign kontakt = site.data.presse -%}
+{%- assign kontakt = site.data.press -%}
 <div class="slogan-editor card" id="slogan-vorschlagen" data-pagefind-ignore
      data-source="{{ '/source/_data/slogans.yml' | relative_url }}"
      data-datei="_data/slogans.yml">
@@ -27,7 +27,7 @@
   </p>
   <p class="slogan-editor-status small" role="status"></p>
   <pre class="slogan-editor-fallback" hidden></pre>
-  <p class="small muted">Kein GitHub-Konto? Schick uns deinen Slogan per E-Mail an <a href="#" class="obf-mail" data-em="{{ kontakt.kontakt_email_b64 }}">{{ kontakt.kontakt_email_anzeige }}</a>.</p>
+  <p class="small muted">Kein GitHub-Konto? Schick uns deinen Slogan per E-Mail an <a href="#" class="obf-mail" data-em="{{ kontakt.contact_email_b64 }}">{{ kontakt.contact_email_display }}</a>.</p>
   <details class="slogan-editor-liste">
     <summary>Alle {{ site.data.slogans | size }} bisherigen Slogans</summary>
     <ul>

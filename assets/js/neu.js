@@ -1,7 +1,7 @@
 // "➕ new" forms: one pop-up per resource type, built from the schemas in TYPEN with the building blocks of
 // assets/js/formular.js (chip fields with autocomplete, dialog, YAML). Loaded on the first click on a ➕ link
 // (_includes/neu-buttons.html). Each link carries data-neu = { typ, label, hinweis, werte } – werte is the connection
-// to the current page (author, team, tags, projekte …). Without JS the link opens GitHub with the full template.
+// to the current page (author, team, tags, projects …). Without JS the link opens GitHub with the full template.
 // The form writes the new file (front matter + Markdown, or plain YAML), shows it live, keeps a draft in
 // localStorage and creates it through GitHub's "new file" editor (→ pull request).
 // NeuFormular.datei(typ, werte) builds a file without DOM – used by the tests (_scripts/test_formulare.rb).
@@ -14,6 +14,12 @@
 var NeuFormular = (function () {
   "use strict";
   var F = typeof Formular !== "undefined" ? Formular : require("./formular.js");
+  // UI strings (assets/js/i18n.js, keys form.* / github.* in _data/i18n/*.yml) with the German text as fallback.
+  // Not yet translated: field labels/hints of the schemas below, photo slots, conflict boxes, most status lines.
+  var t = F.t;
+  var TYPE_KEYS = { beitrag: "post", termin: "event", projekt: "project", "projekt-vergangen": "past_project", geraet: "device",
+    herausforderung: "challenge", team: "team_profile", presse: "press_release", partner: "partner", pressebericht: "press_report" };
+  function typeName(typ, schema) { return TYPE_KEYS[typ] ? t("form.types." + TYPE_KEYS[typ], null, schema.titel) : schema.titel; }
   var esc = F.esc;
 
   // ---------- field factories ----------
@@ -33,13 +39,72 @@ var NeuFormular = (function () {
   function titel(platzhalter, x) { return text("title", "Titel", Object.assign({ pflicht: true, platzhalter: platzhalter, klasse: "form-feld-titel" }, x)); }
   function inhalt(platzhalter, x) { return feld("langtext", "text", "Text (Markdown)", Object.assign({ intern: true, markdown: true, zeilen: 10, platzhalter: platzhalter }, x)); }
 
+  // ---------- HTML/Liquid check for the HTML field of overview pages (#154) ----------
+  // A small sanity check, not a full parser: Liquid blocks ({% if %} … {% endif %}) and output ({{ … }}) must be closed,
+  // HTML elements must be closed in the right order. Elements HTML lets you leave open (p, li, td …) are fine.
+  // → German message for the status line, or null.
+  var LIQUID_BLOCKS = ["if", "unless", "case", "for", "capture", "comment", "raw", "tablerow"];
+  var VOID_ELEMENTS = /^(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)$/i;
+  var OPTIONAL_END = /^(p|li|dt|dd|option|optgroup|tr|td|th|thead|tbody|tfoot|colgroup|rb|rt|rp)$/i;
+  function lineAt(src, i) { return src.slice(0, i).split("\n").length; }
+  function blank(s) { return s.replace(/[^\n]/g, " "); } // same length and line breaks – positions stay right
+  function checkHtml(src) {
+    src = String(src || "");
+    var stack = [], m, re = /\{%-?\s*(end)?(\w+)[\s\S]*?-?%\}/g, skip = null;
+    // unclosed {% … %} / {{ … }}
+    for (var i = 0; (i = src.indexOf("{%", i)) >= 0; i += 2) if (src.indexOf("%}", i) < 0) return "Liquid-Tag „{%“ in Zeile " + lineAt(src, i) + " wird nicht mit „%}“ geschlossen.";
+    for (i = 0; (i = src.indexOf("{{", i)) >= 0; i += 2) {
+      var end = src.indexOf("}}", i), next = src.indexOf("{{", i + 2);
+      if (end < 0 || (next >= 0 && next < end)) return "Liquid-Ausgabe „{{“ in Zeile " + lineAt(src, i) + " wird nicht mit „}}“ geschlossen.";
+    }
+    while ((m = re.exec(src))) {
+      var name = m[2], isEnd = !!m[1];
+      if (skip) { if (isEnd && name === skip) { skip = null; stack.pop(); } continue; }
+      if (!isEnd && LIQUID_BLOCKS.indexOf(name) >= 0) {
+        stack.push({ name: name, line: lineAt(src, m.index) });
+        if (name === "comment" || name === "raw") skip = name;
+      } else if (isEnd && LIQUID_BLOCKS.indexOf(name) >= 0) {
+        var top = stack.pop();
+        if (!top) return "„{% end" + name + " %}“ in Zeile " + lineAt(src, m.index) + " hat keinen Anfang.";
+        if (top.name !== name) return "„{% end" + name + " %}“ in Zeile " + lineAt(src, m.index) + " passt nicht – offen ist „{% " + top.name + " %}“ aus Zeile " + top.line + ".";
+      }
+    }
+    if (stack.length) { var last = stack[stack.length - 1]; return "„{% " + last.name + " %}“ aus Zeile " + last.line + " wird nicht mit „{% end" + last.name + " %}“ geschlossen."; }
+    // HTML: Liquid, comments and script/style contents blanked out, then the tags in order
+    var html = src.replace(/\{%-?\s*comment[\s\S]*?endcomment\s*-?%\}|\{%[\s\S]*?%\}|\{\{[\s\S]*?\}\}|<!--[\s\S]*?-->/g, blank)
+      .replace(/(<(script|style)\b[^>]*>)([\s\S]*?)(<\/\2\s*>)/gi, function (all, a, tag, body, b) { return a + blank(body) + b; });
+    var tags = [], t = /<(\/?)([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^'">])*)>/g;
+    while ((m = t.exec(html))) {
+      var tag = m[2].toLowerCase(), line = lineAt(html, m.index);
+      if (!m[1]) {
+        if (VOID_ELEMENTS.test(tag) || /\/\s*$/.test(m[3])) continue;
+        if (OPTIONAL_END.test(tag) && tags.length && tags[tags.length - 1].tag === tag) tags.pop(); // <li>…<li>
+        tags.push({ tag: tag, line: line });
+        continue;
+      }
+      if (VOID_ELEMENTS.test(tag)) continue;
+      var at = -1;
+      for (var k = tags.length - 1; k >= 0; k--) { if (tags[k].tag === tag) { at = k; break; } if (!OPTIONAL_END.test(tags[k].tag)) break; }
+      if (at < 0) {
+        var openTop = tags[tags.length - 1];
+        return "„</" + tag + ">“ in Zeile " + line + " passt nicht" + (openTop ? " – offen ist „<" + openTop.tag + ">“ aus Zeile " + openTop.line : " – dazu gibt es kein „<" + tag + ">“") + ".";
+      }
+      tags.length = at;
+    }
+    var left = tags.filter(function (x) { return !OPTIONAL_END.test(x.tag); }).pop(); // the innermost one
+    return left ? "„<" + left.tag + ">“ aus Zeile " + left.line + " wird nicht geschlossen." : null;
+  }
+
   // fields that many types share
   var stichworte = function (x) { return chips("tags", "🏷️ Stichworte", "stichworte", Object.assign({ platzhalter: "Stichwort suchen oder neu …" }, x)); };
-  var verlinkt = function () { return chips("verlinkt", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "seiten", { platzhalter: "Seite suchen oder /adresse/ …" }); };
+  var verlinkt = function () { return chips("linked", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "seiten", { platzhalter: "Seite suchen oder /adresse/ …" }); };
   var leute = function (name, label, x) { return chips(name, label, "personen", Object.assign({ platzhalter: "Name aus dem Team …" }, x)); };
   var partner = function (name, label, x) { return chips(name, label, "partner", Object.assign({ platzhalter: "Partner suchen …" }, x)); };
   var projekte = function (name, label, x) { return chips(name, label, "projekte", Object.assign({ platzhalter: "Projekt suchen …" }, x)); };
-  var persoenlich = function (hilfe) { return haken("persoenlich", "Persönlich", { hilfe: hilfe }); };
+  var persoenlich = function (hilfe) { return haken("personal", "Persönlich", { hilfe: hilfe }); };
+  // look of the page (_data/themes.yml, assets/css/themes.css); "" = the site's default
+  var THEMES = [["", "Wie die ganze Website"], ["ifsmb", "IfsMB (Standard)"], ["offene-werkstaetten", "Offene Werkstätten"], ["rfflabs", "RFFLabs"], ["slop", "Slop ✨"]];
+  var themeField = function () { return auswahl("theme", "🎨 Theme (Aussehen)", THEMES, { mehr: true, hilfe: "Besucher*innen können unten auf der Seite trotzdem selbst wählen" }); };
   var socialBild = function () { return text("social_media_preview_image", "Social-Media-Vorschaubild (1200×630 px)", { mehr: true, platzhalter: "/assets/images/og-….jpg – leer = erstes Bild oder Standard" }); };
 
   // ---------- values ----------
@@ -57,7 +122,7 @@ var NeuFormular = (function () {
   }
   function ohneT(v) { return v ? v.replace("T", " ").slice(0, 16) : ""; }
   function tag(v) { return String(v || "").slice(0, 10); }
-  // one value as a plain scalar, several as a list (author, standort_partner – single-value fields in .pages.yml)
+  // one value as a plain scalar, several as a list (author, location_partner – single-value fields in .pages.yml)
   function einerOderListe(v) { return v && v.length === 1 ? v[0] : v; }
   // free text into a list (owner_name is `list: true` in .pages.yml)
   function alsEintrag(v) { return v ? [v] : ""; }
@@ -75,18 +140,19 @@ var NeuFormular = (function () {
       titel("Name des Projekts"),
       text("summary", "Kurzbeschreibung (Projektkarte)", { platzhalter: "Ein bis zwei Sätze, worum es geht" }),
       [auswahl("status", "Status", STATUS_PROJEKT), datum("start", "Start", { pflicht: true, standard: F.heute, hilfe: "wird zum Sortieren genutzt" }),
-        text("zeitraum", "Zeitraum", { platzhalter: "z. B. Herbst 2026", folgt: function (w) { return w.status === "abgeschlossen" || !w.start ? "" : "seit " + w.start.slice(0, 4); } })],
-      [text("ort", "Ort", { platzhalter: "z. B. Kurt-Tucholsky-Grundschule, Moabit – keine Wohnadressen" }),
+        text("period", "Zeitraum", { platzhalter: "z. B. Herbst 2026", folgt: function (w) { return w.status === "abgeschlossen" || !w.start ? "" : "seit " + w.start.slice(0, 4); } })],
+      [text("location", "Ort", { platzhalter: "z. B. Kurt-Tucholsky-Grundschule, Moabit – keine Wohnadressen" }),
         text("event_tag", "Eigenes Stichwort (event_tag)", { folgt: function (w) { return F.slugify(w.title); }, hilfe: "Beiträge und Termine mit diesem Stichwort erscheinen auf der Projektseite – nie ein allgemeines wie 35services" })],
       leute("team", "👥 Beteiligte"),
       partner("partners", "🤝 Partner"),
-      projekte("teil_von", "🧩 Teil von", { hilfe: "Nur für Teilprojekte – erscheinen dann nicht in den Übersichten" }),
-      projekte("verwandt", "↔️ Verwandte Projekte", { mehr: true }),
+      projekte("part_of", "🧩 Teil von", { hilfe: "Nur für Teilprojekte – erscheinen dann nicht in den Übersichten" }),
+      projekte("related", "↔️ Verwandte Projekte", { mehr: true }),
       verlinkt(),
       persoenlich("Privates Projekt aus dem Team: nur im Teamprofil, nicht in den Listen des Instituts"),
       inhalt("Ziel, Stand, was gebraucht wird …"),
       text("image", "Titelbild", { mehr: true, platzhalter: "/assets/images/projekte/<name>/01.jpg – ohne Metadaten" }),
-      socialBild()
+      socialBild(),
+      themeField()
     ];
   }
   var TYPEN = {
@@ -103,7 +169,8 @@ var NeuFormular = (function () {
         inhalt("Text in Markdown. Fotos als Galerie: ![Was zu sehen ist](/assets/images/news/<dateiname>/01.jpg) und darunter {: .gallery}"),
         adresse("original_url", "Original-Adresse", { mehr: true, hilfe: "nur bei übernommenen Beiträgen" }),
         text("original_site", "Original-Website", { mehr: true, platzhalter: "z. B. 35services.de" }),
-        socialBild()
+        socialBild(),
+        themeField()
       ]
     },
     termin: {
@@ -117,15 +184,16 @@ var NeuFormular = (function () {
         [text("location", "Ort", { platzhalter: "Ort, Straße (keine Wohnadressen)" }), adresse("location_url", "Link zum Ort")],
         text("summary", "Kurzbeschreibung (Terminliste & iCal)"),
         leute("team", "👥 Dabei", { hilfe: "nur wer wirklich da ist/war" }),
-        projekte("projekte", "🔧 Projekte"),
+        projekte("projects", "🔧 Projekte"),
         stichworte(),
         partner("partners", "🤝 Partner"),
         verlinkt(),
         [persoenlich("Privater Termin aus dem Team (braucht „Dabei“): nur im Teamprofil"),
-          haken("nur_projekt", "Nur auf der Projektseite", { hilfe: "interner Termin: vorher nicht im Kalender, danach normal" })],
+          haken("project_only", "Nur auf der Projektseite", { hilfe: "interner Termin: vorher nicht im Kalender, danach normal" })],
         inhalt("Was passiert, wer kann kommen, was mitbringen …"),
         text("date_label", "Text statt Datum", { mehr: true, platzhalter: "z. B. „Januar 2027 – genauer Termin folgt“" }),
-        socialBild()
+        socialBild(),
+        themeField()
       ]
     },
     projekt: {
@@ -147,46 +215,48 @@ var NeuFormular = (function () {
       datei: function (w) { return F.slugify(w.title, "hersteller-modell") + ".md"; },
       felder: [
         titel("Hersteller Modell"),
-        [text("kategorie", "Kategorie", { liste: "kategorien", platzhalter: "z. B. 3D-Drucker" }),
+        [text("category", "Kategorie", { liste: "kategorien", platzhalter: "z. B. 3D-Drucker" }),
           auswahl("status", "Status", [["", "Im Einsatz"], ["in-aussicht", "🔭 In Aussicht"], ["im-test", "🧪 Im Test"], ["in-reparatur", "🔧 In Reparatur"]])],
         text("summary", "Kurzbeschreibung", { platzhalter: "Was das Gerät kann und wofür wir es nutzen" }),
         leute("owner_team", "🔑 Gehört (Team)"),
         partner("owner_partner", "🔑 Gehört (Partner)"),
         text("owner_name", "🔑 Gehört (andere)", { platzhalter: "freier Name", ausgabe: alsEintrag }),
-        [text("standort", "Standort", { platzhalter: "z. B. KTG, Raum 101" }),
-          partner("standort_partner", "📍 Steht bei Partner", { einzeln: true, ausgabe: einerOderListe })],
+        [text("location", "Standort", { platzhalter: "z. B. KTG, Raum 101" }),
+          partner("location_partner", "📍 Steht bei Partner", { einzeln: true, ausgabe: einerOderListe })],
         stichworte({ hilfe: "Gerät, Gerätetyp, Besitzer*in, z. B. bambu-lab-a1-mini, 3d-drucker" }),
         verlinkt(),
         inhalt("Was das Gerät kann, Erfahrungen, Tipps …"),
         text("image", "Foto", { mehr: true, platzhalter: "eigenes Foto ohne Metadaten – keine Hersteller- oder Shopfotos" }),
         text("image_alt", "Beschreibung des Fotos", { mehr: true }),
         haken("image_is_illustration", "Foto ist eine eigene SVG-Illustration", { mehr: true }),
-        socialBild()
+        socialBild(),
+        themeField()
       ],
       pruefe: function (w) {
         if (!(w.owner_team || []).length && !(w.owner_partner || []).length && !w.owner_name) return "Wem gehört das Gerät? Bitte mindestens eine Besitzer*in eintragen – das Institut besitzt selbst nichts.";
       }
     },
     herausforderung: {
-      titel: "Herausforderung", ordner: "_herausforderungen",
+      titel: "Herausforderung", ordner: "_challenges",
       datei: function (w) { return F.slugify(w.title, "kurzer-name") + ".md"; },
       felder: [
         titel("Was ist die Herausforderung? (kurz, gern als Frage)"),
         text("summary", "Kurz (ein Satz für die Karte)"),
-        [auswahl("art", "Art", [["frage", "❓ Frage"], ["aufgabe", "📋 Aufgabe"], ["problem", "⚠️ Problem"]]),
+        [auswahl("kind", "Art", [["frage", "❓ Frage"], ["aufgabe", "📋 Aufgabe"], ["problem", "⚠️ Problem"]]),
           auswahl("status", "Status", [["offen", "Offen"], ["in-arbeit", "In Arbeit"], ["geloest", "Gelöst"]]),
-          datum("seit", "Seit", { standard: F.heute })],
-        [haken("wichtig", "Wichtig", { hilfe: "allein 📌 einplanen, mit dringend 🔥 sofort" }),
-          haken("dringend", "Dringend", { hilfe: "allein 🤝 abgeben, keins von beiden 💤 später" })],
+          datum("since", "Seit", { standard: F.heute })],
+        [haken("important", "Wichtig", { hilfe: "allein 📌 einplanen, mit dringend 🔥 sofort" }),
+          haken("urgent", "Dringend", { hilfe: "allein 🤝 abgeben, keins von beiden 💤 später" })],
         leute("team", "👥 Zuständig"),
-        projekte("projekte", "🔧 Projekte"),
+        projekte("projects", "🔧 Projekte"),
         stichworte(),
         verlinkt(),
         persoenlich("Aus einem privaten Projekt im Team"),
         inhalt("Was ist das Problem, was wurde schon probiert, was wird gebraucht?"),
-        datum("geloest_am", "Gelöst am", { mehr: true }),
-        feld("langtext", "loesung", "Lösung (Markdown)", { mehr: true, markdown: true, zeilen: 4 }),
-        socialBild()
+        datum("solved_on", "Gelöst am", { mehr: true }),
+        feld("langtext", "solution", "Lösung (Markdown)", { mehr: true, markdown: true, zeilen: 4 }),
+        socialBild(),
+        themeField()
       ]
     },
     team: {
@@ -196,11 +266,12 @@ var NeuFormular = (function () {
         text("title", "Name", { pflicht: true, platzhalter: "Vorname Nachname", klasse: "form-feld-titel", hilfe: "Der Dateiname wird das Team-Kürzel für team, author, owner_team" }),
         [text("role", "Rolle", { platzhalter: "z. B. hilft in der KTG-AG" }), zahl("order", "Reihenfolge", { standard: "50", hilfe: "kleiner = weiter vorne" })],
         verlinkt(),
-        haken("nicht_im_team", "Nicht auf /team/ auflisten (nur eigene Seite zum Verlinken)"),
+        haken("not_in_team", "Nicht auf /team/ auflisten (nur eigene Seite zum Verlinken)"),
         inhalt("Was die Person macht und womit sie im Makespace hilft – keine Wohnadresse, keine privaten E-Mail-Adressen"),
         text("photo", "Foto", { mehr: true, platzhalter: "/assets/images/team/<kürzel>-480w.jpg – nur mit Erlaubnis" }),
         text("photo_credit", "Bildnachweis", { mehr: true, hilfe: "Pflicht bei Fremdfotos (Presse, Agentur)" }),
-        socialBild()
+        socialBild(),
+        themeField()
       ]
     },
     presse: {
@@ -212,8 +283,9 @@ var NeuFormular = (function () {
         stichworte(),
         verlinkt(),
         inhalt("**Berlin, Datum** – Erster Absatz mit dem Wichtigsten: wer, was, wann, wo, warum."),
-        text("contact_name", "Pressekontakt", { mehr: true, hilfe: "leer = Pressekontakt aus _data/presse.yml" }),
-        socialBild()
+        text("contact_name", "Pressekontakt", { mehr: true, hilfe: "leer = Pressekontakt aus _data/press.yml" }),
+        socialBild(),
+        themeField()
       ]
     },
     partner: {
@@ -226,18 +298,48 @@ var NeuFormular = (function () {
         adresse("instagram", "Instagram", { mehr: true }),
         text("logo", "Logo", { mehr: true, platzhalter: "/assets/images/partner/<name>.png" }),
         haken("logo_dark", "Logo hat helle Elemente (dunkler Hintergrund)", { mehr: true }),
-        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partner/<name>/", hilfe: "Nur unsere eigene Unterseite (partner/<name>/index.md) – die Website des Partners gehört oben in „Website“." })
+        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partners/<name>/", hilfe: "Nur unsere eigene Unterseite (partners/<name>/index.md) – die Website des Partners gehört oben in „Website“." })
       ]
     },
-    pressebericht: {
-      titel: "Wir in der Presse", ordner: "_data/pressebericht", format: "yaml",
-      datei: function (w) { return (w.datum ? w.datum + "-" : "") + F.slugify(w.medium, "medium") + ".yml"; },
+    // Pages outside the collections, edit only (_plugins/source_files.rb sets page.edit_form, #154).
+    // Markdown pages (partners/<name>/index.md, angebot/, spenden/ …): title, lead, links, text.
+    seite: {
+      titel: "Seite", ordner: "",
+      datei: function (w) { return F.slugify(w.title, "name-der-seite") + ".md"; },
       felder: [
-        text("titel", "Überschrift des Berichts", { pflicht: true, klasse: "form-feld-titel" }),
-        [text("medium", "Medium", { pflicht: true, platzhalter: "Zeitung, Website oder Kanal" }), datum("datum", "Erschienen am", { standard: F.heute })],
+        titel("Titel der Seite"),
+        text("lead", "Unterzeile", { platzhalter: "Ein Satz unter dem Titel" }),
+        verlinkt(),
+        inhalt("Text der Seite in Markdown"),
+        socialBild(),
+        themeField()
+      ]
+    },
+    // HTML overview pages (team/, partner/, projekte/ …): only the front matter – the HTML with its lists stays as it
+    // is and is not shown in the form.
+    uebersicht: {
+      titel: "Übersichtsseite", ordner: "",
+      datei: function (w) { return F.slugify(w.title, "name-der-seite") + ".html"; },
+      felder: [
+        titel("Titel der Seite"),
+        text("lead", "Unterzeile", { platzhalter: "Ein Satz unter dem Titel" }),
+        feld("langtext", "text", "🧑‍💻 HTML der Seite", { intern: true, mehr: true, code: true, zeilen: 18, klasse: "form-field-code",
+          hilfe: "Für Mutige: Listen und Karten entstehen aus Liquid ({% for %} …). Vor dem Speichern wird geprüft, ob alle HTML-Tags und Liquid-Blöcke geschlossen sind." }),
+        socialBild(),
+        themeField()
+      ],
+      // only check the HTML when it was changed – a title change must never be blocked by the checker
+      pruefe: function (w) { return aktiv && aktiv.edit && w.text === aktiv.edit.w0.text ? null : checkHtml(w.text); }
+    },
+    pressebericht: {
+      titel: "Wir in der Presse", ordner: "_data/press_report", format: "yaml",
+      datei: function (w) { return (w.date ? w.date + "-" : "") + F.slugify(w.medium, "medium") + ".yml"; },
+      felder: [
+        text("title", "Überschrift des Berichts", { pflicht: true, klasse: "form-feld-titel" }),
+        [text("medium", "Medium", { pflicht: true, platzhalter: "Zeitung, Website oder Kanal" }), datum("date", "Erschienen am", { standard: F.heute })],
         adresse("url", "Link zum Bericht", { pflicht: true, hilfe: "ohne Tracking-Parameter (?si=, utm_ …)" }),
-        chips("anlass", "🔗 Anlass (eigene Seite)", "seiten", { einzeln: true, ausgabe: einerOderListe, platzhalter: "Termin oder Beitrag suchen …" }),
-        text("hinweis", "Hinweis", { platzhalter: "erscheint in Klammern hinter dem Eintrag" })
+        chips("occasion", "🔗 Anlass (eigene Seite)", "seiten", { einzeln: true, ausgabe: einerOderListe, platzhalter: "Termin oder Beitrag suchen …" }),
+        text("note", "Hinweis", { platzhalter: "erscheint in Klammern hinter dem Eintrag" })
       ]
     }
   };
@@ -368,7 +470,11 @@ var NeuFormular = (function () {
       if (original.length && original[original.length - 1].key === "uuid") i = blocks.length - 1;
       blocks.splice(i, 0, line);
     });
-    var rest = w.text === edit.w0.text ? edit.file.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
+    // a changed body keeps the file's own spacing after "---" (Markdown: an empty line, index.html: none) and the
+    // indentation of its first line – only line breaks around it are dropped, like readSource does
+    var body = String(w.text).replace(/^\n+/, "").replace(/\s+$/, ""), gap = (edit.file.rest.match(/^\n*/)[0] || "") || "\n\n";
+    if (!/\S/.test(edit.file.rest)) gap = "\n\n";
+    var rest = w.text === edit.w0.text ? edit.file.rest : body ? gap + body + "\n" : "\n";
     return F.joinFile(blocks, rest);
   }
   // Without DOM: the file after changing some values (tests). → { content, rawFields, values }
@@ -398,21 +504,21 @@ var NeuFormular = (function () {
 
   // ---------- dialog ----------
   function baueDialog() {
-    d = F.dialog({ id: "neu-dialog", klasse: "neu-dialog", kopf: '<a class="neu-vorlage small" data-vorlage target="_blank" rel="noopener">Vorlage mit allen Feldern ↗</a>' });
+    d = F.dialog({ id: "neu-dialog", klasse: "neu-dialog", kopf: '<a class="neu-vorlage small" data-vorlage target="_blank" rel="noopener"></a>' });
     d.insertAdjacentHTML("beforeend",
       '<form class="neu-form" autocomplete="off">'
       + '<div class="neu-spalten"><div class="neu-links"><p class="neu-hinweis muted small"></p><div class="neu-felder"></div>'
-      + '<details class="neu-mehr"><summary>Weitere Felder</summary><div class="neu-felder"></div></details></div>'
-      + '<aside class="neu-rechts"><label class="form-feld"><span>Neue Datei</span><span class="neu-pfad"><code></code><input name="datei" type="text" required spellcheck="false"></span></label>'
-      + '<pre class="neu-vorschau" aria-label="Vorschau der Datei"></pre>'
-      + '<details class="neu-social" open><summary>Social-Media-Vorschau (WhatsApp, Signal, X …)</summary>'
+      + '<details class="neu-mehr"><summary>' + esc(t("form.more_fields", null, "Weitere Felder")) + '</summary><div class="neu-felder"></div></details></div>'
+      + '<aside class="neu-rechts"><label class="form-feld"><span></span><span class="neu-pfad"><code></code><input name="datei" type="text" required spellcheck="false"></span></label>'
+      + '<pre class="neu-vorschau" aria-label="' + esc(t("form.file_preview", null, "Vorschau der Datei")) + '"></pre>'
+      + '<details class="neu-social" open><summary>' + esc(t("form.social_preview", null, "Social-Media-Vorschau (WhatsApp, Signal, X …)")) + '</summary>'
       + '<div class="neu-social-karte"><img class="neu-social-bild" src="/assets/images/og-preview.jpg" alt="" loading="lazy">'
       + '<div class="neu-social-text"><span class="neu-social-domain">ifsmb.de</span><strong class="neu-social-titel"></strong><span class="neu-social-beschr"></span></div></div></details>'
-      + '<div class="form-photos" aria-label="Neue Fotos"></div>'
+      + '<div class="form-photos" aria-label="' + esc(t("form.new_photos", null, "Neue Fotos")) + '"></div>'
       + '<ol class="neu-schritte small"></ol></aside></div>'
       + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-verwerfen></button>'
-      + '<button type="button" class="btn btn-small btn-ghost" data-github>🔑 GitHub verbinden</button>'
-      + '<button type="button" class="btn btn-small btn-ghost" data-photos hidden>📷 Fotos hinzufügen</button>'
+      + '<button type="button" class="btn btn-small btn-ghost" data-github>' + esc(t("github.connect", null, "🔑 GitHub verbinden")) + '</button>'
+      + '<button type="button" class="btn btn-small btn-ghost" data-photos hidden>' + esc(t("form.add_photos", null, "📷 Fotos hinzufügen")) + '</button>'
       + '<span class="muted small" data-status aria-live="polite"></span>'
       + '<button type="submit" class="btn" data-submit></button></div></form>');
     form = d.querySelector("form");
@@ -469,7 +575,7 @@ var NeuFormular = (function () {
       if (aktiv.edit) { aktiv.w = JSON.parse(JSON.stringify(aktiv.edit.w0)); aktiv.beruehrt = allTouched(); }
       else { aktiv.w = anfangswerte(aktiv.schema, aktiv.vorgabe); aktiv.beruehrt = {}; }
       folge(); baueFelder(); zeigeVorschau();
-      status.textContent = aktiv.edit ? "Änderungen verworfen." : "Neu angefangen.";
+      status.textContent = aktiv.edit ? t("form.discarded", null, "Änderungen verworfen.") : t("form.restarted", null, "Neu angefangen.");
     });
     // "close" fires a moment after close(); if the dialog was opened again meanwhile, leave the new form alone
     d.addEventListener("close", function () {
@@ -478,6 +584,15 @@ var NeuFormular = (function () {
       destroyEditors(); aktiv = null;
       if (EDIT_HASH.test(location.hash)) history.replaceState(history.state, "", location.pathname + location.search);
     });
+  }
+
+  // The page being edited, in every spelling a link to it can have – never offered as a link to itself (#128).
+  function ownAddresses(url) {
+    if (!url) return [];
+    var path = url.replace(/^https?:\/\/[^/]+/, "").replace(/index\.html$/, ""), bare = path.replace(/\/$/, "");
+    var forms = [path, bare, bare + "/", bare + "/index.html"];
+    var hosts = ["https://ifsmb.de"].concat(typeof location !== "undefined" && location.origin ? [location.origin] : []);
+    return forms.concat.apply(forms, hosts.map(function (h) { return forms.map(function (x) { return h + x; }); }));
   }
 
   // in edit mode a required field only stays required if the file had a value (old posts without date: …)
@@ -492,6 +607,7 @@ var NeuFormular = (function () {
       return F.chipFeld({
         label: f.label + (isRequired(f) ? " *" : ""), quelle: f.quelle, placeholder: f.platzhalter, hilfe: f.hilfe, einzeln: f.einzeln,
         werte: function () { return aktiv.w[f.name]; },
+        ausser: f.quelle === "seiten" ? function () { return ownAddresses(aktiv.url); } : null,
         setze: function (a) { aktiv.w[f.name] = a; nachAenderung(); }
       });
     }
@@ -503,7 +619,7 @@ var NeuFormular = (function () {
     if (f.typ === "auswahl") {
       eingabe = "<select" + attr + ">" + f.optionen.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === w ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select>";
     } else if (f.typ === "langtext") {
-      eingabe = "<textarea" + attr + ' rows="' + (f.zeilen || 8) + '">' + esc(w) + "</textarea>";
+      eingabe = "<textarea" + attr + ' rows="' + (f.zeilen || 8) + '"' + (f.code ? ' spellcheck="false" autocapitalize="off" wrap="off"' : "") + ">" + esc(w) + "</textarea>";
     } else {
       var typ = { text: "text", adresse: "url", datum: "date", zeit: "datetime-local", zahl: "number" }[f.typ];
       eingabe = '<input type="' + typ + '"' + attr + (f.liste ? ' list="neu-liste-' + f.liste + '"' : "") + ' value="' + esc(w) + '">';
@@ -685,7 +801,7 @@ var NeuFormular = (function () {
       var marked = changedLines(aktiv.edit.source.replace(/\r\n/g, "\n"), text), count = marked.filter(Boolean).length;
       vorschau.innerHTML = text.split("\n").map(function (line, i) { return marked[i] ? '<mark class="changed-line">' + esc(line || " ") + "</mark>" : esc(line); }).join("\n");
       submitBtn.disabled = !count;
-      submitBtn.title = count ? "" : "Noch nichts geändert";
+      submitBtn.title = count ? "" : t("form.unchanged_short", null, "Noch nichts geändert");
     } else vorschau.textContent = text;
     if (!socialBox) return;
     var w = aktiv.w, istSeite = aktiv.schema.format !== "yaml";
@@ -695,12 +811,13 @@ var NeuFormular = (function () {
     bild = direct.previewFor(bild); // photos not uploaded yet: show the local preview
     if (socialImg.getAttribute("src") !== bild) socialImg.src = bild;
     socialTitel.textContent = w.title || aktiv.schema.titel;
-    socialBeschr.textContent = (w.summary || w.subtitle || w.role || ersteTextzeile(w.text) || "Institut für spontane Makespace Buildung").slice(0, 160);
+    var codeText = aktiv.felder.some(function (f) { return f.name === "text" && f.code; }); // HTML is no description
+    socialBeschr.textContent = (w.summary || w.subtitle || w.role || w.lead || (codeText ? "" : ersteTextzeile(w.text)) || "Institut für spontane Makespace Buildung").slice(0, 160);
   }
 
   function fehlt() {
     var leer = aktiv.felder.filter(function (f) { return isRequired(f) && f.typ === "chips" && !aktiv.w[f.name].length; })[0];
-    if (leer) return "Bitte „" + leer.label.replace(/^\W+\s*/, "") + "“ ausfüllen.";
+    if (leer) return t("form.fill_in", { field: leer.label.replace(/^\W+\s*/, "") }, "Bitte „" + leer.label.replace(/^\W+\s*/, "") + "“ ausfüllen.");
     return aktiv.schema.pruefe && aktiv.schema.pruefe(aktiv.w);
   }
   function anlegen() {
@@ -709,9 +826,10 @@ var NeuFormular = (function () {
     if (direct.active()) { direct.submit(); return; }
     if (aktiv.edit) {
       var newText = dateiInhalt();
-      if (newText === aktiv.edit.source) { status.textContent = "Noch nichts geändert."; return; }
+      if (newText === aktiv.edit.source) { status.textContent = t("form.unchanged", null, "Noch nichts geändert."); return; }
       F.kopierenUndOeffnen(newText, F.githubEdit(aktiv.path), status, function () { getSelection().selectAllChildren(vorschau); });
-      setTimeout(function () { if (/^Kopiert/.test(status.textContent)) status.textContent = "Kopiert – im GitHub-Editor alles markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V)."; }, 50);
+      var copiedMsg = t("form.copied_github", null, "Kopiert – GitHub ist in einem neuen Tab offen.");
+      setTimeout(function () { if (status.textContent === copiedMsg) status.textContent = t("form.copied_paste", null, "Kopiert – im GitHub-Editor alles markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V)."); }, 50);
       aktiv.gesendet = true;
       return;
     }
@@ -719,7 +837,7 @@ var NeuFormular = (function () {
     var url = F.githubNeu(s.ordner, datei, inhaltText), zuLang = url.length > 8000;
     if (zuLang) url = F.githubNeu(s.ordner, datei);
     F.kopierenUndOeffnen(inhaltText, url, status, function () { getSelection().selectAllChildren(vorschau); });
-    if (zuLang) status.textContent = "Die Datei ist zu lang für die Adresse – sie ist kopiert, bitte im GitHub-Editor einfügen.";
+    if (zuLang) status.textContent = t("form.too_long", null, "Die Datei ist zu lang für die Adresse – sie ist kopiert, bitte im GitHub-Editor einfügen.");
     aktiv.gesendet = true;
   }
 
@@ -728,20 +846,22 @@ var NeuFormular = (function () {
   // With a GitHub token the submit button creates the pull request itself: the file (new or only the changed lines,
   // like before) plus new photos in one commit on a new branch. Without a token everything stays as it was
   // (copy → GitHub's editor). Photos need the token, because they can't be pasted into GitHub's editor.
-  var IMAGE_FOLDERS = { beitrag: "news", termin: "kalender", projekt: "projekte", "projekt-vergangen": "projekte", geraet: "ausstattung", team: "team", partner: "partner", presse: "presse", herausforderung: "herausforderungen" };
+  var IMAGE_FOLDERS = { beitrag: "news", termin: "kalender", projekt: "projekte", "projekt-vergangen": "projekte", geraet: "ausstattung", team: "team", partner: "partner", presse: "presse", herausforderung: "herausforderungen", seite: "seiten", uebersicht: "seiten" };
   var direct = {
     active: function () { return !!(window.GitHubApi && GitHubApi.connected()); },
     // which folder new photos go into: assets/images/<area>/<slug>/ – posts without the date in front, like today
     folder: function () {
       var area = IMAGE_FOLDERS[aktiv.typ] || "news", name = String(aktiv.w.datei || "").replace(/\.(md|ya?ml)$/, "");
       if (area === "news") name = name.replace(/^\d{4}-\d{2}-\d{2}-/, "");
+      // pages are all called index.md: name the folder after the page's path (partners/rfflabs/index.md → partners-rfflabs)
+      if (area === "seiten") name = String(aktiv.path || name).replace(/(^|\/)index\.(md|html)$/, "").replace(/\.(md|html)$/, "").replace(/\//g, "-");
       return "assets/images/" + area + "/" + (name || "neu") + "/";
     },
     // Error from GitHubApi (err.kind, see github-api.js): message in the status line, plus the matching next step
     showError: function (err) {
       status.textContent = (err.kind === "info" ? "ℹ️ " : "⚠️ ") + err.message + " ";
       if (err.kind === "auth") {
-        var b = F.el('<button type="button" class="btn btn-small">🔑 Neu verbinden</button>');
+        var b = F.el('<button type="button" class="btn btn-small">' + esc(t("github.reconnect", null, "🔑 Neu verbinden")) + "</button>");
         b.addEventListener("click", function () { GitHubApi.logout(); direct.update(); direct.connectDialog(); });
         status.appendChild(b);
       }
@@ -764,7 +884,7 @@ var NeuFormular = (function () {
         box.innerHTML = "<strong>⚠️ Diese Seite wird gerade schon geändert:</strong><ul>" + prs.map(function (pr, i) {
           return '<li><a href="' + esc(pr.url) + '" target="_blank" rel="noopener">#' + pr.number + " " + esc(pr.title) + "</a>"
             + (pr.user ? " von @" + esc(pr.user) : "")
-            + (pr.sameRepo ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : " (aus einem Fork – dort weiterarbeiten)") + "</li>";
+            + (pr.sameRepo && me.canPush ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : pr.sameRepo ? "" : " (aus einem Fork – dort weiterarbeiten)") + "</li>";
         }).join("") + "</ul><span>Mit „mitschicken“ landet deine Änderung im selben Pull Request – was du schon eingetragen hast, wird übernommen. Sonst entsteht ein eigener Pull Request.</span>";
         box.onclick = function (e) {
           var b = e.target.closest("[data-pr-continue]"); if (b) direct.pickUp(prs[+b.getAttribute("data-pr-continue")]);
@@ -879,7 +999,7 @@ var NeuFormular = (function () {
       if (!aktiv) return [];
       var has = function (n) { return aktiv.felder.some(function (f) { return f.name === n; }) && !(aktiv.edit && aktiv.edit.rawFields[n]); };
       var s = [];
-      if (!aktiv.schema.format && has("text")) s.push({ id: "gallery", label: "🖼️ Galerie im Text", hilfe: "mehrere Fotos, erscheinen als Galerie" });
+      if (!aktiv.schema.format && has("text") && aktiv.felder.some(function (f) { return f.name === "text" && f.markdown; })) s.push({ id: "gallery", label: "🖼️ Galerie im Text", hilfe: "mehrere Fotos, erscheinen als Galerie" });
       if (has("image")) s.push({ id: "image", label: aktiv.typ === "geraet" ? "📸 Foto des Geräts" : "📸 Titelbild", feld: "image", alt: has("image_alt") && "image_alt" });
       if (has("photo")) s.push({ id: "photo", label: "🙂 Profilfoto", feld: "photo" });
       if (has("logo")) s.push({ id: "logo", label: "🏷️ Logo / Bild auf der Partnerkarte", feld: "logo" });
@@ -944,15 +1064,15 @@ var NeuFormular = (function () {
     update: function () {
       if (!d || !aktiv) return;
       var on = direct.active();
-      githubBtn.textContent = on ? "🔑 GitHub ✓" : "🔑 GitHub verbinden";
+      githubBtn.textContent = on ? "🔑 GitHub ✓" : t("github.connect", null, "🔑 GitHub verbinden");
       if (on) GitHubApi.whoAmI().then(function (me) { if (direct.active()) githubBtn.textContent = "🔑 @" + me.login; }, function () {});
-      githubBtn.title = on ? "Mit GitHub verbunden – Pull Requests direkt von hier" : "Mit einem GitHub-Token Pull Requests direkt von hier erstellen (mit Fotos)";
+      githubBtn.title = on ? t("github.connected_title", null, "Mit GitHub verbunden – Pull Requests direkt von hier") : t("github.connect_title", null, "Mit einem GitHub-Token Pull Requests direkt von hier erstellen (mit Fotos)");
       fotosBtn.hidden = !direct.slots().length;
       if (on) {
-        submitBtn.textContent = aktiv.prBase ? "🚀 In #" + aktiv.prBase.number + " speichern" : aktiv.edit ? "🚀 Änderung als Pull Request" : "🚀 Als Pull Request anlegen";
-        stepsEl.innerHTML = "<li>„Als Pull Request“ legt einen neuen Branch mit "
-          + (aktiv.edit ? "der geänderten Datei" : "der neuen Datei") + " und allen verwendeten Fotos an und öffnet einen Pull Request.</li>"
-          + "<li>Jemand aus dem Team sieht ihn durch und mergt ihn – dann ist alles nach ein paar Minuten auf der Website.</li>";
+        submitBtn.textContent = aktiv.prBase ? t("form.submit_pr_into", { number: aktiv.prBase.number }, "🚀 In #" + aktiv.prBase.number + " speichern") : aktiv.edit ? t("form.submit_pr_edit", null, "🚀 Änderung als Pull Request") : t("form.submit_pr_new", null, "🚀 Als Pull Request anlegen");
+        stepsEl.innerHTML = "<li>" + esc(aktiv.edit ? t("form.steps_pr_edit", null, "„Als Pull Request“ legt einen neuen Branch mit der geänderten Datei und allen verwendeten Fotos an und öffnet einen Pull Request.")
+          : t("form.steps_pr_new", null, "„Als Pull Request“ legt einen neuen Branch mit der neuen Datei und allen verwendeten Fotos an und öffnet einen Pull Request.")) + "</li>"
+          + "<li>" + esc(t("form.steps_pr_review", null, "Jemand aus dem Team sieht ihn durch und mergt ihn – dann ist alles nach ein paar Minuten auf der Website.")) + "</li>";
       }
       direct.showPhotos();
     },
@@ -1044,7 +1164,7 @@ var NeuFormular = (function () {
         return;
       }
       if (aktiv.edit) {
-        if (newText === aktiv.edit.source) { status.textContent = "Noch nichts geändert."; return; }
+        if (newText === aktiv.edit.source) { status.textContent = t("form.unchanged", null, "Noch nichts geändert."); return; }
         path = aktiv.path;
         title = aktiv.schema.titel + " geändert: " + (aktiv.w.title || aktiv.w.name || path.split("/").pop());
       } else {
@@ -1112,7 +1232,7 @@ var NeuFormular = (function () {
         if (aktiv !== state) return;
         // the branch with the commit exists, but the pull request didn't come back: next click finishes it (K41/K42)
         if (err.pendingBranch) {
-          state.pending = { branch: err.pendingBranch, title: title, body: body, text: newText };
+          state.pending = { branch: err.pendingBranch, fork: err.pendingFork || null, title: title, body: body, text: newText };
           direct.showError(err);
           status.appendChild(document.createTextNode(" Nochmal senden setzt fort – es entsteht kein zweiter Pull Request."));
           return;
@@ -1137,6 +1257,21 @@ var NeuFormular = (function () {
     sentOk: function (state, pr, text, path) {
       loescheEntwurf();
       state.gesendet = true; state.retries = 0;
+      // through the person's own fork (no push access, #186): the branch lives in the fork, so the next send starts a new
+      // branch instead of reading this one from the repository; without a number GitHub's compare page opens the PR
+      if (pr.fork) {
+        state.sent = { text: text, url: pr.url || pr.compareUrl, number: pr.number || null };
+        direct.clearPhotos();
+        if (!state.edit) { state.path = path; dateiInput.readOnly = true; }
+        state.edit = readSource(state.schema, text, path) || state.edit;
+        state.w = JSON.parse(JSON.stringify(state.edit.w0)); state.beruehrt = allTouched();
+        baueFelder(); zeigeVorschau();
+        status.innerHTML = pr.number
+          ? "✅ " + t("github.sent_fork_html", { link: '<a href="' + esc(pr.url) + '" target="_blank" rel="noopener">Pull Request #' + pr.number + "</a>", fork: esc(pr.fork) }, '<a href="' + esc(pr.url) + '" target="_blank" rel="noopener">Pull Request #' + pr.number + "</a> ist angelegt (aus deinem Fork " + esc(pr.fork) + ") – danke!")
+          : "✅ " + t("github.sent_fork_compare_html", { fork: esc(pr.fork), link: '<a href="' + esc(pr.compareUrl) + '" target="_blank" rel="noopener" data-compare-link>' + esc(t("github.compare_link", null, "Pull Request auf GitHub anlegen ↗")) + "</a>" }, "Deine Änderung liegt in deinem Fork " + esc(pr.fork) + '. Letzter Schritt: <a href="' + esc(pr.compareUrl) + '" target="_blank" rel="noopener" data-compare-link>Pull Request auf GitHub anlegen ↗</a> – dort „Create pull request“ klicken.');
+        if (pr.forkStale) status.innerHTML += ' <span data-fork-stale>' + t("github.fork_stale_html", { fork: esc(pr.fork), url: esc("https://github.com/" + pr.fork) }, "⚠️ Dein Fork " + esc(pr.fork) + ' ließ sich nicht automatisch auf den neuesten Stand bringen. Deine Änderung baut trotzdem auf dem aktuellen Stand auf – für später auf <a href="https://github.com/' + esc(pr.fork) + '" target="_blank" rel="noopener">GitHub</a> „Sync fork“ klicken.') + "</span>";
+        return;
+      }
       state.sent = { text: text, url: pr.url, number: pr.number };
       direct.clearPhotos();
       var branch = pr.branch || (state.prBase && state.prBase.branch);
@@ -1221,7 +1356,7 @@ var NeuFormular = (function () {
       var box = direct.noticeBox();
       box.innerHTML = "<strong>⚠️ Während du geschrieben hast, hat jemand einen Pull Request zu dieser Seite angelegt:</strong><ul>" + prs.map(function (pr, i) {
         return '<li><a href="' + esc(pr.url) + '" target="_blank" rel="noopener">#' + pr.number + " " + esc(pr.title) + "</a>" + (pr.user ? " von @" + esc(pr.user) : "")
-          + (pr.sameRepo ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : "") + "</li>";
+          + (pr.sameRepo && GitHubApi.canPushKnown() !== false ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : "") + "</li>";
       }).join("") + '</ul><button type="button" class="btn btn-small btn-ghost" data-pr-own>Trotzdem eigener Pull Request</button>';
       box.onclick = function (e) {
         var b = e.target.closest("[data-pr-continue]");
@@ -1254,28 +1389,43 @@ var NeuFormular = (function () {
       status.textContent = "";
     },
     // small dialog: paste a fine-grained token, check it, remember it (or not), disconnect
+    // → Promise of the open <dialog> (the overview /mitmachen/offen/ listens for "close", assets/js/open-work.js)
     connectDialog: function (then) {
-      window.ladeSkripte(["github-api.js"]).then(function () {
+      return window.ladeSkripte(["github-api.js"]).then(function () {
         var g = document.getElementById("github-connect");
         if (!g) {
-          g = F.dialog({ id: "github-connect", klasse: "github-dialog", titel: "🔑 Mit GitHub verbinden" });
+          // texts with <strong>/<code> come from the UI strings as HTML: they are our own strings, not user input
+          g = F.dialog({ id: "github-connect", klasse: "github-dialog", titel: t("github.dialog_title", null, "🔑 Mit GitHub verbinden") });
           g.insertAdjacentHTML("beforeend", '<div class="github-body">'
-            + '<p>Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.</p>'
-            + '<ol class="small"><li><a data-token-link target="_blank" rel="noopener">Token auf GitHub erstellen ↗</a> – Name, Laufzeit (30 Tage) und die Berechtigungen <em>Contents</em> und <em>Pull requests</em> („Read and write“) sind schon ausgefüllt. Unter „Repository access“ bitte <strong>„Only select repositories“</strong> und <code>' + esc(GitHubApi.repo()) + '</code> wählen, dann „Generate token“.</li>'
-            + "<li>Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.</li></ol>"
-            + '<label class="form-feld"><span>Token</span><input type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>'
-            + '<label class="form-check"><input type="checkbox" data-remember><span>Auf diesem Gerät merken</span><small class="form-hilfe">Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.</small></label>'
+            + "<p>" + t("github.intro_html", null, "Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.") + "</p>"
+            + '<ol class="small"><li><a data-token-link target="_blank" rel="noopener">' + esc(t("github.create_token", null, "Token auf GitHub erstellen ↗")) + "</a> – "
+            + t("github.token_classic_html", { repo: "<code>" + esc(GitHubApi.repo()) + "</code>" }, "<em>public_repo</em> ist schon angehakt, kurzes Ablaufdatum wählen (der Token gilt für alle öffentlichen Repositories, in die du schreiben darfst), „Generate token“. Geht mit jedem GitHub-Konto: mit Schreibrechten auf " + esc(GitHubApi.repo()) + " direkt, sonst über deinen eigenen Fork – der wird beim ersten Senden angelegt.") + "</li>"
+            + "<li>" + esc(t("github.paste_token", null, "Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.")) + "</li></ol>"
+            + '<p class="small muted">' + t("github.no_token_html", null, "Ganz ohne Token geht es mit jedem Konto auch: „📋 Auf GitHub speichern“ – GitHub legt dann selbst einen Fork an und bietet „Create pull request“ an. Hast du schon einen älteren Fork, dort vorher „Sync fork“ klicken.") + "</p>"
+            + '<label class="form-feld"><span>Token</span><input type="password" autocomplete="off" spellcheck="false" placeholder="ghp_…"></label>'
+            + '<label class="form-check"><input type="checkbox" data-remember><span>' + esc(t("github.remember", null, "Auf diesem Gerät merken")) + '</span><small class="form-hilfe">' + esc(t("github.remember_hint", null, "Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.")) + "</small></label>"
             + '<p class="github-who small" aria-live="polite"></p>'
-            + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-logout>Abmelden</button><span class="muted small"></span><button type="button" class="btn" data-connect>Verbinden</button></div></div>');
+            + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-logout>' + esc(t("github.logout", null, "Abmelden")) + '</button><span class="muted small"></span><button type="button" class="btn" data-connect>' + esc(t("github.connect_button", null, "Verbinden")) + "</button></div></div>");
           g.querySelector("[data-token-link]").href = GitHubApi.tokenUrl();
         }
         var input = g.querySelector("input[type=password]"), who = g.querySelector(".github-who");
         function show() {
-          if (!GitHubApi.connected()) { who.textContent = "Nicht verbunden."; return; }
-          who.textContent = "Prüfe …";
+          if (!GitHubApi.connected()) { who.textContent = t("github.not_connected_short", null, "Nicht verbunden."); return; }
+          who.textContent = t("github.checking", null, "Prüfe …");
           GitHubApi.whoAmI().then(function (me) {
-            who.innerHTML = '<img src="' + esc(me.avatar) + '" alt="" width="24" height="24"> Verbunden als <strong>@' + esc(me.login) + "</strong>"
-              + (me.canPush ? " – darf Pull Requests anlegen ✅" : " – hat <strong>keine Schreibrechte</strong> auf " + esc(GitHubApi.repo()) + " (Pull Requests aus Forks kommen später)");
+            // one text element next to the avatar: .github-who is a flex row, loose text nodes would each wrap on their own
+            var repoName = esc(GitHubApi.repo()), parts = [];
+            if (me.canPush) parts.push(esc(t("github.can_push", null, "darf Pull Requests anlegen ✅")));
+            else {
+              if (me.collaboratorNeedsClassic) parts.push(t("github.collaborator_classic_html", { repo: repoName }, "du bist Collaborator auf " + repoName + ", aber dieser <strong>fine-grained Token</strong> gilt nur für deine eigenen Repositories. Für Pull Requests direkt im Repository oben einen neuen Token erstellen – mit diesem geht es über deinen Fork."));
+              parts.push(me.fork ? t("github.cannot_push_fork_html", { repo: repoName, fork: esc(me.fork) }, "hat keine Schreibrechte auf " + repoName + " – Änderungen gehen über deinen Fork <strong>" + esc(me.fork) + "</strong> ✅")
+                : t("github.cannot_push_html", { repo: repoName }, "hat keine Schreibrechte auf " + repoName + " – beim ersten Senden wird <strong>dein eigener Fork</strong> angelegt ✅"));
+              if (me.fork && me.forkBehind) parts.push('<span data-fork-behind>' + esc(t("github.fork_behind", null, "Dein Fork ist nicht auf dem neuesten Stand – er wird vor dem Senden abgeglichen, deine Änderung baut auf dem aktuellen Stand auf.")) + "</span>");
+            }
+            // one text element next to the avatar: .github-who is a flex row, loose text nodes would each wrap on their own
+            who.innerHTML = '<img src="' + esc(me.avatar) + '" alt="" width="24" height="24"><span>'
+              + t("github.connected_as_html", { login: "<strong>@" + esc(me.login) + "</strong>" }, "Verbunden als <strong>@" + esc(me.login) + "</strong>")
+              + " – " + parts.join(" ") + "</span>";
           }, function (err) { who.textContent = "⚠️ " + err.message; });
         }
         g.querySelector("[data-connect]").onclick = function () {
@@ -1283,11 +1433,12 @@ var NeuFormular = (function () {
           GitHubApi.setToken(input.value, g.querySelector("[data-remember]").checked);
           input.value = "";
           show(); direct.update();
-          GitHubApi.whoAmI().then(function (me) { if (me.canPush && then) { g.close(); then(); } }, function () {});
+          GitHubApi.whoAmI().then(function (me) { if (then) { g.close(); then(); } }, function () {});
         };
-        g.querySelector("[data-logout]").onclick = function () { GitHubApi.logout(); show(); direct.update(); setMode(!!(aktiv && aktiv.edit)); };
+        g.querySelector("[data-logout]").onclick = function () { GitHubApi.logout(); show(); direct.update(); if (d) setMode(!!(aktiv && aktiv.edit)); };
         show();
         g.showModal();
+        return g;
       });
     }
   };
@@ -1300,25 +1451,29 @@ var NeuFormular = (function () {
     nachAenderung();
   }
 
-  // step lists shown in the dialog (German UI text)
-  var STEPS_NEW = '<li>„Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit dem fertigen Inhalt.</li>'
-    + "<li>Dort „Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.</li>"
-    + "<li>Nach dem Merge erscheint die Seite nach ein paar Minuten auf der Website.</li>";
-  var STEPS_EDIT = "<li>„Auf GitHub speichern“ kopiert die geänderte Datei und öffnet sie im GitHub-Editor.</li>"
-    + "<li>Dort den ganzen Inhalt markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V).</li>"
-    + "<li>„Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.</li>"
-    + "<li>Nach dem Merge ist die Änderung nach ein paar Minuten auf der Website.</li>";
+  // step lists shown in the dialog (UI strings form.steps_*, German fallback; they contain <strong>)
+  function stepsNew() {
+    return "<li>" + t("form.steps_new_1", null, "„Auf GitHub anlegen“ kopiert die Datei und öffnet GitHub mit dem fertigen Inhalt.") + "</li>"
+      + "<li>" + t("form.steps_commit_html", null, "Dort „Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.") + "</li>"
+      + "<li>" + t("form.steps_new_3", null, "Nach dem Merge erscheint die Seite nach ein paar Minuten auf der Website.") + "</li>";
+  }
+  function stepsEdit() {
+    return "<li>" + t("form.steps_edit_1", null, "„Auf GitHub speichern“ kopiert die geänderte Datei und öffnet sie im GitHub-Editor.") + "</li>"
+      + "<li>" + t("form.steps_edit_2", null, "Dort den ganzen Inhalt markieren (⌘A / Strg+A) und einfügen (⌘V / Strg+V).") + "</li>"
+      + "<li>" + t("form.steps_edit_commit_html", null, "„Commit changes …“ → <strong>„Create a new branch … and start a pull request“</strong>.") + "</li>"
+      + "<li>" + t("form.steps_edit_4", null, "Nach dem Merge ist die Änderung nach ein paar Minuten auf der Website.") + "</li>";
+  }
   // switch the dialog between "new file" and "edit existing file"
   function setMode(editing) {
     d.querySelectorAll(".form-pr-notice, .form-conflicts").forEach(function (x) { x.remove(); });
-    stepsEl.innerHTML = editing ? STEPS_EDIT : STEPS_NEW;
-    discardBtn.textContent = editing ? "↩️ Änderungen verwerfen" : "🗑️ Neu anfangen";
-    submitBtn.textContent = editing ? "📋 Auf GitHub speichern" : "📋 Auf GitHub anlegen";
+    stepsEl.innerHTML = editing ? stepsEdit() : stepsNew();
+    discardBtn.textContent = editing ? t("form.discard", null, "↩️ Änderungen verwerfen") : t("form.restart", null, "🗑️ Neu anfangen");
+    submitBtn.textContent = editing ? t("form.submit_edit", null, "📋 Auf GitHub speichern") : t("form.submit_new", null, "📋 Auf GitHub anlegen");
     submitBtn.disabled = false; submitBtn.title = "";
     direct.update();
     dateiInput.readOnly = !!editing;
-    d.querySelector(".neu-pfad").previousElementSibling.textContent = editing ? "Datei" : "Neue Datei";
-    vorlageLink.textContent = editing ? "Auf GitHub ansehen ↗" : "Vorlage mit allen Feldern ↗";
+    d.querySelector(".neu-pfad").previousElementSibling.textContent = editing ? t("form.file", null, "Datei") : t("form.new_file", null, "Neue Datei");
+    vorlageLink.textContent = editing ? t("form.view_on_github", null, "Auf GitHub ansehen ↗") : t("form.template_link", null, "Vorlage mit allen Feldern ↗");
   }
   function allTouched() { var touched = {}; aktiv.felder.forEach(function (f) { touched[f.name] = true; }); return touched; }
 
@@ -1337,14 +1492,16 @@ var NeuFormular = (function () {
     folge();
 
     setMode(false);
-    d.titel("➕ " + (daten.label || schema.titel));
+    // label/hint of the ➕ button in the UI language (_includes/neu-button.html puts the keys into data-neu)
+    if (daten.i18n && window.I18n) { daten.label = t(daten.i18n + ".label", daten.i18nParams); daten.hinweis = t(daten.i18n + ".hint", daten.i18nParams); }
+    d.titel("➕ " + (daten.label || typeName(daten.typ, schema)));
     hinweisEl.textContent = daten.hinweis || "";
     hinweisEl.hidden = !daten.hinweis;
     vorlageLink.href = link.href;
     ordnerEl.textContent = schema.ordner + "/";
     baueFelder();
     zeigeVorschau();
-    status.textContent = entwurf ? "Entwurf wiederhergestellt." : "";
+    status.textContent = entwurf ? t("form.draft_restored", null, "Entwurf wiederhergestellt.") : "";
     if (!d.open) d.showModal();
     var erstes = form.querySelector(".neu-links input:not([type=checkbox]), .neu-links textarea");
     if (erstes) erstes.focus();
@@ -1361,21 +1518,21 @@ var NeuFormular = (function () {
       if (!d) baueDialog();
       var folder = data.path.split("/").slice(0, -1).join("/");
       aktiv = { typ: data.type, schema: schema, felder: alleFelder(schema), gesendet: false, photos: [], edit: loaded, path: data.path,
-        schluessel: "ifsmb-edit:" + data.path };
+        url: data.url || (typeof location !== "undefined" ? location.pathname : ""), schluessel: "ifsmb-edit:" + data.path };
       aktiv.beruehrt = allTouched(); // nothing is derived while editing (file name, event_tag, end …)
       var draft = ladeEntwurf(), draftFits = draft && draft.source === source && !draft.pr;
       aktiv.w = draftFits ? Object.assign(JSON.parse(JSON.stringify(loaded.w0)), draft.w) : JSON.parse(JSON.stringify(loaded.w0));
       // a draft that no longer fits (the page changed since, or it belongs to an open PR) is never thrown away: it is
       // carried over onto the current state below (direct.restoreDraft), with a conflict box if both changed the same thing
       setMode(true);
-      d.titel("✏️ " + schema.titel + " bearbeiten");
-      hinweisEl.textContent = "Änderungen an " + data.path + " – nur geänderte Zeilen werden neu geschrieben, alles andere bleibt wie es ist.";
+      d.titel(t("form.edit_title", { type: typeName(data.type, schema) }, "✏️ " + schema.titel + " bearbeiten"));
+      hinweisEl.textContent = t("form.edit_hint", { path: data.path }, "Änderungen an " + data.path + " – nur geänderte Zeilen werden neu geschrieben, alles andere bleibt wie es ist.");
       hinweisEl.hidden = false;
       vorlageLink.href = F.githubFile(data.path);
       ordnerEl.textContent = folder + "/";
       baueFelder();
       zeigeVorschau();
-      status.textContent = draftFits ? "Entwurf wiederhergestellt." : "";
+      status.textContent = draftFits ? t("form.draft_restored", null, "Entwurf wiederhergestellt.") : "";
       if (!d.open) d.showModal();
       if (draft && !draftFits && draft.source) direct.restoreDraft(draft);
       if (!EDIT_HASH.test(location.hash)) history.replaceState(history.state, "", location.pathname + location.search + "#bearbeiten");
@@ -1387,6 +1544,7 @@ var NeuFormular = (function () {
     });
   }
 
-  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, TYPEN: TYPEN, alleFelder: alleFelder };
+  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, TYPEN: TYPEN, THEMES: THEMES, alleFelder: alleFelder, checkHtml: checkHtml,
+    connect: function () { return direct.connectDialog(); } };
 })();
 if (typeof module !== "undefined") module.exports = NeuFormular;

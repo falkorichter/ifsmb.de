@@ -1,6 +1,6 @@
 ---
 title: German RepRap X400
-kategorie: Großformat-3D-Drucker (FDM)
+category: Großformat-3D-Drucker (FDM)
 status: im-test
 summary: Ein großer 3D-Drucker mit Alu-Rahmen, der sich vielleicht zur Fräsmaschine umbauen lässt – den bekommen wir vielleicht.
 owner_name: ["Ralf, Falko, Anton - Klärung "]
@@ -21,7 +21,7 @@ gallery:
     thumb: /assets/images/ausstattung/german-reprap-x400/05-600w.jpg
     alt: "Logo der German RepRap GmbH auf dem blauen Acrylsockel"
 tags: [german-reprap-x400, 3d-drucker, 35services]
-standort_partner: 35 services e. V.
+location_partner: 35 services e. V.
 uuid: 1ccf68cc-fc2e-4c40-a2e6-83c6ab52fb7d
 ---
 

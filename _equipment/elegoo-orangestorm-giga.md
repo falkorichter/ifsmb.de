@@ -1,6 +1,6 @@
 ---
 title: Elegoo OrangeStorm Giga
-kategorie: Großformat-3D-Drucker (FDM)
+category: Großformat-3D-Drucker (FDM)
 summary: Ein Großformatdrucker für richtig große Objekte – bis hin zu Möbeln.
 owner_partner: Philippe Bietenholz
 image: /assets/images/ausstattung/elegoo-orangestorm-giga/01.jpg
