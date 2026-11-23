@@ -2,9 +2,9 @@
 title: "Makespace Tiergarten"
 summary: Frieders Makespace in Raum 226 – mit 3D-Drucker, Ton- und Videostudio samt Greenscreen und einer großen Werkzeugkiste.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2025-12-05
-zeitraum: seit 2025
+period: seit 2025
 event_tag: makespace-tiergarten
 tags: [makespace-tiergarten]
 team:

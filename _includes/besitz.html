@@ -9,13 +9,13 @@
 {%- assign owners = "" | split: "" -%}
 {%- for n in o_partners -%}
   {%- assign op = site.data.partners | where: "name", n | first -%}
-  {%- if op and include.plain == nil -%}{%- capture o %}<a href="{{ op.page | default: '/partner/' | relative_url }}{% unless op.page %}#{{ op.name | slugify }}{% endunless %}">{{ op.name }}</a>{% endcapture -%}{%- else -%}{%- assign o = n -%}{%- endif -%}
+  {%- if op and include.plain == nil -%}{%- capture o %}<a href="{{ op.page | default: '/partners/' | relative_url }}{% unless op.page %}#{{ op.name | slugify }}{% endunless %}">{{ op.name }}</a>{% endcapture -%}{%- else -%}{%- assign o = n -%}{%- endif -%}
   {%- assign owners = owners | push: o -%}
 {%- endfor -%}
 {%- assign team_in_list = false -%}
 {%- for s in o_team -%}
   {%- assign om = site.team | where: "slug", s | first -%}
-  {%- if om and om.nicht_im_team != true -%}{%- assign team_in_list = true -%}{%- endif -%}
+  {%- if om and om.not_in_team != true -%}{%- assign team_in_list = true -%}{%- endif -%}
   {%- if om and include.plain == nil -%}{%- capture o %}<a href="{{ om.url | relative_url }}">{{ om.title }}</a>{% endcapture -%}{%- elsif om -%}{%- assign o = om.title -%}{%- else -%}{%- assign o = s -%}{%- endif -%}
   {%- assign owners = owners | push: o -%}
 {%- endfor -%}

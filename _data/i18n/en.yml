@@ -302,6 +302,17 @@ equipment:
   scanners: 3D scanners
   others: Plotters, measuring devices and more
   back: ← All equipment
+  filter_owner: "Owned by:"
+  filter_location: "Located at:"
+  filter_active_owner: "Equipment of {name}"
+  filter_active_location: "Equipment at {name}"
+  filter_count:
+    one: "1 device"
+    other: "{n} devices"
+  filter_none: no devices for this filter
+  filter_reset: Show all
+  of_partner: "Equipment of {name}"
+  at_partner: "Equipment at {name}"
 
 team:
   photo_of: Photo of {name}
@@ -492,7 +503,7 @@ new:
     hint: New report about us – sorted in by date
   partners_partner:
     label: Partner
-    hint: New partner as its own file – appears on /partner/ and in the network
+    hint: New partner as its own file – appears on /partners/ and in the network
 
 read:
   check: read
@@ -556,14 +567,17 @@ form:
     press_report: In the press
 
 github:
+  create_token: "Create a token on GitHub ↗"
+  token_classic_html: "<em>public_repo</em> is already ticked, choose a short expiry date (the token works for all public repositories you may write to), “Generate token”. Works with any GitHub account: with write access to {repo} directly, otherwise through your own fork – it is created the first time you send."
+  collaborator_classic_html: "you are a collaborator on {repo}, but this <strong>fine-grained token</strong> only works for your own repositories. For pull requests directly in the repository, create a new token above – with this one it goes through your fork."
+  fork_behind: "Your fork is not up to date – it is synced before sending, and your change is based on the current state."
+  fork_stale_html: "⚠️ Your fork {fork} couldn’t be brought up to date automatically. Your change is still based on the current state – for later, click “Sync fork” on <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">GitHub</a>."
   connect: 🔑 Connect GitHub
   reconnect: 🔑 Reconnect
   connect_title: Create pull requests right from here with a GitHub token (with photos)
   connected_title: Connected to GitHub – pull requests right from here
   dialog_title: 🔑 Connect to GitHub
   intro_html: With a GitHub token the forms <strong>create pull requests directly</strong> – with photos, no copying. As always, nothing is merged before a review.
-  create_token: Create a token on GitHub ↗
-  token_steps_html: Name, expiry (30 days) and the permissions <em>Contents</em> and <em>Pull requests</em> (“Read and write”) are already filled in (plus <em>Issues</em>, to take on tasks on the “Open” page). Under “Repository access” choose <strong>“Only select repositories”</strong> and {repo}, then “Generate token”.
   paste_token: Paste the token here. It stays in this browser and is only sent to api.github.com.
   remember: Remember on this device
   remember_hint: Otherwise it’s gone once the tab is closed. Don’t tick this on someone else’s device.
@@ -573,7 +587,6 @@ github:
   checking: Checking …
   connected_as_html: Connected as {login}
   can_push: may create pull requests ✅
-  cannot_push_html: has <strong>no write access</strong> to {repo} (pull requests from forks are coming later)
   not_connected: Not connected to GitHub.
   network: No connection to GitHub – please check your internet connection and try again.
   error: Error
@@ -585,10 +598,19 @@ github:
   not_found: Not found ({message}) – is the token missing access to {repo}?
   rejected: "GitHub rejected the change: {message}"
   server: GitHub is having a problem right now ({status}). Please try again shortly.
-  no_push: "@{login} may not create branches in {repo} (pull requests from forks are coming later)."
   step_base: Fetching the current state of {branch} …
   step_upload: Uploading file {n} of {total} …
   step_commit: Creating commit …
   step_update_pr: "Adding to pull request #{number} …"
   step_branch: Creating branch {branch} …
   step_open_pr: Opening pull request …
+  no_token_html: "Without any token it works with every account too: “📋 Save on GitHub” – GitHub then creates a fork itself and offers “Create pull request”. If you already have an older fork, click “Sync fork” there first."
+  cannot_push_html: "has no write access to {repo} – <strong>your own fork</strong> is created the first time you send ✅"
+  cannot_push_fork_html: "has no write access to {repo} – changes go through your fork <strong>{fork}</strong> ✅"
+  sent_fork_html: "{link} has been opened (from your fork {fork}) – thank you!"
+  sent_fork_compare_html: "Your change is in your fork {fork}. Last step: {link} – click “Create pull request” there."
+  compare_link: "Open the pull request on GitHub ↗"
+  step_sync_fork: "Bringing fork {fork} up to date …"
+  step_create_fork: "Creating your own fork of {repo} …"
+  fork_permission: "The token may not create a fork. Either fork {repo} once on GitHub (“Fork” at the top right) or set “Administration” to “Read and write” on the token."
+  fork_no_continue: "Without write access you can’t add to #{number} – please send it as your own pull request."

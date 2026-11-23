@@ -35,8 +35,8 @@ var OpenWork = (function () {
   // pages = { "<path>": [url, title] } from #open-work-pages (every page and document of the build). Files that are
   // not built yet (new in a pull request) get their future address from the permalinks in _config.yml – the same
   // collections as the ✏️ forms (_includes/edit-buttons.html, neu.js).
-  var COLLECTIONS = { _team: "/team/", _projects: "/projekte/", _events: "/kalender/", _equipment: "/ausstattung/",
-    _herausforderungen: "/herausforderungen/", _press: "/presse/" };
+  var COLLECTIONS = { _team: "/team/", _projects: "/projects/", _events: "/calendar/", _equipment: "/equipment/",
+    _challenges: "/challenges/", _press: "/press/" };
   // → { url, title, isNew } | { asset: true, image } | null (no page, e.g. a script)
   function pageFor(file, pages) {
     var hit = pages && pages[file];
@@ -47,8 +47,8 @@ var OpenWork = (function () {
       var name = m[1] === "_press" ? m[2].replace(/^\d{4}-\d{2}-\d{2}-/, "") : m[2]; // presse uses :slug (no date)
       return { url: COLLECTIONS[m[1]] + name + "/", isNew: true };
     }
-    if (/^_data\/(partner\/|partners\.yml$)/.test(file)) return { url: "/partner/", title: "Partner", isNew: false };
-    if (/^_data\/(pressebericht\/|presseberichte\.yml$)/.test(file)) return { url: "/presse/", title: "Presse", isNew: false };
+    if (/^_data\/(partner\/|partners\.yml$)/.test(file)) return { url: "/partners/", title: "Partner", isNew: false };
+    if (/^_data\/(press_report\/|press_reports\.yml$)/.test(file)) return { url: "/press/", title: "Presse", isNew: false };
     if (/^todos\/todo-[^/]+\.md$/.test(file)) return { url: "/todos/", title: "Todos", isNew: false };
     if (/^assets\//.test(file)) return { asset: true, image: /\.(jpe?g|png|gif|webp|svg)$/i.test(file) };
     return null;

@@ -17,5 +17,5 @@ Falko hat die Messe 2026 besucht ([Bericht und Video vom Messerundgang]({{ '/new
 
 ## Stand
 
-- **26. August 2026:** Nach einem Telefonat mit dem Veranstalter hat Falko per 35services E-Mail angefragt, ob er mit Schüler*innen der [3D-Druck AG an der KTG]({{ '/projekte/3d-druck-ag-ktg/' | relative_url }}) als Ausflug im neuen Schuljahr die Messe besuchen kann – mit eigener Betreuung, damit der Messebetrieb nicht gestört wird. Auch die AGs und Makespaces an den Gymnasien, die er mit aufbaut, könnten davon profitieren.
+- **26. August 2026:** Nach einem Telefonat mit dem Veranstalter hat Falko per 35services E-Mail angefragt, ob er mit Schüler*innen der [3D-Druck AG an der KTG]({{ '/projects/3d-druck-ag-ktg/' | relative_url }}) als Ausflug im neuen Schuljahr die Messe besuchen kann – mit eigener Betreuung, damit der Messebetrieb nicht gestört wird. Auch die AGs und Makespaces an den Gymnasien, die er mit aufbaut, könnten davon profitieren.
 - **9. November 2026:** Falko hat noch einmal nachgefragt, ob der Besuch mit den Schüler*innen klappt. Eine Antwort an die 35services Adresse steht noch aus.

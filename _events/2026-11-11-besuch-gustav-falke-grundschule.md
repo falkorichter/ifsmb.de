@@ -7,7 +7,7 @@ location: "Gustav-Falke-Grundschule, Berlin"
 summary: Falko besucht die Gustav-Falke-Grundschule und ihren Makespace – Making steht dort seit 2020 im Stundenplan.
 tags: [gustav-falke]
 team: [falko-richter]
-persoenlich: false
+personal: false
 ---
 
 Falko besucht die **Gustav-Falke-Grundschule** in Berlin und schaut sich ihren Makespace an.

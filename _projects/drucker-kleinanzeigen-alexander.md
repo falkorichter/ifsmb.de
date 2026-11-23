@@ -2,20 +2,20 @@
 title: "IBM Proprinter von Kleinanzeigen wieder zum Laufen bringen"
 summary: Ein 24-Nadel-Nadeldrucker aus den Neunzigern, komplett mit Handbuch und Centronics-Kabel – im Moment bewegt sich kein Motor, weil die 24-Volt-Leitung irgendwo unterbrochen ist.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-11-15
-zeitraum: seit November 2026
+period: seit November 2026
 event_tag: proprinter
 tags: [proprinter, nadeldrucker, retro, altrechner]
 team:
   - alexander-riedel
-verwandt:
+related:
   - monocell
-verlinkt:
-  - /projekte/monocell/
+linked:
+  - /projects/monocell/
 image: /assets/images/projekte/drucker-kleinanzeigen-alexander/01.jpg
 updates:
-  - datum: 2026-11-17
+  - date: 2026-11-17
     text: |-
       **Der Plan steht:** Erst die Stromversorgung, dann der Anschluss. Der Drucker soll am Ende nicht nur an einem Rechner laufen, sondern im Netz hängen – siehe unten.
 uuid: 7e2e4f16-4f66-42a2-96d5-3504be25357e
@@ -32,7 +32,7 @@ Alexander hat das Gerät über Kleinanzeigen bekommen, samt Original-Handbuch un
 
 Weil er etwas kann, was kein Tinten- oder Laserdrucker kann: **Durchschläge**. Und weil das Geräusch dazugehört – ein Nadeldrucker klingt nach Arbeit.
 
-Der eigentliche Grund ist aber ein anderer. In [Monocell]({{ '/projekte/monocell/' | relative_url }}) gibt es einen Writer, der bereits auf genau diese Druckerfamilie vorbereitet ist: **PPDS**, also der Proprinter-Befehlssatz, 24-Nadel-Bitgrafik mit 180 dpi, Zeichensatz 2 für Umlaute, Seitenvorschübe. Der Textverarbeitung fehlt also nur noch der Drucker – und dem Drucker der Strom.
+Der eigentliche Grund ist aber ein anderer. In [Monocell]({{ '/projects/monocell/' | relative_url }}) gibt es einen Writer, der bereits auf genau diese Druckerfamilie vorbereitet ist: **PPDS**, also der Proprinter-Befehlssatz, 24-Nadel-Bitgrafik mit 180 dpi, Zeichensatz 2 für Umlaute, Seitenvorschübe. Der Textverarbeitung fehlt also nur noch der Drucker – und dem Drucker der Strom.
 
 ## Der zweite Schritt: ein Druckserver
 

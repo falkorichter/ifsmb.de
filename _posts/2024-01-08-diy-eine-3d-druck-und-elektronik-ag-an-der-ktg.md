@@ -5,7 +5,7 @@ author: falko-richter
 original_url: https://35services.de/2024/diy-eine-3d-druck-und-elektronik-ag-an-der-ktg/
 original_site: 35services.de
 tags: [35services, ktg, ktg-ag-jahr-1, rc-modellbau, axidraw, prusa-mk4, zazza]
-verlinkt: [/partner/zazza/]
+linked: [/partners/zazza/]
 uuid: 69781c47-bbeb-4388-8eac-fdd26e08c7ce
 ---
 

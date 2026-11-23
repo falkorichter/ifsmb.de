@@ -1,13 +1,13 @@
 ---
-suche: false # Übersichtsseite, nicht im Suchindex
+search: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Neuigkeiten
 i18n_title: pages.news.title
 i18n_lead: pages.news.lead
 lead: Was gerade im Institut passiert.
 ---
-{% assign inst_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" %}
-{% assign pers_posts = site.posts | where: "persoenlich", true %}
+{% assign inst_posts = site.posts | where_exp: "p", "p.personal != true" | where_exp: "p", "p.project_only != true" %}
+{% assign pers_posts = site.posts | where: "personal", true %}
 {% if inst_posts.size > 0 %}
 <div class="feed-abo-zeile">{% include feed-abo.html feed="/feed.xml" title_key="feed.title_institute" %}</div>
 <div class="gelesen-fortschritt" data-bereich=".post-list-full" hidden><div class="gelesen-fortschritt-balken"><span></span></div><span class="gelesen-fortschritt-text"></span></div>
@@ -25,5 +25,5 @@ lead: Was gerade im Institut passiert.
 {% endif %}
 
 {% if pers_posts.size > 0 %}
-<p class="section-foot"><a href="{{ '/news/persoenlich/' | relative_url }}" data-i18n="pages.news.personal_link" data-i18n-params="{{ "n" | i18n_params: pers_posts.size }}">{{ "pages.news.personal_link" | t: "n", pers_posts.size }}</a></p>
+<p class="section-foot"><a href="{{ '/news/personal/' | relative_url }}" data-i18n="pages.news.personal_link" data-i18n-params="{{ "n" | i18n_params: pers_posts.size }}">{{ "pages.news.personal_link" | t: "n", pers_posts.size }}</a></p>
 {% endif %}

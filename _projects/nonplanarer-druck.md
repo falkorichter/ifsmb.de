@@ -2,9 +2,9 @@
 title: "Non-Planar 3D Druck"
 summary: Falko, Alexander und Jan ergründen nonplanaren 3D-Druck. Alexander druckt schon zweifarbig nonplanar und hat mit Impasto ein Werkzeug gebaut, das auf fertig geslicten G-Code eine zusätzliche Dekorschicht legt – bis zu vier Farben.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-11-15
-zeitraum: seit November 2026
+period: seit November 2026
 event_tag: nonplanar
 tags: [nonplanar, impasto, 3d-drucker, bambu-lab-a1-mini, 35services]
 team:
@@ -13,17 +13,17 @@ team:
   - jan
 partners:
   - 35 services e. V.
-verlinkt:
+linked:
   - /todos/#falko-richter/non-planar-slicing
-  - /ausstattung/35services-bambu-lab-a1-mini/
-  - /presse/#badge
+  - /equipment/35services-bambu-lab-a1-mini/
+  - /press/#badge
 updates:
-  - datum: 2026-11-17
+  - date: 2026-11-17
     text: |-
       **Das Werkzeug hat jetzt einen Namen:** Aus dem Arbeitstitel „Non-Planar GCoder" ist **Impasto** geworden – der Malerbegriff für Farbe, die so dick aufgetragen ist, dass die Pinselspur aus der Fläche steht. Version 0.4.0 liegt offen auf GitHub: [3p1cball-code/impasto](https://github.com/3p1cball-code/impasto) (AGPL-3.0-or-later).
 
       Neben dem Namen ist einiges dazugekommen: eine Kollisionsprüfung gegen Kopfprofile, echte Prioritätsregeln bei überlappenden Elementen, ein Wipe beim Rückzug gegen Oozing, ein Schrägen-Ausgleich und ein Warp-Ausgleich, der die Düse über einem verzogenen Bauteil nicht schleifen lässt.
-  - datum: 2026-11-15
+  - date: 2026-11-15
     text: |-
       **Eigener Prozess für nachträglich angepassten G-Code:** Aus verschiedenen Quellen aus dem Netz, seinen eigenen Vorlieben und den Funktionen, die er braucht, hat [Alexander](/team/alexander-riedel/) einen eigenen Prozess entwickelt, um G-Code im Nachhinein anzupassen („Non-Planar GCoder“). Damit behält man die gewohnte Qualität und den normalen Druckprozess aus Bambu Studio – plus optional eine **nonplanare Deckschicht (Top Layer)** auf der gewölbten Oberfläche.
 
@@ -36,7 +36,7 @@ image: /assets/video/projekte/nonplanarer-druck/01.jpg
 uuid: 8ec30934-7816-47da-ac7e-7e7407465672
 ---
 
-Ein neues privates Projekt von [Alexander Riedel]({{ '/team/alexander-riedel/' | relative_url }}) – und [Falko]({{ '/team/falko-richter/' | relative_url }}) und [Jan]({{ '/team/jan/' | relative_url }}) sind auch total interessiert. Der [Bambu Lab A1 mini]({{ '/ausstattung/35services-bambu-lab-a1-mini/' | relative_url }}) von [35services e. V.]({{ '/partner/35services/' | relative_url }}) ist ideal für dieses Experiment. Wir wollen **nonplanaren 3D-Druck** ergründen. Normalerweise druckt ein 3D-Drucker in flachen Schichten übereinander. Beim nonplanaren Druck folgen die Schichten dagegen der Form des Bauteils – gewölbte Oberflächen werden glatt statt treppenförmig.
+Ein neues privates Projekt von [Alexander Riedel]({{ '/team/alexander-riedel/' | relative_url }}) – und [Falko]({{ '/team/falko-richter/' | relative_url }}) und [Jan]({{ '/team/jan/' | relative_url }}) sind auch total interessiert. Der [Bambu Lab A1 mini]({{ '/equipment/35services-bambu-lab-a1-mini/' | relative_url }}) von [35services e. V.]({{ '/partners/35services/' | relative_url }}) ist ideal für dieses Experiment. Wir wollen **nonplanaren 3D-Druck** ergründen. Normalerweise druckt ein 3D-Drucker in flachen Schichten übereinander. Beim nonplanaren Druck folgen die Schichten dagegen der Form des Bauteils – gewölbte Oberflächen werden glatt statt treppenförmig.
 
 Alexander hat das schon ausprobiert: Er druckt **zweifarbig nonplanar** und experimentiert weiter. Im Video entsteht eine Brillenfassung – der schwarze Unterbau steht auf Baumstützen, die weiße Oberfläche wird nonplanar obendrauf gedruckt und folgt der Wölbung der Brille.
 
@@ -92,7 +92,7 @@ Die Bilder zeigen den gedruckten Stand mit „Alex" im Schriftband. Die schwarze
 ![Nahaufnahme von der Seite: die schwarze Platte wölbt sich zur Mitte, die weißen Buchstaben stehen erhaben darauf; auf der weißen Fläche laufen die Bahnen strahlenförmig nach außen](/assets/images/projekte/nonplanarer-druck/06.jpg)
 {: .gallery}
 
-Das Badge gibt es zum Selbstdrucken: [Badges auf der Presseseite]({{ '/presse/#badge' | relative_url }}) — als 3MF mit zwei eingefärbten Objekten, als STL für den Farbwechsel per Pause und als drehbares Modell im Browser.
+Das Badge gibt es zum Selbstdrucken: [Badges auf der Presseseite]({{ '/press/#badge' | relative_url }}) — als 3MF mit zwei eingefärbten Objekten, als STL für den Farbwechsel per Pause und als drehbares Modell im Browser.
 
 ## Stand
 

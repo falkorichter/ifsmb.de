@@ -46,23 +46,23 @@ content:
         description: Uhrzeiten werden dann ignoriert.
         type: boolean
         default: false
-      - name: persoenlich
+      - name: personal
         label: Persönlicher Termin
         description: "Privater Termin einer Person aus dem Team (unter „Dabei aus dem Team“ eintragen): erscheint nicht auf der Startseite, im Kalender und im iCal-Abo, sondern nur im Teamprofil."
         type: boolean
         default: false
-      - name: nur_projekt
+      - name: project_only
         label: Nur fürs Projekt (bis er stattgefunden hat)
         description: Kommende Termine erscheinen dann nicht auf der Startseite, im Kalender und im iCal-Abo, sondern nur auf der Projektseite (über die Kategorie). Nach dem Termin erscheint er ganz normal unter „Vergangene Termine“.
         type: boolean
         default: false
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
-      - name: orte
-        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+      - name: places
+        label: Orte auf der Karte (IDs aus _data/places.yml, z. B. ktg)
         description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
@@ -71,7 +71,7 @@ content:
         description: Projekte mit derselben Kategorie unter „Termine-Kategorie“ zeigen diesen Termin automatisch an.
         type: string
         list: true
-      - name: projekte
+      - name: projects
         label: Gehört zu den Projekten (Kürzel, z. B. openpress-bauen)
         description: Der Termin erscheint auf jeder dieser Projektseiten unter „Termine & Berichte“ – zusätzlich zu Projekten mit passender Kategorie.
         type: string
@@ -98,10 +98,10 @@ content:
         type: text
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen auf WhatsApp, Signal, Mastodon, LinkedIn, Facebook oder X (og:image). Ohne Angabe wird das erste Seitenbild oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
@@ -156,21 +156,21 @@ content:
       - name: author
         label: Autor*in (Team-Kürzel, z. B. falko-richter)
         type: string
-      - name: persoenlich
+      - name: personal
         label: Persönlicher Beitrag
         description: "Privates Makespace-Update einer Person aus dem Team: erscheint nicht unter Neuigkeiten, sondern im Profil (Autor*in) und unter „Persönliche Blogs“."
         type: boolean
-      - name: nur_projekt
+      - name: project_only
         label: Nur fürs Projekt
         description: "Kleines Projekt-Update: erscheint nicht unter Neuigkeiten, auf der Startseite und im RSS-Feed, sondern nur auf der Projektseite (über die Kategorie)."
         type: boolean
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
-      - name: orte
-        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+      - name: places
+        label: Orte auf der Karte (IDs aus _data/places.yml, z. B. ktg)
         description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
@@ -187,10 +187,10 @@ content:
         type: string
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen auf WhatsApp, Signal, Mastodon, LinkedIn, Facebook oder X (og:image). Ohne Angabe wird das erste Beitragsbild oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
@@ -229,7 +229,7 @@ content:
         default: aktuell
         options:
           values: [idee, anfrage, aktuell, abgeschlossen]
-      - name: persoenlich
+      - name: personal
         label: Persönliches Projekt
         description: "Privates Projekt einer Person aus dem Team (unter Team eintragen): erscheint nicht in den Projektlisten, sondern im Profil und unter „Persönliche Projekte“."
         type: boolean
@@ -238,18 +238,18 @@ content:
         type: date
         options:
           format: "yyyy-MM-dd"
-      - name: zeitraum
+      - name: period
         label: Zeitraum (Text, z. B. „seit November 2026“)
         type: string
-      - name: ort
+      - name: location
         label: Ort
         type: string
-      - name: teil_von
+      - name: part_of
         label: Teilprojekt von (Kürzel der Projekte, z. B. 3d-druck-ag-ktg)
         description: Teilprojekte erscheinen nicht in den Projektübersichten, sondern unter „Teilprojekte“ auf der Seite jedes übergeordneten Projekts. Ein Teilprojekt kann zu mehreren Projekten gehören.
         type: string
         list: true
-      - name: verwandt
+      - name: related
         label: Verwandte Projekte (Kürzel, z. B. ipad-stifte-wiederbeleben)
         description: Erscheinen unten unter „Verwandte Projekte“ – auf beiden Seiten, es reicht ein Eintrag bei einem der Projekte.
         type: string
@@ -264,7 +264,7 @@ content:
         type: object
         list: true
         fields:
-          - name: datum
+          - name: date
             label: Datum
             type: date
             options:
@@ -277,10 +277,10 @@ content:
         type: image
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen auf WhatsApp, Signal, Mastodon, LinkedIn, Facebook oder X (og:image). Ohne Angabe wird das Projektbild, das erste Galeriebild oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
@@ -298,13 +298,13 @@ content:
         type: rich-text
         options:
           format: markdown
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
-      - name: orte
-        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+      - name: places
+        label: Orte auf der Karte (IDs aus _data/places.yml, z. B. ktg)
         description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
@@ -334,7 +334,7 @@ content:
       - name: order
         label: Reihenfolge
         type: number
-      - name: nicht_im_team
+      - name: not_in_team
         label: Nicht auf /team/ auflisten (nur eigene Seite zum Verlinken)
         description: Die Person hat trotzdem eine eigene Seite unter /team/<kürzel>/ und kann überall verlinkt werden (team, author, owner_team, verlinkt), erscheint aber nicht in der Übersicht auf /team/.
         type: boolean
@@ -355,10 +355,10 @@ content:
         type: image
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen des Profils (og:image). Ohne Angabe wird das Profilfoto oder das Standardbild genutzt.
@@ -379,8 +379,8 @@ content:
         type: rich-text
         options:
           format: markdown
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
@@ -404,7 +404,7 @@ content:
         label: Name des Geräts
         type: string
         required: true
-      - name: kategorie
+      - name: category
         label: Kategorie (z. B. 3D-Drucker (FDM), Schneidplotter, Messgerät)
         type: string
       - name: summary
@@ -423,11 +423,11 @@ content:
         label: Gehört jemand anderem (Name, falls weder Partner noch Team)
         type: string
         list: true
-      - name: standort
+      - name: location
         label: Standort (Text, z. B. „Kurt-Tucholsky-Grundschule (3D-Druck AG)“)
         description: Wo das Gerät steht. Erscheint auf der Geräteseite und im Netzwerk als Ort.
         type: string
-      - name: standort_partner
+      - name: location_partner
         label: Standort bei Partner (Name wie in der Partnerliste)
         description: Optional – verlinkt den Standort mit dem Partner, im Netzwerk als Linie „steht bei“.
         type: string
@@ -456,21 +456,21 @@ content:
         type: boolean
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen auf WhatsApp, Signal, Mastodon, LinkedIn, Facebook oder X (og:image). Ohne Angabe wird das Gerätefoto oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
         type: image
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
-      - name: orte
-        label: Orte auf der Karte (IDs aus _data/orte.yml, z. B. ktg)
+      - name: places
+        label: Orte auf der Karte (IDs aus _data/places.yml, z. B. ktg)
         description: Nur nötig, wenn der Ort nicht automatisch erkannt wird (über Adresse, Ort, Standort oder Partner).
         type: string
         list: true
@@ -485,7 +485,7 @@ content:
         type: object
         list: true
         fields:
-          - name: datum
+          - name: date
             label: Datum
             type: date
             options:
@@ -499,10 +499,10 @@ content:
         options:
           format: markdown
 
-  - name: herausforderungen
+  - name: challenges
     label: Herausforderungen
     type: collection
-    path: _herausforderungen
+    path: _challenges
     filename: "{primary}.md"
     view:
       fields: [title, status, art]
@@ -521,7 +521,7 @@ content:
       - name: summary
         label: Kurzbeschreibung (ein Satz, erscheint auf der Karte)
         type: text
-      - name: art
+      - name: kind
         label: Art
         type: select
         options:
@@ -532,16 +532,16 @@ content:
         type: select
         options:
           values: [offen, in-arbeit, geloest]
-      - name: seit
+      - name: since
         label: Seit
         type: date
-      - name: geloest_am
+      - name: solved_on
         label: Gelöst am
         type: date
-      - name: wichtig
+      - name: important
         label: Wichtig (Eisenhower-Matrix)
         type: boolean
-      - name: dringend
+      - name: urgent
         label: Dringend (Eisenhower-Matrix)
         description: wichtig + dringend = sofort erledigen, nur wichtig = einplanen, nur dringend = abgeben, keins = später
         type: boolean
@@ -549,16 +549,16 @@ content:
         label: Zuständig (Team-Kürzel, eine oder mehrere Personen)
         type: string
         list: true
-      - name: projekte
+      - name: projects
         label: Gehört zu Projekten (Dateinamen, z. B. mural-wandplotter)
         description: Ein Projekt hat viele Herausforderungen – sie erscheinen auf der Projektseite unter „Herausforderungen“.
         type: string
         list: true
-      - name: persoenlich
+      - name: personal
         label: Persönlich (aus einem privaten Projekt im Team)
         type: boolean
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /kalender/…/ oder /ausstattung/…/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /calendar/…/ oder /equipment/…/)
         description: Beliebige Seiten verlinken – Termine, Beiträge, Geräte, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten.
         type: string
         list: true
@@ -566,15 +566,15 @@ content:
         label: Stichworte (das event_tag eines Projekts verbindet auch mit dem Projekt)
         type: string
         list: true
-      - name: loesung
+      - name: solution
         label: Lösung (wenn gelöst, Markdown)
         type: text
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen (og:image). Ohne Angabe wird das Standardbild genutzt.
@@ -613,8 +613,8 @@ content:
         required: true
         options:
           format: "yyyy-MM-dd"
-      - name: verlinkt
-        label: Verlinkt mit (Adressen, z. B. /projekte/openpress-bauen/ oder /team/anton/)
+      - name: linked
+        label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
         type: string
         list: true
@@ -629,15 +629,15 @@ content:
         label: E-Mail des Kontakts, base64-kodiert
         description: "Erzeugen im Terminal: printf 'name@example.org' | base64"
         type: string
-      - name: contact_email_anzeige
+      - name: contact_email_display
         label: Anzeigetext der E-Mail (z. B. name [at] example.org)
         type: string
       - name: theme
         label: Theme (Aussehen, optional)
-        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs. Liste: _data/themes.yml"
+        description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
         type: select
         options:
-          values: ["", ifsmb, offene-werkstaetten, rfflabs]
+          values: ["", ifsmb, offene-werkstaetten, rfflabs, slop]
       - name: social_media_preview_image
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen der Pressemitteilung (og:image). Ohne Angabe wird das erste Bild oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
@@ -660,38 +660,38 @@ content:
         type: text
         required: true
 
-  - name: presse
+  - name: press_profile
     label: Presse – Kurzprofil & Kontakt
     type: file
-    path: _data/presse.yml
+    path: _data/press.yml
     fields:
-      - name: kurzprofil
+      - name: short_profile
         label: Kurzprofil
         type: text
-      - name: kontakt_name
+      - name: contact_name
         label: Pressekontakt – Name
         type: string
-      - name: kontakt_email_b64
+      - name: contact_email_b64
         label: Pressekontakt – E-Mail (base64-kodiert)
         description: "Damit Spam-Bots die Adresse nicht finden. Erzeugen im Terminal: printf 'presse@ifsmb.de' | base64"
         type: string
-      - name: kontakt_email_anzeige
+      - name: contact_email_display
         label: Pressekontakt – Anzeigetext der E-Mail (z. B. presse [at] ifsmb.de)
         type: string
-      - name: kontakt_telefon
+      - name: contact_phone
         label: Pressekontakt – Telefon (sichtbar im Quelltext; besser das Feld darunter)
         type: string
-      - name: kontakt_telefon_b64
+      - name: contact_phone_b64
         label: Pressekontakt – Telefon (base64-kodiert, wird per JavaScript angezeigt)
         type: string
-      - name: bildnachweis
+      - name: photo_credit
         label: Bildnachweis für Pressefotos
         type: string
 
-  - name: pressematerial
+  - name: press_kit
     label: Presse – Material zum Download
     type: file
-    path: _data/pressematerial.yml
+    path: _data/press_kit.yml
     list: true
     fields:
       - name: title
@@ -729,8 +729,8 @@ content:
         label: Logo braucht dunklen Hintergrund
         type: boolean
       - name: page
-        label: Eigene Seite (optional, z. B. /partner/taschenstation/)
-        description: Pfad zu einer Unterseite mit mehr Infos zur Zusammenarbeit. Die Seite selbst liegt als Datei unter partner/<name>/index.md.
+        label: Eigene Seite (optional, z. B. /partners/taschenstation/)
+        description: Pfad zu einer Unterseite mit mehr Infos zur Zusammenarbeit. Die Seite selbst liegt als Datei unter partners/<name>/index.md.
         type: string
       - name: description
         label: Beschreibung

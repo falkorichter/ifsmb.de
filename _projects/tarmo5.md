@@ -3,7 +3,7 @@ title: "Tarmo5 bauen?"
 summary: Ein 3D-gedrucktes RC-Auto zum Selberbauen – Druckteile, Elektronik und viel Schrauberei.
 status: idee
 start: 2026-11-09
-zeitraum: Idee aus dem November 2026
+period: Idee aus dem November 2026
 event_tag: tarmo5
 tags: [3d-drucker]
 team:

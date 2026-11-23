@@ -1,0 +1,48 @@
+---
+search: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Herausforderungen
+i18n_title: pages.challenges.title
+i18n_lead: pages.challenges.lead
+lead: Unsere Bestandsaufnahme – Aufgaben, Probleme und offene Fragen aus unseren Projekten, gesammelt und dokumentiert. Kleiner als ein Projekt, aber oft genau das, wobei ihr helfen könnt.
+linked: [/todos/]
+---
+{%- comment -%}
+  Overview of all challenges: open ones (in progress first) in an Eisenhower matrix, solved below as cards, personal ones at the end.
+{%- endcomment -%}
+<div class="prose intro">
+  <p>Ein Projekt besteht aus vielen kleinen <strong>Herausforderungen</strong>: Welche Motoren passen? Wer besorgt die Platine? Warum haftet das Filament nicht? Jede Herausforderung gehört zu einem oder mehreren <a href="{{ '/projects/' | relative_url }}">Projekten</a>, Terminen oder Menschen – und jemand aus dem <a href="{{ '/team/' | relative_url }}">Team</a> kümmert sich darum.</p>
+  <p>Ihr wisst eine Antwort oder habt das passende Teil? Meldet euch!</p>
+  <p>Hier sammeln und dokumentieren wir erst einmal, was es zu lösen gibt. Wer etwas davon konkret anpackt, macht daraus ein <a href="{{ '/todos/' | relative_url }}">Todo</a> – die werden pro Person in der Eisenhower-Matrix verfolgt.</p>
+</div>
+{%- assign all = site.challenges | sort: "title" -%}
+{%- assign inst = all | where_exp: "h", "h.personal != true" -%}
+{%- assign personal = all | where: "personal", true -%}
+{%- assign h_open = inst | where_exp: "h", "h.status != 'geloest'" -%}
+{%- assign h_wip = h_open | where: "status", "in-arbeit" -%}
+{%- assign h_todo = h_open | where_exp: "h", "h.status != 'in-arbeit'" -%}
+{%- assign h_open = h_wip | concat: h_todo -%}
+{%- assign h_done = inst | where: "status", "geloest" -%}
+<nav class="equipment-jump">
+  <a href="#offen"><span data-i18n="badge.open">{{ "badge.open" | t }}</span> ({{ h_open.size }})</a>{% if h_done.size > 0 %} · <a href="#geloest"><span data-i18n="badge.solved">{{ "badge.solved" | t }}</span> ({{ h_done.size }})</a>{% endif %}{% if personal.size > 0 %} · <a href="#persoenlich"><span data-i18n="badge.personal">{{ "badge.personal" | t }}</span> ({{ personal.size }})</a>{% endif %}
+</nav>
+
+<h2 class="cal-heading" id="offen" data-i18n="pages.challenges.open_heading">{{ "pages.challenges.open_heading" | t }}</h2>
+{%- capture link_matrix %}<a href="https://de.wikipedia.org/wiki/Eisenhower-Prinzip" data-i18n="matrix.name">{{ "matrix.name" | t }}</a>{% endcapture %}
+<p class="muted" data-i18n="pages.challenges.open_intro">{{ "pages.challenges.open_intro" | t_html: link_matrix, "<code>wichtig</code>", "<code>dringend</code>" }}</p>
+{% include eisenhower.html list=h_open %}
+
+{% if h_done.size > 0 %}
+<h2 class="cal-heading" id="geloest" data-i18n="badge.solved">{{ "badge.solved" | t }}</h2>
+<div class="grid-2">
+  {% for h in h_done %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% endif %}
+
+{% if personal.size > 0 %}
+<h2 class="cal-heading" id="persoenlich" data-i18n="pages.challenges.personal_heading">{{ "pages.challenges.personal_heading" | t }}</h2>
+<p class="muted" data-i18n="pages.challenges.personal_intro">{{ "pages.challenges.personal_intro" | t }}</p>
+<div class="grid-2">
+  {% for h in personal %}{% include herausforderung-karte.html h=h %}{% endfor %}
+</div>
+{% endif %}

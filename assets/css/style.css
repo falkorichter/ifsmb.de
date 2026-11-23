@@ -421,7 +421,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .cal-heading-abo { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 2.5rem 0 1.25rem; }
 .cal-heading-abo h2 { margin: 0; }
 .abo-open { white-space: nowrap; }
-/* subscribe dialog on /kalender/ (native <dialog>) */
+/* subscribe dialog on /calendar/ (native <dialog>) */
 .abo-dialog {
   margin: auto;
   max-width: min(560px, calc(100vw - 2rem));
@@ -704,6 +704,14 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 @media (max-width: 1080px) and (min-width: 721px) { .site-nav a, .nav-group-toggle { padding: .4rem .5rem; font-size: .92rem; } .brand-name { display: none; } }
 .offer-contact { margin-bottom: 2.5rem; font-weight: 600; }
 .equipment-jump { margin: .5rem 0 0; font-weight: 600; }
+/* separators only between visible jump links (equipment-filter.js hides empty groups) */
+.equipment-jump a[hidden] { display: none; }
+.equipment-jump a:not([hidden]) ~ a:not([hidden])::before { content: "·"; display: inline-block; margin: 0 .4em 0 0; text-decoration: none; color: var(--ink); font-weight: 400; }
+.equipment-filter { margin: .75rem 0 0; font-size: .95rem; }
+.equipment-filter p { margin: .25rem 0; }
+.equipment-filter-label { font-weight: 600; }
+.equipment-filter a[aria-current] { font-weight: 700; text-decoration-thickness: 3px; }
+.equipment-filter-status { padding: .4rem .6rem; border-left: 4px solid var(--ink); background: var(--paper); }
 .equipment-thumb img[src$=".svg"] { object-fit: contain; background: #fff; }
 .project-updates { margin-top: 2.5rem; }
 .update-list { list-style: none; border-left: 3px solid var(--accent); padding-left: 1.2rem; display: grid; gap: 1.2rem; }
@@ -764,7 +772,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .ai-note p { margin: 0; }
 .our-note { background: #fff4c2; border-left: 4px solid var(--accent); border-radius: 6px; padding: .6rem .9rem; margin: .8rem 0 1.2rem; }
 
-/* Suche (Pagefind, /suche/) – Inhalt bleibt Flex-Kind von body */
+/* Suche (Pagefind, /search/) – Inhalt bleibt Flex-Kind von body */
 .search-body { display: contents; }
 .search-ui {
   --pagefind-ui-scale: .9;
@@ -782,7 +790,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 .search-ui .pagefind-ui__result-link:hover { color: var(--accent-2); }
 .search-ui mark { background: var(--accent); color: var(--ink); }
 
-/* network page (/netzwerk/, assets/js/netzwerk.js) */
+/* network page (/network/, assets/js/netzwerk.js) */
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .netz-controls { display: flex; flex-wrap: wrap; gap: .5rem .75rem; align-items: center; margin-bottom: .75rem; }
 .netz-search input { font: inherit; padding: .4rem .8rem; border: 2px solid var(--ink); border-radius: 999px; min-width: 14rem; background: var(--paper); }
@@ -858,7 +866,7 @@ a.link-tot::after { content: "🪦"; content: "🪦" / "(Link tot)"; text-decora
 /* photo credit under a team member's name */
 .photo-credit { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
 
-/* Map of the network (/karte/), see assets/js/karte.js */
+/* Map of the network (/map/), see assets/js/karte.js */
 .karte-hinweis { margin: 0; font-size: .9rem; }
 .karte-rahmen { position: relative; }
 .karte-map { position: relative; width: 100%; height: 72vh; min-height: 420px; border: 2px solid var(--ink); border-radius: var(--radius); background: #e8e4da; overflow: hidden; outline-offset: 3px; }
@@ -1118,7 +1126,7 @@ body.todos-ziehen, body.todos-ziehen * { cursor: grabbing !important; user-selec
 .neu-vorschau mark.changed-line { background: #fff1a8; color: inherit; border-radius: 2px; box-shadow: -.3rem 0 0 #fff1a8, .3rem 0 0 #fff1a8; }
 [data-submit]:disabled { opacity: .5; cursor: not-allowed; }
 
-/* Eisenhower matrix of challenges (/herausforderungen/): columns dringend / nicht dringend, rows wichtig / nicht wichtig.
+/* Eisenhower matrix of challenges (/challenges/): columns dringend / nicht dringend, rows wichtig / nicht wichtig.
    Own hm-* classes so the todo matrix (.todos-*) stays independent. */
 .hm-matrix { display: grid; grid-template-columns: 2rem 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: .6rem; margin: 1rem 0 1.5rem; }
 .hm-axis { font-family: var(--mono); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
@@ -1169,6 +1177,7 @@ kbd { display: inline-block; font-family: var(--mono); font-size: .8em; line-hei
 .github-body ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
 .github-who { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin: 0; }
 .github-who img { border-radius: 50%; border: 1px solid var(--ink); }
+.github-who > span { flex: 1 1 0; min-width: 0; }
 .photo-dialog { width: min(1300px, 98vw); }
 .photo-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 1rem; padding: 1rem; overflow: auto; min-height: 0; }
 .photo-main { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }

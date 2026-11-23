@@ -2,7 +2,7 @@
 
 Alles, worauf ifsmb.de angewiesen ist – im Browser, beim Bauen, in den Tests und in lokalen Skripten. Regeln in `CLAUDE.md` unter „Abhängigkeiten“: **Was hier nicht steht, wird nicht benutzt.** Neue, aktualisierte und entfernte Einträge kommen mit genauer Version auch ins `CHANGELOG.md` und in die PR-Beschreibung.
 
-Stand: 21.11.2026
+Stand: 23.11.2026
 
 ## 1. Im Browser (wird an Besucher*innen ausgeliefert)
 
@@ -24,7 +24,7 @@ Stand: 21.11.2026
 | Aktualisieren | neue Version wie oben holen, beide Dateien ersetzen, Version/SHA-256 hier und in der README daneben eintragen, Bundle wieder auf externe Adressen prüfen, Formulare im Browser testen (Editor da, Werkzeugleiste und 🛠️-Schalter, Kürzel aus dem Beitrag `_posts/2026-11-17-mitschreiben-leicht-gemacht.md`, ✏️ markiert nur geänderte Zeilen), `CHANGELOG.md` |
 | Entfernen | Ordner löschen und `markdown: true` bzw. `createMarkdownEditors()` in `neu.js` entfernen – die Formulare fallen dann auf das normale Textfeld zurück |
 
-### Pagefind – Volltextsuche (`/suche/`)
+### Pagefind – Volltextsuche (`/search/`)
 
 | | |
 |---|---|
@@ -33,8 +33,8 @@ Stand: 21.11.2026
 | Herkunft | npm, beim Deployment mit `npx -y pagefind@1.5.2 --site _site` (`.github/workflows/pages.yml`) – erzeugt `_site/pagefind/` |
 | Liegt in | nicht im Repo; entsteht bei jedem Deployment |
 | Lizenz | MIT |
-| Benutzt von | `suche/`, `_includes/formular-config.html` (Volltextsuche in den Chip-Feldern der Formulare), `_includes/verknuepft.html`, `_includes/todos-knopf.html` |
-| Aktualisieren | Version in `pages.yml` ändern, nach dem Deployment `/suche/` und die Seitensuche in den Formularen testen |
+| Benutzt von | `search/`, `_includes/formular-config.html` (Volltextsuche in den Chip-Feldern der Formulare), `_includes/verknuepft.html`, `_includes/todos-knopf.html` |
+| Aktualisieren | Version in `pages.yml` ändern, nach dem Deployment `/search/` und die Seitensuche in den Formularen testen |
 
 ### VT323 – Schrift für Themes
 
@@ -89,6 +89,42 @@ Stand: 21.11.2026
 | Änderungen | keine – unveränderte Kopie |
 | Aktualisieren | `npm pack` mit neuer Version, Datei(en) ersetzen, SHA-256 hier und in der README daneben eintragen, Seiten mit `?theme=…` ansehen, `CHANGELOG.md` |
 | Entfernen | Ordner und `@font-face`-Regel löschen, Schrift aus den Variablen in `themes.css` nehmen – Theme fällt auf system-ui zurück |
+
+### Inter – Schrift für Themes
+
+| | |
+|---|---|
+| Zweck | Theme „Slop ✨“: alle Texte (wie bei Slopstrap) |
+| Version | **4.1** – `InterVariable.woff2` (Version 4.001), variable Schrift mit den Achsen `wght` 100–900 und `opsz` 14–32, voller Zeichensatz (nicht nur Latin) |
+| Herkunft | https://github.com/rsms/inter · geholt mit `git clone --depth 1 --filter=blob:none --sparse --branch v4.1 https://github.com/rsms/inter && git -C inter sparse-checkout set docs/font-files` (Commit `e3a3d4c57d5ecc01453a575621882a384c1995a3`), daraus `docs/font-files/InterVariable.woff2` und `LICENSE.txt` (23.11.2026) – nicht von Google Fonts oder einem CDN |
+| Liegt in | `assets/fonts/inter/` (Schrift, `LICENSE`, `README.md`) |
+| SHA-256 | `693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3` |
+| Lizenz | SIL Open Font License 1.1 (Copyright 2016 The Inter Project Authors), Lizenztext liegt daneben |
+| Größe | 344 KB (WOFF2) – größer als die anderen Schriften, weil ungekürzt (alle Sprachen); ein Latin-Teilset bräuchte ein Werkzeug (fontTools + brotli) und wäre keine unveränderte Kopie mehr |
+| Benutzt von | `assets/css/themes.css` (`@font-face`) |
+| Wann geladen | nur, wenn das Theme „Slop ✨“ aktiv ist – das Standard-Theme lädt sie nie |
+| Geprüft | reine Schriftdatei, keine externen Adressen; Umlaute, ß, „“, – und € vorhanden (mit `fontTools` an der TTF-Version desselben Tags geprüft) |
+| Änderungen | keine – unveränderte Kopie |
+| Aktualisieren | neuen Tag wie oben holen, Datei ersetzen, SHA-256 hier und in der README daneben eintragen, Seiten mit `?theme=slop` ansehen, `CHANGELOG.md` |
+| Entfernen | Ordner und `@font-face`-Regel löschen – das Theme fällt auf system-ui zurück |
+
+### Instrument Serif – Schrift für Themes
+
+| | |
+|---|---|
+| Zweck | Theme „Slop ✨“: das kursive Serifenwort im Slogan (Hervorhebung `.hl`) |
+| Version | **1.000** – nur der Schnitt Italic |
+| Herkunft | https://github.com/Instrument/instrument-serif · geholt mit `git clone --depth 1 https://github.com/Instrument/instrument-serif` (Commit `65c0ef225f386a3c7e87570a4aa9cc0262c2fd81` vom 26.04.2023 – das Repo hat keine Tags), daraus `fonts/webfonts/InstrumentSerif-Italic.woff2` und `OFL.txt` (23.11.2026) |
+| Liegt in | `assets/fonts/instrument-serif/` (Schrift, `LICENSE`, `README.md`) |
+| SHA-256 | `4f7aacc18d491dea8778bbc591db87b9455625899ed5f913957e7fd82604c294` |
+| Lizenz | SIL Open Font License 1.1 (Copyright 2022 The Instrument Serif Project Authors), Lizenztext liegt daneben |
+| Größe | 28 KB (WOFF2) |
+| Benutzt von | `assets/css/themes.css` (`@font-face`) |
+| Wann geladen | nur, wenn das Theme „Slop ✨“ aktiv ist und ein hervorgehobenes Wort auf der Seite steht |
+| Geprüft | reine Schriftdatei, keine externen Adressen; Umlaute, ß, „“, – und € vorhanden |
+| Änderungen | keine – unveränderte Kopie |
+| Aktualisieren | Repo neu klonen, Datei ersetzen, SHA-256 und Commit hier und in der README eintragen, `?theme=slop` ansehen, `CHANGELOG.md` |
+| Entfernen | Ordner und `@font-face`-Regel löschen – das Theme fällt auf Georgia zurück |
 
 ## 2. Bauen und Veröffentlichen (GitHub Actions)
 

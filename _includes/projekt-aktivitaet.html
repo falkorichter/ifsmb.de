@@ -5,11 +5,11 @@
 {%- assign pa = include.project -%}
 {%- assign pa_url = pa.url | relative_url -%}
 {%- assign n_sub = 0 -%}
-{%- for x in site.projects -%}{%- assign xp = x.teil_von | join: "," | split: "," -%}{%- if xp contains pa.slug %}{% assign n_sub = n_sub | plus: 1 %}{% endif -%}{%- endfor -%}
+{%- for x in site.projects -%}{%- assign xp = x.part_of | join: "," | split: "," -%}{%- if xp contains pa.slug %}{% assign n_sub = n_sub | plus: 1 %}{% endif -%}{%- endfor -%}
 {%- assign n_ev = 0 -%}{%- assign n_up = 0 -%}
 {%- assign now_s = site.time | date: "%s" | plus: 0 -%}
 {%- for e in site.events -%}
-  {%- assign ep = e.projekte | join: "," | split: "," -%}
+  {%- assign ep = e.projects | join: "," | split: "," -%}
   {%- if ep contains pa.slug or pa.event_tag and e.tags contains pa.event_tag -%}
     {%- assign n_ev = n_ev | plus: 1 -%}
     {%- if e.end and e.end != "" %}{% assign es = e.end | date: "%s" | plus: 0 %}{% else %}{% assign es = e.start | date: "%s" | plus: 7200 %}{% endif -%}
@@ -21,9 +21,9 @@
 {%- assign n_eq = 0 -%}
 {%- if pa.event_tag -%}{%- for x in site.equipment -%}{%- if x.tags contains pa.event_tag %}{% assign n_eq = n_eq | plus: 1 %}{% endif -%}{%- endfor -%}{%- endif -%}
 {%- assign n_ch = 0 -%}
-{%- for x in site.herausforderungen -%}
+{%- for x in site.challenges -%}
   {%- if x.status == "geloest" %}{% continue %}{% endif -%}
-  {%- assign xp = x.projekte | join: "," | split: "," -%}{%- assign xt = x.tags | join: "," | split: "," -%}
+  {%- assign xp = x.projects | join: "," | split: "," -%}{%- assign xt = x.tags | join: "," | split: "," -%}
   {%- if xp contains pa.slug or pa.event_tag and xt contains pa.event_tag %}{% assign n_ch = n_ch | plus: 1 %}{% endif -%}
 {%- endfor -%}
 {%- assign n_team = pa.team.size | default: 0 -%}

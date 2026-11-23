@@ -7,12 +7,12 @@
 title: "Titel des Beitrags"
 date: JJJJ-MM-TT 12:00:00 TZTZ
 author: {{ include.author | default: "falko-richter" }}   # Team-Kürzel (Dateiname in _team/), mehrere als Liste: [falko-richter, jan]
-persoenlich: {{ include.persoenlich | default: false }}   # true = persönliches Update: nicht unter Neuigkeiten, sondern im Teamprofil („Persönlicher Blog“)
+personal: {{ include.personal | default: false }}   # true = persönliches Update: nicht unter Neuigkeiten, sondern im Teamprofil („Persönlicher Blog“)
 tags: [{{ include.tags }}]   # Stichworte, z. B. [ktg, 3d-drucker] – das event_tag eines Projekts zeigt den Beitrag auf der Projektseite
-verlinkt: [{{ include.verlinkt }}]   # weitere Seiten, z. B. [/projekte/3d-druck-ag-ktg/, /kalender/…/] – erscheinen unten bei „Verbindungen“
+linked: [{{ include.linked }}]   # weitere Seiten, z. B. [/projects/3d-druck-ag-ktg/, /calendar/…/] – erscheinen unten bei „Verbindungen“
 original_url:    # nur bei übernommenen Beiträgen: Adresse des Originals, sonst löschen
 original_site:   # z. B. 35services.de, sonst löschen
-theme:   # Aussehen der Seite, leer = wie die ganze Website; ifsmb, offene-werkstaetten oder rfflabs (Liste: _data/themes.yml) – Besucher*innen können unten auf der Seite selbst wählen
+theme:   # Aussehen der Seite, leer = wie die ganze Website; ifsmb, offene-werkstaetten, rfflabs oder slop (Liste: _data/themes.yml) – Besucher*innen können unten auf der Seite selbst wählen
 social_media_preview_image:   # Vorschaubild beim Teilen (1200×630 px, ohne Metadaten), z. B. /assets/images/og-….jpg
 uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---

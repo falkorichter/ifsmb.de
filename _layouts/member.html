@@ -33,20 +33,20 @@ layout: default
     <h2 id="badge" data-i18n="team.badge">{{ "team.badge" | t }}</h2>
     <div class="member-badge">
       {% include badge-3d.html b=member_badge %}
-      {%- capture badge_link %}<a href="{{ '/presse/#badge' | relative_url }}" data-i18n="team.badge_more">{{ "team.badge_more" | t }}</a>{% endcapture %}
+      {%- capture badge_link %}<a href="{{ '/press/#badge' | relative_url }}" data-i18n="team.badge_more">{{ "team.badge_more" | t }}</a>{% endcapture %}
       <p class="muted small" data-i18n="team.badge_help">{{ "team.badge_help" | t_html: badge_link }}</p>
     </div>
     {% endif %}
     {% assign member_all = site.projects | where_exp: "p", "p.team contains page.slug" %}
-    {% assign member_projects = member_all | where_exp: "p", "p.persoenlich != true" %}
-    {% assign member_personal = member_all | where: "persoenlich", true | sort: "start" | reverse %}
-    {% assign member_posts = site.posts | where: "author", page.slug | where: "persoenlich", true %}
+    {% assign member_projects = member_all | where_exp: "p", "p.personal != true" %}
+    {% assign member_personal = member_all | where: "personal", true | sort: "start" | reverse %}
+    {% assign member_posts = site.posts | where: "author", page.slug | where: "personal", true %}
     {% if member_personal.size > 0 %}
     <h2 id="persoenliche-projekte" data-i18n="team.personal_projects">{{ "team.personal_projects" | t }}</h2>
     <div class="grid-2">
       {% for p in member_personal %}
       <a class="card card-link" href="{{ p.url | relative_url }}">
-        <p class="meta"><span class="badge badge-personal" data-i18n="badge.personal">{{ "badge.personal" | t }}</span>{% if p.zeitraum %} · {{ p.zeitraum }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · <span data-i18n="project.update_short">{{ "project.update_short" | t }}</span> {{ lu }}{% endif %}</p>
+        <p class="meta"><span class="badge badge-personal" data-i18n="badge.personal">{{ "badge.personal" | t }}</span>{% if p.period %} · {{ p.period }}{% endif %}{% capture lu %}{% include projekt-letztes-update.html project=p %}{% endcapture %}{% if lu != "" %} · <span data-i18n="project.update_short">{{ "project.update_short" | t }}</span> {{ lu }}{% endif %}</p>
         <h3>{{ p.title }}</h3>
         {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
       </a>
@@ -66,7 +66,7 @@ layout: default
     </ul>
     {% endif %}
     {%- assign member_ch = "" | split: "" -%}{%- assign member_ch_done = "" | split: "" -%}
-    {%- for h in site.herausforderungen -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
+    {%- for h in site.challenges -%}{%- assign ht = h.team | join: "," | split: "," -%}{%- if ht contains page.slug -%}{%- if h.status == "geloest" %}{% assign member_ch_done = member_ch_done | push: h %}{% else %}{% assign member_ch = member_ch | push: h %}{% endif -%}{%- endif -%}{%- endfor -%}
     {%- assign member_ch = member_ch | concat: member_ch_done -%}
     {% if member_ch.size > 0 %}
     <h2 id="herausforderungen" data-i18n="challenge.heading">{{ "challenge.heading" | t }}</h2>
@@ -77,7 +77,7 @@ layout: default
     {%- comment -%}This person's todos (todos/todo-<slug>.md) – loaded by JS on click.{%- endcomment -%}
     {%- assign todo_file = "/todos/todo-" | append: page.slug | append: ".md" -%}
     {%- assign has_todo_file = site.static_files | where: "path", todo_file | first -%}
-    {% if page.nicht_im_team != true or has_todo_file %}
+    {% if page.not_in_team != true or has_todo_file %}
     <h2 id="todos" data-i18n="todos.heading">{{ "todos.heading" | t }}</h2>
     {%- assign tk_titel = "Todos von " | append: page.title -%}
     {% include todos-knopf.html person=page.slug titel=tk_titel label_key="todos.person_button" label_name=page.title %}

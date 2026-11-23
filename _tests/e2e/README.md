@@ -74,7 +74,10 @@ Im Test direkt als `env.control.<methode>(args)`; von außen als `POST /__fake/<
 | Methode | Argumente | Wirkung |
 |---|---|---|
 | `reset` | `{ users?, owner?, repo?, base? }` | alles leeren, ein leerer Start-Commit auf `main` |
-| `setUser` | `{ token, login, name?, push?, expired?, issues?, checks? }` | Token anlegen/ändern; `issues: false` / `checks: false` = dem Token fehlt die Berechtigung (403), `issues: "read"` = Issues lesen, aber nicht zuweisen |
+| `setUser` | `{ token, login, name?, push?, expired?, issues?, checks?, classic?, fork? }` | Token anlegen/ändern; `issues: false` / `checks: false` = dem Token fehlt die Berechtigung (403), `issues: "read"` = Issues lesen, aber nicht zuweisen; `classic: true` = klassischer Token (darf PRs aus dem eigenen Fork per API öffnen – fine-grained bekommen 403, wie auf GitHub); `fork: false` = darf keinen Fork anlegen (fine-grained ohne „Administration“); `fineGrained: true` = fine-grained Token: schreibt nur in Repositories seines Owners (Collaborator-Rolle hilft nicht → 403) – im Browser erkennt das Formular ihn am Präfix `github_pat_`, also den Token so benennen |
+| `createFork` | `{ login }` | Fork `login/<repo>` mit einer Kopie des Basis-Branches (eigene Branches, Objekte geteilt wie im Fork-Netzwerk von GitHub); per API: `POST /repos/:owner/:repo/forks`, im Fork `GET`, `merge-upstream`, `git/…` |
+| `forkCommit` | `{ login, branch?, files, message? }` | Commit auf einem Fork-Branch (z. B. eigener Commit auf `main` → Fork lässt sich nicht mehr vorspulen, `merge-upstream` 409) |
+| `forkBranches` | `{ login }` | Branches eines Forks `{ name: sha }` oder `null` |
 | `expireToken` | `{ token }` | Token läuft ab → `401 Bad credentials` |
 | `seed` | `{ files: { pfad: text \| {base64} }, fromDir?: { root, paths }, message? }` | Commit auf `main` |
 | `commit` | `{ branch, from?, files: { pfad: inhalt \| null }, login?, message? }` | jemand anderes committet (Branch wird aus `from`/main angelegt; `null` löscht) |

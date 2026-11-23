@@ -3,8 +3,8 @@ title: "Programmierwerkstatt am Lessing-Gymnasium"
 summary: Eine Programmierwerkstatt von 35services am Lessing-Gymnasium – Programmieren lernen mit Scratch.
 status: abgeschlossen
 start: 2025-10-01
-zeitraum: Herbst 2025
-ort: Lessing-Gymnasium, Berlin
+period: Herbst 2025
+location: Lessing-Gymnasium, Berlin
 event_tag: lessing-gymnasium
 team:
   - falko-richter

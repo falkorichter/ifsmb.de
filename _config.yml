@@ -23,19 +23,19 @@ collections:
     permalink: /team/:name/
   projects:
     output: true
-    permalink: /projekte/:name/
+    permalink: /projects/:name/
   events:
     output: true
-    permalink: /kalender/:name/
+    permalink: /calendar/:name/
   press:
     output: true
-    permalink: /presse/:slug/
+    permalink: /press/:slug/
   equipment:
     output: true
-    permalink: /ausstattung/:name/
-  herausforderungen:
+    permalink: /equipment/:name/
+  challenges:
     output: true
-    permalink: /herausforderungen/:name/
+    permalink: /challenges/:name/
 
 defaults:
   - scope:
@@ -70,7 +70,7 @@ defaults:
       layout: "equipment"
   - scope:
       path: ""
-      type: "herausforderungen"
+      type: "challenges"
     values:
       layout: "herausforderung"
 
@@ -81,25 +81,25 @@ nav:
     url: /news/
   - title: Kalender
     key: nav.calendar
-    url: /kalender/
+    url: /calendar/
   - title: Wir
     key: nav.about_us
     children:
       - title: Netzwerk
         key: nav.network
-        url: /netzwerk/
+        url: /network/
       - title: Karte
         key: nav.map
-        url: /karte/
+        url: /map/
       - title: Projekte
         key: nav.projects
-        url: /projekte/
+        url: /projects/
       - title: Projekt-Ideen
         key: nav.project_ideas
-        url: /projekte/ideen/
+        url: /project/ideas/
       - title: Herausforderungen
         key: nav.challenges
-        url: /herausforderungen/
+        url: /challenges/
       - title: Angebot
         key: nav.offer
         url: /angebot/
@@ -108,19 +108,19 @@ nav:
         url: /geld-fuer-makespaces/
       - title: Ausstattung
         key: nav.equipment
-        url: /ausstattung/
+        url: /equipment/
       - title: Team
         key: nav.team
         url: /team/
   - title: Partner
     key: nav.partners
-    url: /partner/
+    url: /partners/
   - title: Presse
     key: nav.press
-    url: /presse/
+    url: /press/
   - title: Suche
     key: nav.search
-    url: /suche/
+    url: /search/
 
 # Pagefind-Index (_site/pagefind/) beim Neubauen nicht löschen – lokal mit `npx pagefind --site _site` erzeugt
 keep_files:

@@ -10,3 +10,6 @@
 - id: rfflabs
   name: RFFLabs
   reference: https://www.rfflabs.fr/
+- id: slop
+  name: "Slop ✨"
+  reference: https://slopstrap.mikelacher.com/

@@ -12,35 +12,35 @@
   {% include neu-button.html typ="geraet" i18n="new.team_device" owner_team=page.slug %}
   {% include neu-button.html typ="herausforderung" i18n="new.team_challenge" team=page.slug %}
 {%- elsif c == 'projects' -%}
-  {%- assign p = page.persoenlich | default: false -%}
+  {%- assign p = page.personal | default: false -%}
   {%- assign team = page.team | join: ', ' -%}
   {%- if page.event_tag -%}
-    {% include neu-button.html typ="beitrag" i18n="new.project_post" tags=page.event_tag persoenlich=p %}
-    {% include neu-button.html typ="termin" i18n="new.project_event" tags=page.event_tag team=team persoenlich=p %}
+    {% include neu-button.html typ="beitrag" i18n="new.project_post" tags=page.event_tag personal=p %}
+    {% include neu-button.html typ="termin" i18n="new.project_event" tags=page.event_tag team=team personal=p %}
   {%- else -%}
     {%- assign url = page.url -%}
-    {% include neu-button.html typ="beitrag" i18n="new.project_post_untagged" verlinkt=url persoenlich=p %}
-    {% include neu-button.html typ="termin" i18n="new.project_event_untagged" projekte=page.slug team=team persoenlich=p %}
+    {% include neu-button.html typ="beitrag" i18n="new.project_post_untagged" linked=url personal=p %}
+    {% include neu-button.html typ="termin" i18n="new.project_event_untagged" projects=page.slug team=team personal=p %}
   {%- endif -%}
-  {% include neu-button.html typ="projekt" i18n="new.project_subproject" teil_von=page.slug team=team persoenlich=p %}
-  {% include neu-button.html typ="geraet" i18n="new.project_device" verlinkt=page.url %}
-  {% include neu-button.html typ="herausforderung" i18n="new.project_challenge" projekte=page.slug team=team persoenlich=p %}
+  {% include neu-button.html typ="projekt" i18n="new.project_subproject" part_of=page.slug team=team personal=p %}
+  {% include neu-button.html typ="geraet" i18n="new.project_device" linked=page.url %}
+  {% include neu-button.html typ="herausforderung" i18n="new.project_challenge" projects=page.slug team=team personal=p %}
 {%- elsif c == 'events' -%}
-  {% include neu-button.html typ="beitrag" i18n="new.event_report" tags=tags verlinkt=page.url persoenlich=page.persoenlich %}
+  {% include neu-button.html typ="beitrag" i18n="new.event_report" tags=tags linked=page.url personal=page.personal %}
   {%- assign team = page.team | join: ', ' -%}
-  {%- assign proj = page.projekte | join: ', ' -%}
-  {% include neu-button.html typ="herausforderung" i18n="new.event_challenge" team=team projekte=proj tags=tags verlinkt=page.url persoenlich=page.persoenlich %}
+  {%- assign proj = page.projects | join: ', ' -%}
+  {% include neu-button.html typ="herausforderung" i18n="new.event_challenge" team=team projects=proj tags=tags linked=page.url personal=page.personal %}
 {%- elsif c == 'equipment' -%}
-  {% include neu-button.html typ="beitrag" i18n="new.device_post" tags=tags verlinkt=page.url %}
-  {% include neu-button.html typ="herausforderung" i18n="new.device_challenge" verlinkt=page.url %}
-{%- elsif c == 'herausforderungen' -%}
+  {% include neu-button.html typ="beitrag" i18n="new.device_post" tags=tags linked=page.url %}
+  {% include neu-button.html typ="herausforderung" i18n="new.device_challenge" linked=page.url %}
+{%- elsif c == 'challenges' -%}
   {%- assign team = page.team | join: ', ' -%}
-  {%- assign proj = page.projekte | join: ', ' -%}
+  {%- assign proj = page.projects | join: ', ' -%}
   {%- assign auth = nil -%}{%- if team != '' -%}{%- assign auth = '[' | append: team | append: ']' -%}{%- endif -%}
-  {% include neu-button.html typ="beitrag" i18n="new.challenge_post" author=auth tags=tags verlinkt=page.url persoenlich=page.persoenlich %}
-  {% include neu-button.html typ="herausforderung" i18n="new.challenge_more" team=team projekte=proj tags=tags persoenlich=page.persoenlich %}
+  {% include neu-button.html typ="beitrag" i18n="new.challenge_post" author=auth tags=tags linked=page.url personal=page.personal %}
+  {% include neu-button.html typ="herausforderung" i18n="new.challenge_more" team=team projects=proj tags=tags personal=page.personal %}
 {%- elsif c == 'posts' -%}
-  {% include neu-button.html typ="beitrag" i18n="new.post_followup" author=page.author tags=tags verlinkt=page.url persoenlich=page.persoenlich %}
+  {% include neu-button.html typ="beitrag" i18n="new.post_followup" author=page.author tags=tags linked=page.url personal=page.personal %}
 {%- else -%}
   {%- assign partner = site.data.partners | where: 'page', page.url | first -%}
   {%- if partner -%}
@@ -48,20 +48,20 @@
     {% include neu-button.html typ="projekt" i18n="new.partner_project" partners=pname %}
     {% include neu-button.html typ="termin" i18n="new.partner_event" partners=pname %}
     {% include neu-button.html typ="geraet" i18n="new.partner_device" owner_partner=pname %}
-    {% include neu-button.html typ="herausforderung" i18n="new.partner_challenge" verlinkt=page.url %}
+    {% include neu-button.html typ="herausforderung" i18n="new.partner_challenge" linked=page.url %}
   {%- else -%}
     {%- case page.url -%}
       {%- when '/team/' -%}{% include neu-button.html typ="team" i18n="new.team_profile" %}
-      {%- when '/projekte/' -%}{% include neu-button.html typ="projekt" i18n="new.projects_project" %}
-      {%- when '/projekte/archiv/' -%}{% include neu-button.html typ="projekt-vergangen" i18n="new.archive_project" %}
-      {%- when '/projekte/persoenlich/' -%}{% include neu-button.html typ="projekt" i18n="new.personal_project" persoenlich=true %}
+      {%- when '/projects/' -%}{% include neu-button.html typ="projekt" i18n="new.projects_project" %}
+      {%- when '/projects/archive/' -%}{% include neu-button.html typ="projekt-vergangen" i18n="new.archive_project" %}
+      {%- when '/projects/personal/' -%}{% include neu-button.html typ="projekt" i18n="new.personal_project" personal=true %}
       {%- when '/news/' -%}{% include neu-button.html typ="beitrag" i18n="new.news_post" %}
-      {%- when '/news/persoenlich/' -%}{% include neu-button.html typ="beitrag" i18n="new.personal_post" persoenlich=true %}
-      {%- when '/kalender/' -%}{% include neu-button.html typ="termin" i18n="new.calendar_event" %}
-      {%- when '/herausforderungen/' -%}{% include neu-button.html typ="herausforderung" i18n="new.challenges_challenge" %}
-      {%- when '/ausstattung/' -%}{% include neu-button.html typ="geraet" i18n="new.equipment_device" %}
-      {%- when '/presse/' -%}{% include neu-button.html typ="presse" i18n="new.press_release" %}{% include neu-button.html typ="pressebericht" i18n="new.press_report" %}
-      {%- when '/partner/' -%}{% include neu-button.html typ="partner" i18n="new.partners_partner" %}
+      {%- when '/news/personal/' -%}{% include neu-button.html typ="beitrag" i18n="new.personal_post" personal=true %}
+      {%- when '/calendar/' -%}{% include neu-button.html typ="termin" i18n="new.calendar_event" %}
+      {%- when '/challenges/' -%}{% include neu-button.html typ="herausforderung" i18n="new.challenges_challenge" %}
+      {%- when '/equipment/' -%}{% include neu-button.html typ="geraet" i18n="new.equipment_device" %}
+      {%- when '/press/' -%}{% include neu-button.html typ="presse" i18n="new.press_release" %}{% include neu-button.html typ="pressebericht" i18n="new.press_report" %}
+      {%- when '/partners/' -%}{% include neu-button.html typ="partner" i18n="new.partners_partner" %}
     {%- endcase -%}
   {%- endif -%}
 {%- endif -%}

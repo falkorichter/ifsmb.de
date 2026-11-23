@@ -2,16 +2,16 @@
 title: "Macro-Lens – der Verpackungs-Scanner"
 summary: Barcode scannen und in Sekunden sehen, was wirklich drin ist – Zucker, Salz, Eiweiß, Sättigung, Allergene. Ohne Konto, ohne Cloud, ohne Werbung.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-10-15
-zeitraum: seit Oktober 2026
+period: seit Oktober 2026
 event_tag: macro-lens
 tags: [macro-lens, ernährung, android]
 team:
   - alexander-riedel
 image: /assets/images/projekte/macro-lens/01.png
 updates:
-  - datum: 2026-10-18
+  - date: 2026-10-18
     text: |-
       **Im Google Play Store veröffentlicht:** Macro-Lens ist seit dem 18. Oktober 2026 für Android erhältlich, als Einzelpersonen-Konto unter dem Namen Alexander Riedel, Kategorie Gesundheit & Fitness. Der Quelltext bleibt offen auf [GitHub](https://github.com/3p1cball-code/macro-lens).
 uuid: f1c078a4-272a-4dd8-bf27-ba3ea6fc766e

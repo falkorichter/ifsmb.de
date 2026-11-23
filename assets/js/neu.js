@@ -1,7 +1,7 @@
 // "➕ new" forms: one pop-up per resource type, built from the schemas in TYPEN with the building blocks of
 // assets/js/formular.js (chip fields with autocomplete, dialog, YAML). Loaded on the first click on a ➕ link
 // (_includes/neu-buttons.html). Each link carries data-neu = { typ, label, hinweis, werte } – werte is the connection
-// to the current page (author, team, tags, projekte …). Without JS the link opens GitHub with the full template.
+// to the current page (author, team, tags, projects …). Without JS the link opens GitHub with the full template.
 // The form writes the new file (front matter + Markdown, or plain YAML), shows it live, keeps a draft in
 // localStorage and creates it through GitHub's "new file" editor (→ pull request).
 // NeuFormular.datei(typ, werte) builds a file without DOM – used by the tests (_scripts/test_formulare.rb).
@@ -97,13 +97,13 @@ var NeuFormular = (function () {
 
   // fields that many types share
   var stichworte = function (x) { return chips("tags", "🏷️ Stichworte", "stichworte", Object.assign({ platzhalter: "Stichwort suchen oder neu …" }, x)); };
-  var verlinkt = function () { return chips("verlinkt", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "seiten", { platzhalter: "Seite suchen oder /adresse/ …" }); };
+  var verlinkt = function () { return chips("linked", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "seiten", { platzhalter: "Seite suchen oder /adresse/ …" }); };
   var leute = function (name, label, x) { return chips(name, label, "personen", Object.assign({ platzhalter: "Name aus dem Team …" }, x)); };
   var partner = function (name, label, x) { return chips(name, label, "partner", Object.assign({ platzhalter: "Partner suchen …" }, x)); };
   var projekte = function (name, label, x) { return chips(name, label, "projekte", Object.assign({ platzhalter: "Projekt suchen …" }, x)); };
-  var persoenlich = function (hilfe) { return haken("persoenlich", "Persönlich", { hilfe: hilfe }); };
+  var persoenlich = function (hilfe) { return haken("personal", "Persönlich", { hilfe: hilfe }); };
   // look of the page (_data/themes.yml, assets/css/themes.css); "" = the site's default
-  var THEMES = [["", "Wie die ganze Website"], ["ifsmb", "IfsMB (Standard)"], ["offene-werkstaetten", "Offene Werkstätten"], ["rfflabs", "RFFLabs"]];
+  var THEMES = [["", "Wie die ganze Website"], ["ifsmb", "IfsMB (Standard)"], ["offene-werkstaetten", "Offene Werkstätten"], ["rfflabs", "RFFLabs"], ["slop", "Slop ✨"]];
   var themeField = function () { return auswahl("theme", "🎨 Theme (Aussehen)", THEMES, { mehr: true, hilfe: "Besucher*innen können unten auf der Seite trotzdem selbst wählen" }); };
   var socialBild = function () { return text("social_media_preview_image", "Social-Media-Vorschaubild (1200×630 px)", { mehr: true, platzhalter: "/assets/images/og-….jpg – leer = erstes Bild oder Standard" }); };
 
@@ -122,7 +122,7 @@ var NeuFormular = (function () {
   }
   function ohneT(v) { return v ? v.replace("T", " ").slice(0, 16) : ""; }
   function tag(v) { return String(v || "").slice(0, 10); }
-  // one value as a plain scalar, several as a list (author, standort_partner – single-value fields in .pages.yml)
+  // one value as a plain scalar, several as a list (author, location_partner – single-value fields in .pages.yml)
   function einerOderListe(v) { return v && v.length === 1 ? v[0] : v; }
   // free text into a list (owner_name is `list: true` in .pages.yml)
   function alsEintrag(v) { return v ? [v] : ""; }
@@ -140,13 +140,13 @@ var NeuFormular = (function () {
       titel("Name des Projekts"),
       text("summary", "Kurzbeschreibung (Projektkarte)", { platzhalter: "Ein bis zwei Sätze, worum es geht" }),
       [auswahl("status", "Status", STATUS_PROJEKT), datum("start", "Start", { pflicht: true, standard: F.heute, hilfe: "wird zum Sortieren genutzt" }),
-        text("zeitraum", "Zeitraum", { platzhalter: "z. B. Herbst 2026", folgt: function (w) { return w.status === "abgeschlossen" || !w.start ? "" : "seit " + w.start.slice(0, 4); } })],
-      [text("ort", "Ort", { platzhalter: "z. B. Kurt-Tucholsky-Grundschule, Moabit – keine Wohnadressen" }),
+        text("period", "Zeitraum", { platzhalter: "z. B. Herbst 2026", folgt: function (w) { return w.status === "abgeschlossen" || !w.start ? "" : "seit " + w.start.slice(0, 4); } })],
+      [text("location", "Ort", { platzhalter: "z. B. Kurt-Tucholsky-Grundschule, Moabit – keine Wohnadressen" }),
         text("event_tag", "Eigenes Stichwort (event_tag)", { folgt: function (w) { return F.slugify(w.title); }, hilfe: "Beiträge und Termine mit diesem Stichwort erscheinen auf der Projektseite – nie ein allgemeines wie 35services" })],
       leute("team", "👥 Beteiligte"),
       partner("partners", "🤝 Partner"),
-      projekte("teil_von", "🧩 Teil von", { hilfe: "Nur für Teilprojekte – erscheinen dann nicht in den Übersichten" }),
-      projekte("verwandt", "↔️ Verwandte Projekte", { mehr: true }),
+      projekte("part_of", "🧩 Teil von", { hilfe: "Nur für Teilprojekte – erscheinen dann nicht in den Übersichten" }),
+      projekte("related", "↔️ Verwandte Projekte", { mehr: true }),
       verlinkt(),
       persoenlich("Privates Projekt aus dem Team: nur im Teamprofil, nicht in den Listen des Instituts"),
       inhalt("Ziel, Stand, was gebraucht wird …"),
@@ -184,12 +184,12 @@ var NeuFormular = (function () {
         [text("location", "Ort", { platzhalter: "Ort, Straße (keine Wohnadressen)" }), adresse("location_url", "Link zum Ort")],
         text("summary", "Kurzbeschreibung (Terminliste & iCal)"),
         leute("team", "👥 Dabei", { hilfe: "nur wer wirklich da ist/war" }),
-        projekte("projekte", "🔧 Projekte"),
+        projekte("projects", "🔧 Projekte"),
         stichworte(),
         partner("partners", "🤝 Partner"),
         verlinkt(),
         [persoenlich("Privater Termin aus dem Team (braucht „Dabei“): nur im Teamprofil"),
-          haken("nur_projekt", "Nur auf der Projektseite", { hilfe: "interner Termin: vorher nicht im Kalender, danach normal" })],
+          haken("project_only", "Nur auf der Projektseite", { hilfe: "interner Termin: vorher nicht im Kalender, danach normal" })],
         inhalt("Was passiert, wer kann kommen, was mitbringen …"),
         text("date_label", "Text statt Datum", { mehr: true, platzhalter: "z. B. „Januar 2027 – genauer Termin folgt“" }),
         socialBild(),
@@ -215,14 +215,14 @@ var NeuFormular = (function () {
       datei: function (w) { return F.slugify(w.title, "hersteller-modell") + ".md"; },
       felder: [
         titel("Hersteller Modell"),
-        [text("kategorie", "Kategorie", { liste: "kategorien", platzhalter: "z. B. 3D-Drucker" }),
+        [text("category", "Kategorie", { liste: "kategorien", platzhalter: "z. B. 3D-Drucker" }),
           auswahl("status", "Status", [["", "Im Einsatz"], ["in-aussicht", "🔭 In Aussicht"], ["im-test", "🧪 Im Test"], ["in-reparatur", "🔧 In Reparatur"]])],
         text("summary", "Kurzbeschreibung", { platzhalter: "Was das Gerät kann und wofür wir es nutzen" }),
         leute("owner_team", "🔑 Gehört (Team)"),
         partner("owner_partner", "🔑 Gehört (Partner)"),
         text("owner_name", "🔑 Gehört (andere)", { platzhalter: "freier Name", ausgabe: alsEintrag }),
-        [text("standort", "Standort", { platzhalter: "z. B. KTG, Raum 101" }),
-          partner("standort_partner", "📍 Steht bei Partner", { einzeln: true, ausgabe: einerOderListe })],
+        [text("location", "Standort", { platzhalter: "z. B. KTG, Raum 101" }),
+          partner("location_partner", "📍 Steht bei Partner", { einzeln: true, ausgabe: einerOderListe })],
         stichworte({ hilfe: "Gerät, Gerätetyp, Besitzer*in, z. B. bambu-lab-a1-mini, 3d-drucker" }),
         verlinkt(),
         inhalt("Was das Gerät kann, Erfahrungen, Tipps …"),
@@ -237,24 +237,24 @@ var NeuFormular = (function () {
       }
     },
     herausforderung: {
-      titel: "Herausforderung", ordner: "_herausforderungen",
+      titel: "Herausforderung", ordner: "_challenges",
       datei: function (w) { return F.slugify(w.title, "kurzer-name") + ".md"; },
       felder: [
         titel("Was ist die Herausforderung? (kurz, gern als Frage)"),
         text("summary", "Kurz (ein Satz für die Karte)"),
-        [auswahl("art", "Art", [["frage", "❓ Frage"], ["aufgabe", "📋 Aufgabe"], ["problem", "⚠️ Problem"]]),
+        [auswahl("kind", "Art", [["frage", "❓ Frage"], ["aufgabe", "📋 Aufgabe"], ["problem", "⚠️ Problem"]]),
           auswahl("status", "Status", [["offen", "Offen"], ["in-arbeit", "In Arbeit"], ["geloest", "Gelöst"]]),
-          datum("seit", "Seit", { standard: F.heute })],
-        [haken("wichtig", "Wichtig", { hilfe: "allein 📌 einplanen, mit dringend 🔥 sofort" }),
-          haken("dringend", "Dringend", { hilfe: "allein 🤝 abgeben, keins von beiden 💤 später" })],
+          datum("since", "Seit", { standard: F.heute })],
+        [haken("important", "Wichtig", { hilfe: "allein 📌 einplanen, mit dringend 🔥 sofort" }),
+          haken("urgent", "Dringend", { hilfe: "allein 🤝 abgeben, keins von beiden 💤 später" })],
         leute("team", "👥 Zuständig"),
-        projekte("projekte", "🔧 Projekte"),
+        projekte("projects", "🔧 Projekte"),
         stichworte(),
         verlinkt(),
         persoenlich("Aus einem privaten Projekt im Team"),
         inhalt("Was ist das Problem, was wurde schon probiert, was wird gebraucht?"),
-        datum("geloest_am", "Gelöst am", { mehr: true }),
-        feld("langtext", "loesung", "Lösung (Markdown)", { mehr: true, markdown: true, zeilen: 4 }),
+        datum("solved_on", "Gelöst am", { mehr: true }),
+        feld("langtext", "solution", "Lösung (Markdown)", { mehr: true, markdown: true, zeilen: 4 }),
         socialBild(),
         themeField()
       ]
@@ -266,7 +266,7 @@ var NeuFormular = (function () {
         text("title", "Name", { pflicht: true, platzhalter: "Vorname Nachname", klasse: "form-feld-titel", hilfe: "Der Dateiname wird das Team-Kürzel für team, author, owner_team" }),
         [text("role", "Rolle", { platzhalter: "z. B. hilft in der KTG-AG" }), zahl("order", "Reihenfolge", { standard: "50", hilfe: "kleiner = weiter vorne" })],
         verlinkt(),
-        haken("nicht_im_team", "Nicht auf /team/ auflisten (nur eigene Seite zum Verlinken)"),
+        haken("not_in_team", "Nicht auf /team/ auflisten (nur eigene Seite zum Verlinken)"),
         inhalt("Was die Person macht und womit sie im Makespace hilft – keine Wohnadresse, keine privaten E-Mail-Adressen"),
         text("photo", "Foto", { mehr: true, platzhalter: "/assets/images/team/<kürzel>-480w.jpg – nur mit Erlaubnis" }),
         text("photo_credit", "Bildnachweis", { mehr: true, hilfe: "Pflicht bei Fremdfotos (Presse, Agentur)" }),
@@ -283,7 +283,7 @@ var NeuFormular = (function () {
         stichworte(),
         verlinkt(),
         inhalt("**Berlin, Datum** – Erster Absatz mit dem Wichtigsten: wer, was, wann, wo, warum."),
-        text("contact_name", "Pressekontakt", { mehr: true, hilfe: "leer = Pressekontakt aus _data/presse.yml" }),
+        text("contact_name", "Pressekontakt", { mehr: true, hilfe: "leer = Pressekontakt aus _data/press.yml" }),
         socialBild(),
         themeField()
       ]
@@ -298,11 +298,11 @@ var NeuFormular = (function () {
         adresse("instagram", "Instagram", { mehr: true }),
         text("logo", "Logo", { mehr: true, platzhalter: "/assets/images/partner/<name>.png" }),
         haken("logo_dark", "Logo hat helle Elemente (dunkler Hintergrund)", { mehr: true }),
-        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partner/<name>/", hilfe: "Nur unsere eigene Unterseite (partner/<name>/index.md) – die Website des Partners gehört oben in „Website“." })
+        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partners/<name>/", hilfe: "Nur unsere eigene Unterseite (partners/<name>/index.md) – die Website des Partners gehört oben in „Website“." })
       ]
     },
     // Pages outside the collections, edit only (_plugins/source_files.rb sets page.edit_form, #154).
-    // Markdown pages (partner/<name>/index.md, angebot/, spenden/ …): title, lead, links, text.
+    // Markdown pages (partners/<name>/index.md, angebot/, spenden/ …): title, lead, links, text.
     seite: {
       titel: "Seite", ordner: "",
       datei: function (w) { return F.slugify(w.title, "name-der-seite") + ".md"; },
@@ -332,14 +332,14 @@ var NeuFormular = (function () {
       pruefe: function (w) { return aktiv && aktiv.edit && w.text === aktiv.edit.w0.text ? null : checkHtml(w.text); }
     },
     pressebericht: {
-      titel: "Wir in der Presse", ordner: "_data/pressebericht", format: "yaml",
-      datei: function (w) { return (w.datum ? w.datum + "-" : "") + F.slugify(w.medium, "medium") + ".yml"; },
+      titel: "Wir in der Presse", ordner: "_data/press_report", format: "yaml",
+      datei: function (w) { return (w.date ? w.date + "-" : "") + F.slugify(w.medium, "medium") + ".yml"; },
       felder: [
-        text("titel", "Überschrift des Berichts", { pflicht: true, klasse: "form-feld-titel" }),
-        [text("medium", "Medium", { pflicht: true, platzhalter: "Zeitung, Website oder Kanal" }), datum("datum", "Erschienen am", { standard: F.heute })],
+        text("title", "Überschrift des Berichts", { pflicht: true, klasse: "form-feld-titel" }),
+        [text("medium", "Medium", { pflicht: true, platzhalter: "Zeitung, Website oder Kanal" }), datum("date", "Erschienen am", { standard: F.heute })],
         adresse("url", "Link zum Bericht", { pflicht: true, hilfe: "ohne Tracking-Parameter (?si=, utm_ …)" }),
-        chips("anlass", "🔗 Anlass (eigene Seite)", "seiten", { einzeln: true, ausgabe: einerOderListe, platzhalter: "Termin oder Beitrag suchen …" }),
-        text("hinweis", "Hinweis", { platzhalter: "erscheint in Klammern hinter dem Eintrag" })
+        chips("occasion", "🔗 Anlass (eigene Seite)", "seiten", { einzeln: true, ausgabe: einerOderListe, platzhalter: "Termin oder Beitrag suchen …" }),
+        text("note", "Hinweis", { platzhalter: "erscheint in Klammern hinter dem Eintrag" })
       ]
     }
   };
@@ -470,7 +470,11 @@ var NeuFormular = (function () {
       if (original.length && original[original.length - 1].key === "uuid") i = blocks.length - 1;
       blocks.splice(i, 0, line);
     });
-    var rest = w.text === edit.w0.text ? edit.file.rest : "\n" + (String(w.text).trim() ? "\n" + String(w.text).trim() + "\n" : "");
+    // a changed body keeps the file's own spacing after "---" (Markdown: an empty line, index.html: none) and the
+    // indentation of its first line – only line breaks around it are dropped, like readSource does
+    var body = String(w.text).replace(/^\n+/, "").replace(/\s+$/, ""), gap = (edit.file.rest.match(/^\n*/)[0] || "") || "\n\n";
+    if (!/\S/.test(edit.file.rest)) gap = "\n\n";
+    var rest = w.text === edit.w0.text ? edit.file.rest : body ? gap + body + "\n" : "\n";
     return F.joinFile(blocks, rest);
   }
   // Without DOM: the file after changing some values (tests). → { content, rawFields, values }
@@ -807,7 +811,8 @@ var NeuFormular = (function () {
     bild = direct.previewFor(bild); // photos not uploaded yet: show the local preview
     if (socialImg.getAttribute("src") !== bild) socialImg.src = bild;
     socialTitel.textContent = w.title || aktiv.schema.titel;
-    socialBeschr.textContent = (w.summary || w.subtitle || w.role || w.lead || ersteTextzeile(w.text) || "Institut für spontane Makespace Buildung").slice(0, 160);
+    var codeText = aktiv.felder.some(function (f) { return f.name === "text" && f.code; }); // HTML is no description
+    socialBeschr.textContent = (w.summary || w.subtitle || w.role || w.lead || (codeText ? "" : ersteTextzeile(w.text)) || "Institut für spontane Makespace Buildung").slice(0, 160);
   }
 
   function fehlt() {
@@ -848,7 +853,7 @@ var NeuFormular = (function () {
     folder: function () {
       var area = IMAGE_FOLDERS[aktiv.typ] || "news", name = String(aktiv.w.datei || "").replace(/\.(md|ya?ml)$/, "");
       if (area === "news") name = name.replace(/^\d{4}-\d{2}-\d{2}-/, "");
-      // pages are all called index.md: name the folder after the page's path (partner/rfflabs/index.md → partner-rfflabs)
+      // pages are all called index.md: name the folder after the page's path (partners/rfflabs/index.md → partners-rfflabs)
       if (area === "seiten") name = String(aktiv.path || name).replace(/(^|\/)index\.(md|html)$/, "").replace(/\.(md|html)$/, "").replace(/\//g, "-");
       return "assets/images/" + area + "/" + (name || "neu") + "/";
     },
@@ -879,7 +884,7 @@ var NeuFormular = (function () {
         box.innerHTML = "<strong>⚠️ Diese Seite wird gerade schon geändert:</strong><ul>" + prs.map(function (pr, i) {
           return '<li><a href="' + esc(pr.url) + '" target="_blank" rel="noopener">#' + pr.number + " " + esc(pr.title) + "</a>"
             + (pr.user ? " von @" + esc(pr.user) : "")
-            + (pr.sameRepo ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : " (aus einem Fork – dort weiterarbeiten)") + "</li>";
+            + (pr.sameRepo && me.canPush ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : pr.sameRepo ? "" : " (aus einem Fork – dort weiterarbeiten)") + "</li>";
         }).join("") + "</ul><span>Mit „mitschicken“ landet deine Änderung im selben Pull Request – was du schon eingetragen hast, wird übernommen. Sonst entsteht ein eigener Pull Request.</span>";
         box.onclick = function (e) {
           var b = e.target.closest("[data-pr-continue]"); if (b) direct.pickUp(prs[+b.getAttribute("data-pr-continue")]);
@@ -1227,7 +1232,7 @@ var NeuFormular = (function () {
         if (aktiv !== state) return;
         // the branch with the commit exists, but the pull request didn't come back: next click finishes it (K41/K42)
         if (err.pendingBranch) {
-          state.pending = { branch: err.pendingBranch, title: title, body: body, text: newText };
+          state.pending = { branch: err.pendingBranch, fork: err.pendingFork || null, title: title, body: body, text: newText };
           direct.showError(err);
           status.appendChild(document.createTextNode(" Nochmal senden setzt fort – es entsteht kein zweiter Pull Request."));
           return;
@@ -1252,6 +1257,21 @@ var NeuFormular = (function () {
     sentOk: function (state, pr, text, path) {
       loescheEntwurf();
       state.gesendet = true; state.retries = 0;
+      // through the person's own fork (no push access, #186): the branch lives in the fork, so the next send starts a new
+      // branch instead of reading this one from the repository; without a number GitHub's compare page opens the PR
+      if (pr.fork) {
+        state.sent = { text: text, url: pr.url || pr.compareUrl, number: pr.number || null };
+        direct.clearPhotos();
+        if (!state.edit) { state.path = path; dateiInput.readOnly = true; }
+        state.edit = readSource(state.schema, text, path) || state.edit;
+        state.w = JSON.parse(JSON.stringify(state.edit.w0)); state.beruehrt = allTouched();
+        baueFelder(); zeigeVorschau();
+        status.innerHTML = pr.number
+          ? "✅ " + t("github.sent_fork_html", { link: '<a href="' + esc(pr.url) + '" target="_blank" rel="noopener">Pull Request #' + pr.number + "</a>", fork: esc(pr.fork) }, '<a href="' + esc(pr.url) + '" target="_blank" rel="noopener">Pull Request #' + pr.number + "</a> ist angelegt (aus deinem Fork " + esc(pr.fork) + ") – danke!")
+          : "✅ " + t("github.sent_fork_compare_html", { fork: esc(pr.fork), link: '<a href="' + esc(pr.compareUrl) + '" target="_blank" rel="noopener" data-compare-link>' + esc(t("github.compare_link", null, "Pull Request auf GitHub anlegen ↗")) + "</a>" }, "Deine Änderung liegt in deinem Fork " + esc(pr.fork) + '. Letzter Schritt: <a href="' + esc(pr.compareUrl) + '" target="_blank" rel="noopener" data-compare-link>Pull Request auf GitHub anlegen ↗</a> – dort „Create pull request“ klicken.');
+        if (pr.forkStale) status.innerHTML += ' <span data-fork-stale>' + t("github.fork_stale_html", { fork: esc(pr.fork), url: esc("https://github.com/" + pr.fork) }, "⚠️ Dein Fork " + esc(pr.fork) + ' ließ sich nicht automatisch auf den neuesten Stand bringen. Deine Änderung baut trotzdem auf dem aktuellen Stand auf – für später auf <a href="https://github.com/' + esc(pr.fork) + '" target="_blank" rel="noopener">GitHub</a> „Sync fork“ klicken.') + "</span>";
+        return;
+      }
       state.sent = { text: text, url: pr.url, number: pr.number };
       direct.clearPhotos();
       var branch = pr.branch || (state.prBase && state.prBase.branch);
@@ -1336,7 +1356,7 @@ var NeuFormular = (function () {
       var box = direct.noticeBox();
       box.innerHTML = "<strong>⚠️ Während du geschrieben hast, hat jemand einen Pull Request zu dieser Seite angelegt:</strong><ul>" + prs.map(function (pr, i) {
         return '<li><a href="' + esc(pr.url) + '" target="_blank" rel="noopener">#' + pr.number + " " + esc(pr.title) + "</a>" + (pr.user ? " von @" + esc(pr.user) : "")
-          + (pr.sameRepo ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : "") + "</li>";
+          + (pr.sameRepo && GitHubApi.canPushKnown() !== false ? ' <button type="button" class="btn btn-small" data-pr-continue="' + i + '">In #' + pr.number + " mitschicken</button>" : "") + "</li>";
       }).join("") + '</ul><button type="button" class="btn btn-small btn-ghost" data-pr-own>Trotzdem eigener Pull Request</button>';
       box.onclick = function (e) {
         var b = e.target.closest("[data-pr-continue]");
@@ -1379,9 +1399,10 @@ var NeuFormular = (function () {
           g.insertAdjacentHTML("beforeend", '<div class="github-body">'
             + "<p>" + t("github.intro_html", null, "Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.") + "</p>"
             + '<ol class="small"><li><a data-token-link target="_blank" rel="noopener">' + esc(t("github.create_token", null, "Token auf GitHub erstellen ↗")) + "</a> – "
-            + t("github.token_steps_html", { repo: "<code>" + esc(GitHubApi.repo()) + "</code>" }, "Name, Laufzeit (30 Tage) und die Berechtigungen <em>Contents</em> und <em>Pull requests</em> („Read and write“) sind schon ausgefüllt (dazu <em>Issues</em>, um Aufgaben auf der Seite „Offen“ zu übernehmen). Unter „Repository access“ bitte <strong>„Only select repositories“</strong> und <code>" + esc(GitHubApi.repo()) + "</code> wählen, dann „Generate token“.") + "</li>"
+            + t("github.token_classic_html", { repo: "<code>" + esc(GitHubApi.repo()) + "</code>" }, "<em>public_repo</em> ist schon angehakt, kurzes Ablaufdatum wählen (der Token gilt für alle öffentlichen Repositories, in die du schreiben darfst), „Generate token“. Geht mit jedem GitHub-Konto: mit Schreibrechten auf " + esc(GitHubApi.repo()) + " direkt, sonst über deinen eigenen Fork – der wird beim ersten Senden angelegt.") + "</li>"
             + "<li>" + esc(t("github.paste_token", null, "Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.")) + "</li></ol>"
-            + '<label class="form-feld"><span>Token</span><input type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…"></label>'
+            + '<p class="small muted">' + t("github.no_token_html", null, "Ganz ohne Token geht es mit jedem Konto auch: „📋 Auf GitHub speichern“ – GitHub legt dann selbst einen Fork an und bietet „Create pull request“ an. Hast du schon einen älteren Fork, dort vorher „Sync fork“ klicken.") + "</p>"
+            + '<label class="form-feld"><span>Token</span><input type="password" autocomplete="off" spellcheck="false" placeholder="ghp_…"></label>'
             + '<label class="form-check"><input type="checkbox" data-remember><span>' + esc(t("github.remember", null, "Auf diesem Gerät merken")) + '</span><small class="form-hilfe">' + esc(t("github.remember_hint", null, "Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.")) + "</small></label>"
             + '<p class="github-who small" aria-live="polite"></p>'
             + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-logout>' + esc(t("github.logout", null, "Abmelden")) + '</button><span class="muted small"></span><button type="button" class="btn" data-connect>' + esc(t("github.connect_button", null, "Verbinden")) + "</button></div></div>");
@@ -1392,8 +1413,19 @@ var NeuFormular = (function () {
           if (!GitHubApi.connected()) { who.textContent = t("github.not_connected_short", null, "Nicht verbunden."); return; }
           who.textContent = t("github.checking", null, "Prüfe …");
           GitHubApi.whoAmI().then(function (me) {
-            who.innerHTML = '<img src="' + esc(me.avatar) + '" alt="" width="24" height="24"> ' + t("github.connected_as_html", { login: "<strong>@" + esc(me.login) + "</strong>" }, "Verbunden als <strong>@" + esc(me.login) + "</strong>")
-              + (me.canPush ? " – " + esc(t("github.can_push", null, "darf Pull Requests anlegen ✅")) : " – " + t("github.cannot_push_html", { repo: esc(GitHubApi.repo()) }, "hat <strong>keine Schreibrechte</strong> auf " + esc(GitHubApi.repo()) + " (Pull Requests aus Forks kommen später)"));
+            // one text element next to the avatar: .github-who is a flex row, loose text nodes would each wrap on their own
+            var repoName = esc(GitHubApi.repo()), parts = [];
+            if (me.canPush) parts.push(esc(t("github.can_push", null, "darf Pull Requests anlegen ✅")));
+            else {
+              if (me.collaboratorNeedsClassic) parts.push(t("github.collaborator_classic_html", { repo: repoName }, "du bist Collaborator auf " + repoName + ", aber dieser <strong>fine-grained Token</strong> gilt nur für deine eigenen Repositories. Für Pull Requests direkt im Repository oben einen neuen Token erstellen – mit diesem geht es über deinen Fork."));
+              parts.push(me.fork ? t("github.cannot_push_fork_html", { repo: repoName, fork: esc(me.fork) }, "hat keine Schreibrechte auf " + repoName + " – Änderungen gehen über deinen Fork <strong>" + esc(me.fork) + "</strong> ✅")
+                : t("github.cannot_push_html", { repo: repoName }, "hat keine Schreibrechte auf " + repoName + " – beim ersten Senden wird <strong>dein eigener Fork</strong> angelegt ✅"));
+              if (me.fork && me.forkBehind) parts.push('<span data-fork-behind>' + esc(t("github.fork_behind", null, "Dein Fork ist nicht auf dem neuesten Stand – er wird vor dem Senden abgeglichen, deine Änderung baut auf dem aktuellen Stand auf.")) + "</span>");
+            }
+            // one text element next to the avatar: .github-who is a flex row, loose text nodes would each wrap on their own
+            who.innerHTML = '<img src="' + esc(me.avatar) + '" alt="" width="24" height="24"><span>'
+              + t("github.connected_as_html", { login: "<strong>@" + esc(me.login) + "</strong>" }, "Verbunden als <strong>@" + esc(me.login) + "</strong>")
+              + " – " + parts.join(" ") + "</span>";
           }, function (err) { who.textContent = "⚠️ " + err.message; });
         }
         g.querySelector("[data-connect]").onclick = function () {
@@ -1401,7 +1433,7 @@ var NeuFormular = (function () {
           GitHubApi.setToken(input.value, g.querySelector("[data-remember]").checked);
           input.value = "";
           show(); direct.update();
-          GitHubApi.whoAmI().then(function (me) { if (me.canPush && then) { g.close(); then(); } }, function () {});
+          GitHubApi.whoAmI().then(function (me) { if (then) { g.close(); then(); } }, function () {});
         };
         g.querySelector("[data-logout]").onclick = function () { GitHubApi.logout(); show(); direct.update(); if (d) setMode(!!(aktiv && aktiv.edit)); };
         show();

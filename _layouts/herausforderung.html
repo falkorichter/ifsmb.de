@@ -3,14 +3,14 @@ layout: default
 ---
 {%- comment -%}
   A challenge (Herausforderung): a task, problem or question that belongs to projects, events, people …
-  Owners in `team`, projects in `projekte` (or via `tags` = a project's event_tag), anything else via `verlinkt`.
+  Owners in `team`, projects in `projects` (or via `tags` = a project's event_tag), anything else via `linked`.
 {%- endcomment -%}
 {%- assign owners = "" | split: "" -%}{%- assign owner_slugs = page.team | join: "," | split: "," -%}
 {%- for s in owner_slugs %}{% assign m = site.team | where: "slug", s | first %}{% if m %}{% assign owners = owners | push: m %}{% endif %}{% endfor -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{% include herausforderung-status.html h=page %}{% if page.seit %} · <span data-i18n="challenge.since">{{ "challenge.since" | t }}</span> {{ page.seit | i18n_date }}{% endif %}{% if page.status == "geloest" and page.geloest_am %} · <span data-i18n="challenge.solved_on">{{ "challenge.solved_on" | t }}</span> {{ page.geloest_am | i18n_date }}{% endif %}</p>
+      <p class="meta">{% include herausforderung-status.html h=page %}{% if page.since %} · <span data-i18n="challenge.since">{{ "challenge.since" | t }}</span> {{ page.since | i18n_date }}{% endif %}{% if page.status == "geloest" and page.solved_on %} · <span data-i18n="challenge.solved_on">{{ "challenge.solved_on" | t }}</span> {{ page.solved_on | i18n_date }}{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
       {%- if owners.size > 0 %}
@@ -18,17 +18,17 @@ layout: default
       {%- endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
-    {% if page.persoenlich %}
+    {% if page.personal %}
     <p class="personal-note"><span data-i18n="challenge.personal">{{ "challenge.personal" | t }}</span>{% if owners.size > 0 %} <span data-i18n="common.by">{{ "common.by" | t }}</span> {% for m in owners %}<a href="{{ m.url | relative_url }}">{{ m.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %} <span data-i18n="challenge.personal_note">{{ "challenge.personal_note" | t }}</span></p>
     {% endif %}
     <div class="prose">
       {{ content }}
     </div>
     {% if page.status == "geloest" %}
-    {% if page.loesung %}
+    {% if page.solution %}
     <section class="challenge-solution" id="loesung">
       <h2 data-i18n="challenge.solution">{{ "challenge.solution" | t }}</h2>
-      <div class="prose">{{ page.loesung | markdownify }}</div>
+      <div class="prose">{{ page.solution | markdownify }}</div>
     </section>
     {% endif %}
     {% else %}
@@ -36,6 +36,6 @@ layout: default
     {% endif %}
     {% include verbindungen.html %}
     {% if page.tags and page.tags.size > 0 %}{% include verknuepft.html tags=page.tags %}{% endif %}
-    <a href="{{ '/herausforderungen/' | relative_url }}" class="back-link" data-i18n="challenge.back">{{ "challenge.back" | t }}</a>
+    <a href="{{ '/challenges/' | relative_url }}" class="back-link" data-i18n="challenge.back">{{ "challenge.back" | t }}</a>
   </article>
 </main>

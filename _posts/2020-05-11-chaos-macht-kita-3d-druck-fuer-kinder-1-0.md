@@ -5,7 +5,7 @@ author: falko-richter
 original_url: https://falkorichter.github.io/volkersfreunde-jekyll/chaos-macht-kita-3d-druck-fuer-kinder-1-0/
 original_site: volkersfreunde
 tags: [kita, maydaygirl]
-verlinkt:
+linked:
   - /team/opa-andi/
 uuid: 1a6472d9-b482-4e44-ab92-919f2a837a51
 ---
@@ -24,7 +24,7 @@ Am Donnerstag den 21.05.2020 (Himmelfahrt) um 10:00 gibt es einen Stream zum The
 
 ## Wann? – 21.05.2020 10:00
 
-→ [Termin im Kalender]({{ '/kalender/2020-05-21-chaos-macht-kita-stream/' | relative_url }})
+→ [Termin im Kalender]({{ '/calendar/2020-05-21-chaos-macht-kita-stream/' | relative_url }})
 
 ## WO? – HIER:
 

@@ -3,7 +3,7 @@
   include.ohne_projekt = hide the project line (used on project pages).
 {%- endcomment -%}
 {%- assign h = include.h -%}
-{%- assign h_proj = h.projekte | join: "," | split: "," -%}
+{%- assign h_proj = h.projects | join: "," | split: "," -%}
 {%- assign h_owners = h.team | join: "," | split: "," -%}
 <a class="card card-link challenge-card{% if h.status == 'geloest' %} challenge-solved{% endif %}" href="{{ h.url | relative_url }}">
   <p class="meta">{% include herausforderung-status.html h=h %}</p>

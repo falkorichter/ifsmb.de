@@ -1,12 +1,12 @@
 ---
-suche: false # Übersichtsseite, nicht im Suchindex
+search: false # Übersichtsseite, nicht im Suchindex
 layout: page
 title: Team
 i18n_title: pages.team.title
 i18n_lead: pages.team.lead
 lead: Die Menschen hinter dem Institut.
 ---
-{% assign members = site.team | where_exp: "m", "m.nicht_im_team != true" | sort: "order" %}
+{% assign members = site.team | where_exp: "m", "m.not_in_team != true" | sort: "order" %}
 <div class="grid-3">
   {% for m in members %}
   <a class="card card-link member-card" href="{{ m.url | relative_url }}">

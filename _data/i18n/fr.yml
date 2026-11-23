@@ -303,6 +303,17 @@ equipment:
   scanners: Scanners 3D
   others: Traceurs, appareils de mesure et plus
   back: ← Tout l’équipement
+  filter_owner: "Appartient à :"
+  filter_location: "Se trouve chez :"
+  filter_active_owner: "Équipement de {name}"
+  filter_active_location: "Équipement chez {name}"
+  filter_count:
+    one: "1 appareil"
+    other: "{n} appareils"
+  filter_none: aucun appareil pour ce filtre
+  filter_reset: Tout afficher
+  of_partner: "Équipement de {name}"
+  at_partner: "Équipement chez {name}"
 
 team:
   photo_of: Photo de {name}
@@ -493,7 +504,7 @@ new:
     hint: Nouvel article sur nous – classé par date
   partners_partner:
     label: Partenaire
-    hint: Nouveau partenaire dans son propre fichier – apparaît sur /partner/ et dans le réseau
+    hint: Nouveau partenaire dans son propre fichier – apparaît sur /partners/ et dans le réseau
 
 read:
   check: lu
@@ -557,14 +568,17 @@ form:
     press_report: On parle de nous
 
 github:
+  create_token: "Créer un jeton sur GitHub ↗"
+  token_classic_html: "<em>public_repo</em> est déjà coché, choisis une date d’expiration courte (le jeton vaut pour tous les dépôts publics où tu peux écrire), « Generate token ». Marche avec n’importe quel compte GitHub : avec un accès en écriture à {repo} directement, sinon via ton propre fork – il est créé au premier envoi."
+  collaborator_classic_html: "tu es collaborateur·rice sur {repo}, mais ce <strong>jeton à granularité fine</strong> ne vaut que pour tes propres dépôts. Pour des pull requests directement dans le dépôt, crée un nouveau jeton ci-dessus – avec celui-ci, ça passe par ton fork."
+  fork_behind: "Ton fork n’est pas à jour – il est synchronisé avant l’envoi, ta modification repose sur l’état actuel."
+  fork_stale_html: "⚠️ Ton fork {fork} n’a pas pu être mis à jour automatiquement. Ta modification repose quand même sur l’état actuel – pour la suite, clique sur « Sync fork » sur <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">GitHub</a>."
   connect: 🔑 Connecter GitHub
   reconnect: 🔑 Se reconnecter
   connect_title: Créer des pull requests directement d’ici avec un jeton GitHub (avec photos)
   connected_title: Connecté à GitHub – pull requests directement d’ici
   dialog_title: 🔑 Se connecter à GitHub
   intro_html: Avec un jeton GitHub, les formulaires <strong>créent directement des pull requests</strong> – avec photos, sans copier-coller. Comme toujours, rien n’est fusionné sans relecture.
-  create_token: Créer un jeton sur GitHub ↗
-  token_steps_html: Le nom, la durée (30 jours) et les autorisations <em>Contents</em> et <em>Pull requests</em> (« Read and write ») sont déjà remplis (ainsi que <em>Issues</em>, pour prendre en charge des tâches sur la page « Ouvert »). Sous « Repository access », choisir <strong>« Only select repositories »</strong> et {repo}, puis « Generate token ».
   paste_token: Collez le jeton ici. Il reste dans ce navigateur et n’est envoyé qu’à api.github.com.
   remember: Se souvenir sur cet appareil
   remember_hint: Sinon, il disparaît à la fermeture de l’onglet. Ne pas cocher sur l’appareil de quelqu’un d’autre.
@@ -574,7 +588,6 @@ github:
   checking: Vérification …
   connected_as_html: Connecté en tant que {login}
   can_push: peut créer des pull requests ✅
-  cannot_push_html: n’a <strong>pas les droits d’écriture</strong> sur {repo} (les pull requests depuis des forks viendront plus tard)
   not_connected: Pas connecté à GitHub.
   network: Pas de connexion à GitHub – merci de vérifier la connexion internet et de réessayer.
   error: Erreur
@@ -586,10 +599,19 @@ github:
   not_found: Introuvable ({message}) – le jeton n’a-t-il pas accès à {repo} ?
   rejected: "GitHub a refusé la modification : {message}"
   server: GitHub a un problème en ce moment ({status}). Merci de réessayer dans un instant.
-  no_push: "@{login} ne peut pas créer de branches dans {repo} (les pull requests depuis des forks viendront plus tard)."
   step_base: Récupération de l’état de {branch} …
   step_upload: Envoi du fichier {n} sur {total} …
   step_commit: Création du commit …
   step_update_pr: "Ajout à la pull request #{number} …"
   step_branch: Création de la branche {branch} …
   step_open_pr: Ouverture de la pull request …
+  no_token_html: "Sans aucun jeton, ça marche aussi avec tous les comptes : « 📋 Enregistrer sur GitHub » – GitHub crée alors lui-même un fork et propose « Create pull request ». Si tu as déjà un ancien fork, clique d’abord sur « Sync fork »."
+  cannot_push_html: "n’a pas d’accès en écriture à {repo} – <strong>ton propre fork</strong> est créé au premier envoi ✅"
+  cannot_push_fork_html: "n’a pas d’accès en écriture à {repo} – les modifications passent par ton fork <strong>{fork}</strong> ✅"
+  sent_fork_html: "{link} est ouverte (depuis ton fork {fork}) – merci !"
+  sent_fork_compare_html: "Ta modification est dans ton fork {fork}. Dernière étape : {link} – clique sur « Create pull request »."
+  compare_link: "Ouvrir la pull request sur GitHub ↗"
+  step_sync_fork: "Mise à jour du fork {fork} …"
+  step_create_fork: "Création de ton propre fork de {repo} …"
+  fork_permission: "Le jeton n’a pas le droit de créer un fork. Crée le fork de {repo} une fois sur GitHub (« Fork » en haut à droite) ou mets « Administration » sur « Read and write » pour le jeton."
+  fork_no_continue: "Sans accès en écriture, tu ne peux pas ajouter à #{number} – envoie-la comme ta propre pull request."

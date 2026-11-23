@@ -305,6 +305,17 @@ equipment:
   scanners: 3D-Scanner
   others: Plotter, Messgeräte und mehr
   back: ← Alle Ausstattung
+  filter_owner: "Gehört:"
+  filter_location: "Steht bei:"
+  filter_active_owner: "Geräte von {name}"
+  filter_active_location: "Geräte bei {name}"
+  filter_count:
+    one: "1 Gerät"
+    other: "{n} Geräte"
+  filter_none: keine Geräte für diesen Filter
+  filter_reset: Alle zeigen
+  of_partner: "Ausstattung von {name}"
+  at_partner: "Ausstattung bei {name}"
 
 team:
   photo_of: Foto von {name}
@@ -498,7 +509,7 @@ new:
     hint: "Neuer Bericht über uns – wird nach Datum einsortiert"
   partners_partner:
     label: "Partner"
-    hint: "Neuer Partner als eigene Datei – erscheint auf /partner/ und im Netzwerk"
+    hint: "Neuer Partner als eigene Datei – erscheint auf /partners/ und im Netzwerk"
 
 # assets/js/gelesen.js
 read:
@@ -565,14 +576,17 @@ form:
 
 # GitHub connection (assets/js/github-api.js, connect dialog in assets/js/neu.js)
 github:
+  create_token: "Token auf GitHub erstellen ↗"
+  token_classic_html: "<em>public_repo</em> ist schon angehakt, kurzes Ablaufdatum wählen (der Token gilt für alle öffentlichen Repositories, in die du schreiben darfst), „Generate token“. Geht mit jedem GitHub-Konto: mit Schreibrechten auf {repo} direkt, sonst über deinen eigenen Fork – der wird beim ersten Senden angelegt."
+  collaborator_classic_html: "du bist Collaborator auf {repo}, aber dieser <strong>fine-grained Token</strong> gilt nur für deine eigenen Repositories. Für Pull Requests direkt im Repository oben einen neuen Token erstellen – mit diesem geht es über deinen Fork."
+  fork_behind: "Dein Fork ist nicht auf dem neuesten Stand – er wird vor dem Senden abgeglichen, deine Änderung baut auf dem aktuellen Stand auf."
+  fork_stale_html: "⚠️ Dein Fork {fork} ließ sich nicht automatisch auf den neuesten Stand bringen. Deine Änderung baut trotzdem auf dem aktuellen Stand auf – für später auf <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">GitHub</a> „Sync fork“ klicken."
   connect: 🔑 GitHub verbinden
   reconnect: 🔑 Neu verbinden
   connect_title: Mit einem GitHub-Token Pull Requests direkt von hier erstellen (mit Fotos)
   connected_title: Mit GitHub verbunden – Pull Requests direkt von hier
   dialog_title: 🔑 Mit GitHub verbinden
   intro_html: Mit einem GitHub-Token legen die Formulare <strong>Pull Requests direkt an</strong> – mit Fotos, ohne Kopieren. Gemergt wird wie immer erst nach Durchsicht.
-  create_token: Token auf GitHub erstellen ↗
-  token_steps_html: Name, Laufzeit (30 Tage) und die Berechtigungen <em>Contents</em> und <em>Pull requests</em> („Read and write“) sind schon ausgefüllt (dazu <em>Issues</em>, um Aufgaben auf der Seite „Offen“ zu übernehmen). Unter „Repository access“ bitte <strong>„Only select repositories“</strong> und {repo} wählen, dann „Generate token“.
   paste_token: Token hier einfügen. Er bleibt nur in diesem Browser und wird nur an api.github.com geschickt.
   remember: Auf diesem Gerät merken
   remember_hint: Sonst ist er weg, sobald der Tab zu ist. Auf fremden Geräten nicht anhaken.
@@ -582,7 +596,6 @@ github:
   checking: Prüfe …
   connected_as_html: Verbunden als {login}
   can_push: darf Pull Requests anlegen ✅
-  cannot_push_html: hat <strong>keine Schreibrechte</strong> auf {repo} (Pull Requests aus Forks kommen später)
   not_connected: Nicht mit GitHub verbunden.
   network: Keine Verbindung zu GitHub – bitte die Internetverbindung prüfen und nochmal versuchen.
   error: Fehler
@@ -594,10 +607,19 @@ github:
   not_found: Nicht gefunden ({message}) – fehlt dem Token der Zugriff auf {repo}?
   rejected: "GitHub hat die Änderung abgelehnt: {message}"
   server: GitHub hat gerade ein Problem ({status}). Bitte gleich nochmal versuchen.
-  no_push: "@{login} darf in {repo} keine Branches anlegen (Pull Requests aus Forks kommen später)."
   step_base: Stand von {branch} holen …
   step_upload: Datei {n} von {total} hochladen …
   step_commit: Commit anlegen …
   step_update_pr: "Pull Request #{number} ergänzen …"
   step_branch: Branch {branch} anlegen …
   step_open_pr: Pull Request öffnen …
+  no_token_html: "Ganz ohne Token geht es mit jedem Konto auch: „📋 Auf GitHub speichern“ – GitHub legt dann selbst einen Fork an und bietet „Create pull request“ an. Hast du schon einen älteren Fork, dort vorher „Sync fork“ klicken."
+  cannot_push_html: "hat keine Schreibrechte auf {repo} – beim ersten Senden wird <strong>dein eigener Fork</strong> angelegt ✅"
+  cannot_push_fork_html: "hat keine Schreibrechte auf {repo} – Änderungen gehen über deinen Fork <strong>{fork}</strong> ✅"
+  sent_fork_html: "{link} ist angelegt (aus deinem Fork {fork}) – danke!"
+  sent_fork_compare_html: "Deine Änderung liegt in deinem Fork {fork}. Letzter Schritt: {link} – dort „Create pull request“ klicken."
+  compare_link: "Pull Request auf GitHub anlegen ↗"
+  step_sync_fork: "Fork {fork} auf den neuesten Stand bringen …"
+  step_create_fork: "Eigenen Fork von {repo} anlegen …"
+  fork_permission: "Das Token darf keinen Fork anlegen. Entweder den Fork von {repo} einmal auf GitHub anlegen („Fork“ oben rechts) oder beim Token „Administration“ auf „Read and write“ stellen."
+  fork_no_continue: "Ohne Schreibrechte kannst du nicht in #{number} mitschicken – bitte als eigenen Pull Request senden."

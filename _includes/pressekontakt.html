@@ -1,7 +1,7 @@
-{%- assign pr = site.data.presse -%}
-{%- assign c_name = pr.kontakt_name -%}{%- assign c_b64 = pr.kontakt_email_b64 -%}{%- assign c_show = pr.kontakt_email_anzeige -%}{%- assign c_tel = pr.kontakt_telefon -%}{%- assign c_tel_b64 = pr.kontakt_telefon_b64 -%}
+{%- assign pr = site.data.press -%}
+{%- assign c_name = pr.contact_name -%}{%- assign c_b64 = pr.contact_email_b64 -%}{%- assign c_show = pr.contact_email_display -%}{%- assign c_tel = pr.contact_phone -%}{%- assign c_tel_b64 = pr.contact_phone_b64 -%}
 {%- if page.contact_name and page.contact_name != "" -%}
-  {%- assign c_name = page.contact_name -%}{%- assign c_b64 = page.contact_email_b64 -%}{%- assign c_show = page.contact_email_anzeige -%}{%- assign c_tel = page.contact_telefon | default: "" -%}{%- assign c_tel_b64 = page.contact_telefon_b64 | default: "" -%}
+  {%- assign c_name = page.contact_name -%}{%- assign c_b64 = page.contact_email_b64 -%}{%- assign c_show = page.contact_email_display -%}{%- assign c_tel = page.contact_telefon | default: "" -%}{%- assign c_tel_b64 = page.contact_telefon_b64 | default: "" -%}
 {%- endif -%}
 <div class="card press-contact">
   <h3 data-i18n="press.contact">{{ "press.contact" | t }}</h3>
