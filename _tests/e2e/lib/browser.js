@@ -85,6 +85,12 @@ class Page {
     await this.addInitScript("window.__opened = []; window.open = function (u) { window.__opened.push(String(u)); return null; };");
   }
   addInitScript(source) { return this.send("Page.addScriptToEvaluateOnNewDocument", { source }); }
+  // browser languages like a visitor from another country: navigator.languages and Accept-Language ("fr-FR,fr")
+  async emulateLanguages(acceptLanguage) {
+    const { userAgent } = await this.conn.send("Browser.getVersion");
+    await this.send("Emulation.setUserAgentOverride", { userAgent, acceptLanguage });
+    await this.send("Emulation.setLocaleOverride", { locale: acceptLanguage.split(",")[0] }).catch(() => {});
+  }
   async goto(url, { timeout: ms = 15000 } = {}) {
     const loaded = new Promise((ok) => { const off = this.on("Page.loadEventFired", () => { off(); ok(); }); });
     const r = await this.send("Page.navigate", { url });

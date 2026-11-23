@@ -14,7 +14,7 @@ uuid: d92cb238-0eda-4f47-bd93-7c38addf6647
     <div class="card-icon">🖨️</div>
     <h3>AGs an Schulen</h3>
     <p>3D-Druck, Konstruieren am Computer (CAD) und Elektronik – einmal pro Woche, über ein ganzes Schuljahr. Die Kinder bauen echte Projekte, von ferngesteuerten Fahrzeugen bis zum Stiftehalter.</p>
-    <p class="small">Zum Beispiel: <a href="{{ '/projekte/3d-druck-ag-ktg/' | relative_url }}">3D-Druck AG an der KTG</a>, <a href="{{ '/projekte/3d-druck-ag-platanus-schule/' | relative_url }}">AG an der Platanus Schule</a></p>
+    <p class="small">Zum Beispiel: <a href="{{ '/projects/3d-druck-ag-ktg/' | relative_url }}">3D-Druck AG an der KTG</a>, <a href="{{ '/projects/3d-druck-ag-platanus-schule/' | relative_url }}">AG an der Platanus Schule</a></p>
   </div>
   <div class="card">
     <div class="card-icon">🧸</div>
@@ -26,7 +26,7 @@ uuid: d92cb238-0eda-4f47-bd93-7c38addf6647
     <div class="card-icon">💻</div>
     <h3>Programmierwerkstätten</h3>
     <p>Programmieren lernen mit Scratch – von den Grundlagen des Webs bis zu Highscore und „Clean Code“.</p>
-    <p class="small">Zum Beispiel: <a href="{{ '/projekte/programmierwerkstatt-lessing-gymnasium/' | relative_url }}">Programmierwerkstatt am Lessing-Gymnasium</a></p>
+    <p class="small">Zum Beispiel: <a href="{{ '/projects/programmierwerkstatt-lessing-gymnasium/' | relative_url }}">Programmierwerkstatt am Lessing-Gymnasium</a></p>
   </div>
   <div class="card">
     <div class="card-icon">🎬</div>
@@ -38,26 +38,26 @@ uuid: d92cb238-0eda-4f47-bd93-7c38addf6647
     <div class="card-icon">🏗️</div>
     <h3>Makespaces an Schulen aufbauen</h3>
     <p>Wir beraten Schulen ehrenamtlich, wenn sie einen eigenen Makespace einrichten wollen: Welche Geräte, welche Software, wie organisiert man das – und wie finanziert man es über Spenden?</p>
-    <p class="small">Zum Beispiel: <a href="{{ '/projekte/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}">Makespace am Rosalind-Franklin-Gymnasium</a> · Finanzierung: <a href="{{ '/geld-fuer-makespaces/' | relative_url }}">Geld für Makespaces</a></p>
+    <p class="small">Zum Beispiel: <a href="{{ '/projects/3d-druck-ag-rosalind-franklin-gymnasium/' | relative_url }}">Makespace am Rosalind-Franklin-Gymnasium</a> · Finanzierung: <a href="{{ '/geld-fuer-makespaces/' | relative_url }}">Geld für Makespaces</a></p>
   </div>
   <div class="card">
     <div class="card-icon">🚌</div>
     <h3>Ausflüge und Events</h3>
     <p>Besuche bei Designer*innen, Werkstätten und Messen – und wir kommen mit Druckern und Plottern zu Festen, Kongressen und Aktionstagen.</p>
-    <p class="small">Zum Beispiel: <a href="{{ '/kalender/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/' | relative_url }}">Ausflug zu Max</a>, <a href="{{ '/news/2026/10/19/jugend-hackt-congress-2026/' | relative_url }}">Jugend Hackt Congress</a></p>
+    <p class="small">Zum Beispiel: <a href="{{ '/calendar/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/' | relative_url }}">Ausflug zu Max</a>, <a href="{{ '/news/2026/10/19/jugend-hackt-congress-2026/' | relative_url }}">Jugend Hackt Congress</a></p>
   </div>
   <div class="card">
     <div class="card-icon">🧰</div>
     <h3>Geräte über unsere Partner</h3>
     <p>Das Institut selbst besitzt (noch) nichts – aber über Partner und Team haben wir Zugang zu 3D-Druckern, Scannern, Plottern und mehr.</p>
-    <p class="small">Siehe <a href="{{ '/ausstattung/' | relative_url }}">Ausstattung</a></p>
+    <p class="small">Siehe <a href="{{ '/equipment/' | relative_url }}">Ausstattung</a></p>
   </div>
 </div>
 
 <h2 id="projektwoche-digitaler-makespace">Projektwoche: Eine Woche digitaler Makespace</h2>
 <div class="prose">
   <p>Wir machen Content – und programmieren unsere eigene schulinterne Content-Plattform. Vielleicht heißt sie am Ende „Lessing-Tok“, „Lessing-gram“ oder „Insta-Lessing“ 🙂</p>
-  <p>Eine Woche lang werden Inhalte erstellt und auf eine eigene kleine Webseite gestellt. Die Webseite bauen die Schüler*innen selbst, mit Hilfe von professioneller KI. Das Konzept ist für eine Projektwoche am Lessing-Gymnasium entstanden, wo Falko die <a href="{{ '/projekte/programmierwerkstatt-lessing-gymnasium/' | relative_url }}">Programmierwerkstatt</a> leitet.</p>
+  <p>Eine Woche lang werden Inhalte erstellt und auf eine eigene kleine Webseite gestellt. Die Webseite bauen die Schüler*innen selbst, mit Hilfe von professioneller KI. Das Konzept ist für eine Projektwoche am Lessing-Gymnasium entstanden, wo Falko die <a href="{{ '/projects/programmierwerkstatt-lessing-gymnasium/' | relative_url }}">Programmierwerkstatt</a> leitet.</p>
   <p>Falko ist professioneller Software- und App-Entwickler, seit vielen Jahren hobbymäßig auf YouTube unterwegs, macht seit 20 Jahren Podcasts und ist seit einiger Zeit als „YouTuber-Praktikant“ auch semi-professionell im „Content-Game“. Mit der <a href="https://www.youtube.com/@Radelbande">Radelbande</a> ist er immer mal wieder unterwegs, außerdem betreut er verschiedene Instagram-Kanäle.</p>
 
   <h3>Für wen?</h3>

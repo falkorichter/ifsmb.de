@@ -10,7 +10,7 @@
 <script type="application/json" id="todos-daten">
 {
   "dateien": {{ todo_ids | jsonify }},
-  "personen": [{% assign tc_team = site.team | sort: "order" %}{% assign tc_first = true %}{% for m in tc_team %}{% if m.nicht_im_team != true or todo_ids contains m.slug %}{% unless tc_first %},{% endunless %}{% assign tc_first = false %}{"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}}{% endif %}{% endfor %}],
+  "personen": [{% assign tc_team = site.team | sort: "order" %}{% assign tc_first = true %}{% for m in tc_team %}{% if m.not_in_team != true or todo_ids contains m.slug %}{% unless tc_first %},{% endunless %}{% assign tc_first = false %}{"id": {{ m.slug | jsonify }}, "name": {{ m.title | jsonify }}, "bild": {{ m.photo_icon | default: "" | relative_url | jsonify }}}{% endif %}{% endfor %}],
   "basis": {{ '/todos/' | relative_url | jsonify }}
 }
 </script>

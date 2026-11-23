@@ -7,6 +7,6 @@ falko baut an 2 abenden
 mogster treffen aufeinander und erster praxistest von Falko
 
 
-http://localhost:4000/projekte/3dsets-mogster-bauen/ should be split into http://localhost:4000/news/persoenlich/ and then listed on the project. we want little pieces of linked information. people work on projects and post little updates on the projects. ideally we have projects that involve multiple people
+http://localhost:4000/projects/3dsets-mogster-bauen/ should be split into http://localhost:4000/news/personal/ and then listed on the project. we want little pieces of linked information. people work on projects and post little updates on the projects. ideally we have projects that involve multiple people
 
-Anton from the team baut sich auch einen mogster. http://localhost:4000/projekte/3dsets-mogster-bauen/ link him
+Anton from the team baut sich auch einen mogster. http://localhost:4000/projects/3dsets-mogster-bauen/ link him

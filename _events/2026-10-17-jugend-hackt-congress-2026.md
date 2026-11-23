@@ -15,4 +15,4 @@ Beim [Jugend hackt Congress 2026](https://jugendhackt.org/events/jugend-hackt-co
 
 Nebenbei hat er ein bisschen den Makespace vor Ort mitbetreut: 35services hat den Congress mit Hardware (Snapmaker U1) unterstützt.
 
-→ [Bericht mit Fotos und Videos vom Congress]({{ '/news/2026/10/19/jugend-hackt-congress-2026/' | relative_url }}) · [Aufzeichnungen auf media.ccc.de](https://media.ccc.de/c/jh26congress) · [Partnerseite Jugend hackt]({{ '/partner/jugend-hackt/' | relative_url }})
+→ [Bericht mit Fotos und Videos vom Congress]({{ '/news/2026/10/19/jugend-hackt-congress-2026/' | relative_url }}) · [Aufzeichnungen auf media.ccc.de](https://media.ccc.de/c/jh26congress) · [Partnerseite Jugend hackt]({{ '/partners/jugend-hackt/' | relative_url }})

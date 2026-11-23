@@ -31,6 +31,7 @@ Nichts geht direkt auf `main`. Ohne Verbindung bleibt alles wie bisher (Kopieren
 | Fotos ziehen mit um, wenn sich der Dateiname danach ändert (alle Varianten, in allen Feldern) | `direct.submit` | ✅ |
 | Bilder je Typ unter `assets/images/<bereich>/<name>/` (`IMAGE_FOLDERS`: news, kalender, projekte, ausstattung, team, partner, presse, herausforderungen); Nummer `NN` = nächste freie im Ordner auf GitHub | `direct.folder`, `direct.nextNumber` | ✅ |
 | `#bearbeiten` in der Adresse, solange ✏️ offen ist; `<seite>#bearbeiten` / `#edit` öffnet das Formular | `neu.js` (`EDIT_HASH`), `_includes/edit-buttons.html` | ✅ |
+| Übersicht „Offen“: offene PRs nach Check-/Merge-Status, offene Issues (übernehmbar / in Arbeit), „Übernehmen“ – nur für Verbundene (#146; Mergen von dort ist ein offener Punkt) | `assets/js/open-work.js`, `/mitmachen/offen/`, `GitHubApi.commitChecks/pullMergeState/openIssues/assignIssue` | ✅ gegen simulierte API |
 | Offene PRs zur selben Markdown-Datei: Warnung im Formular mit „In #N weiterarbeiten“ (lädt den Stand aus dem PR-Branch, Speichern = Commit auf diesen Branch, `force: false`) und – nur für Verbundene – oben auf der Seite | `GitHubApi.openPullsForFile`, `direct.checkOpenPulls/pickUp`, `edit-buttons.html` | ✅ gegen simulierte API |
 
 Neue Abhängigkeiten: **keine** – nur Browser-APIs (Canvas, Fetch, FileReader, DataTransfer). Externe Anfragen gehen nur an `api.github.com` und nur nach aktivem Verbinden (Impressum, Abschnitt Datenschutz).
@@ -54,7 +55,7 @@ Im Browser (lokaler Server) `window.fetch` für `https://api.github.com` durch e
 
 - Token verbinden und PR anlegen klappte auf Anhieb (Partner „Zazza Moabit / Pajas Kaffee“).
 - Das Foto landete aber unter `assets/images/news/…` und war **nirgends eingetragen** (Partner haben kein Textfeld) → Anlass für die Foto-Ablage mit Verwendungen; ist behoben.
-- `page:` wurde mit der externen Website gefüllt – das Feld ist für eine eigene Partnerseite `/partner/<name>/`. → Hilfetext im Partner-Formular schärfen (siehe offene Punkte).
+- `page:` wurde mit der externen Website gefüllt – das Feld ist für eine eigene Partnerseite `/partners/<name>/`. → Hilfetext im Partner-Formular schärfen (siehe offene Punkte).
 - Ein „Foto als Logo“ (wie `bietenholz.jpg`) liegt bisher flach als `assets/images/partner/<name>.jpg`; die Ablage legt neue in `assets/images/partner/<name>/NN.jpg` ab – beides funktioniert, Konvention noch festlegen.
 
 ## Anmeldung – Optionen
@@ -87,7 +88,7 @@ Für B gilt `CLAUDE.md`: der Dienst ist eine Abhängigkeit → vorher in `DEPEND
 | HEIC (iPhone) | Pillow (mit Plugin) | ✅ Safari, ❌ Chrome | Hinweis im Editor ist da |
 | „Makespace“ statt „Makerspace“, Inhalt prüfen | Claude/Durchsicht | Prüfliste im PR | Check in `pruefen.yml` |
 | Screenshots für den PR (`pr_vorschau.py`) | lokal | ❌ | Workflow, der Vorschaubilder an `web/*`-PRs hängt |
-| Verbindungen pflegen (`partners`, Stichworte, `verlinkt` auf anderen Seiten) | Claude sucht über Pagefind alle Erwähnungen und trägt sie beidseitig ein | ❌ nur in der eigenen Datei | siehe offene Punkte |
+| Verbindungen pflegen (`partners`, Stichworte, `linked` auf anderen Seiten) | Claude sucht über Pagefind alle Erwähnungen und trägt sie beidseitig ein | ❌ nur in der eigenen Datei | siehe offene Punkte |
 
 ✋ = von Hand · 🤖 = automatischer Vorschlag (immer selbst prüfen) · Verpixelt wird grob (ca. 10 Blöcke über den Bereich) – nicht zurückrechenbar, anders als ein leichter Weichzeichner.
 
@@ -150,7 +151,7 @@ Sortiert nach Wichtigkeit. ⭐ = als Nächstes sinnvoll.
 2. ⭐ **`web/*`-Branches automatisch löschen** nach dem Merge (Repo-Einstellung „Automatically delete head branches“) – sonst sammeln sie sich (z. B. `web/falkorichter-zazza-…` von #112 liegt noch auf GitHub).
 3. Content-Security-Policy per `<meta>` (`connect-src 'self' https://api.github.com`, keine fremden Skripte) – vorher prüfen, dass Karte (OpenStreetMap nach Klick) und Pagefind weiter gehen.
 4. **Anmeldung B** (GitHub App + Token-Tausch-Dienst) entscheiden und bauen; `DEPENDENCIES.md`, Impressum.
-5. Pull Requests aus **Forks** für Leute ohne Schreibrechte (mit GitHub App: App muss auch auf dem Fork installiert sein – prüfen).
+5. ~~Pull Requests aus **Forks** für Leute ohne Schreibrechte~~ – umgesetzt (#186): ohne Schreibrechte legt das Formular einen eigenen Fork an (oder nimmt den vorhandenen und gleicht ihn per `merge-upstream` ab), baut den Commit auf dem aktuellen Stand des Repositories und öffnet den PR aus `login:branch`. Mit einem fine-grained Token verweigert GitHub diesen PR per API – dann bekommt man den Link auf GitHubs Vergleichsseite („Create pull request“). Collaborators ohne Owner-Rechte brauchen einen klassischen Token (`public_repo`), fine-grained Tokens gibt es für fremde persönliche Repositories nicht. Offen: „In #N mitschicken“ für Fork-PRs (Push in fremde Fork-Branches).
 
 ### Fotos
 
@@ -176,9 +177,9 @@ Alle Konfliktfälle mit Soll-Verhalten und Stand der Umsetzung: [`EDITING_CONFLI
 
 ### Formulare & Inhalte
 
-19. ✅ (PR #118) Hilfetext im Partner-Formular: `page` = eigene Partnerseite `/partner/<name>/`, nicht die Website (Fehler aus #112).
+19. ✅ (PR #118) Hilfetext im Partner-Formular: `page` = eigene Partnerseite `/partners/<name>/`, nicht die Website (Fehler aus #112).
 20. **Verbindungen auf anderen Seiten** mitpflegen (z. B. beim neuen Partner die Termine/Projekte mit `partners:` ergänzen, Stichwort anlegen) – heute macht das Claude nach Suche über Pagefind. Idee: nach dem Anlegen Vorschläge aus der Suche anzeigen („Diese Seiten erwähnen Zazza – verbinden?“) und die Änderungen mit in den Commit nehmen.
-21. Neue Stichworte bekommen keinen Anzeigenamen in `_data/stichworte.yml` – im Formular mit anbieten.
+21. Neue Stichworte bekommen keinen Anzeigenamen in `_data/tags.yml` – im Formular mit anbieten.
 22. Todo-Editor (`todos.js`) nutzt noch Kopieren → GitHub – auf `GitHubApi.createPullRequest` umstellen.
 23. Check „Makespace statt Makerspace“ und fremde E-Mail-Adressen in `pruefen.yml`.
 24. Vorschaubilder (`pr_vorschau.py`) automatisch an `web/*`-PRs hängen (Workflow).

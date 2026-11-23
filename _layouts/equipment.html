@@ -1,17 +1,17 @@
 ---
 layout: default
 ---
-{%- if page.standort_partner -%}{%- assign sp = site.data.partners | where: "name", page.standort_partner | first -%}{%- endif -%}
+{%- if page.location_partner -%}{%- assign sp = site.data.partners | where: "name", page.location_partner | first -%}{%- endif -%}
 {%- assign eq_updates = "" | split: "" -%}{%- if page.updates -%}{%- assign eq_updates = page.updates | sort: "datum" | reverse -%}{%- endif -%}
 {%- assign eq_last = eq_updates | first -%}
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry">In Aussicht</span> · {% elsif page.status == "in-reparatur" %}<span class="badge badge-inquiry">In Reparatur</span> · {% elsif page.status == "im-test" %}<span class="badge badge-inquiry">Im Test</span> · {% endif %}{% if page.kategorie %}{{ page.kategorie }} · {% endif %}{% include besitz.html item=page %}{% if eq_last %} · Letztes Update: <a href="#updates">{{ eq_last.datum | date: "%d.%m.%Y" }}</a>{% endif %}</p>
+      <p class="meta">{% if page.status == "in-aussicht" %}<span class="badge badge-inquiry" data-i18n="badge.prospect">{{ "badge.prospect" | t }}</span> · {% elsif page.status == "in-reparatur" %}<span class="badge badge-inquiry" data-i18n="badge.in_repair">{{ "badge.in_repair" | t }}</span> · {% elsif page.status == "im-test" %}<span class="badge badge-inquiry" data-i18n="badge.testing">{{ "badge.testing" | t }}</span> · {% endif %}{% if page.category %}{{ page.category }} · {% endif %}{% include besitz.html item=page %}{% if eq_last %} · <span data-i18n="project.last_update">{{ "project.last_update" | t }}</span> <a href="#updates">{{ eq_last.date | i18n_date }}</a>{% endif %}</p>
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
-      {% if page.standort or sp %}
-      <p class="equipment-location">📍 Standort: {% if sp %}<a href="{{ '/partner/' | relative_url }}#{{ sp.name | slugify }}">{{ page.standort | default: sp.name }}</a>{% else %}{{ page.standort }}{% endif %}</p>
+      {% if page.location or sp %}
+      <p class="equipment-location">📍 <span data-i18n="equipment.location">{{ "equipment.location" | t }}</span> {% if sp %}<a href="{{ '/partners/' | relative_url }}#{{ sp.name | slugify }}">{{ page.location | default: sp.name }}</a>{% else %}{{ page.location }}{% endif %}</p>
       {% endif %}
       {% include stichworte.html tags=page.tags %}
     </header>
@@ -20,13 +20,13 @@ layout: default
       <a href="{{ page.image | relative_url }}" class="lightbox"><img src="{{ page.thumb | default: page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></a>
     </div>
     {% if page.image_caption %}<p class="muted small image-caption">{{ page.image_caption }}</p>{% endif %}
-    {% if page.image_is_illustration %}<p class="muted small">Illustration – ein Foto folgt{% if page.status == "in-aussicht" %}, sobald das Gerät da ist{% endif %}.</p>{% endif %}
+    {% if page.image_is_illustration %}{% if page.status == "in-aussicht" %}<p class="muted small" data-i18n="equipment.illustration_prospect">{{ "equipment.illustration_prospect" | t }}</p>{% else %}<p class="muted small" data-i18n="equipment.illustration">{{ "equipment.illustration" | t }}</p>{% endif %}{% endif %}
     {% endif %}
     <div class="prose equipment-body">
       {{ content }}
     </div>
     {% if page.gallery and page.gallery.size > 0 %}
-    <h2>Fotos</h2>
+    <h2 data-i18n="equipment.photos">{{ "equipment.photos" | t }}</h2>
     <div class="gallery">
       {% for g in page.gallery %}
       <a href="{{ g.image | relative_url }}" class="lightbox"><img src="{{ g.thumb | default: g.image | relative_url }}" alt="{{ g.alt }}" loading="lazy"></a>
@@ -34,7 +34,7 @@ layout: default
     </div>
     {% endif %}
     {% if page.videos and page.videos.size > 0 %}
-    <h2>Videos</h2>
+    <h2 data-i18n="equipment.videos">{{ "equipment.videos" | t }}</h2>
     {% for v in page.videos %}
     <figure class="equipment-video">
       <video class="post-video" controls preload="none" playsinline{% if v.poster %} poster="{{ v.poster | relative_url }}"{% endif %} src="{{ v.src | relative_url }}"></video>
@@ -45,11 +45,11 @@ layout: default
     {%- comment -%}Stand / Updates: short dated notes (`updates`: datum + text in Markdown, may contain a {: .gallery}), newest first – like on project pages.{%- endcomment -%}
     {% if eq_updates.size > 0 %}
     <section class="project-updates" id="updates">
-      <h2>Stand / Updates</h2>
+      <h2 data-i18n="project.updates">{{ "project.updates" | t }}</h2>
       <ol class="update-list">
         {%- for u in eq_updates %}
         <li class="update-item">
-          <span class="meta update-date">{{ u.datum | date: "%d.%m.%Y" }}</span>
+          <span class="meta update-date">{{ u.date | i18n_date }}</span>
           <div class="update-text">{{ u.text | markdownify }}</div>
         </li>
         {%- endfor %}
@@ -57,15 +57,15 @@ layout: default
     </section>
     {% endif %}
     {% if page.status == "in-aussicht" %}
-    <p class="note">Dieses Gerät ist noch nicht da – wir bekommen es vielleicht. Sobald es so weit ist, aktualisieren wir diese Seite.</p>
+    <p class="note" data-i18n="equipment.prospect_note">{{ "equipment.prospect_note" | t }}</p>
     {% else %}
-    <p class="note">Das Institut besitzt (noch) keine eigenen Geräte. {% include besitz.html item=page %} – darüber können wir es je nach Absprache nutzen.</p>
+    <p class="note"><span data-i18n="equipment.no_own_devices">{{ "equipment.no_own_devices" | t }}</span> {% include besitz.html item=page %} <span data-i18n="equipment.use_by_arrangement">{{ "equipment.use_by_arrangement" | t }}</span></p>
     {% endif %}
     {%- assign rel_tags = "" | split: "" -%}
-    {%- for t in page.tags -%}{%- unless site.data.stichworte_breit contains t -%}{%- assign rel_tags = rel_tags | push: t -%}{%- endunless -%}{%- endfor -%}
+    {%- for t in page.tags -%}{%- unless site.data.tags_broad contains t -%}{%- assign rel_tags = rel_tags | push: t -%}{%- endunless -%}{%- endfor -%}
     {%- if rel_tags.size == 0 -%}{%- assign rel_tags = page.tags -%}{%- endif %}
     {% include verbindungen.html %}
     {% include verknuepft.html tags=rel_tags %}
-    <a href="{{ '/ausstattung/' | relative_url }}" class="back-link">← Alle Ausstattung</a>
+    <a href="{{ '/equipment/' | relative_url }}" class="back-link" data-i18n="equipment.back">{{ "equipment.back" | t }}</a>
   </article>
 </main>

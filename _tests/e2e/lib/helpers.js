@@ -18,7 +18,7 @@ const { launchChrome } = require("./browser.js");
 
 const ROOT = path.resolve(__dirname, "../../..");
 const SITE = path.join(ROOT, "_site");
-const TOKEN_KEY = "ifsmb-github-token", API_KEY = "ifsmb-github-api";
+const TOKEN_KEY = "ifsmb-github-token", API_KEY = "ifsmb-github-api", LANGUAGE_KEY = "ifsmb-language";
 
 function decodeEntities(s) { return s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&"); }
 
@@ -162,16 +162,21 @@ async function startEnv({ site = SITE } = {}) {
     reset() { fake.control.reset(); },
     // files of this working tree onto main (paths relative to the repository root)
     seedSource(paths) { return fake.control.seed({ fromDir: { root: ROOT, paths } }); },
-    // a person in their own browser context (own storage); token = null → not connected
-    async person(token, { remember = false } = {}) {
+    // a person in their own browser context (own storage); token = null → not connected.
+    // language: the UI language stored as this person's choice (assets/js/i18n.js) – German by default, because the
+    // tests check German texts and headless Chrome may report another language; null = no choice (detection).
+    // locale: browser languages to emulate (navigator.languages), e.g. "fr-FR,fr"
+    async person(token, { remember = false, language = "de", locale = null } = {}) {
       const context = await browser.newContext();
       const page = await context.newPage();
+      if (locale) await page.emulateLanguages(locale);
       // storage lives per origin: set token and API override on an empty page of the site first
       await page.goto(siteUrl + "/__blank");
-      await page.evaluate((k, v, ak, av, rem) => {
+      await page.evaluate((k, v, ak, av, rem, lk, lv) => {
         localStorage.setItem(ak, av);
         if (v) (rem ? localStorage : sessionStorage).setItem(k, v);
-      }, TOKEN_KEY, token, API_KEY, apiUrl, remember);
+        if (lv) localStorage.setItem(lk, lv);
+      }, TOKEN_KEY, token, API_KEY, apiUrl, remember, LANGUAGE_KEY, language);
       const p = new Person(env, page, context, token);
       people.push(p);
       return p;

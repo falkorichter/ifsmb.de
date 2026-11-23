@@ -2,9 +2,9 @@
 title: "Papas Mogster rollt"
 date: 2026-08-16 12:00:00 +0200
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [mogster, rc-modellbau]
-verlinkt:
+linked:
   - /team/opa-andi/
 uuid: d2e74f0d-c462-4347-9823-0ef45dee5978
 ---

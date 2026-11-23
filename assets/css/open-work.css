@@ -1,0 +1,32 @@
+/* Overview of open pull requests and issues (/mitmachen/offen/, assets/js/open-work.js) – loaded only on that page.
+   Uses the variables of style.css. */
+.open-work [hidden] { display: none !important; }
+.open-work .note p + p { margin-top: .6rem; }
+.open-work-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin: 1rem 0 .5rem; }
+.open-work-bar [data-open-work-who] { margin-right: auto; }
+.open-work-status:empty { display: none; }
+.open-work-status { margin: .5rem 0; padding: .5rem .8rem; border-left: 4px solid var(--accent); background: var(--paper); }
+.open-work-status[data-kind="auth"], .open-work-status[data-kind="rate"], .open-work-status[data-kind="permission"],
+.open-work-status[data-kind="network"], .open-work-status[data-kind="other"], .open-work-status[data-kind="notfound"] { border-left-color: var(--accent-2); }
+.open-work h2 { margin-top: 2rem; }
+.open-work-group { margin: 1.25rem 0; }
+.open-work-group h3 { margin: 0 0 .2rem; font-size: 1.1rem; }
+.open-work-group > p { margin: 0 0 .5rem; }
+.open-work-count { display: inline-block; min-width: 1.6em; padding: 0 .4em; border-radius: 999px; background: var(--line); font-size: .8rem; text-align: center; vertical-align: middle; }
+.open-work-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.open-work-item { padding: .6rem .8rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--paper); }
+.open-work-group[data-group="ready"] .open-work-item { border-left: 8px solid #1a7f37; }
+.open-work-group[data-group="failing"] .open-work-item { border-left: 8px solid #cf222e; }
+.open-work-group[data-group="running"] .open-work-item { border-left: 8px solid var(--accent); }
+.open-work-group[data-group="pickable"] .open-work-item { border-left: 8px solid var(--blue); }
+.open-work-title { font-weight: 700; }
+.open-work-title a { color: var(--ink); }
+.open-work-number { color: var(--muted); font-weight: 400; }
+.open-work-meta, .open-work-pages { color: var(--ink-soft); font-size: .85rem; margin-top: .2rem; }
+.open-work-pages code, .open-work-page-new code { font-size: .8rem; }
+.open-work-badge { display: inline-block; padding: 0 .45rem; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); white-space: nowrap; }
+.open-work-badge[data-check-state="failure"], .open-work-badge[data-merge-state="dirty"], .open-work-badge[data-merge-state="behind"] { border-color: #cf222e; white-space: normal; }
+.open-work-badge[data-check-state="success"] { border-color: #1a7f37; }
+.open-work-label { display: inline-block; padding: 0 .5rem; border-radius: 999px; font-size: .75rem; font-weight: 400; background: var(--line);
+  box-shadow: inset 4px 0 0 var(--label-color, var(--muted)); vertical-align: middle; }
+.open-work-actions { margin-top: .4rem; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }

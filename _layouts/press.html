@@ -4,7 +4,7 @@ layout: default
 <main class="container page narrow">
   <article>
     <header class="page-header">
-      <p class="meta"><span class="badge badge-active">Pressemitteilung</span> · Berlin, {{ page.date | date: "%d.%m.%Y" }}</p>
+      <p class="meta"><span class="badge badge-active" data-i18n="press.release">{{ "press.release" | t }}</span> · Berlin, {{ page.date | i18n_date }}</p>
       <h1>{{ page.title }}</h1>
       {% if page.subtitle %}<p class="lead">{{ page.subtitle }}</p>{% endif %}
       {% include stichworte.html tags=page.tags %}
@@ -15,9 +15,9 @@ layout: default
     {% include verbindungen.html %}
     {% include verknuepft.html tags=page.tags %}
     <hr class="divider">
-    <h2>Über das Institut</h2>
-    <p>{{ site.data.presse.kurzprofil }}</p>
+    <h2 data-i18n="press.about">{{ "press.about" | t }}</h2>
+    <p>{{ site.data.press.short_profile }}</p>
     {% include pressekontakt.html %}
-    <a href="{{ '/presse/' | relative_url }}" class="back-link">← Zum Pressebereich</a>
+    <a href="{{ '/press/' | relative_url }}" class="back-link" data-i18n="press.back">{{ "press.back" | t }}</a>
   </article>
 </main>

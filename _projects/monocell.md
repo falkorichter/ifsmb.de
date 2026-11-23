@@ -2,16 +2,16 @@
 title: "Monocell – ein Text-Desktop für alte Rechner"
 summary: Ein vollständiger Desktop in ASCII-Zeichen – überlappende Fenster, Apps, Browser, sogar Video. Läuft in jedem Terminal und auf der Linux-Konsole, auch auf einem 19 Jahre alten ThinkPad.
 status: aktuell
-persoenlich: true
+personal: true
 start: 2026-10-21
-zeitraum: seit Oktober 2026
+period: seit Oktober 2026
 event_tag: monocell
 tags: [monocell, retro, linux, altrechner]
 team:
   - alexander-riedel
 image: /assets/images/projekte/monocell/01.png
 updates:
-  - datum: 2026-11-16
+  - date: 2026-11-16
     text: |-
       **Auf drei Rechnern im Einsatz:** Version 1.4.1 läuft auf dem X61s, auf dem Yoga und auf der Workstation, jeweils mit denselben 877 Tests. Dazu kamen zuletzt Paint (ein ASCII-Malprogramm mit Stift- und Touchbedarf), JezzBall, die externen Konsolenspiele und ein YouTube-Bereich mit persönlichen Vorschlägen.
 uuid: 91c61984-bc6e-4bdd-b3b4-4994a3f5b2ca

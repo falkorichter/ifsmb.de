@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="de">
+{%- comment -%}Theme: page front matter `theme:` → `default_theme:` in _config.yml → first entry of _data/themes.yml.
+  The visitor's choice (localStorage "ifsmb-theme", ?theme=<id>) overrides it before the first paint (script below).{%- endcomment -%}
+{%- assign theme_ids = site.data.themes | map: "id" -%}
+{%- assign page_theme = page.theme | default: site.default_theme | default: theme_ids[0] -%}
+{%- unless theme_ids contains page_theme -%}{%- assign page_theme = theme_ids[0] -%}{%- endunless %}
+<html lang="de" data-theme="{{ page_theme }}" data-page-theme="{{ page_theme }}">
 <head>
   <meta charset="UTF-8">
+  <script>
+    /* theme choice before the first paint – nothing leaves the browser (see /impressum/#datenschutz) */
+    (function () {
+      var root = document.documentElement, key = "ifsmb-theme", ids = {{ theme_ids | jsonify }}, choice = null;
+      try { choice = localStorage.getItem(key); } catch (e) {}
+      try {
+        var q = new URLSearchParams(location.search).get("theme");
+        if (q === "" || q === "auto") { choice = null; try { localStorage.removeItem(key); } catch (e) {} }
+        else if (ids.indexOf(q) >= 0) { choice = q; try { localStorage.setItem(key, q); } catch (e) {} }
+      } catch (e) {}
+      if (ids.indexOf(choice) >= 0) root.setAttribute("data-theme", choice);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/themes.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }} – Neuigkeiten" href="{{ '/feed.xml' | relative_url }}">
   {%- comment -%}per-page feeds from _plugins/beitrag_feeds.rb{%- endcomment -%}
-  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/persoenlich/" %}
+  {%- if page.collection == "projects" or page.collection == "team" or page.url == "/news/personal/" %}
   <link rel="alternate" type="application/atom+xml" title="{{ page.title }} – Beiträge" href="{{ page.url | append: 'feed.xml' | relative_url }}">
   {%- endif %}
 
@@ -59,6 +78,33 @@
   <meta name="twitter:title"       content="{{ page.title | default: site.title }}">
   <meta name="twitter:description" content="{{ og_desc }}">
   <meta name="twitter:image"       content="{% if og_img contains '://' %}{{ og_img }}{% else %}{{ site.url }}{{ og_img | relative_url }}{% endif %}">
+
+  <script>
+    /* UI language (assets/js/i18n.js) before the first paint: ?lang= → stored choice → browser languages → English.
+       German is in the HTML; other languages hide the strings to swap until i18n.js ran (at most 3 s).
+       The choice stays in this browser (localStorage "ifsmb-language"), see /impressum/#datenschutz. */
+    (function () {
+      var root = document.documentElement, key = "ifsmb-language", ok = ["de", "en", "fr"], language = null;
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        if (ok.indexOf(q) >= 0) { language = q; localStorage.setItem(key, q); }
+      } catch (e) { /* storage blocked */ }
+      if (!language) try { language = localStorage.getItem(key); } catch (e) { /* storage blocked */ }
+      if (ok.indexOf(language) < 0) {
+        language = "en";
+        var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+        for (var i = 0; i < list.length; i++) { var l = String(list[i]).slice(0, 2).toLowerCase(); if (ok.indexOf(l) >= 0) { language = l; break; } }
+      }
+      root.lang = language;
+      root.setAttribute("data-ui-language", language);
+      if (language !== "de") {
+        root.classList.add("i18n-pending");
+        setTimeout(function () { root.classList.remove("i18n-pending"); }, 3000);
+      }
+    })();
+  </script>
+  <script src="{{ '/assets/js/i18n-strings.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/i18n.js' | relative_url }}" defer></script>
 </head>
 <body{% if page.uuid %} data-uuid="{{ page.uuid }}"{% endif %} data-gelesen-index="{{ '/gelesen.json' | relative_url }}">
   <header class="site-header">
@@ -67,7 +113,7 @@
         <span class="brand-mark">IfsMB</span>
         <span class="brand-name">Institut für spontane<br>Makespace Buildung</span>
       </a>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Menü öffnen">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="{{ 'nav.open_menu' | t }}" data-i18n-attr="aria-label:nav.open_menu">
       <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span></label>
       <nav class="site-nav">
         {% for item in site.nav %}
@@ -75,24 +121,24 @@
         {%- assign sub_active = false -%}
         {%- for c in item.children -%}{%- if page.url contains c.url -%}{%- assign sub_active = true -%}{%- endif -%}{%- endfor %}
         <div class="nav-group">
-          <button type="button" class="nav-group-toggle{% if sub_active %} active{% endif %}" aria-haspopup="true">{{ item.title }} <span aria-hidden="true">▾</span></button>
+          <button type="button" class="nav-group-toggle{% if sub_active %} active{% endif %}" aria-haspopup="true"><span data-i18n="{{ item.key }}">{{ item.title }}</span> <span aria-hidden="true">▾</span></button>
           <div class="nav-sub">
-            {% for c in item.children %}<a href="{{ c.url | relative_url }}"{% if page.url contains c.url %} class="active"{% endif %}>{{ c.title }}</a>{% endfor %}
+            {% for c in item.children %}<a href="{{ c.url | relative_url }}"{% if page.url contains c.url %} class="active"{% endif %} data-i18n="{{ c.key }}">{{ c.title }}</a>{% endfor %}
           </div>
         </div>
         {% else %}
-        <a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} class="active"{% endif %}>{{ item.title }}</a>
+        <a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} class="active"{% endif %} data-i18n="{{ item.key }}">{{ item.title }}</a>
         {% endif %}
         {% endfor %}
       </nav>
     </div>
   </header>
 
-  {% unless page.suche == false %}<div class="search-body" data-pagefind-body>
+  {% unless page.search == false %}<div class="search-body" data-pagefind-body>
   {% include suche-meta.html page=page %}{% endunless %}
   {{ content }}
   {% if content contains "link-tot" %}{% include link-tot-hinweis.html html=content %}{% endif %}
-  {% unless page.suche == false %}</div>{% endunless %}
+  {% unless page.search == false %}</div>{% endunless %}
 
   {% if site.repository and page.path %}
   {%- assign schmale_layouts = "post,project,member,event,equipment,press" | split: "," -%}
@@ -104,29 +150,50 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p><strong>{{ site.title }}</strong><br>{{ site.description }}</p>
+      <p><strong>{{ site.title }}</strong><br><span data-i18n="site.description">{{ site.description }}</span></p>
       <p>
-        <a href="{{ '/spenden/' | relative_url }}">Spenden</a> ·
-        <a href="{{ '/impressum/' | relative_url }}">Impressum &amp; Datenschutz</a> ·
-        <a href="{{ '/projekte/archiv/' | relative_url }}">Vergangene Projekte</a> ·
-        <a href="https://github.com/falkorichter/ifsmb.de" target="_blank" rel="noopener">Quelltext auf GitHub</a>
+        <a href="{{ '/spenden/' | relative_url }}" data-i18n="footer.donate">{{ "footer.donate" | t }}</a> ·
+        <a href="{{ '/impressum/' | relative_url }}" data-i18n="footer.imprint">{{ "footer.imprint" | t }}</a> ·
+        <a href="{{ '/projects/archive/' | relative_url }}" data-i18n="footer.past_projects">{{ "footer.past_projects" | t }}</a> ·
+        <a href="https://github.com/falkorichter/ifsmb.de" target="_blank" rel="noopener" data-i18n="footer.source">{{ "footer.source" | t }}</a>
       </p>
       {%- comment -%}Project documentation for contributors – rendered by GitHub (the files are excluded from the site).{%- endcomment -%}
       {%- assign doc_branch = site.branch | default: "main" -%}
       {%- assign doc_base = "https://github.com/" | append: site.repository | append: "/blob/" | append: doc_branch | append: "/" %}
-      <p class="footer-docs">Zum Mitmachen:
+      <p class="footer-docs"><span data-i18n="footer.contribute">{{ "footer.contribute" | t }}</span>
         <a href="{{ doc_base }}CHANGELOG.md" target="_blank" rel="noopener">Changelog</a> ·
-        <a href="{{ doc_base }}DATA_STRUCTURES.md" target="_blank" rel="noopener">Datenstrukturen</a> ·
-        <a href="{{ doc_base }}DEPENDENCIES.md" target="_blank" rel="noopener">Abhängigkeiten</a>
+        <a href="{{ doc_base }}DATA_STRUCTURES.md" target="_blank" rel="noopener" data-i18n="footer.data_structures">{{ "footer.data_structures" | t }}</a> ·
+        <a href="{{ doc_base }}DEPENDENCIES.md" target="_blank" rel="noopener" data-i18n="footer.dependencies">{{ "footer.dependencies" | t }}</a>
       </p>
-      <p class="footer-note">Das IfsMB ist eine private, ehrenamtliche Initiative von Falko Richter – keine Hochschule, keine Behörde und kein Forschungsinstitut. <a href="{{ '/angebot/' | relative_url }}#warum-ein-institut">Warum ein Institut?</a></p>
-      <p class="footer-note">Diese Seite setzt keine Cookies und lädt keine externen Inhalte.</p>
+      <p class="footer-note"><span data-i18n="footer.disclaimer">{{ "footer.disclaimer" | t }}</span> <a href="{{ '/angebot/' | relative_url }}#warum-ein-institut" data-i18n="footer.why_institute">{{ "footer.why_institute" | t }}</a></p>
+      <p class="footer-note" data-i18n="footer.no_cookies">{{ "footer.no_cookies" | t }}</p>
+      {%- comment -%}UI language switch (assets/js/i18n.js shows it; without JS the page stays German){%- endcomment %}
+      <p class="language-switch" data-language-switch hidden>
+        <span id="language-switch-label" data-i18n="language.label">{{ "language.label" | t }}</span>
+        <span class="language-switch-buttons" role="group" aria-labelledby="language-switch-label">
+          <button type="button" data-language="de" lang="de" aria-label="Deutsch" aria-pressed="true">DE</button>
+          <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+          <button type="button" data-language="fr" lang="fr" aria-label="Français" aria-pressed="false">FR</button>
+        </span>
+        <span class="language-switch-note muted" data-i18n="language.note">{{ "language.note" | t }}</span>
+      </p>
+      {%- assign page_theme_name = site.data.themes | where: "id", page_theme | map: "name" | first %}
+      <p class="theme-picker" data-theme-picker hidden>
+        <label for="theme-select" data-i18n="theme.label">{{ "theme.label" | t }}</label>
+        <select id="theme-select">
+          <option value="" data-i18n="theme.like_page" data-i18n-params="{{ "name" | i18n_params: page_theme_name }}">{{ "theme.like_page" | t: "name", page_theme_name }}</option>
+          {%- for t in site.data.themes %}
+          <option value="{{ t.id }}">{{ t.name }}</option>
+          {%- endfor %}
+        </select>
+        <a href="{{ '/impressum/' | relative_url }}#theme-wahl" data-i18n="theme.what_is_this">{{ "theme.what_is_this" | t }}</a>
+      </p>
     </div>
   </footer>
 
   {% unless page.url == '/spenden/' %}
-  <a href="{{ '/spenden/' | relative_url }}" class="badge-donate" aria-label="Spenden">
-    <span class="badge-donate-text">❤️<br>Spenden</span>
+  <a href="{{ '/spenden/' | relative_url }}" class="badge-donate" aria-label="{{ 'footer.donate' | t }}" data-i18n-attr="aria-label:footer.donate">
+    <span class="badge-donate-text">❤️<br><span data-i18n="footer.donate">{{ "footer.donate" | t }}</span></span>
     <span class="badge-donate-icon" style="--i: 0" aria-hidden="true">🖨️</span>
     <span class="badge-donate-icon" style="--i: 1" aria-hidden="true">📷</span>
     <span class="badge-donate-icon" style="--i: 2" aria-hidden="true">💾</span>
@@ -138,12 +205,13 @@
 
   {% include formular-config.html %}
   <script src="{{ '/assets/js/gelesen.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
 
   <div class="lightbox-overlay" id="lightbox" hidden>
-    <button class="lb-btn lb-close" aria-label="Schließen">×</button>
-    <button class="lb-btn lb-prev" aria-label="Vorheriges Bild">‹</button>
+    <button class="lb-btn lb-close" aria-label="{{ 'common.close' | t }}" data-i18n-attr="aria-label:common.close">×</button>
+    <button class="lb-btn lb-prev" aria-label="{{ 'lightbox.previous' | t }}" data-i18n-attr="aria-label:lightbox.previous">‹</button>
     <figure><img alt=""><figcaption></figcaption></figure>
-    <button class="lb-btn lb-next" aria-label="Nächstes Bild">›</button>
+    <button class="lb-btn lb-next" aria-label="{{ 'lightbox.next' | t }}" data-i18n-attr="aria-label:lightbox.next">›</button>
   </div>
 
   <script>

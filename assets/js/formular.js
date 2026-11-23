@@ -8,6 +8,10 @@ var Formular = (function () {
   "use strict";
 
   // ---------- helpers ----------
+  // UI string (assets/js/i18n.js, _data/i18n/*.yml); German fallback where the page has no i18n.js (and in Node)
+  function t(key, params, fallback) {
+    return typeof window !== "undefined" && window.I18n ? window.I18n.t(key, params) : (fallback != null ? fallback : key);
+  }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
   function slugify(s, ersatz) {
@@ -129,7 +133,7 @@ var Formular = (function () {
     var id = "fc" + (++zaehler);
     var feld = el('<div class="form-feld form-chips-feld"><span id="' + id + '-l">' + esc(o.label) + "</span>"
       + '<div class="form-chips"><ul class="form-chip-liste"></ul><div class="form-ac">'
-      + '<input type="text" class="form-ac-input" aria-labelledby="' + id + '-l" placeholder="' + esc(o.placeholder || "Suchen …") + '"'
+      + '<input type="text" class="form-ac-input" aria-labelledby="' + id + '-l" placeholder="' + esc(o.placeholder || t("form.search", null, "Suchen …")) + '"'
       + ' role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + id + '-a">'
       + '<ul class="form-ac-liste" id="' + id + '-a" role="listbox" hidden></ul></div></div>'
       + (o.hilfe ? '<small class="form-hilfe">' + esc(o.hilfe) + "</small>" : "") + "</div>");
@@ -143,7 +147,7 @@ var Formular = (function () {
         var info = q.beschreibe(v);
         return '<li class="form-chip' + (info.person ? " form-chip-person" : "") + '">' + (info.person ? avatar(info.person) : "")
           + (info.url ? '<a href="' + esc(info.url) + '" target="_blank" rel="noopener">' + esc(info.name) + "</a>" : "<span>" + esc(info.name) + "</span>")
-          + '<button type="button" data-i="' + i + '" aria-label="' + esc(info.name) + ' entfernen">✕</button></li>';
+          + '<button type="button" data-i="' + i + '" aria-label="' + esc(t("form.remove", { name: info.name }, info.name + " entfernen")) + '">✕</button></li>';
       }).join("");
       input.hidden = !!o.einzeln && w.length > 0;
     }
@@ -159,7 +163,7 @@ var Formular = (function () {
         return '<li role="option" id="' + id + "-" + i + '" data-wert="' + esc(x.wert) + '"' + (i === 0 ? ' aria-selected="true"' : "") + ">"
           + (x.person ? avatar(x.person) : "") + '<span class="form-ac-name">' + esc(x.name) + "</span>"
           + (x.typ ? '<span class="form-ac-typ">' + esc(x.typ) + "</span>" : "") + "</li>";
-      }).join("") || (INDEX ? "" : '<li class="muted small">Suchindex lädt …</li>');
+      }).join("") || (INDEX ? "" : '<li class="muted small">' + esc(t("form.index_loading", null, "Suchindex lädt …")) + "</li>");
       liste.hidden = !liste.innerHTML;
       input.setAttribute("aria-expanded", liste.hidden ? "false" : "true");
       if (r.length) input.setAttribute("aria-activedescendant", id + "-0"); else input.removeAttribute("aria-activedescendant");
@@ -236,7 +240,7 @@ var Formular = (function () {
   function dialog(o) {
     var d = el('<dialog class="form-dialog ' + (o.klasse || "") + '" id="' + o.id + '" aria-labelledby="' + o.id + '-titel">'
       + '<div class="form-dialog-kopf"><h2 id="' + o.id + '-titel">' + esc(o.titel || "") + "</h2>" + (o.kopf || "")
-      + '<button type="button" class="btn btn-small btn-ghost" data-schliessen aria-label="Schließen">✕</button></div></dialog>');
+      + '<button type="button" class="btn btn-small btn-ghost" data-schliessen aria-label="' + esc(t("common.close", null, "Schließen")) + '">✕</button></div></dialog>');
     var start = null;
     d.addEventListener("pointerdown", function (e) { start = e.target; });
     d.addEventListener("click", function (e) {
@@ -373,13 +377,13 @@ var Formular = (function () {
     function oeffnen(msg) { status.textContent = msg; window.open(url, "_blank", "noopener"); }
     function manuell(msg) { if (fallback) fallback(); oeffnen(msg); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { oeffnen("Kopiert – GitHub ist in einem neuen Tab offen."); },
-        function () { manuell("Kopieren ging nicht – bitte den Text unten kopieren."); });
-    } else manuell("Bitte den Text unten kopieren.");
+      navigator.clipboard.writeText(text).then(function () { oeffnen(t("form.copied_github", null, "Kopiert – GitHub ist in einem neuen Tab offen.")); },
+        function () { manuell(t("form.copy_failed", null, "Kopieren ging nicht – bitte den Text unten kopieren.")); });
+    } else manuell(t("form.copy_manually", null, "Bitte den Text unten kopieren."));
   }
 
   return {
-    esc: esc, norm: norm, slugify: slugify, heute: heute, datumDE: datumDE, el: el, zwei: zwei,
+    t: t, esc: esc, norm: norm, slugify: slugify, heute: heute, datumDE: datumDE, el: el, zwei: zwei,
     cfg: cfg, ladeIndex: ladeIndex, index: function () { return INDEX; },
     personen: personen, person: person, avatar: avatar,
     QUELLEN: QUELLEN, chipFeld: chipFeld, dialog: dialog,

@@ -2,7 +2,7 @@
 title: "Ein offline, datenschutzkonformer Vokabeltrainer, gebaut mit github-copilot KI"
 date: 2026-01-12 07:23:22 +0100
 author: falko-richter
-persoenlich: true
+personal: true
 tags: [vokabeltrainer]
 uuid: 21a886a4-b427-4509-9e46-24eaa2719e17
 ---

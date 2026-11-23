@@ -3,7 +3,7 @@ title: "Falko ist auf TikTok"
 date: 2026-10-19 18:00:00 +0200
 author: falko-richter
 tags: [rc-modellbau]
-persoenlich: true
+personal: true
 uuid: 42f91d5f-a7fa-4c12-989f-6e1b2efc50d7
 ---
 
