@@ -27,3 +27,5 @@ Sein Ziel: 3D-Druck an möglichst viele Schulen bringen – auch zu den Lehrkrä
 > „Heute geht alles nur viel schneller und mit einem Hauch von KI.“
 
 <p class="muted small">Zitate und Angaben aus dem <a href="{{ '/news/2026/05/05/3d-drucker-in-der-schule-interview-moabit-ost/' | relative_url }}">Interview von Gerald Backhaus</a> für das Quartiersmanagement Moabit-Ost, Mai 2026.</p>
+
+test
