@@ -1,0 +1,20 @@
+---
+search: false # Übersichtsseite, nicht im Suchindex
+layout: page
+title: Vergangene Projekte
+i18n_title: pages.archive.title
+i18n_lead: pages.archive.lead
+lead: Was wir schon gebaut haben.
+---
+{% assign past = site.projects | where: "status", "abgeschlossen" | where_exp: "p", "p.personal != true" | where_exp: "p", "p.part_of == nil" | sort: "start" | reverse %}
+{% if past.size > 0 %}
+<div class="grid-2">
+  {% for p in past %}
+  {% include projekt-karte.html project=p badge="abgeschlossen" meta=true %}
+  {% endfor %}
+</div>
+{% else %}
+<p data-i18n="pages.archive.empty">{{ "pages.archive.empty" | t }}</p>
+{% endif %}
+
+<p class="section-foot"><a href="{{ '/projects/' | relative_url }}" data-i18n="pages.archive.back">{{ "pages.archive.back" | t }}</a></p>

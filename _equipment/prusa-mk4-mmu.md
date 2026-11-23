@@ -1,10 +1,10 @@
 ---
 title: Prusa MK4 mit MMU
-kategorie: 3D-Drucker (FDM, Mehrfarbe)
+category: 3D-Drucker (FDM, Mehrfarbe)
 summary: Der „ordentliche Drucker“ – als Bausatz aufgebaut, mit Multi-Material-Unit für bis zu fünf Filamente.
 owner_partner: 35 services e. V.
-standort_partner: 35 services e. V.
-standort: 35services e.V. (offene Werkstatt)
+location_partner: 35 services e. V.
+location: 35services e.V. (offene Werkstatt)
 image: /assets/images/news/3d-druck-in-der-kita/02.jpg
 thumb: /assets/images/news/3d-druck-in-der-kita/02-600w.jpg
 image_alt: "Der Prusa MK4 druckt die erste Schicht in goldenem Filament"

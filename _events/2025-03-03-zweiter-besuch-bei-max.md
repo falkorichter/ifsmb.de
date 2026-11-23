@@ -13,8 +13,8 @@ team: [falko-richter]
 uuid: 4fa524d3-4125-4f2e-a650-7d6293ac99df
 ---
 
-Zum zweiten Mal war die [3D-Druck- und Elektronik-AG]({{ '/projekte/ktg-ag-jahr-2/' | relative_url }}) zu Gast bei Max in seiner Werkstatt in der Stephanstraße – nach dem [ersten Ausflug im April 2024]({{ '/kalender/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/' | relative_url }}). Max betreibt **3dBoutiqueBerlin**, eine kleine Firma, die 3D-gedruckte Objekte entwirft, druckt und verkauft.
+Zum zweiten Mal war die [3D-Druck- und Elektronik-AG]({{ '/projects/ktg-ag-jahr-2/' | relative_url }}) zu Gast bei Max in seiner Werkstatt in der Stephanstraße – nach dem [ersten Ausflug im April 2024]({{ '/calendar/2024-04-29-ausflug-zu-max-in-der-stephanstrasse/' | relative_url }}). Max betreibt **3dBoutiqueBerlin**, eine kleine Firma, die 3D-gedruckte Objekte entwirft, druckt und verkauft.
 
-Der nächste Besuch mit der AG aus dem Schuljahr 2026/27 ist für [Januar 2027]({{ '/kalender/2027-01-04-besuch-bei-max-2027/' | relative_url }}) geplant.
+Der nächste Besuch mit der AG aus dem Schuljahr 2026/27 ist für [Januar 2027]({{ '/calendar/2027-01-04-besuch-bei-max-2027/' | relative_url }}) geplant.
 
 Mehr von 3dBoutiqueBerlin: [Instagram](https://www.instagram.com/3dboutiqueberlin/) · [Etsy](https://www.etsy.com/de/shop/3dBoutiqueBerlin)

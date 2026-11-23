@@ -15,7 +15,7 @@ Der **Treffpunkt Modellbau** sind die Havelländischen Modellbautage im MAFZ in 
 
 **Wir sind dabei – hoffentlich mit Fahrzeugen:** Falko ist mit den Veranstaltern in Kontakt und will seine **Modellbau-Autos** mitbringen. Und **[„Opa Andi“]({{ '/team/opa-andi/' | relative_url }})** – Falkos Papa – will mit seinem **3D-gedruckten Mogster** vorbeikommen.
 
-**Die Mogster in Falkos persönlichem Blog:** So sind die beiden Mogster entstanden (mehr im persönlichen Projekt [3DSets Mogster bauen]({{ '/projekte/3dsets-mogster-bauen/' | relative_url }})):
+**Die Mogster in Falkos persönlichem Blog:** So sind die beiden Mogster entstanden (mehr im persönlichen Projekt [3DSets Mogster bauen]({{ '/projects/3dsets-mogster-bauen/' | relative_url }})):
 
 - [Papas Mogster rollt]({% post_url 2026-08-16-papas-mogster-rollt %})
 - [Falko baut seinen Mogster an zwei Abenden]({% post_url 2026-10-01-falko-baut-seinen-mogster-an-zwei-abenden %})

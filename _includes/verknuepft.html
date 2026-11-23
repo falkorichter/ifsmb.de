@@ -3,7 +3,8 @@
 {%- endcomment -%}
 {%- assign my = include.tags -%}
 {%- if my and my.size > 0 -%}
-{%- assign groups = "equipment:Ausstattung,projects:Projekte,herausforderungen:Herausforderungen,events:Termine,posts:Beiträge,press:Presse" | split: "," -%}
+{%- comment -%}collection:UI string of the group heading (_data/i18n/*.yml){%- endcomment -%}
+{%- assign groups = "equipment:equipment.heading,projects:connections.projects,challenges:challenge.heading,events:calendar.events,posts:connections.posts,press:connections.press" | split: "," -%}
 {%- capture rel_out -%}
 {%- for g in groups -%}
   {%- assign gk = g | split: ":" | first -%}{%- assign gl = g | split: ":" | last -%}
@@ -22,10 +23,10 @@
   {%- if gk == "events" -%}{%- assign hits = hits | sort: "start" | reverse -%}{%- endif -%}
   {%- if hits.size > 0 %}
   <div class="related-group">
-    <h3>{{ gl }}</h3>
+    <h3 data-i18n="{{ gl }}">{{ gl | t }}</h3>
     <ul>
       {%- for it in hits %}
-      <li><a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% if gk == "events" %} <span class="meta">{{ it.start | date: "%d.%m.%Y" }}</span>{% elsif gk == "posts" or gk == "press" %} <span class="meta">{{ it.date | date: "%d.%m.%Y" }}</span>{% endif %}</li>
+      <li><a href="{{ it.url | relative_url }}">{{ it.title }}</a>{% if gk == "events" %} <span class="meta">{{ it.start | i18n_date }}</span>{% elsif gk == "posts" or gk == "press" %} <span class="meta">{{ it.date | i18n_date }}</span>{% endif %}</li>
       {%- endfor %}
     </ul>
   </div>
@@ -34,7 +35,7 @@
 {%- endcapture -%}
 {%- if rel_out != "" %}
 <section class="related" data-pagefind-ignore="all">
-  <h2>Verknüpft</h2>
+  <h2 data-i18n="connections.related">{{ "connections.related" | t }}</h2>
   <div class="related-grid">{{ rel_out }}</div>
 </section>
 {%- endif -%}

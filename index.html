@@ -1,5 +1,5 @@
 ---
-suche: false # Übersichtsseite, nicht im Suchindex
+search: false # Übersichtsseite, nicht im Suchindex
 layout: default
 ---
 <main>
@@ -28,9 +28,9 @@ layout: default
       ohne lange Anträge, mit dem, was gerade da ist. 
     </p>
     <div class="hero-actions">
-      <a class="btn" href="{{ '/projekte/' | relative_url }}">Unsere Projekte</a>
-      <a class="btn btn-ghost" href="{{ '/team/' | relative_url }}">Wer wir sind</a>
-      <a class="btn" href="{{ '/angebot/' | relative_url }}">Ein Institut</a>
+      <a class="btn" href="{{ '/projects/' | relative_url }}" data-i18n="home.our_projects">{{ "home.our_projects" | t }}</a>
+      <a class="btn btn-ghost" href="{{ '/team/' | relative_url }}" data-i18n="home.who_we_are">{{ "home.who_we_are" | t }}</a>
+      <a class="btn" href="{{ '/angebot/' | relative_url }}" data-i18n="home.an_institute">{{ "home.an_institute" | t }}</a>
     </div>
   </div>
 </section>
@@ -60,15 +60,15 @@ layout: default
 {%- assign next_events = "" | split: "" -%}
 {%- assign sorted_events = site.events | sort: "start" -%}
 {%- for e in sorted_events -%}
-  {%- if e.nur_projekt or e.persoenlich %}{% continue %}{% endif -%}
+  {%- if e.project_only or e.personal %}{% continue %}{% endif -%}
   {%- if e.end and e.end != "" %}{% assign end_s = e.end | date: "%s" | plus: 0 %}{% else %}{% assign end_s = e.start | date: "%s" | plus: 7200 %}{% endif -%}
   {%- if end_s >= now_s %}{% assign next_events = next_events | push: e %}{% endif -%}
 {%- endfor -%}
 {% if next_events.size > 0 %}
 <section class="container section">
   <div class="section-head">
-    <h2>Nächste Termine</h2>
-    <a href="{{ '/kalender/' | relative_url }}">Zum Kalender →</a>
+    <h2 data-i18n="home.next_events">{{ "home.next_events" | t }}</h2>
+    <a href="{{ '/calendar/' | relative_url }}" data-i18n="home.to_calendar">{{ "home.to_calendar" | t }}</a>
   </div>
   <ul class="event-list" id="home-events">
     {%- for e in next_events limit: 3 %}{% include termin-karte.html event=e %}{% endfor %}
@@ -83,12 +83,12 @@ layout: default
 </section>
 {% endif %}
 
-{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.teil_von == nil" %}
+{% assign active = site.projects | where_exp: "p", "p.status != 'abgeschlossen'" | where_exp: "p", "p.status != 'anfrage'" | where_exp: "p", "p.status != 'idee'" | where_exp: "p", "p.personal != true" | where_exp: "p", "p.part_of == nil" %}
 {% if active.size > 0 %}
 <section class="container section">
   <div class="section-head">
-    <h2>Aktuelle Projekte</h2>
-    <a href="{{ '/projekte/' | relative_url }}">Alle Projekte →</a>
+    <h2 data-i18n="home.current_projects">{{ "home.current_projects" | t }}</h2>
+    <a href="{{ '/projects/' | relative_url }}" data-i18n="home.all_projects">{{ "home.all_projects" | t }}</a>
   </div>
   <div class="grid-2">
     {% for p in active limit: 4 %}
@@ -98,17 +98,17 @@ layout: default
 </section>
 {% endif %}
 
-{% assign home_posts = site.posts | where_exp: "p", "p.persoenlich != true" | where_exp: "p", "p.nur_projekt != true" %}
+{% assign home_posts = site.posts | where_exp: "p", "p.personal != true" | where_exp: "p", "p.project_only != true" %}
 {% if home_posts.size > 0 %}
 <section class="container section">
   <div class="section-head">
-    <h2>Neuigkeiten</h2>
-    <a href="{{ '/news/' | relative_url }}">Alle Neuigkeiten →</a>
+    <h2 data-i18n="nav.news">{{ "nav.news" | t }}</h2>
+    <a href="{{ '/news/' | relative_url }}" data-i18n="home.all_news">{{ "home.all_news" | t }}</a>
   </div>
   <ul class="post-list">
     {% for post in home_posts limit: 3 %}
     <li>
-      <span class="meta">{{ post.date | date: "%d.%m.%Y" }}</span>
+      <span class="meta">{{ post.date | i18n_date }}</span>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </li>
     {% endfor %}
@@ -118,8 +118,8 @@ layout: default
 
 <section class="container section">
   <div class="section-head">
-    <h2>Partner</h2>
-    <a href="{{ '/partner/' | relative_url }}">Mehr über unsere Partner →</a>
+    <h2 data-i18n="nav.partners">{{ "nav.partners" | t }}</h2>
+    <a href="{{ '/partners/' | relative_url }}" data-i18n="home.more_partners">{{ "home.more_partners" | t }}</a>
   </div>
   <div class="logo-strip">
     {% for p in site.data.partners %}

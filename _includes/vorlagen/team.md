@@ -5,7 +5,7 @@
 title: Vorname Nachname   # Anzeigename – der Dateiname (vorname-nachname) ist das Team-Kürzel für team/author/owner_team
 role: Rolle im Makespace   # erscheint unter dem Namen, z. B. „hilft in der KTG-AG“
 order: 50   # Reihenfolge auf /team/, kleiner = weiter vorne
-nicht_im_team: false   # true = eigene Seite unter /team/<kürzel>/ und überall verlinkbar (team, author, owner_team, verlinkt), aber nicht auf /team/ gelistet
+not_in_team: false   # true = eigene Seite unter /team/<kürzel>/ und überall verlinkbar (team, author, owner_team, verlinkt), aber nicht auf /team/ gelistet
 photo:   # /assets/images/team/<kürzel>-480w.jpg – nur mit Erlaubnis, ohne Metadaten; leer = kein Foto
 photo_2x:   # optional: doppelt so großes Foto für scharfe Bildschirme
 photo_icon:   # optional: rundes Mini-Foto (48 px) für die Kalenderseite
@@ -13,7 +13,8 @@ photo_credit:   # Bildnachweis – Pflicht bei Fremdfotos (Presse, Agentur)
 links:   # Links zur Person, Liste aus title und url
 #  - title: GitHub
 #    url: https://github.com/…
-verlinkt: []   # weitere Seiten, z. B. [/projekte/3d-druck-ag-ktg/]
+linked: []   # weitere Seiten, z. B. [/projects/3d-druck-ag-ktg/]
+theme:   # Aussehen der Seite, leer = wie die ganze Website; ifsmb, offene-werkstaetten, rfflabs oder slop (Liste: _data/themes.yml) – Besucher*innen können unten auf der Seite selbst wählen
 social_media_preview_image:   # Vorschaubild beim Teilen (1200×630 px, ohne Metadaten), z. B. /assets/images/og-….jpg
 uuid: UUID-NEU   # zufällige Kennung für die Gelesen-Markierung – wird beim Klick erzeugt, nicht ändern
 ---

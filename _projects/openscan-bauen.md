@@ -3,15 +3,15 @@ title: "Einen OpenScan bauen?"
 summary: Ein 3D-Scanner zum Selberbauen – Open Source, modular und mit Fotogrammetrie statt Streifenlicht.
 status: idee
 start: 2026-05-23
-zeitraum: Idee seit Mai 2026
-ort: 35services e.V.
+period: Idee seit Mai 2026
+location: 35services e.V.
 event_tag: openscan
 tags: [3d-scanner]
 team:
   - falko-richter
 partners:
   - 35 services e. V.
-verlinkt: [/news/2026/05/25/open-hardware-summit-2026/]
+linked: [/news/2026/05/25/open-hardware-summit-2026/]
 uuid: c33afcf3-ae35-49c2-994e-bfa740c1dc7b
 ---
 
@@ -30,7 +30,7 @@ Falko hat mit Thomas von [openscan.eu](https://openscan.eu/) auf dem [Open Hardw
 
 - Viele Teile kann man **selbst 3D-drucken** – ein schönes Projekt für eine AG oder die Werkstatt.
 - Man lernt dabei **Mechanik, Elektronik (Raspberry Pi, Schrittmotoren) und Fotografie** auf einmal.
-- Fotogrammetrie ist ein ganz anderes Prinzip als die Streifenlicht-Scanner, die wir schon haben: den [Lynx]({{ '/ausstattung/3dmakerpro-lynx/' | relative_url }}) und den [Ferret SE]({{ '/ausstattung/creality-ferret-se/' | relative_url }}). Ein direkter Vergleich wäre spannend.
+- Fotogrammetrie ist ein ganz anderes Prinzip als die Streifenlicht-Scanner, die wir schon haben: den [Lynx]({{ '/equipment/3dmakerpro-lynx/' | relative_url }}) und den [Ferret SE]({{ '/equipment/creality-ferret-se/' | relative_url }}). Ein direkter Vergleich wäre spannend.
 
 Mehr dazu: [openscan.eu](https://openscan.eu/) · [Kontakt zu OpenScan](https://openscan.eu/policies/contact-information)
 

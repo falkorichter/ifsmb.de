@@ -2,7 +2,7 @@
 {%- if st and st.size > 0 -%}
 <ul class="tag-list">
   {%- for t in st %}
-  <li><a href="{{ '/stichworte/' | relative_url }}#{{ t }}">#{{ site.data.stichworte[t] | default: t }}</a></li>
+  <li><a href="{{ '/tags/' | relative_url }}#{{ t }}">#{{ site.data.tags[t] | default: t }}</a></li>
   {%- endfor %}
 </ul>
 {%- endif -%}

@@ -4,7 +4,7 @@
 // One Markdown file per person (todos/todo-<person>.md, see the comment at the top of each file):
 //   ## <quadrant heading>      → Eisenhower quadrant (q1 … q4) or "Erledigt"
 //   ### <title> {#id}          → one challenge; order inside a quadrant = priority
-//   ```yaml … ```              → fields (kurz, art, status, seit, faellig, helfer, projekte, tags, verlinkt …)
+//   ```yaml … ```              → fields (summary, kind, status, since, due, helpers, projects, tags, linked …)
 //   free Markdown text
 // Files are fetched lazily per person. Every change is written to localStorage right away;
 // "Pull Request" shows a diff, copies the new file and opens the GitHub editor.
@@ -19,8 +19,8 @@ var TodoFormat = (function () {
     { q: "done", name: "Erledigt", icon: "✅", sub: "", finde: /erledigt|gelöst|✅/i }
   ];
   var BUCKET = {}; BUCKETS.forEach(function (b) { BUCKET[b.q] = b; });
-  var FELDER = ["kurz", "art", "status", "seit", "faellig", "geloest_am", "helfer", "projekte", "tags", "verlinkt"];
-  var LISTEN = { helfer: 1, projekte: 1, tags: 1, verlinkt: 1 };
+  var FELDER = ["summary", "kind", "status", "since", "due", "solved_on", "helpers", "projects", "tags", "linked"];
+  var LISTEN = { helpers: 1, projects: 1, tags: 1, linked: 1 };
 
   function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
   function slugify(s) {
@@ -199,7 +199,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   var NAV = null;    // person ids in the navigation (null = everyone)
   function sichtbar(t) {
     if (!FILTER) return true;
-    return (t.felder.projekte || []).indexOf(FILTER.projekt) >= 0 || !!FILTER.tag && (t.felder.tags || []).indexOf(FILTER.tag) >= 0;
+    return (t.felder.projects || []).indexOf(FILTER.projekt) >= 0 || !!FILTER.tag && (t.felder.tags || []).indexOf(FILTER.tag) >= 0;
   }
   var aktuell = null;
   var auswahl = null; // id of the challenge in the editor
@@ -308,15 +308,15 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   var matrix = el('<div class="todos-matrix" id="todos-matrix"></div>');
 
   function karte(t) {
-    var f = t.felder, helfer = f.helfer || [];
+    var f = t.felder, helfer = f.helpers || [];
     var meta = [];
     if (f.status === "in-arbeit") meta.push('<span class="badge badge-active">In Arbeit</span>');
-    if (f.faellig) meta.push('<span class="todo-faellig' + (f.faellig < heute() && t.q !== "done" ? " ueberfaellig" : "") + '">📅 ' + esc(datumDE(f.faellig)) + "</span>");
-    if ((f.projekte || []).length) meta.push('<span title="Projekte">🔧' + f.projekte.length + "</span>");
-    if ((f.verlinkt || []).length) meta.push('<span title="Verknüpfte Seiten">🔗' + f.verlinkt.length + "</span>");
+    if (f.due) meta.push('<span class="todo-faellig' + (f.due < heute() && t.q !== "done" ? " ueberfaellig" : "") + '">📅 ' + esc(datumDE(f.due)) + "</span>");
+    if ((f.projects || []).length) meta.push('<span title="Projekte">🔧' + f.projects.length + "</span>");
+    if ((f.linked || []).length) meta.push('<span title="Verknüpfte Seiten">🔗' + f.linked.length + "</span>");
     return '<li class="todo-karte' + (t.id === auswahl ? " ausgewaehlt" : "") + '" data-id="' + esc(t.id) + '" tabindex="0" role="button" aria-label="' + esc(t.titel) + ' – bearbeiten; Pfeiltasten verschieben">'
       + '<span class="todo-griff" aria-hidden="true">⠿</span>'
-      + '<span class="todo-inhalt"><span class="todo-titel">' + (ART[f.art] ? '<span aria-hidden="true">' + ART[f.art] + "</span> " : "") + esc(t.titel) + "</span>"
+      + '<span class="todo-inhalt"><span class="todo-titel">' + (ART[f.kind] ? '<span aria-hidden="true">' + ART[f.kind] + "</span> " : "") + esc(t.titel) + "</span>"
       + (meta.length || helfer.length ? '<span class="todo-meta">' + meta.join(" ")
         + (helfer.length ? '<span class="todo-helfer" title="Helfende Hände">' + helfer.slice(0, 4).map(function (h) { return avatar(h); }).join("") + (helfer.length > 4 ? '<span class="person-avatar person-avatar-text">+' + (helfer.length - 4) + "</span>" : "") + "</span>" : "")
         + "</span>" : "")
@@ -376,8 +376,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
   // Moving into/out of "Erledigt" also sets the status.
   function setzeFeld(t, q) {
     if (q === t.q) return;
-    if (q === "done") { t.felder.status = "geloest"; if (!t.felder.geloest_am) t.felder.geloest_am = heute(); }
-    else if (t.q === "done") { t.felder.status = "offen"; delete t.felder.geloest_am; }
+    if (q === "done") { t.felder.status = "geloest"; if (!t.felder.solved_on) t.felder.solved_on = heute(); }
+    else if (t.q === "done") { t.felder.status = "offen"; delete t.felder.solved_on; }
     t.q = q;
   }
 
@@ -496,8 +496,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   function neueAufgabe(q) {
     var st = DOCS[aktuell];
-    var t = { id: eindeutig(st.doc, "neues-todo"), titel: "", q: q, felder: { art: "aufgabe", status: q === "done" ? "geloest" : "offen", seit: heute() }, text: "", autoId: true };
-    if (FILTER) { t.felder.projekte = [FILTER.projekt]; if (FILTER.tag) t.felder.tags = [FILTER.tag]; }
+    var t = { id: eindeutig(st.doc, "neues-todo"), titel: "", q: q, felder: { kind: "aufgabe", status: q === "done" ? "geloest" : "offen", since: heute() }, text: "", autoId: true };
+    if (FILTER) { t.felder.projects = [FILTER.projekt]; if (FILTER.tag) t.felder.tags = [FILTER.tag]; }
     st.doc.todos.push(t);
     speichern(aktuell);
     renderMatrix();
@@ -539,15 +539,15 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     editor.innerHTML =
       '<label class="form-feld form-feld-titel"><span>Titel</span><input name="titel" type="text" required value="' + esc(t.titel) + '" placeholder="Kurz, gern als Frage"></label>'
       + '<p class="todos-id muted small">#' + esc(t.id) + "</p>"
-      + '<label class="form-feld"><span>Kurz (ein Satz für die Karte)</span><input name="kurz" type="text" value="' + esc(f.kurz || "") + '"></label>'
+      + '<label class="form-feld"><span>Kurz (ein Satz für die Karte)</span><input name="summary" type="text" value="' + esc(f.summary || "") + '"></label>'
       + '<div class="form-reihe">'
-      + '<label class="form-feld"><span>Art</span><select name="art">' + optionen(ART_NAMEN, f.art || "aufgabe") + "</select></label>"
+      + '<label class="form-feld"><span>Art</span><select name="kind">' + optionen(ART_NAMEN, f.kind || "aufgabe") + "</select></label>"
       + '<label class="form-feld"><span>Status</span><select name="status">' + optionen(STATUS_NAMEN, f.status || "offen") + "</select></label>"
       + '<label class="form-feld"><span>Feld</span><select name="q">' + optionen(felder, t.q) + "</select></label>"
-      + '<label class="form-feld"><span>Fällig</span><input name="faellig" type="date" value="' + esc(f.faellig || "") + '"></label>'
+      + '<label class="form-feld"><span>Fällig</span><input name="due" type="date" value="' + esc(f.due || "") + '"></label>'
       + "</div>"
       + '<label class="form-feld"><span>Hauptzuständig</span><select name="person">' + optionen(personen, aktuell) + "</select></label>"
-      + '<div data-chips="helfer"></div><div data-chips="projekte"></div><div data-chips="tags"></div><div data-chips="verlinkt"></div>'
+      + '<div data-chips="helpers"></div><div data-chips="projects"></div><div data-chips="tags"></div><div data-chips="linked"></div>'
       + '<label class="form-feld"><span>Beschreibung (Markdown)</span><textarea name="text" rows="7">' + esc(t.text || "") + "</textarea></label>"
       + '<div class="form-fuss"><button type="button" class="btn btn-small btn-ghost" data-loeschen>🗑️ Löschen</button>'
       + '<span class="muted small">Jede Änderung ist sofort im Browser gespeichert.</span>'
@@ -558,10 +558,10 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
 
   // Chip fields of the editor (widget from formular.js): key → label, autocomplete source, options.
   var CHIPS = {
-    helfer: { label: "🙌 Helfende Hände", quelle: "personen", placeholder: "Name aus dem Team …", ausser: function () { return [aktuell]; } },
-    projekte: { label: "🔧 Projekte", quelle: "projekte", placeholder: "Projekt suchen …", gewaehlt: projektTag },
+    helpers: { label: "🙌 Helfende Hände", quelle: "personen", placeholder: "Name aus dem Team …", ausser: function () { return [aktuell]; } },
+    projects: { label: "🔧 Projekte", quelle: "projekte", placeholder: "Projekt suchen …", gewaehlt: projektTag },
     tags: { label: "🏷️ Stichworte", quelle: "stichworte", placeholder: "Stichwort suchen oder neu …" },
-    verlinkt: { label: "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", quelle: "seiten", placeholder: "Seite suchen …" }
+    linked: { label: "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", quelle: "seiten", placeholder: "Seite suchen …" }
   };
   var chipFelder = {};
   function chipFeld(key) {
@@ -589,7 +589,7 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       t.titel = v;
       if (t.autoId && v.trim()) { t.id = eindeutig(DOCS[aktuell].doc, slugify(v), t); auswahl = t.id; editor.querySelector(".todos-id").textContent = "#" + t.id; if (!EINGEBETTET) location.replace("#" + aktuell + "/" + t.id); }
     } else if (n === "text") t.text = v;
-    else if (n === "kurz" || n === "faellig") { if (v) t.felder[n] = v; else delete t.felder[n]; }
+    else if (n === "summary" || n === "due") { if (v) t.felder[n] = v; else delete t.felder[n]; }
     else return;
     speichern(aktuell);
     renderMatrix();
@@ -598,11 +598,11 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
     var t = finde(auswahl), n = e.target.name;
     if (!t || !n) return;
     var v = e.target.value;
-    if (n === "art") t.felder.art = v;
+    if (n === "kind") t.felder.kind = v;
     else if (n === "status") {
       t.felder.status = v;
       if (v === "geloest" && t.q !== "done") { setzeFeld(t, "done"); t.felder.status = "geloest"; }
-      else if (v !== "geloest" && t.q === "done") { t.q = "q4"; delete t.felder.geloest_am; }
+      else if (v !== "geloest" && t.q === "done") { t.q = "q4"; delete t.felder.solved_on; }
     } else if (n === "q") { var vorher = t.felder.status; setzeFeld(t, v); if (v !== "done" && t.q !== "done" && vorher === "in-arbeit") t.felder.status = "in-arbeit"; }
     else if (n === "person") { uebergeben(t, v); return; }
     else return;
@@ -629,8 +629,8 @@ if (typeof module !== "undefined") module.exports = TodoFormat;
       var st = DOCS[von];
       st.doc.todos = st.doc.todos.filter(function (x) { return x !== t; });
       t.id = eindeutig(ziel.doc, t.id, t);
-      t.felder.helfer = (t.felder.helfer || []).filter(function (h) { return h !== person; });
-      if (von && t.felder.helfer.indexOf(von) < 0) t.felder.helfer.push(von);
+      t.felder.helpers = (t.felder.helpers || []).filter(function (h) { return h !== person; });
+      if (von && t.felder.helpers.indexOf(von) < 0) t.felder.helpers.push(von);
       ziel.doc.todos.push(t);
       speichern(von); speichern(person);
       // switch the person while the pop-up stays open (closing would reset the hash asynchronously)
