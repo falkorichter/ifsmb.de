@@ -97,5 +97,6 @@ Wollt ihr eins davon mit uns bauen? Schaut bei unseren [Projekten]({{ '/projects
 - **Superflexibles Filament** ([Video](https://www.youtube.com/watch?v=pysK-l3PTWY))
 - **Nachtlicht-Eule** 🦉 ([Video](https://youtu.be/x8SMtZ-UIlM))
 - **Strickmaschine** zum Selberbauen ([3Druck.com](https://3druck.com/diy/3d-druck-modell-fuer-selbstgebaute-strickmaschine-veroeffentlicht-42124338/))
+- **Peppo v1** – ein kleiner Polar-Stiftplotter mit Akku, der in rund fünf Minuten Porträts auf Bierdeckel zeichnet: Drehteller plus Stift auf einem Schlitten, Arduino mit CNC-Shield und GRBL, ein Raspberry Pi macht ein eigenes WLAN mit Steuerseite fürs Handy; ein Remix des „Polar Coaster“ von Bart Dring ([Bericht bei Algorigraph](https://www.algorigraph.de/en/journal/peppo_v1))
 
 </div>
