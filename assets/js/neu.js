@@ -701,8 +701,11 @@ var NeuFormular = (function () {
   }
   // Reads a source file for a type. → { source, file (blocks + rest), w0 (values as loaded), rawFields ({ name: true }
   // for fields the form can't show, e.g. lists of objects) } or null if the file has no front matter.
+  // Pure YAML files (_data/partner/<name>.yml, schema.format "yaml") are read like front matter without a body –
+  // needed e.g. after the first save of a new partner, when the form carries on in that pull request.
   function readSource(schema, source, path) {
-    var file = F.splitFile(source);
+    var yaml = schema.format === "yaml";
+    var file = F.splitFile(yaml ? "---\n" + String(source).replace(/\r\n/g, "\n").replace(/\n*$/, "\n") + "---\n" : source);
     if (!file) return null;
     var fields = alleFelder(schema), w = anfangswerte(schema), rawFields = {};
     fields.forEach(function (f) { if (f.typ) w[f.name] = f.typ === "chips" || f.typ === "links" ? [] : f.typ === "haken" ? false : ""; });
@@ -716,7 +719,7 @@ var NeuFormular = (function () {
     });
     w.text = file.rest.replace(/^\n+/, "").replace(/\s+$/, "");
     w.datei = path ? path.split("/").pop() : "";
-    return { source: source, file: file, w0: JSON.parse(JSON.stringify(w)), rawFields: rawFields };
+    return { source: source, file: file, w0: JSON.parse(JSON.stringify(w)), rawFields: rawFields, yaml: yaml };
   }
   // The file with the changed fields: unchanged blocks stay as they were, changed ones are written anew (or removed
   // when emptied), new fields go to the end of the front matter. The body only changes when the text was edited.
@@ -760,6 +763,7 @@ var NeuFormular = (function () {
     var body = String(w.text).replace(/^\n+/, "").replace(/\s+$/, ""), gap = (edit.file.rest.match(/^\n*/)[0] || "") || "\n\n";
     if (!/\S/.test(edit.file.rest)) gap = "\n\n";
     var rest = w.text === edit.w0.text ? edit.file.rest : body ? gap + body + "\n" : "\n";
+    if (edit.yaml) return blocks.join("\n").replace(/\n*$/, "\n"); // pure YAML: no "---", no body
     return F.joinFile(blocks, rest);
   }
   // Without DOM: the file after changing some values (tests). → { content, rawFields, values }
