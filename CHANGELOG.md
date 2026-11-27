@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- **Fix: Partner und Presseberichte im ➕-Formular** – nach dem Anlegen des Pull Requests stand „Cannot read properties of undefined (reading 'w0')“, und weitere Änderungen ließen sich nicht in den PR speichern (#293). Das Formular liest jetzt auch reine YAML-Dateien (`_data/partner/*.yml`, `_data/press_report/*.yml`) wieder ein; Test in `_tests/e2e/data-forms.test.js`.
 - **Abhängigkeit (nur CI):** Die E2E-Tests installieren **ffmpeg** (Ubuntu-Paket, Version im Log), damit der Test „📎 4K-Video → 1080p ohne Standort“ auch in GitHub Actions läuft statt übersprungen zu werden. In `DEPENDENCIES.md` mit offenem Punkt (Version nicht festgelegt).
 - **📎 Videos: Upload scheitert nie an der Umwandlung.** Kann der Browser ein Video nicht auf 1080p verkleinern, wird das Original hochgeladen – auch 4K vom Handy, bis 95 MB (GitHub-Grenze 100 MB), mit Hinweis im Formular und einem Prüfpunkt „Standort in den Metadaten prüfen“ im Pull Request. `.mov`-Videos werden auf der Seite als Video gezeigt. Zuverlässige Umwandlung kommt später (#290).
 - **📎 Videos: Ausweichen, wenn der Encoder nicht startet.** Chrome 158 (macOS) meldet für das bevorzugte H.264-Profil „Encoder initialization failed“, obwohl es als unterstützt gilt. `video-verkleinern.js` probiert dann die nächste MP4-Variante (Ton ggf. Opus statt AAC).
