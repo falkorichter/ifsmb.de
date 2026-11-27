@@ -6,6 +6,7 @@ location: Unterwegs
 image: /assets/images/ausstattung/megafon/01.jpg
 image_alt: Megafon
 social_media_preview_image: /assets/images/ausstattung/megafon/01-social.jpg
+location_partner: Zazza Moabit / Pajas Kaffee
 uuid: 2d2a5819-2b6a-4cd3-b5b2-ea45a52ff0a8
 ---
 
