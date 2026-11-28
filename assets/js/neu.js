@@ -1972,7 +1972,8 @@ var NeuFormular = (function () {
       var newText = dateiInhalt(), path, title, u;
       // sent already and nothing changed since → no second pull request with the same content
       if (aktiv.sent && aktiv.sent.text === newText) {
-        status.innerHTML = 'Schon gesendet: <a href="' + esc(aktiv.sent.url) + '" target="_blank" rel="noopener">Pull Request #' + aktiv.sent.number + "</a>.";
+        var link = '<a href="' + esc(aktiv.sent.url) + '" target="_blank" rel="noopener">#' + aktiv.sent.number + "</a>";
+        status.innerHTML = "✅ " + t("form.already_saved_html", { link: link }, "Alles ist schon in " + link + " gespeichert – seitdem nichts geändert.");
         return;
       }
       if (aktiv.edit) {

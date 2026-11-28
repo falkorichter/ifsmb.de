@@ -152,7 +152,7 @@ test("doppelt senden: während des Sendens und danach entsteht kein zweiter PR (
   await alice.page.evaluate(() => { const b = document.querySelector("#neu-dialog [data-submit]"); b.click(); b.click(); });
   await alice.waitStatus(/Pull Request #1.*angelegt/);
   await alice.submit();
-  await alice.waitStatus(/^Schon gesendet: Pull Request #1\.$/);
+  await alice.waitStatus(/^✅ Alles ist schon in #1 gespeichert – seitdem nichts geändert\.$/);
   assert.equal(env.control.state().pulls.length, 1);
   assert.equal(apiCalls("POST", /\/pulls$/).length, 1);
   assert.equal(apiCalls("POST", /\/git\/refs$/).length, 1);
