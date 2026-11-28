@@ -1,13 +1,15 @@
 ---
 title: Homebox mit Jannis
 status: aktuell
-start: 2026-11-28
+start: 2026-11-01
 period: seit 2026
 event_tag: homebox-mit-jannis
 team: [falko-richter]
 partners: [35 services e. V.]
 encrypted: true
 social_media_preview_image: /assets/images/projekte/homebox-mit-jannis/03-social.jpg
+linked: [/partners/35services/]
+personal: true
 uuid: 63d7be50-8ac4-41fe-a5de-e8ce39a48286
 ---
 
