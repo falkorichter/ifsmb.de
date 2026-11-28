@@ -22,6 +22,7 @@ uuid: 82e8b984-0272-4778-a89b-07f607220cb9
 - 2024 eigentlich angetreten obwohl meine Frau meinte ich soll mich zurücknehmen und weil ich bemerkt habe, dass ich zeitlich sehr belastet bin - mein problem - wurde gewählt und habe die wahl angenommen
 - sept 2025 kürzeste MVV organisiert und einen übergang eingeleitet
 - sept 2025 kassenprüfer
+  - kassenprüfung eigentlich unmöglich, zeiträume zu kurzfristig, trotzdem abgesegnet 
 - nach sept 2025 sehr schleppende übergabe, diverse angebote aber es gab wenig echte termine
 - vorstand hat dann viel per email eingefordert und übernommen ohne absprachen wie mein wissen übergeben werden kann - viel frust bei Falko und vorstand
    - mailinglisten (hat sich vorher niemand interessiert, ich hatte einen passwort manager) 
@@ -40,4 +41,6 @@ uuid: 82e8b984-0272-4778-a89b-07f607220cb9
 - protokoll wurde versprochen, protokoll gab es nie
 
 # Email "Diskussionskultur"
+
+Apr 14, 2026, 10:21 PM
 - https://mail.google.com/mail/u/0/#search/Diskussionskultur/FMfcgzQgLPNclvwcZNnXZmXQgXxgXHQc
