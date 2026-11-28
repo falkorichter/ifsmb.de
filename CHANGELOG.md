@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- **Weiterarbeiten im PR: Fotos aus dem PR werden angezeigt.** Wer über „✏️ Im Formular weiterarbeiten“ eine Seite bearbeitet, die es nur im Pull Request gibt, sah kaputte Vorschaubilder (die Fotos liegen noch nicht auf der Website). Das Formular lädt solche Bilder jetzt über die GitHub-Verbindung aus dem Branch des PRs (Liste „📎 Fotos und Dateien“, Social-Media-Karte).
 - **Fix: Verschlüsselung ausschalten entschlüsselt jetzt auch die Anhänge.** Bisher wurde nur der Text wieder Klartext; Fotos und Dateien blieben `.blob`, die Seite zeigte kaputte Bilder (#298). Jetzt werden sie beim Speichern entschlüsselt und unter ihrem Namen abgelegt (Fotos mit `NN-600w.jpg`), die `.blob`-Dateien gelöscht; nicht mehr benutzte Anhänge werden nur gelöscht. Test in `_tests/e2e/crypto-resave.test.js`.
 - **Klarere Meldung nach dem Speichern:** Wer ohne neue Änderung nochmal speichert, liest jetzt „✅ Alles ist schon in #N gespeichert – seitdem nichts geändert.“ statt „Schon gesendet: Pull Request #N.“ (klang nach Fehler, #298). Neuer E2E-Test: verschlüsselte Seite speichern, Text ändern, nochmal speichern → Commit im selben PR.
 - **Abhängigkeit (nur CI):** Die E2E-Tests installieren **ffmpeg** (Ubuntu-Paket, Version im Log), damit der Test „📎 4K-Video → 1080p ohne Standort“ auch in GitHub Actions läuft statt übersprungen zu werden. In `DEPENDENCIES.md` mit offenem Punkt (Version nicht festgelegt).
