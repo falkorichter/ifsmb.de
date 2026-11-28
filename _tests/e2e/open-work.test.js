@@ -248,3 +248,23 @@ test("Offen: PR mit mehreren Formular-Dateien → ein ✏️-Knopf pro Datei zur
   await alice.waitDialog();
   assert.equal(await alice.value("title"), "E2E Zwei");
 });
+
+test("Offen: ✏️ weiterarbeiten – Fotos, die es nur im PR gibt, zeigt das Formular aus dem Branch an", async () => {
+  const c = env.control;
+  const file = "_projects/e2e-mit-foto.md", dir = "assets/images/projekte/e2e-mit-foto/";
+  const png = require("node:fs").readFileSync(env.makePng("pr-foto.png", { width: 300, height: 200 }));
+  const src = "---\ntitle: E2E mit Foto\nstatus: aktuell\nsocial_media_preview_image: /" + dir + "01-social.jpg\nuuid: 11111111-2222-4333-8444-000000000003\n---\n\n![Foto](/" + dir + "01.jpg)\n{: .gallery}\n";
+  c.commit({ branch: "web/alice-foto", from: "main", files: { [file]: src, [dir + "01.jpg"]: { base64: png.toString("base64") }, [dir + "01-social.jpg"]: { base64: png.toString("base64") } }, login: "alice" });
+  c.openPull({ head: "web/alice-foto", title: "Neu: Projekt „E2E mit Foto“", login: "alice" });
+  const alice = await env.person("token-alice");
+  await alice.open(URL_PATH);
+  await alice.page.waitForSelector('[data-pull="1"] [data-pr-edit]');
+  await alice.page.click('[data-pull="1"] [data-pr-edit]');
+  await alice.waitDialog();
+  // the thumbnail in "Fotos und Dateien" and the social card load from the PR branch (blob: URL), not broken
+  await alice.page.waitFor(() => {
+    const t = document.querySelector('#neu-dialog [data-existing-file="01.jpg"] img');
+    return t && t.src.startsWith("blob:") && t.complete && t.naturalWidth === 300;
+  }, [], { message: "Vorschaubild nicht aus dem PR geladen" });
+  await alice.page.waitFor(() => { const i = document.querySelector("#neu-dialog .neu-social-bild"); return i.src.startsWith("blob:") && i.naturalWidth === 300; }, [], { message: "Social-Bild nicht aus dem PR geladen" });
+});

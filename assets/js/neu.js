@@ -790,6 +790,10 @@ var NeuFormular = (function () {
   // ---------- dialog ----------
   function baueDialog() {
     d = F.dialog({ id: "neu-dialog", klasse: "neu-dialog", kopf: '<a class="neu-vorlage small" data-vorlage target="_blank" rel="noopener"></a>' });
+    // Working in a pull request: images that are only in the PR (not on the site yet) can't load from the site – an
+    // image in the form (file list, social card) that fails is fetched from the PR's branch through the GitHub API
+    // and shown as a blob: URL (error events don't bubble, hence capture).
+    d.addEventListener("error", function (e) { if (e.target && e.target.tagName === "IMG") direct.imageFromPull(e.target); }, true);
     d.insertAdjacentHTML("beforeend",
       '<form class="neu-form" autocomplete="off">'
       + '<div class="neu-spalten"><div class="neu-links"><p class="neu-hinweis muted small"></p><div class="neu-felder"></div>'
@@ -1967,6 +1971,17 @@ var NeuFormular = (function () {
       setText(lines.join("\n").replace(/\n{3,}/g, "\n\n"));
       aktiv.files.splice(i, 1);
       direct.showFiles();
+    },
+    imageFromPull: function (img) {
+      var src = img.getAttribute("src") || "", pr = aktiv && aktiv.prBase;
+      // only site paths: a blob: URL that fails too doesn't match, so there is no loop; the cache keeps it to one request
+      if (!pr || !/^\/assets\/[^?#]+\.(jpe?g|png|webp|gif)$/i.test(src) || !direct.active()) return;
+      var cache = direct.prImages = direct.prImages || {}, key = pr.branch + ":" + src;
+      var load = cache[key] || (cache[key] = GitHubApi.readBinaryFile(src.slice(1), pr.branch).then(function (bytes) {
+        if (!bytes) return null;
+        return URL.createObjectURL(new Blob([bytes], { type: /\.png$/i.test(src) ? "image/png" : /\.webp$/i.test(src) ? "image/webp" : /\.gif$/i.test(src) ? "image/gif" : "image/jpeg" }));
+      }).catch(function () { return null; }));
+      load.then(function (url) { if (url && img.getAttribute("src") === src) img.src = url; });
     },
     // Encryption switched off on a page that was encrypted: its attachments (<name>.blob) are decrypted again and stored
     // under their own name (photos with an NN-600w.jpg preview, like uploads), the .blob files are deleted – otherwise the
