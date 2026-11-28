@@ -35,12 +35,12 @@ uuid: 82e8b984-0272-4778-a89b-07f607220cb9
 - P verlässt den Verein
 
 # showdown meeting mit dem vorstand
-- vorstand wollte meeting mit falko
+- vorstand wollte meeting mit falko 08.03.26, 18:38 (an falko ät 35services)
 - lange email
 - lange antwort (micha als moderator sagt er hat die email nicht gelesen)
 - protokoll wurde versprochen, protokoll gab es nie
 
 # Email "Diskussionskultur"
 
-Apr 14, 2026, 10:21 PM
+Apr 14, 2026, 10:21 PM and deadfalkon at
 - https://mail.google.com/mail/u/0/#search/Diskussionskultur/FMfcgzQgLPNclvwcZNnXZmXQgXxgXHQc
