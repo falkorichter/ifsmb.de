@@ -582,6 +582,7 @@ form:
   submit_pr_recycle: "♻️ An #{number} anhängen"
   fill_in: Bitte „{field}“ ausfüllen.
   unchanged: Noch nichts geändert.
+  already_saved_html: "Alles ist schon in {link} gespeichert – seitdem nichts geändert."
   unchanged_short: Noch nichts geändert
   too_long: Die Datei ist zu lang für die Adresse – sie ist kopiert, bitte im GitHub-Editor einfügen.
   edit_title: ✏️ {type} bearbeiten

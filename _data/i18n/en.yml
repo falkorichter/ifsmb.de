@@ -574,6 +574,7 @@ form:
   submit_pr_recycle: "♻️ Add to #{number}"
   fill_in: Please fill in “{field}”.
   unchanged: Nothing changed yet.
+  already_saved_html: "Everything is already saved in {link} – nothing changed since."
   unchanged_short: Nothing changed yet
   too_long: The file is too long for the address – it has been copied, please paste it in the GitHub editor.
   edit_title: "✏️ Edit: {type}"

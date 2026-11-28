@@ -1968,11 +1968,51 @@ var NeuFormular = (function () {
       aktiv.files.splice(i, 1);
       direct.showFiles();
     },
+    // Encryption switched off on a page that was encrypted: its attachments (<name>.blob) are decrypted again and stored
+    // under their own name (photos with an NN-600w.jpg preview, like uploads), the .blob files are deleted – otherwise the
+    // now plain page points to images that don't exist. Attachments the text no longer uses are only deleted.
+    decryptAttachments: function (state, files, text) {
+      var c = state.crypto, atts = c && c.wasEncrypted && c.unlocked && c.initialPayload && c.initialPayload.attachments;
+      if (!atts || !atts.length || state.w.encrypted) return Promise.resolve();
+      var ref = state.prBase && state.prBase.branch, payload = c.initialPayload;
+      function b64(s) { var bin = atob(s), out = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+      return withCrypto().then(function (CP) {
+        return CP.deriveKey(c.initialPassword || c.password, b64(payload.kdf.salt), payload.kdf.iterations || 600000).then(function (key) {
+          return Promise.all(atts.map(function (att) {
+            var name = String(att.name || ""), blobPath = String(att.blob || name + ".blob").replace(/^\//, "");
+            if (!/^\/assets\//.test(name)) return null;
+            return GitHubApi.readBinaryFile(blobPath, ref).then(function (bytes) {
+              if (!bytes) return;
+              files.push({ path: blobPath, delete: true });
+              if (String(text).indexOf(name) < 0) return; // not used any more: only delete
+              return CP.decryptData(bytes.subarray(12), bytes.subarray(0, 12), key).then(function (plain) {
+                var blob = new Blob([plain], { type: att.mime || "application/octet-stream" });
+                files.push({ path: name.slice(1), blob: blob });
+                if (/^image\/jpeg$/.test(att.mime) && !/-(600w|social)\.jpg$/.test(name)) {
+                  return direct.thumb600(blob).then(function (t) { if (t) files.push({ path: name.slice(1).replace(/\.jpg$/i, "-600w.jpg"), blob: t }); });
+                }
+              });
+            });
+          }));
+        });
+      });
+    },
+    // NN-600w.jpg preview for a decrypted photo (same size as uploads from the photo editor); null if the browser can't
+    thumb600: function (blob) {
+      if (typeof createImageBitmap !== "function") return Promise.resolve(null);
+      return createImageBitmap(blob).then(function (img) {
+        var k = Math.min(1, 600 / img.width), cv = document.createElement("canvas");
+        cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
+        cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+        return new Promise(function (ok) { cv.toBlob(function (b) { ok(b); }, "image/jpeg", 0.85); });
+      }).catch(function () { return null; });
+    },
     submit: function () {
       var newText = dateiInhalt(), path, title, u;
       // sent already and nothing changed since → no second pull request with the same content
       if (aktiv.sent && aktiv.sent.text === newText) {
-        status.innerHTML = 'Schon gesendet: <a href="' + esc(aktiv.sent.url) + '" target="_blank" rel="noopener">Pull Request #' + aktiv.sent.number + "</a>.";
+        var link = '<a href="' + esc(aktiv.sent.url) + '" target="_blank" rel="noopener">#' + aktiv.sent.number + "</a>";
+        status.innerHTML = "✅ " + t("form.already_saved_html", { link: link }, "Alles ist schon in " + link + " gespeichert – seitdem nichts geändert.");
         return;
       }
       if (aktiv.edit) {
@@ -1998,15 +2038,18 @@ var NeuFormular = (function () {
             if (u.plain) { files.push({ path: base, blob: u.p.full }); files.push({ path: base.replace(/\.jpg$/, "-600w.jpg"), blob: u.p.thumb }); }
             if (u.social && u.p.social) files.push({ path: base.replace(/\.jpg$/, "-social.jpg"), blob: u.p.social.full });
           });
-          if (!removedFiles.length) return Promise.resolve();
+          var decrypting = direct.decryptAttachments(state, files, newText);
+          if (!removedFiles.length) return decrypting;
           // photos/attachments whose embed was removed: delete them too – only if they are (still) there on the target branch
           var paths = [].concat.apply([], removedFiles.map(direct.deletePaths)), byDir = {};
           paths.forEach(function (p) { var d0 = p.slice(0, p.lastIndexOf("/")); (byDir[d0] = byDir[d0] || []).push(p); });
-          return Promise.all(Object.keys(byDir).map(function (d0) {
-            return GitHubApi.listFolder(d0, state.prBase && state.prBase.branch).then(function (names) {
-              byDir[d0].forEach(function (p) { if (names.indexOf(p.slice(d0.length + 1)) >= 0) files.push({ path: p, delete: true }); });
-            });
-          }));
+          return decrypting.then(function () {
+            return Promise.all(Object.keys(byDir).map(function (d0) {
+              return GitHubApi.listFolder(d0, state.prBase && state.prBase.branch).then(function (names) {
+                byDir[d0].forEach(function (p) { if (names.indexOf(p.slice(d0.length + 1)) >= 0) files.push({ path: p, delete: true }); });
+              });
+            }));
+          });
         }
         // Encrypted page: encrypt all gallery photos as .blob files (never upload unencrypted .jpg/-600w.jpg),
         // upload social_media_preview_image (-social.jpg) unencrypted if chosen, and migrate any existing
