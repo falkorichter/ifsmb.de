@@ -31,6 +31,7 @@ uuid: 82e8b984-0272-4778-a89b-07f607220cb9
 - auf signal
 - keine distanzierung vom Vorstand, vielleicht nicht nötig aber vielleicht doch
 - beleidigungen anfeindungen an Ferhat und Falko
+- P verlässt den Verein
 
 # showdown meeting mit dem vorstand
 - vorstand wollte meeting mit falko
