@@ -118,3 +118,11 @@ AAAA  2606:50c0:8002::153
 AAAA  2606:50c0:8003::153
 www   CNAME  falkorichter.github.io.
 ```
+
+## Branch `pr-previews` – nicht mergen
+
+`pr-previews` enthält nur die **Vorschaubilder für Pull Requests**: `_scripts/pr_vorschau.py` lädt dort die Screenshots hoch (ein Ordner pro Feature-Branch) und die PR-Beschreibungen binden sie über `raw.githubusercontent.com/…/<commit>/…` ein. Der Branch hat keine gemeinsame Geschichte mit `main` und keinen Code.
+
+- **GitHubs Hinweis „pr-previews had recent pushes – Compare & pull request“ ignorieren** (oder wegklicken): Er erscheint nach jedem Hochladen von Vorschaubildern. Ein Pull Request ist weder nötig noch möglich – GitHub meldet „entirely different commit histories“.
+- **Nicht löschen:** Sonst räumt GitHub die Commits irgendwann weg und die Bilder in alten PR-Beschreibungen verschwinden. Das Skript legt den Branch bei Bedarf selbst wieder an.
+
