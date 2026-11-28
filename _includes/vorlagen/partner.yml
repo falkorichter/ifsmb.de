@@ -9,4 +9,5 @@ instagram:   # optional: Link zum Instagram-Profil
 logo:   # /assets/images/partner/<name>.png – leer lassen, solange es kein Logo gibt; Original nach _logo/partner/
 logo_dark: false   # true, wenn das Logo helle Elemente hat und einen dunklen Hintergrund braucht
 page:   # optional: eigene Partnerseite, z. B. /partners/<name>/ (Datei partners/<name>/index.md)
+same_as:   # optional: derselbe Partner auf einer anderen Instanz, z. B. [https://35services.ifsmb.de/partners/…/] – nur https, für Links in beide Richtungen
 description: Ein Satz, wer der Partner ist und wie wir zusammenarbeiten.

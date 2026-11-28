@@ -116,6 +116,18 @@ var Formular = (function () {
       neu: function (text) { return /^(\/|https?:\/\/)\S+$/.test(text) && { wert: text, name: text, typ: "Adresse" }; },
       beschreibe: function (v) { var s = finde(I("seiten"), "url", v); return { name: s ? s.name : v, url: /^(\/|https?:)/.test(v) ? v : null }; }
     },
+    // same_as: absolute https addresses of the same thing on another instance or website – no suggestions, no
+    // addresses of this site itself (_plugins/same_as.rb drops those)
+    urls: {
+      leer: 0,
+      treffer: function () { return []; },
+      neu: function (text) {
+        var m = /^https:\/\/([^\/\s?#]+)\S*$/.exec(text), own = "";
+        try { own = (cfg().site || {}).host || location.host; } catch (e) { /* no page */ }
+        return m && m[1].toLowerCase() !== String(own).toLowerCase() && { wert: text, name: text, typ: "Adresse" };
+      },
+      beschreibe: function (v) { return { name: v, url: /^https:/.test(v) ? v : null }; }
+    },
     partner: {
       leer: 99,
       treffer: function (nq) { return I("partner").filter(function (p) { return passt(nq, p.name); }).map(function (p) { return { wert: p.name, name: p.name, typ: "Partner" }; }); },

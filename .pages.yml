@@ -431,6 +431,11 @@ content:
         label: Mini-Foto für den Kalender (quadratisch, 48 px, optional)
         description: Rundes Gesicht auf der Kalenderseite. Ohne Mini-Foto wird das normale Foto verkleinert.
         type: image
+      - name: same_as
+        label: Dieselbe Person auf einer anderen Instanz (same_as)
+        description: Optional – Adressen derselben Sache auf einer anderen Instanz oder Website (z. B. https://35services.ifsmb.de/…), nur vollständige https-Adressen, nicht diese Website. Erscheint in den Microdata als sameAs und im Netzwerk-Graphen – für Links in beide Richtungen.
+        type: string
+        list: true
       - name: theme
         label: Theme (Aussehen, optional)
         description: "Wie die Seite aussieht, wenn Besucher*innen nichts anderes gewählt haben (Auswahl unten auf jeder Seite). Leer = wie die ganze Website (IfsMB). „offene-werkstaetten“ = im Stil des Verbunds Offener Werkstätten, „rfflabs“ = im Stil des Réseau Français des FabLabs, „slop“ = absichtlich wie hastig „vibecoded“ (Parodie nach Slopstrap). Liste: _data/themes.yml"
@@ -560,6 +565,11 @@ content:
         label: Social-Media-Vorschaubild (1200×630 px, optional)
         description: Vorschaubild beim Teilen auf WhatsApp, Signal, Mastodon, LinkedIn, Facebook oder X (og:image). Ohne Angabe wird das Gerätefoto oder das Standardbild genutzt. Ohne GPS-Metadaten hochladen!
         type: image
+      - name: same_as
+        label: Dasselbe Gerät auf einer anderen Instanz (same_as)
+        description: Optional – Adressen derselben Sache auf einer anderen Instanz oder Website (z. B. https://35services.ifsmb.de/…), nur vollständige https-Adressen, nicht diese Website. Erscheint in den Microdata als sameAs und im Netzwerk-Graphen – für Links in beide Richtungen.
+        type: string
+        list: true
       - name: linked
         label: Verlinkt mit (Adressen, z. B. /projects/openpress-bauen/ oder /team/anton/)
         description: Beliebige Seiten verlinken – Projekte, Termine, Beiträge, Personen, Ausstattung, Partnerseiten. Die Verbindung erscheint unten auf beiden Seiten; ein Eintrag auf einer Seite reicht.
@@ -895,6 +905,11 @@ content:
         label: Eigene Seite (optional, z. B. /partners/taschenstation/)
         description: Pfad zu einer Unterseite mit mehr Infos zur Zusammenarbeit. Die Seite selbst liegt als Datei unter partners/<name>/index.md.
         type: string
+      - name: same_as
+        label: Derselbe Partner auf einer anderen Instanz (same_as)
+        description: Optional – Adressen derselben Sache auf einer anderen Instanz oder Website (z. B. https://35services.ifsmb.de/…), nur vollständige https-Adressen, nicht diese Website. Erscheint in den Microdata als sameAs und im Netzwerk-Graphen – für Links in beide Richtungen.
+        type: string
+        list: true
       - name: description
         label: Beschreibung
         type: string

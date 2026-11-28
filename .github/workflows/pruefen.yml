@@ -43,3 +43,5 @@ jobs:
         run: ruby _scripts/check_site.rb
       - name: Sprachen der Bedienung prüfen (de/en/fr)
         run: ruby _scripts/test_i18n.rb
+      - name: same_as (dieselbe Sache auf anderen Instanzen) testen
+        run: ruby _scripts/test_same_as.rb

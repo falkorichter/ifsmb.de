@@ -101,6 +101,12 @@ var NeuFormular = (function () {
   var externeLinks = function () {
     return feld("links", "links", "🌍 Externe Links (mit Titel und Art)", { hilfe: "Adresse einfügen und ➕ – Titel und Art liest das Formular von der Seite, wenn sie es verrät; sonst selbst eintragen. Erscheint unten bei „Verbindungen“ in der passenden Gruppe." });
   };
+  // same_as (schema.org sameAs): the same partner, device or person on another instance – for links in both
+  // directions (_plugins/same_as.rb, issue #299)
+  var gleicheSache = function () {
+    return chips("same_as", "🪞 Dieselbe Sache auf einer anderen Instanz", "urls", { mehr: true, platzhalter: "https://… einfügen und Enter",
+      hilfe: "Dieselbe Sache auf einer anderen Instanz (z. B. https://35services.ifsmb.de/…) – für Links in beide Richtungen. Nur vollständige https-Adressen, nicht diese Website." });
+  };
   var verlinkt = function () { return chips("linked", "🔗 Verknüpft (Termine, Beiträge, Geräte, Seiten …)", "seiten", { platzhalter: "Seite suchen oder /adresse/ …" }); };
   var leute = function (name, label, x) { return chips(name, label, "personen", Object.assign({ platzhalter: "Name aus dem Team …" }, x)); };
   var partner = function (name, label, x) { return chips(name, label, "partner", Object.assign({ platzhalter: "Partner suchen …" }, x)); };
@@ -259,6 +265,7 @@ var NeuFormular = (function () {
         text("image", "Foto", { mehr: true, platzhalter: "eigenes Foto ohne Metadaten – keine Hersteller- oder Shopfotos" }),
         text("image_alt", "Beschreibung des Fotos", { mehr: true }),
         haken("image_is_illustration", "Foto ist eine eigene SVG-Illustration", { mehr: true }),
+        gleicheSache(),
         socialBild(),
         themeField()
       ],
@@ -304,6 +311,7 @@ var NeuFormular = (function () {
         inhalt("Was die Person macht und womit sie im Makespace hilft – keine Wohnadresse, keine privaten E-Mail-Adressen"),
         text("photo", "Foto", { mehr: true, platzhalter: "/assets/images/team/<kürzel>-480w.jpg – nur mit Erlaubnis" }),
         text("photo_credit", "Bildnachweis", { mehr: true, hilfe: "Pflicht bei Fremdfotos (Presse, Agentur)" }),
+        gleicheSache(),
         socialBild(),
         themeField()
       ]
@@ -334,7 +342,8 @@ var NeuFormular = (function () {
         adresse("instagram", "Instagram", { mehr: true }),
         text("logo", "Logo", { mehr: true, platzhalter: "/assets/images/partner/<name>.png" }),
         haken("logo_dark", "Logo hat helle Elemente (dunkler Hintergrund)", { mehr: true }),
-        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partners/<name>/", hilfe: "Nur unsere eigene Unterseite (partners/<name>/index.md) – die Website des Partners gehört oben in „Website“." })
+        text("page", "Eigene Partnerseite", { mehr: true, platzhalter: "/partners/<name>/", hilfe: "Nur unsere eigene Unterseite (partners/<name>/index.md) – die Website des Partners gehört oben in „Website“." }),
+        gleicheSache()
       ]
     },
     // Pages outside the collections, edit only (_plugins/source_files.rb sets page.edit_form, #154).

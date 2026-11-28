@@ -670,6 +670,7 @@ microdata:
   id: "Adresse (itemid)"
   uuid: "Kennung (uuid)"
   name: "Name"
+  same_as: "Dieselbe Sache auf (sameAs)"
   more: "Was ist das? →"
 
 files:

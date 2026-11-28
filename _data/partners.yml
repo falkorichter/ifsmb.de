@@ -15,6 +15,7 @@
   logo: /assets/images/partner/35services.png
   logo_dark: true
   page: /partners/35services/
+  same_as: https://35services.ifsmb.de/partners/35-services-e-v/   # dieselbe Partnerseite auf der Instanz von 35services
   description: Nachbarschaftswerkstatt in Moabit, Mitglied im Verbund Offener Werkstätten.
 
 - name: Rosalind-Franklin-Gymnasium

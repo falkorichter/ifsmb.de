@@ -18,6 +18,7 @@ links:
     url: https://falkorichter.github.io/volkersfreunde-jekyll/
     category: link
 not_in_team: true
+same_as: [https://35services.ifsmb.de/team/falko-richter/]
 uuid: 12917a5c-7d81-49d0-8960-c930308a7079
 ---
 

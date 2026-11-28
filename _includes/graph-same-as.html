@@ -1,0 +1,7 @@
+{%- comment -%}
+  ,"same_as":[…] for a node of network/graph.json – absolute URLs of the same thing on another instance or website
+  (_plugins/same_as.rb). Prints nothing when not set, so nodes without it stay as they were. Param: of (page or
+  partner entry).
+{%- endcomment -%}
+{%- assign gsa = include.of | same_as -%}
+{%- if gsa.size > 0 -%},"same_as":{{ gsa | jsonify }}{%- endif -%}

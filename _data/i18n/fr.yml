@@ -662,6 +662,7 @@ microdata:
   id: "Adresse (itemid)"
   uuid: "Identifiant (uuid)"
   name: "Nom"
+  same_as: "La même chose sur (sameAs)"
   more: "Qu’est-ce que c’est ? →"
 
 files:

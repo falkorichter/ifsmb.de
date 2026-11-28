@@ -12,7 +12,8 @@ const BEISPIEL_CHIPS = {
   projekte: ["3d-druck-ag-ktg", "ktg-orca-slicer-hardware"],
   stichworte: ["ktg", "3d-drucker"],
   seiten: ["/projects/3d-druck-ag-ktg/", "/calendar/"],
-  partner: ["Kurt-Tucholsky-Grundschule", "35services e.V."]
+  partner: ["Kurt-Tucholsky-Grundschule", "35services e.V."],
+  urls: ["https://35services.ifsmb.de/team/falko-richter/", "https://example.org/pfad/?x=1"]
 };
 
 function wert(f, fall) {

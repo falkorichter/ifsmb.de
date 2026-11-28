@@ -9,7 +9,9 @@ permalink: /network/graph.json
   (<site>/team/falko-richter/) – valid as they are on every instance, also under a baseurl. Reference fields (team, author, owner_team, projects, part_of, related,
   partners, owner_partner, location_partner) hold node ids too (absolute URLs, not falko-richter) –
   resolved by _includes/graph-refs.html; Markdown keeps the short slugs and names. "uuid" is the page's stable
-  id from its front matter (survives renames and new URLs); partners from _data/ have none. Todos are not part of the network (they stay local and are too abstract).
+  id from its front matter (survives renames and new URLs); partners from _data/ have none. People, equipment and partners
+  with same_as (the same thing on another instance or website, _plugins/same_as.rb) carry "same_as": [absolute
+  URLs] – only when set, so the format stays version 1. Todos are not part of the network (they stay local and are too abstract).
 {%- endcomment -%}
 {
 "format": "ifsmb-network",
@@ -30,10 +32,10 @@ permalink: /network/graph.json
 {{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"beitrag","title":{{ x.title | jsonify }},"personal":{{ x.personal | default: false | jsonify }},"date":{{ x.date | date: "%Y-%m-%d" | jsonify }},"author":{% include graph-refs.html refs=x.author kind="person" %},"tags":{{ x.tags | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}}{%- assign sep = "," -%}
 {%- endfor -%}
 {%- for x in site.team -%}
-{{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"person","title":{{ x.title | jsonify }},"slug":{{ x.slug | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}}{%- assign sep = "," -%}
+{{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"person","title":{{ x.title | jsonify }},"slug":{{ x.slug | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}{% include graph-same-as.html of=x %}}{%- assign sep = "," -%}
 {%- endfor -%}
 {%- for x in site.equipment -%}
-{{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"ausstattung","title":{{ x.title | jsonify }},"owner_partner":{% include graph-refs.html refs=x.owner_partner kind="partner" %},"location_partner":{% include graph-refs.html refs=x.location_partner kind="partner" %},"owner_team":{% include graph-refs.html refs=x.owner_team kind="person" %},"owner_name":{{ x.owner_name | jsonify }},"location":{{ x.location | jsonify }},"status":{{ x.status | jsonify }},"tags":{{ x.tags | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}}{%- assign sep = "," -%}
+{{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"ausstattung","title":{{ x.title | jsonify }},"owner_partner":{% include graph-refs.html refs=x.owner_partner kind="partner" %},"location_partner":{% include graph-refs.html refs=x.location_partner kind="partner" %},"owner_team":{% include graph-refs.html refs=x.owner_team kind="person" %},"owner_name":{{ x.owner_name | jsonify }},"location":{{ x.location | jsonify }},"status":{{ x.status | jsonify }},"tags":{{ x.tags | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}{% include graph-same-as.html of=x %}}{%- assign sep = "," -%}
 {%- endfor -%}
 {%- for x in site.challenges -%}
 {{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"herausforderung","title":{{ x.title | jsonify }},"status":{{ x.status | jsonify }},"personal":{{ x.personal | default: false | jsonify }},"date":{{ x.since | date: "%Y-%m-%d" | jsonify }},"projects":{% include graph-refs.html refs=x.projects kind="project" %},"team":{% include graph-refs.html refs=x.team kind="person" %},"tags":{{ x.tags | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}}{%- assign sep = "," -%}
@@ -42,7 +44,7 @@ permalink: /network/graph.json
 {{ sep }}{"id":{{ x.url | absolute_url | jsonify }},"uuid":{{ x.uuid | jsonify }},"type":"presse","title":{{ x.title | jsonify }},"date":{{ x.date | date: "%Y-%m-%d" | jsonify }},"tags":{{ x.tags | jsonify }},"linked":{% include graph-refs.html refs=x.linked kind="url" %}}{%- assign sep = "," -%}
 {%- endfor -%}
 {%- for pt in site.data.partners -%}
-{{ sep }}{"id":{% if pt.page %}{{ pt.page | absolute_url | jsonify }}{% else %}{{ "partner:" | append: pt.name | jsonify }}{% endif %},"type":"partner","title":{{ pt.name | jsonify }},"url":{% if pt.page %}{{ pt.page | absolute_url | jsonify }}{% else %}{{ pt.url | jsonify }}{% endif %},"extern":{% if pt.page %}false{% else %}true{% endif %}}{%- assign sep = "," -%}
+{{ sep }}{"id":{% if pt.page %}{{ pt.page | absolute_url | jsonify }}{% else %}{{ "partner:" | append: pt.name | jsonify }}{% endif %},"type":"partner","title":{{ pt.name | jsonify }},"url":{% if pt.page %}{{ pt.page | absolute_url | jsonify }}{% else %}{{ pt.url | jsonify }}{% endif %},"extern":{% if pt.page %}false{% else %}true{% endif %}{% include graph-same-as.html of=pt %}}{%- assign sep = "," -%}
 {%- endfor -%}
 ]
 }
