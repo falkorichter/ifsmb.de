@@ -37,6 +37,19 @@ nehmen zusätzlich volle URLs an, z. B. `team: [falko-richter, https://35service
 - **Gleiche uuid = dasselbe in der echten Welt.** Ist Falko auf ifsmb.de und bei 35services aktiv, trägt sein Profil
   auf beiden dieselbe uuid. Verschiedene Personen haben nie dieselbe uuid, auch bei gleichem Namen. Eine neue Seite
   bekommt immer eine neue uuid, auch wenn sie aus einer anderen Datei kopiert wurde.
+- **`same_as` = „das ist dasselbe wie diese Seite dort“** (schema.org `sameAs`): für Partner, Geräte und Personen, eine
+  absolute https-Adresse oder eine Liste. Braucht keine gemeinsame uuid – Partner aus `_data/` haben gar keine:
+
+  ```yaml
+  # _data/partners.yml auf ifsmb.de
+  - name: 35 services e. V.
+    page: /partners/35services/
+    same_as: https://35services.ifsmb.de/partners/35-services-e-v/
+  ```
+
+  Steht in den Microdata (`<link itemprop="sameAs">`), in der Box „🤖 Maschinenlesbar“ und am Knoten in `graph.json`
+  (`"same_as": […]`, nur wenn gesetzt – Format bleibt Version 1). `_plugins/same_as.rb` prüft beim Bauen: nur https;
+  Adressen der eigenen Website werden mit Warnung ignoriert (ein Fork, der unsere Daten übernimmt, scheitert so nicht).
 
 ## 3. Was jede Instanz veröffentlicht (maschinenlesbar)
 
@@ -53,14 +66,14 @@ nehmen zusätzlich volle URLs an, z. B. `team: [falko-richter, https://35service
 
 | Ressource | schema.org | Eigenschaften |
 |---|---|---|
-| Ausstattung | `Product` | name, description, image, category, identifier |
-| Person | `Person` | name, description, image, jobTitle, identifier |
+| Ausstattung | `Product` | name, description, image, category, identifier, sameAs |
+| Person | `Person` | name, description, image, jobTitle, identifier, sameAs |
 | Beitrag | `BlogPosting` | name, headline, datePublished, … |
 | Termin | `Event` | name, startDate, endDate, location, … |
 | Projekt | `Project` | name, description, foundingDate, … |
 | Herausforderung | `CreativeWork` | name, description, … |
 | Presse | `NewsArticle` | name, headline, datePublished |
-| Partnerseite | `Organization` | name, description |
+| Partnerseite | `Organization` | name, description, sameAs |
 
 Alle mit `itemid` = absolute Adresse und `identifier` = uuid. Andere Software kann dasselbe Format liefern – z. B.
 sichtbares Markup wie `<h1 itemprop="name">` funktioniert genauso.
@@ -153,5 +166,8 @@ links:
 - **Neubau bei Änderungen anderer Instanzen:** Namen werden beim Bauen eingelesen – ändert 35services einen Titel,
   aktualisiert ifsmb.de ihn erst beim nächsten Bauen (oder live nach dem Klick). Ein nächtlicher Bau wäre eine Option.
 - **e2e-Tests im Fork** testen Inhalte von ifsmb.de und schlagen dort fehl – eigener Test-Satz oder Workflow aus.
-- **Rückverweise** (wer verlinkt mich?) über die Graphen der anderen Instanzen, z. B. „Verlinkt von 35services“.
+- **Rückverweise** (wer verlinkt mich?) über die Graphen der anderen Instanzen, z. B. „Verlinkt von 35services“ –
+  geplant in [#299](https://github.com/falkorichter/ifsmb.de/issues/299): eigene, eingeklappte Box „🌐 Erwähnt auf anderen
+  Instanzen“, beim Bauen gesammelt (mit Cache), Zustimmung entscheidet die verlinkte Seite (`backlinks: aus | vertraut |
+  geprüft` in `_config.yml`). Erster Schritt ist erledigt: `same_as` (Abschnitt 2).
 - Standards zum Weiterdenken: JSON-LD (dieselben schema.org-Typen), ActivityPub (`id`/`alsoKnownAs`), Webmention.

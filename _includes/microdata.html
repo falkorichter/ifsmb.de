@@ -4,7 +4,9 @@
   to know what it is (type), what it is called today (name) and that it still exists. Included once per page by
   _layouts/default.html. Only meta/link elements – nothing visible.
   Type mapping: _includes/microdata-type.html. Visible summary for readers: _includes/microdata-info.html.
-  identifier = the page's uuid (same uuid = the same thing on every instance), itemid = its absolute URL.
+  identifier = the page's uuid (same uuid = the same thing on every instance), itemid = its absolute URL,
+  sameAs = the same thing on another instance or website (same_as; partner pages: from the partner entry –
+  _plugins/same_as.rb).
 {%- endcomment -%}
 {%- include microdata-type.html page=include.page -%}
 {%- if md_type -%}
@@ -25,6 +27,10 @@
   {%- if md_p.uuid %}
   <meta itemprop="identifier" content="{{ md_p.uuid }}">
   {%- endif %}
+  {%- assign md_same_as = md_p | same_as %}
+  {%- for md_sa in md_same_as %}
+  <link itemprop="sameAs" href="{{ md_sa | escape }}">
+  {%- endfor %}
   {%- case md_type -%}
   {%- when "Product" -%}
   {%- if md_p.category %}

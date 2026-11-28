@@ -205,6 +205,12 @@ Jeder Knoten hat seine **absolute** Adresse als `id` (`https://ifsmb.de/team/fal
 **Gleiche uuid = dasselbe in der echten Welt:** Ist eine Person (oder ein Beitrag, ein Gerät) auf mehreren Instanzen aktiv,
 trägt sie überall dieselbe uuid – beim Zusammenführen der Graphen wird daraus ein Knoten mit mehreren Adressen. Verschiedene
 Personen haben nie dieselbe uuid, auch nicht bei gleichem Namen oder Kürzel.
+**`same_as`** (Partner, Geräte, Personen; eine absolute https-Adresse oder eine Liste) sagt: „das ist dasselbe wie diese Seite
+auf einer anderen Instanz oder Website“ – auch ohne gemeinsame uuid, also auch für Partner aus `_data/`. Der Knoten trägt dann
+`"same_as": ["https://35services.ifsmb.de/partners/35-services-e-v/"]` (nur wenn gesetzt; Format bleibt Version 1), die
+Microdata der Seite `<link itemprop="sameAs" href="…">` (Partnerseiten nehmen den Wert aus dem Partner-Eintrag). Damit kann
+eine andere Instanz Knoten finden, die auf eine ihrer eigenen Seiten zeigen (eingehende Links, #299). `_plugins/same_as.rb`
+prüft beim Bauen: nur https, keine Adresse der eigenen Website.
 In den Verweisfeldern (`team`, `author`, `owner_team`, `projects`, `part_of`, `related`,
 `partners`, `owner_partner`, `location_partner`) stehen ebenfalls Knoten-IDs, also `https://ifsmb.de/team/falko-richter/` statt `falko-richter`; `linked` wird genauso zu absoluten Adressen
 (`_includes/graph-refs.html` löst die Kürzel und Namen aus dem Markdown beim Bauen auf).

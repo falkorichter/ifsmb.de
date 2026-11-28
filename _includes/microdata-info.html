@@ -1,6 +1,6 @@
 {%- comment -%}
   Visible summary of the page's Microdata at the bottom of every resource page („🤖 Maschinenlesbar“, collapsed):
-  what this page tells programs and other sites (schema.org type, address = itemid, uuid, name) – the same values as
+  what this page tells programs and other sites (schema.org type, address = itemid, uuid, name, sameAs) – the same values as
   the hidden block of _includes/microdata.html. Explained on /maschinenlesbar/. Params: page, narrow (true/false).
 {%- endcomment -%}
 {%- include microdata-type.html page=include.page -%}
@@ -20,6 +20,11 @@
       {%- endif %}
       <dt data-i18n="microdata.name">{{ "microdata.name" | t }}</dt>
       <dd lang="de">{{ md_p.title }}</dd>
+      {%- assign md_same_as = md_p | same_as %}
+      {%- if md_same_as.size > 0 %}
+      <dt data-i18n="microdata.same_as">{{ "microdata.same_as" | t }}</dt>
+      <dd>{% for md_sa in md_same_as %}<a href="{{ md_sa | escape }}" target="_blank" rel="noopener"><code>{{ md_sa | escape }}</code></a>{% unless forloop.last %}<br>{% endunless %}{% endfor %}</dd>
+      {%- endif %}
     </dl>
     {% ifpage /maschinenlesbar/ %}<p class="small"><a href="{{ '/maschinenlesbar/' | relative_url }}" data-i18n="microdata.more">{{ "microdata.more" | t }}</a></p>{% endifpage %}
   </details>

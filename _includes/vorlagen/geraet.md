@@ -18,6 +18,7 @@ image_caption:   # optionale Bildunterschrift
 image_is_illustration: false   # true = eigene SVG-Illustration statt Foto
 tags: [{{ include.tags }}]   # Gerät, Gerätetyp, Besitzer*in, z. B. [bambu-lab-a1-mini, 3d-drucker]
 linked: [{{ include.linked }}]   # weitere Seiten, z. B. [/projects/…/]
+same_as: []   # optional: dasselbe Gerät auf einer anderen Instanz, z. B. [https://35services.ifsmb.de/equipment/…/] – nur https, für Links in beide Richtungen
 links:   # externe Links: Liste aus title, url und category (equipment, person, partner, event, post, project, challenge, press, link = beliebiger Link wie ein Instagram-Beitrag) – erscheinen unten bei „Verbindungen“ in der passenden Gruppe
 gallery:   # weitere Fotos, Liste aus image, thumb, alt
 #  - image: /assets/images/ausstattung/name/02.jpg

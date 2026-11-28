@@ -28,6 +28,7 @@ Wir nutzen dafür [Microdata](https://developer.mozilla.org/en-US/docs/Web/HTML/
 
 - **`itemid`** ist die volle Adresse der Seite – sie sagt, *wo* etwas zu finden ist, und ist überall eindeutig.
 - **`identifier`** ist die **uuid** der Seite – sie sagt, *was* es ist, und bleibt gleich, auch wenn die Seite umzieht. Ist dieselbe Person, dasselbe Gerät oder derselbe Beitrag auf mehreren Websites dieser Art vertreten, trägt es überall dieselbe uuid.
+- **`sameAs`** (nur bei Partnern, Geräten und Personen, wenn eingetragen) nennt die Adresse *derselben Sache* auf einer anderen Website – z. B. die Seite eines Partners auf dessen eigener Website dieser Art. Das geht auch ohne gemeinsame uuid und ist die Grundlage dafür, dass eine Website später sieht, wer anderswo auf sie verweist.
 
 ## So sieht das aus {#beispiel}
 
