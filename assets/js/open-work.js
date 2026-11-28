@@ -192,7 +192,18 @@ var OpenWork = (function () {
     if (other) out.push(other === 1 ? "1 weitere Datei" : other + " weitere Dateien");
     return out.length ? '<div class="open-work-pages">' + (out.length > 1 ? "Seiten/Dateien: " : "Seite: ") + out.join(", ") + "</div>" : "";
   }
-  function pullItem(pr, pages, issuesByNumber) {
+  // the files of a pull request that a ✏️ form can open (same folders as TYPEN in neu.js)
+  var FORM_FILE = /^(_posts|_projects|_events|_equipment|_challenges|_team|_press|_data\/partner|_data\/press_report)\/[^/]+\.(md|markdown|html|ya?ml)$/;
+  function formFiles(pr) {
+    return (pr.files || []).filter(function (x) { return x.status !== "removed" && FORM_FILE.test(x.filename); }).map(function (x) { return x.filename; });
+  }
+  function pullItem(pr, pages, issuesByNumber, canPush) {
+    // one file (a new resource, the usual case): one button; several: one per file to choose from
+    var files = pr.sameRepo && canPush ? formFiles(pr).slice(0, 8) : [];
+    var actions = files.length ? '<div class="open-work-actions">' + files.map(function (file) {
+      return '<button type="button" class="btn btn-small" data-pr-edit="' + pr.number + '" data-path="' + esc(file) + '" title="' + esc(file) + '">✏️ '
+        + (files.length === 1 ? "Im Formular weiterarbeiten" : esc(file.split("/").pop())) + "</button>";
+    }).join(" ") + ' <span class="open-work-claim-status small" data-pr-edit-status aria-live="polite"></span></div>' : "";
     var links = linkedIssues(pr.body).map(function (l) {
       var i = issuesByNumber[l.number];
       return (l.closes ? "schließt " : "Teil von ") + (i ? '<a href="' + esc(i.url) + '" target="_blank" rel="noopener">#' + l.number + " " + esc(i.title) + "</a>" : "#" + l.number);
@@ -203,7 +214,7 @@ var OpenWork = (function () {
       + (pr.sameRepo ? "" : " · aus einem Fork") + " · " + checkBadge(pr) + "</div>"
       + pagesHtml(pr, pages)
       + (links.length ? '<div class="open-work-meta">Aufgabe: ' + links.join(", ") + "</div>" : "")
-      + "</li>";
+      + actions + "</li>";
   }
   function labelChip(l) {
     var color = /^[0-9a-f]{6}$/i.test(l.color) ? "#" + l.color : "";
@@ -242,7 +253,7 @@ var OpenWork = (function () {
       + '<h2 id="pull-requests">Pull Requests</h2>'
       + '<p class="muted small">Gemergt wird (noch) auf GitHub: Pull Request öffnen, Änderungen durchsehen, „Merge“.' + (pulls.length >= 30 ? " Es werden höchstens 30 offene Pull Requests angezeigt." : "") + "</p>"
       + PULL_GROUPS.map(function (g) {
-        return group(g[0], g[1], g[2], pulls.filter(function (p) { return p.group === g[0]; }).map(function (p) { return pullItem(p, pages, byNumber); }), "pulls");
+        return group(g[0], g[1], g[2], pulls.filter(function (p) { return p.group === g[0]; }).map(function (p) { return pullItem(p, pages, byNumber, data.canPush); }), "pulls");
       }).join("")
       + '<h2 id="aufgaben">Aufgaben</h2>'
       + '<p class="muted small">Offene <a href="https://github.com/' + esc(data.repo) + '/issues" target="_blank" rel="noopener">Issues auf GitHub</a> – ohne Pull Requests. Wer eine Aufgabe anpackt, trägt sich ein und verweist im Pull Request mit „Closes #N“ oder „Teil von #N“ darauf.</p>'
@@ -307,12 +318,25 @@ var OpenWork = (function () {
         } else out.textContent = "⚠️ " + err.message;
       });
     }
+    // ✏️ continue a pull request in the form (neu.js NeuFormular.editPull): the file from the PR's branch, saving
+    // adds a commit there – works for pages that exist only in the pull request, too
+    function editPull(btn) {
+      var n = +btn.getAttribute("data-pr-edit"), pr = (current.pulls || []).filter(function (p) { return p.number === n; })[0];
+      var out = btn.parentNode.querySelector("[data-pr-edit-status]");
+      if (!pr) return;
+      btn.disabled = true; out.textContent = "Lade #" + n + " …";
+      window.ladeSkripte(["formular.js", "neu.js"]).then(function () {
+        return window.NeuFormular.editPull({ number: pr.number, url: pr.url, branch: pr.branch }, btn.getAttribute("data-path"));
+      }).then(function () { out.textContent = ""; }, function (err) { out.textContent = "⚠️ " + ((err && err.message) || err); })
+        .then(function () { btn.disabled = false; });
+    }
     root.addEventListener("click", function (e) {
       var t = e.target.closest && e.target.closest("button");
       if (!t) return;
       if (t.hasAttribute("data-open-work-connect")) connect();
       else if (t.hasAttribute("data-open-work-refresh")) start(true);
       else if (t.hasAttribute("data-claim")) claim(t);
+      else if (t.hasAttribute("data-pr-edit")) editPull(t);
     });
     connectBtn.hidden = false;
     return window.ladeSkripte(["github-api.js"]).then(function () { return start(false); });
@@ -323,6 +347,6 @@ var OpenWork = (function () {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
   }
 
-  return { age: age, pageFor: pageFor, checkSummary: checkSummary, classifyPull: classifyPull, linkedIssues: linkedIssues, groupIssues: groupIssues };
+  return { age: age, formFiles: formFiles, pageFor: pageFor, checkSummary: checkSummary, classifyPull: classifyPull, linkedIssues: linkedIssues, groupIssues: groupIssues };
 })();
 if (typeof module !== "undefined") module.exports = OpenWork;
