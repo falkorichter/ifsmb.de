@@ -8,6 +8,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Geändert
 
+- **Fix: Verschlüsselung ausschalten entschlüsselt jetzt auch die Anhänge.** Bisher wurde nur der Text wieder Klartext; Fotos und Dateien blieben `.blob`, die Seite zeigte kaputte Bilder (#298). Jetzt werden sie beim Speichern entschlüsselt und unter ihrem Namen abgelegt (Fotos mit `NN-600w.jpg`), die `.blob`-Dateien gelöscht; nicht mehr benutzte Anhänge werden nur gelöscht. Test in `_tests/e2e/crypto-resave.test.js`.
 - **Klarere Meldung nach dem Speichern:** Wer ohne neue Änderung nochmal speichert, liest jetzt „✅ Alles ist schon in #N gespeichert – seitdem nichts geändert.“ statt „Schon gesendet: Pull Request #N.“ (klang nach Fehler, #298). Neuer E2E-Test: verschlüsselte Seite speichern, Text ändern, nochmal speichern → Commit im selben PR.
 - **Abhängigkeit (nur CI):** Die E2E-Tests installieren **ffmpeg** (Ubuntu-Paket, Version im Log), damit der Test „📎 4K-Video → 1080p ohne Standort“ auch in GitHub Actions läuft statt übersprungen zu werden. In `DEPENDENCIES.md` mit offenem Punkt (Version nicht festgelegt).
 - **📎 Videos: Upload scheitert nie an der Umwandlung.** Kann der Browser ein Video nicht auf 1080p verkleinern, wird das Original hochgeladen – auch 4K vom Handy, bis 95 MB (GitHub-Grenze 100 MB), mit Hinweis im Formular und einem Prüfpunkt „Standort in den Metadaten prüfen“ im Pull Request. `.mov`-Videos werden auf der Seite als Video gezeigt. Zuverlässige Umwandlung kommt später (#290).
