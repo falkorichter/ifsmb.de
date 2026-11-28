@@ -1,5 +1,5 @@
 ---
-title: berlincreators - ein der freundliche makespace
+title: berlincreators - der freundliche makespace
 date: 2026-11-13 22:00:00 +0100
 author: falko-richter
 linked: [/partners/35services/, /projects/recherche-ki-tools-cad-openscad/, /news/2026/10/13/linux-laptops-fuer-die-3d-druck-ag/, /news/2026/11/12/ki-server-pi4-proxy/]
