@@ -206,3 +206,45 @@ test("Offen: Token ohne Leserecht für Checks → „Checks nicht lesbar“ stat
   assert.ok(g.running.includes(1));
   assert.match(await alice.page.text('[data-pull="1"]'), /Checks nicht lesbar/);
 });
+
+test("Offen: ✏️ Im Formular weiterarbeiten – neue Seite, die es nur im PR gibt → Formular lädt sie vom Branch, Speichern ergänzt den PR", async () => {
+  const c = env.control;
+  const file = "_projects/e2e-nur-im-pr.md";
+  const src = "---\ntitle: E2E nur im PR\nstatus: aktuell\nteam: [falko-richter]\nuuid: 11111111-2222-4333-8444-555555555555\n---\n\nErster Text.\n";
+  c.commit({ branch: "web/alice-nur-im-pr", from: "main", files: { [file]: src, "assets/images/projekte/e2e-nur-im-pr/01.jpg": { base64: "/9j/" } }, login: "alice" });
+  c.openPull({ head: "web/alice-nur-im-pr", title: "Neu: Projekt „E2E nur im PR“", login: "alice" });
+  c.commit({ branch: "web/bob-code", from: "main", files: { "assets/js/x.js": "x\n" }, login: "bob" });
+  c.openPull({ head: "web/bob-code", title: "Nur Code", login: "bob" });
+  const alice = await env.person("token-alice");
+  await alice.open(URL_PATH);
+  await alice.page.waitForSelector('[data-pull="1"] [data-pr-edit]');
+  assert.equal(await alice.page.evaluate(() => !!document.querySelector('[data-pull="2"] [data-pr-edit]')), false, "kein Knopf ohne Formular-Datei");
+  await alice.page.click('[data-pull="1"] [data-pr-edit]');
+  await alice.waitDialog();
+  assert.equal(await alice.value("title"), "E2E nur im PR");
+  assert.match(await alice.page.text("#neu-dialog [data-submit]"), /In #1 speichern/);
+  await alice.fill({ text: "Erster Text.\n\nZweiter Absatz aus der Übersicht.\n" });
+  await alice.submit();
+  await alice.waitStatus(/Pull Request #1.*ergänzt/, { timeout: 20000 });
+  const st = c.state();
+  assert.equal(st.pulls.length, 2, "kein neuer PR");
+  const text = c.readFile({ ref: "web/alice-nur-im-pr", path: file }).text;
+  assert.match(text, /Zweiter Absatz aus der Übersicht\./);
+  assert.match(text, /^title: E2E nur im PR$/m, "Rest unverändert");
+});
+
+test("Offen: PR mit mehreren Formular-Dateien → ein ✏️-Knopf pro Datei zur Auswahl", async () => {
+  const c = env.control;
+  c.commit({ branch: "web/alice-zwei", from: "main", files: {
+    "_projects/e2e-eins.md": "---\ntitle: E2E Eins\nstatus: aktuell\nuuid: 11111111-2222-4333-8444-000000000001\n---\n\nA\n",
+    "_equipment/e2e-zwei.md": "---\ntitle: E2E Zwei\nuuid: 11111111-2222-4333-8444-000000000002\n---\n\nB\n" }, login: "alice" });
+  c.openPull({ head: "web/alice-zwei", title: "Zwei Sachen", login: "alice" });
+  const alice = await env.person("token-alice");
+  await alice.open(URL_PATH);
+  await alice.page.waitForSelector('[data-pull="1"] [data-pr-edit]');
+  const labels = await alice.page.evaluate(() => [...document.querySelectorAll('[data-pull="1"] [data-pr-edit]')].map((b) => b.textContent).sort());
+  assert.deepEqual(labels, ["✏️ e2e-eins.md", "✏️ e2e-zwei.md"]);
+  await alice.page.click('[data-pull="1"] [data-path="_equipment/e2e-zwei.md"]');
+  await alice.waitDialog();
+  assert.equal(await alice.value("title"), "E2E Zwei");
+});

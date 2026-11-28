@@ -2513,6 +2513,31 @@ var NeuFormular = (function () {
     var data = JSON.parse(link.getAttribute("data-edit")), schema = TYPEN[data.type];
     if (!schema) return Promise.reject(new Error("type"));
     return fetch(data.source, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (source) {
+      openEdit(data, source, null);
+    });
+  }
+  // Which form a file in the repository belongs to (folder of the type, see TYPEN) – null for files without a form
+  function typeForPath(path) {
+    var dir = String(path || "").split("/").slice(0, -1).join("/");
+    if (!/\.(md|markdown|html|ya?ml)$/.test(path) || !dir) return null;
+    var hit = Object.keys(TYPEN).filter(function (k) { return TYPEN[k].ordner === dir; })[0]; // _projects → projekt
+    return hit || null;
+  }
+  // Continue in an open pull request from /mitmachen/offen/ (assets/js/open-work.js): the file as it is on the PR's
+  // branch, saving adds a commit there – also for pages that only exist in that pull request (not on the site yet).
+  // pr = { number, url, branch }, path = file in the repository. → Promise
+  function editPull(pr, path) {
+    var type = typeForPath(path);
+    if (!type) return Promise.reject(new Error("Für " + path + " gibt es kein Formular."));
+    return window.ladeSkripte(["github-api.js"]).then(function () { return GitHubApi.readFile(path, pr.branch); }).then(function (source) {
+      if (source == null) throw new Error(path + " gibt es im Branch von #" + pr.number + " nicht.");
+      openEdit({ type: type, path: path, url: "" }, source, pr);
+    });
+  }
+  // data = { type, path, url }, source = the file's text, pr = open pull request to save into (or null)
+  function openEdit(data, source, pr) {
+    var schema = TYPEN[data.type];
+    {
       var loaded = readSource(schema, source, data.path);
       if (!loaded) throw new Error("no front matter");
       if (!d) baueDialog();
@@ -2543,14 +2568,19 @@ var NeuFormular = (function () {
       }
       status.textContent = draftFits ? t("form.draft_restored", null, "Entwurf wiederhergestellt.") : "";
       if (!d.open) d.showModal();
+      F.ladeIndex();
+      if (pr) { // from /mitmachen/offen/: straight into that pull request (no hash – the page is the overview)
+        aktiv.prBase = { number: pr.number, url: pr.url, branch: pr.branch };
+        direct.showPrMode();
+        return;
+      }
       if (draft && !draftFits && draft.source) direct.restoreDraft(draft);
       if (!EDIT_HASH.test(location.hash)) history.replaceState(history.state, "", location.pathname + location.search + "#bearbeiten");
-      F.ladeIndex();
       var hasToken = false;
       try { hasToken = !!(sessionStorage.getItem("ifsmb-github-token") || localStorage.getItem("ifsmb-github-token")); } catch (e) { /* storage blocked */ }
       if (hasToken && window.ladeSkripte) window.ladeSkripte(["github-api.js"]).then(function () { direct.update(); direct.checkOpenPulls(); }).catch(function () {});
       else direct.checkOpenPulls();
-    });
+    }
   }
 
   // Headless helpers for automated tests (_scripts/test_crypto.js):
@@ -2583,7 +2613,7 @@ var NeuFormular = (function () {
     });
   }
 
-  return { oeffnen: oeffnen, edit: edit, datei: datei, editedFile: editedFile, decryptFileForEdit: decryptFileForEdit,
+  return { oeffnen: oeffnen, edit: edit, editPull: editPull, typeForPath: typeForPath, datei: datei, editedFile: editedFile, decryptFileForEdit: decryptFileForEdit,
     encryptEditedFile: encryptEditedFile, TYPEN: TYPEN, THEMES: THEMES, alleFelder: alleFelder, checkHtml: checkHtml,
     connect: function () { return direct.connectDialog(); } };
 })();
